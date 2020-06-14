@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./generar-reserva.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>Administrador | Calendario de reserva</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../consultar-zona-comun/consultar-zona.xhtml">Consultar zona común</a></li>
+                    <li class="breadcrumb-item"><a href="../consultar-zona-comun/detalle-zona.xhtml">Detalle zona común</a></li>
+                    <li class="breadcrumb-item active">Calendario de reserva</li>
+                </ol>
+            </div>
+            <!-- main -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="far fa-calendar-alt"></i>
+                            Calendario de reserva
+                        </h3>
+                    </div>
+                </div>
+                <hr style="color:black"/>
+                <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
+                    <div class="col-12 panel">
+                        <div class="panel-heading">
+                            <span>Filtros</span>
+                        </div>
+                    </div>
+                    <div class="col-12 reserva">
+                        <form action="">
+                            <div class="col-12 col-md-5" style="padding: 0;">
+                                <div class="form-group row">
+                                    <div class="col-12 mt-3" style="padding: 0;">
+                                        <strong><label for="zona-comun">Zona común</label></strong>
+                                        <div class="box">
+                                            <select name="zona comun" id="zona-comun">
+                                                <option value="terraza BBQ">Terraza BBQ</option>
+                                                <option value="Salón zona norte">Salón zona norte</option>
+                                                <option value="Salón zona sur">Salón zona sur</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" style="padding: 0;">
+                                <div class="form-group row">
+                                    <div class="col-12 col-md-5 mb-3" style="padding: 0;">
+                                        <strong><label for="fecha-inicial">Fecha inicial</label></strong>
+                                        <div class="box date">
+                                            <input type="date" name="fecha-inicial" id="fecha-inicial" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-5 mb-3 sin-padding">
+                                        <strong><label for="fecha-final">Fecha fin</label></strong>
+                                        <div class="box date">
+                                            <input type="date" name="fecha-final" id="fecha-final" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2 mb-3" style="text-align: center; padding-top: 33px;">
+                                        <button type="submit" style="--content: 'BUSCAR';">
+                                            <div class="left"></div>
+                                                BUSCAR
+                                            <div class="right"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr style="border-top:1px solid gray"/>
+                <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
+                    <div class="col-12 panel">
+                        <div class="panel-heading">
+                            <span>Disponibilidad de la zona comunal</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3 mb-3">
+                        <!-- Calendario -->
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <button class="control">&lt;</button>
+                                <span class="month-name">abril 2020</span>
+                                <button type="button" class="control">&gt;</button>
+                            </div>
+                            <div class="calendar-body">
+                                <div class="grid">
+                                    <div class="grid__header">
+                                        <span class="celdas">Lun</span>
+                                        <span class="celdas">Mar</span>
+                                        <span class="celdas">Mie</span>
+                                        <span class="celdas">Jue</span>
+                                        <span class="celdas">Vie</span>
+                                        <span class="celdas">Sab</span>
+                                        <span class="celdas">Dom</span>
+                                    </div>
+                                    <div class="grid__body">
+                                        <span class="celdas disabled">29</span>
+                                        <span class="celdas disabled">30</span>
+                                        <span class="celdas disabled">31</span>
+                                        <span class="celdas">1</span>
+                                        <span class="celdas">2</span>
+                                        <span class="celdas">3</span>
+                                        <span class="celdas">4</span>
+                                        <span class="celdas">5</span>
+                                        <span class="celdas">6</span>
+                                        <span class="celdas">7</span>
+                                        <span class="celdas">8</span>
+                                        <span class="celdas">9</span>
+                                        <span class="celdas">10</span>
+                                        <span class="celdas">11</span>
+                                        <span class="celdas">12</span>
+                                        <span class="celdas">13</span>
+                                        <span class="celdas">14</span>
+                                        <span class="celdas">15</span>
+                                        <span class="celdas selected">16</span>
+                                        <span class="celdas selected">17</span>
+                                        <span class="celdas">18</span>
+                                        <span class="celdas">19</span>
+                                        <span class="celdas">20</span>
+                                        <span class="celdas">21</span>
+                                        <span class="celdas selected">22</span>
+                                        <span class="celdas">23</span>
+                                        <span class="celdas">24</span>
+                                        <span class="celdas selected">25</span>
+                                        <span class="celdas">26</span>
+                                        <span class="celdas">27</span>
+                                        <span class="celdas">28</span>
+                                        <span class="celdas">29</span>
+                                        <span class="celdas">30</span>
+                                        <span class="celdas disabled">1</span>
+                                        <span class="celdas disabled">2</span>
+                                        <span class="celdas disabled">3</span>
+                                        <span class="celdas disabled">4</span>
+                                        <span class="celdas disabled">5</span>
+                                        <span class="celdas disabled">6</span>
+                                        <span class="celdas disabled">7</span>
+                                        <span class="celdas disabled">8</span>
+                                        <span class="celdas disabled">9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert-success" style="margin:0; margin-top: 20px;">Días con reservas disponibles</div>
+                        </div>
+                    </div>
+                    <!-- Horas disponibles -->
+                    <div class="col-12 col-md-6 mt-3 mb-3">
+                        <form>
+                            <div class="contenedor-hora-reserva">
+                                <div class="contenedor-header">
+                                    <h4>Terraza BBQ</h4>
+                                    <Small>El pícante es mejor en familia</Small>
+                                </div>
+                                <div class="contenedor-title">
+                                    <h6>Horas disponibles</h6>
+                                    <small>22/04/2020</small>
+                                </div>
+                                <div class="contenedor-body">
+                                    <ul name="hora_reserva">
+                                        <li value="10:00am - 12:00pm"  id="ososo" ondblclick="brillo4()" onclick="brillo3()">10:00 am</li>
+                                        <li value="">10:30 am</li>
+                                        <li value="4:00pm - 6:00pm" id="osos"  ondblclick="brillo2()" onclick="brillo()">11:00 am</li>
+                                        <li value=""  id="ososo" ondblclick="brillo4()" onclick="brillo3()">11:30 am</li>
+                                        <li value="">12:00 pm</li>
+                                        <li value="">12:30 pm</li>
+                                        <li value="">13:00 pm</li>
+                                    </ul>
+                                </div>
+                                <div class="contenedor-footer">
+                                    <button id="btn-confirmar">Reservar</button>
+                                </div>
+                                <h6 style="padding: 10px 0; color: white;">Usted reservará desde las 10:00 am hasta las 11:00 am</h6>
+                            </div>
+                            <!--Modal reserva-->
+                            <!-- <div class="modal fade" id="modal-reserva" tabindex="-1" role="dialog" aria-labelledby="modal-reserva" aria-hidden="true">
+                                <div class="modal-dialog  modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img src="../../img/poput.PNG" alt="">
+                                                </div>
+                                                <div class="col-8">
+                                                    <form action="">
+                                                        <h4>
+                                                            Reservar zona comunal
+                                                        </h4>
+                                                        <mark><small><b>Terraza BBQ,</b> Fecha: 22-04-2020 Hora: 10:00am - 12:00pm </mark></small>
+                                                        <h5>Motivo de reserva:</h5>
+                                                        <textarea placeholder="Describe el evento que deseas realizar" required="required"/></textarea>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" data-dismiss="modal"  id="btn-confirmar">Confirmar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- Modal confirmación reserva -->
+                            <!-- <div class="modal fade" id="modal-confirmacion" tabindex="-1" role="dialog" aria-labelledby="modal-confirmacion" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto;">
+                                        <div class="modal-body">
+                                            <i class="far fa-check-circle"></i>
+                                            <p style="font-family:'righteous'; color:#155724 ;">Reserva ha sido asignada satisfactoriamente</p>
+                                            <strong>
+                                                <p>*Recuerde que tiene 3 horas <br>
+                                                    para cancelar sin causar de bloqueo.
+                                                </p>
+                                                <p>*Su solicitud queda en<mark>estado pediente</mark></br>
+                                                    hasta que el administrador la apruebe.
+                                                </p>
+                                            </strong>
+                                        </div>
+
+                                        <div class="modal-footer justify-content-center">
+                                            <button class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap and jquery -->
+        <script src="../../../js/opcionesSeguridad.js"></script>
+        <!-- Bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive-->
+        <script src="../../navs/nav.js"></script>
+        <!-- SweetAlert-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>
+

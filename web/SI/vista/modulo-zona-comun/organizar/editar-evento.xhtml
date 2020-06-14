@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../../crear.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- CKeditor -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>Administrador | Editar evento</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./organizar-evento.xhtml">Organizar evento</a></li>
+                    <li class="breadcrumb-item active">Editar evento</li>
+                </ol>
+            </div>
+            <!-- Contenido principal -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><i class="far fa-edit"></i>Editar evento</h3>
+                    </div>
+                </div>
+                <hr/>
+                <!-- Formulario -->
+                <form>
+                    <div class="row mt-3">
+                        <!-- Titulo -->
+                        <div class="col-12">
+                            <p>
+                                <a href="#titulo" class="btn btn-primary text-left" aria-expanded="false"
+                                    aria-controls="titulo" data-toggle="collapse">Titulo</a>
+                            </p>
+                            <div class="collapse" id="titulo">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Ingrese el nombre del evento"
+                                            name="nombre_evento" id="nombre_evento" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fecha y hora -->
+                        <div class="col-12 col-md-6">
+                            <p>
+                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                                    data-toggle="collapse"><i class="far fa-clock"></i>Fecha y hora del evento</a>
+                            </p>
+                            <div class="collapse" id="date">
+                                <div class="form-group row">
+                                    <div class="col-5">
+                                        <strong><label for="fechai">Fecha inicio</label></strong>
+                                        <input type="date" class="form-control" name="fechai" id="fechai" required="required"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <strong><label for="fechai">Empieza a las</label></strong>
+                                        <input type="time" class="form-control" name="desde" id="desde" required="required"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="checkhora"/>
+                                            <label class="custom-control-label" for="checkhora">Todo el día</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-5">
+                                        <strong><label for="fechaf">Fecha fin</label></strong>
+                                        <input type="date" class="form-control" placeholder="Fin: 30 febrero 2020"
+                                            name="fechaf" id="fechaf" required="required"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <strong><label for="fechaf">Termina a las</label></strong>
+                                        <input type="time" class="form-control" placeholder="6:00 pm" name="hasta"
+                                            id="hasta" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Datos del lugar -->
+                        <div class="col-12 col-md-6">
+                            <p>
+                                <a href="#lugar" class="btn btn-primary text-left" aria-expanded="false"
+                                    aria-controls="lugar" data-toggle="collapse"><i class="fas fa-map-marker-alt"></i>Datos
+                                    del lugar del evento</a>
+                            </p>
+                            <div class="collapse" id="lugar">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Ingrese nombre del lugar"
+                                            name="nombrelu" id="nombrelu" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-12">
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese ubicación/dirección del lugar" name="ubicacion"
+                                            id="ubicacion" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contacto -->
+                        <div class="col-12 col-md-6">
+                            <p>
+                                <a href="#contacto" class="btn btn-primary text-left" aria-expanded="false"
+                                    aria-controls="contacto" data-toggle="collapse"><i class="fas fa-phone-alt"></i>Contacto
+                                    del organizador</a>
+                            </p>
+                            <div class="collapse" id="contacto">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Ingrese nombre del organizador"
+                                            name="nombre2" id="nombre2" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="tel" class="form-control"
+                                            placeholder="Ingrese número de celular de contacto" name="tel_organizador"
+                                            id="tel_organizador" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="email" class="form-control" placeholder="Ingrese correo electrónico"
+                                            name="correo2" id="correo2" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Notificar invitados -->
+                        <div class="col-12 col-md-6">
+                            <p>
+                                <a href="#invitados" class="btn btn-primary text-left" aria-expanded="false"
+                                    aria-controls="invitados" data-toggle="collapse"><i
+                                        class="far fa-envelope"></i>Notificar vía email</a>
+                            </p>
+                            <div class="collapse" id="invitados">
+                                <div class="form-group row">
+                                    <div class="torre col-12 col-md-6">
+                                        <strong><label for="torre">Notificar a</label></strong>
+                                        <select name="torre" id="torre" class="form-control">
+                                            <option value="">Seleccione invitados</option>
+                                            <option value="">Residentes</option>
+                                            <option value="">Vigilantes</option>
+                                            <option value="">Todos los usuarios</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <strong><label for="correo" id="email">Otros destinarios</label></strong>
+                                        <input type="email" class="form-control" placeholder="Correos separados por coma."/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Descripción -->
+                    <hr/>
+                    <h4 class="col-12">Descripción</h4>
+                    <hr/>
+                    <div class="form-group row">
+                        <div class="col-12 col-md-9">
+                            <textarea name="descripcion" class="form" placeholder="Mensaje" id="descripcion"
+                                required="required"></textarea>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="row">
+                                <!-- Subir foto -->
+                                <div class="col-5" style="padding: 0;">
+                                    <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/>
+                                        imagen</label>
+                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
+                                        style="display: none;" name="file"/>
+                                </div>
+                                <!-- Pre-visualizar foto -->
+                                <div class="contenedor-imagen col-7" style="padding: 0;">
+                                    <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
+                                </div>
+                            </div>
+                            <!-- Mostrar foto en modal -->
+                            <div class="modal fade" id="modal-img">
+                                <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                    <div class="modal-content">
+                                        <img src="../../../img/bbq.jpg" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Boton guardar cambios -->
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-2">
+                                <button class="btn btn-outline-success btn-block" id="publicar"
+                                    type="submit">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- ckEditor-->
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#descripcion'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar'),
+                        image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>
+        <!-- bootstrap and jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

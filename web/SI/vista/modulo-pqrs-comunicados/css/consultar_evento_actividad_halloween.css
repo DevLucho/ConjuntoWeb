@@ -1,0 +1,95 @@
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/*Estilos miga de pan*/
+.breadcrumb{
+  background-color: #e7e7e7;
+}
+.breadcrumb a {
+  color: #2A6378;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+ol{
+  font-family: helvetica;
+}
+/*Fin estilos miga de pan*/
+.titulo2{
+  width: 32%;
+  height: 50px;
+  float: left;
+  margin-left: 8px;
+  /*background-color: blue;*/
+}
+.iconotitulo2{
+  width: 3%;
+  height: 50px;
+  float: left;
+}
+.iconotitulo2 img{
+  width: 90%;
+  height: 90%;
+  padding-top: 25px;
+}
+.titulo2vacio{
+  width: 64%;
+  height: 50px;
+  float: left;
+  /*background-color: orange;*/
+}
+
+.titulo2 h1{
+  padding-top: 20px;
+  padding-left: 20px;
+  font-size: 25px;
+  font-family: helvetica;
+}
+
+.caja{
+  width: 97%;
+  height: 600px;
+  margin: auto;
+}
+
+.contenido{
+  width: 70%;
+  height: auto;
+  margin-top: 30px;
+  margin-left: 8px;
+  margin-bottom: 30px;
+  padding-right: 15px;
+  float: left;
+/*  background-color: pink;*/
+}
+
+.contenido2{
+  width: 29.2%;
+  height: 300px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  float: right;
+/*  background-color: blue;*/
+}
+.contenido2 img{
+  width: 100%;
+  height: auto;
+
+}
+
+.lugar{
+  margin-top: 50px;
+  font-size: 15px;
+}
+
+.fechayhora{
+  font-size: 15px;
+}
+
+.estadodelevento{
+  font-size: 15px;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,70 @@
+/*--- Estilos footer ---*/
+footer{
+    height: 60px;
+    background-color: rgb(28, 30, 32);
+    clear: both;
+    bottom: 0;
+    width: 100%;
+    z-index: 11;
+}
+footer .footer-interior {
+    width: 100%;
+    margin: auto;
+    height: 60px;
+}
+footer i{
+    color: white;
+    padding: 15px 30px 0 0;
+    font-size: 27px;
+}
+.redes{
+    width: 20%;
+    height:60px;
+    float: left;
+}
+.redes li {
+    width: 27px;
+    height: 26px;
+    float: left;
+    margin-left: 25px;
+}
+.redes-2 li{
+    float: right;
+    margin-right: 27px;
+    margin-left: 0;
+}
+footer .derechos{
+    margin-top: 18px;
+    font-family: 'helvetica';
+    width:60%;
+    height:42px;
+    float: left;
+    text-align: center;
+}
+footer .derechos p small{
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: normal;
+}
+#facebook:hover{
+    color:#3b5998;
+}
+#whatsapp:hover{
+    color: #00bb2d;
+}
+#instagram:hover{
+    color: #f09433; 	
+}
+#twitter:hover{
+    color:#00acee; 
+}
+
+/* --- Media Query --- */
+@media screen and (max-width: 684px){
+    .redes{
+        display: none;
+    }
+    footer .derechos{
+        width: 100%;
+    }
+}

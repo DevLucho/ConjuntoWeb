@@ -1,0 +1,13 @@
+*{
+  font-family: 'Helvetica';
+}
+.container-fluid h3{
+	color:#33406A;
+  margin-bottom: 0;
+}
+.container-fluid i{
+	padding-right: 5px;
+}
+#report-users{
+  background: black;
+}

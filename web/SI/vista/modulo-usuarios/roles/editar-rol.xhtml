@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../estilos-usuarios.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Estilos datatables -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar rol</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">Consultar roles &amp; funciones</a></li>
+                    <li class="breadcrumb-item"><a href="./consultar-rol.xhtml">Consultar roles</a></li>
+                    <li class="breadcrumb-item active">Editar rol</li>
+                </ol>
+            </div>
+            <!-- Contenido principal -->
+            <section class="container-fluid" id="principal" style="height:560px;">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>
+                            <i class="fas fa-edit"></i>Editar rol
+                        </h3>
+                        <hr/>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <!-- Tabla -->
+                    <f:view>
+                        <h:form class="sombra form">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="Id rol" for="idRol" />
+                                        <h:inputText id="idRol" styleClass="form-control" value="#{rolControlador.rol.idRol}" title="Id rol" required="true" requiredMessage="The IdRol field is required." disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="Nombre rol" for="nombre" />
+                                        <h:inputText id="nombre" styleClass="form-control" value="#{rolControlador.rol.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="form-check">
+                                        <label class="custom-control custom-checkbox">
+                                            <input empty="empty" type="checkbox" class="custom-control-input" id="asignar-rol" href="#mas" aria-expanded="false" aria-controls="mas" data-toggle="collapse"/>
+                                            <span class="custom-control-indicator"></span>
+                                            <label class="custom-control-label" for="asignar-rol">Asignar rol anterior</label>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="collapse row" id="mas">
+                                    <div class="col-12">
+                                        <select name="" id="" class="form-control">
+                                            <option value="" selected="selected" disabled="disabled">Seleccione rol</option>
+                                            <option value="Administrador">Administrador</option>
+                                            <option value="Residente">Redidente</option>
+                                            <option value="Vigilante">Vigilante</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{rolControlador.actualizar()}"></h:commandButton>
+                            </div>
+                        </h:form>
+                    </f:view>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../../../js/dataTables/dataTables.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>
+

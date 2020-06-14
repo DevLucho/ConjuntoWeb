@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../../crear.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Comunicados</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Crear comunicado</li>
+                </ol>
+            </div>
+            <!-- main -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3><i class="fas fa-bullhorn" id="icono"></i>Comunicados</h3>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-12 col-md-2" style="margin-left:auto; margin-right:auto;">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-comunicado">Crear comunicado</button>
+                    </div>
+                </div>
+                <hr/>
+                <!-- Modal crear comunicado -->
+                <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>Crear comunicado</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- Formulario comunicado -->
+                            <form action="">
+                                <div class="modal-body">
+                                    <div class="form-group row font">
+                                        <div class="col-12 col-md-6">
+                                            <label for="titulo">Título del Comunicado</label>
+                                            <input type="text" class="form-control" placeholder="Título comunicado" required="required" name="titulo"/>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="fechafinal">Publicar hasta:</label>
+                                            <input type="date" class="form-control" name="fechai" id="fechafinal" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row font">
+                                        <div class="col-12">
+                                            <label for="descripcion">Descripción</label>
+                                            <textarea name="descripcion" class="form-control" placeholder="Mensaje" required="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <!-- Subir foto -->
+                                        <div class="col-5" style="padding-right:0 ;">
+                                            <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar
+                                                <br/>imagen</label>
+                                            <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
+                                                style="display: none;" name="file"/>
+                                        </div>
+                                        <!-- Pre-visualizar foto -->
+                                        <div class="contenedor-imagen col-7" style="padding-left: 0;">
+                                            <div id="pre-visualizar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-success btn-block btn-publicar-comunicado" type="submit"
+                                        id="publicar">Publicar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-12 col-md-6">
+                        <div class="card border-light" style="padding: 20px;">
+                            <div class="card-block text-dark">
+                                <h3 class="card-title">Atención en administración 
+                                    <button class="btn btn-outline-danger float-right btn-eliminar-comunicado" title="Eliminar comunicado" style="margin-left:5px"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-outline-info float-right" title="Editar comunicado"  data-toggle="modal" data-target="#modal-editar-comunicado"><i class="fas fa-edit"></i></button>
+                                </h3>
+                                <p class="card-subtitle text-muted mb-2">Fecha publicación: 19/04/2020, Por: Administrador
+                                </p>
+                                <img src="../../../img/comunicado.jpg" class="card-img-top img-fluid" alt=""
+                                    style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
+                                <p class="card-text mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Accusantium similique vero perferendis dolorem in libero id omnis, esse nesciunt
+                                    corrupti?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal editar comunicado -->
+                <div class="modal fade" id="modal-editar-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=""><i class="fas fa-edit"></i>Editar comunicado</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- Formulario comunicado -->
+                            <form action="">
+                                <div class="modal-body">
+                                    <div class="form-group row font">
+                                        <div class="col-12 col-md-6">
+                                            <label for="titulo">Título del Comunicado</label>
+                                            <input type="text" class="form-control" placeholder="Título comunicado" required="required"
+                                                name="titulo"/>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="fechafinal">Publicar hasta:</label>
+                                            <input type="date" class="form-control" name="fechai" id="fechafinal" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row font">
+                                        <div class="col-12">
+                                            <label for="descripcion">Descripción</label>
+                                            <textarea name="descripcion" class="form-control" placeholder="Mensaje" 
+                                                required="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <!-- Subir foto -->
+                                        <div class="col-5" style="padding-right:0 ;">
+                                            <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar
+                                                <br/>imagen</label>
+                                            <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
+                                                style="display: none;" name="file"/>
+                                        </div>
+                                        <!-- Pre-visualizar foto -->
+                                        <div class="contenedor-imagen col-7" style="padding-left: 0;">
+                                            <div id="pre-visualizar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-success btn-block btn-publicar-comunicado" type="submit"
+                                        id="publicar">Guardar cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mostrar foto en modal -->
+                <div class="modal fade" id="modal-img">
+                    <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img src="../../../img/comunicado.jpg" alt=""/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar'),
+                        image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>
+        <!-- Bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive-->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>
+

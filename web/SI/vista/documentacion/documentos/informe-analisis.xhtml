@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./estilos-documentos.css"/>
+    <link rel="stylesheet" href="../../header/header.css"/>
+    <link rel="stylesheet" href="../../navs/nav.css"/>
+    <link rel="stylesheet" href="../../footer/footer.css"/>
+    <link rel="shortcut icon" href="../../../img/logo2.png"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+	<title>Documentación | Informe de analisis</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../navs/navAdmin.xhtml"></ui:include>	
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Informe de analisis</li>
+                </ol>
+            </div>
+            <!-- Area de trabajo -->
+            <main>
+                <iframe name="principal" src="../../../docs/informe.pdf"></iframe>
+            </main>	
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- Bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive-->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

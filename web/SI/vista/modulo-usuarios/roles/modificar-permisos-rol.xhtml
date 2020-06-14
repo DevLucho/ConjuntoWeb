@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Estilos datatables -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar rol</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">Consultar roles &amp; funciones</a></li>
+                    <li class="breadcrumb-item active">Editar roles &amp; funciones</li>
+                </ol>
+            </div>
+            <!-- Contenido principal -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>
+                      <i class="far fa-edit mr-1"></i>Editar roles &amp; funciones
+                   </h3>
+                   <hr/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive mt-3 mb-3">
+                        <!-- Secciones por funciones -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item ">
+                                <a href="#tab1" class="nav-link active" data-toggle="tab">Permisos de usuario<span class="badge badge-info" style="margin-left: 5px;">10</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab2" class="nav-link" data-toggle="tab">Permisos de comunicación<span class="badge badge-info" style="margin-left: 5px;">10</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab3" class="nav-link" data-toggle="tab">Permisos de seguridad<span class="badge badge-info" style="margin-left: 5px;">5</span></a>
+                            </li>
+                        </ul>
+                        <!-- Tablas -->
+                        <div class="tab-content">
+                            <!-- Tabla permisos usuario -->
+                            <div class="tab-pane active" id="tab1" role="tabpanel">
+                                <h4 class="mt-3 text-center">Funciones de usuario</h4>
+                                <table class="table table-bordered table-hover tabla text-center" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Permisos</th>
+                                            <th>Administrador<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Vigilante<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Residente<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>crear_rol</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>asignar_rol</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_rol</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>modificar_rol</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>crear_usuario</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>login</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_usuario</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>modificar_usuario</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>cancelar_usuario</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>cambiar_contraseña</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- permisos comunicacion -->
+                            <div class="tab-pane" id="tab2" role="tabpanel">
+                                <h4 class="mt-3 text-center">Funciones de comunicación</h4>
+                                <table class="table table-bordered table-hover tabla text-center" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Permisos</th>
+                                            <th>Administrador<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Vigilante<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Residente<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>crear_comunicado</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_comunicado</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>editar_comunicado</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>eliminar_comunicado</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>crear_zona_comun</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_zona_comun</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>reservar_zona_comun</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>incribir_eventos</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_pqrs</td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>generar_pqrs</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Tabla todos los vigilantes -->
+                            <div class="tab-pane" id="tab3" role="tabpanel">
+                                <h4 class="mt-3 text-center">Funciones de seguridad</h4>
+                                <table class="table table-bordered table-hover tabla text-center" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Permisos</th>
+                                            <th>Administrador<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Vigilante<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                            <th>Residente<i class="far fa-edit" style="margin-left: 5px;"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>crear_ficha_ingreso</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>registrar_correspondencia</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_correspondencia</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>asignar_parqueadero</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>consultar_parqueadero</td>
+                                            <td><input type="checkbox"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                            <td><input type="checkbox" checked="checked"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../../../js/dataTables/dataTables.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>
+

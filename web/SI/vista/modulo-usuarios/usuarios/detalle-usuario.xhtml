@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../estilos-usuarios.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Detalle usuario</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">Consultar usuario</a></li>
+                    <li class="breadcrumb-item active">Detalle usuario</li>
+                </ol>
+            </div>
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3><i class="fas fa-user-tie"></i>Detalle usuario # #{usuarioControlador.usuario.idPerfil}</h3>
+                        <hr/>
+                    </div>
+                    <div class="col-12 col-md-8 form">
+                        <!-- formulario name="form" -->
+                        <f:view> 
+                            <h:form class="recorrer-dato">
+                                <div class="col-12">
+                                    <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                </div>
+                                <div class="form-group row sombra">
+                                    <div class="col-12" style="margin-top: 1rem;"></div> 
+                                   <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="nombre">Nombres</label></strong> 
+                                        <h:inputText id="nombre" class="form-control-plaintext" required="true" value="#{usuarioControlador.usuario.nombre}" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="apellido">Apellidos</label></strong> 
+                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" disabled="true"/>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}" required="true" disabled="true">
+                                            <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}" required="true" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="correo">Email</label></strong> 
+                                        <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}" required="true" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="phone">Número de celular</label></strong> 
+                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}" required="true" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <strong><label for="direccion">Dirección</label></strong> 
+                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion"  disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="rol">Rol</label></strong> 
+                                        <h:selectOneMenu id="idRol" class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" disabled="true">
+                                            <f:selectItems var="rol" value="#{rolControlador.consultarTodos()}" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
+                                        <input class="form-control-plaintext" name="contrasenia" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" required="required" disabled="true"/>
+                                    </div>
+                                </div>
+                            </h:form>
+                         </f:view>      
+                    </div>
+                </div>
+            </section> 
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

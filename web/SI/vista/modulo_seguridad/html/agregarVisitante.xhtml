@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  lang="es"
+>
+  <h:head>
+    <meta charset="UTF-8" />
+
+    <title>Vigilante | Agregar Visitante</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/agregarVisitante.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+      rel="stylesheet" />
+    <link rel="shortcut icon" href="../../../img/logo2.png" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+    <script
+      src="https://kit.fontawesome.com/7769f8ac48.js"
+      crossorigin="anonymous"
+    ></script>
+  </h:head>
+  <h:body>
+    <div class="logo_main">
+      <!-- inicio de header y poput -->
+      <img
+        src="../../../img/Isologotipo variacion horizontal.png"
+        width="450px"
+        alt=""
+        srcset=""
+      />
+    </div>
+
+    <div class="vigilante">
+      <h1 translate="no">Vigilante</h1>
+      <button onclick="location.href='../../../../index.html'">
+        Cerrar Sesion
+      </button>
+    </div>
+
+    <div class="divcela">
+      <img
+        class="imgCela"
+        src="../../../img/pngkey.com-seguridad-png-4049465.png"
+        alt=""
+      />
+      <button onclick="location.href='#popup'" class="button" />
+
+      <div id="popup" class="overlay">
+        <div id="popupBody">
+          <i class="fas fa-cog code" aria-hidden="true" />
+
+          <h2>Mi cuenta</h2>
+          <br />
+          <a id="cerrar" href="#">×</a>
+
+          <div class="popupContent">
+            <table>
+              <tbody>
+                <tr>
+                  <th>Nombre:</th>
+
+                  <th />
+
+                  <th>Email:</th>
+                </tr>
+
+                <tr>
+                  <td>Luis David Huertas</td>
+
+                  <td />
+
+                  <td>ldhuertas@gmail.com</td>
+                </tr>
+
+                <tr>
+                  <th>Telefono:</th>
+
+                  <th />
+
+                  <th>N.Identidad:</th>
+                </tr>
+
+                <tr>
+                  <td>301 458 95 56</td>
+
+                  <td />
+
+                  <td>123456789</td>
+                </tr>
+
+                <tr>
+                  <td class="especialboy">Cambiar Contraseña</td>
+
+                  <td />
+
+                  <td class="especialboy">Actualizar Datos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <div class="wrap">
+        <div class="logo logo_small">
+          <img
+            class="pepee"
+            src="../../../img/LogoCW.png"
+            alt=""
+            width="80px"
+          />
+
+          <div class="hola">
+            <img
+              src="../../../img/pngkey.com-seguridad-png-4049465.png"
+              class="pepe"
+              alt=""
+            />
+
+            <div class="hola hla">
+              <h2>Luis Huertas</h2>
+            </div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml"
+                >Inicio</a
+              >
+            </li>
+
+            <li><a href="opcionesDomiciliario.xhtml">Domiciliario</a></li>
+
+            <li><a href="opcionesSeguridad.xhtml">Visitante</a></li>
+
+            <li><a href="opcionesMensajeria.xhtml">Correspondencia</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- fin de header y poput -->
+    <!--________________________ Inicio de formulario ______________________- -->
+    <section class="inicioSeguridad border">
+      <div class="titulazo">
+        Agregar Visitante
+        <form name="form">
+          <div id="alerta" class="alex" />
+
+          <ul class="form-style-1">
+            <li>
+              <label>¿Ingresara un Automovil?</label>
+              <select name="field4" class="field-select">
+                <option value="Advertise">No</option>
+
+                <option value="Partnership">Si</option>
+              </select>
+            </li>
+
+            <li>
+              <label for="nombre"
+                >Nombre Completo<span class="required">*</span></label
+              >
+              <input
+                type="text"
+                name="nombre"
+                class="field-divided"
+                placeholder="Nombres"
+              />
+              <input
+                type="text"
+                name="apellido"
+                class="field-divided"
+                placeholder="Apellidos"
+              />
+            </li>
+
+            <li>
+              <label for="identificacion"
+                >Num. de documento <span class="required">*</span></label
+              >
+              <input
+                type="number"
+                name="identificacion"
+                id="identificacion"
+                class="field-long"
+              />
+            </li>
+
+            <li>
+              <label for="torre">Torre y Apartamento a ingresar</label>
+              <select name="torre" id="torre" class="field-select corto">
+                <option value="">Torre</option>
+
+                <option value="1">1</option>
+
+                <option value="2">2</option>
+
+                <option value="3">3</option>
+
+                <option value="4">4</option>
+
+                <option value="5">5</option>
+
+                <option value="6">6</option>
+
+                <option value="7">7</option>
+
+                <option value="8">8</option>
+
+                <option value="9">9</option>
+
+                <option value="10">10</option>
+
+                <option value="11">11</option>
+
+                <option value="12">12</option>
+
+                <option value="13">13</option>
+
+                <option value="14">14</option>
+              </select>
+              <select name="apto" id="apto" class="field-select corto">
+                <option value="">Apartamento</option>
+
+                <option value="101">101</option>
+
+                <option value="102">102</option>
+
+                <option value="103">103</option>
+
+                <option value="104">104</option>
+
+                <option value="201">201</option>
+
+                <option value="202">202</option>
+
+                <option value="203">203</option>
+
+                <option value="204">204</option>
+
+                <option value="301">301</option>
+
+                <option value="302">302</option>
+
+                <option value="302">303</option>
+
+                <option value="302">304</option>
+
+                <option value="301">401</option>
+
+                <option value="302">402</option>
+
+                <option value="302">403</option>
+
+                <option value="302">404</option>
+
+                <option value="301">501</option>
+
+                <option value="302">502</option>
+
+                <option value="302">503</option>
+
+                <option value="302">504</option>
+
+                <option value="301">601</option>
+
+                <option value="302">602</option>
+
+                <option value="302">603</option>
+
+                <option value="302">604</option>
+
+                <option value="301">701</option>
+
+                <option value="302">702</option>
+
+                <option value="302">703</option>
+
+                <option value="302">704</option>
+
+                <option value="301">801</option>
+
+                <option value="302">802</option>
+
+                <option value="302">803</option>
+
+                <option value="302">804</option>
+
+                <option value="901">901</option>
+
+                <option value="902">902</option>
+
+                <option value="903">903</option>
+
+                <option value="904">904</option>
+
+                <option value="1001">1001</option>
+
+                <option value="1002">1002</option>
+
+                <option value="1003">1003</option>
+
+                <option value="1004">1004</option>
+
+                <option value="1101">1101</option>
+
+                <option value="1002">1102</option>
+
+                <option value="1103">1103</option>
+
+                <option value="1104">1104</option>
+
+                <option value="1201">1201</option>
+
+                <option value="1202">1202</option>
+
+                <option value="1203">1203</option>
+
+                <option value="120">1205</option>
+              </select>
+            </li>
+            <li>
+              <input
+                type="button"
+                id="botones"
+                value="Guardar"
+                onclick="validar_form()"
+              />
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
+    <!--______________________- fin de capa formulario ____________________- -->
+    <!--________________________ inicio de seccion de noticias __________________- -->
+    <section class="noticiasSeguridad border">
+      <h1 class="noticiah1">Noticias</h1>
+
+      <div class="linea border">
+        <figure class="efectoNoticia">
+          <img
+            class="pito"
+            height="200"
+            width="400"
+            src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg"
+            alt="sample45"
+          />
+          <figcaption>
+            <h3>Ultima Hora</h3>
+
+            <p>
+              un osito dormilon te
+              regaleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            </p>
+          </figcaption>
+          <a href="#" />
+        </figure>
+      </div>
+
+      <div class="linea2 border" />
+
+      <div class="linea2 left rigth bottom line3">
+        <figure class="efectoNoticia">
+          <img
+            class="pito"
+            height="200"
+            width="400"
+            src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg"
+            alt="sample45"
+          />
+          <figcaption>
+            <h3>Bartholemew Shoe</h3>
+
+            <p>
+              Weekends don't count unless you spend them doing something
+              completely pointless.
+            </p>
+          </figcaption>
+          <a href="#" />
+        </figure>
+      </div>
+    </section>
+    <!-- ________________________- fin de seccion de noticias __________________- --><!--__________________________- inicio del footer __________________________- -->
+    <footer class="tuputamadre">
+      <div class="part1">
+        <i class="fab fa-facebook-messenger" aria-hidden="true" />
+        <i class="fab fa-facebook-f" aria-hidden="true" />
+      </div>
+
+      <div class="part2">
+        <p class="derechossEGURIDAD">
+          @2019,Todos los derechos reservados-!Conjuntos Websay!.
+        </p>
+      </div>
+
+      <div class="part3">
+        <i class="fab fa-instagram paya" aria-hidden="true" />
+        <i class="fab fa-twitter-square paya" aria-hidden="true" />
+      </div>
+    </footer>
+    <!--______________________________- fin del footer __________________________-->
+    <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="../../../js/scriptvigilante.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script src="../../../js/alert.js"></script>
+  </h:body>
+</html>

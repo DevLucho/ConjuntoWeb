@@ -1,0 +1,141 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+/*Estilos miga de pan*/
+.breadcrumb{
+	background-color: #e7e7e7;
+}
+.breadcrumb a {
+	color: #2A6378;
+}
+.breadcrumb a:hover {
+	text-decoration: underline;
+}
+ol{
+  font-family: helvetica;
+}
+/*Fin estilos miga de pan*/
+.titulo2{
+	width: 16%;
+	height: 50px;
+	float: left;
+}
+.iconotitulo2{
+	width: 3%;
+	height: 50px;
+	float: left;
+}
+.iconotitulo2 img{
+	width: 90%;
+	height: 90%;
+	padding-top: 25px;
+}
+.titulo2vacio{
+	width: 81%;
+	height: 50px;
+	float: left;
+}
+
+.titulo2 h1{
+	padding-top: 20px;
+	padding-left: 20px;
+	font-size: 25px;
+	font-family: helvetica;
+}
+.caja{
+	width: 97%;
+	margin: auto;
+	background-color: green;
+}
+.crearsolicitudformulario{
+	margin-top:30px;
+	margin-left: auto;
+	font-family: helvetica;
+	width: 100%;
+	height: 410px;
+	float: left;
+    margin-bottom: 10px;
+	border:1px solid black;
+
+}
+form{
+	line-height: 45px;
+	
+}
+.formcuerpo1{
+	width: 100%;
+	height: 45px;
+	margin-top: 15px;
+}
+form div label{			
+	padding-left: 85px;
+	padding-right: 25px;
+	line-height: 100%;
+}
+form div input{
+	width:50%;
+	height: 30px;
+	padding: 4px;
+	border:1px solid #000000;
+	box-shadow: 2px 2px 3px 0px #b4b4b4;
+	font-size: 16px;
+	font-family: helvetica;																		
+}
+form div input:focus{
+	border:1px solid #2A6378;
+	box-shadow: 1px 1px 5px 1px #2A6378
+}
+.formcuerpo2{
+	width: 100%;
+	height: 245px;
+}
+form div p{
+	float: left;
+	padding-left: 45px;
+	padding-right: 25px;
+}
+form div textarea{
+	margin-top: 15px;
+	float: left;
+	width: 50%;
+	height: 210px;
+	padding: 4px;
+	border:1px solid #000000;
+	box-shadow: 2px 2px 3px 0px #b4b4b4;
+	resize: none;
+	font-family: helvetica;
+}
+form div textarea:focus{
+	border:1px solid #2A6378;
+	box-shadow: 1px 1px 5px 1px #2A6378
+}
+.formcuerpo3{
+	width: 100%;
+	height: 45px;
+}
+div p{
+	float: left;
+	padding-left: 19px;
+	padding-right: 25px;
+}
+p input{
+	float: left;
+	padding-left: 100px;
+}
+.cajabotonpqrs{
+	width: 100%;
+	height: 45px;
+
+}
+.botoncrearpqrs{
+	margin-left: 153px;
+	width: 10%;
+	height: 35px;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 35px;
+	background: #2A6378;
+	color: white; 
+}

@@ -1,0 +1,79 @@
+*{
+	font-family: 'helvetica';
+}
+form .font label{
+  font-family: 'Righteous';
+  font-size:1rem;
+  color: #33406A;
+}
+h3,h4{
+	color:#33406A;
+  margin-bottom: 0;
+}
+.btn-primary{
+	width: 100%;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #33406A;
+    border-color: #33406A;
+    font-family: 'righteous';
+}
+.btn-primary:hover{
+	background-color: #3e4c78;
+	border-color: #3e4c78;
+}
+/*input file*/
+.subir-foto {
+    border: 2px dotted #D0CECE;
+    color: #646161;
+    text-align: center;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 26px 25px !important;
+    border-radius: 2px;
+    margin-top: 0;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+.subir-foto:hover{
+	background: #e7e7e7;
+}
+#pre-visualizar{
+  border: 1px dashed #e7e7e7;
+  width:100%;
+  border-radius: 5px;
+}
+#pre-visualizar img{
+  width: 100%;
+  height:100px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+}
+.descripcion{
+  width: 100%;
+}
+.card{
+  box-shadow: 3px 3px 7px rgba(33,33,33,.3);
+}
+.card img{
+  cursor: pointer;
+}
+.contenedor-imagen:hover img, .card:hover img {
+	opacity: .9;
+}
+p i, .container-fluid h3 i{
+  margin-right: 5px;
+}
+@media only screen and (max-width: 768px) {
+  .subir-foto, #pre-visualizar{
+  	margin-top: 1rem;
+  }
+  #email{
+  	margin-top: 1rem;
+  }
+}
+
+

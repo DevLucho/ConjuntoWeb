@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./inicio-admin.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- Main -->
+            <main>
+                <div class="row">
+                    <section class=" modulos col-12 col-md-8 "> 
+                        <!-- PQRS -->
+                        <div class="modulo col-12 col-md-5">
+                            <div class="cantidad">
+                                <h1 id="pqrs">2</h1>
+                            </div>
+                            <div class="icono">
+                                <i class="far fa-comments" ></i>
+                            </div>
+                            <p>PQRS sin responder</p>
+                            <a href="../modulo_pqrs_comunicados/pqrs.html" class="text-right d-block">Consultar PQRs >></a>
+                        </div>
+                        <!-- Reservas -->
+                        <div class="modulo col-12 col-md-5">
+                            <div class="cantidad">
+                                <h1 id="reservas">0</h1>
+                            </div>
+                            <div class="icono">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <p>Reservas pendientes</p>
+                            <a href="#" class="text-right d-block">Consultar reservas >></a>
+                        </div>
+                        <!-- Inscripciones -->
+                        <div class="modulo col-12 col-md-5">
+                            <div class="cantidad">
+                                <h1 id="inscripciones">0</h1>
+                            </div>
+                            <div class="icono">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <p>Inscripciones</p>
+                            <div class="consult-inscriptions-2"> 
+                                <a href="#"  class="text-right d-block">inscripciones >></a>
+                            </div>	
+                            <div class="consult-inscriptions">
+                                <a href="#" class="text-right d-block">Consultar inscripciones >></a>
+                            </div>
+                        </div>
+                        <!-- Usuarios -->
+                        <div class="modulo col-12 col-md-5">
+                            <div class="cantidad">
+                                <h1 id="usuarios">#{usuarioControlador.contarUsuarios()}</h1>
+                            </div>
+                            <div class="icono">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <p>Usuarios</p>
+                            <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">Consultar usuarios >></a>
+                        </div>
+                        <!-- Visitantes -->
+                        <div class="modulo col-12 col-md-5">
+                            <div class="cantidad">
+                                <h1 id="visitantes">0</h1>
+                            </div>
+                            <div class="icono">
+                                <i class="fas fa-id-card-alt"></i>
+                            </div>
+                            <p>Visitantes</p>
+                            <a href="#" class="text-right d-block">Consultar visitantes >></a>
+                        </div>
+                    </section>
+                    <!-- Seccion derecha -->
+                    <aside class="novedades col-12 col-md-4">
+                        <!-- Eventos -->
+                        <div class="novedades-eventos">
+                            <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
+                            <ul id="lista">
+                                <li>
+                                    <label class="date">21/09/2020</label>
+                                    <p><strong>Jornada de vacunación</strong></p>
+                                </li>
+                            </ul>
+                            <div class="link">
+                                <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
+                            </div>
+                        </div>
+                        <!-- Documentos -->
+                        <div class="novedades-eventos">
+                            <h6><i class="icalendar far fa-file-alt"></i>Ultimos documentos</h6>
+                            <ul id="lista">
+                                <li>
+                                    <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
+                                </li>
+                                <li>
+                                    <a href="../../documentacion/documentos/ieee830.xhtml"><i class="pdf far fa-file-pdf" ></i>Formato IEEE830</a>
+                                </li>
+                                <li>
+                                    <a href="../../documentacion/documentos/informe-analisis.xhtml"><i class="pdf far fa-file-pdf" ></i>Informe de analisis</a>
+                                </li>
+                                <li>
+                                    <a href="../../documentacion/documentos/manual-corporativo.xhtml"><i class="pdf far fa-file-pdf"></i>Manual de identidad corporativa</a>
+                                </li>
+                            </ul>
+                        </div>		
+                    </aside>
+                </div>
+            </main>		
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap and jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

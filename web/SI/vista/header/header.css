@@ -1,0 +1,192 @@
+*{
+    margin:0%;
+    box-sizing: border-box;
+    padding: 0%;
+}
+/*Propiedades para el contenedor principal*/
+.contenedor{
+    width: 100%;
+    margin:auto;
+    max-width: 1920px;
+    font-family: helvetica;
+}
+/* Scroll */
+body::-webkit-scrollbar {    
+    width: 10px;
+    height: 5px;
+}
+body::-webkit-scrollbar-thumb {
+    background:#c1c1d3;
+    border-radius:5px;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background:#c1c1d3;
+}
+body::-webkit-scrollbar-track {
+    background:#FFFFFF;
+}
+/* Estilos generales */
+ul{
+    margin-bottom: 0;
+    margin-top:0;
+    list-style: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.row{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+mark{
+    background-color:#d4edda;
+}
+/* Estilo miga de pan */
+.breadcrumb a {
+    color: #2A6378;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+/*--- Estilos para el encabezado --- */
+header{
+    width: 100%;
+}
+.sub-contenedor{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.logotipo{
+    height: 120px;
+    padding: 20px;
+}
+.logotipo img{
+    width: 405px;
+}
+.usuario{
+    font-size:25px;
+    padding-top: 50px;
+    float: right;
+    font-family:'righteous';
+    font-size: 20px;
+}
+.options .icono{
+    height: 120px;
+    float: right;
+    padding:40px 0px 0px 10px;
+    font-size: 40px;
+    color:#33406A;
+}
+/*Estilos input 
+.recorrer-dato input::-webkit-input-placeholder{ 
+    color:red;
+}*/
+/* Estilos pop-up */
+#modal input, #modal-2 input, #modal-3 input, .recorrer-dato input, .recorrer-dato select{
+    border-bottom:1px solid #2A6378;
+    border-radius: 4px;
+    font-family: 'Helvetica';
+    outline: none;
+}
+#modal label, #modal-2 label, #modal-3 label{
+    margin-top: .5rem;
+    margin-bottom: 0;
+    color:#33406A;
+    font-family: 'Helvetica';
+}
+.modal-header button{
+    outline: none;
+}
+.modal-title{
+    padding-left: 30px;
+}
+.modal-title i{
+    color: #33406A;
+    padding-right: 10px;
+}
+.options .icono:hover{
+    cursor: pointer;
+    color:rgb(32, 39, 63);
+}
+.btn-outline-secondary {
+    color:#2A6378;
+    border-color:#2A6378;
+}
+.btn-outline-secondary:hover{
+    color:#FFFFFF;
+    background: #2A6378;
+}
+.btn-default{
+    border-color:#2A6378;
+    color:#2A6378;
+}
+.btn-default:hover{
+    color:#2A6378
+}
+/* Estilos banderas - language */
+.country{
+    width: 32px;
+}
+.country-flag{
+    padding:0 4px;
+    border-radius: 5px;
+    width:40px;
+    margin: 47px 40px 0px 0px;
+    float: right;
+}
+.country-flag:hover {
+    box-shadow:0px 1px 3px 0px rgba(0, 0, 0, 0.50);
+}
+.country-flag ul{
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.country-flag li:hover ul{
+    display: block;
+}
+.country-flag li ul{
+    display: none;
+}
+/* Estilos boton cerrar sesion */
+.cerrar{
+    height: 120px;
+    padding: 45px 0 0 40px;
+    float: right;
+    font-family: "helvetica";
+}
+
+/*{
+    font-family: 'Helvetica';
+    font-size: 16px;
+    color: #fff;
+    background: black;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    text-align: center;
+    line-height: 36px;
+    padding: 0 16px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+.cerrar button:hover{
+    background: rgb(28, 30, 32);
+}*/
+/*Media Querys*/
+@media screen and (max-width:673px){
+    header .sub-contenedor .options .usuario{
+        display: none;
+    }
+}
+@media screen and (max-width:499px){
+    header .sub-contenedor .options{
+        display: none;
+}
+}
+@media screen and (max-width:430px){
+	.logotipo img{
+		width: 325px;
+	}
+}

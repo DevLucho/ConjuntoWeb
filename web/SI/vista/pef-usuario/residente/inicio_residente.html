@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../modulo-pqrs-comunicados/css/bootstrap.min.css">
+	<link rel="stylesheet" href="inicio_residente.css">
+	<link rel="shortcut icon" href="../../../img/logo2.png">
+	<script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+	<title>Residente | Inicio</title>
+</head>
+<body>
+	<!-- Contenedor principal -->
+	<div class="contenedor">
+		<header>
+			<div class="sub-contenedor">
+				<div class="row">
+					<div class="logotipo col-4"><a href="inicio_residente.html"><img src="../../../img/Isologotipo variacion horizontal.png" alt=""></a></div>
+					<div class="options col-8">
+						<div class="cerrar">
+							<button class="exit" onclick="location.href='../../../index.html'">Cerrar sesión</button>
+						</div>
+						<i class="icono fas fa-user" id="user" data-toggle="modal" data-target="#modal"></i>						
+						<!-- modal datos usuario -->
+						<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<h5 class="modal-title" id=""><i class="fas fa-user-cog"></i>Mi cuenta</h5>
+										<button style="outline:none;"class="close" data-dismiss="modal" aria-label="Cerrar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+		
+									<div class="modal-body">
+										<div class="container-fluid">
+											<div class="row">
+										
+												<div class="col-12 col-sm-6">
+													<strong><label for="nombre">Nombres y Apellidos</label></strong>
+													<input type="text" class="form-control-plaintext" placeholder="Gustavo Gomez" name="nombre" id="nombre" disabled>
+
+													<strong><label for="identificacion">Numero de identificación</label></strong>
+													<input type="number" class="form-control-plaintext" placeholder="1000941665" disabled>
+
+													<strong><label for="torre">Torre</label></strong>
+													<input type="number" class="form-control-plaintext" placeholder="15"  disabled>
+													
+													<strong><label for="apto">Apartamento</label></strong>
+													<input type="number" class="form-control-plaintext" placeholder="701"  disabled>
+												</div>
+												<div class="col-12 col-sm-6">
+													<strong><label for="correo">Email</label></strong>
+													<input type="email" class="form-control-plaintext" placeholder="addmin@conjuntoweb.com.co"  disabled>
+
+													<strong><label for="direccion">Dirección</label></strong>
+													<input type="text" class="form-control-plaintext" placeholder="Tv - 29 #22 - 09"  disabled>
+
+													<strong><label for="phone">Número de celular</label></strong>
+													<input type="tel" class="form-control-plaintext" placeholder="3146694458"  disabled>
+													
+													<strong><label for="rol">Rol</label></strong>
+													<input type="text" class="form-control-plaintext" placeholder="ADMINISTRADOR"  disabled>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button"class="btn  btn-outline-secondary"  data-dismiss="modal" data-toggle="modal" data-target="#modal-2">Cambiar contraseña</button>
+										<button type="button"class="btn  btn-outline-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-3">Actualizar datos</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Modal cambiar contraseña -->
+						<div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true" >
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title"><i class="fas fa-user-lock"></i>
+										Cambiar contraseña</h5>
+										<button class="close" data-dismiss="modal" aria-label="Cerrar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+		
+									<div class="modal-body">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-12 col-sm-6">
+													<strong><label for="rol">Contraseña actual</label></strong>
+													<input type="password" class="form-control-plaintext" placeholder="">
+													
+													<strong><label for="rol">Nueva contraseña</label></strong>
+													<input type="password" class="form-control-plaintext" placeholder="">
+													
+													<strong><label for="rol">Confirma contraseña</label></strong>
+													<input type="password" class="form-control-plaintext" placeholder="">
+												</div>
+												<div class="col-12 col-sm-6">
+													<p><strong>Recuerda:</strong><br>
+														<ul style="padding-left: 40px;">
+															<li style="list-style:circle;">Debe tener una longitud de 8 a 20 caracteres</li><br>
+															<li style="list-style:circle;">No datos personales</li>
+														</ul>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+		
+									<div class="modal-footer">
+										<button class="btn btn-default" data-dismiss="modal" data-dismiss="modal-2" data-toggle="modal" data-target="#modal">Cancelar</button>
+										<button class="btn btn-success">Guardar cambios</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Modal actualizar datos -->
+						<div class="modal fade" id="modal-3" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" >
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id=""><i class="fas fa-cog fa-pulse"></i>
+										Actualizar datos</h5>
+										<button class="close" data-dismiss="modal" aria-label="Cerrar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+		
+									<div class="modal-body">
+										<div class="container-fluid">
+											<div class="form-group row">
+												<div class="alert alert-info col-12 " id="alerta">
+													Si requiere actualizar mas datos porfavor dirigirse al administrador de sistema.
+												</div>
+												<div class="col-12 col-md-6 mb-3">
+													<strong><label for="tel">Número de celular</label></strong>
+													<input type="tel" class="form-control" placeholder="" name="tel" id="tel">
+												</div>
+												<div class="col-12 col-md-6 mb-3">
+													<strong><label for="correo">Correo electrónico</label></strong>
+													<input type="email" class="form-control" placeholder="Ingrese un email válido" name="correo" id="correo">
+												</div>
+												<div class="col-12 col-md-6 mb-3">
+													<strong><label for="confirmar">Confirme su correo electrónico</label></strong>
+													<input type="email" class="form-control" placeholder="Repita el email" name="confirmar" id="confirmar">
+												</div>
+											</div>
+										</div>
+									</div>
+		
+									<div class="modal-footer">
+										<button class="btn btn-default" data-dismiss="modal" data-dismiss="modal-2" data-toggle="modal" data-target="#modal">Cancelar</button>
+										<button class="btn btn-success">Actualizar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Usuario -->
+						<h1 class="usuario">Residente</h1>
+						<div class="country-flag">
+							<ul>
+								<li>
+									<a href="#"><img src="../../../img/country-es.png" alt="" class="country"></a>
+									<ul>
+										<li><a href="inicio_admin_en.html"><img src="../../../img/country-us.png" alt="" class="country"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div> 			
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- icono responsive -->
+		<i class="fas fa-ellipsis-v btn-menu" id="btn-menu"></i>
+		<!-- Menu desplegable -->
+		<nav id="nav">
+			<ul>
+				<li class="user-account">
+					<i class="fas fa-user-circle" data-toggle="modal" data-target="#modal"></i>
+					<h6>Administrador</h6>
+				</li>
+				<li class="submenu" id="menu-1-users"> <a href="#"><span><i class="fas fa-users"></i></span>Servicios PQRS<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+					<ul class="sub-submenu">
+						<li><a href="../../modulo-pqrs-comunicados/html/generar_pqrs.html" target="contenido">Generar solicitud</a></li>
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_mis_solicitudes.html" target="contenido">Consultar mis solicitudes</a></li>
+					</ul>
+				</li>
+				<li class="submenu borde-left" > <a href="#"><span><i class="fas fa-bullhorn"></i></span>Correspondencia<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+					<ul class="sub-submenu">
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_correspondencia.html" target="contenido">Consultar</a></li>
+					</ul>
+				</li>
+				<li class="submenu borde-left" > <a href="#"><span><i class="fas fa-calendar-day"></i></span>Eventos<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+					<ul class="sub-submenu">
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_calendario_eventos.html" target="contenido">Consultar calendario de eventos</a></li>
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_mis_inscripciones.html" target="contenido">Consultar mis inscripciones</a></li>
+					</ul>
+				</li>
+				<li class="submenu borde-left" class="borde-left" id="menu-1-zonas"><a href="#"><span><i class="fas fa-thumbtack"></i></span>Zonas comunales<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+					<ul class="sub-submenu">
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_calendario_reservas.html" target="contenido">Consultar calendario de reservas</a></li>
+						<li><a href="../../modulo-pqrs-comunicados/html/consultar_mis_reservas.html" target="contenido">Consultar mis reservas</a></li>
+					</ul>
+				</li>
+				<div class="logout">
+					<a href="../../../index.html"><span class="span2"><i class="fas fa-sign-out-alt"></i></span>Cerrar Sesión</a>
+				</div>
+				<div class="idioma">
+					<a href="#"><img src="../../img/country-es.png" alt="" class="country"></a>
+					<a href="inicio_admin_en.html"><img src="../../img/country-us.png" alt="" class="country" style="opacity: 50%;"></a>
+				</div>
+			</ul>
+		</nav>	
+		<section>
+				<iframe name="contenido" src="../../modulo-pqrs-comunicados/html/consultar_comunicados.html"></iframe>
+			</section>
+		<footer>
+			<div class="footer-interior">
+				<ul class="redes">
+					<li>
+						<i class="fab fa-whatsapp" id="whatsapp"></i>
+					</li>
+					<li>
+						<i class="fab fa-facebook-f" id="facebook"></i>
+					</li>
+				</ul>
+				<div class="derechos">
+					<p><small>© 2020 Todos los derechos reservados. <a href="#"><img src="../../img/derechos.png" alt=""></a></small></p>
+				</div>
+				<ul class="redes redes-2">
+					<li>
+						<i class="fab fa-instagram" id="instagram"></i>
+					</li>
+					<li>
+						<i class="fab fa-twitter-square" id="twitter"></i>
+					</li>
+				</ul>	
+			</div>
+		</footer>
+	</div>
+	<!-- bootstrap and jquery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="../../../../js/bootstrap.min.js"></script>
+	<script src="../../js/menu-responsive.js"></script>
+</body>
+</html>

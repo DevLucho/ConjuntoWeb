@@ -1,0 +1,354 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../../crear.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- CKeditor -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>Administrador | Editar zona común</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./organizar-zona.xhtml">Organizar zona común</a></li>
+                    <li class="breadcrumb-item active">Crear zona común</li>
+                </ol>
+            </div>
+            <!-- main -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="far fa-edit"></i>
+                            Editar zona común
+                        </h3>
+                    </div>
+                </div>
+                <hr/>
+                <!-- Formulario -->
+                <form>
+                    <div class="row">
+                        <!-- Titulo -->
+                        <div class="col-12 ">
+                            <p>
+                                <a href="#titulo" class="btn btn-primary text-left" aria-expanded="false"
+                                    aria-controls="titulo" data-toggle="collapse">Zona común</a>
+                            </p>
+                            <div class="collapse" id="titulo">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese el nombre de la zona comunal" required="required" name="nombre_zona"
+                                            id="nombre_zona"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Disponibilidad -->
+                        <div class="col-12">
+                            <p>
+                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                                    data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>Disponibilidad</a>
+                            </p>
+                            <div class="collapse" id="date">
+                                <div class="from-group row">
+                                    <div class="col-6" style="border-right: 1px solid #efefef ;">
+                                        <b>
+                                            <p>Disponibilidad en días</p>
+                                        </b>
+                                        <hr/>
+                                        <div class="custom-control custom-checkbox" style="padding-left: 0;">
+                                            <div class="form-group row">
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkd"/>
+                                                    <label class="custom-control-label" for="checkd">Domingo</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkl"/>
+                                                    <label class="custom-control-label" for="checkl">Lunes</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkm"/>
+                                                    <label class="custom-control-label" for="checkm">Martes</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkmi"/>
+                                                    <label class="custom-control-label" for="checkmi">Miercoles</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkj"/>
+                                                    <label class="custom-control-label" for="checkj">Jueves</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checkv"/>
+                                                    <label class="custom-control-label" for="checkv">Viernes</label>
+                                                </div>
+
+                                                <div class="col-12 col-sm col-md col-lg col-xl">
+                                                    <input type="checkbox" class="custom-control-input" id="checks"/>
+                                                    <label class="custom-control-label" for="checks">Sabado</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <b>
+                                            <p>Disponiblidad en horas</p>
+                                        </b>
+                                        <hr/>
+                                        <div class="form-group row">
+                                            <div class="col-12 col-md-6">
+                                                <label for="desde_las">Hora Inicial de reservaciones</label>
+                                                <select id="desde_las" required="required" class="form-control">
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="00:30">00:30</option>
+                                                    <option value="01:00">01:00</option>
+                                                    <option value="01:30">01:30</option>
+                                                    <option value="02:00">02:00</option>
+                                                    <option value="02:30">02:30</option>
+                                                    <option value="03:00">03:00</option>
+                                                    <option value="03:30">03:30</option>
+                                                    <option value="04:00">04:00</option>
+                                                    <option value="04:30">04:30</option>
+                                                    <option value="05:00">05:00</option>
+                                                    <option value="05:30">05:30</option>
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="22:30">22:30</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="23:30">23:30</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label for="hasta_las">Hora Final de reservaciones</label>
+                                                <select id="hasta_las" required="required" class="form-control">
+                                                    <option value="00:30">00:30</option>
+                                                    <option value="01:00">01:00</option>
+                                                    <option value="01:30">01:30</option>
+                                                    <option value="02:00">02:00</option>
+                                                    <option value="02:30">02:30</option>
+                                                    <option value="03:00">03:00</option>
+                                                    <option value="03:30">03:30</option>
+                                                    <option value="04:00">04:00</option>
+                                                    <option value="04:30">04:30</option>
+                                                    <option value="05:00">05:00</option>
+                                                    <option value="05:30">05:30</option>
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="22:30">22:30</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="23:30">23:30</option>
+                                                    <option value="23:59">23:59</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="tiempo_maximo_reserva">Tiempo máximo de reserva (en
+                                                    horas)</label>
+                                                <select select="" id="tiempo_maximo_reserva" name="tiempo_maximo_reserva"
+                                                    required="required" class="form-control">
+                                                    <option value="01">1 </option>
+                                                    <option value="02">2 </option>
+                                                    <option value="03">3 </option>
+                                                    <option value="04">4 </option>
+                                                    <option value="05">5 </option>
+                                                    <option value="06">6 </option>
+                                                    <option value="07">7 </option>
+                                                    <option value="08">8 </option>
+                                                    <option value="09">9 </option>
+                                                    <option value="10">10 </option>
+                                                    <option value="11">11 </option>
+                                                    <option value="12">12 </option>
+                                                    <option value="13">13 </option>
+                                                    <option value="14">14 </option>
+                                                    <option value="15">15 </option>
+                                                    <option value="16">16 </option>
+                                                    <option value="17">17 </option>
+                                                    <option value="18">18 </option>
+                                                    <option value="19">19 </option>
+                                                    <option value="20">20 </option>
+                                                    <option value="21">21 </option>
+                                                    <option value="22">22 </option>
+                                                    <option value="23">23 </option>
+                                                    <option value="24">24 </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Descripción -->
+                    <hr/>
+                    <h4 class="col-12">Descripción</h4>
+                    <hr/>
+                    <div class="form-group row">
+                        <div class="col-12 col-md-9">
+                            <textarea name="descripcion" class="form" placeholder="Mensaje" id="descripcion"
+                                required="required"></textarea>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="row">
+                                <!-- Subir foto -->
+                                <div class="col-5" style="padding: 0;">
+                                    <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
+                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
+                                        style="display: none;" name="file"/>
+                                </div>
+                                <!-- Pre-visualizar foto -->
+                                <div class="contenedor-imagen col-7" style="padding: 0;">
+                                    <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
+                                </div>
+                            </div>
+                            <!-- Mostrar foto en modal -->
+                            <div class="modal fade" id="modal-img">
+                                <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                    <div class="modal-content">
+                                        <img src="#" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Boton guardar cambios -->
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-2">
+                                <button class="btn btn-outline-success btn-block" id="publicar" type="submit">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- ckEditor-->
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#descripcion'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar'),
+                        image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>
+        <!-- bootstrap and jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

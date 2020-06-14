@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./consultar-zona.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>Administrador | Consultar zona comunal</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+             <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Consultar zona común</li>
+                </ol>
+            </div>
+            <!-- main -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="fas fa-thumbtack"></i>
+                            Consultar zonas comunes reservables
+                        </h3>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row mt-3 mb-3">
+                    <div class="col">
+                        <div class="card-columns">
+
+                            <div class="card">
+                                <img src="../../../img/norte.jpg" class="card-img-top img-fluid" alt=""/>
+                                <div class="card-block">
+                                    <h3 class="card-title">Salón comunal norte</h3>
+                                    <p class="card-text">
+                                        El salon de la zona norte es un salon que tiene caracteristica muy especiales como su
+                                        gran juego de luces para hacer los mejores shows del evento que se vaya a realizar,
+                                        tambien cuenta con una excelente cocina con toda la instrumentaria que se necesita
+                                        para realizar las mejores recetas de cocina que necesites
+                                        <a href="./detalle-zona.xhtml" class="card-link">...Leer más</a>
+                                    </p>
+                                    <a href="#" class="btn  btn-outline-success btn-block btn-lg">¡Reservar!</a>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="../../../img/sur.PNG" class="card-img-top img-fluid" alt=""/>
+                                <div class="card-block">
+                                    <h3 class="card-title">Salón comunal sur</h3>
+                                    <p class="card-text">
+                                        Salon caracterizado por su gran equipo de sonido con el cual se tienen fiestas
+                                        inolvidables, este salon cuenta con gran espacio para socializar, bailar, jugar o
+                                        cualquier actividad que desees con tal de que sea completamente legal, cuenta
+                                        con todos los instrumentos para que tengas la mejores reuniones
+                                        <a href="./detalle-zona.xhtml" class="card-link">...Leer más</a>
+                                    </p>
+                                    <a href="#" class="btn  btn-outline-success btn-block btn-lg">¡Reservar!</a>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="../../../img/bbq.jpg" class="card-img-top img-fluid" alt=""/>
+                                <div class="card-block">
+                                    <h3 class="card-title">Terraza BBQ</h3>
+                                    <p class="card-text">
+                                        Lugar ideal para tener muy bellos momentos donde los sentimientos de agrado y
+                                        felicidad floreceran pues el lugar indeicado para tener un buen desayuno o un delicioso almuerzo 
+                                        o mas bien una comida muy agradable junto a tus serer amados o
+                                        tus amigos
+                                        <a href="./detalle-zona.xhtml" class="card-link">...Leer más</a>
+                                    </p>
+                                    <a href="#" class="btn  btn-outline-success btn-block btn-lg">¡Reservar!</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- Bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive-->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+

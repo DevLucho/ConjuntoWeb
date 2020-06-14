@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./registro.css"/>
+        <link rel="shortcut icon" href="../../img/Logo ShortCut.png"/>
+        <title>Conjunto lucerna | Registro</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <header style="width:500px;">
+                <div class="contenedor">
+                    <div class="logo">
+                        <a  href="../../index.xhtml">
+                            <img src="../../img/logo.png" alt=""/>
+                        </a>
+                    </div>
+                </div>
+            </header>
+            <div class="container" style="width: 500px;">
+                <div class="col">
+                    <div class="titulo">
+                        <h1>Registro de residente</h1>
+                    </div>
+                    <!-- formulario NO SIRVE VALIDACION POR EL ATRIBUTO NAME-->
+                    <h:form class="was-validated">
+                        <div class="form-group row">
+
+                            <div id="alerta" class="col-12"></div>
+
+                            <div class="col-12 col-md-6 mb-3" data-validate = "Este campo es requerido">
+                                <strong><label for="nombre">Nombres</label></strong>
+                                <h:inputText a:type="text" class="form-control" id="nombre" value="#{residenteControlador.usuario.nombre}" required="required"/>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="apellido">Apellidos</label></strong>
+                                <h:inputText a:type="text" class="form-control" id="apellido" value="#{residenteControlador.usuario.apellido}" required="required"/>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="tipoDocumento">Tipo de documento</label></strong> 
+                                <h:selectOneMenu  id="tipoDocumento" value="#{residenteControlador.tipoDocumento.id}" class="form-control" required="required">
+                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                    <f:selectItems value="#{tipoDocumentoControlador.consultarTodos()}" var="tipo" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="identificacion">Numero de identificación</label></strong>
+                                <h:inputText a:type="number" class="form-control" id="documento" value="#{residenteControlador.usuario.documento}" a:placeholder="Documento de identidad" required="required"/>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="correo">Email</label></strong>
+                                <h:inputText a:type="email" class="form-control" id="correo" value="#{residenteControlador.usuario.correo}" a:placeholder="Correo válido" required="required"/>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="phone">Número de celular</label></strong>
+                                <h:inputText a:type="tel" class="form-control" id="celular" value="#{residenteControlador.usuario.celular}" required="required"/>
+                                <small id="phone" class="form-text text-muted">Debe tener 10 digitos.</small>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="direccion">Dirección</label></strong>
+                                <h:inputText a:type="text" class="form-control" id="direccion" value="#{residenteControlador.usuario.direccion}" required="required"/>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="direccion">Automovil</label></strong>
+                                <h:selectOneMenu value="#{residenteControlador.residente.automovil}" class="form-control" id="automovil">
+                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                    <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
+                                    <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="torre col-12 col-md-6 mb-3">
+                                <strong><label for="torre">Torre</label></strong>
+                                <h:selectOneMenu  id="idTorre" value="#{residenteControlador.torre.idTorre}" class="form-control" required="required">
+                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                    <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="apto">Apartamento</label></strong>
+                                <h:selectOneMenu  id="idApartamento" value="#{residenteControlador.apartamento.idApartamento}" class="form-control" required="required">
+                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                    <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
+                                <h:inputText a:type="password" class="form-control" a:placeholder="Ingrese contrase&ntilde;a" id="contrasenia" value="#{residenteControlador.usuario.contrasenia}" required="required"/>
+                                <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <strong><label for="confirmar">Confirme contraseña</label></strong>
+                                <h:inputText a:type="password" class="form-control" a:placeholder="Repita la contraseña" a:name="confirmar" id="confirmar" required="true"/>
+                            </div>
+
+                            <div class="col-12">
+                                <h:commandButton class="btn btn-outline-success btn-block" style="margin-bottom: 25px;" value="Registrar" action="#{residenteControlador.registrar()}"></h:commandButton>
+                            </div>
+
+                        </div>
+                    </h:form> 
+                </div>
+            </div>
+        </f:view>
+        <!-- bootstrap and jquery -->
+        <script src="../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <!-- Validacion registro-->
+        <script src="./registro.js"></script>
+    </h:body>
+</html>
+

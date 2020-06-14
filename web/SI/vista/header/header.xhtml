@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <header>
+        <h:form>
+
+            <div class="sub-contenedor">
+                <div class="row">
+                    <!-- Isologotipo -->
+                    <div class="logotipo col-4"><a href="#"><img src="../../../img/Isologotipo variacion horizontal.png" alt="" class="justify-content-center"/></a></div>
+                    <div class="options col-8">
+                        <!-- Cerrar sesi&oacute;n -->
+                        <div class="cerrar">
+                            <h:commandButton class="btn bg-dark text-white bg-gradient-dark active" action="#{sesionControlador.cerrarSesion()}" value="Cerrar sesi&oacute;n"></h:commandButton>
+                        </div>
+                        <i class="icono fas fa-user" id="user" data-toggle="modal" data-target="#modal"></i>						
+                        <!-- modal datos usuario -->
+                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id=""><i class="fas fa-user-cog"></i>Mi cuenta</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+
+                                                <div class="col-12 col-sm-6">
+                                                    <strong><label for="user-nombre">Nombres y Apellidos</label></strong>
+                                                    <input type="text" class="form-control-plaintext" name="user-nombre" id="user-nombre" disabled="disabled"/>
+
+                                                    <strong><label for="user-identificacion">Numero de identificaci&oacute;n</label></strong>
+                                                    <input type="number" class="form-control-plaintext" value="#{sesionControlador.documento}" disabled="disabled"/>
+
+                                                    <strong><label for="user-torre">Torre</label></strong>
+                                                    <input type="number" class="form-control-plaintext" placeholder="15"  disabled="disabled"/>
+
+                                                    <strong><label for="user-apto">Apartamento</label></strong>
+                                                    <input type="number" class="form-control-plaintext" placeholder="701"  disabled="disabled"/>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <strong><label for="user-correo">Email</label></strong>
+                                                    <input type="email" class="form-control-plaintext" placeholder="addmin@conjuntoweb.com.co"  disabled="disabled"/>
+
+                                                    <strong><label for="user-direccion">Direcci&oacute;n</label></strong>
+                                                    <input type="text" class="form-control-plaintext" placeholder="Tv - 29 #22 - 09"  disabled="disabled"/>
+
+                                                    <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
+                                                    <input type="tel" class="form-control-plaintext" placeholder="3146694458"  disabled="disabled"/>
+
+                                                    <strong><label for="user-rol">Rol</label></strong>
+                                                    <input type="text" class="form-control-plaintext" value="#{sesionControlador.rolSeleccionado.nombre}" disabled="disabled"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn  btn-outline-secondary"  data-dismiss="modal" data-toggle="modal" data-target="#modal-2">Cambiar contrase&ntilde;a</button>
+                                        <button type="button" class="btn  btn-outline-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-3">Actualizar datos</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal cambiar contrase&ntilde;a -->
+                        <div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true" >
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"><i class="fas fa-user-lock"></i>
+                                            Cambiar contrase&ntilde;a</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <strong><label for="user-password">Contrase&ntilde;a actual</label></strong>
+                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+
+                                                    <strong><label for="user-new-password">Nueva contrase&ntilde;a</label></strong>
+                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+
+                                                    <strong><label for="user-confirm-pasword">Confirma contrase&ntilde;a</label></strong>
+                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <p><strong>Recuerda:</strong><br/>
+                                                        <ul style="padding-left: 40px;">
+                                                            <li style="list-style:circle;">Debe tener una longitud de 8 a 20 caracteres</li><br/>
+                                                            <li style="list-style:circle;">No datos personales</li>
+                                                        </ul>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
+                                        <button class="btn btn-success">Guardar cambios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal actualizar datos -->
+                        <div class="modal fade" id="modal-3" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" >
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id=""><i class="fas fa-cog fa-pulse"></i>
+                                            Actualizar datos</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="form-group row">
+                                                <div class="alert alert-info col-12">
+                                                    Si requiere actualizar mas datos porfavor dirigirse al administrador de sistema.
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-3">
+                                                    <strong><label for="user-tel">N&uacute;mero de celular</label></strong>
+                                                    <input type="tel" class="form-control" placeholder="N&uacute;mero con 10 d&iacute;gitos" name="user-tel" id="user-tel"/>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-3">
+                                                    <strong><label for="user-correo">Correo electr&oacute;nico</label></strong>
+                                                    <input type="email" class="form-control" placeholder="Ingrese un email v&aacute;lido" name="user-correo" id="user-correo"/>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-3">
+                                                    <strong><label for="user-confirm-email">Confirme su correo electr&oacute;nico</label></strong>
+                                                    <input type="email" class="form-control" placeholder="Repita el email" name="user-confirm-email" id="user-confirm-email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
+                                        <button class="btn btn-success">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Usuario -->
+                        <h1 class="usuario">#{sesionControlador.rolSeleccionado.nombre}</h1>
+                        <!-- Idioma -->
+                        <div class="country-flag">
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="../../../img/country-es.png" alt="" class="country"/></a>
+                                    <ul>
+                                        <li><a href="#"><img src="../../../img/country-us.png" alt="" class="country"/></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div> 			
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </header>
+</ui:fragment>

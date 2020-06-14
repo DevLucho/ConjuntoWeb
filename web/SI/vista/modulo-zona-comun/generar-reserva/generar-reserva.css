@@ -1,0 +1,257 @@
+*{
+  font-family: 'Helvetica';
+}
+nav ul li{
+  z-index: 1000;
+}
+.container-fluid h3{
+  color:#33406A;
+  margin-bottom: 0;
+}
+.box{
+  border:1px solid #d9d9d9;
+  width:100%;
+  position:relative;
+}
+.box select, .box input{
+  border-radius: 5px;
+  background:#fff;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  height: 50px;
+  border:none;
+  font-size:18px;
+  -webkit-appearance:button;
+  outline: none;
+}
+.box:before{
+  content: '\f358';
+  font-family: "Font awesome 5 Free";
+  position: absolute;
+  top:0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color:#33406A;
+  font-size: 28px;
+  background:#fff;
+  pointer-events: none;
+  border-left: 1px solid #d9d9d9;
+}
+.box:hover:before{
+  background:#ecebeb;
+}
+.date:before{
+  content:'\f073';
+} 
+.panel{
+  background: #0F1012;
+  color: white;
+  border-radius: 5px 5px 0 0;
+}
+.panel-heading{
+  padding: 10px;
+}
+.panel-heading span{
+  font-family:'righteous';
+}
+/* popup */
+.modal textarea{
+  width: 100%;
+  height: 150px;
+}
+/* Estilos calendario */
+.calendar{
+  padding: 20px 10px;
+  background: #292b2e;
+  width: 100%;
+  border-radius: 3px;
+}
+.calendar-header{
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.calendar .control{
+  color: white;
+  font-weight: bold;
+  background-color: transparent;
+  border:none;
+  cursor: pointer;
+  outline: none;
+  padding: 0 5px;
+}
+.grid__header, .grid__body{
+  display:grid;
+  grid-template-columns: repeat(7,1fr);
+}
+.grid__header{
+  color:white;
+  margin-bottom: 20px;
+}
+.grid__body{
+  grid-auto-rows: 40px;
+  color:#fff;
+}
+.celdas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selected{
+  color:rgb(29, 212, 23);
+  cursor: pointer;
+}
+.selected:hover{
+  color:rgb(35, 153, 33);
+}
+.disabled{
+  color:#424649;
+  cursor: not-allowed;
+}
+/* Estilos hora de reserva */
+.contenedor-hora-reserva{
+  background:#0F1012;
+  text-align: center;
+  width:300px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 3px;
+}
+.contenedor-header{
+  color: #fff;
+  padding: 10px;
+}
+.contenedor-header h4, #modal-reserva h4{
+  margin: 0;
+}
+.contenedor-title{
+  background:#292b2e;
+  color: #64AAA4;
+  padding: 10px;
+}
+.contenedor-title h6{
+  margin:0;
+}
+.contenedor-body{
+  padding: 15px;
+}
+.contenedor-body li{
+  cursor: pointer;
+  color:#999999;
+}
+.contenedor-body ul{
+  overflow: scroll;
+  height: 150px;
+}
+.contenedor-body li:hover{
+  background:#292b2e;
+}
+.contenedor-footer{
+  padding: 15px;
+}
+.modal img{
+  width: 100%;
+  height: 100%;
+  background-size:cover;
+  background-position: center;
+}
+.modal .modal-body, .modal .col-4{
+  padding: 0;
+}
+#modal-confirmacion i{
+  color:#155724;
+  font-size: 100px;
+  padding-top: 10px;
+}
+@media screen and (max-width:768px){
+  .contenedor-hora-reserva{
+    width: 100%;
+  }
+  .sin-padding{
+    padding: 0;
+  }
+}
+/* Scroll contenedor horas reservas */
+.contenedor-body ul::-webkit-scrollbar {    
+  display:none;
+}
+/* Efecto boton */
+form button, .contenedor-footer button {
+  position:relative;
+  padding: 10px 20px;  
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 15px;  
+  font-family: "righteous";
+  color:#e7e7e8;
+  background-color:rgb(28, 30, 32);
+  box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 22px;
+  border-radius: 10px; 
+  z-index: 0;  
+  overflow: hidden;  
+  outline: none;
+}
+form button:focus, .contenedor-footer {
+  outline-color: transparent;
+  box-shadow: rgb(28, 30, 32) 2px 2px 22px;
+}
+.right, .left {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+.right {
+  left: 66%;
+}
+.left {
+  right: 66%;
+}
+.right::after {
+  top: -30px;
+  left: calc(-66% - 20px);
+  background-color: #2A6378;
+  color:transparent;
+  transition: transform .4s ease-out;
+  transform: translate(0, -90%) rotate(0deg)
+}
+form button:hover .right::after {
+  transform: translate(0, -47%) rotate(0deg)
+}
+form button .right:hover::after {
+  transform: translate(0, -50%) rotate(-7deg)
+}
+form button .left:hover ~ .right::after {
+  transform: translate(0, -50%) rotate(7deg)
+}
+form button::before {
+  content: '';
+  pointer-events: none;
+  opacity: .6;
+  background:
+    radial-gradient(circle at 20% 35%,  transparent 0,  transparent 2px, #e7e7e8 3px, #e7e7e8 4px, transparent 4px),
+    radial-gradient(circle at 75% 44%, transparent 0,  transparent 2px, #e7e7e8 3px, #e7e7e8 4px, transparent 4px),
+    radial-gradient(circle at 46% 52%, transparent 0, transparent 4px, #e7e7e8 5px, #e7e7e8 6px, transparent 6px);
+  width: 100%;
+  height: 300%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: bubbles 5s linear infinite both;
+}
+@keyframes bubbles {
+  from {
+    transform: translate();
+  }
+  to {
+    transform: translate(0, -66.666%);
+  }
+}
