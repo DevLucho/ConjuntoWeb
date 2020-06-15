@@ -1,0 +1,56 @@
+.titulazo{height: 130px;}
+.inicioSeguridad{height: 140vh; margin-bottom: 2%}
+.circulo{/* estilos del poput de guardar*/
+    background-color:darkcyan;
+    width: 36%; 
+    height: 30vh;
+    position: absolute;
+    border-radius: 50%; 
+    margin:-25% -30%;
+    z-index: 2;
+    border:black solid 2px;
+  }
+   /* formu2 */
+ .form2{
+     width: 100%;
+     margin: 5% 3% 12% 8%;
+     height:80vh; 
+     border: solid black 1px;
+     text-align: center;
+ }
+ .menos{
+     margin-left:0%;
+     width: 100%;
+     padding-top: 0;
+ }
+ /* form2 */
+  .fortuna{background-color: #33406A; width: 39%; height: 33vh;}
+  .title-class{
+    color: black !important;
+    font-family: helvetica;
+  }
+  .image-class{
+    position: absolute;
+    width: 160px;
+    /* margin:-11% -55% !important; */
+  }
+  .popup-class{border: solid black 2px !important;}
+  .isos2{font-size: 140px !important;}
+  .isos{
+    font-size: 120px;
+    margin-top:35px;
+    color: black; 
+  }/*fin  estilos del poput de guardar*/
+  @media screen and (max-width:800px){
+    .circulo{display: none;}
+    .isos{display: none;}
+    .image-class{display: none;}
+    .popup-class{padding-left:1%  !important;}
+    .titulazo{height: 80px;}
+    .inicioSeguridad{height: 150vh;}
+    .form2 .form-style-1{margin-left:35px}
+  }
+  @media screen and (max-width:800px){
+    .form2{margin:0% 9%; height: 60vh;}
+    .form2 .form-style-1{margin-left: 17%;}
+  }

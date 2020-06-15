@@ -1,0 +1,644 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
+*{
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
+}
+p {/* inicio de header y poput */
+    max-width: 80%;
+    margin: 20px auto;
+}
+.logo_main{
+    height: 140px;
+    padding: 20px;
+    padding-left: 70px;
+    color: white;
+    width: 50%;
+    cursor: default;
+    float: left;
+}
+.vigilante{
+    width: 35%;
+    height: 140px;
+    float: left;
+}
+.vigilante h1{
+    font-size: 25px;
+    padding: 60px 50px;
+    float: right;
+    font-family: 'Righteous', cursive;
+}
+button{
+    font-size: 20px;
+    width: 140px;
+    border: black 5px solid; 
+    background-color: #141414;
+    color: #FFF;
+    position: absolute;
+    margin: 4% 10%;
+    border-radius: 15px;
+    height: 50px;
+    transition: all 1s;
+}
+button:hover{
+    background-color: transparent;
+    border: black double 5px;
+    box-shadow: black 0px 0px 15px ;
+    color: black;
+    cursor: pointer;
+}
+.divcela{
+    width: 15%;
+    height: 140px;
+    padding: 35px 0px;
+    float: right;
+}
+.imgCela{
+    border-radius: 100% ;
+    width: 70px;
+    padding: 0px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 3;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+.button{
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    margin:-0% 0% 0% -5.5%;
+    position: absolute;
+}
+.code{
+    font-size: 50px;
+    margin-left: 3%;
+}
+.especialboy{
+    transition: all 1s;
+    cursor: pointer;
+    background-color: #2A6378;
+    border-radius: 84px 84px 84px 84px;
+    -moz-border-radius: 84px 84px 84px 84px;
+    -webkit-border-radius: 84px 84px 84px 84px;
+}
+.especialboy:hover{
+    background-color: #141414;
+    color: #FFF;
+    border: #d4c5c5 solid 3px;
+    box-shadow: 0 0 15px black;
+}
+#popupBody{
+    width: 540px;
+    padding: 2%;
+    height:45vh;
+    max-width: 540px;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #CCC;
+    background: #FFF;
+    position: relative;
+    transition: all 5s ease-in-out;
+    margin: 15% auto;    
+}
+.popupContent ,td, th{text-align: center;}
+.popupContent , th{font-family: 'Righteous';}
+.popupContent , td{font-family: 'Helvetica';}
+.popupContent table{
+    width: 100%;
+    border-top: solid 3px #2A6378;
+    font-size: 20px;
+    height: 30vh;
+} 
+#cerrar{
+    position: absolute;
+    top: 10px;
+    left: 500px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #F00;
+}
+h2{
+    color: #9c9c9c;
+    text-align: center;
+    margin-top: -8%;
+    font-family: 'Times New Roman', Times, serif;
+}
+.logo_small{
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-right: 40px;
+    margin-left: 20px;
+    color: #019CDE;
+    cursor: pointer;
+    float: left;
+}
+.nav{
+    float: left;
+    width: 100%;
+    background: rgb(28, 30, 32);
+    color: white;
+    transition: .3s ease all;
+    backface-visibility: hidden;
+    z-index: 2;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.nav .wrap{
+    position: relative;
+    left: -150px;
+    transition: 0.4s ease all;
+}
+nav{
+    display: inline-block;
+    margin-left: 90px;
+    margin-top: -200px;
+}
+nav ul{
+    margin-left: 100px;
+    float: right;
+    margin-top: -75px;
+}
+nav li{
+    margin: 0px;
+    margin-left: 30px;
+    padding: 0;
+    border-bottom:5px solid #2A6378 ;
+    display: inline-block;
+    width: 250px;
+}
+nav a{
+    display: block;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    transition: 1s ease all;
+}
+.pepe{display: none;}
+nav a:hover{
+    color: white;
+    background: #2A6378;
+    transition: 1s ease all;
+}
+body.nav_fixed .nav{
+    position: fixed;
+    top: 0;
+}
+body.nav_fixed .nav .wrap{left: 0;}/* fin de header y poput */
+.inicioSeguridad{/* inicio de estilos de formulario*/
+    width: 60%;
+     height: 120vh;
+     margin: 5% 3% 3% 0%;   
+     float: right;
+ }
+ .border{border: solid 1px black;}
+ .titulazo{
+     width: 50%;
+     height: 7vh;
+     padding-bottom: 10%;
+     border-bottom: 3px solid black;
+     margin-left: 25%;
+     font-size: 60px;
+     text-align: center;
+ }
+ .corto{
+     max-width: 49%;
+ }
+ .corto2{
+    float:left;
+ }
+ .corto3{
+     float:right;
+ }
+ .formstyle1{
+     margin:10px auto;
+     width: 500px;
+     margin-left: -15%;
+     padding: 20px 12px 10px 20px;
+     font: 20px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+ }
+ li{
+     padding: 0;
+     display: block;
+     list-style: none;
+     margin: 20px 0 0 0;
+     background-color: none;
+ }
+  label{
+     margin:0 0 10px 0;
+     padding:0px;
+     display:block;
+     font-weight: bold;
+ }
+  .correcto{
+     box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     border:1px solid #BEBEBE;
+     padding: 7px;
+     margin:0px;
+     outline: none;	
+ }
+ .correcto:focus{
+     -moz-box-shadow: 0 0 8px #2A6378;
+     -webkit-box-shadow: 0 0 8px #2A6378;
+     box-shadow: 0 0 8px #2A6378;
+     border: 1px solid #2A6378;
+ }
+  .fielddivided{
+     width: 49%;
+ }
+  .fieldlong{
+     width: 100%;
+ }
+  .fieldselect{
+     width: 100%;
+ }
+ 
+.enviarcrud{
+     background: #4B99AD;
+     padding: 8px 25px 8px 15px;
+     width: 100px;
+     font-size: 20px;
+     border: none;
+     transition: all 1s;
+     color: #fff;
+     border-radius: 10px 10px 10px 10px;
+     -moz-border-radius: 10px 10px 10px 10px;
+     cursor: pointer;
+     -webkit-border-radius: 10px 10px 10px 10px;
+ }
+ .enviarcrud:hover{
+     background: #4691A4;
+     box-shadow: black 0px 0px 20px 1px;
+ }
+ .required{color:red;}/* fin de estlos de formulario */
+ .noticiasSeguridad{/* inicio de estilos de noticias */
+     margin: 5% 3% 3% 0%;
+     float: right;
+     width: 31%;
+     height: 90vh;
+ }
+ .noticiah1{
+     text-align: center;
+     padding-top: 20px;
+ }
+  .linea{
+     width:  80%;
+     height: 1px;
+     margin: 3% 10%;
+ } 
+ .linea2{
+     width:  80%;
+    overflow: hidden;
+     height: 45%;
+     margin: 10% 10%;
+ }
+ .noticiasSeguridad  .linea2 form ul{
+     margin: -10px 0px 0px 10px;
+     width: 580px;
+ }
+ .negro{
+    color: black;
+    font-size: 120px;
+    margin: 2% 14%;
+}/* fin de estilos de noticias */
+.circulo{/* estilos del poput de guardar*/
+    background-color:darkcyan;
+    width: 33%;
+    height: 30vh;
+    position: absolute;
+    border-radius: 50%; 
+    margin:-25%   -28%;
+    z-index: 2;
+    border:black solid 2px;
+  }
+  .title-class{
+    color: black !important;
+    font-family: helvetica;
+  }
+  .image-class{
+    position: absolute;
+    width: 150px;
+    margin:-13% -53% !important;
+  }
+  .isos{
+    width: 140px;
+    margin-top:25px; 
+  }
+  .popup-class{
+      width: 45% !important;
+  }/*fin  estilos del poput de guardar*/
+.btn-menu{/*boton de menu responsive*/
+    width: 60px;
+    height: 60px;
+    padding: 22px;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #019CDE;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 500ms cubic-bezier(1, 0, 0, 1);
+    transform: translateX(100px);
+}
+.btn-menu:hover{
+    transform: scale(1.2);
+    background: #42acfa;
+}
+.hola{
+    display: none;
+}/* fin de boton responsive*/
+.rigth{/* bordes */
+    border-right: 1px solid black;
+}
+.left{
+    border-left: 1px solid black;
+}
+.top{
+    border-top: 1px solid black;
+}
+.bottom{
+    border-bottom: 1px solid black;
+}/* fin de bordes */
+footer{/*inicio estilos del footer */
+    width: 100%;
+    height: 60px;
+    margin-top:95%;
+    background-color: rgb(28, 30, 32);
+    position: absolute;
+}
+.derechossEGURIDAD{
+    text-align: center;
+    color: white;
+}
+footer i{
+    color: white;
+    padding-left: 60px;
+    padding-top: 10px;
+    font-size: 40px;
+}
+.part1{
+    width: 20%;
+    float: left;
+}
+.part2{
+    width: 60%;
+    float: left;
+}
+.part3{
+    width: 20%;
+    float: left;
+}
+.paya{
+    margin-right: 10px;
+}
+.hola{
+    height: 90%;
+    width: 400px;
+}/* fin de estilos del footer */
+@media screen and (max-width: 800px){/*inicio de responsive para tablet*/
+    nav ul li{
+        margin-left: 0px;
+        width: 145px;
+        margin-left: 1px;
+    }    
+    nav ul{
+        width: 100%;
+        padding-left: 110px;
+    }
+    nav ul li a{
+        padding-top: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .vigilante h1{
+        display: none;
+    }
+    .vigilante button{
+        margin-top: 45px;
+    }
+    .button{
+        margin-left:-9.5%;
+    }
+    .logo_main{
+        padding-left: 15px;
+    }
+    .part1{
+        font-size: 22px;
+        background-color: #141414;
+    }
+    .part2{
+        padding-top: 20px;
+        height: 102px;   
+        background-color: #141414;
+    }
+    .part3{
+        font-size: 22px;
+        background-color: #141414;
+    }
+    .tuputamadre{
+        margin-top: 110%;
+        font-size: 15px;
+    }
+    .inicioSeguridad{
+        overflow: hidden;
+        height: 102vh;
+    }
+    .titulazo{
+        border:none;
+    }
+    form{
+        margin-left: -20%;
+    }
+    form .form-style-1 li{
+        width: 80%;
+    }
+    .field-select option{
+        background-color: royalblue;
+    }
+    .noticiasSeguridad  .linea2 form ul{
+        margin: -10px 0px 0px 50px;
+        width: 370px    
+    }
+    .negro{
+       margin: 2% 3%;
+   }
+   .circulo{display: none;}
+   .image-class{display: none;}
+   .popup-class{padding-left:1%  !important;}
+}/* fin de responsive de tablet*/
+@media screen and (max-width: 600px){/* inicio de responsive de cel*/
+    .btn-menu{
+        transform: translateX(0px);
+    }
+    .logo_main{
+        display: none;
+    }
+    .nav{
+        width: 70%;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        padding: 0px;
+        transform: translateX(-100%);
+    }
+    .nav .wrap{
+        left: 0  ;
+    }
+    nav{
+        width: 100%;
+        position: absolute;
+        top: 120px;
+    }
+    nav li{
+        margin:0;
+        padding: 0;
+        border: none;
+        display: flex;
+    }
+    .nav ul{
+        width: 100%;
+        padding-left: 0em;
+        margin-right: 90px;
+    }
+    .nav ul li{
+        width: 100%;
+    }
+    .nav ul li a{
+        text-align: left;
+        padding-left: 1em;
+    }
+    .logo_small{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+    .logo_small{
+        margin: 100px ;
+    }
+    .pepee{
+        display: none;
+    }
+    .pepe{
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        margin: 10% 0 0 35%;
+        border-radius: 50%;
+        border: solid  rgb(28, 30, 32) 15px;
+        background-color: white;
+        z-index: 2;
+    }
+    .hola{
+        display: block;
+        width: 400px;
+        height: 100px;
+        margin-left: -110px;
+        margin-top: -110px;
+        background-color: #33406A;
+    }
+    .hla{
+        background-color: #33406A;
+        margin-left: 0px;
+        margin-top: -75px;
+        color: white;
+        text-align: center;
+        padding-top: 110px;
+        height: 140px;
+        border-top: rgb(28, 30, 32) solid 15px;
+    }
+    nav{
+        margin-top: 50%;
+    }
+    nav a{
+        width: 100%;
+        display: block;
+        padding: 20px;
+        margin: 0;
+    }
+    .nav-toggle{
+        transition: all 300ms cubic-bezier(1,0,0,1);
+        transform: translateX(0%);
+    }    
+    .button{
+        margin: -14% -58%;
+        width: 94px;
+        height: 94px;
+        position: fixed;
+        z-index: 3;
+    }
+    .imgCela{
+        display: none;
+    }
+    .vigilante{
+        width: 90%;
+        height: 120px;
+        margin: -1% 5% 0% 05%;
+        border-bottom:solid 7px #33406A
+    }
+    .vigilante h1{
+        margin: -10px 10px 0px 0px;
+        display: block;
+    }
+    .tuputamadre{
+        margin-top: 185%;
+    }
+    .part2 {
+        font-size: 15px;
+        padding-top: 10px;
+    }
+    .noticiasSeguridad{
+        width: 80%;
+        margin:29% 10%;
+        float: none;
+        position: absolute;
+        height: 200px;
+        overflow: hidden;
+    }
+    .linea2{
+        border: none;
+        margin-top:30px;
+    }
+    .noticiasSeguridad  .linea2 form ul{
+        margin: -25px 0px 0px 90px;
+        width: 580px;
+    }
+    .negro{
+       font-size: 60px;
+       position: absolute;
+       margin: -14% 54%;
+   }
+    .inicioSeguridad{
+        width: 80%;
+        height: 103vh;
+        margin-right: 10%;
+        margin-top:  33%;
+    }
+    .titulazo{
+        font-size: 50px;
+        padding-top: 10px;
+        padding-bottom: 0;
+    }
+}/* fin de responsive de cel */

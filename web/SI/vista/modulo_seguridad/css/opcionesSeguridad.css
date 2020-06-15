@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
+*{
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
+}
+.pep{/*  */
+    height: 600px;
+    margin-top: 30px;
+}
+/* inicio de estilos de capá principal*/
+.espacio{
+      width: 100%;
+      height: 80px;
+  }
+.opciones{
+    background-color: #e7e7e7;
+    width: 90%;
+    margin-left: 5%;
+    height: 74vh;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    padding-top:1%;
+    margin-bottom: 10%;
+  }
+  .agregar{
+    width: 26.5%;
+    height: 84%;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    margin: 3% 0% 0% 5%;
+    float: left;
+    box-shadow: black 0px 0px 20px 1px;
+    transition: all 0.9s;
+  }
+  .agregar:hover{
+    background-color: #2A6378;
+  }
+  .negro{
+      color: black;
+      font-size: 120px;
+      margin: 15% 29%;
+  }
+  h3{
+    font-size:40px !important;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 10% 10% !important;
+    transition: all 0.9s;
+    cursor: pointer;
+    font-family: sans-serif;
+  }
+  h3:hover{
+    color: white;
+  } /* fin de capa principal */
+.hola{
+    display: none;
+}/* fin de boton responsive*/
+.rigth{/* bordes */
+    border-right: 1px solid black;
+}
+.left{
+    border-left: 1px solid black;
+}
+.top{
+    border-top: 1px solid black;
+}
+.bottom{
+    border-bottom: 1px solid black;
+}/* fin de bordes */
+@media screen and (max-width: 800px){/*inicio de responsive para tablet*/
+    .opciones{
+        height: 60vh;
+    }
+    .negro{
+        font-size: 80px;
+        padding-top: 30px;
+    }   
+    h3{
+        font-size: 25px !important;
+    }
+}/* fin de responsive de tablet*/
+@media screen and (max-width: 600px){/* inicio de responsive de cel*/
+    .opciones{
+        height: 110vh;
+        margin-bottom: 10%;
+    }
+    .agregar{
+        width: 80%;
+        height: 150px;
+        margin: 5% 0% 0% 10% !important;
+    }
+    .negro{
+        margin:10px 0px 0px 30px;
+    }
+    h3{
+        margin: -72px 0px 0px 150px !important;
+    }
+
+}/* fin de responsive de cel */
+

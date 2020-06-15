@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-jun-2020, 23:32:02
+    Author     : Sebastian
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
+*{
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
+}
+.container-fluid{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.rigth{/* bordes */
+    border-right: 1px solid black;
+}
+.left{
+    border-left: 1px solid black;
+}
+.top{
+    border-top: 1px solid black;
+}
+.bottom{
+    border-bottom: 1px solid black;
+}/* fin de bordes */
+.xxx{/*inicio de tabla*/
+    margin-left: 5%;
+}
+thead, tfoot, tbody{
+    text-align: center;
+}
+.btn-secondary {
+    background-color: transparent !important;
+    margin-left: 5px !important;
+}
+
+.buttons-pdf:hover{
+    background-color: rgb(220, 53, 69) !important;
+}
+.buttons-print:hover{
+    background-color: rgb(23, 182, 164) !important;
+}
+.buttons-excel:hover{
+    background-color: rgb(40, 167, 69) !important;
+}
+.dataTables_filter, .pagination{
+    float: right;
+  }
+.mt-3{
+    font-size: 32px;
+    font-family: 'Righteous', cursive;
+    padding-top: 30px !important;
+}/*fin de tabla*/
+@media screen and (max-width: 600px){/* inicio de responsive de cel*/
+    .mt-3{
+        margin:0% 0% 10% 10%;
+    }
+}/* fin de responsive de cel */
