@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://java.sun.com/jsf/passthrough">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../estilos-parqueaderos.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Estilos datatables -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar parqueadero</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="./ConsultarParqueaderos.xhtml">Consultar parqueaderos</a></li>
+                    <li class="breadcrumb-item active">Editar parqueaderos</li>
+                </ol>
+            </div>
+            <!-- Contenido principal -->
+            <section class="container-fluid" id="principal" style="height:560px;">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>
+                            <i class="fas fa-edit"></i>Editar parqueaderos
+                        </h3>
+                        <hr/>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <!-- Tabla -->
+                    <f:view>
+                        <h:form class="sombra form">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="Id Parquedero" for="idParqueadero" />
+                                        <h:inputText id="idParqueadero" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.idParqueadero}" title="Id Parquedero" required="true" requiredMessage="The IdRol field is required." disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="Lugar" for="lugar" />
+                                        <h:inputText id="lugar" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.lugar}" title="Lugar" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                    <h:outputLabel value="Estado" for="estado"/><br></br>
+                                    <h:selectOneMenu class="custom-select" value = "#{parqueaderoControlador.parqueadero.estado}"> 
+                                       <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                       <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
+                                       <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
+                                    </h:selectOneMenu> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{parqueaderoControlador.actualizar()}"></h:commandButton>
+                            </div>
+                        </h:form>
+                    </f:view>
+                </div>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../../../js/dataTables/dataTables.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>

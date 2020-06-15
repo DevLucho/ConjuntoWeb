@@ -84,8 +84,6 @@ public class ResidenteControlador implements Serializable {
         torre = new Torre();
     }
     
-    int valor = 2;
-    
     public void registrar() {
         
         usuario.setIdRol(rolFacade.find(2));

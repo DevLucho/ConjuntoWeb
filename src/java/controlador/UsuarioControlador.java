@@ -78,7 +78,7 @@ public class UsuarioControlador implements Serializable {
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
 
-    /*
+    
     private int valor = 0;
 
     public void incrementar() {
@@ -87,7 +87,7 @@ public class UsuarioControlador implements Serializable {
 
     public int getValor() {
         return valor;
-    }*/
+    }
 
     public UsuarioControlador() {
     }
@@ -126,6 +126,11 @@ public class UsuarioControlador implements Serializable {
             turnoVigilanteFacade.create(turnoVigilante);
             vigilante.setIdTurno(turnoVigilante);
             vigilanteFacade.create(vigilante);
+            usuario = new Usuario();
+            rol = new Rol();
+            tipoDocumento = new TipoDocumento();
+            vigilante = new Vigilante();
+            turnoVigilante = new TurnoVigilante();
         }
     }
 

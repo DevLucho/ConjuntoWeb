@@ -43,7 +43,6 @@ nav ul{
 }
 nav ul li{
     display: inline-block;
-    width:14.28%;
     text-align: center;
     transition: 0.8s all;
     font-family: Helvetica;
@@ -88,7 +87,7 @@ nav ul ul ul{
 
 /* --- Media Query --- */
 
-@media screen and (max-width:900px){
+@media screen and (max-width:903px){
     header .sub-contenedor .options .cerrar, header .sub-contenedor .options  .country-flag{
         display:none;
     }
