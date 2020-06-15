@@ -37,7 +37,7 @@ public class VigilanteControlador implements Serializable {
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Vigilante vigilante;
-    TurnoVigilante turnoVigilante;
+    private TurnoVigilante turnoVigilante;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -111,6 +111,22 @@ public class VigilanteControlador implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public TurnoVigilante getTurnoVigilante() {
+        return turnoVigilante;
+    }
+
+    public void setTurnoVigilante(TurnoVigilante turnoVigilante) {
+        this.turnoVigilante = turnoVigilante;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
 }

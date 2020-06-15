@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -76,12 +77,10 @@
                                 </div>
                                 <div class="collapse row" id="mas">
                                     <div class="col-12">
-                                        <select name="" id="" class="form-control">
-                                            <option value="" selected="selected" disabled="disabled">Seleccione rol</option>
-                                            <option value="Administrador">Administrador</option>
-                                            <option value="Residente">Redidente</option>
-                                            <option value="Vigilante">Vigilante</option>
-                                        </select>
+                                        <h:selectOneMenu class="form-control" value="#{rolControlador.rol.idRol}">
+                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                            <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                             </div>
