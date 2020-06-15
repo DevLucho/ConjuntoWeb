@@ -30,7 +30,6 @@ public class SesionControlador implements Serializable {
     /**
      * Creates a new instance of SesionControlador
      */
-    
     private int documento;
     private String contrasenia;
     private Rol rolSeleccionado;
@@ -57,7 +56,13 @@ public class SesionControlador implements Serializable {
         if (user.getDocumento() != 0) {
             rolSeleccionado = user.getIdRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
-            return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+            if (rolSeleccionado.getIdRol() == 1) {
+                return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+            }
+            if (rolSeleccionado.getIdRol() == 2) {
+                return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
+            }
+            return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
         } else {
             return "login?faces-redirect=true";
         }
@@ -82,7 +87,7 @@ public class SesionControlador implements Serializable {
         }
         return false;
     }
-    
+
     public List<Permiso> hijos(int id) {
         return permisoFacade.consultarHijos(id);
     }
