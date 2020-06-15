@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -23,32 +24,33 @@
         <title>Administrador | Crear zona común</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga de pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item active">Crear zona común</li>
-                </ol>
-            </div>
-            <!-- main -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>
-                            <i class="fas fa-thumbtack"></i>
-                            Crear nueva zona común
-                        </h3>
-                    </div>
+        <f:view>
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga de pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item active">Crear zona común</li>
+                    </ol>
                 </div>
-                <hr/>                 
-                <!-- Formulario -->
-                <f:view>
+                <!-- main -->
+                <section class="container-fluid" id="principal">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>
+                                <i class="fas fa-thumbtack"></i>
+                                Crear nueva zona común
+                            </h3>
+                        </div>
+                    </div>
+                    <hr/>                 
+                    <!-- Formulario -->
+
                     <h:form>
                         <div class="row">
                             <!-- Titulo -->
@@ -77,6 +79,16 @@
                                                 <p>Disponibilidad en días</p>
                                             </b>
                                             <hr/>
+                                            <h:selectManyCheckbox value="#{zonaComunalControlador.zonaComunal.disponibilidad}">
+                                                <f:selectItem itemValue="Domingo" itemLabel="Domingo"></f:selectItem>
+                                                <f:selectItem itemValue="Lunes" itemLabel="Lunes"></f:selectItem>
+                                                <f:selectItem itemValue="Martes" itemLabel="Martes"></f:selectItem>
+                                                <f:selectItem itemValue="Miercoles" itemLabel="Miercoles"></f:selectItem>
+                                                <f:selectItem itemValue="Jueves" itemLabel="Jueves"></f:selectItem>
+                                                <f:selectItem itemValue="Viernes" itemLabel="Viernes"></f:selectItem>
+                                                <f:selectItem itemValue="Sabado" itemLabel="Sabado"></f:selectItem>
+                                            </h:selectManyCheckbox>
+                                            <!--
                                             <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                                 <div class="form-group row">
                                                     <div class="col-12 col-sm col-md col-lg col-xl">
@@ -114,7 +126,7 @@
                                                         <label class="custom-control-label" for="checks">Sabado</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="col-6">
                                             <b>
@@ -123,6 +135,11 @@
                                             <hr/>
                                             <div class="form-group row">
                                                 <div class="col-12 col-md-6">
+                                                    <h:outputLabel value="HoraInicialReserva:" for="horaInicialReserva" />
+                                                    <h:inputText id="horaInicialReserva" a:type="time" value="#{zonaComunalControlador.zonaComunal.horaInicialReserva}" title="HoraInicialReserva" required="true" requiredMessage="The HoraInicialReserva field is required.">
+                                                        <f:convertDateTime pattern="HH:mm" />
+                                                    </h:inputText>
+                                                    <!--
                                                     <label for="desde_las">Hora Inicial de reservaciones</label>
                                                     <select id="desde_las" required="required" class="form-control">
                                                         <option value="00:00">00:00</option>
@@ -173,9 +190,14 @@
                                                         <option value="22:30">22:30</option>
                                                         <option value="23:00">23:00</option>
                                                         <option value="23:30">23:30</option>
-                                                    </select>
+                                                    </select>-->
                                                 </div>
                                                 <div class="col-12 col-md-6">
+                                                    <h:outputLabel value="HoraFinalReserva:" for="horaFinalReserva" />
+                                                    <h:inputText id="horaFinalReserva" a:type="time" value="#{zonaComunalControlador.zonaComunal.horaFinalReserva}" title="HoraFinalReserva" required="true" requiredMessage="The HoraFinalReserva field is required.">
+                                                        <f:convertDateTime pattern="HH:mm" />
+                                                    </h:inputText>
+                                                    <!--
                                                     <label for="hasta_las">Hora Final de reservaciones</label>
                                                     <select id="hasta_las" required="required" class="form-control">
                                                         <option value="00:30">00:30</option>
@@ -226,9 +248,14 @@
                                                         <option value="23:00">23:00</option>
                                                         <option value="23:30">23:30</option>
                                                         <option value="23:59">23:59</option>
-                                                    </select>
+                                                    </select>-->
                                                 </div>
                                                 <div class="col-12">
+                                                    <h:outputLabel value="TiempoMaximoReserva:" for="tiempoMaximoReserva" />
+                                                    <h:inputText id="tiempoMaximoReserva" a:type="time" value="#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}" title="TiempoMaximoReserva" required="true" requiredMessage="The TiempoMaximoReserva field is required.">
+                                                        <f:convertDateTime pattern="HH:mm" />
+                                                    </h:inputText>
+                                                    <!--
                                                     <label for="tiempo_maximo_reserva">Tiempo máximo de reserva (en horas)</label>
                                                     <select id="tiempo_maximo_reserva" name="tiempo_maximo_reserva"
                                                             required="required" class="form-control">
@@ -256,7 +283,7 @@
                                                         <option value="22">22 </option>
                                                         <option value="23">23 </option>
                                                         <option value="24">24 </option>
-                                                    </select>
+                                                    </select>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -270,21 +297,23 @@
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <textarea name="descripcion" class="form" placeholder="Mensaje" id="descripcion" required="required"></textarea>
+                                <label>Descripcion</label>
+                                <h:inputText class="form" pt:placeholder="Mensaje" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required"/>
                             </div>
+                            <!--
                             <div class="col-12 col-md-3">
                                 <div class="row">
-                                    <!-- Subir foto -->
+                                     Subir foto 
                                     <div class="col-5" style="padding: 0;">
                                         <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
                                         <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
                                     </div>
-                                    <!-- Pre-visualizar foto -->
+                                     Pre-visualizar foto 
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
                                 </div>
-                                <!-- Mostrar foto en modal -->
+                                Mostrar foto en modal 
                                 <div class="modal fade" id="modal-img">
                                     <div class="modal-dialog d-flex justify-content-center align-items-center">
                                         <div class="modal-content">
@@ -292,7 +321,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- Boton publicar -->
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-2">
@@ -301,11 +330,13 @@
                             </div>
                         </div>
                     </h:form>
-                </f:view>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
+
         <!-- ckEditor-->
         <script>
             ClassicEditor

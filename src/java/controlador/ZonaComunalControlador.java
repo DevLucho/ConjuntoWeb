@@ -10,6 +10,7 @@ import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -41,6 +42,33 @@ public class ZonaComunalControlador implements Serializable {
     public void registrar(){
         zonaComunalFacade.create(zonaComunal);
         zonaComunal = new ZonaComunal();
+    }
+    
+    public void eliminar (ZonaComunal zonaComunalEliminar){
+        zonaComunalFacade.remove(zonaComunal);
+    }
+    
+    public String preActulizar(ZonaComunal zonaComunalActualizar){
+        zonaComunal = zonaComunalActualizar;
+        return "editar-zona";
+    }
+    
+    public void actualizar(){
+        zonaComunalFacade.findAll();
+    }
+    
+    public List<ZonaComunal> consultarTodos(){
+        return zonaComunalFacade.findAll();
+    }
+    
+    public String consultarZona(int id){
+        zonaComunal = zonaComunalFacade.find(id);
+        return "detalle-zona";
+        
+    }
+    
+    public int contarZonas(){
+        return zonaComunalFacade.count();
     }
 
     public ZonaComunal getZonaComunal() {

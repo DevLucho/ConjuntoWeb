@@ -201,8 +201,9 @@
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
                                                     <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar usuario" action="#{usuarioControlador.preActualizar(residente)}"></h:commandButton>
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.eliminar(usuario)}"></h:commandButton>
-                                                    <button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>
+                                                    <!-- . -->
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.eliminar(residente.idPerfil)}"></h:commandButton>
+                                                    <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver usuario" action="#{usuarioControlador.consultarPorId(usuario.idPerfil)}"></h:commandButton>
                                                 </div>
                                             </h:column>
@@ -263,8 +264,9 @@
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
                                                     <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar usuario" action="#{usuarioControlador.preActualizar(residente)}"></h:commandButton>
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.eliminar(usuario)}"></h:commandButton>
-                                                    <button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>
+                                                    <!-- . -->
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.eliminar(vigilante.idPerfil)}"></h:commandButton>
+                                                    <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver usuario" action="#{usuarioControlador.consultarPorId(usuario.idPerfil)}"></h:commandButton>
                                                 </div>
                                             </h:column>

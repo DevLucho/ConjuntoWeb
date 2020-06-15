@@ -48,7 +48,7 @@ public class RolControlador implements Serializable {
         rolFacade.remove(rolEliminar);
     }
     
-    public String preActulizar(Rol rolActualizar){
+    public String preActualizar(Rol rolActualizar){
         rol = rolActualizar;
         return "editar-rol";
     }

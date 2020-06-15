@@ -20,7 +20,7 @@
                 <!-- Nav -->
                 <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="p">
                     <c:if test="#{empty p.idPermiso.permisoPadre}">
-                        <li class="submenu borde-left flex-nowrap"><a class="text-white" href="#{p.idPermiso.url}"><span><i class="#{p.idPermiso.icon}"></i></span>#{p.idPermiso.nombre}<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+                        <li class="submenu borde-left"><a class="text-white" href="#{p.idPermiso.url}"><span><i class="#{p.idPermiso.icon}"></i></span>#{p.idPermiso.nombre}<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
                             <ul class="sub-submenu">
                                 <c:forEach items="#{sesionControlador.hijos(p.idPermiso.idPermiso)}" var="sp">
                                     <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="op">

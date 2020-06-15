@@ -43,6 +43,7 @@ nav ul{
 }
 nav ul li{
     display: inline-block;
+    width:14.28%;
     text-align: center;
     transition: 0.8s all;
     font-family: Helvetica;

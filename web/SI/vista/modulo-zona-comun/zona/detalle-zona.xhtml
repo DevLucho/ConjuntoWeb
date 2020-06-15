@@ -10,11 +10,44 @@
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
         <!-- Estilos -->
-        <link rel="stylesheet" href="./detalle-zona.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../navs/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <style>
+            *{
+                font-family: 'Helvetica';
+            }
+            /* inicio de estilos de descripcion de zona */
+            svg{
+                background:url("../../../img/bbq.jpg");
+                background-size:cover;
+                width:35vmin; 
+                height:auto;
+                display:block;
+            }
+            text{
+                font-size:10px;
+                transition:font-size .9s ease-out;
+                font-weight:900;
+                font-family:arial;
+            }
+            svg:hover text{
+                transition:font-size .9s ease-in;
+                font-size: 300px;
+            }
+            .sobree{
+                margin: -2.5% 0% 4% 30%;
+            }
+            .contenidodescri{
+                margin-top: 25px;
+            }
+
+            h3{
+                color:#33406A;
+                margin-bottom: 0;
+            }
+        </style>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <title>Administrador | Zona comunal</title>
     </h:head>
@@ -44,81 +77,71 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="row mt-3 mb-3">
+                <h:form>
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12 col-md-10">
+                            <h2>#{zonaComunalControlador.zonaComunal.nombre}</h2>
+                            <hr/>
 
-                    <div class="col-12 col-md-10">
-                        <h2>Terraza BBQ</h2>
-                        <hr/>
-
-                        <div class="media">
-                            <div class="media-body">
-                                <h4 class="mt-0">Descripción</h4>
-                                <p>Lugar ideal para tener muy bellos momentos donde los sentimientos de agrado y
-                                felicidad floreceran pues el lugar indeicado para tener un buen desayuno o un delicioso almuerzo 
-                                o mas bien una comida muy agradable junto a tus serer amados o
-                                tus amigos.</p>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                                <hr/>
-                                <div class="media">
-                                    <i class="fas fa-calendar-week d-flex align-self-start mr-3"></i>
-                                    <div class="media-body">
-                                        <h4 class="mt-0">Disponibilidad en dias</h4>
-                                        <p>La terraza BBQ estara disponible los dias <mark>Lunes</mark>, <mark>Miercoles</mark>,<mark>Jueves</mark>
-                                        y el día<mark>Domingo</mark>
-                                        </p>
-                                        <hr/>
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="mt-0">Descripción</h4>
+                                    <p>#{zonaComunalControlador.zonaComunal.descripcion}</p>
+                                    <hr/>
+                                    <div class="media">
+                                        <i class="fas fa-calendar-week d-flex align-self-start mr-3"></i>
+                                        <div class="media-body">
+                                            <h4 class="mt-0">Disponibilidad en dias</h4>
+                                            <p>La terraza BBQ estara disponible los dias <mark>#{zonaComunalControlador.zonaComunal.disponibilidad}</mark>
+                                            </p>
+                                            <hr/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media">
-                                    <i class="far fa-clock d-flex align-self-start mr-3"></i>
-                                    <div class="media-body">
-                                        <h4 class="mt-0">Disponibildiad en horas</h4>
-                                        <p>La terraza estara disponible desde las <mark>8:30</mark> hasta las <mark>22:00</mark> horas.
-                                        </p>
-                                        <p> 
-                                        El tiempo maximo de reserva en la zona común es <mark>2</mark> horas.
-                                        </p>
-                                        <hr/>
+                                    <div class="media">
+                                        <i class="far fa-clock d-flex align-self-start mr-3"></i>
+                                        <div class="media-body">
+                                            <h4 class="mt-0">Disponibildiad en horas</h4>
+                                            <p>La terraza estara disponible desde las <mark>#{zonaComunalControlador.zonaComunal.horaInicialReserva}</mark> 
+                                                hasta las <mark>#{zonaComunalControlador.zonaComunal.horaFinalReserva}</mark> horas.
+                                            </p>
+                                            <p> 
+                                                El tiempo maximo de reserva en la zona común es <mark>#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}</mark> horas.
+                                            </p>
+                                            <hr/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr/>
-                        <div class="media">
-                            <div class="media-body">
-                                <strong><h4 class="mt-0 text-right">Notas</h4></strong>
-                                <p class="text-right">
-                                    Recuerde que el administrador aprobará su solicitud de reserva.
-                                </p>
+                            <hr/>
+                            <div class="media">
+                                <div class="media-body">
+                                    <strong><h4 class="mt-0 text-right">Notas</h4></strong>
+                                    <p class="text-right">
+                                        Recuerde que el administrador aprobará su solicitud de reserva.
+                                    </p>
+                                </div>
+                                <img src="../../../img/bbq.jpg" width="64" height="64" alt="" class="ml-3"/>
                             </div>
-                            <img src="../../../img/bbq.jpg" width="64" height="64" alt="" class="ml-3"/>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-2" style="text-align: center; padding: 0;">
-                        <button type="button" class="btn btn-success btn-block" onclick="location.href='../generar-reserva/generar-reserva.xhtml'">Reservar</button>
-                        <div class="contenidodescri">
-                            <svg viewbox="0 0 50 50" width="50" height="50">
-                                <defs>
-                                    <mask id="mask" x="0" y="0" width="100" height="49">
-                                        <rect x="0.5" y="0.5" width="49" height="49" fill="#fff"/>
-                                        <text x="10" text-anchor="middle" y="50" dy="0">T.</text>
-                                        <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">B</text>
-                                        <text x="30" text-anchor="middle" y="50" dy="0">B</text>
-                                        <text x="40" text-anchor="middle" y="50" dy="0">Q</text>
-                                    </mask>
-                                </defs>
-                                <rect x="0.5" y="0.5" width="49" height="49" mask="url(#mask)" fill-opacity="1" fill="#e7e7e8"/>
-                            </svg>
-                        </div>
-                    </div>   
-                </div>
+                        <div class="col-12 col-md-2" style="text-align: center; padding: 0;">
+                            <button type="button" class="btn btn-success btn-block" onclick="location.href = '../generar-reserva/generar-reserva.xhtml'">Reservar</button>
+                            <div class="contenidodescri">
+                                <svg viewbox="0 0 50 50" width="50" height="50">
+                                    <defs>
+                                        <mask id="mask" x="0" y="0" width="100" height="49">
+                                            <rect x="0.5" y="0.5" width="49" height="49" fill="#fff"/>
+                                            <text x="10" text-anchor="middle" y="50" dy="0">T.</text>
+                                            <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">B</text>
+                                            <text x="30" text-anchor="middle" y="50" dy="0">B</text>
+                                            <text x="40" text-anchor="middle" y="50" dy="0">Q</text>
+                                        </mask>
+                                    </defs>
+                                    <rect x="0.5" y="0.5" width="49" height="49" mask="url(#mask)" fill-opacity="1" fill="#e7e7e8"/>
+                                </svg>
+                            </div>
+                        </div> 
+                    </div> 
+                </h:form>
             </section>
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>

@@ -57,30 +57,5 @@
     </h:body>
 </html>
 
-<f:view>
 
 
-    <h:form>
-        <h1><h:outputText value="List"/></h1>
-        <h:dataTable value="#{vigilanteControlador.consultarTodos()}" var="item">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="IdVigilante"/>
-                </f:facet>
-                <h:outputText value="#{item.idVigilante}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="IdPerfil"/>
-                </f:facet>
-                <h:outputText value="#{item.idPerfil}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="IdTurno"/>
-                </f:facet>
-                <h:outputText value="#{item.idTurno}"/>
-            </h:column>
-        </h:dataTable>
-    </h:form>
-</f:view>
