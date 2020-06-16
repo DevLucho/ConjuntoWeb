@@ -19,6 +19,15 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar parqueadero</title>
     </h:head>
     <h:body>
@@ -31,7 +40,7 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
                     <li class="breadcrumb-item active">Agregar parqueadero</li>
                 </ol>
             </div>
@@ -43,7 +52,7 @@
                     </div>
                     <div class="col-12 col-md-8 form">
                         <!-- formulario -->
-                       <f:view>
+                        <f:view>
                             <!--formulario-->
                             <h:form class="recorrer-dato was-validated sombra form">
                                 <div class="col-12">

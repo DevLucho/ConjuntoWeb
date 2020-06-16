@@ -239,13 +239,17 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Inicio turno"/>
                                                 </f:facet>
-                                                <h:outputText value="#{vigilante.idTurno.inicioTurno}"/>
+                                                <h:outputText value="#{vigilante.idTurno.inicioTurno}">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Fin turno"/>
                                                 </f:facet>
-                                                <h:outputText value="#{vigilante.idTurno.finTurno}"/>
+                                                <h:outputText value="#{vigilante.idTurno.finTurno}">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">

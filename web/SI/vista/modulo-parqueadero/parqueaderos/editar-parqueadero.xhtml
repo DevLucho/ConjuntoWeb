@@ -21,6 +21,15 @@
         <!-- Estilos datatables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar parqueadero</title>
     </h:head>
     <h:body>
@@ -33,7 +42,7 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href=".../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="./ConsultarParqueaderos.xhtml">Consultar parqueaderos</a></li>
                     <li class="breadcrumb-item active">Editar parqueaderos</li>
                 </ol>
@@ -67,12 +76,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-12 font">
-                                    <h:outputLabel value="Estado" for="estado"/><br></br>
-                                    <h:selectOneMenu class="custom-select" value = "#{parqueaderoControlador.parqueadero.estado}"> 
-                                       <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                       <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
-                                       <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
-                                    </h:selectOneMenu> 
+                                        <h:outputLabel value="Estado" for="estado"/><br></br>
+                                        <h:selectOneMenu class="custom-select" value = "#{parqueaderoControlador.parqueadero.estado}"> 
+                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
+                                            <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
+                                        </h:selectOneMenu> 
                                     </div>
                                 </div>
                             </div>

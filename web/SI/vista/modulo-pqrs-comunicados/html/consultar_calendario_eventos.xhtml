@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/consulta_calendario_eventos.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <style>
+            nav ul li{ width:25%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Calendario de eventos</title>
+    </h:head>
+    <h:body>
+        <!-- header -->
+        <ui:include src="../../header/header.xhtml"></ui:include>
+        <!-- nav -->
+        <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                <li class="breadcrumb-item active">Calendario de eventos</li>
+            </ol>
+        </div>
+        <div class="borde titulo2">
+            <h1>Consultar calendario de eventos</h1>
+        </div>
+        <div class="borde iconotitulo2">
+            <img src="img/iconocomunicado.svg" alt=""/>
+        </div>
+        <div class="borde titulo2vacio"></div>
+        <div class="borde caja">
+            <div class="borde caja-calendario">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h1>
+                            Diciembre
+                            <button>▾</button>
+                        </h1>
+                        <p>
+                            2019
+                            <button>▾</button>
+                        </p>
+                    </div>
+                    <div class="calendar"><span class="day-name">Lu</span><span class="day-name">Ma</span><span class="day-name">Mi</span><span class="day-name">Ju</span><span class="day-name">Vi</span><span class="day-name">Sa</span><span class="day-name">Do</span>
+                        <div class="day day--disabled">30</div>
+                        <div class="day day--disabled">31</div>
+                        <div class="day">1</div>
+                        <div class="day">2</div>
+                        <div class="day">3</div>
+                        <div class="day">4</div>
+                        <div class="day">5</div>
+                        <div class="day">6</div>
+                        <div class="day">7</div>
+                        <div class="day">8</div>
+                        <div class="day">9</div>
+                        <div class="day">10</div>
+                        <div class="day">11</div>
+                        <div class="day">12</div>
+                        <div class="day">13</div>
+                        <div class="day">14</div>
+                        <div class="day">15</div>
+                        <div class="day">16</div>
+                        <div class="day">17</div>
+                        <div class="day">18</div>
+                        <div class="day">19</div>
+                        <div class="day">20</div>
+                        <div class="day">21</div>
+                        <div class="day">22</div>
+                        <div class="day">23</div>
+                        <div class="day">24</div>
+                        <div class="day">25</div>
+                        <div class="day">26</div>
+                        <div class="day">27</div>
+                        <div class="day">28</div>
+                        <div class="day">29</div>
+                        <div class="day">30</div>
+                        <div class="day">31</div>   
+                        <div class="day day--disabled">1</div>
+                        <div class="day day--disabled">2</div>
+                        <section class="cuadrodia dianueve"><a class= "cuadroevento" href="consultar_evento_jornada_de_vacunacion.html">Jornada de vacunacion</a></section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        <ui:include src="../../footer/footer.xhtml"></ui:include>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../js/menu-responsive.js"></script> 
+    </h:body>
+</html>
+

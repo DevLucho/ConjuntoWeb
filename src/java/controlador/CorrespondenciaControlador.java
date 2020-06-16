@@ -140,4 +140,8 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia = correspondenciaFacade.find(id);
         return "ListaPaquete";
     }
+    
+    public int contarCorrespondencia(){
+        return correspondenciaFacade.count();
+    }
 }

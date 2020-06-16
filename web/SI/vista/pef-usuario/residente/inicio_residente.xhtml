@@ -12,13 +12,24 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
         <!-- Estilos -->
-        <link rel="stylesheet" href="./inicio-admin.css"/>
+        <link rel="stylesheet" href="../administrador/inicio-admin.css"/>
+        <link rel="stylesheet" href="../../../crear.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../navs/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+
+        <style>
+            nav ul li{ width:25%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
     </h:head>
     <h:body>
@@ -31,66 +42,40 @@
             <!-- Main -->
             <main>
                 <div class="row">
-                    <section class=" modulos col-12 col-md-8 "> 
-                        <!-- PQRS -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="pqrs">2</h1>
-                            </div>
-                            <div class="icono">
-                                <i class="far fa-comments" ></i>
-                            </div>
-                            <p>PQRS sin responder</p>
-                            <a href="../modulo_pqrs_comunicados/pqrs.html" class="text-right d-block">Consultar PQRs >></a>
-                        </div>
-                        <!-- Reservas -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="reservas">0</h1>
-                            </div>
-                            <div class="icono">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <p>Reservas pendientes</p>
-                            <a href="#" class="text-right d-block">Consultar reservas >></a>
-                        </div>
-                        <!-- Inscripciones -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="inscripciones">0</h1>
-                            </div>
-                            <div class="icono">
-                                <i class="fas fa-envelope-open-text"></i>
-                            </div>
-                            <p>Inscripciones</p>
-                            <div class="consult-inscriptions-2"> 
-                                <a href="#"  class="text-right d-block">inscripciones >></a>
-                            </div>	
-                            <div class="consult-inscriptions">
-                                <a href="#" class="text-right d-block">Consultar inscripciones >></a>
+                    <section class=" modulos col-12 col-md-8 container-fluid" id="principal"> 
+                        <div class="row">
+                            <div class="col-12 text-left">
+                                <h3><i class="fas fa-bullhorn mr-3"></i>Comunicados</h3>
                             </div>
                         </div>
-                        <!-- Usuarios -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="usuarios">#{usuarioControlador.contarUsuarios()}</h1>
+                        <hr/>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-12 col-md-6">
+                                <div class="card border-light" style="padding: 20px;">
+                                    <div class="card-block text-dark">
+                                        <h3 class="card-title">Atención en administración</h3>
+                                        <p class="card-subtitle text-muted mb-2">Fecha publicación: 19/04/2020, Por: Administrador
+                                        </p>
+                                        <img src="../../../img/comunicado.jpg" class="card-img-top img-fluid" alt=""
+                                             style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
+                                        <p class="card-text mt-3">No habra servicio de administración el fin de semana</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="icono">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <p>Usuarios</p>
-                            <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">Consultar usuarios >></a>
                         </div>
-                        <!-- Visitantes -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="visitantes">0</h1>
+                        <hr/>
+                        <!-- Mostrar foto en modal -->
+                        <div class="modal fade" id="modal-img">
+                            <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <img src="../../../img/comunicado.jpg" alt=""/>
+                                </div>
                             </div>
-                            <div class="icono">
-                                <i class="fas fa-id-card-alt"></i>
-                            </div>
-                            <p>Visitantes</p>
-                            <a href="#" class="text-right d-block">Consultar visitantes >></a>
                         </div>
                     </section>
                     <!-- Seccion derecha -->
@@ -119,33 +104,53 @@
                         </div>
                         <!-- Documentos -->
                         <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>Ultimos documentos</h6>
+                            <h6><i class="icalendar far fa-file-alt"></i>Mis reservas</h6>
                             <ul id="lista">
                                 <li>
-                                    <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/ieee830.xhtml"><i class="pdf far fa-file-pdf" ></i>Formato IEEE830</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/informe-analisis.xhtml"><i class="pdf far fa-file-pdf" ></i>Informe de analisis</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/manual-corporativo.xhtml"><i class="pdf far fa-file-pdf"></i>Manual de identidad corporativa</a>
+
                                 </li>
                             </ul>
-                        </div>		
+                            <div class="link">
+                                <li><a href="#" class="text-right d-block">Consultar reservas<i class="greater fas fa-greater-than"></i></a></li>
+                            </div>
+                        </div>	
+                        <div class="novedades-eventos">
+                            <h6><i class="icalendar far fa-file-alt"></i>Mis inscripciones</h6>
+                            <ul id="lista">
+                                <li>
+
+                                </li>
+                            </ul>
+                            <div class="link">
+                                <li><a href="#" class="text-right d-block">Consultar inscripciones<i class="greater fas fa-greater-than"></i></a></li>
+                            </div>
+                        </div>
+                        <div class="novedades-eventos">
+                            <h6><i class="icalendar far fa-file-alt"></i>Mis pqrs</h6>
+                            <ul id="lista">
+                                <li>
+
+                                </li>
+                            </ul>
+                            <div class="link">
+                                <li><a href="#" class="text-right d-block">Consultar Pqrs<i class="greater fas fa-greater-than"></i></a></li>
+                            </div>
+                        </div>	
                     </aside>
                 </div>
-            </main>		
+            </main>            
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>
         </div>
-        <!-- bootstrap and jquery -->
+        <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/popper.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive -->
         <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>   
     </h:body>
 </html>
 

@@ -1,7 +1,7 @@
 *{
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 /*Estilos miga de pan*/
 .breadcrumb{
@@ -81,7 +81,7 @@ form div input{
 	border:1px solid #000000;
 	box-shadow: 2px 2px 3px 0px #b4b4b4;
 	font-size: 16px;
-	font-family: helvetica;																		
+	font-family: helvetica;
 }
 form div input:focus{
 	border:1px solid #2A6378;
@@ -91,12 +91,12 @@ form div input:focus{
 	width: 100%;
 	height: 245px;
 }
-form div p{
+.descripcion{
 	float: left;
 	padding-left: 45px;
 	padding-right: 25px;
 }
-form div textarea{
+.textarea{
 	margin-top: 15px;
 	float: left;
 	width: 50%;

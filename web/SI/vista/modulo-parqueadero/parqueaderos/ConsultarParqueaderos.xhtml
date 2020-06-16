@@ -21,6 +21,15 @@
         <!-- Estilos datatables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar parqueaderos</title>
     </h:head>
     <h:body>
@@ -33,7 +42,7 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
                     <li class="breadcrumb-item active">Consultar parqueaderos</li>
                 </ol>
             </div>
@@ -50,38 +59,38 @@
                 <div class="row table-responsive mt-3 mb-3">
                     <!-- Tabla -->
                     <f:view>
-                            <h:form>
-                                <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                             value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Identificador Parqueadero"/>
-                                        </f:facet>
-                                        <h:outputText value="#{parqueadero.idParqueadero}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Lugar"/>
-                                        </f:facet>
-                                        <h:outputText value="#{parqueadero.lugar}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Estado"/>
-                                        </f:facet>
-                                        <h:outputText value="#{parqueadero.estado}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Acciones"/>
-                                        </f:facet>
-                                        <div class="btn-group-sm">
-                                            <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar parqueadero" action="#{parqueaderoControlador.eliminar(parqueadero)}"></h:commandButton>
-                                            <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar parqueadero" action="#{parqueaderoControlador.preActulizar(parqueadero)}"></h:commandButton>
-                                        </div>
-                                    </h:column>
-                                </h:dataTable>
-                            </h:form>
+                        <h:form>
+                            <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
+                                         value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Identificador Parqueadero"/>
+                                    </f:facet>
+                                    <h:outputText value="#{parqueadero.idParqueadero}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Lugar"/>
+                                    </f:facet>
+                                    <h:outputText value="#{parqueadero.lugar}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{parqueadero.estado}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    <div class="btn-group-sm">
+                                        <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar parqueadero" action="#{parqueaderoControlador.eliminar(parqueadero)}"></h:commandButton>
+                                        <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar parqueadero" action="#{parqueaderoControlador.preActulizar(parqueadero)}"></h:commandButton>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
                     </f:view>
                 </div>
             </section>

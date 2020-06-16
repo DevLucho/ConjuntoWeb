@@ -2,156 +2,165 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-          
+
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-    <meta charset="UTF-8" />
+    <h:head>
+        <meta charset="UTF-8" />
 
-    <title>Vigilante | Editar Correspondencia</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
-      rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous" />
+        <title>Vigilante | Editar Correspondencia</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+            integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+            crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="../css/editarDomiciliarioo.css"/>
-    <link rel="stylesheet" href="../css/editarMensajeria.css"/>      
-    <link
-      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
-      rel="stylesheet" />
-    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous" />
-    <link rel="shortcut icon" href="../../../img/logo2.png" />
+        <link rel="stylesheet" href="../css/editarDomiciliarioo.css"/>
+        <link rel="stylesheet" href="../css/editarMensajeria.css"/>      
+        <link
+            href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+            rel="stylesheet" />
+        <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous" />
+        <link rel="shortcut icon" href="../../../img/logo2.png" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 
-    <script
-      src="https://kit.fontawesome.com/7769f8ac48.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="../../footer/footer.css"/>
-<link rel="stylesheet" href="../../header/header.css"/>
-<link rel="stylesheet" href="../../nav/nav.css"/>
-  </h:head>
-  <h:body>
-   <ui:include src="../../header/header.xhtml"></ui:include>
-    <ui:include src="../../nav/nav.xhtml"></ui:include>
-      <!-- fin de header y poput -->
-    <div class="container-fluid">
-        <div class="row">
-            <!--________________________ inicio de seccion de noticias __________________- -->
-            <div class="col-sm-12 col-md-4 col-xl-4 pepue">
+        <script
+            src="https://kit.fontawesome.com/7769f8ac48.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../nav/nav.css"/>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:include src="../../header/header.xhtml"></ui:include>
+        <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <!-- fin de header y poput -->
+        <div class="container-fluid">
+            <div class="row">
+                <!--________________________ inicio de seccion de noticias __________________- -->
+                <div class="col-sm-12 col-md-4 col-xl-4 pepue">
                     <section class="form2">
-                      <h1 class="noticiah1">Editar <br /> Empresa</h1>
+                        <h1 class="noticiah1">Editar <br /> Empresa</h1>
                         <div class="linea"> <br />
                             <f:view>
-                               <h:form id="form2">
-                                   <ul class="form-style-1 menos">
-                                     <li>
-                                         <h:outputLabel for="nombre">Nombre</h:outputLabel>
-                                         <h:inputText a:type="text" id="nombre" value="#{empresaControlador.empresa.nombre}"  title="Nombre" required="true" class="field-long"></h:inputText><br /><br />
-                                         <h:commandButton value="Editar" action="#{empresaControlador.actualizar()}"></h:commandButton>
-                                     </li>
-                                   </ul>
-                               </h:form>
-                           </f:view>
+                                <h:form id="form2">
+                                    <ul class="form-style-1 menos">
+                                        <li>
+                                            <h:outputLabel for="nombre">Nombre</h:outputLabel>
+                                            <h:inputText a:type="text" id="nombre" value="#{empresaControlador.empresa.nombre}"  title="Nombre" required="true" class="field-long"></h:inputText><br /><br />
+                                            <h:commandButton value="Editar" action="#{empresaControlador.actualizar()}"></h:commandButton>
+                                        </li>
+                                    </ul>
+                                </h:form>
+                            </f:view>
                         </div>
                     </section>
+                </div>
+                <!--________________________- fin de seccion de noticias __________________- -->        
+
+                <div class="pep col-sm-12 col-md-8 col-xl-8">
+                    <!--________________________ Inicio de formulario ______________________- -->
+                    <section class="inicioSeguridad">   
+
+                        <div class="titulazo">
+                            Editar Correspondencia
+                            <f:view>
+                                <h:form id="form">
+                                    <div id="alerta" class="col-md-12 col-12 alex" />
+
+                                    <ul class="form-style-1">
+                                        <li>
+                                            <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
+                                            <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true">
+                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems>
+                                            </h:selectOneMenu>
+                                        </li>
+                                        <li>
+                                            <h:outputLabel class="label" for="descripcion">Descripcion</h:outputLabel>
+                                            <h:inputTextarea class="field-long correcto corto2" id="descripcion" a:type="text" title="Descripcion" required="true" value="#{correspondenciaControlador.correspondencia.descripcion}"></h:inputTextarea>
+                                        </li>
+                                        <li>
+                                            <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
+                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto" title="Entrada" required="true">
+                                                <f:convertDateTime pattern="yyyy-mm-dd" />
+                                            </h:inputText>
+                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto" title="Salida" required="false">
+                                                <f:convertDateTime pattern="yyyy-mm-dd" />
+                                            </h:inputText>
+                                        </li>
+                                        <li>
+                                            <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
+                                            <h:selectOneMenu class="field-select correcto" id="paquete" value="#{correspondenciaControlador.paquete.idPaquete}" title="Paquete" required="true">
+                                                <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>
+                                            </h:selectOneMenu>
+                                        </li>
+                                        <li>
+                                            <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
+                                            <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+
+                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idVigilante}"/>
+                                            </h:selectOneMenu>
+                                        </li>  
+                                        <li>
+                                            <h:outputLabel for="empresa" class="label">Nombre de la Empresa<span class="required">*</span></h:outputLabel>
+                                            <h:selectOneMenu class="field-select correcto " id="empresa" value="#{correspondenciaControlador.empresa.idEmpresa}" title="Empresa" onkeyup="activity()" required="true">
+                                                <f:selectItems var="empre" value="#{empresaControlador.consultar()}" itemValue="#{empre.idEmpresa}" itemLabel="#{empre.nombre}"></f:selectItems>
+                                            </h:selectOneMenu>
+                                        </li>
+
+                                        <li>
+                                            <input type="button" disabled="disabled" value="Notificar " id="btoE" onclick="activiti()" />
+                                            <h:commandButton  class="enviarcrud" onclick="validar_formMM()" value="Guardar Cambios" action="#{correspondenciaControlador.actualizar()}"></h:commandButton>
+                                            <!---->
+                                        </li>
+                                    </ul>
+                                </h:form>
+                            </f:view>
+                        </div></section><!--______________________- fin de capa formulario ____________________- -->                
+                </div>
             </div>
-            <!--________________________- fin de seccion de noticias __________________- -->        
-            
-<div class="pep col-sm-12 col-md-8 col-xl-8">
-  <!--________________________ Inicio de formulario ______________________- -->
-  <section class="inicioSeguridad">   
-    
-<div class="titulazo">
-        Editar Correspondencia
-        <f:view>
-            <h:form id="form">
-              <div id="alerta" class="col-md-12 col-12 alex" />
+        </div>
+        <!--__________________________- inicio del footer __________________________- -->
+        <ui:include src="../../footer/footer.xhtml"></ui:include>
+        <!--______________________________- fin del footer __________________________-->
+        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
 
-              <ul class="form-style-1">
-                <li>
-                  <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
-                  <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true">
-                      <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems>
-                  </h:selectOneMenu>
-                </li>
-                <li>
-                    <h:outputLabel class="label" for="descripcion">Descripcion</h:outputLabel>
-                    <h:inputTextarea class="field-long correcto corto2" id="descripcion" a:type="text" title="Descripcion" required="true" value="#{correspondenciaControlador.correspondencia.descripcion}"></h:inputTextarea>
-                </li>
-                <li>
-                    <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                    <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto" title="Entrada" required="true">
-                        <f:convertDateTime pattern="yyyy-mm-dd" />
-                    </h:inputText>
-                    <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto" title="Salida" required="false">
-                        <f:convertDateTime pattern="yyyy-mm-dd" />
-                    </h:inputText>
-                </li>
-                <li>
-                    <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
-                    <h:selectOneMenu class="field-select correcto" id="paquete" value="#{correspondenciaControlador.paquete.idPaquete}" title="Paquete" required="true">
-                        <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>
-                    </h:selectOneMenu>
-                </li>
-                <li>
-                    <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
-                    <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
-                        
-                        <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idVigilante}"/>
-                  </h:selectOneMenu>
-                </li>  
-                <li>
-                    <h:outputLabel for="empresa" class="label">Nombre de la Empresa<span class="required">*</span></h:outputLabel>
-                    <h:selectOneMenu class="field-select correcto " id="empresa" value="#{correspondenciaControlador.empresa.idEmpresa}" title="Empresa" onkeyup="activity()" required="true">
-                        <f:selectItems var="empre" value="#{empresaControlador.consultar()}" itemValue="#{empre.idEmpresa}" itemLabel="#{empre.nombre}"></f:selectItems>
-                    </h:selectOneMenu>
-                </li>
-                  
-                <li>
-                  <input type="button" disabled="disabled" value="Notificar " id="btoE" onclick="activiti()" />
-                  <h:commandButton  class="enviarcrud" onclick="validar_formMM()" value="Guardar Cambios" action="#{correspondenciaControlador.actualizar()}"></h:commandButton>
-                <!---->
-                </li>
-              </ul>
-            </h:form>
-              </f:view>
-    </div></section><!--______________________- fin de capa formulario ____________________- -->                
-</div>
-    </div>
-    </div>
-    <!--__________________________- inicio del footer __________________________- -->
-    <ui:include src="../../footer/footer.xhtml"></ui:include>
-    <!--______________________________- fin del footer __________________________-->
-    <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
-   
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-   <!-- bootstrap and jquery -->
-	
-<script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- bootstrap and jquery -->
 
-    <script src="../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
 
-    <script src="../../../js/alert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-    <script src="../../../js/scriptvigilante.js"></script></h:body>
-     <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../../js/alert.js"></script>
+
+        <script src="../../../js/scriptvigilante.js"></script></h:body>
+    <!-- Menu responsive -->
+    <script src="../../navs/nav.js"></script>
 
 </html>
 

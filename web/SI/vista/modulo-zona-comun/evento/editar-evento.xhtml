@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -21,217 +23,194 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar evento</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga de pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./organizar-evento.xhtml">Organizar evento</a></li>
-                    <li class="breadcrumb-item active">Editar evento</li>
-                </ol>
-            </div>
-            <!-- Contenido principal -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12">
-                        <h3><i class="far fa-edit"></i>Editar evento</h3>
-                    </div>
+        <f:view>
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga de pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="./organizar-evento.xhtml">Organizar evento</a></li>
+                        <li class="breadcrumb-item active">Editar evento</li>
+                    </ol>
                 </div>
-                <hr/>
-                <!-- Formulario -->
-                <form>
-                    <div class="row mt-3">
-                        <!-- Titulo -->
+                <!-- Contenido principal -->
+                <section class="container-fluid" id="principal">
+                    <div class="row">
                         <div class="col-12">
-                            <p>
-                                <a href="#titulo" class="btn btn-primary text-left" aria-expanded="false"
-                                    aria-controls="titulo" data-toggle="collapse">Titulo</a>
-                            </p>
-                            <div class="collapse" id="titulo">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Ingrese el nombre del evento"
-                                            name="nombre_evento" id="nombre_evento" required="required"/>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3><i class="far fa-edit"></i>Editar evento</h3>
                         </div>
-                        <!-- Fecha y hora -->
-                        <div class="col-12 col-md-6">
-                            <p>
-                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                                    data-toggle="collapse"><i class="far fa-clock"></i>Fecha y hora del evento</a>
-                            </p>
-                            <div class="collapse" id="date">
-                                <div class="form-group row">
-                                    <div class="col-5">
-                                        <strong><label for="fechai">Fecha inicio</label></strong>
-                                        <input type="date" class="form-control" name="fechai" id="fechai" required="required"/>
-                                    </div>
-                                    <div class="col-4">
-                                        <strong><label for="fechai">Empieza a las</label></strong>
-                                        <input type="time" class="form-control" name="desde" id="desde" required="required"/>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="checkhora"/>
-                                            <label class="custom-control-label" for="checkhora">Todo el día</label>
+                    </div>
+                    <hr/>
+                    <!-- Formulario -->
+                    <h:form>
+                        <div class="row mt-3">
+                            <!-- Titulo -->
+                            <div class="col-12">
+                                <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Titulo</a></p>
+                                <div class="collapse" id="titulo">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese el nombre del evento" id="titulo" value="#{eventoControlador.evento.titulo}" required="required"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-5">
-                                        <strong><label for="fechaf">Fecha fin</label></strong>
-                                        <input type="date" class="form-control" placeholder="Fin: 30 febrero 2020"
-                                            name="fechaf" id="fechaf" required="required"/>
-                                    </div>
-                                    <div class="col-4">
-                                        <strong><label for="fechaf">Termina a las</label></strong>
-                                        <input type="time" class="form-control" placeholder="6:00 pm" name="hasta"
-                                            id="hasta" required="required"/>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <!-- Datos del lugar -->
-                        <div class="col-12 col-md-6">
-                            <p>
-                                <a href="#lugar" class="btn btn-primary text-left" aria-expanded="false"
-                                    aria-controls="lugar" data-toggle="collapse"><i class="fas fa-map-marker-alt"></i>Datos
-                                    del lugar del evento</a>
-                            </p>
-                            <div class="collapse" id="lugar">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Ingrese nombre del lugar"
-                                            name="nombrelu" id="nombrelu" required="required"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
+                            <!-- Fecha y hora -->
+                            <div class="col-12 col-md-6">
+                                <p><a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date" data-toggle="collapse"><i class="far fa-clock"></i>Fecha y hora del evento</a></p>
+                                <div class="collapse" id="date">
+                                    <div class="form-group row">
+                                        <div class="col-5">
+                                            <strong><label for="fechai">Fecha inicio</label></strong>
+                                            <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" required="required">
+                                                <f:convertDateTime pattern="yyyy-mm-dd" />
+                                            </h:inputText>
+                                        </div>
+                                        <div class="col-4">
+                                            <strong><label for="fechai">Empieza a las</label></strong>
+                                            <h:inputText a:type="time" class="form-control" id="horaInicio" value="#{eventoControlador.evento.horaInicio}" required="required">
+                                                <f:convertDateTime pattern="HH:mm" />
+                                            </h:inputText>
+                                        </div>
 
-                                    <div class="col-12">
-                                        <input type="text" class="form-control"
-                                            placeholder="Ingrese ubicación/dirección del lugar" name="ubicacion"
-                                            id="ubicacion" required="required"/>
+                                        <div class="col-3">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkhora"/>
+                                                <label class="custom-control-label" for="checkhora">Todo el día</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-5">
+                                            <strong><label for="fechaf">Fecha fin</label></strong>
+                                            <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" required="required"> 
+                                                <f:convertDateTime pattern="yyyy-mm-dd" />
+                                            </h:inputText>
+                                        </div>
+                                        <div class="col-4">
+                                            <strong><label for="fechaf">Termina a las</label></strong>
+                                            <h:inputText a:type="time" class="form-control" id="horaFin" value="#{eventoControlador.evento.horaFin}" required="required">
+                                                <f:convertDateTime pattern="HH:mm" />
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Datos del lugar -->
+                            <div class="col-12 col-md-6">
+                                <p><a href="#lugar" class="btn btn-primary text-left" aria-expanded="false" aria-controls="lugar" data-toggle="collapse"><i class="fas fa-map-marker-alt"></i>Datos del lugar del evento</a></p>
+                                <div class="collapse" id="lugar">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <strong><label for="torre">Zona común</label></strong>
+                                            <h:selectOneMenu id="idZonaComunal" class="form-control" value="#{eventoControlador.zonaComunal.idZonaComunal}" title="IdZonaComunal" required="true">
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-3">
+                                            <strong><label for="torre">Estado</label></strong>
+                                            <h:selectOneMenu class="form-control" id="estado" value="#{eventoControlador.evento.estado}" required="true">
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="Vigente" itemValue="Vigente"></f:selectItem>
+                                                <f:selectItem itemLabel="Cancelado" itemValue="Cancelado"></f:selectItem>
+                                                <f:selectItem itemLabel="Finalizado" itemValue="Finalizado"></f:selectItem>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Contacto -->
+                            <div class="col-12 col-md-6">
+                                <p><a href="#contacto" class="btn btn-primary text-left" aria-expanded="false" aria-controls="contacto" data-toggle="collapse"><i class="fas fa-phone-alt"></i>Contacto del organizador</a></p>
+                                <div class="collapse" id="contacto">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese nombre del organizador del evento" id="organizador" value="#{eventoControlador.evento.organizador}" required="required"></h:inputText>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Notificar invitados -->
+                            <div class="col-12 col-md-6">
+                                <p><a href="#invitados" class="btn btn-primary text-left" aria-expanded="false" aria-controls="invitados" data-toggle="collapse"><i class="far fa-envelope"></i>Notificar vía email</a></p>
+                                <div class="collapse" id="invitados">
+                                    <div class="form-group row">
+                                        <div class="torre col-12 col-md-6">
+                                            <strong><label for="torre">Notificar a</label></strong>
+                                            <h:selectOneMenu class="form-control" value="#{eventoControlador.rol.idRol}">
+                                                <f:selectItem itemLabel="- Seleccione invitados -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="Todos los usuarios" itemValue="" ></f:selectItem>
+                                                <f:selectItems var="rol" value="#{rolControlador.consultarTodos()}" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"></f:selectItems>
+                                                <f:selectItem itemLabel="Ninguno" itemValue="" ></f:selectItem>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <strong><label for="correo" id="email">Otros destinarios</label></strong>
+                                            <input type="email" class="form-control" placeholder="Correos separados por coma."/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Contacto -->
-                        <div class="col-12 col-md-6">
-                            <p>
-                                <a href="#contacto" class="btn btn-primary text-left" aria-expanded="false"
-                                    aria-controls="contacto" data-toggle="collapse"><i class="fas fa-phone-alt"></i>Contacto
-                                    del organizador</a>
-                            </p>
-                            <div class="collapse" id="contacto">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Ingrese nombre del organizador"
-                                            name="nombre2" id="nombre2" required="required"/>
+                        <!-- Descripción -->
+                        <hr/>
+                        <h4 class="col-12">Detalle</h4>
+                        <hr/>
+                        <div class="form-group row">
+                            <div class="col-12 col-md-9">
+                                <h:inputText class="form col-12 form-control" a:placeholder="Detalle del evento" value="#{eventoControlador.evento.detalle}" id="descripcion" required="required"></h:inputText>
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <div class="row">
+                                    <!--Subir foto--> 
+                                    <div class="col-5" style="padding: 0;">
+                                        <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
+                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;"/>
+                                    </div>
+                                    <!--Pre-visualizar foto-->
+                                    <div class="contenedor-imagen col-7" style="padding: 0;">
+                                        <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <input type="tel" class="form-control"
-                                            placeholder="Ingrese número de celular de contacto" name="tel_organizador"
-                                            id="tel_organizador" required="required"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <input type="email" class="form-control" placeholder="Ingrese correo electrónico"
-                                            name="correo2" id="correo2" required="required"/>
+                                <!--Mostrar foto en modal-->
+                                <div class="modal fade" id="modal-img">
+                                    <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                        <div class="modal-content">
+                                            <img src="../../../img/bbq.jpg" alt=""/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Notificar invitados -->
-                        <div class="col-12 col-md-6">
-                            <p>
-                                <a href="#invitados" class="btn btn-primary text-left" aria-expanded="false"
-                                    aria-controls="invitados" data-toggle="collapse"><i
-                                        class="far fa-envelope"></i>Notificar vía email</a>
-                            </p>
-                            <div class="collapse" id="invitados">
-                                <div class="form-group row">
-                                    <div class="torre col-12 col-md-6">
-                                        <strong><label for="torre">Notificar a</label></strong>
-                                        <select name="torre" id="torre" class="form-control">
-                                            <option value="">Seleccione invitados</option>
-                                            <option value="">Residentes</option>
-                                            <option value="">Vigilantes</option>
-                                            <option value="">Todos los usuarios</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <strong><label for="correo" id="email">Otros destinarios</label></strong>
-                                        <input type="email" class="form-control" placeholder="Correos separados por coma."/>
-                                    </div>
+                            <!-- Boton publicar -->
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-2">
+                                    <h:commandButton class="btn btn-outline-success btn-block" value="Guardar cambios" action="#{eventoControlador.actualizar()}"></h:commandButton>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Descripción -->
-                    <hr/>
-                    <h4 class="col-12">Descripción</h4>
-                    <hr/>
-                    <div class="form-group row">
-                        <div class="col-12 col-md-9">
-                            <textarea name="descripcion" class="form" placeholder="Mensaje" id="descripcion"
-                                required="required"></textarea>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="row">
-                                <!-- Subir foto -->
-                                <div class="col-5" style="padding: 0;">
-                                    <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/>
-                                        imagen</label>
-                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
-                                        style="display: none;" name="file"/>
-                                </div>
-                                <!-- Pre-visualizar foto -->
-                                <div class="contenedor-imagen col-7" style="padding: 0;">
-                                    <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
-                                </div>
-                            </div>
-                            <!-- Mostrar foto en modal -->
-                            <div class="modal fade" id="modal-img">
-                                <div class="modal-dialog d-flex justify-content-center align-items-center">
-                                    <div class="modal-content">
-                                        <img src="../../../img/bbq.jpg" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Boton guardar cambios -->
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-2">
-                                <button class="btn btn-outline-success btn-block" id="publicar"
-                                    type="submit">Guardar cambios</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                    </h:form>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- ckEditor-->
         <script>
             ClassicEditor
-                .create(document.querySelector('#descripcion'))
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+                    .create(document.querySelector('#descripcion'))
+                    .then(editor => {
+                        console.log(editor);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
         </script>
         <!-- Previsulizar img -->
         <script>
@@ -246,7 +225,7 @@
                 // Le decimos que cuando este listo ejecute el código interno
                 reader.onload = function () {
                     let preview = document.getElementById('pre-visualizar'),
-                        image = document.createElement('img');
+                            image = document.createElement('img');
 
                     image.src = reader.result;
 

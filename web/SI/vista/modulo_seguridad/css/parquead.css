@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-jun-2020, 1:25:23
+    Author     : Sebastian
+*/
+  .map{
+      font-size: 160px;
+      margin-left: 35%;
+  }
+  .mn{margin-left: 30%;}
+  .opciones{
+      width: 75%;
+      margin-left: 12.5%;
+  }
+  .agregar{width: 42.5%}
+  h3{margin-top:1%  !important;}
+@media screen and (max-width: 800px){/*inicio de responsive para tablet*/
+    .map{font-size: 100px;}
+}
+@media screen and (max-width: 600px){/*inicio de responsive para cel*/
+    .agregar{width: 80%}
+    .map{
+        margin-left: 8%;
+        margin-top: -1%;
+    }
+    h3{
+        margin-top: -25% !important;
+        margin-right: 7% !important;
+    }
+    .opciones{
+        height: 70vh;
+        padding-top: 3%;
+    }
+}
