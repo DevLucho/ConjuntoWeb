@@ -125,24 +125,23 @@
                                         <f:facet name="header">
                                             <h:outputText value="Ingreso"/>
                                         </f:facet>
-                                        <h:outputText value="#{paq.fechaIngreso}"/>
+                                        <h:outputText value="#{paq.fechaIngreso}">
+                                            <f:convertDateTime pattern="HH:mm" />
+                                        </h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Salida"/>
                                         </f:facet>
-                                        <h:outputText value="#{paq.fechaSalida}"/>
+                                        <h:outputText value="#{paq.fechaSalida}">
+                                            <f:convertDateTime pattern="HH:mm" />
+                                        </h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Torre"/>
+                                            <h:outputText value="Inmueble"/>
                                         </f:facet>
-                                        <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Apto"/>
-                                        </f:facet>
+                                        <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/> -
                                         <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
                                     </h:column>
                                     <h:column>

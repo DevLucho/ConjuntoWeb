@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="../css/generar_pqrs.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../navs/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
@@ -46,26 +46,47 @@
         <div class="borde titulo2vacio"></div>
         <div class="borde caja">
             <div class="borde crearsolicitudformulario">
+
                 <h:form>
-                    <div class="borde formcuerpo1">
+                    <h1><h:outputText value="Create/Edit"/></h1>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="NroRadicado:" for="nroRadicado" />
+                        <h:inputText id="nroRadicado" value="#{pqrsControlador.pqrs.nroRadicado}" title="NroRadicado" required="true" requiredMessage="The NroRadicado field is required."/>
+                        
+                        <h:outputLabel value="IdResidente:" for="idResidente" />
+                        <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idPerfil}" title="IdResidente" required="true" requiredMessage="The IdResidente field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{usuarioControlador.consultarTodos()}" var="residente" itemValue="#{residente.idPerfil}" itemLabel="#{residente.nombre}"/>
+                        </h:selectOneMenu>
+                        
                         <h:outputLabel value="Asunto:" for="asunto" />
                         <h:inputText id="asunto" value="#{pqrsControlador.pqrs.asunto}" title="Asunto" required="true" requiredMessage="The Asunto field is required."/>
-                    </div>
-                    <div class="borde formcuerpo2">
-                        <h:outputLabel class="descripcion" value="Descripcion:" for="descripcion" />
-                        <h:inputTextarea class="textarea" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                    </div>
-                    <div class="borde formcuerpo3">
-                        <h:outputLabel value="IdTipoPqrs:" for="idTipoPqrs" />
-                        <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}" title="IdTipoPqrs" required="true" requiredMessage="The IdTipoPqrs field is required.">                 
-                            <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
+
+                        <h:outputLabel value="Descripcion:" for="descripcion" />
+                        <h:inputText id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+
+                        
+
+                        
+                        
+                        <strong><label for="direccion">Estado</label></strong>
+                        <h:selectOneMenu id="estado" value="#{pqrsControlador.pqrs.estado}" class="form-control-plaintext">
+                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                            <f:selectItem itemValue="Pendiente" itemLabel="Pendiente"></f:selectItem>
+                            <f:selectItem itemValue="Cancelado" itemLabel="Cancelado"></f:selectItem>
+                            <f:selectItem itemValue="Resuelto" itemLabel="Resuelto"></f:selectItem>
+                            <f:selectItem itemValue="Abierto" itemLabel="Abierto"></f:selectItem>
                         </h:selectOneMenu>
-                    </div>
-                    <div class="borde cajabotonpqrs">
-                        <div><h:commandButton class="borde botoncrearpqrs" value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
-                        </div>
-                    </div>
-                </h:form>        
+                        
+                        <h:outputLabel value="IdTipoPqrs:" for="idTipoPqrs" />
+                        <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.pqrs.idTipoPqrs.idTipoPqrs}" title="IdTipoPqrs" required="true" requiredMessage="The IdTipoPqrs field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{tipoPqrControlador.consultarTodos()}" var="tipo" itemValue="#{tipo.idTipoPqrs}" itemLabel="#{tipo.tipo}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandButton value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
+                </h:form>
+
             </div>
         </div>
         <!-- footer -->

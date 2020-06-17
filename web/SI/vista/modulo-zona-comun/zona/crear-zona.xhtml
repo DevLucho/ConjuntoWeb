@@ -297,23 +297,22 @@
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <label>Descripcion</label>
-                                <h:inputText class="form" pt:placeholder="Mensaje" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required"/>
+                                <h:inputText class="form col-12 form-control" pt:placeholder="Detalle zona comun" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
                             </div>
-                            <!--
+                            
                             <div class="col-12 col-md-3">
                                 <div class="row">
-                                     Subir foto 
+                                    <!--Subir foto--> 
                                     <div class="col-5" style="padding: 0;">
                                         <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
                                         <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
                                     </div>
-                                     Pre-visualizar foto 
+                                    <!--Pre-visualizar foto--> 
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
                                 </div>
-                                Mostrar foto en modal 
+                                <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">
                                     <div class="modal-dialog d-flex justify-content-center align-items-center">
                                         <div class="modal-content">
@@ -321,9 +320,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
                             <!-- Boton publicar -->
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center mt-3 mb-3">
                                 <div class="col-12 col-md-2">
                                     <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{zonaComunalControlador.registrar()}"></h:commandButton>
                                 </div>

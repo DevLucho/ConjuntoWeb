@@ -9,6 +9,8 @@ import entidades.Pqrs;
 import entidades.Residente;
 import entidades.TipoPqrs;
 import facade.PqrsFacade;
+import facade.ResidenteFacade;
+import facade.TipoPqrsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -36,6 +38,12 @@ public class PqrsControlador implements Serializable {
     
     @EJB
     PqrsFacade pqrsFacade;
+    
+    @EJB
+    ResidenteFacade residenteFacade;
+    
+    @EJB
+    TipoPqrsFacade tipoPqrsFacade;
 
     public Pqrs getPqrs() {
         return pqrs;
@@ -69,8 +77,8 @@ public class PqrsControlador implements Serializable {
     }
     
     public void registar(){
-        pqrs.setIdResidente(residente);
-        pqrs.setIdTipoPqrs(tipoPqrs);
+        pqrs.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+        pqrs.setIdTipoPqrs(tipoPqrsFacade.find(tipoPqrs.getIdTipoPqrs()));
         pqrsFacade.create(pqrs);
     }
     

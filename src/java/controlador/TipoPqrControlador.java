@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package controlador;
 
 import entidades.TipoPqrs;
 import facade.TipoPqrsFacade;
@@ -16,38 +16,35 @@ import javax.ejb.EJB;
 
 /**
  *
- * @author Familia
+ * @author Huertas
  */
-@Named(value = "tipoPqrsControlador")
+@Named(value = "tipoPqrControlador")
 @SessionScoped
-public class TipoPqrsControlador implements Serializable {
+public class TipoPqrControlador implements Serializable {
 
     /**
-     * Creates a new instance of TipoPqrsControlador
+     * Creates a new instance of TipoPqrControlador
      */
-    public TipoPqrsControlador() {
-    }
     
-    TipoPqrs tipoPqrs;
+    private TipoPqrs tipoPqrs;
     
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
     
+    public TipoPqrControlador() {
+    }
+        
     @PostConstruct
     public void init(){
         tipoPqrs = new TipoPqrs();
     }
-   
-    public List <TipoPqrs> consultarTodos(){
-        return tipoPqrsFacade.findAll();
-    }
     
-    public TipoPqrs getTipoPqrs() {
-        return tipoPqrs;
+    public List<TipoPqrs> consultarTodos(){
+        return tipoPqrsFacade.findAll();
     }
 
     public void setTipoPqrs(TipoPqrs tipoPqrs) {
         this.tipoPqrs = tipoPqrs;
     }
-
+    
 }

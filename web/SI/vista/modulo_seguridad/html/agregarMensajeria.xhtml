@@ -60,7 +60,7 @@
                                         <li>
                                             <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
                                             <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true">
-                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems>
+                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems> -
                                             </h:selectOneMenu>
                                         </li>
                                         <li>
@@ -86,7 +86,7 @@
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idVigilante}"/>
+                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                             </h:selectOneMenu>
                                         </li>  
                                         <li>
