@@ -1,312 +1,203 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:h="http://xmlns.jcp.org/jsf/html"
-  lang="es"
-      
-  xmlns:f="http://xmlns.jcp.org/jsf/core">
-  <h:head>
-    <meta charset="UTF-8" />
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    lang="es"
 
-    <title>Vigilante | Buscar Visitante</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
-      rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous" />
-    <link rel="stylesheet" href="../css/buscarVisitante.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
-      rel="stylesheet" />
-    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous" />
-    <link rel="shortcut icon" href="../../../img/logo2.png" />
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="UTF-8" />
 
-    <!-- css bootstrap 4 datatable -->
-    <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css" />
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Buscar Visitante</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+            integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="../css/buscarVisitantee.css"/>
+        <link rel="stylesheet" href="../css/buscarMensajeria.css"/>
+        <link
+            href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
+            rel="stylesheet" />
+        <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous" />
+        <link rel="shortcut icon" href="../../../img/logo2.png" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <!-- css bootstrap 4 datatable -->
+        <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css" />
 
-    <script
-      src="https://kit.fontawesome.com/7769f8ac48.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css"
-      media="all" /><link
-      rel="stylesheet"
-      href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css"
-      media="all" /><link
-      rel="stylesheet"
-      href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
-      media="all"
-  /></h:head>
-  <h:body>
-    <div class="logo_main">
-      <!-- inicio de header y poput -->
-      <img
-        src="../../../img/Isologotipo variacion horizontal.png"
-        width="450px"
-        alt=""
-        srcset=""
-      />
-    </div>
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 
-    <div class="vigilante">
-      <h1 translate="no">Vigilante</h1>
-      <button class="yaque" onclick="location.href='../../../../index.html'">
-        Cerrar Sesion
-      </button>
-    </div>
-
-    <div class="divcela">
-      <img
-        class="imgCela"
-        src="../../../img/pngkey.com-seguridad-png-4049465.png"
-        alt=""
-      />
-      <button onclick="location.href='#popup'" class="button" />
-
-      <div id="popup" class="overlay">
-        <div id="popupBody">
-          <i class="fas fa-cog code" aria-hidden="true" />
-
-          <h2 class="h2">Mi cuenta</h2>
-          <br />
-          <a id="cerrar" href="#">×</a>
-
-          <div class="popupContent">
-            <table>
-              <tbody>
-                <tr>
-                  <th>Nombre:</th>
-
-                  <th />
-
-                  <th>Email:</th>
-                </tr>
-
-                <tr>
-                  <td>Luis David Huertas</td>
-
-                  <td />
-
-                  <td>ldhuertas@gmail.com</td>
-                </tr>
-
-                <tr>
-                  <th>Telefono:</th>
-
-                  <th />
-
-                  <th>N.Identidad:</th>
-                </tr>
-
-                <tr>
-                  <td>301 458 95 56</td>
-
-                  <td />
-
-                  <td>123456789</td>
-                </tr>
-
-                <tr>
-                  <td class="especialboy">Cambiar Contraseña</td>
-
-                  <td />
-
-                  <td class="especialboy">Actualizar Datos</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="nav">
-      <div class="wrap">
-        <div class="logo logo_small">
-          <img
-            class="pepee"
-            src="../../../img/LogoCW.png"
-            alt=""
-            width="80px"
-          />
-
-          <div class="hola">
-            <img
-              src="../../../img/pngkey.com-seguridad-png-4049465.png"
-              class="pepe"
-              alt=""
+        <script
+            src="https://kit.fontawesome.com/7769f8ac48.js"
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css"
+            media="all" /><link
+            rel="stylesheet"
+            href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css"
+            media="all" /><link
+            rel="stylesheet"
+            href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+            media="all"
             />
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../nav/nav.css"/>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+    </h:head>
+    <h:body>
 
-            <div class="hola hla">
-              <h2>Luis Huertas</h2>
+
+        <ui:include src="../../header/header.xhtml"></ui:include>
+        <ui:include src="../../nav/nav.xhtml"></ui:include>
+
+        <!-- fin de header y poput -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 mt-3 text-center">
+                    Consulta de Visitantes
+                </div>
             </div>
-          </div>
+
+            <div class="row table-responsive">
+                <div class="col-sm-12 col-md-11 col-xl-11 xxx">
+                    <f:view>
+                        <h:form>    
+                            <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{visitanteControlador.consultarVisitante()}" var="visi">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.apellido}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Documento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.documento}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Entrada"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.horaEntrada}">
+                                        <f:convertDateTime pattern="HH:mm" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salida"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.horaSalida}">
+                                        <f:convertDateTime pattern="HH:mm" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ficha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.idFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.estadoFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Torre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.idInmueble.idTorre.idTorre}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.idInmueble.idApartamento.idApartamento}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Automovil"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.vehiculo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    <h:commandButton class="confi" value="Actualizar" action="#{visitanteControlador.preActulizr(visi)}" title="Modificar Visitante"></h:commandButton>
+                                    <h:commandButton class="confi" value="Eliminar" action="#{fichadeIngresoControlador.eliminar(visi.idFicha)}" title="Eliminar Visitante"></h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                </div>
+            </div>
         </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml"
-                >Inicio</a
-              >
-            </li>
+        <!-- fin tabla -->
+        <!--__________________________- inicio del footer __________________________- -->
+        <ui:include src="../../footer/footer.xhtml"></ui:include>
 
-            <li><a href="opcionesDomiciliario.xhtml">Domiciliario</a></li>
+        <!--______________________________- fin del footer __________________________-->
+        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
 
-            <li><a href="opcionesSeguridad.xhtml">Visitante</a></li>
+        <!-- bootstrap, popper y jquery -->
 
-            <li><a href="opcionesMensajeria.xhtml">Correspondencia</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <!-- fin de header y poput -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 mt-3 text-center">
-          Consulta de Visitantes
-        </div>
-      </div>
+        <script src="../../../../js/popper.min.js"></script>
 
-      <div class="row table-responsive">
-        <div class="col-sm-12 col-md-11 col-xl-11 xxx">
-        <f:view>
-            <h:form>    
-                <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{visitanteControlador.consultarVisitante()}" var="visi">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombre"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.nombre}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Apellido"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.apellido}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Documento"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.documento}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Entrada"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.horaEntrada}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Salida"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.horaSalida}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ficha"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.idFicha}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Estado"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.idFicha.estadoFicha}"/>
-                    </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Torre"/>
-                            </f:facet>
-                            <h:outputText value="#{visi.idFicha.idInmueble.idTorre.idTorre}"/>
-                        </h:column>  
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Apto"/>
-                            </f:facet>
-                            <h:outputText value="#{visi.idFicha.idInmueble.idApartamento.idApartamento}"/>
-                        </h:column>  
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Automovil"/>
-                        </f:facet>
-                        <h:outputText value="#{visi.vehiculo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Acciones"/>
-                        </f:facet>
-                        <h:commandButton value="Actualizar" action="#{visitanteControlador.preActulizr(visi)}" title="Modificar Visitante"></h:commandButton>
-                        <h:commandButton value="Eliminar" action="#{visitanteControlador.eliminar(visi)}" title="Eliminar Visitante"></h:commandButton>
-                    </h:column>
-          </h:dataTable>
-            </h:form>
-        </f:view>
-        </div>
-      </div>
-    </div>
-    <!-- fin tabla -->
-    <!--__________________________- inicio del footer __________________________- -->
-    <footer class="tuputamadre">
-      <div class="part1">
-        <i class="fab fa-facebook-messenger" aria-hidden="true" />
-        <i class="fab fa-facebook-f" aria-hidden="true" />
-      </div>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Datatable -->
 
-      <div class="part2">
-        <p class="derechossEGURIDAD">
-          @2019,Todos los derechos reservados-!Conjuntos Websay!.
-        </p>
-      </div>
+        <script src="../../../js/dataTables/datatables.min.js"></script>
+        <!-- Botones datatable -->
 
-      <div class="part3">
-        <i class="fab fa-instagram paya" aria-hidden="true" />
-        <i class="fab fa-twitter-square paya" aria-hidden="true" />
-      </div>
-    </footer>
-    <!--______________________________- fin del footer __________________________-->
-    <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+        <script src="../../../js/dataTables/dataTables.buttons.min.js"></script>
 
-    <!-- bootstrap, popper y jquery -->
+        <script src="../../../js/dataTables/jszip.min.js"></script>
 
-    <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../js/dataTables/pdfmake.min.js"></script>
 
-    <script src="../../../../js/popper.min.js"></script>
+        <script src="../../../js/dataTables/vfs_fonts.js"></script>
 
-    <script src="../../../../js/bootstrap.min.js"></script>
-    <!-- Datatable -->
+        <script src="../../../js/dataTables/buttons.html5.min.js"></script>
 
-    <script src="../../../js/dataTables/datatables.min.js"></script>
-    <!-- Botones datatable -->
+        <script src="../../../js/dataTables/exportar_tablas.js"></script>
 
-    <script src="../../../js/dataTables/dataTables.buttons.min.js"></script>
+        <script src="../../../js/scriptvigilante.js"></script>
 
-    <script src="../../../js/dataTables/jszip.min.js"></script>
-
-    <script src="../../../js/dataTables/pdfmake.min.js"></script>
-
-    <script src="../../../js/dataTables/vfs_fonts.js"></script>
-
-    <script src="../../../js/dataTables/buttons.html5.min.js"></script>
-
-    <script src="../../../js/dataTables/exportar_tablas.js"></script>
-
-    <script src="../../../js/scriptvigilante.js"></script>
-  </h:body>
+        <!-- Menu responsive -->
+        <script src="../../nav/nav.js"></script>
+    </h:body>
 </html>

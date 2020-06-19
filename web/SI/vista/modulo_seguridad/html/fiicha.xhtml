@@ -8,7 +8,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:view>
 
 
@@ -46,7 +46,7 @@
                         <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idVigilante}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                                <h:commandButton class="enviarcrud" onclick="validar_form()"  id="botones" value="Guardar" action="#{fichadeIngresoControlador.registrar()}"></h:commandButton>
+                <h:commandButton class="enviarcrud" onclick="validar_form()"  id="botones" value="Guardar" action="#{fichadeIngresoControlador.registrar()}"></h:commandButton>
 
             </h:form>
         </f:view>

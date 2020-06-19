@@ -31,18 +31,18 @@ public class FichadeIngresoControlador implements Serializable {
      */
     public FichadeIngresoControlador() {
     }
-    
+
     FichaIngreso fichaIngreso;
     Vigilante vigilante;
     Inmueble inmueble;
-    
+
     @EJB
     FichaIngresoFacade fichaIngresoFacade;
-    @EJB    
+    @EJB
     VigilanteFacade vigilanteFacade;
     @EJB
     InmuebleFacade inmuebleFacade;
- 
+
     public FichaIngreso getFichaIngreso() {
         return fichaIngreso;
     }
@@ -67,40 +67,39 @@ public class FichadeIngresoControlador implements Serializable {
         this.inmueble = inmueble;
     }
 
-    
     @PostConstruct
-    public void init(){
+    public void init() {
         fichaIngreso = new FichaIngreso();
         vigilante = new Vigilante();
         inmueble = new Inmueble();
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
-        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));    
+        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngresoFacade.create(fichaIngreso);
     }
-    
-    public List<FichaIngreso> consultar(){
+
+    public List<FichaIngreso> consultar() {
         return fichaIngresoFacade.findAll();
     }
-    
-    public String preActualizar(FichaIngreso fichaIngresoActualizar){
+
+    public String preActualizar(FichaIngreso fichaIngresoActualizar) {
         fichaIngreso = fichaIngresoActualizar;
         vigilante = fichaIngresoActualizar.getIdVigilante();
         inmueble = fichaIngresoActualizar.getIdInmueble();
         return "editarVisitante";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngresoFacade.edit(fichaIngreso);
         return "buscarVisitante";
     }
-    
-    public void eliminar(FichaIngreso fichaIngresoEliminar){
+
+    public void eliminar(FichaIngreso fichaIngresoEliminar) {
         fichaIngresoFacade.remove(fichaIngresoEliminar);
     }
-    
+
 }

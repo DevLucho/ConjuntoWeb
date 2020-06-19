@@ -60,3 +60,6 @@
   .dataTables_filter, .pagination{
     float: right;
   }
+  @media screen and(max-width:600px){
+      .container-fluid{margin-left: 0%}
+  }

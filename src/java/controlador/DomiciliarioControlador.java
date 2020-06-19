@@ -37,32 +37,32 @@ public class DomiciliarioControlador implements Serializable {
      */
     public DomiciliarioControlador() {
     }
-    
+
     private Domiciliario domiciliario;
     private FichaIngreso fichaIngreso;
     private Paquete paquete;
     private Empresa empresa;
     private Inmueble inmueble;
     private Vigilante vigilante;
-    
+
     @EJB
     DomiciliarioFacade domiciliarioFacade;
-    
+
     @EJB
     FichaIngresoFacade fichaIngresoFacade;
-    
+
     @EJB
     PaqueteFacade paqueteFacade;
-    
+
     @EJB
     EmpresaFacade empresaFacade;
-    
+
     @EJB
     InmuebleFacade inmuebleFacade;
-    
+
     @EJB
     VigilanteFacade vigilanteFacade;
-    
+
     public Domiciliario getDomiciliario() {
         return domiciliario;
     }
@@ -70,7 +70,7 @@ public class DomiciliarioControlador implements Serializable {
     public void setDomiciliario(Domiciliario domiciliario) {
         this.domiciliario = domiciliario;
     }
-    
+
     public FichaIngreso getFichaIngreso() {
         return fichaIngreso;
     }
@@ -94,7 +94,7 @@ public class DomiciliarioControlador implements Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
+
     public Inmueble getInmueble() {
         return inmueble;
     }
@@ -110,9 +110,9 @@ public class DomiciliarioControlador implements Serializable {
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         domiciliario = new Domiciliario();
         fichaIngreso = new FichaIngreso();
         paquete = new Paquete();
@@ -120,26 +120,23 @@ public class DomiciliarioControlador implements Serializable {
         inmueble = new Inmueble();
         vigilante = new Vigilante();
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.create(fichaIngreso);
-    
+
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
-        empresaFacade.create(empresa);
-       
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         domiciliario.setIdFicha(fichaIngreso);
-        domiciliario.setIdEmpresa(empresa);
         domiciliarioFacade.create(domiciliario);
     }
-    
-    public List<Domiciliario> consultar(){
+
+    public List<Domiciliario> consultar() {
         return domiciliarioFacade.findAll();
     }
-    
-    public String preActualizar(Domiciliario domiciliarioActualizar){
+
+    public String preActualizar(Domiciliario domiciliarioActualizar) {
         domiciliario = domiciliarioActualizar;
         fichaIngreso = domiciliarioActualizar.getIdFicha();
         inmueble = domiciliarioActualizar.getIdFicha().getIdInmueble();
@@ -148,28 +145,24 @@ public class DomiciliarioControlador implements Serializable {
         paquete = domiciliarioActualizar.getIdPaquete();
         return "editarDomiciliario";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.edit(fichaIngreso);
-        
+
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
-        empresaFacade.edit(empresa);
-        
-        domiciliario.setIdFicha(fichaIngresoFacade.find(fichaIngreso.getIdFicha()));
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
+        domiciliario.setIdFicha(fichaIngresoFacade.find(fichaIngreso.getIdFicha()));
         domiciliarioFacade.edit(domiciliario);
         return "buscarDomiciliario";
     }
-    
-    public void eliminar(Domiciliario domiciliarioEliminar){
-        fichaIngreso = domiciliarioEliminar.getIdFicha();
-        fichaIngresoFacade.remove(fichaIngreso);
+
+    public void eliminar(Domiciliario domiciliarioEliminar) {
         domiciliarioFacade.remove(domiciliarioEliminar);
     }
-    
-    public String consultarID(int id){
+
+    public String consultarID(int id) {
         domiciliario = domiciliarioFacade.find(id);
         return "buscarDomiciliario";
     }

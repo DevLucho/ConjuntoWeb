@@ -8,7 +8,7 @@
     <h:head>
         <meta charset="UTF-8" />
 
-        <title>Vigilante | Parqueadero</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Parqueadero</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
             rel="stylesheet" />
@@ -73,18 +73,12 @@
                     <!--________________________ Inicio de capa principal ______________________- -->
                     <!-- <div class="espacio"></div> -->
                     <section class="opciones">
-                        <div
-                            class="agregar menos"
-                            onclick="location.href = '../../modulo-parqueadero/parqueaderos/agregar-parqueadero.xhtml'"
-                            >
+                        <div class="agregar menos" onclick="location.href = '../../modulo-parqueadero/parqueaderos/agregar-parqueadero.xhtml'">
                             <i class="fas fa-map-marker-alt negro map" aria-hidden="true"/>
                             <h3><b>Agregar Parqueadero</b></h3>
                         </div>
 
-                        <div
-                            class="agregar"
-                            onclick="location.href = '../../modulo-parqueadero/parqueaderos/ConsultarParqueaderos.xhtml'"
-                            >
+                        <div class="agregar" onclick="location.href = '../../modulo-parqueadero/parqueaderos/ConsultarParqueaderos.xhtml'">
                             <i class="fas fa-search-location negro map mn" aria-hidden="true"/>
 
                             <h3><b>Consultar Parqueadero</b></h3>

@@ -27,17 +27,17 @@ public class PaqueteControlador implements Serializable {
      */
     public PaqueteControlador() {
     }
-    
+
     Paquete paquete;
-    
+
     @EJB
     PaqueteFacade paqueteFacade;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         paquete = new Paquete();
     }
-    
+
     public Paquete getPaquete() {
         return paquete;
     }
@@ -45,26 +45,26 @@ public class PaqueteControlador implements Serializable {
     public void setPaquete(Paquete paquete) {
         this.paquete = paquete;
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         paqueteFacade.create(paquete);
     }
-    
-    public String preActualizar(Paquete paqueteActualizar){
+
+    public String preActualizar(Paquete paqueteActualizar) {
         paquete = paqueteActualizar;
         return "editarDomiciliario";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         paqueteFacade.edit(paquete);
         return "buscarDomiciliario";
     }
-    
-    public void eliminar(Paquete paqueteEliminar){
+
+    public void eliminar(Paquete paqueteEliminar) {
         paqueteFacade.remove(paquete);
     }
-    
-    public List<Paquete> consultar(){
+
+    public List<Paquete> consultar() {
         return paqueteFacade.findAll();
     }
 }

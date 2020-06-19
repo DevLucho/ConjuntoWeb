@@ -1,4 +1,13 @@
-.titulazo{height: 130px;}
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-jun-2020, 0:44:33
+    Author     : Sebastian
+*/
+.titulazo{height: 17%;}
 .inicioSeguridad{height: 140vh; margin-bottom: 2%}
 .circulo{/* estilos del poput de guardar*/
     background-color:darkcyan;
@@ -10,20 +19,6 @@
     z-index: 2;
     border:black solid 2px;
   }
-   /* formu2 */
- .form2{
-     width: 100%;
-     margin: 5% 3% 12% 8%;
-     height:80vh; 
-     border: solid black 1px;
-     text-align: center;
- }
- .menos{
-     margin-left:0%;
-     width: 100%;
-     padding-top: 0;
- }
- /* form2 */
   .fortuna{background-color: #33406A; width: 39%; height: 33vh;}
   .title-class{
     color: black !important;
@@ -46,11 +41,10 @@
     .isos{display: none;}
     .image-class{display: none;}
     .popup-class{padding-left:1%  !important;}
-    .titulazo{height: 80px;}
-    .inicioSeguridad{height: 150vh;}
-    .form2 .form-style-1{margin-left:35px}
+    .titulazo{height: 50px;}
+    .inicioSeguridad{height: 150vh !important;}
+    .duque{margin-left: -27%}
   }
-  @media screen and (max-width:800px){
-    .form2{margin:0% 9%; height: 60vh;}
-    .form2 .form-style-1{margin-left: 17%;}
+  @media screen and (max-width:600px){
+      .titulazo{height: 90px;}
   }

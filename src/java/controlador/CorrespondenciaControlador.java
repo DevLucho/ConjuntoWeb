@@ -35,13 +35,13 @@ public class CorrespondenciaControlador implements Serializable {
      */
     public CorrespondenciaControlador() {
     }
-    
+
     Correspondecia correspondencia;
     Inmueble inmueble;
     Paquete paquete;
     Empresa empresa;
     Vigilante vigilante;
-    
+
     @EJB
     CorrespondeciaFacade correspondenciaFacade;
     @EJB
@@ -92,17 +92,17 @@ public class CorrespondenciaControlador implements Serializable {
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         correspondencia = new Correspondecia();
         inmueble = new Inmueble();
         paquete = new Paquete();
         empresa = new Empresa();
         vigilante = new Vigilante();
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         correspondencia.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
@@ -110,11 +110,11 @@ public class CorrespondenciaControlador implements Serializable {
         correspondenciaFacade.create(correspondencia);
     }
 
-    public List<Correspondecia> consultar(){
+    public List<Correspondecia> consultar() {
         return correspondenciaFacade.findAll();
     }
 
-    public String preActualizar(Correspondecia correspondenciaActualizar){
+    public String preActualizar(Correspondecia correspondenciaActualizar) {
         correspondencia = correspondenciaActualizar;
         inmueble = correspondenciaActualizar.getIdInmueble();
         paquete = correspondenciaActualizar.getIdPaquete();
@@ -122,8 +122,8 @@ public class CorrespondenciaControlador implements Serializable {
         vigilante = correspondenciaActualizar.getIdVigilante();
         return "editarMensajeria";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         correspondencia.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
@@ -131,17 +131,13 @@ public class CorrespondenciaControlador implements Serializable {
         correspondenciaFacade.edit(correspondencia);
         return "buscarMensajeria";
     }
-    
-    public void eliminar(Correspondecia correspondenciaEliminar){
+
+    public void eliminar(Correspondecia correspondenciaEliminar) {
         correspondenciaFacade.remove(correspondenciaEliminar);
     }
-    
-    public String consultarID(int id){
+
+    public String consultarID(int id) {
         correspondencia = correspondenciaFacade.find(id);
         return "ListaPaquete";
-    }
-    
-    public int contarCorrespondencia(){
-        return correspondenciaFacade.count();
     }
 }

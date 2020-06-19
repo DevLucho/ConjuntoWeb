@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-jun-2020, 23:03:06
+    Author     : Sebastian
+*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
 *{
     box-sizing: border-box;
@@ -5,20 +14,19 @@
     padding: 0;
     margin: 0;
 }
-.pep{/* estilos boo */margin-top: 30px;}
-.pepue{
-    margin-top: 52px;   
-    padding: 0;
+.kk{float: left}
+.lll{float: right}
+.container-fluid{
+    margin-top: 2%;
+    margin-bottom: 10%;
 }
-thead{text-align: center;}
-#boton{margin-left: 175px;}/*fin estilos boo*/
 .circulo{/* estilos del poput de guardar*/
     background-color:darkcyan;
-    width: 35%;
+    width: 39%;
     height: 30vh;
     position: absolute;
     border-radius: 50%; 
-    margin:-25%   -28%;
+    margin:-28%   -35%;
     z-index: 2;
     border:black solid 2px;
   }
@@ -28,17 +36,13 @@ thead{text-align: center;}
   }
   .image-class{
     position: absolute;
-    width: 150px;
-    margin:-10% -53% !important;
+    width: 160px;
+    margin:-13% -55% !important;
   }
   .isos{
-    width: 130px;
-    margin:30px 40px; 
-  }
-  .popup-class{
-      width: 42% !important;
-      /* height: 40%; */
-      border: solid black 2px !important;
+    font-size: 120px;
+    margin-top:35px;
+    color: black; 
   }/*fin  estilos del poput de guardar*/
 .rigth{/* bordes */
     border-right: 1px solid black;
@@ -52,21 +56,21 @@ thead{text-align: center;}
 .bottom{
     border-bottom: 1px solid black;
 }/* fin de bordes */
+
 /* inicio de estilos de formulario*/
 .inicioSeguridad{
     width: 90%;
-     height: 102vh;
-     margin: 5% 0% 0% 6%;
+     height: 160vh;
+     margin: 5% 3% 0% 3%;
      border: #141414 solid 1px;
      overflow: hidden;
+     background-color: #2A6378;
  }
  .alex{
      font-size: 20px;
      background-color: white;
      margin-bottom: -5%;
  }
- .alvm{width: 200px !important;}
-
  .titulazo{
      width: 50%;
      height: 15vh;
@@ -75,6 +79,8 @@ thead{text-align: center;}
      margin-left: 25%;
      font-size: 40px;
      text-align: center;
+     color: white;
+     font-family: Righteous;
  }
  .corto{
      max-width: 49%;
@@ -145,86 +151,167 @@ thead{text-align: center;}
  }
  .form-style-1 .required{
      color:red;
- }/* fin de estlos de formulario */
-.noticiasSeguridad{/* inicio de estilos de noticias */
-    margin: 5% 0% 0% 8%;
+ }
+ /* fin de estlos de formulario */
+ /* formu2 */
+ .form2{
+     width: 100%;
+     margin: 10% 3% 12% -7%;
+     height:40vh; 
+     border: solid black 1px;
+     text-align: center;
+ }
+ .menos{
+     margin-left:0%;
+     width: 100%;
+     padding-top: 0;
+ }
+ /* form2 */
+/* inicio de estilos de noticias */
+.noticiasSeguridad{
+    margin: 10% 5% 0% -7%;
     width: 100%;
-     border: #141414 solid 1px;
-     height: 102vh;
+    border: black 1px solid;
+    height: 102vh;
 }
 .noticiah1{
     text-align: center;
     padding-top: 20px;
 }
- .linea{
+.linea{
     width:  80%;
     height: 1px;
-    border: #141414 solid 1px;
     margin: 3% 10%;
-} 
+    border: black 1px solid;
+
+}
 .linea2{
     width:  80%;
-    border: #141414 solid 1px;
-
-   overflow: hidden;
-    height: 45%;
+    height: 33.7%;
     margin: 10% 10%;
 }
-.noticiasSeguridad  .linea2 form ul{
-    margin: -10px 0px 0px 10px;
-    width: 580px;
+.line3{
+    margin-top: 50px;
+    height: 33.6%;
 }
-.negro{
-   color: black;
-   font-size: 120px;
-   margin: 2% 14%;
-}/* fin de estilos de noticias */
+.noticiafoto{
+   width:101%;
+   height: 15vh;
+   margin: 4% -1%;
+}
+.efectoNoticia {
+  font-family: 'Quattrocento', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin-top: 43px;
+  width: 100%;
+  color: #141414;
+  text-align: left;
+  line-height: 1.4em;
+  font-size: 16px;
+  height: 30vh;
+}
+.efectoNoticia * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.efectoNoticia img {
+  max-width: 100%;
+  vertical-align: top;
+}
+.efectoNoticia figcaption {
+  position: absolute;
+  top: calc(77%);
+  width: 100%;
+  background-color:#ffffff
+
+  ;
+  padding: 15px 25px 65px;
+}
+.efectoNoticia figcaption:before {
+  position: absolute;
+  content: '';
+  z-index: 1;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-image: -webkit-linear-gradient(top, transparent 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+}
+.efectoNoticia h3,
+.efectoNoticia p {
+  margin: 0 0 10px;
+}
+.efectoNoticia h3 {
+  font-weight: 300;
+  font-size: 1.4em;
+  line-height: 1.2em;
+  font-family: 'Oswald', Arial, sans-serif;
+  text-transform: uppercase;
+}
+.efectoNoticia p {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+.efectoNoticia a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.efectoNoticia:hover figcaption,
+.efectoNoticia.hover figcaption {
+  top: 80px;
+}
+/* fin de estilos de noticias */
 @media screen and (max-width: 800px){/*inicio de responsive para tablet*/
-    #boton{margin-left: 80px;}
-    .pepue{margin-top: 40px;}
+    .pepue{
+        margin-top: 40px;
+    }
     .inicioSeguridad{
-        height: 112vh;
-        padding-top: 10px;
+        height: 185vh;
+    }
+    .noticiasSeguridad{
+        height: 115vh;
     }
     .titulazo{
         font-size: 25px;
         padding-top: 1px;
-        height: 50px;
     }
-    form{margin-left: -20%;}
-    form .form-style-1 li{width: 80%;}
-    .noticiasSeguridad  .linea2 form ul{
-        margin: -10px 0px 0px 45px;
-        width: 370px;
+    .duque{
+        margin-left: -25%;
     }
-    .negro{margin: 2% 3%;}
+    form .form-style-1 li{
+        width: 80%;
+    }
+    .field-select option{
+        background-color: royalblue;
+    }
     .circulo{display: none;}
     .image-class{display: none;}
     .popup-class{padding-left:1%  !important;}
+    .form2{height: 50vh;margin-top: -7%;}
+    .form2 .form-style-1{margin-left:35px}
+    
 }/* fin de responsive de tablet*/
 @media screen and (max-width: 600px){/* inicio de responsive de cel*/
-    .pep{margin-left:2.5% }
+    .pep{margin-left:7% ;}
     #boton{margin-left: 200px;}
+    .pepue{margin-left: 7%}
+    .noticiasSeguridad{display: none;}
     .inicioSeguridad{
-        width: 100%;
-        height: 120vh;
+        width: 80%;
+        height: 180vh;
+        margin-top: 60vh;
     }
-    .noticiasSeguridad{
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-    }
-    .linea2{
-        border: none;
-        margin-top:30px;
-    }
-    .noticiasSeguridad  .linea2 form ul{
-        margin: -35px 0px 0px 60px;
-        width: 580px;
-    }
-    .negro{
-       font-size: 60px;
-       position: absolute;
-       margin: -14% 54%;
-   }
+    .form2{margin:-250% 3%; width: 80%;}
+    .form2 .form-style-1{margin-left: 18%;}
 }/* fin de responsive de cel */
+
+

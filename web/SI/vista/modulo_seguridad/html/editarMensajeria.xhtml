@@ -9,7 +9,7 @@
     <h:head>
         <meta charset="UTF-8" />
 
-        <title>Vigilante | Editar Correspondencia</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar Correspondencia</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
             rel="stylesheet" />
@@ -19,8 +19,8 @@
             integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
             crossorigin="anonymous" />
 
-        <link rel="stylesheet" href="../css/editarDomiciliarioo.css"/>
-        <link rel="stylesheet" href="../css/editarMensajeria.css"/>      
+        <link rel="stylesheet" href="../css/editDomi.css"/>
+        <link rel="stylesheet" href="../css/editMensajeria.css"/>      
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
             rel="stylesheet" />
@@ -59,35 +59,15 @@
         <!-- fin de header y poput -->
         <div class="container-fluid">
             <div class="row">
-                <!--________________________ inicio de seccion de noticias __________________- -->
-                <div class="col-sm-12 col-md-4 col-xl-4 pepue">
-                    <section class="form2">
-                        <h1 class="noticiah1">Editar <br /> Empresa</h1>
-                        <div class="linea"> <br />
-                            <f:view>
-                                <h:form id="form2">
-                                    <ul class="form-style-1 menos">
-                                        <li>
-                                            <h:outputLabel for="nombre">Nombre</h:outputLabel>
-                                            <h:inputText a:type="text" id="nombre" value="#{empresaControlador.empresa.nombre}"  title="Nombre" required="true" class="field-long"></h:inputText><br /><br />
-                                            <h:commandButton value="Editar" action="#{empresaControlador.actualizar()}"></h:commandButton>
-                                        </li>
-                                    </ul>
-                                </h:form>
-                            </f:view>
-                        </div>
-                    </section>
-                </div>
-                <!--________________________- fin de seccion de noticias __________________- -->        
-
-                <div class="pep col-sm-12 col-md-8 col-xl-8">
+                <div class="col-xl-2"></div>
+                <div class="pep col-sm-12 col-md-12 col-xl-8">
                     <!--________________________ Inicio de formulario ______________________- -->
                     <section class="inicioSeguridad">   
 
                         <div class="titulazo">
                             Editar Correspondencia
                             <f:view>
-                                <h:form id="form">
+                                <h:form id="form" class="duque">
                                     <div id="alerta" class="col-md-12 col-12 alex" />
 
                                     <ul class="form-style-1">
@@ -103,10 +83,10 @@
                                         </li>
                                         <li>
                                             <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto" title="Entrada" required="true">
+                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto kk" title="Entrada" required="true">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
-                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto" title="Salida" required="false">
+                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto lll" title="Salida" required="false">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
                                         </li>
@@ -120,7 +100,7 @@
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idVigilante}"/>
+                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                             </h:selectOneMenu>
                                         </li>  
                                         <li>
@@ -131,8 +111,8 @@
                                         </li>
 
                                         <li>
-                                            <input type="button" disabled="disabled" value="Notificar " id="btoE" onclick="activiti()" />
-                                            <h:commandButton  class="enviarcrud" onclick="validar_formMM()" value="Guardar Cambios" action="#{correspondenciaControlador.actualizar()}"></h:commandButton>
+                                            <input type="button" disabled="disabled" value="Notificar" class="kk" id="btoE" onclick="activiti()" />
+                                            <h:commandButton  class="enviarcrud lll" onclick="validar_formMM()" value="Guardar Cambios" action="#{correspondenciaControlador.actualizar()}"></h:commandButton>
                                             <!---->
                                         </li>
                                     </ul>
@@ -160,7 +140,7 @@
 
         <script src="../../../js/scriptvigilante.js"></script></h:body>
     <!-- Menu responsive -->
-    <script src="../../navs/nav.js"></script>
+    <script src="../../nav/nav.js"></script>
 
 </html>
 

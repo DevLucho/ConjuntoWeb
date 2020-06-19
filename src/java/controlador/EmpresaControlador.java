@@ -27,14 +27,14 @@ public class EmpresaControlador implements Serializable {
      */
     public EmpresaControlador() {
     }
-    
+
     Empresa empresa;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         empresa = new Empresa();
     }
-    
+
     @EJB
     EmpresaFacade empresaFacade;
 
@@ -45,26 +45,26 @@ public class EmpresaControlador implements Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
-    public List<Empresa> consultar(){
+
+    public List<Empresa> consultar() {
         return empresaFacade.findAll();
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         empresaFacade.create(empresa);
     }
-    
-    public String preActualizar(Empresa empresaActualizar){
+
+    public String preActualizar(Empresa empresaActualizar) {
         empresa = empresaActualizar;
         return "editarDomiciliario";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         empresaFacade.edit(empresa);
         return "buscarDomiciliario";
     }
-    
-    public void eliminar(Empresa empresaEliminar){
+
+    public void eliminar(Empresa empresaEliminar) {
         empresaFacade.remove(empresa);
     }
 }

@@ -8,11 +8,11 @@
     <h:head>
         <meta charset="UTF-8" />
 
-        <title>Vigilante | Agregar Correspondencia</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar Correspondencia</title>
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
               integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
-        <link rel="stylesheet" href="../css/agregarMensajeria.css" />
+        <link rel="stylesheet" href="../css/addMensajeria.css" />
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -53,14 +53,14 @@
                         <div class="titulazo">
                             Agregar Correspondencia
                             <f:view>
-                                <h:form id="form">
+                                <h:form class="duque" id="form">
                                     <div id="alerta" class="col-md-12 col-12 alex" />
 
                                     <ul class="form-style-1">
                                         <li>
                                             <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
                                             <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true">
-                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems> -
+                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems>
                                             </h:selectOneMenu>
                                         </li>
                                         <li>
@@ -69,10 +69,10 @@
                                         </li>
                                         <li>
                                             <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto" title="Entrada" required="true">
+                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto kk" title="Entrada" required="true">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
-                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto" title="Salida" required="false">
+                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto lll" title="Salida" required="false">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
                                         </li>
@@ -97,8 +97,8 @@
                                         </li>
 
                                         <li>
-                                            <input type="button" disabled="disabled" value="Notificar" id="btoE" onclick="activiti()" />
-                                            <h:commandButton  class="enviarcrud" onclick="validar_formMM()" value="Guardar" action="#{correspondenciaControlador.registrar()}"></h:commandButton>
+                                            <input type="button" disabled="disabled" value="Notificar" class="kk" id="btoE" onclick="activiti()" />
+                                            <h:commandButton  class="enviarcrud lll" onclick="validar_formMM()" value="Guardar" action="#{correspondenciaControlador.registrar()}"></h:commandButton>
                                             <!---->
                                         </li>
                                     </ul>
@@ -112,7 +112,7 @@
                         <h1 class="noticiah1">Empresa</h1>
                         <div class="linea"> 
                             <f:view>
-                                <h:form id="form2">
+                                <h:form class="duque" id="form2">
                                     <ul class="form-style-1 menos">
                                         <li>
                                             <h:outputLabel for="nombre">Nombre</h:outputLabel>
@@ -182,7 +182,7 @@
         <script src="../../../js/scriptvigilante.js"></script>
 
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

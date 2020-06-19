@@ -33,41 +33,40 @@ public class VisitanteControlador implements Serializable {
      */
     public VisitanteControlador() {
     }
-        Visitante visitante;
-        FichaIngreso fichaIngreso;
-        Inmueble inmueble;
-        Vigilante vigilante;
-        
-    
+    Visitante visitante;
+    FichaIngreso fichaIngreso;
+    Inmueble inmueble;
+    Vigilante vigilante;
+
     @PostConstruct
-    public void init(){
+    public void init() {
         visitante = new Visitante();
         fichaIngreso = new FichaIngreso();
         inmueble = new Inmueble();
         vigilante = new Vigilante();
     }
-    
+
     @EJB
     VisitanteFacade visitanteFacade;
-    
+
     @EJB
     FichaIngresoFacade fichaIngresoFacade;
 
     @EJB
     InmuebleFacade inmuebleFacade;
-    
+
     @EJB
     VigilanteFacade vigilanteFacade;
-    
+
     public Visitante getVisitante() {
         return visitante;
     }
 
     public void setVisitante(Visitante visitante) {
         this.visitante = visitante;
-    }    
-    
-       public FichaIngreso getFichaIngreso() {
+    }
+
+    public FichaIngreso getFichaIngreso() {
         return fichaIngreso;
     }
 
@@ -81,7 +80,7 @@ public class VisitanteControlador implements Serializable {
 
     public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
-    }   
+    }
 
     public Vigilante getVigilante() {
         return vigilante;
@@ -90,25 +89,24 @@ public class VisitanteControlador implements Serializable {
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
-    
-    
-    public void registrar(){
+
+    public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
         visitanteFacade.create(visitante);
     }
-    
-    public String preActulizr(Visitante visitanteActualizar){
+
+    public String preActulizr(Visitante visitanteActualizar) {
         visitante = visitanteActualizar;
         fichaIngreso = visitanteActualizar.getIdFicha();
         inmueble = visitanteActualizar.getIdFicha().getIdInmueble();
         vigilante = visitanteActualizar.getIdFicha().getIdVigilante();
         return "editarVisitante";
     }
-    
-    public String actualizar(){
+
+    public String actualizar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.edit(fichaIngreso);
@@ -116,18 +114,16 @@ public class VisitanteControlador implements Serializable {
         visitanteFacade.edit(visitante);
         return "buscarVisitante";
     }
-    
-    public void eliminar(Visitante visitanteEliminar){
-        fichaIngreso = visitanteEliminar.getIdFicha();
-        fichaIngresoFacade.remove(fichaIngreso);
+
+    public void eliminar(Visitante visitanteEliminar) {
         visitanteFacade.remove(visitanteEliminar);
     }
-    
-    public List<Visitante> consultarVisitante(){
+
+    public List<Visitante> consultarVisitante() {
         return visitanteFacade.findAll();
     }
-    
-    public String consultarID(int id){
+
+    public String consultarID(int id) {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";
     }

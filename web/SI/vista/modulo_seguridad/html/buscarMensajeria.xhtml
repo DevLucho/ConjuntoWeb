@@ -10,7 +10,7 @@
     <h:head>
         <meta charset="UTF-8" />
 
-        <title>Vigilante | Buscar Correspondencia</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Buscar Correspondencia</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
             rel="stylesheet" />
@@ -126,7 +126,7 @@
                                             <h:outputText value="Ingreso"/>
                                         </f:facet>
                                         <h:outputText value="#{paq.fechaIngreso}">
-                                            <f:convertDateTime pattern="HH:mm" />
+                                            <f:convertDateTime pattern="yyyy-mm-dd" />
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
@@ -134,14 +134,19 @@
                                             <h:outputText value="Salida"/>
                                         </f:facet>
                                         <h:outputText value="#{paq.fechaSalida}">
-                                            <f:convertDateTime pattern="HH:mm" />
+                                            <f:convertDateTime pattern="yyyy-mm-dd" />
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Inmueble"/>
+                                            <h:outputText value="Torre"/>
                                         </f:facet>
-                                        <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/> -
+                                        <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Apto"/>
+                                        </f:facet>
                                         <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
                                     </h:column>
                                     <h:column>
@@ -214,7 +219,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
 
     </h:body>
 </html>

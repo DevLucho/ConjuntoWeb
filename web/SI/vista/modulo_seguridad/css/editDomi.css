@@ -4,10 +4,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 14-jun-2020, 23:54:01
+    Created on : 17-jun-2020, 21:52:38
     Author     : Sebastian
 */
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
 *{
     box-sizing: border-box;
@@ -15,11 +14,13 @@ and open the template in the editor.
     padding: 0;
     margin: 0;
 }
-.pep{/* estilos boo */margin-top: 30px;}
-.pepue{
-    margin-top: 52px;   
-    padding: 0;
+.kk{
+    float: left;
 }
+.lll{
+    float: right
+}
+.pep{/* estilos boo */margin-top: 30px}
 thead{text-align: center;}
 #boton{margin-left: 175px;}/*fin estilos boo*/
 .circulo{/* estilos del poput de guardar*/
@@ -69,6 +70,7 @@ thead{text-align: center;}
      margin: 5% 0% 0% 6%;
      border: #141414 solid 1px;
      overflow: hidden;
+     background-color: #2A6378;
  }
  .alex{
      font-size: 20px;
@@ -76,7 +78,6 @@ thead{text-align: center;}
      margin-bottom: -5%;
  }
  .alvm{width: 200px !important;}
-
  .titulazo{
      width: 50%;
      height: 15vh;
@@ -85,6 +86,8 @@ thead{text-align: center;}
      margin-left: 25%;
      font-size: 40px;
      text-align: center;
+     color: white;
+     font-family: Righteous;
  }
  .corto{
      max-width: 49%;
@@ -92,7 +95,7 @@ thead{text-align: center;}
  .form-style-1 {
      margin:10px auto;
      width: 500px;
-     margin-left: -15%;
+     margin-left: -17%;
      padding: 20px 12px 10px 20px;
      font: 20px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
@@ -156,57 +159,21 @@ thead{text-align: center;}
  .form-style-1 .required{
      color:red;
  }/* fin de estlos de formulario */
-.noticiasSeguridad{/* inicio de estilos de noticias */
-    margin: 5% 0% 0% 8%;
-    width: 100%;
-     border: #141414 solid 1px;
-     height: 102vh;
-}
-.noticiah1{
-    text-align: center;
-    padding-top: 20px;
-}
- .linea{
-    width:  80%;
-    height: 1px;
-    border: #141414 solid 1px;
-    margin: 3% 10%;
-} 
-.linea2{
-    width:  80%;
-    border: #141414 solid 1px;
-
-   overflow: hidden;
-    height: 45%;
-    margin: 10% 10%;
-}
-.noticiasSeguridad  .linea2 form ul{
-    margin: -10px 0px 0px 10px;
-    width: 580px;
-}
-.negro{
-   color: black;
-   font-size: 120px;
-   margin: 2% 14%;
-}/* fin de estilos de noticias */
 @media screen and (max-width: 800px){/*inicio de responsive para tablet*/
     #boton{margin-left: 80px;}
-    .pepue{margin-top: 40px;}
     .inicioSeguridad{
-        height: 112vh;
+        height: 192vh !important;
         padding-top: 10px;
+        background-color:#2A6378;
     }
+    .duque{margin-left: -26%;}
+    .form-style-1{margin-left: 11%}
     .titulazo{
         font-size: 25px;
         padding-top: 1px;
         height: 50px;
     }
-    form{margin-left: -20%;}
     form .form-style-1 li{width: 80%;}
-    .noticiasSeguridad  .linea2 form ul{
-        margin: -10px 0px 0px 45px;
-        width: 370px;
-    }
     .negro{margin: 2% 3%;}
     .circulo{display: none;}
     .image-class{display: none;}
@@ -216,21 +183,13 @@ thead{text-align: center;}
     .pep{margin-left:2.5% }
     #boton{margin-left: 200px;}
     .inicioSeguridad{
-        width: 100%;
+        width: 82%;
         height: 120vh;
     }
-    .noticiasSeguridad{
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-    }
+    .form-style-1{margin-left: -13%}
     .linea2{
         border: none;
         margin-top:30px;
-    }
-    .noticiasSeguridad  .linea2 form ul{
-        margin: -35px 0px 0px 60px;
-        width: 580px;
     }
     .negro{
        font-size: 60px;
