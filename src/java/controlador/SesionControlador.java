@@ -80,8 +80,7 @@ public class SesionControlador implements Serializable {
         FacesContext fc = FacesContext.getCurrentInstance();
         String urlRecurso = fc.getExternalContext().getRequestPathInfo();
         for (RolPermiso p : rolSeleccionado.getRolPermisoList()) {
-            if (p.getIdPermiso().getUrl() != null && (p.getIdPermiso().getUrl().equals(urlRecurso)
-                    || p.getIdPermiso().getUrl().equals("index.xhtml"))) {
+            if (p.getIdPermiso().getUrl() != null && (p.getIdPermiso().getUrl().equals(urlRecurso) || p.getIdPermiso().getUrl().equals("index.xhtml"))) {
                 return true;
             }
         }
@@ -105,6 +104,10 @@ public class SesionControlador implements Serializable {
         this.documento = documento;
     }
 
+    public int getDocumento() {
+        return documento;
+    }
+
     public String getContrasenia() {
         return contrasenia;
     }
@@ -119,10 +122,6 @@ public class SesionControlador implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public int getDocumento() {
-        return documento;
     }
 
 }

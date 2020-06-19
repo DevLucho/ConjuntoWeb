@@ -79,15 +79,16 @@
                                                 <p>Disponibilidad en días</p>
                                             </b>
                                             <hr/>
-                                            <h:selectManyCheckbox value="#{zonaComunalControlador.zonaComunal.disponibilidad}">
-                                                <f:selectItem itemValue="Domingo" itemLabel="Domingo"></f:selectItem>
-                                                <f:selectItem itemValue="Lunes" itemLabel="Lunes"></f:selectItem>
-                                                <f:selectItem itemValue="Martes" itemLabel="Martes"></f:selectItem>
-                                                <f:selectItem itemValue="Miercoles" itemLabel="Miercoles"></f:selectItem>
-                                                <f:selectItem itemValue="Jueves" itemLabel="Jueves"></f:selectItem>
-                                                <f:selectItem itemValue="Viernes" itemLabel="Viernes"></f:selectItem>
-                                                <f:selectItem itemValue="Sabado" itemLabel="Sabado"></f:selectItem>
-                                            </h:selectManyCheckbox>
+                                            
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.domingo}" label="Domingo">Domingo</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.lunes}" label="Lunes">Lunes</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.martes}" label="Martes">Martes</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.miercoles}" label="Miercoles">Miercoles</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.jueves}" label="Jueves">Jueves</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.viernes}" label="Viernes">Viernes</h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{zonaComunalControlador.sabado}" label="Sabado">Sabado</h:selectBooleanCheckbox>
+
+
                                             <!--
                                             <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                                 <div class="form-group row">
@@ -299,7 +300,7 @@
                             <div class="col-12 col-md-9">
                                 <h:inputText class="form col-12 form-control" pt:placeholder="Detalle zona comun" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
                             </div>
-                            
+
                             <div class="col-12 col-md-3">
                                 <div class="row">
                                     <!--Subir foto--> 
