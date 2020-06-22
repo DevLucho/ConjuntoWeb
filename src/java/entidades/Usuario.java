@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion")
     , @NamedQuery(name = "Usuario.findByCelular", query = "SELECT u FROM Usuario u WHERE u.celular = :celular")
     , @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")
-    , @NamedQuery(name = "Usuario.findByContrasenia", query = "SELECT u FROM Usuario u WHERE u.contrasenia = :contrasenia")})
+    , @NamedQuery(name = "Usuario.findByContrasenia", query = "SELECT u FROM Usuario u WHERE u.contrasenia = :contrasenia")
+    , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,10 +83,15 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "contrasenia")
     private String contrasenia;
+    @Size(max = 50)
+    @Column(name = "estado")
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil", fetch = FetchType.LAZY)
     private List<Vigilante> vigilanteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil", fetch = FetchType.LAZY)
     private List<Residente> residenteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil", fetch = FetchType.LAZY)
+    private List<Comunicado> comunicadoList;
     @JoinColumn(name = "idRol", referencedColumnName = "idRol")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Rol idRol;
@@ -176,6 +182,14 @@ public class Usuario implements Serializable {
         this.contrasenia = contrasenia;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     @XmlTransient
     public List<Vigilante> getVigilanteList() {
         return vigilanteList;
@@ -192,6 +206,15 @@ public class Usuario implements Serializable {
 
     public void setResidenteList(List<Residente> residenteList) {
         this.residenteList = residenteList;
+    }
+
+    @XmlTransient
+    public List<Comunicado> getComunicadoList() {
+        return comunicadoList;
+    }
+
+    public void setComunicadoList(List<Comunicado> comunicadoList) {
+        this.comunicadoList = comunicadoList;
     }
 
     public Rol getIdRol() {

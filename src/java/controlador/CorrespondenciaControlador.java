@@ -5,12 +5,12 @@
  */
 package controlador;
 
-import entidades.Correspondecia;
+import entidades.Correspondencia;
 import entidades.Empresa;
 import entidades.Inmueble;
 import entidades.Paquete;
 import entidades.Vigilante;
-import facade.CorrespondeciaFacade;
+import facade.CorrespondenciaFacade;
 import facade.EmpresaFacade;
 import facade.InmuebleFacade;
 import facade.PaqueteFacade;
@@ -36,14 +36,14 @@ public class CorrespondenciaControlador implements Serializable {
     public CorrespondenciaControlador() {
     }
 
-    Correspondecia correspondencia;
+    Correspondencia correspondencia;
     Inmueble inmueble;
     Paquete paquete;
     Empresa empresa;
     Vigilante vigilante;
 
     @EJB
-    CorrespondeciaFacade correspondenciaFacade;
+    CorrespondenciaFacade correspondenciaFacade;
     @EJB
     InmuebleFacade inmuebleFacade;
     @EJB
@@ -53,11 +53,11 @@ public class CorrespondenciaControlador implements Serializable {
     @EJB
     VigilanteFacade vigilanteFacade;
 
-    public Correspondecia getCorrespondencia() {
+    public Correspondencia getCorrespondencia() {
         return correspondencia;
     }
 
-    public void setCorrespondencia(Correspondecia correspondencia) {
+    public void setCorrespondencia(Correspondencia correspondencia) {
         this.correspondencia = correspondencia;
     }
 
@@ -95,7 +95,7 @@ public class CorrespondenciaControlador implements Serializable {
 
     @PostConstruct
     public void init() {
-        correspondencia = new Correspondecia();
+        correspondencia = new Correspondencia();
         inmueble = new Inmueble();
         paquete = new Paquete();
         empresa = new Empresa();
@@ -110,11 +110,11 @@ public class CorrespondenciaControlador implements Serializable {
         correspondenciaFacade.create(correspondencia);
     }
 
-    public List<Correspondecia> consultar() {
+    public List<Correspondencia> consultar() {
         return correspondenciaFacade.findAll();
     }
 
-    public String preActualizar(Correspondecia correspondenciaActualizar) {
+    public String preActualizar(Correspondencia correspondenciaActualizar) {
         correspondencia = correspondenciaActualizar;
         inmueble = correspondenciaActualizar.getIdInmueble();
         paquete = correspondenciaActualizar.getIdPaquete();
@@ -132,7 +132,7 @@ public class CorrespondenciaControlador implements Serializable {
         return "buscarMensajeria";
     }
 
-    public void eliminar(Correspondecia correspondenciaEliminar) {
+    public void eliminar(Correspondencia correspondenciaEliminar) {
         correspondenciaFacade.remove(correspondenciaEliminar);
     }
 

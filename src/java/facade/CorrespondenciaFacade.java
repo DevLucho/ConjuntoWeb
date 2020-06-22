@@ -5,7 +5,7 @@
  */
 package facade;
 
-import entidades.Correspondecia;
+import entidades.Correspondencia;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Huertas
  */
 @Stateless
-public class CorrespondeciaFacade extends AbstractFacade<Correspondecia> {
+public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
 
     @PersistenceContext(unitName = "ProyectoConjuntoWebPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class CorrespondeciaFacade extends AbstractFacade<Correspondecia> {
         return em;
     }
 
-    public CorrespondeciaFacade() {
-        super(Correspondecia.class);
+    public CorrespondenciaFacade() {
+        super(Correspondencia.class);
     }
     
 }

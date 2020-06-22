@@ -46,7 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Evento.findByHoraFin", query = "SELECT e FROM Evento e WHERE e.horaFin = :horaFin")
     , @NamedQuery(name = "Evento.findByDetalle", query = "SELECT e FROM Evento e WHERE e.detalle = :detalle")
     , @NamedQuery(name = "Evento.findByOrganizador", query = "SELECT e FROM Evento e WHERE e.organizador = :organizador")
-    , @NamedQuery(name = "Evento.findByEstado", query = "SELECT e FROM Evento e WHERE e.estado = :estado")})
+    , @NamedQuery(name = "Evento.findByEstado", query = "SELECT e FROM Evento e WHERE e.estado = :estado")
+    , @NamedQuery(name = "Evento.findByImg", query = "SELECT e FROM Evento e WHERE e.img = :img")})
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,6 +92,9 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 11)
     @Column(name = "estado")
     private String estado;
+    @Size(max = 100)
+    @Column(name = "img")
+    private String img;
     @JoinColumn(name = "idZonaComunal", referencedColumnName = "idZonaComunal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ZonaComunal idZonaComunal;
@@ -184,6 +188,14 @@ public class Evento implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public ZonaComunal getIdZonaComunal() {

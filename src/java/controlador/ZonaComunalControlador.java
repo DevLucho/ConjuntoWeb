@@ -58,7 +58,7 @@ public class ZonaComunalControlador implements Serializable {
     }
 
     public void registrar() {
-        
+        /*
         String diasDisponibilidad = "";
         
         if(domingo){
@@ -78,7 +78,7 @@ public class ZonaComunalControlador implements Serializable {
         }
         zonaComunal.setDisponibilidad(diasDisponibilidad);
         zonaComunalFacade.create(zonaComunal);
-        zonaComunal = new ZonaComunal();
+        zonaComunal = new ZonaComunal();*/
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) {

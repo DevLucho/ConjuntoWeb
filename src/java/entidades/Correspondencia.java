@@ -30,15 +30,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Huertas
  */
 @Entity
-@Table(name = "correspondecia")
+@Table(name = "correspondencia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Correspondecia.findAll", query = "SELECT c FROM Correspondecia c")
-    , @NamedQuery(name = "Correspondecia.findByIdCorrespondencia", query = "SELECT c FROM Correspondecia c WHERE c.idCorrespondencia = :idCorrespondencia")
-    , @NamedQuery(name = "Correspondecia.findByDescripcion", query = "SELECT c FROM Correspondecia c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "Correspondecia.findByFechaIngreso", query = "SELECT c FROM Correspondecia c WHERE c.fechaIngreso = :fechaIngreso")
-    , @NamedQuery(name = "Correspondecia.findByFechaSalida", query = "SELECT c FROM Correspondecia c WHERE c.fechaSalida = :fechaSalida")})
-public class Correspondecia implements Serializable {
+    @NamedQuery(name = "Correspondencia.findAll", query = "SELECT c FROM Correspondencia c")
+    , @NamedQuery(name = "Correspondencia.findByIdCorrespondencia", query = "SELECT c FROM Correspondencia c WHERE c.idCorrespondencia = :idCorrespondencia")
+    , @NamedQuery(name = "Correspondencia.findByDescripcion", query = "SELECT c FROM Correspondencia c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "Correspondencia.findByFechaIngreso", query = "SELECT c FROM Correspondencia c WHERE c.fechaIngreso = :fechaIngreso")
+    , @NamedQuery(name = "Correspondencia.findByFechaSalida", query = "SELECT c FROM Correspondencia c WHERE c.fechaSalida = :fechaSalida")})
+public class Correspondencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -74,14 +74,14 @@ public class Correspondecia implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Vigilante idVigilante;
 
-    public Correspondecia() {
+    public Correspondencia() {
     }
 
-    public Correspondecia(Integer idCorrespondencia) {
+    public Correspondencia(Integer idCorrespondencia) {
         this.idCorrespondencia = idCorrespondencia;
     }
 
-    public Correspondecia(Integer idCorrespondencia, String descripcion, Date fechaIngreso, Date fechaSalida) {
+    public Correspondencia(Integer idCorrespondencia, String descripcion, Date fechaIngreso, Date fechaSalida) {
         this.idCorrespondencia = idCorrespondencia;
         this.descripcion = descripcion;
         this.fechaIngreso = fechaIngreso;
@@ -162,10 +162,10 @@ public class Correspondecia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Correspondecia)) {
+        if (!(object instanceof Correspondencia)) {
             return false;
         }
-        Correspondecia other = (Correspondecia) object;
+        Correspondencia other = (Correspondencia) object;
         if ((this.idCorrespondencia == null && other.idCorrespondencia != null) || (this.idCorrespondencia != null && !this.idCorrespondencia.equals(other.idCorrespondencia))) {
             return false;
         }
@@ -174,7 +174,7 @@ public class Correspondecia implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Correspondecia[ idCorrespondencia=" + idCorrespondencia + " ]";
+        return "entidades.Correspondencia[ idCorrespondencia=" + idCorrespondencia + " ]";
     }
     
 }

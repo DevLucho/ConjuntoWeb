@@ -49,9 +49,9 @@ public class Vigilante implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TurnoVigilante idTurno;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVigilante", fetch = FetchType.LAZY)
-    private List<FichaIngreso> fichaIngresoList;
+    private List<Correspondencia> correspondenciaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVigilante", fetch = FetchType.LAZY)
-    private List<Correspondecia> correspondeciaList;
+    private List<FichaIngreso> fichaIngresoList;
 
     public Vigilante() {
     }
@@ -85,21 +85,21 @@ public class Vigilante implements Serializable {
     }
 
     @XmlTransient
+    public List<Correspondencia> getCorrespondenciaList() {
+        return correspondenciaList;
+    }
+
+    public void setCorrespondenciaList(List<Correspondencia> correspondenciaList) {
+        this.correspondenciaList = correspondenciaList;
+    }
+
+    @XmlTransient
     public List<FichaIngreso> getFichaIngresoList() {
         return fichaIngresoList;
     }
 
     public void setFichaIngresoList(List<FichaIngreso> fichaIngresoList) {
         this.fichaIngresoList = fichaIngresoList;
-    }
-
-    @XmlTransient
-    public List<Correspondecia> getCorrespondeciaList() {
-        return correspondeciaList;
-    }
-
-    public void setCorrespondeciaList(List<Correspondecia> correspondeciaList) {
-        this.correspondeciaList = correspondeciaList;
     }
 
     @Override

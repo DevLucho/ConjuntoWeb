@@ -104,7 +104,7 @@ public class UsuarioControlador implements Serializable {
         torre = new Torre();
         usuario = new Usuario();
     }
-
+    
     public void registrar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));

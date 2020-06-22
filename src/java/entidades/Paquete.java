@@ -51,7 +51,7 @@ public class Paquete implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaquete", fetch = FetchType.LAZY)
     private List<Domiciliario> domiciliarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaquete", fetch = FetchType.LAZY)
-    private List<Correspondecia> correspondeciaList;
+    private List<Correspondencia> correspondenciaList;
 
     public Paquete() {
     }
@@ -91,12 +91,12 @@ public class Paquete implements Serializable {
     }
 
     @XmlTransient
-    public List<Correspondecia> getCorrespondeciaList() {
-        return correspondeciaList;
+    public List<Correspondencia> getCorrespondenciaList() {
+        return correspondenciaList;
     }
 
-    public void setCorrespondeciaList(List<Correspondecia> correspondeciaList) {
-        this.correspondeciaList = correspondeciaList;
+    public void setCorrespondenciaList(List<Correspondencia> correspondenciaList) {
+        this.correspondenciaList = correspondenciaList;
     }
 
     @Override

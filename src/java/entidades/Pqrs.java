@@ -58,12 +58,12 @@ public class Pqrs implements Serializable {
     @Column(name = "asunto")
     private String asunto;
     @Basic(optional = false)
-
+    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
-  
+    @NotNull
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
@@ -78,14 +78,13 @@ public class Pqrs implements Serializable {
     @Column(name = "estado")
     private String estado;
     @JoinColumn(name = "idResidente", referencedColumnName = "idResidente")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Residente idResidente;
     @JoinColumn(name = "idTipoPqrs", referencedColumnName = "idTipoPqrs")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoPqrs idTipoPqrs;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nroRadicado")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nroRadicado", fetch = FetchType.LAZY)
     private List<Respuesta> respuestaList;
-
 
     public Pqrs() {
     }
