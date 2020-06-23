@@ -83,7 +83,7 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "contrasenia")
     private String contrasenia;
-    @Size(max = 50)
+    @Size(max = 9)
     @Column(name = "estado")
     private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil", fetch = FetchType.LAZY)

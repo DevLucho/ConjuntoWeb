@@ -22,7 +22,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -46,19 +45,13 @@ public class Respuesta implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_respuesta")
     private Integer idRespuesta;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "respuesta")
     private String respuesta;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
@@ -74,13 +67,6 @@ public class Respuesta implements Serializable {
 
     public Respuesta(Integer idRespuesta) {
         this.idRespuesta = idRespuesta;
-    }
-
-    public Respuesta(Integer idRespuesta, String respuesta, Date fecha, Date hora) {
-        this.idRespuesta = idRespuesta;
-        this.respuesta = respuesta;
-        this.fecha = fecha;
-        this.hora = hora;
     }
 
     public Integer getIdRespuesta() {

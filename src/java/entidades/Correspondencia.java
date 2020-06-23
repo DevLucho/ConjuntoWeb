@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Correspondencia.findByIdCorrespondencia", query = "SELECT c FROM Correspondencia c WHERE c.idCorrespondencia = :idCorrespondencia")
     , @NamedQuery(name = "Correspondencia.findByDescripcion", query = "SELECT c FROM Correspondencia c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "Correspondencia.findByFechaIngreso", query = "SELECT c FROM Correspondencia c WHERE c.fechaIngreso = :fechaIngreso")
-    , @NamedQuery(name = "Correspondencia.findByFechaSalida", query = "SELECT c FROM Correspondencia c WHERE c.fechaSalida = :fechaSalida")})
+    , @NamedQuery(name = "Correspondencia.findByFechaSalida", query = "SELECT c FROM Correspondencia c WHERE c.fechaSalida = :fechaSalida")
+    , @NamedQuery(name = "Correspondencia.findByEstado", query = "SELECT c FROM Correspondencia c WHERE c.estado = :estado")})
 public class Correspondencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,13 +55,16 @@ public class Correspondencia implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechaIngreso")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
+    @Column(name = "fechaSalida")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaSalida;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fechaSalida")
-    @Temporal(TemporalType.DATE)
-    private Date fechaSalida;
+    @Size(min = 1, max = 12)
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "idInmueble", referencedColumnName = "idInmueble")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Inmueble idInmueble;
@@ -81,11 +85,11 @@ public class Correspondencia implements Serializable {
         this.idCorrespondencia = idCorrespondencia;
     }
 
-    public Correspondencia(Integer idCorrespondencia, String descripcion, Date fechaIngreso, Date fechaSalida) {
+    public Correspondencia(Integer idCorrespondencia, String descripcion, Date fechaIngreso, String estado) {
         this.idCorrespondencia = idCorrespondencia;
         this.descripcion = descripcion;
         this.fechaIngreso = fechaIngreso;
-        this.fechaSalida = fechaSalida;
+        this.estado = estado;
     }
 
     public Integer getIdCorrespondencia() {
@@ -118,6 +122,14 @@ public class Correspondencia implements Serializable {
 
     public void setFechaSalida(Date fechaSalida) {
         this.fechaSalida = fechaSalida;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Inmueble getIdInmueble() {

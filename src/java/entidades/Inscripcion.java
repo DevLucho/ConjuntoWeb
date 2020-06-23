@@ -55,7 +55,7 @@ public class Inscripcion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechaInscripcion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInscripcion;
     @Basic(optional = false)
     @NotNull

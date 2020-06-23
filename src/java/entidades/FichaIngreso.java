@@ -41,7 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "FichaIngreso.findByIdFicha", query = "SELECT f FROM FichaIngreso f WHERE f.idFicha = :idFicha")
     , @NamedQuery(name = "FichaIngreso.findByNombre", query = "SELECT f FROM FichaIngreso f WHERE f.nombre = :nombre")
     , @NamedQuery(name = "FichaIngreso.findByApellido", query = "SELECT f FROM FichaIngreso f WHERE f.apellido = :apellido")
-    , @NamedQuery(name = "FichaIngreso.findByFecha", query = "SELECT f FROM FichaIngreso f WHERE f.fecha = :fecha")
     , @NamedQuery(name = "FichaIngreso.findByHoraEntrada", query = "SELECT f FROM FichaIngreso f WHERE f.horaEntrada = :horaEntrada")
     , @NamedQuery(name = "FichaIngreso.findByHoraSalida", query = "SELECT f FROM FichaIngreso f WHERE f.horaSalida = :horaSalida")
     , @NamedQuery(name = "FichaIngreso.findByEstadoFicha", query = "SELECT f FROM FichaIngreso f WHERE f.estadoFicha = :estadoFicha")})
@@ -64,17 +63,12 @@ public class FichaIngreso implements Serializable {
     @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    //@NotNull
-    @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "horaEntrada")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date horaEntrada;
     @Column(name = "horaSalida")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date horaSalida;
     @Size(max = 8)
     @Column(name = "estadoFicha")
@@ -97,11 +91,10 @@ public class FichaIngreso implements Serializable {
         this.idFicha = idFicha;
     }
 
-    public FichaIngreso(Integer idFicha, String nombre, String apellido, Date fecha, Date horaEntrada) {
+    public FichaIngreso(Integer idFicha, String nombre, String apellido, Date horaEntrada) {
         this.idFicha = idFicha;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.fecha = fecha;
         this.horaEntrada = horaEntrada;
     }
 
@@ -127,14 +120,6 @@ public class FichaIngreso implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public Date getHoraEntrada() {

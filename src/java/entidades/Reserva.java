@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Reserva.findByIdReserva", query = "SELECT r FROM Reserva r WHERE r.idReserva = :idReserva")
     , @NamedQuery(name = "Reserva.findByNombre", query = "SELECT r FROM Reserva r WHERE r.nombre = :nombre")
     , @NamedQuery(name = "Reserva.findByMotivoReserva", query = "SELECT r FROM Reserva r WHERE r.motivoReserva = :motivoReserva")
-    , @NamedQuery(name = "Reserva.findByFechaReserva", query = "SELECT r FROM Reserva r WHERE r.fechaReserva = :fechaReserva")
+    , @NamedQuery(name = "Reserva.findByFechaInicioReserva", query = "SELECT r FROM Reserva r WHERE r.fechaInicioReserva = :fechaInicioReserva")
+    , @NamedQuery(name = "Reserva.findByFechaFinReserva", query = "SELECT r FROM Reserva r WHERE r.fechaFinReserva = :fechaFinReserva")
     , @NamedQuery(name = "Reserva.findByEstado", query = "SELECT r FROM Reserva r WHERE r.estado = :estado")})
 public class Reserva implements Serializable {
 
@@ -59,9 +60,14 @@ public class Reserva implements Serializable {
     private String motivoReserva;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fechaReserva")
+    @Column(name = "fechaInicioReserva")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaReserva;
+    private Date fechaInicioReserva;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fechaFinReserva")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaFinReserva;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -81,11 +87,12 @@ public class Reserva implements Serializable {
         this.idReserva = idReserva;
     }
 
-    public Reserva(Integer idReserva, String nombre, String motivoReserva, Date fechaReserva, String estado) {
+    public Reserva(Integer idReserva, String nombre, String motivoReserva, Date fechaInicioReserva, Date fechaFinReserva, String estado) {
         this.idReserva = idReserva;
         this.nombre = nombre;
         this.motivoReserva = motivoReserva;
-        this.fechaReserva = fechaReserva;
+        this.fechaInicioReserva = fechaInicioReserva;
+        this.fechaFinReserva = fechaFinReserva;
         this.estado = estado;
     }
 
@@ -113,12 +120,20 @@ public class Reserva implements Serializable {
         this.motivoReserva = motivoReserva;
     }
 
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public Date getFechaInicioReserva() {
+        return fechaInicioReserva;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public void setFechaInicioReserva(Date fechaInicioReserva) {
+        this.fechaInicioReserva = fechaInicioReserva;
+    }
+
+    public Date getFechaFinReserva() {
+        return fechaFinReserva;
+    }
+
+    public void setFechaFinReserva(Date fechaFinReserva) {
+        this.fechaFinReserva = fechaFinReserva;
     }
 
     public String getEstado() {
