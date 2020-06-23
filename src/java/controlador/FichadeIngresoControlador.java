@@ -75,6 +75,7 @@ public class FichadeIngresoControlador implements Serializable {
     }
 
     public void registrar() {
+        fichaIngreso.setEstadoFicha("Activo");
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngresoFacade.create(fichaIngreso);

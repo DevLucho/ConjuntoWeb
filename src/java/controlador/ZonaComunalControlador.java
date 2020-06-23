@@ -5,7 +5,9 @@
  */
 package controlador;
 
+import entidades.Disponibilidad;
 import entidades.ZonaComunal;
+import facade.DisponibilidadFacade;
 import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -25,10 +27,8 @@ public class ZonaComunalControlador implements Serializable {
     /**
      * Creates a new instance of ZonaComunalControlador
      */
-    private String[] disponiblidad = new String[7];
-    
-    String [] disponibilidad ={"Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"};
-    
+    private String[] disponibilidadDias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+
     private boolean domingo;
     private boolean lunes;
     private boolean martes;
@@ -36,11 +36,16 @@ public class ZonaComunalControlador implements Serializable {
     private boolean jueves;
     private boolean viernes;
     private boolean sabado;
-    
+
     private ZonaComunal zonaComunal;
+
+    private Disponibilidad disponibilidad;
 
     @EJB
     ZonaComunalFacade zonaComunalFacade;
+
+    @EJB
+    DisponibilidadFacade disponibilidadFacade;
 
     public ZonaComunalControlador() {
     }
@@ -54,44 +59,62 @@ public class ZonaComunalControlador implements Serializable {
         jueves = false;
         viernes = false;
         sabado = false;
+        disponibilidad = new Disponibilidad();
         zonaComunal = new ZonaComunal();
     }
 
     public void registrar() {
-        /*
         String diasDisponibilidad = "";
-        
-        if(domingo){
-            diasDisponibilidad+=disponibilidad[0]+",";
-        }if(lunes){
-            diasDisponibilidad+=disponibilidad[1]+",";
-        }if(martes){
-            diasDisponibilidad+=disponibilidad[2]+",";
-        }if(miercoles){
-            diasDisponibilidad+=disponibilidad[3]+",";
-        }if(jueves){
-            diasDisponibilidad+=disponibilidad[4]+",";
-        }if(viernes){
-            diasDisponibilidad+=disponibilidad[5]+",";
-        }if(sabado){
-            diasDisponibilidad+=disponibilidad[6]+",";
+
+        if (domingo) {
+            diasDisponibilidad += disponibilidadDias[0] + ", ";
         }
-        zonaComunal.setDisponibilidad(diasDisponibilidad);
+        if (lunes) {
+            diasDisponibilidad += disponibilidadDias[1] + ", ";
+        }
+        if (martes) {
+            diasDisponibilidad += disponibilidadDias[2] + ", ";
+        }
+        if (miercoles) {
+            diasDisponibilidad += disponibilidadDias[3] + ", ";
+        }
+        if (jueves) {
+            diasDisponibilidad += disponibilidadDias[4] + ", ";
+        }
+        if (viernes) {
+            diasDisponibilidad += disponibilidadDias[5] + ", ";
+        }
+        if (sabado) {
+            diasDisponibilidad += disponibilidadDias[6] + ", ";
+        }
+        disponibilidad.setDias(diasDisponibilidad);
+        disponibilidadFacade.create(disponibilidad);
+        zonaComunal.setIdDisponibilidad(disponibilidad);
         zonaComunalFacade.create(zonaComunal);
-        zonaComunal = new ZonaComunal();*/
+        domingo = false;
+        lunes = false;
+        martes = false;
+        miercoles = false;
+        jueves = false;
+        viernes = false;
+        sabado = false;
+        disponibilidad = new Disponibilidad();
+        zonaComunal = new ZonaComunal();
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) {
         zonaComunalFacade.remove(zonaComunal);
     }
 
-    public String preActulizar(ZonaComunal zonaComunalActualizar) {
+    public String preActualizar(ZonaComunal zonaComunalActualizar) {
+        disponibilidad = zonaComunalActualizar.getIdDisponibilidad();
         zonaComunal = zonaComunalActualizar;
         return "editar-zona";
     }
 
     public void actualizar() {
-        zonaComunalFacade.findAll();
+        zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
+        zonaComunalFacade.edit(zonaComunal);
     }
 
     public List<ZonaComunal> consultarTodos() {
@@ -116,12 +139,12 @@ public class ZonaComunalControlador implements Serializable {
         this.zonaComunal = zonaComunal;
     }
 
-    public String[] getDisponiblidad() {
-        return disponiblidad;
+    public Disponibilidad getDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setDisponiblidad(String[] disponiblidad) {
-        this.disponiblidad = disponiblidad;
+    public void setDisponibilidad(Disponibilidad disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     public boolean isDomingo() {

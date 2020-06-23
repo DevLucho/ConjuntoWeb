@@ -78,38 +78,36 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Reservaciones desde"/>
                                                 </f:facet>
-                                                <h:outputText value="#{zona.horaInicialReserva}">
-                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                <h:outputText value="#{zona.idDisponibilidad.horaInicialReserva}">
+                                                    <f:convertDateTime pattern="HH:mm a" />
                                                 </h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Reservaciones hasta"/>
                                                 </f:facet>
-                                                <h:outputText value="#{zona.horaFinalReserva}">
-                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                <h:outputText value="#{zona.idDisponibilidad.horaFinalReserva}">
+                                                    <f:convertDateTime pattern="HH:mm a" />
                                                 </h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Dias reservables"/>
                                                 </f:facet>
-                                                <h:outputText value="#{zona.disponibilidad}"/>
+                                                <h:outputText value="#{zona.idDisponibilidad.dias}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Tiempo maximo de reserva"/>
                                                 </f:facet>
-                                                <h:outputText value="#{zona.tiempoMaximoReserva}">
-                                                    <f:convertDateTime pattern="HH:mm:ss" />
-                                                </h:outputText>
+                                                <h:outputText value="#{zona.idDisponibilidad.tiempoMaximoReserva}"></h:outputText> H
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="btn btn-outline-success fas fa-pen-square" title="Editar zona" action="#{zonaComunalControlador.preActulizar(zona)}"></h:commandButton>
+                                                    <h:commandButton value="" class="btn btn-outline-success fas fa-pen-square" title="Editar zona" action="#{zonaComunalControlador.preActualizar(zona)}"></h:commandButton>
                                                     <!-- . -->
                                                     <h:commandButton value="" class="btn btn-outline-danger btn-cancelar-zona fas fa-ban" title="Cancelar zona" action="#{zonaComunalControlador.eliminar(zona)}"></h:commandButton>
                                                     <!-- . -->

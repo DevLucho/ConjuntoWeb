@@ -56,6 +56,7 @@ public class EventoControlador implements Serializable {
     }
     
     public void registrar(){
+        evento.setEstado("Vigente");
         evento.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
         eventoFacade.create(evento);
         zonaComunal = new ZonaComunal();

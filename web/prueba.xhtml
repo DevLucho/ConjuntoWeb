@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets<f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}" label="Domingo">Domingo</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}" label="Lunes">Lunes</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}" label="Martes">Martes</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}" label="Miercoles">Miercoles</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}" label="Jueves">Jueves</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}" label="Viernes">Viernes</h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}" label="Sabado">Sabado</h:selectBooleanCheckbox>
+                    
+
+                    <h:outputLabel value="Dias:" for="dias" />
+                    <h:inputTextarea rows="4" cols="30" id="dias" value="#{disponibilidadControlador.disponibilidad.dias}" title="Dias" required="true" requiredMessage="The Dias field is required."/>
+                    <h:outputLabel value="HoraInicialReserva:" for="horaInicialReserva" />
+                    <h:inputText id="horaInicialReserva" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" title="HoraInicialReserva" required="true" requiredMessage="The HoraInicialReserva field is required.">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:inputText>
+                    <h:outputLabel value="HoraFinalReserva:" for="horaFinalReserva" />
+                    <h:inputText id="horaFinalReserva" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" title="HoraFinalReserva" required="true" requiredMessage="The HoraFinalReserva field is required.">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:inputText>
+                    <h:outputLabel value="TiempoMaximoReserva:" for="tiempoMaximoReserva" />
+                    <h:inputText id="tiempoMaximoReserva" value="#{disponibilidadControlador.disponibilidad.tiempoMaximoReserva}" title="TiempoMaximoReserva" required="true" requiredMessage="The TiempoMaximoReserva field is required."/>
+                </h:panelGrid>
+                <h:commandButton value="Registrar" action="#{disponibilidadControlador.registrar()}"></h:commandButton>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

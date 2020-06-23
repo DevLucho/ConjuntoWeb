@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -47,20 +49,16 @@
                 </div>
                 <hr/>
                 <!-- Formulario -->
-                <form>
+
+                <h:form>
                     <div class="row">
                         <!-- Titulo -->
                         <div class="col-12 ">
-                            <p>
-                                <a href="#titulo" class="btn btn-primary text-left" aria-expanded="false"
-                                    aria-controls="titulo" data-toggle="collapse">Zona común</a>
-                            </p>
+                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Zona común</a></p>
                             <div class="collapse" id="titulo">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <input type="text" class="form-control"
-                                            placeholder="Ingrese el nombre de la zona comunal" required="required" name="nombre_zona"
-                                            id="nombre_zona"/>
+                                        <h:inputText id="nombre" class="form-control" value="#{zonaComunalControlador.zonaComunal.nombre}" title="Nombre zona comun" a:placeholder="Ingrese el nombre de la zona comunal" required="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +69,7 @@
                         <div class="col-12">
                             <p>
                                 <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                                    data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>Disponibilidad</a>
+                                   data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>Disponibilidad</a>
                             </p>
                             <div class="collapse" id="date">
                                 <div class="from-group row">
@@ -83,184 +81,172 @@
                                         <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                             <div class="form-group row">
                                                 <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkd"/>
-                                                    <label class="custom-control-label" for="checkd">Domingo</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkl"/>
-                                                    <label class="custom-control-label" for="checkl">Lunes</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkm"/>
-                                                    <label class="custom-control-label" for="checkm">Martes</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkmi"/>
-                                                    <label class="custom-control-label" for="checkmi">Miercoles</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkj"/>
-                                                    <label class="custom-control-label" for="checkj">Jueves</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checkv"/>
-                                                    <label class="custom-control-label" for="checkv">Viernes</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <input type="checkbox" class="custom-control-input" id="checks"/>
-                                                    <label class="custom-control-label" for="checks">Sabado</label>
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.domingo}"></h:selectBooleanCheckbox>Domingo
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.lunes}"></h:selectBooleanCheckbox>Lunes
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.martes}"></h:selectBooleanCheckbox>Martes
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.miercoles}"></h:selectBooleanCheckbox>Miercoles
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.jueves}"></h:selectBooleanCheckbox>Jueves
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.viernes}"></h:selectBooleanCheckbox>Viernes
+                                                    <!-- . -->
+                                                    <h:selectBooleanCheckbox value="#{zonaComunalControlador.sabado}"></h:selectBooleanCheckbox>Sabado
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <b>
-                                            <p>Disponiblidad en horas</p>
-                                        </b>
+                                        <b><p>Disponiblidad en horas</p></b>
                                         <hr/>
                                         <div class="form-group row">
                                             <div class="col-12 col-md-6">
-                                                <label for="desde_las">Hora Inicial de reservaciones</label>
-                                                <select id="desde_las" required="required" class="form-control">
-                                                    <option value="00:00">00:00</option>
-                                                    <option value="00:30">00:30</option>
-                                                    <option value="01:00">01:00</option>
-                                                    <option value="01:30">01:30</option>
-                                                    <option value="02:00">02:00</option>
-                                                    <option value="02:30">02:30</option>
-                                                    <option value="03:00">03:00</option>
-                                                    <option value="03:30">03:30</option>
-                                                    <option value="04:00">04:00</option>
-                                                    <option value="04:30">04:30</option>
-                                                    <option value="05:00">05:00</option>
-                                                    <option value="05:30">05:30</option>
-                                                    <option value="06:00">06:00</option>
-                                                    <option value="06:30">06:30</option>
-                                                    <option value="07:00">07:00</option>
-                                                    <option value="07:30">07:30</option>
-                                                    <option value="08:00">08:00</option>
-                                                    <option value="08:30">08:30</option>
-                                                    <option value="09:00">09:00</option>
-                                                    <option value="09:30">09:30</option>
-                                                    <option value="10:00">10:00</option>
-                                                    <option value="10:30">10:30</option>
-                                                    <option value="11:00">11:00</option>
-                                                    <option value="11:30">11:30</option>
-                                                    <option value="12:00">12:00</option>
-                                                    <option value="12:30">12:30</option>
-                                                    <option value="13:00">13:00</option>
-                                                    <option value="13:30">13:30</option>
-                                                    <option value="14:00">14:00</option>
-                                                    <option value="14:30">14:30</option>
-                                                    <option value="15:00">15:00</option>
-                                                    <option value="15:30">15:30</option>
-                                                    <option value="16:00">16:00</option>
-                                                    <option value="16:30">16:30</option>
-                                                    <option value="17:00">17:00</option>
-                                                    <option value="17:30">17:30</option>
-                                                    <option value="18:00">18:00</option>
-                                                    <option value="18:30">18:30</option>
-                                                    <option value="19:00">19:00</option>
-                                                    <option value="19:30">19:30</option>
-                                                    <option value="20:00">20:00</option>
-                                                    <option value="20:30">20:30</option>
-                                                    <option value="21:00">21:00</option>
-                                                    <option value="21:30">21:30</option>
-                                                    <option value="22:00">22:00</option>
-                                                    <option value="22:30">22:30</option>
-                                                    <option value="23:00">23:00</option>
-                                                    <option value="23:30">23:30</option>
-                                                </select>
+                                                <b><label>Reservaciones desde las:</label></b>
+                                                <h:inputText a:type="time" value="#{zonaComunalControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:inputText>
+                                                <!--
+                                                <h:selectOneMenu value="" class="form-control">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemValue="00:00" itemLabel="00:00"></f:selectItem>
+                                                    <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
+                                                    <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
+                                                    <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
+                                                    <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
+                                                    <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
+                                                    <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
+                                                    <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
+                                                    <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
+                                                    <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
+                                                    <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
+                                                    <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
+                                                    <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
+                                                    <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
+                                                    <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
+                                                    <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
+                                                    <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
+                                                    <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
+                                                    <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
+                                                    <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
+                                                    <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
+                                                    <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
+                                                    <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
+                                                    <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
+                                                    <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
+                                                    <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
+                                                    <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
+                                                    <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
+                                                    <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
+                                                    <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
+                                                    <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
+                                                    <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
+                                                    <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
+                                                    <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
+                                                    <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
+                                                    <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
+                                                    <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
+                                                    <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
+                                                    <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
+                                                    <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
+                                                    <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
+                                                    <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
+                                                    <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
+                                                    <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
+                                                    <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
+                                                    <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
+                                                    <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
+                                                    <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
+                                                </h:selectOneMenu>-->
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <label for="hasta_las">Hora Final de reservaciones</label>
-                                                <select id="hasta_las" required="required" class="form-control">
-                                                    <option value="00:30">00:30</option>
-                                                    <option value="01:00">01:00</option>
-                                                    <option value="01:30">01:30</option>
-                                                    <option value="02:00">02:00</option>
-                                                    <option value="02:30">02:30</option>
-                                                    <option value="03:00">03:00</option>
-                                                    <option value="03:30">03:30</option>
-                                                    <option value="04:00">04:00</option>
-                                                    <option value="04:30">04:30</option>
-                                                    <option value="05:00">05:00</option>
-                                                    <option value="05:30">05:30</option>
-                                                    <option value="06:00">06:00</option>
-                                                    <option value="06:30">06:30</option>
-                                                    <option value="07:00">07:00</option>
-                                                    <option value="07:30">07:30</option>
-                                                    <option value="08:00">08:00</option>
-                                                    <option value="08:30">08:30</option>
-                                                    <option value="09:00">09:00</option>
-                                                    <option value="09:30">09:30</option>
-                                                    <option value="10:00">10:00</option>
-                                                    <option value="10:30">10:30</option>
-                                                    <option value="11:00">11:00</option>
-                                                    <option value="11:30">11:30</option>
-                                                    <option value="12:00">12:00</option>
-                                                    <option value="12:30">12:30</option>
-                                                    <option value="13:00">13:00</option>
-                                                    <option value="13:30">13:30</option>
-                                                    <option value="14:00">14:00</option>
-                                                    <option value="14:30">14:30</option>
-                                                    <option value="15:00">15:00</option>
-                                                    <option value="15:30">15:30</option>
-                                                    <option value="16:00">16:00</option>
-                                                    <option value="16:30">16:30</option>
-                                                    <option value="17:00">17:00</option>
-                                                    <option value="17:30">17:30</option>
-                                                    <option value="18:00">18:00</option>
-                                                    <option value="18:30">18:30</option>
-                                                    <option value="19:00">19:00</option>
-                                                    <option value="19:30">19:30</option>
-                                                    <option value="20:00">20:00</option>
-                                                    <option value="20:30">20:30</option>
-                                                    <option value="21:00">21:00</option>
-                                                    <option value="21:30">21:30</option>
-                                                    <option value="22:00">22:00</option>
-                                                    <option value="22:30">22:30</option>
-                                                    <option value="23:00">23:00</option>
-                                                    <option value="23:30">23:30</option>
-                                                    <option value="23:59">23:59</option>
-                                                </select>
+                                                <b><label>Reservaciones hasta las:</label></b>
+                                                <h:inputText a:type="time" value="#{zonaComunalControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:inputText>
+                                                <!--
+                                                <h:selectOneMenu value="" class="form-control">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
+                                                    <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
+                                                    <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
+                                                    <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
+                                                    <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
+                                                    <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
+                                                    <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
+                                                    <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
+                                                    <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
+                                                    <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
+                                                    <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
+                                                    <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
+                                                    <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
+                                                    <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
+                                                    <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
+                                                    <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
+                                                    <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
+                                                    <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
+                                                    <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
+                                                    <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
+                                                    <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
+                                                    <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
+                                                    <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
+                                                    <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
+                                                    <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
+                                                    <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
+                                                    <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
+                                                    <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
+                                                    <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
+                                                    <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
+                                                    <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
+                                                    <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
+                                                    <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
+                                                    <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
+                                                    <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
+                                                    <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
+                                                    <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
+                                                    <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
+                                                    <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
+                                                    <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
+                                                    <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
+                                                    <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
+                                                    <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
+                                                    <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
+                                                    <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
+                                                    <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
+                                                    <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
+                                                    <f:selectItem itemValue="23:30" itemLabel="23:59"></f:selectItem>
+                                                </h:selectOneMenu>-->
                                             </div>
-                                            <div class="col-12">
-                                                <label for="tiempo_maximo_reserva">Tiempo máximo de reserva (en
-                                                    horas)</label>
-                                                <select select="" id="tiempo_maximo_reserva" name="tiempo_maximo_reserva"
-                                                    required="required" class="form-control">
-                                                    <option value="01">1 </option>
-                                                    <option value="02">2 </option>
-                                                    <option value="03">3 </option>
-                                                    <option value="04">4 </option>
-                                                    <option value="05">5 </option>
-                                                    <option value="06">6 </option>
-                                                    <option value="07">7 </option>
-                                                    <option value="08">8 </option>
-                                                    <option value="09">9 </option>
-                                                    <option value="10">10 </option>
-                                                    <option value="11">11 </option>
-                                                    <option value="12">12 </option>
-                                                    <option value="13">13 </option>
-                                                    <option value="14">14 </option>
-                                                    <option value="15">15 </option>
-                                                    <option value="16">16 </option>
-                                                    <option value="17">17 </option>
-                                                    <option value="18">18 </option>
-                                                    <option value="19">19 </option>
-                                                    <option value="20">20 </option>
-                                                    <option value="21">21 </option>
-                                                    <option value="22">22 </option>
-                                                    <option value="23">23 </option>
-                                                    <option value="24">24 </option>
-                                                </select>
+                                            <div class="col-12 col-md-6 mt-3">
+                                                <b><label>Tiempo maximo de reserva en horas:</label></b>
+                                                <h:selectOneMenu value="#{zonaComunalControlador.disponibilidad.tiempoMaximoReserva}" class="form-control">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
+                                                    <f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
+                                                    <f:selectItem itemValue="3" itemLabel="3"></f:selectItem>
+                                                    <f:selectItem itemValue="4" itemLabel="4"></f:selectItem>
+                                                    <f:selectItem itemValue="5" itemLabel="5"></f:selectItem>
+                                                    <f:selectItem itemValue="6" itemLabel="6"></f:selectItem>
+                                                    <f:selectItem itemValue="7" itemLabel="7"></f:selectItem>
+                                                    <f:selectItem itemValue="8" itemLabel="8"></f:selectItem>
+                                                    <f:selectItem itemValue="9" itemLabel="9"></f:selectItem>
+                                                    <f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
+                                                    <f:selectItem itemValue="11" itemLabel="11"></f:selectItem>
+                                                    <f:selectItem itemValue="12" itemLabel="12"></f:selectItem>
+                                                    <f:selectItem itemValue="13" itemLabel="13"></f:selectItem>
+                                                    <f:selectItem itemValue="14" itemLabel="14"></f:selectItem>
+                                                    <f:selectItem itemValue="15" itemLabel="15"></f:selectItem>
+                                                    <f:selectItem itemValue="16" itemLabel="16"></f:selectItem>
+                                                    <f:selectItem itemValue="17" itemLabel="17"></f:selectItem>
+                                                    <f:selectItem itemValue="18" itemLabel="18"></f:selectItem>
+                                                    <f:selectItem itemValue="19" itemLabel="19"></f:selectItem>
+                                                    <f:selectItem itemValue="20" itemLabel="20"></f:selectItem>
+                                                    <f:selectItem itemValue="21" itemLabel="21"></f:selectItem>
+                                                    <f:selectItem itemValue="22" itemLabel="22"></f:selectItem>
+                                                    <f:selectItem itemValue="23" itemLabel="23"></f:selectItem>
+                                                    <f:selectItem itemValue="24" itemLabel="24"></f:selectItem>
+                                                </h:selectOneMenu> 
                                             </div>
                                         </div>
                                     </div>
@@ -274,39 +260,37 @@
                     <hr/>
                     <div class="form-group row">
                         <div class="col-12 col-md-9">
-                            <textarea name="descripcion" class="form" placeholder="Mensaje" id="descripcion"
-                                required="required"></textarea>
+                            <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle zona comun" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
                         </div>
+
                         <div class="col-12 col-md-3">
                             <div class="row">
-                                <!-- Subir foto -->
+                                <!--Subir foto--> 
                                 <div class="col-5" style="padding: 0;">
                                     <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
-                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file"
-                                        style="display: none;" name="file"/>
+                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
                                 </div>
-                                <!-- Pre-visualizar foto -->
+                                <!--Pre-visualizar foto--> 
                                 <div class="contenedor-imagen col-7" style="padding: 0;">
                                     <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                 </div>
+                                <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{zonaComunalControlador.zonaComunal.img}" required="true"/>
                             </div>
-                            <!-- Mostrar foto en modal -->
+                            <!--Mostrar foto en modal-->
                             <div class="modal fade" id="modal-img">
                                 <div class="modal-dialog d-flex justify-content-center align-items-center">
-                                    <div class="modal-content">
-                                        <img src="#" alt=""/>
-                                    </div>
+                                    <div class="modal-content"><img src="#" alt=""/></div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Boton guardar cambios -->
-                        <div class="row justify-content-center">
+                        <!-- Boton actualizar -->
+                        <div class="row justify-content-center mt-3 mb-3">
                             <div class="col-12 col-md-2">
-                                <button class="btn btn-outline-success btn-block" id="publicar" type="submit">Guardar cambios</button>
+                                <h:commandButton class="btn btn-outline-success btn-block" value="Guardar cambios" action="#{zonaComunalControlador.actualizar()}"></h:commandButton>
                             </div>
                         </div>
                     </div>
-                </form>
+                </h:form>
             </section>
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -314,13 +298,13 @@
         <!-- ckEditor-->
         <script>
             ClassicEditor
-                .create(document.querySelector('#descripcion'))
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+                    .create(document.querySelector('#descripcion'))
+                    .then(editor => {
+                        console.log(editor);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
         </script>
         <!-- Previsulizar img -->
         <script>
@@ -335,7 +319,7 @@
                 // Le decimos que cuando este listo ejecute el código interno
                 reader.onload = function () {
                     let preview = document.getElementById('pre-visualizar'),
-                        image = document.createElement('img');
+                            image = document.createElement('img');
 
                     image.src = reader.result;
 

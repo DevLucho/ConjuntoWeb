@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -52,17 +54,16 @@
                         </div>
                     </div>
                     <div class="col-12 reserva">
-                        <form action="">
+                        <h:form>
                             <div class="col-12 col-md-5" style="padding: 0;">
                                 <div class="form-group row">
                                     <div class="col-12 mt-3" style="padding: 0;">
                                         <strong><label for="zona-comun">Zona común</label></strong>
                                         <div class="box">
-                                            <select name="zona comun" id="zona-comun">
-                                                <option value="terraza BBQ">Terraza BBQ</option>
-                                                <option value="Salón zona norte">Salón zona norte</option>
-                                                <option value="Salón zona sur">Salón zona sur</option>
-                                            </select>
+                                            <h:selectOneMenu id="idZonaComunal" value="#{zonaComunalControlador.zonaComunal.idZonaComunal}" required="true">
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}"/>
+                                            </h:selectOneMenu>
                                         </div>
                                     </div>
                                 </div>
@@ -72,13 +73,13 @@
                                     <div class="col-12 col-md-5 mb-3" style="padding: 0;">
                                         <strong><label for="fecha-inicial">Fecha inicial</label></strong>
                                         <div class="box date">
-                                            <input type="date" name="fecha-inicial" id="fecha-inicial" required="required"/>
+                                            <h:inputText a:type="date" required="true"></h:inputText>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-5 mb-3 sin-padding">
                                         <strong><label for="fecha-final">Fecha fin</label></strong>
                                         <div class="box date">
-                                            <input type="date" name="fecha-final" id="fecha-final" required="required"/>
+                                            <h:inputText a:type="date" required="true"></h:inputText>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-2 mb-3" style="text-align: center; padding-top: 33px;">
@@ -90,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
                 <hr style="border-top:1px solid gray"/>

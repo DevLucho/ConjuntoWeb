@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -20,7 +22,7 @@
             }
             /* inicio de estilos de descripcion de zona */
             svg{
-                background:url("../../../img/bbq.jpg");
+                background:url("#{zonaComunalControlador.zonaComunal.img}");
                 background-size:cover;
                 width:35vmin; 
                 height:auto;
@@ -61,7 +63,21 @@
             <!-- miga de pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    </c:if>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                        <style>
+                            nav ul li{ width:25%;}
+                            @media screen and (max-width:903px){
+                                nav ul li{
+                                    width: 100%;
+                                    text-align: left;
+                                }
+                            }
+                        </style>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                    </c:if>
                     <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">Consultar zona común</a></li>
                     <li class="breadcrumb-item active">Detalle zona común</li>
                 </ol>
@@ -92,7 +108,7 @@
                                         <i class="fas fa-calendar-week d-flex align-self-start mr-3"></i>
                                         <div class="media-body">
                                             <h4 class="mt-0">Disponibilidad en dias</h4>
-                                            <p>La terraza BBQ estara disponible los dias <mark>#{zonaComunalControlador.zonaComunal.disponibilidad}</mark>
+                                            <p>La terraza BBQ estara disponible los dias <mark>#{zonaComunalControlador.zonaComunal.idDisponibilidad.dias}</mark>
                                             </p>
                                             <hr/>
                                         </div>
@@ -101,11 +117,11 @@
                                         <i class="far fa-clock d-flex align-self-start mr-3"></i>
                                         <div class="media-body">
                                             <h4 class="mt-0">Disponibildiad en horas</h4>
-                                            <p>La terraza estara disponible desde las <mark>#{zonaComunalControlador.zonaComunal.horaInicialReserva}</mark> 
-                                                hasta las <mark>#{zonaComunalControlador.zonaComunal.horaFinalReserva}</mark> horas.
+                                            <p>La #{zonaComunalControlador.zonaComunal.nombre} estara disponible desde las <mark><h:outputText value="#{zonaComunalControlador.zonaComunal.idDisponibilidad.horaInicialReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> 
+                                                hasta las <mark><h:outputText value="#{zonaComunalControlador.zonaComunal.idDisponibilidad.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> horas.
                                             </p>
                                             <p> 
-                                                El tiempo maximo de reserva en la zona común es <mark>#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}</mark> horas.
+                                                El tiempo maximo de reserva en la zona común es <mark>#{zonaComunalControlador.zonaComunal.idDisponibilidad.tiempoMaximoReserva}</mark> horas.
                                             </p>
                                             <hr/>
                                         </div>
@@ -120,20 +136,20 @@
                                         Recuerde que el administrador aprobará su solicitud de reserva.
                                     </p>
                                 </div>
-                                <img src="../../../img/bbq.jpg" width="64" height="64" alt="" class="ml-3"/>
+                                <img src="#{zonaComunalControlador.zonaComunal.img}" width="64" height="64" alt="" class="ml-3"/>
                             </div>
                         </div>
                         <div class="col-12 col-md-2" style="text-align: center; padding: 0;">
-                            <button type="button" class="btn btn-success btn-block" onclick="location.href = '../generar-reserva/generar-reserva.xhtml'">Reservar</button>
+                            <button type="button" class="btn btn-success btn-block" onclick="location.href = './generar-reserva.xhtml'">Reservar</button>
                             <div class="contenidodescri">
                                 <svg viewbox="0 0 50 50" width="50" height="50">
                                     <defs>
                                         <mask id="mask" x="0" y="0" width="100" height="49">
                                             <rect x="0.5" y="0.5" width="49" height="49" fill="#fff"/>
-                                            <text x="10" text-anchor="middle" y="50" dy="0">T.</text>
-                                            <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">B</text>
-                                            <text x="30" text-anchor="middle" y="50" dy="0">B</text>
-                                            <text x="40" text-anchor="middle" y="50" dy="0">Q</text>
+                                            <text x="10" text-anchor="middle" y="50" dy="0">F</text>
+                                            <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">O</text>
+                                            <text x="30" text-anchor="middle" y="50" dy="0">T</text>
+                                            <text x="40" text-anchor="middle" y="50" dy="0">O</text>
                                         </mask>
                                     </defs>
                                     <rect x="0.5" y="0.5" width="49" height="49" mask="url(#mask)" fill-opacity="1" fill="#e7e7e8"/>

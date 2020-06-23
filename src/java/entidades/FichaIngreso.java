@@ -64,12 +64,12 @@ public class FichaIngreso implements Serializable {
     @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "horaEntrada")
     @Temporal(TemporalType.TIME)
     private Date horaEntrada;

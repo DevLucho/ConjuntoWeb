@@ -99,18 +99,20 @@
                         <div class="novedades-eventos">
                             <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
                             <h:form>
-                                <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
-                                    <ul id="lista">
-                                        <li>
+
+                                <ul id="lista">
+                                    <li>
+                                        <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
                                             <label class="date">
                                                 <h:outputText value="#{evento.fechaInicio}">
                                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                                 </h:outputText>
                                             </label>
                                             <p><strong>#{evento.titulo}</strong></p>
-                                        </li>
-                                    </ul>
-                                </c:forEach>
+                                        </c:forEach>
+                                    </li>
+                                </ul>
+
                             </h:form>
 
                             <div class="link">
