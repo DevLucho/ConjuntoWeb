@@ -127,4 +127,8 @@ public class VisitanteControlador implements Serializable {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";
     }
+    
+    public int contarVisitantes(){
+        return visitanteFacade.count();
+    }
 }

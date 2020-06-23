@@ -61,78 +61,9 @@
                         <div class="tab-pane active" id="tab1" role="tabpanel">
                             <h4 class="mt-3 text-center">Todas las PQRS</h4>
                             <f:view>
-                                <h:form>
-                                    <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{pqrsControlador.consultar()}" var="pqrs">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="NroRadicado"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.nroRadicado}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Asunto"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.asunto}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Fecha"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.fecha}">
-                                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Hora"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.hora}">
-                                                <f:convertDateTime pattern="HH:mm:ss" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Descripcion"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.descripcion}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Estado"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.estado}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Nombre"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.idResidente.idPerfil.nombre}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Apellido"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.idResidente.idPerfil.apellido}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="TipoPqrs"/>
-                                            </f:facet>
-                                            <h:outputText value="#{pqrs.idTipoPqrs.tipo}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Acciones"></h:outputText>
-                                            </f:facet>
-                                            <div class="btn-group-sm text-center">
-                                                <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Actualizar pqrs" action="#{pqrsControlador.preActualizar(pqrs)}"></h:commandButton>
-                                                <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar pqrs" action="#{pqrsControlador.eliminar(pqrs)}"></h:commandButton>
-                                                <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver pqrs" action="#{pqrsControlador.preActualizar(pqrs)}"></h:commandButton>
-                                            </div>
-                                        </h:column>
-                                    </h:dataTable>
-                                </h:form>
+                                <!--<h:form>
+                                   
+                                </h:form>-->
                             </f:view>
                         </div>
                     </div>

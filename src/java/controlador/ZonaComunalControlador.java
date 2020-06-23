@@ -103,7 +103,7 @@ public class ZonaComunalControlador implements Serializable {
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) {
-        zonaComunalFacade.remove(zonaComunal);
+        zonaComunalFacade.remove(zonaComunalEliminar);
     }
 
     public String preActualizar(ZonaComunal zonaComunalActualizar) {

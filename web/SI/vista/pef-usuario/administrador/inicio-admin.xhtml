@@ -19,6 +19,7 @@
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <style>.icalendar{color:white;}</style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
     </h:head>
     <h:body>
@@ -35,7 +36,7 @@
                         <!-- PQRS -->
                         <div class="modulo col-12 col-md-5">
                             <div class="cantidad">
-                                <h1 id="pqrs">2</h1>
+                                <h1 id="pqrs">#{pqrsControlador.contarPqrs()}</h1>
                             </div>
                             <div class="icono">
                                 <i class="far fa-comments" ></i>
@@ -46,7 +47,7 @@
                         <!-- Reservas -->
                         <div class="modulo col-12 col-md-5">
                             <div class="cantidad">
-                                <h1 id="reservas">0</h1>
+                                <h1 id="reservas">#{reservaControlador.contarReservas()}</h1>
                             </div>
                             <div class="icono">
                                 <i class="fas fa-calendar-alt"></i>
@@ -57,7 +58,7 @@
                         <!-- Inscripciones -->
                         <div class="modulo col-12 col-md-5">
                             <div class="cantidad">
-                                <h1 id="inscripciones">0</h1>
+                                <h1 id="inscripciones">#{inscripcionControlador.contarInscripciones()}</h1>
                             </div>
                             <div class="icono">
                                 <i class="fas fa-envelope-open-text"></i>
@@ -84,7 +85,7 @@
                         <!-- Visitantes -->
                         <div class="modulo col-12 col-md-5">
                             <div class="cantidad">
-                                <h1 id="visitantes">0</h1>
+                                <h1 id="visitantes">#{visitanteControlador.contarVisitantes()}</h1>
                             </div>
                             <div class="icono">
                                 <i class="fas fa-id-card-alt"></i>
@@ -99,22 +100,19 @@
                         <div class="novedades-eventos">
                             <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
                             <h:form>
-
                                 <ul id="lista">
-                                    <li>
-                                        <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
+                                    <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
+                                        <li>
                                             <label class="date">
                                                 <h:outputText value="#{evento.fechaInicio}">
                                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                                 </h:outputText>
                                             </label>
                                             <p><strong>#{evento.titulo}</strong></p>
-                                        </c:forEach>
-                                    </li>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
-
                             </h:form>
-
                             <div class="link">
                                 <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
                             </div>

@@ -82,6 +82,15 @@ public class DisponibilidadControlador implements Serializable {
         disponibilidadFacade.create(disponibilidad);
         disponibilidad = new Disponibilidad();
     }
+    
+    public String preActualizar(Disponibilidad disponibilidadActualizar){
+        disponibilidad = disponibilidadActualizar;
+        return "prueba-d";
+    }
+    
+    public void actualizar(){
+        disponibilidadFacade.edit(disponibilidad);
+    }
 
     public String[] getDisponibilidadDias() {
         return disponibilidadDias;

@@ -29,6 +29,9 @@
                     text-align: left;
                 }
             }
+            .icalendar{
+                color:white;
+            }
         </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
     </h:head>
@@ -49,34 +52,37 @@
                             </div>
                         </div>
                         <hr/>
-                        <div class="row mt-3 mb-3">
-                            <div class="col-12 col-md-6">
-                                <div class="card border-light" style="padding: 20px;">
-                                    <div class="card-block text-dark">
-                                        <h3 class="card-title">Atención en administración</h3>
-                                        <p class="card-subtitle text-muted mb-2">Fecha publicación: 19/04/2020, Por: Administrador
-                                        </p>
-                                        <img src="../../../img/comunicado.jpg" class="card-img-top img-fluid" alt=""
-                                             style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
-                                        <p class="card-text mt-3">No habra servicio de administración el fin de semana</p>
+                        <h:form class="row mt-3 mb-3">
+                            <c:forEach items="#{comunicadoControlador.consultarTodos()}" var="comunicado">
+                                <div class="col-12 col-md-6">
+                                    <div class="card border-light" style="padding: 20px;">
+                                        <div class="card-block text-dark">
+
+                                            <h3 class="card-title">#{comunicado.titulo}</h3>
+                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}
+                                            </p>
+                                            <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
+                                            <p class="card-text mt-3">#{comunicado.descripcion}</p>
+
+                                        </div>
+                                    </div>
+                                </div>  
+                                <!-- Mostrar foto en modal -->
+                                <div class="modal fade" id="modal-img">
+                                    <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <img src="#{comunicado.img}" alt=""/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </c:forEach>
+                        </h:form>
                         <hr/>
-                        <!-- Mostrar foto en modal -->
-                        <div class="modal fade" id="modal-img">
-                            <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <img src="../../../img/comunicado.jpg" alt=""/>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                     <!-- Seccion derecha -->
                     <aside class="novedades col-12 col-md-4">
@@ -84,8 +90,8 @@
                         <div class="novedades-eventos">
                             <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
                             <h:form>
-                                <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
-                                    <ul id="lista">
+                                <ul id="lista">
+                                    <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
                                         <li>
                                             <label class="date">
                                                 <h:outputText value="#{evento.fechaInicio}">
@@ -94,17 +100,36 @@
                                             </label>
                                             <p><strong>#{evento.titulo}</strong></p>
                                         </li>
-                                    </ul>
-                                </c:forEach>
+                                    </c:forEach>
+                                </ul>
                             </h:form>
 
                             <div class="link">
                                 <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>
-                        <!-- Documentos -->
                         <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>Mis reservas</h6>
+                            <h6><i class="icalendar fas fa-box-open"></i>Correspondencia</h6>
+                            <ul id="lista">
+                                <c:forEach items="#{correspondenciaControlador.consultar()}" var="c">
+                                    <li>
+
+                                        <label class="date">Fecha de ingreso:
+                                            <h:outputText value="#{c.fechaIngreso}">
+                                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                                            </h:outputText>
+                                        </label>
+                                        <p>Tipo Paquete: <strong>#{c.idPaquete.tipo}</strong></p>
+                                        <p>Estado: <strong>#{c.estado}</strong></p>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                            <div class="link">
+                                <li><a href="#" class="text-right d-block">Consultar correspondencia<i class="greater fas fa-greater-than"></i></a></li>
+                            </div>
+                        </div>
+                        <div class="novedades-eventos">
+                            <h6><i class="icalendar fas fa-thumbtack"></i>Mis reservas</h6>
                             <ul id="lista">
                                 <li>
 
@@ -126,7 +151,7 @@
                             </div>
                         </div>
                         <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>Mis pqrs</h6>
+                            <h6><i class="icalendar far fa-comment-alt"></i>Mis pqrs</h6>
                             <ul id="lista">
                                 <li>
 

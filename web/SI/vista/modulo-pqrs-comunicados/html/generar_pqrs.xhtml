@@ -46,47 +46,11 @@
         <div class="borde titulo2vacio"></div>
         <div class="borde caja">
             <div class="borde crearsolicitudformulario">
-
+<!--
                 <h:form>
-                    <h1><h:outputText value="Create/Edit"/></h1>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="NroRadicado:" for="nroRadicado" />
-                        <h:inputText id="nroRadicado" value="#{pqrsControlador.pqrs.nroRadicado}" title="NroRadicado" required="true" requiredMessage="The NroRadicado field is required."/>
-                        
-                        <h:outputLabel value="IdResidente:" for="idResidente" />
-                        <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idPerfil}" title="IdResidente" required="true" requiredMessage="The IdResidente field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{usuarioControlador.consultarTodos()}" var="residente" itemValue="#{residente.idPerfil}" itemLabel="#{residente.nombre}"/>
-                        </h:selectOneMenu>
-                        
-                        <h:outputLabel value="Asunto:" for="asunto" />
-                        <h:inputText id="asunto" value="#{pqrsControlador.pqrs.asunto}" title="Asunto" required="true" requiredMessage="The Asunto field is required."/>
 
-                        <h:outputLabel value="Descripcion:" for="descripcion" />
-                        <h:inputText id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-
-                        
-
-                        
-                        
-                        <strong><label for="direccion">Estado</label></strong>
-                        <h:selectOneMenu id="estado" value="#{pqrsControlador.pqrs.estado}" class="form-control-plaintext">
-                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                            <f:selectItem itemValue="Pendiente" itemLabel="Pendiente"></f:selectItem>
-                            <f:selectItem itemValue="Cancelado" itemLabel="Cancelado"></f:selectItem>
-                            <f:selectItem itemValue="Resuelto" itemLabel="Resuelto"></f:selectItem>
-                            <f:selectItem itemValue="Abierto" itemLabel="Abierto"></f:selectItem>
-                        </h:selectOneMenu>
-                        
-                        <h:outputLabel value="IdTipoPqrs:" for="idTipoPqrs" />
-                        <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.pqrs.idTipoPqrs.idTipoPqrs}" title="IdTipoPqrs" required="true" requiredMessage="The IdTipoPqrs field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{tipoPqrControlador.consultarTodos()}" var="tipo" itemValue="#{tipo.idTipoPqrs}" itemLabel="#{tipo.tipo}"/>
-                        </h:selectOneMenu>
-                    </h:panelGrid>
-                    <h:commandButton value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
                 </h:form>
-
+-->
             </div>
         </div>
         <!-- footer -->

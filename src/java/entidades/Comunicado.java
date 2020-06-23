@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Comunicado.findAll", query = "SELECT c FROM Comunicado c")
     , @NamedQuery(name = "Comunicado.findByIdComunicado", query = "SELECT c FROM Comunicado c WHERE c.idComunicado = :idComunicado")
+    , @NamedQuery(name = "Comunicado.findByFechaPublicacion", query = "SELECT c FROM Comunicado c WHERE c.fechaPublicacion = :fechaPublicacion")
     , @NamedQuery(name = "Comunicado.findByTitulo", query = "SELECT c FROM Comunicado c WHERE c.titulo = :titulo")
     , @NamedQuery(name = "Comunicado.findByDescripcion", query = "SELECT c FROM Comunicado c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "Comunicado.findByImg", query = "SELECT c FROM Comunicado c WHERE c.img = :img")})
@@ -43,6 +47,11 @@ public class Comunicado implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_comunicado")
     private Integer idComunicado;
+    @Basic(optional = false)
+    //@NotNull
+    @Column(name = "fechaPublicacion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaPublicacion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -67,8 +76,9 @@ public class Comunicado implements Serializable {
         this.idComunicado = idComunicado;
     }
 
-    public Comunicado(Integer idComunicado, String titulo, String descripcion) {
+    public Comunicado(Integer idComunicado, Date fechaPublicacion, String titulo, String descripcion) {
         this.idComunicado = idComunicado;
+        this.fechaPublicacion = fechaPublicacion;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
@@ -79,6 +89,14 @@ public class Comunicado implements Serializable {
 
     public void setIdComunicado(Integer idComunicado) {
         this.idComunicado = idComunicado;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
 
     public String getTitulo() {

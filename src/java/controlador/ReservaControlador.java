@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
-
+package controlador;
 
 import entidades.Reserva;
 import entidades.Residente;
 import entidades.ZonaComunal;
 import facade.ReservaFacade;
+import facade.ResidenteFacade;
+import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 /**
  *
- * @author Familia
+ * @author Huertas
  */
 @Named(value = "reservaControlador")
 @SessionScoped
@@ -28,22 +28,39 @@ public class ReservaControlador implements Serializable {
     /**
      * Creates a new instance of ReservaControlador
      */
-    public ReservaControlador() {
-    }
-    
-    Reserva reserva;
-    ZonaComunal zonaComunal;
-    Residente residente;
-    
+    private Residente residente;
+    private ZonaComunal zonaComunal;
+    private Reserva reserva;
+
+    @EJB
+    ResidenteFacade residenteFacade;
+
+    @EJB
+    ZonaComunalFacade zonaComunalFacade;
+
     @EJB
     ReservaFacade reservaFacade;
 
-    public Reserva getReserva() {
-        return reserva;
+    public ReservaControlador() {
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
+    @PostConstruct
+    public void init() {
+        residente = new Residente();
+        zonaComunal = new ZonaComunal();
+        reserva = new Reserva();
+    }
+
+    public int contarReservas() {
+        return reservaFacade.count();
+    }
+
+    public Residente getResidente() {
+        return residente;
+    }
+
+    public void setResidente(Residente residente) {
+        this.residente = residente;
     }
 
     public ZonaComunal getZonaComunal() {
@@ -54,43 +71,12 @@ public class ReservaControlador implements Serializable {
         this.zonaComunal = zonaComunal;
     }
 
-    public Residente getResidente() {
-        return residente;
+    public Reserva getReserva() {
+        return reserva;
     }
 
-    public void setResidente(Residente residente) {
-        this.residente = residente;
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
-    
-    
-    @PostConstruct
-    public void init(){
-        reserva = new Reserva();
-        zonaComunal = new ZonaComunal();
-        residente = new Residente();
-    }
-    
-    public void registrar(){
-        reserva.setIdZonaComunal(zonaComunal);
-        reserva.setIdResidente(residente);
-        reservaFacade.create(reserva);
-    }
-    
-    public List <Reserva> consultar(){
-        return reservaFacade.findAll();
-    }
-    
-    public String preActualizar(Reserva reservaActualizar){
-        reserva = reservaActualizar;
-        zonaComunal = reservaActualizar.getIdZonaComunal();
-        residente = reservaActualizar.getIdResidente();
-        return "ActualizarReserva";
-    }
-    
-    public String actualizar(){
-        reserva.setIdZonaComunal(zonaComunal);
-        reserva.setIdResidente(residente);
-        reservaFacade.edit(reserva);
-        return "ListaReserva";
-    }
+
 }

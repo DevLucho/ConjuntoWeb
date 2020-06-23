@@ -117,7 +117,7 @@
                                                     <!-- . -->
                                                 </div>
                                             </h3>
-                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: 19/04/2020, Por: #{comunicado.idPerfil.idRol.nombre}
+                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}
                                             </p>
                                             <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
                                             <p class="card-text mt-3">#{comunicado.descripcion}</p>
