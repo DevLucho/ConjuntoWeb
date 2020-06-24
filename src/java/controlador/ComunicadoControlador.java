@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -38,6 +39,9 @@ public class ComunicadoControlador implements Serializable {
     @EJB
     UsuarioFacade usuarioFacade;
     
+    @Inject
+    MensajeControlador mensajes;
+    
     public ComunicadoControlador() {
     }
     
@@ -53,6 +57,7 @@ public class ComunicadoControlador implements Serializable {
         comunicadoFacade.create(comunicado);
         usuario = new Usuario();
         comunicado = new Comunicado();
+        mensajes.setMensajes("Se ha registrado correctamente");
     }
     
     public List<Comunicado> consultarTodos(){
@@ -72,6 +77,10 @@ public class ComunicadoControlador implements Serializable {
     
     public void eliminar(Comunicado comunicadoEliminar){
         comunicadoFacade.remove(comunicadoEliminar);
+    }
+    
+    public void asignarImg(Comunicado comunicadoImg){
+        comunicado = comunicadoImg;
     }
 
     public Comunicado getComunicado() {

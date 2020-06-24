@@ -19,6 +19,16 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <script>
+            function mensajes(titulo, texto, icono) {
+                Swal.fire({
+                    title: titulo,
+                    text: texto,
+                    icon: icono,
+                    buttom: 'close'
+                })
+            }
+        </script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Comunicados</title>
     </h:head>
     <h:body>
@@ -62,7 +72,7 @@
                                     </button>
                                 </div>
                                 <!-- Formulario comunicado -->
-                                <h:form>
+                                <h:form >
                                     <div class="modal-body">
                                         <div class="form-group row font">
                                             <div class="col-12 col-md-6">
@@ -95,7 +105,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <h:commandButton class="btn btn-outline-success btn-block btn-publicar-comunicado" value="Publicar" action="#{comunicadoControlador.registrar()}"></h:commandButton>
+                                        <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{comunicadoControlador.registrar()}" onclick="mensajes('Exito',#{mensajeControlador.mensajes},'success')"></h:commandButton>
                                     </div>
                                 </h:form>
                             </div>
@@ -117,8 +127,7 @@
                                                     <!-- . -->
                                                 </div>
                                             </h3>
-                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}
-                                            </p>
+                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}</p>
                                             <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
                                             <p class="card-text mt-3">#{comunicado.descripcion}</p>
                                         </div>
