@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -69,6 +70,9 @@ public class ResidenteControlador implements Serializable {
 
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
+    
+    @Inject
+    private MensajeControlador mensaje;
 
     public ResidenteControlador() {
     }
@@ -100,6 +104,7 @@ public class ResidenteControlador implements Serializable {
         torre = new Torre();
         apartamento = new Apartamento();
         residente = new Residente();
+        mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml');");
     }
 
     public List<Residente> consultarTodos() {
@@ -164,6 +169,14 @@ public class ResidenteControlador implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
 
 }
