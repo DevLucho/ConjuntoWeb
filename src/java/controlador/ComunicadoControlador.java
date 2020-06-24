@@ -40,7 +40,7 @@ public class ComunicadoControlador implements Serializable {
     UsuarioFacade usuarioFacade;
     
     @Inject
-    MensajeControlador mensajes;
+    private MensajeControlador mensaje;
     
     public ComunicadoControlador() {
     }
@@ -57,7 +57,7 @@ public class ComunicadoControlador implements Serializable {
         comunicadoFacade.create(comunicado);
         usuario = new Usuario();
         comunicado = new Comunicado();
-        mensajes.setMensajes("Se ha registrado correctamente");
+        mensaje.setMensaje("Mensaje('Exito','Se ha publicado el comunicado','success');");
     }
     
     public List<Comunicado> consultarTodos(){
@@ -79,6 +79,7 @@ public class ComunicadoControlador implements Serializable {
         comunicadoFacade.remove(comunicadoEliminar);
     }
     
+    // Pendiente 
     public void asignarImg(Comunicado comunicadoImg){
         comunicado = comunicadoImg;
     }
@@ -97,6 +98,14 @@ public class ComunicadoControlador implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
     
 }

@@ -19,20 +19,14 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <script>
-            function mensajes(titulo, texto, icono) {
-                Swal.fire({
-                    title: titulo,
-                    text: texto,
-                    icon: icono,
-                    buttom: 'close'
-                })
-            }
-        </script>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Comunicados</title>
     </h:head>
     <h:body>
         <f:view>
+            <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
                 <!-- header -->
@@ -105,7 +99,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{comunicadoControlador.registrar()}" onclick="mensajes('Exito',#{mensajeControlador.mensajes},'success')"></h:commandButton>
+                                        <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{comunicadoControlador.registrar()}"></h:commandButton>
                                     </div>
                                 </h:form>
                             </div>
@@ -181,9 +175,6 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
         <script src="../../navs/nav.js"></script>
-        <!-- Sweet alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="../../../js/sweetAlert.js"></script>
     </h:body>
 </html>
 

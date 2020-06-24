@@ -5,32 +5,31 @@
  */
 package controlador;
 
-import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author Huertas
  */
 @Named(value = "mensajeControlador")
-@SessionScoped
-public class MensajeControlador implements Serializable{
+@RequestScoped
+public class MensajeControlador{
 
     /**
      * Creates a new instance of MensajeControlador
      */
-    private String mensajes;
+    private String mensaje;
 
     public MensajeControlador() {
     }
 
-    public String getMensajes() {
-        return mensajes;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setMensajes(String mensajes) {
-        this.mensajes = mensajes;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
 }

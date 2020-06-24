@@ -78,8 +78,8 @@ public class UsuarioControlador implements Serializable {
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
 
-    
-    private int valor = 0;
+    // Incremental para menu dinamico
+    /*private int valor = 0;
 
     public void incrementar() {
         valor++;
@@ -87,8 +87,7 @@ public class UsuarioControlador implements Serializable {
 
     public int getValor() {
         return valor;
-    }
-
+    }*/
     public UsuarioControlador() {
     }
 
@@ -104,7 +103,7 @@ public class UsuarioControlador implements Serializable {
         torre = new Torre();
         usuario = new Usuario();
     }
-    
+
     public void registrar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
@@ -151,6 +150,10 @@ public class UsuarioControlador implements Serializable {
         usuarioFacade.edit(usuario);
     }
 
+    public List<Usuario> consultarTodos() {
+        return usuarioFacade.findAll();
+    }
+
     public String consultarUsuario(Usuario usuarioConsultar) {
         rol = usuarioConsultar.getIdRol();
         tipoDocumento = usuarioConsultar.getTipoDocumento();
@@ -158,8 +161,23 @@ public class UsuarioControlador implements Serializable {
         return "detalle-usuario";
     }
 
-    public List<Usuario> consultarTodos() {
-        return usuarioFacade.findAll();
+    public String consultarResidente(Residente residenteConsultar) {
+        rol = residenteConsultar.getIdPerfil().getIdRol();
+        tipoDocumento = residenteConsultar.getIdPerfil().getTipoDocumento();
+        usuario = residenteConsultar.getIdPerfil();
+        torre = residenteConsultar.getIdInmueble().getIdTorre();
+        apartamento = residenteConsultar.getIdInmueble().getIdApartamento();
+        residente = residenteConsultar;
+        return "detalle-usuario";
+    }
+
+    public String consultarVigilante(Vigilante vigilanteConsultar) {
+        rol = vigilanteConsultar.getIdPerfil().getIdRol();
+        tipoDocumento = vigilanteConsultar.getIdPerfil().getTipoDocumento();
+        usuario = vigilanteConsultar.getIdPerfil();
+        turnoVigilante = vigilanteConsultar.getIdTurno();
+        vigilante = vigilanteConsultar;
+        return "detalle-usuario";
     }
 
     public int contarUsuarios() {

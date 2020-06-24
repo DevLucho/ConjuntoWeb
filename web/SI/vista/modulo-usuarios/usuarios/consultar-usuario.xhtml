@@ -195,11 +195,11 @@
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar residente" action="#{usuarioControlador.preActualizar(residente)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar residente" ></h:commandButton>
                                                     <!-- . -->
                                                     <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar residente" action="#{usuarioControlador.eliminar(residente.idPerfil)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
-                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver residente" action="#{usuarioControlador.consultarPorId(usuario.idPerfil)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver residente" action="#{usuarioControlador.consultarResidente(residente)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>
@@ -262,11 +262,11 @@
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar vigilante" action="#{usuarioControlador.preActualizar(residente)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar vigilante"></h:commandButton>
                                                     <!-- . -->
                                                     <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar vigilante" action="#{usuarioControlador.eliminar(vigilante.idPerfil)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
-                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver vigilante" action="#{usuarioControlador.consultarPorId(usuario.idPerfil)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver vigilante" action="#{usuarioControlador.consultarVigilante(vigilante)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>
