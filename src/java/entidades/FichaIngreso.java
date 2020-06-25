@@ -62,8 +62,6 @@ public class FichaIngreso implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "apellido")
     private String apellido;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "horaEntrada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaEntrada;
@@ -91,11 +89,10 @@ public class FichaIngreso implements Serializable {
         this.idFicha = idFicha;
     }
 
-    public FichaIngreso(Integer idFicha, String nombre, String apellido, Date horaEntrada) {
+    public FichaIngreso(Integer idFicha, String nombre, String apellido) {
         this.idFicha = idFicha;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.horaEntrada = horaEntrada;
     }
 
     public Integer getIdFicha() {

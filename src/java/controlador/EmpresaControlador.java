@@ -52,6 +52,7 @@ public class EmpresaControlador implements Serializable {
 
     public void registrar() {
         empresaFacade.create(empresa);
+        empresa = new Empresa();
     }
 
     public String preActualizar(Empresa empresaActualizar) {

@@ -52,8 +52,6 @@ public class Correspondencia implements Serializable {
     @Size(min = 1, max = 150)
     @Column(name = "descripcion")
     private String descripcion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaIngreso")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
@@ -85,10 +83,9 @@ public class Correspondencia implements Serializable {
         this.idCorrespondencia = idCorrespondencia;
     }
 
-    public Correspondencia(Integer idCorrespondencia, String descripcion, Date fechaIngreso, String estado) {
+    public Correspondencia(Integer idCorrespondencia, String descripcion, String estado) {
         this.idCorrespondencia = idCorrespondencia;
         this.descripcion = descripcion;
-        this.fechaIngreso = fechaIngreso;
         this.estado = estado;
     }
 

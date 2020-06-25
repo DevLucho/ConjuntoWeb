@@ -16,6 +16,8 @@ import facade.VisitanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -93,9 +95,14 @@ public class VisitanteControlador implements Serializable {
     public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        fichaIngreso.setEstadoFicha("Activo");
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
         visitanteFacade.create(visitante);
+        fichaIngreso = new FichaIngreso();
+        inmueble = new Inmueble();
+        vigilante = new Vigilante();
+        visitante = new Visitante();
     }
 
     public String preActulizr(Visitante visitanteActualizar) {
@@ -130,5 +137,25 @@ public class VisitanteControlador implements Serializable {
     
     public int contarVisitantes(){
         return visitanteFacade.count();
+    }
+    
+     public List<Visitante> consultaSQL(){
+        SimpleDateFormat hora = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
+        List<Object[]> listaTres = visitanteFacade.consultarVis();
+        List<Visitante> listaVisitante = new ArrayList();
+        try {
+            for(Object[] iten : listaTres){
+                Visitante visitante = new Visitante();
+                FichaIngreso fichaIngreso = fichaIngresoFacade.find(Integer.parseInt(iten[3].toString()));
+                visitante.setIdVisitante(Integer.parseInt(iten[0].toString()));
+                visitante.setDocumento(Integer.parseInt(iten[1].toString()));
+                visitante.setVehiculo(iten[2].toString());
+                visitante.setIdFicha(fichaIngreso);
+                listaVisitante.add(visitante);
+            }
+        } catch (Exception e) {
+            System.out.println("errormmm: " + e.getMessage());
+        }
+        return listaVisitante;
     }
 }

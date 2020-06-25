@@ -14,6 +14,8 @@ import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -102,5 +104,32 @@ public class FichadeIngresoControlador implements Serializable {
     public void eliminar(FichaIngreso fichaIngresoEliminar) {
         fichaIngresoFacade.remove(fichaIngresoEliminar);
     }
-
+    public List<FichaIngreso> consultarSQL(){
+        SimpleDateFormat hora = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
+     List<Object[]> listaDos = fichaIngresoFacade.consultarFichas();
+        List<FichaIngreso> listaFichaIngreso = new ArrayList();
+        try {
+        for(Object[] item : listaDos) {
+             
+            FichaIngreso fichaIngreso = new FichaIngreso();
+            Inmueble inmueble = inmuebleFacade.find(Integer.parseInt(item [3].toString()));
+            Vigilante vigilante = vigilanteFacade.find(Integer.parseInt(item [7].toString()));
+            fichaIngreso.setIdFicha(Integer.parseInt(item[0].toString()));
+            fichaIngreso.setNombre(item[1].toString());
+            fichaIngreso.setApellido(item[2].toString());
+            fichaIngreso.setIdInmueble(inmueble);
+            fichaIngreso.setHoraEntrada(hora.parse(item[4].toString()));
+            fichaIngreso.setEstadoFicha(item[6].toString());
+            fichaIngreso.setIdVigilante(vigilante);
+            
+            listaFichaIngreso.add(fichaIngreso);
+        }
+        
+            
+        } catch (Exception e) {
+            System.out.println("error:" + e.getMessage());
+        }
+        
+        return listaFichaIngreso;
+    }
 }

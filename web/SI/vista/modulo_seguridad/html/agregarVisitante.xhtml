@@ -87,25 +87,8 @@
 
                                                 <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idInmueble}"/>
                                             </h:selectOneMenu>
-
-                                            <h:outputLabel for="fecha" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="fecha" value="#{visitanteControlador.fichaIngreso.fecha}" class="field-long correcto" title="Fecha" >
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
                                         </li>
                                         <li>
-                                            <h:outputLabel for="entrada" class="label">Hora entrada y salida<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="time" id="entrada" value="#{visitanteControlador.fichaIngreso.horaEntrada}" class="field-divided correcto corto2 kk" title="Entrada" required="true">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
-                                            <h:inputText a:type="time" id="salida" value="#{visitanteControlador.fichaIngreso.horaSalida}" title="Salida" class="field-divided correcto corto3 lll" required="true">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
-                                        </li>
-                                        <li>
-                                            <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
-                                            <h:inputText a:type="text" id="estado" value="#{visitanteControlador.fichaIngreso.estadoFicha}" class="field-long correcto corto2" title="Estado" required="true"/>
-
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
@@ -118,15 +101,12 @@
                                         </li>
                                         <li>
                                             <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
+                                            <h:selectOneMenu class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
 
-                                            <h:inputText a:type="text" id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" class="field-long correcto corto2" title="Vehiculo" required="true"/>
-
-                                        </li>
-                                        <li>
-                                            <h:outputLabel for="ficha" class="label">ficha</h:outputLabel>
-
-                                            <h:inputText a:type="number" id="ficha" value="#{visitanteControlador.fichaIngreso.idFicha}" class="field-long correcto corto2" title="Ficha" required="true"/>
-
+                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                <f:selectItem itemValue="Si" itemLabel="Si"/>
+                                                <f:selectItem itemValue="No" itemLabel="No"/>
+                                            </h:selectOneMenu> 
                                         </li><br/>           
                                         <li>
                                             <h:commandButton class="enviarcrud" onclick="validar_form()"  id="botones" value="Guardar" action="#{visitanteControlador.registrar()}"></h:commandButton>

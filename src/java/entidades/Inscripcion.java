@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Inscripcion.findByCodInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.codInscripcion = :codInscripcion")
     , @NamedQuery(name = "Inscripcion.findByNombre", query = "SELECT i FROM Inscripcion i WHERE i.nombre = :nombre")
     , @NamedQuery(name = "Inscripcion.findByFechaInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.fechaInscripcion = :fechaInscripcion")
-    , @NamedQuery(name = "Inscripcion.findByHoraEvento", query = "SELECT i FROM Inscripcion i WHERE i.horaEvento = :horaEvento")
     , @NamedQuery(name = "Inscripcion.findByEstado", query = "SELECT i FROM Inscripcion i WHERE i.estado = :estado")})
 public class Inscripcion implements Serializable {
 
@@ -52,16 +51,9 @@ public class Inscripcion implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaInscripcion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInscripcion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "horaEvento")
-    @Temporal(TemporalType.TIME)
-    private Date horaEvento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
@@ -81,11 +73,9 @@ public class Inscripcion implements Serializable {
         this.codInscripcion = codInscripcion;
     }
 
-    public Inscripcion(Integer codInscripcion, String nombre, Date fechaInscripcion, Date horaEvento, String estado) {
+    public Inscripcion(Integer codInscripcion, String nombre, String estado) {
         this.codInscripcion = codInscripcion;
         this.nombre = nombre;
-        this.fechaInscripcion = fechaInscripcion;
-        this.horaEvento = horaEvento;
         this.estado = estado;
     }
 
@@ -111,14 +101,6 @@ public class Inscripcion implements Serializable {
 
     public void setFechaInscripcion(Date fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
-    }
-
-    public Date getHoraEvento() {
-        return horaEvento;
-    }
-
-    public void setHoraEvento(Date horaEvento) {
-        this.horaEvento = horaEvento;
     }
 
     public String getEstado() {

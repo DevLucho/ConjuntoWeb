@@ -106,11 +106,6 @@
                                             <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{domiciliarioControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
                                                 <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idInmueble}"/>
                                             </h:selectOneMenu>
-
-                                            <h:outputLabel for="fecha" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="fecha" value="#{domiciliarioControlador.fichaIngreso.fecha}" class="field-long correcto" title="Fecha" >
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
                                         </li>
 
                                         <li>
@@ -125,7 +120,12 @@
 
                                         <li>
                                             <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
-                                            <h:inputText a:type="text" id="estado" value="#{domiciliarioControlador.fichaIngreso.estadoFicha}" class="field-long correcto " title="Estado" required="true"/>
+                                            <h:selectOneMenu class="field-select correcto " id="estado" value="#{domiciliarioControlador.fichaIngreso.estadoFicha}" title="Estado" required="true" requiredMessage="The IdTorre field is required.">
+
+                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                <f:selectItem itemValue="Activo" itemLabel="Activo"/>
+                                                <f:selectItem itemValue="Inactivo" itemLabel="Inactivo"/>
+                                            </h:selectOneMenu>
 
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{domiciliarioControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">

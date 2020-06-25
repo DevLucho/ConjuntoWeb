@@ -47,8 +47,6 @@ public class Comunicado implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_comunicado")
     private Integer idComunicado;
-    @Basic(optional = false)
-    //@NotNull
     @Column(name = "fechaPublicacion")
     @Temporal(TemporalType.DATE)
     private Date fechaPublicacion;
@@ -76,9 +74,8 @@ public class Comunicado implements Serializable {
         this.idComunicado = idComunicado;
     }
 
-    public Comunicado(Integer idComunicado, Date fechaPublicacion, String titulo, String descripcion) {
+    public Comunicado(Integer idComunicado, String titulo, String descripcion) {
         this.idComunicado = idComunicado;
-        this.fechaPublicacion = fechaPublicacion;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
