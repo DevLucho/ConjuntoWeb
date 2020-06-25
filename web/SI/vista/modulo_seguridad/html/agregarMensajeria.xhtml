@@ -68,15 +68,6 @@
                                             <h:inputTextarea class="field-long correcto corto2" id="descripcion" a:type="text" title="Descripcion" required="true" value="#{correspondenciaControlador.correspondencia.descripcion}"></h:inputTextarea>
                                         </li>
                                         <li>
-                                            <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto kk" title="Entrada" required="true">
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
-                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto lll" title="Salida" required="false">
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
-                                        </li>
-                                        <li>
                                             <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto" id="paquete" value="#{correspondenciaControlador.paquete.idPaquete}" title="Paquete" required="true">
                                                 <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>

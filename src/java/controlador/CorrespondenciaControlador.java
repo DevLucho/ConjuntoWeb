@@ -107,7 +107,13 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         correspondencia.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        correspondencia.setEstado("No reclamado");
         correspondenciaFacade.create(correspondencia);
+        empresa = new Empresa();
+        inmueble = new Inmueble();
+        paquete = new Paquete();
+        vigilante = new Vigilante();
+        correspondencia = new Correspondencia();
     }
 
     public List<Correspondencia> consultar() {

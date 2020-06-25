@@ -120,7 +120,6 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunal = zonaComunalActualizar;
         return "editar-zona";
     }
-
     public void actualizar() {
         zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
         zonaComunalFacade.edit(zonaComunal);

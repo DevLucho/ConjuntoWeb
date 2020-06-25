@@ -124,12 +124,19 @@ public class DomiciliarioControlador implements Serializable {
     public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        fichaIngreso.setEstadoFicha("Activo");
         fichaIngresoFacade.create(fichaIngreso);
 
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         domiciliario.setIdFicha(fichaIngreso);
         domiciliarioFacade.create(domiciliario);
+        fichaIngreso = new FichaIngreso();
+        inmueble = new Inmueble();
+        vigilante = new Vigilante();
+        empresa = new Empresa();
+        paquete = new Paquete();
+        domiciliario = new Domiciliario();
     }
 
     public List<Domiciliario> consultar() {
