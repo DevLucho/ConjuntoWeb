@@ -7,26 +7,22 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Disponibilidad.findAll", query = "SELECT d FROM Disponibilidad d")
     , @NamedQuery(name = "Disponibilidad.findByIdDisponibilidad", query = "SELECT d FROM Disponibilidad d WHERE d.idDisponibilidad = :idDisponibilidad")
     , @NamedQuery(name = "Disponibilidad.findByHoraInicialReserva", query = "SELECT d FROM Disponibilidad d WHERE d.horaInicialReserva = :horaInicialReserva")
-    , @NamedQuery(name = "Disponibilidad.findByHoraFinalReserva", query = "SELECT d FROM Disponibilidad d WHERE d.horaFinalReserva = :horaFinalReserva")
-    , @NamedQuery(name = "Disponibilidad.findByTiempoMaximoReserva", query = "SELECT d FROM Disponibilidad d WHERE d.tiempoMaximoReserva = :tiempoMaximoReserva")})
+    , @NamedQuery(name = "Disponibilidad.findByHoraFinalReserva", query = "SELECT d FROM Disponibilidad d WHERE d.horaFinalReserva = :horaFinalReserva")})
 public class Disponibilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,12 +46,6 @@ public class Disponibilidad implements Serializable {
     private Integer idDisponibilidad;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "dias")
-    private String dias;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "horaInicialReserva")
     @Temporal(TemporalType.TIME)
     private Date horaInicialReserva;
@@ -65,12 +54,12 @@ public class Disponibilidad implements Serializable {
     @Column(name = "horaFinalReserva")
     @Temporal(TemporalType.TIME)
     private Date horaFinalReserva;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tiempoMaximoReserva")
-    private int tiempoMaximoReserva;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDisponibilidad", fetch = FetchType.LAZY)
-    private List<ZonaComunal> zonaComunalList;
+    @JoinColumn(name = "idZonaComunal", referencedColumnName = "idZonaComunal")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ZonaComunal idZonaComunal;
+    @JoinColumn(name = "idDia", referencedColumnName = "idDia")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private DisponibilidadDia idDia;
 
     public Disponibilidad() {
     }
@@ -79,12 +68,10 @@ public class Disponibilidad implements Serializable {
         this.idDisponibilidad = idDisponibilidad;
     }
 
-    public Disponibilidad(Integer idDisponibilidad, String dias, Date horaInicialReserva, Date horaFinalReserva, int tiempoMaximoReserva) {
+    public Disponibilidad(Integer idDisponibilidad, Date horaInicialReserva, Date horaFinalReserva) {
         this.idDisponibilidad = idDisponibilidad;
-        this.dias = dias;
         this.horaInicialReserva = horaInicialReserva;
         this.horaFinalReserva = horaFinalReserva;
-        this.tiempoMaximoReserva = tiempoMaximoReserva;
     }
 
     public Integer getIdDisponibilidad() {
@@ -93,14 +80,6 @@ public class Disponibilidad implements Serializable {
 
     public void setIdDisponibilidad(Integer idDisponibilidad) {
         this.idDisponibilidad = idDisponibilidad;
-    }
-
-    public String getDias() {
-        return dias;
-    }
-
-    public void setDias(String dias) {
-        this.dias = dias;
     }
 
     public Date getHoraInicialReserva() {
@@ -119,21 +98,20 @@ public class Disponibilidad implements Serializable {
         this.horaFinalReserva = horaFinalReserva;
     }
 
-    public int getTiempoMaximoReserva() {
-        return tiempoMaximoReserva;
+    public ZonaComunal getIdZonaComunal() {
+        return idZonaComunal;
     }
 
-    public void setTiempoMaximoReserva(int tiempoMaximoReserva) {
-        this.tiempoMaximoReserva = tiempoMaximoReserva;
+    public void setIdZonaComunal(ZonaComunal idZonaComunal) {
+        this.idZonaComunal = idZonaComunal;
     }
 
-    @XmlTransient
-    public List<ZonaComunal> getZonaComunalList() {
-        return zonaComunalList;
+    public DisponibilidadDia getIdDia() {
+        return idDia;
     }
 
-    public void setZonaComunalList(List<ZonaComunal> zonaComunalList) {
-        this.zonaComunalList = zonaComunalList;
+    public void setIdDia(DisponibilidadDia idDia) {
+        this.idDia = idDia;
     }
 
     @Override

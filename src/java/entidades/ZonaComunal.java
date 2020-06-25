@@ -15,8 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ZonaComunal.findAll", query = "SELECT z FROM ZonaComunal z")
     , @NamedQuery(name = "ZonaComunal.findByIdZonaComunal", query = "SELECT z FROM ZonaComunal z WHERE z.idZonaComunal = :idZonaComunal")
     , @NamedQuery(name = "ZonaComunal.findByNombre", query = "SELECT z FROM ZonaComunal z WHERE z.nombre = :nombre")
+    , @NamedQuery(name = "ZonaComunal.findByTiempoMaximoReserva", query = "SELECT z FROM ZonaComunal z WHERE z.tiempoMaximoReserva = :tiempoMaximoReserva")
     , @NamedQuery(name = "ZonaComunal.findByDescripcion", query = "SELECT z FROM ZonaComunal z WHERE z.descripcion = :descripcion")
     , @NamedQuery(name = "ZonaComunal.findByImg", query = "SELECT z FROM ZonaComunal z WHERE z.img = :img")})
 public class ZonaComunal implements Serializable {
@@ -54,6 +53,10 @@ public class ZonaComunal implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "tiempoMaximoReserva")
+    private int tiempoMaximoReserva;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
@@ -64,9 +67,8 @@ public class ZonaComunal implements Serializable {
     private List<Evento> eventoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
     private List<Reserva> reservaList;
-    @JoinColumn(name = "idDisponibilidad", referencedColumnName = "idDisponibilidad")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Disponibilidad idDisponibilidad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
+    private List<Disponibilidad> disponibilidadList;
 
     public ZonaComunal() {
     }
@@ -75,9 +77,10 @@ public class ZonaComunal implements Serializable {
         this.idZonaComunal = idZonaComunal;
     }
 
-    public ZonaComunal(Integer idZonaComunal, String nombre, String descripcion) {
+    public ZonaComunal(Integer idZonaComunal, String nombre, int tiempoMaximoReserva, String descripcion) {
         this.idZonaComunal = idZonaComunal;
         this.nombre = nombre;
+        this.tiempoMaximoReserva = tiempoMaximoReserva;
         this.descripcion = descripcion;
     }
 
@@ -95,6 +98,14 @@ public class ZonaComunal implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getTiempoMaximoReserva() {
+        return tiempoMaximoReserva;
+    }
+
+    public void setTiempoMaximoReserva(int tiempoMaximoReserva) {
+        this.tiempoMaximoReserva = tiempoMaximoReserva;
     }
 
     public String getDescripcion() {
@@ -131,12 +142,13 @@ public class ZonaComunal implements Serializable {
         this.reservaList = reservaList;
     }
 
-    public Disponibilidad getIdDisponibilidad() {
-        return idDisponibilidad;
+    @XmlTransient
+    public List<Disponibilidad> getDisponibilidadList() {
+        return disponibilidadList;
     }
 
-    public void setIdDisponibilidad(Disponibilidad idDisponibilidad) {
-        this.idDisponibilidad = idDisponibilidad;
+    public void setDisponibilidadList(List<Disponibilidad> disponibilidadList) {
+        this.disponibilidadList = disponibilidadList;
     }
 
     @Override

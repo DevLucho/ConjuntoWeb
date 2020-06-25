@@ -87,9 +87,11 @@ public class ZonaComunalControlador implements Serializable {
         if (sabado) {
             diasDisponibilidad += disponibilidadDias[6] + ", ";
         }
+        /*
         disponibilidad.setDias(diasDisponibilidad);
         disponibilidadFacade.create(disponibilidad);
         zonaComunal.setIdDisponibilidad(disponibilidad);
+        */
         zonaComunalFacade.create(zonaComunal);
         domingo = false;
         lunes = false;
@@ -105,7 +107,7 @@ public class ZonaComunalControlador implements Serializable {
     public void eliminar(ZonaComunal zonaComunalEliminar) {
         zonaComunalFacade.remove(zonaComunalEliminar);
     }
-
+    /*
     public String preActualizar(ZonaComunal zonaComunalActualizar) {
         disponibilidad = zonaComunalActualizar.getIdDisponibilidad();
         zonaComunal = zonaComunalActualizar;
@@ -115,7 +117,7 @@ public class ZonaComunalControlador implements Serializable {
     public void actualizar() {
         zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
         zonaComunalFacade.edit(zonaComunal);
-    }
+    }*/
 
     public List<ZonaComunal> consultarTodos() {
         return zonaComunalFacade.findAll();

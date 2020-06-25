@@ -78,10 +78,13 @@ public class DisponibilidadControlador implements Serializable {
         if (sabado) {
             diasDisponibilidad += disponibilidadDias[6] + ",";
         }
+        /*
         disponibilidad.setDias(diasDisponibilidad);
         disponibilidadFacade.create(disponibilidad);
         disponibilidad = new Disponibilidad();
-    }
+    
+        */
+        }
     
     public String preActualizar(Disponibilidad disponibilidadActualizar){
         disponibilidad = disponibilidadActualizar;

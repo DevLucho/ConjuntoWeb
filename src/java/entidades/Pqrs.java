@@ -57,13 +57,9 @@ public class Pqrs implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "asunto")
     private String asunto;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
@@ -93,11 +89,9 @@ public class Pqrs implements Serializable {
         this.nroRadicado = nroRadicado;
     }
 
-    public Pqrs(Integer nroRadicado, String asunto, Date fecha, Date hora, String descripcion, String estado) {
+    public Pqrs(Integer nroRadicado, String asunto, String descripcion, String estado) {
         this.nroRadicado = nroRadicado;
         this.asunto = asunto;
-        this.fecha = fecha;
-        this.hora = hora;
         this.descripcion = descripcion;
         this.estado = estado;
     }
