@@ -14,6 +14,17 @@ and open the template in the editor.
     padding: 0;
     margin: 0;
 }
+.title-class{
+    color: black !important;
+    font-family: Righteous;
+    font-size: 50px !important;
+}
+.icon-class{background-color: #3ed363;}
+.popup-class{
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
 .kk{float: left}
 .lll{float: right}
 .container-fluid{
@@ -29,33 +40,6 @@ and open the template in the editor.
     margin-top: 52px;   
     margin-left: -20px;
 }
-.circulo{/* estilos del poput de guardar*/
-    background-color:darkcyan;
-    width: 39%;
-    height: 30vh;
-    position: absolute;
-    border-radius: 50%; 
-    margin:-28%   -35%;
-    z-index: 2;
-    border:black solid 2px;
-  }
-  .fortuna{background-color: #33406A; width: 42%; height: 32vh;}
-  .title-class{
-    color: black !important;
-    font-family: helvetica;
-  }
-  .image-class{
-    position: absolute;
-    width: 160px;
-    margin:-11% -55% !important;
-  }
-  .popup-class{border: solid black 2px !important;}
-  .isos2{font-size: 140px !important;}
-  .isos{
-    font-size: 120px;
-    margin-top:35px;
-    color: black; 
-  }/*fin  estilos del poput de guardar*/
 .rigth{/* bordes */border-right: 1px solid black;}
 .left{border-left: 1px solid black;}
 .top{border-top: 1px solid black;}

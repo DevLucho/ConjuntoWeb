@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -59,6 +60,9 @@ public class VisitanteControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
+
+    @Inject
+    private MensajeControlador mensaje;
 
     public Visitante getVisitante() {
         return visitante;
@@ -103,6 +107,7 @@ public class VisitanteControlador implements Serializable {
         inmueble = new Inmueble();
         vigilante = new Vigilante();
         visitante = new Visitante();
+        mensaje.setMensaje("RegistrarVisitante('Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
     }
 
     public String preActulizr(Visitante visitanteActualizar) {
@@ -113,17 +118,19 @@ public class VisitanteControlador implements Serializable {
         return "editarVisitante";
     }
 
-    public String actualizar() {
+    public void actualizar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.edit(fichaIngreso);
         visitante.setIdFicha(fichaIngresoFacade.find(fichaIngreso.getIdFicha()));
         visitanteFacade.edit(visitante);
-        return "buscarVisitante";
+        mensaje.setMensaje("EdicionVisitante('buscarVisitante.xhtml','Ficha de visitante modificada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
+        
     }
 
     public void eliminar(Visitante visitanteEliminar) {
         visitanteFacade.remove(visitanteEliminar);
+        mensaje.setMensaje("EliminarVisitante();");
     }
 
     public List<Visitante> consultarVisitante() {

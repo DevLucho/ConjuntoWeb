@@ -14,43 +14,22 @@ and open the template in the editor.
     padding: 0;
     margin: 0;
 }
-.kk{
-    float: left;
+.title-class{
+    color: black !important;
+    font-family: Righteous;
+    font-size: 50px !important;
 }
-.lll{
-    float: right
+.icon-class{background-color: #3ed363;}
+.popup-class{
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
+.kk{float: left;}
+.lll{float: right}
 .pep{/* estilos boo */margin-top: 30px}
 thead{text-align: center;}
 #boton{margin-left: 175px;}/*fin estilos boo*/
-.circulo{/* estilos del poput de guardar*/
-    background-color:darkcyan;
-    width: 35%;
-    height: 30vh;
-    position: absolute;
-    border-radius: 50%; 
-    margin:-25%   -28%;
-    z-index: 2;
-    border:black solid 2px;
-  }
-  .title-class{
-    color: black !important;
-    font-family: helvetica;
-  }
-  .image-class{
-    position: absolute;
-    width: 150px;
-    margin:-10% -53% !important;
-  }
-  .isos{
-    width: 130px;
-    margin:30px 40px; 
-  }
-  .popup-class{
-      width: 42% !important;
-      /* height: 40%; */
-      border: solid black 2px !important;
-  }/*fin  estilos del poput de guardar*/
 .rigth{/* bordes */
     border-right: 1px solid black;
 }

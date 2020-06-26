@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -38,6 +39,9 @@ public class EmpresaControlador implements Serializable {
     @EJB
     EmpresaFacade empresaFacade;
 
+    @Inject
+    private MensajeControlador mensaje;
+    
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -53,6 +57,7 @@ public class EmpresaControlador implements Serializable {
     public void registrar() {
         empresaFacade.create(empresa);
         empresa = new Empresa();
+        mensaje.setMensaje("RegistrarVisitante('Empresa Registrada','<br>');");
     }
 
     public String preActualizar(Empresa empresaActualizar) {

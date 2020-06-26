@@ -51,6 +51,10 @@
         <!-- css bootstrap 4 datatable -->
         <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css" />
         <link rel="shortcut icon" href="../../../img/logo2.png" />
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
         <script
             src="https://kit.fontawesome.com/7769f8ac48.js"
             crossorigin="anonymous"
@@ -71,8 +75,10 @@
     </h:head>
 
     <h:body>
+        <f:view>
         <ui:include src="../../header/header.xhtml"></ui:include>
         <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <script>#{mensajeControlador.mensaje}</script>
 
         <!-- fin de header y poput -->
         <!-- inicio tabla -->
@@ -153,7 +159,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="Acciones"/>
                                         </f:facet>
-                                        <h:commandButton value="Confirmar" onclick="confirmameestaxd()" class="confi"></h:commandButton>
+                                        <h:commandButton value="Confirmar" onclick="confirmar()" class="confi"></h:commandButton>
                                         <h:commandButton value="Actualizar" class="confi" action="#{correspondenciaControlador.preActualizar(paq)}" title="Modificar Paquete"></h:commandButton>
                                         <h:commandButton value="Eliminar" class="confi" action="#{correspondenciaControlador.eliminar(paq)}" title="Eliminar Paquete"></h:commandButton>
 
@@ -220,6 +226,6 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- Menu responsive -->
         <script src="../../nav/nav.js"></script>
-
+        </f:view>
     </h:body>
 </html>

@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -52,7 +53,11 @@ public class CorrespondenciaControlador implements Serializable {
     EmpresaFacade empresaFacade;
     @EJB
     VigilanteFacade vigilanteFacade;
-
+    
+    
+    @Inject
+    private MensajeControlador mensaje;
+    
     public Correspondencia getCorrespondencia() {
         return correspondencia;
     }
@@ -114,6 +119,7 @@ public class CorrespondenciaControlador implements Serializable {
         paquete = new Paquete();
         vigilante = new Vigilante();
         correspondencia = new Correspondencia();
+        mensaje.setMensaje("RegistrarVisitante('Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
     public List<Correspondencia> consultar() {
@@ -129,13 +135,13 @@ public class CorrespondenciaControlador implements Serializable {
         return "editarMensajeria";
     }
 
-    public String actualizar() {
+    public void actualizar() {
         correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         correspondencia.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         correspondencia.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         correspondenciaFacade.edit(correspondencia);
-        return "buscarMensajeria";
+        mensaje.setMensaje("EdicionVisitante('buscarMensajeria.xhtml','Correspondencia Modificada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
     public void eliminar(Correspondencia correspondenciaEliminar) {

@@ -24,9 +24,22 @@ and open the template in the editor.
     padding: 0;
     margin: 0;
 }
+.title-class{
+    color: black !important;
+    font-family: Righteous;
+    font-size: 50px !important;
+  }
+.icon-class{
+    background-color: #3ed363;
+}
+.popup-class{
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
 .container-fluid{
-    margin-top: 3%;
-    margin-bottom: 40%
+    margin-bottom: 39%;
+    background-color: red;
 }
 .kk{float: left}
 .lll{float: right}
@@ -213,30 +226,6 @@ and open the template in the editor.
   z-index: 1;
 }
 .efectoNoticia:hover figcaption,.efectoNoticia.hover figcaption {top: 80px;}/* fin de estilos de noticias */
-
- .circulo{/* estilos del poput de guardar*/
-    background-color:darkcyan;
-    width: 35%;
-    height: 30vh;
-    position: absolute;
-    border-radius: 50%; 
-    margin:-25%   -30%;
-    z-index: 2;
-    border:black solid 2px;
-  }
-  .title-class{
-    color: black !important;
-    font-family: helvetica;
-  }
-  .image-class{
-    position: absolute;
-    width: 150px;
-    margin:-13% -54% !important;
-  }
-  .isos{
-    width: 140px;
-    margin-top:25px; 
-  }/*fin  estilos del poput de guardar*/
 .rigth{/* bordes */
     border-right: 1px solid black;
 }

@@ -1,4 +1,4 @@
-/* global Swal */
+
 
 // Swal.fire({
 //     title: "Hola pepe",
@@ -116,7 +116,7 @@ function validar_texto(parametro){
     }
 }
 // validar formulario
-function validar_form(){
+function validar_formNosirve(){
     
     var formulario = document.form;
 

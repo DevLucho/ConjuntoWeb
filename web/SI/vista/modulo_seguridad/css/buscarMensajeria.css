@@ -24,33 +24,16 @@
     background-color: #33406A !important;
     color: white;
 }
-.circulo{/* estilos del poput de guardar*/
-    background-color:darkcyan !important;
-    width: 38%;
-    height: 29vh;
-    position: absolute;
-    border-radius: 50%; 
-    margin:-29%   -22%;
-    z-index: 2;
-    border:black solid 2px;
-  }
-  .title-class{
+.title-class{
     color: black !important;
-    font-family: helvetica;
-  }
-  .image-class{
-    position: absolute;
-    width: 160px;
-    margin:-11% -49% !important;
-  }
-  .popup-class{border: solid black 2px !important;}
-  .isos{
-    font-size: 120px;
-    position: absolute;
-    margin:35px -70px !important;
-    color: black; 
-  }/*fin  estilos del poput de guardar*/
-
+    font-family: Righteous;
+    font-size: 50px !important;
+}
+.popup-class{
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
   @media screen and (max-width:800px){
     .circulo{display: none;}
     .isos{display: none;}

@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -62,6 +63,9 @@ public class DomiciliarioControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
+    
+    @Inject
+    private MensajeControlador mensaje;
 
     public Domiciliario getDomiciliario() {
         return domiciliario;
@@ -137,6 +141,7 @@ public class DomiciliarioControlador implements Serializable {
         empresa = new Empresa();
         paquete = new Paquete();
         domiciliario = new Domiciliario();
+        mensaje.setMensaje("RegistrarVisitante('Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
 
     public List<Domiciliario> consultar() {
@@ -153,7 +158,7 @@ public class DomiciliarioControlador implements Serializable {
         return "editarDomiciliario";
     }
 
-    public String actualizar() {
+    public void actualizar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngresoFacade.edit(fichaIngreso);
@@ -162,7 +167,7 @@ public class DomiciliarioControlador implements Serializable {
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         domiciliario.setIdFicha(fichaIngresoFacade.find(fichaIngreso.getIdFicha()));
         domiciliarioFacade.edit(domiciliario);
-        return "buscarDomiciliario";
+        mensaje.setMensaje("EdicionVisitante('buscarDomiciliario.xhtml','Ficha de domiciliario modificada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
 
     public void eliminar(Domiciliario domiciliarioEliminar) {
