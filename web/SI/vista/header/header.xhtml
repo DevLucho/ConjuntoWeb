@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
-             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <header>
         <h:form>
 
@@ -152,12 +153,22 @@
                         <!-- Idioma -->
                         <div class="country-flag">
                             <ul>
-                                <li>
-                                    <a href="#"><img src="../../../img/country-es.png" alt="" class="country"/></a>
-                                    <ul>
-                                        <li><a href="#"><img src="../../../img/country-us.png" alt="" class="country"/></a></li>
-                                    </ul>
-                                </li>
+                                <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                                    <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
+                                        <img src="../../../img/country-es.png" class="country"/>
+                                    </h:commandLink>
+                                </c:if>
+                                <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                                    <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
+                                        <img src="../../../img/country-us.png" class="country"/>
+                                    </h:commandLink> 
+                                </c:if>  
+                                <!--<li>
+                                        <ul>
+                                            <li>
+                                            </li>
+                                        </ul>
+                                </li>-->
                             </ul>
                         </div> 			
                     </div>

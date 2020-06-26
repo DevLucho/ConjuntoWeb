@@ -7,7 +7,7 @@
     <h:form>
         <!-- btn-menu-responsive -->
         <i class="fas fa-ellipsis-v btn-menu" id="btn-menu"></i>
-        
+
         <!-- Menu admin-->
         <nav id="nav">
             <ul>
@@ -16,33 +16,56 @@
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modal"></i>
                     <h6>#{sesionControlador.rolSeleccionado.nombre}</h6>
                 </li>
-                
+
                 <!-- Nav -->
                 <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="p">
                     <c:if test="#{empty p.idPermiso.permisoPadre}">
-                        <li class="submenu borde-left"><a class="text-white" href="#{p.idPermiso.url}"><span><i class="#{p.idPermiso.icon}"></i></span>#{p.idPermiso.nombre}<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
-                            <ul class="sub-submenu">
-                                <c:forEach items="#{sesionControlador.hijos(p.idPermiso.idPermiso)}" var="sp">
-                                    <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="op">
-                                        <c:if test="#{sp.idPermiso eq op.idPermiso.idPermiso}">
-                                            <li><a class="text-white" href="#{sp.url}">#{sp.nombre} <i class="#{sp.icon}}"></i></a></li>
-                                        </c:if>
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                            <li class="submenu borde-left"><a class="text-white" href="#{p.idPermiso.url}"><span><i class="#{p.idPermiso.icon}"></i></span>#{p.idPermiso.nombre}<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+                                <ul class="sub-submenu">
+                                    <c:forEach items="#{sesionControlador.hijos(p.idPermiso.idPermiso)}" var="sp">
+                                        <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="op">
+                                            <c:if test="#{sp.idPermiso eq op.idPermiso.idPermiso}">
+                                                <li><a class="text-white" href="#{sp.url}">#{sp.nombre} <i class="#{sp.icon}}"></i></a></li>
+                                            </c:if>
+                                        </c:forEach>
                                     </c:forEach>
-                                </c:forEach>
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
+                        </c:if>
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                            <li class="submenu borde-left"><a class="text-white" href="#{p.idPermiso.url}"><span><i class="#{p.idPermiso.icon}"></i></span>#{p.idPermiso.name}<span class="span2"><i class="down fas fa-angle-down"></i></span></a>
+                                <ul class="sub-submenu">
+                                    <c:forEach items="#{sesionControlador.hijos(p.idPermiso.idPermiso)}" var="sp">
+                                        <c:forEach items="#{sesionControlador.rolSeleccionado.rolPermisoList}" var="op">
+                                            <c:if test="#{sp.idPermiso eq op.idPermiso.idPermiso}">
+                                                <li><a class="text-white" href="#{sp.url}">#{sp.name} <i class="#{sp.icon}}"></i></a></li>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                        </c:if>
                     </c:if>
                 </c:forEach>
-                
+
                 <!-- Cerrar sesion -->
                 <div class="logout  borde-left">
                     <h:commandLink action="#{sesionControlador.cerrarSesion()}"><span class="span2"><i class="fas fa-sign-out-alt"></i></span>Cerrar Sesión</h:commandLink>
                 </div>
-                
+
                 <!-- Internacionalizacion -->
                 <div class="idioma">
-                    <a href="#"><img src="../../../img/country-es.png" alt="" class="country"/></a>
-                    <a href="#"><img src="../../../img/country-us.png" alt="" class="country" style="opacity: 50%;"/></a>
+                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
+                            <img src="../../../img/country-es.png" class="country" style="opacity: 50%;"/>
+                        </h:commandLink>
+                    </c:if>
+                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
+                            <img src="../../../img/country-us.png" class="country" style="opacity: 50%;"/>
+                        </h:commandLink> 
+                    </c:if>  
                 </div>
             </ul>
         </nav>

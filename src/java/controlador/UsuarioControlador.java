@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -77,6 +78,9 @@ public class UsuarioControlador implements Serializable {
 
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
+    
+    @Inject
+    private MensajeControlador mensaje;
 
     // Incremental para menu dinamico
     /*private int valor = 0;
@@ -134,6 +138,7 @@ public class UsuarioControlador implements Serializable {
     }
 
     public void eliminar(Usuario usuarioEliminar) {
+        mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar este usuario?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado exitosamente el usuario.','success');");
         usuarioFacade.remove(usuarioEliminar);
     }
 
@@ -254,6 +259,14 @@ public class UsuarioControlador implements Serializable {
 
     public void setTurnoVigilante(TurnoVigilante turnoVigilante) {
         this.turnoVigilante = turnoVigilante;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
 
 }

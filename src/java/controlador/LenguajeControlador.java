@@ -43,7 +43,7 @@ public class LenguajeControlador implements Serializable {
     public void init(){
         espaniol=new Locale("es");
         ingles=new Locale("en");
-        languageSelected=new Locale("en");
+        languageSelected=new Locale("es");
     }
 
     public Locale getLanguageSelected() {

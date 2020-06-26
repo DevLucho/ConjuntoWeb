@@ -14,6 +14,7 @@ import facade.TipoPqrsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -49,6 +50,38 @@ public class PqrsControlador implements Serializable {
         residente = new Residente();
         tipoPqrs = new TipoPqrs();
         pqrs = new Pqrs();
+    }
+
+    public void registar() {
+        pqrs.setIdResidente(residente);
+        pqrs.setIdTipoPqrs(tipoPqrs);
+        pqrs.setEstado("Abierto");
+        pqrsFacade.create(pqrs);
+        residente = new Residente();
+        tipoPqrs = new TipoPqrs();
+        pqrs = new Pqrs();
+    }
+
+    public List<Pqrs> consultar() {
+        return pqrsFacade.findAll();
+    }
+
+    public String preActualizar(Pqrs pqrsActualizar) {
+        residente = pqrsActualizar.getIdResidente();
+        tipoPqrs = pqrsActualizar.getIdTipoPqrs();
+        pqrs = pqrsActualizar;
+        return "actualizar_pqrs";
+    }
+
+    public String actualizar() {
+        pqrs.setIdResidente(residente);
+        pqrs.setIdTipoPqrs(tipoPqrs);
+        pqrsFacade.edit(pqrs);
+        return "consultar_mis_solicitudes";
+    }
+
+    public void eliminar(Pqrs pqrsEliminar) {
+        pqrsFacade.remove(pqrsEliminar);
     }
 
     public int contarPqrs() {
