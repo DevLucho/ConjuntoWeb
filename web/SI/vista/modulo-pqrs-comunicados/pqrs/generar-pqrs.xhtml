@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../nav/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <link href="../../../crear.css" rel="stylesheet" type="text/css"/>
+        <style>
+            nav ul li{ width:25%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Generar PQRS</title>
+    </h:head>
+    <h:body>
+        <!-- header -->
+        <ui:include src="../../header/header.xhtml"></ui:include>
+        <!-- nav -->
+        <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                <li class="breadcrumb-item active">Generar pqrs</li>
+            </ol>
+        </div>
+        <section class="container-fluid" id="principal">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <i class="far fa-comment-alt"></i>
+                        Crear Pqrs
+                    </h3>
+                </div>
+            </div>
+            <hr/>                 
+            <!-- Formulario -->
+
+            <h:form>
+                <div class="row">
+                    <!-- Titulo -->
+                    <div class="col-12 ">
+                        <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Asunto</a></p>
+                        <div class="collapse" id="titulo">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <h:inputText id="asunto" class="form-control" value="#{pqrsControlador.pqrs.asunto}" title="Asunto" pt:placeholder="Ingrese el asunto" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Disponibilidad -->
+                    <div class="col-12">
+                        <p>
+                            <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                               data-toggle="collapse"><i></i>Tipo de PQRS</a>
+                        </p>
+                        <div class="collapse" id="date">
+                            <div class="from-group row">
+                                <div class="col-6" style="border-right: 1px solid #efefef ;">
+                                    <b>
+                                        <p>Seleccionar</p>
+                                    </b>
+                                    <hr/>
+                                    <div class="custom-control custom-checkbox" style="padding-left: 0;">
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}"  class="form-control" title="IdTipoPqrs" required="true">                 
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="The IdTipoPqrs field is required.">
+                                        <f:selectItems var="residente" value="#{residenteControlador.consultarTodos()}" itemValue="#{residente.idResidente}" itemLabel="#{residente.idResidente}"/>
+                                    </h:selectOneMenu>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Descripción -->
+                <hr/>
+                <h4 class="col-12">Descripción</h4>
+                <hr/>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;"/>
+                    </div>
+                    <!-- Boton publicar -->
+                    <div class="row justify-content-center mt-3 mb-3">
+                        <div class="col-12 col-md-2">
+                            <h:commandButton class="btn btn-outline-success btn-block" value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+
+        </section>
+        <!-- bootstrap, popper y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/popper.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>
+    </h:body>
+</html>
+

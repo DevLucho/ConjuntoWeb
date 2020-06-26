@@ -18,33 +18,36 @@ import javax.ejb.EJB;
  *
  * @author Huertas
  */
-@Named(value = "tipoPqrControlador")
+@Named(value = "tipoPqrsControlador")
 @SessionScoped
-public class TipoPqrControlador implements Serializable {
+public class TipoPqrsControlador implements Serializable {
 
     /**
      * Creates a new instance of TipoPqrControlador
      */
-    
     private TipoPqrs tipoPqrs;
-    
+
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
-    
-    public TipoPqrControlador() {
+
+    public TipoPqrsControlador() {
     }
-        
+
     @PostConstruct
-    public void init(){
+    public void init() {
         tipoPqrs = new TipoPqrs();
     }
-    
-    public List<TipoPqrs> consultarTodos(){
+
+    public List<TipoPqrs> consultarTodos() {
         return tipoPqrsFacade.findAll();
+    }
+
+    public TipoPqrs getTipoPqrs() {
+        return tipoPqrs;
     }
 
     public void setTipoPqrs(TipoPqrs tipoPqrs) {
         this.tipoPqrs = tipoPqrs;
     }
-    
+
 }
