@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,6 +43,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             System.out.println("Error en login revisar: " + e.getMessage());
         }
         return usuario;
+    }
+
+    public List<Usuario> sesionUsuario(int idPerfil) {
+        Usuario usuario = null;
+        try {
+            Query query;
+            query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
+            query.setParameter("idPerfil", idPerfil);
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en lista usuario revisar: " + e.getMessage());
+        }
+        return (List<Usuario>) usuario;
     }
 
 }

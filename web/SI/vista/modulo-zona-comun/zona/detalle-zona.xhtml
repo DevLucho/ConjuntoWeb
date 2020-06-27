@@ -108,7 +108,7 @@
                                         <i class="fas fa-calendar-week d-flex align-self-start mr-3"></i>
                                         <div class="media-body">
                                             <h4 class="mt-0">Disponibilidad en dias</h4>
-                                            <p>La terraza BBQ estara disponible los dias <mark>#{zonaComunalControlador.zonaComunal.idDisponibilidad.dias}</mark>
+                                            <p>La terraza BBQ estara disponible los dias <mark></mark>
                                             </p>
                                             <hr/>
                                         </div>
@@ -117,11 +117,11 @@
                                         <i class="far fa-clock d-flex align-self-start mr-3"></i>
                                         <div class="media-body">
                                             <h4 class="mt-0">Disponibildiad en horas</h4>
-                                            <p>La #{zonaComunalControlador.zonaComunal.nombre} estara disponible desde las <mark><h:outputText value="#{zonaComunalControlador.zonaComunal.idDisponibilidad.horaInicialReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> 
-                                                hasta las <mark><h:outputText value="#{zonaComunalControlador.zonaComunal.idDisponibilidad.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> horas.
+                                            <p>La #{zonaComunalControlador.zonaComunal.nombre} estara disponible desde las <mark><h:outputText><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> 
+                                                hasta las <mark><h:outputText><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> horas.
                                             </p>
                                             <p> 
-                                                El tiempo maximo de reserva en la zona común es <mark>#{zonaComunalControlador.zonaComunal.idDisponibilidad.tiempoMaximoReserva}</mark> horas.
+                                                El tiempo maximo de reserva en la zona común es <mark>#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}</mark> horas.
                                             </p>
                                             <hr/>
                                         </div>

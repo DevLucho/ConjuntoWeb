@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" lang="es"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <meta charset="UTF-8" />
@@ -39,56 +40,38 @@
         <section class="inicioSeguridad border">
 
             <div class="sobrecapa">
-
-                <p class="aparece">¡Bienvenido!</p>
-
-                <p class="parece">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam et omnis ratione non magnam
-                    consequatur, quibusdam recusandae dolor consequuntur libero corporis, nesciunt quam, ex perspiciatis sit inventore
-                    ducimus itaque?</p>
-                <a href="../../modulo_seguridad/html/opcionesSeguridad.xhtml">vis</a>
-                <a href="../../modulo_seguridad/html/opcionesMensajeria.xhtml">paq</a>
-                <a href="../../modulo_seguridad/html/opcionesDomiciliario.xhtml">dom</a>
+                <b><p class="parece">----------------------- Bienvenido -----------------------</p></b>
+                <b><p class="parece">Aqui podras:</p></b>
+                <b><p class="parece"><i class="fas fa-male mr-3"></i>Controlar el ingreso de visitantes y domiciliarios</p></b>
+                <b><p class="parece"><i class="fas fa-parking mr-3"></i>Asignar parqueaderos</p></b>
+                <b><p class="parece"><i class="fas fa-box-open mr-3"></i>Informar correspondencia</p></b>
             </div>
         </section><!-- fin de capa principal -->
         <!--________________________ inicio de seccion de noticias __________________- -->
-        <section class="noticiasSeguridad border">
+        <h:form>
+            <section class="noticiasSeguridad border">
+                <h3 class="noticiah1"><i class="fas fa-bullhorn mr-3"></i>Ultimos comunicados</h3>
+                <div class="linea border">
+                    <c:forEach items="#{comunicadoControlador.consultarTodos()}" var="comunicado">
+                        <figure class="efectoNoticia">
+                            <img height="200" width="400" src="#{comunicado.img}" alt="sample45" />
+                            <figcaption>
+                                <h3>#{comunicado.titulo}</h3>
+                                <p>#{comunicado.descripcion}</p>
+                            </figcaption>
+                            <a href="#" /> 
+                        </figure>
+                    </c:forEach>
+                </div>
+            </section>
+        </h:form>
 
-            <h1 class="noticiah1">Noticias</h1>
-
-            <div class="linea border">
-                <figure class="efectoNoticia">
-                    <img height="200" width="400" src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg" alt="sample45" />
-                    <figcaption>
-
-                        <h3>Ultima Hora</h3>
-
-                        <p>un osito dormilon te regaleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
-                    </figcaption>
-                    <a href="#" />
-                </figure>
-            </div>
-
-            <div class="linea2 border" />
-
-            <div class="linea2 left rigth bottom line3">            
-                <figure class="efectoNoticia">
-                    <img class="pito" height="200" width="400" src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg" alt="sample45" />
-                    <figcaption>
-
-                        <h3>Bartholemew Shoe</h3>
-
-                        <p>Weekends don't count unless you spend them doing something completely pointless.</p>
-                    </figcaption>
-                    <a href="#" />
-                </figure>
-            </div>
-        </section>
         <!-- ________________________- fin de seccion de noticias __________________- -->
         <!--__________________________- inicio del footer __________________________- -->
         <ui:include src="../../footer/footer.xhtml"></ui:include>
         <!--______________________________- fin del footer __________________________-->
         <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
-<!-- bootstrap, popper y jquery -->
+        <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>

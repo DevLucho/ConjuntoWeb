@@ -156,7 +156,7 @@
                             <div class="col-12 col-md-9">
                                 <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle del evento" value="#{eventoControlador.evento.detalle}" id="descripcion" required="required" style="height:100px;"/>
                             </div>
-                            
+
                             <div class="col-12 col-md-3">
                                 <div class="row">
                                     <!--Subir foto--> 
@@ -168,6 +168,8 @@
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
+                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{eventoControlador.evento.img}" required="true"/>
+
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">

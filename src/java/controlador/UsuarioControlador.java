@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -43,6 +44,7 @@ public class UsuarioControlador implements Serializable {
      * Creates a new instance of UsuarioControlador
      */
     private Usuario usuario;
+    Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Residente residente;
@@ -183,6 +185,10 @@ public class UsuarioControlador implements Serializable {
         turnoVigilante = vigilanteConsultar.getIdTurno();
         vigilante = vigilanteConsultar;
         return "detalle-usuario";
+    }
+    
+    public List<Usuario> sesionUsuario (int idPerfil){
+        return usuarioFacade.sesionUsuario(idPerfil);
     }
 
     public int contarUsuarios() {

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -30,8 +31,23 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Consultar pqrs</li>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item active">Consultar pqrs</li>
+                    </c:if>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item active">Consultar pqrs</li>
+                        <style>
+                            nav ul li{ width:25%;}
+                            @media screen and (max-width:903px){
+                                nav ul li{
+                                    width: 100%;
+                                    text-align: left;
+                                }
+                            }
+                        </style>
+                    </c:if>
                 </ol>
             </div>
             <!-- Contenido principal -->
@@ -84,7 +100,7 @@
                                             <td><mark class="btn-warning">PENDIENTE</mark></td>
                                             <td>
                                                 <div class="btn-group-sm text-center">
-                                                <button class="btn btn-outline-success" title="Editar PQRS">Responder</button></div>
+                                                    <button class="btn btn-outline-success" title="Editar PQRS">Responder</button></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -128,7 +144,7 @@
                                             <td><mark class="btn-info">ABIERTO</mark></td>
                                             <td>
                                                 <div class="btn-group-sm text-center">
-                                                <button class="btn btn-outline-success" title="Editar PQRS">Responder</button></div>
+                                                    <button class="btn btn-outline-success" title="Editar PQRS">Responder</button></div>
                                             </td>
                                         </tr>
                                     </tbody>
