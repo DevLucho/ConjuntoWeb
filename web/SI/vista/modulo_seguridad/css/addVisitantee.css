@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-jun-2020, 23:24:23
+    Author     : Sebastian
+*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
+.inicioSeguridad{
+    height: 110vh;
+}
+.titulazo{     
+    height: 12vh;
+}
+@media screen and (max-width: 800px){/*inicio de responsive para tablet*/
+    .inicioSeguridad{
+        overflow: hidden;
+        height: 150vh;
+    }
+    .noticiasSeguridad{height: 115vh;margin-top: -7%}
+    .titulazo{font-size: 50px; height: 25vh;}
+    .duque{margin-left: -27%;}
+    form .form-style-1 li{width: 80%;}
+    .field-select option{background-color: royalblue;}
+    .popup-class{padding-left:1%  !important;}
+    .alex{
+        width: 400px;
+        margin-left: -30px !important;
+    }
+    .container-fluid{margin-bottom: 10%}
+}/* fin de responsive de tablet*/
+@media screen and (max-width: 600px){/* inicio de responsive de cel*/
+    .noticiasSeguridad{display: none;}
+    .inicioSeguridad{
+        width: 80%;
+        height: 160vh;
+        margin-left: 2%;
+        margin-top: 5%;
+    }
+    .titulazo{height: 27vh}
+}

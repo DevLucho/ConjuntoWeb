@@ -141,17 +141,13 @@
                                         </li>
                                         <li>
                                             <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
+                                            <h:selectOneMenu class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
 
-                                            <h:inputText a:type="text" id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" class="field-long correcto corto2" title="Vehiculo" required="true"/>
-
+                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                <f:selectItem itemValue="Si" itemLabel="Si"/>
+                                                <f:selectItem itemValue="No" itemLabel="No"/>
+                                            </h:selectOneMenu> 
                                         </li>
-                                        <li>
-                                            <h:outputLabel for="ficha" class="label">ficha</h:outputLabel>
-
-                                            <h:inputText a:type="number" id="ficha" value="#{visitanteControlador.fichaIngreso.idFicha}" class="field-long correcto corto2" title="Ficha" required="true"/>
-
-                                        </li>
-
                                         <li><br/><br/>
                                             <h:commandButton class="enviarcrud" id="botones" value="Actualizar" action="#{visitanteControlador.actualizar()}"></h:commandButton>
 
