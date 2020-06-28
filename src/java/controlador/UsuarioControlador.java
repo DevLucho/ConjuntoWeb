@@ -44,7 +44,6 @@ public class UsuarioControlador implements Serializable {
      * Creates a new instance of UsuarioControlador
      */
     private Usuario usuario;
-    Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Residente residente;

@@ -3,16 +3,16 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+             xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <header>
-        <h:form>
-
-            <div class="sub-contenedor">
-                <div class="row">
-                    <!-- Isologotipo -->
-                    <div class="logotipo col-4"><a href="#"><img src="../../../img/Isologotipo variacion horizontal.png" alt="" class="justify-content-center"/></a></div>
-                    <div class="options col-8">
-                        <!-- Cerrar sesi&oacute;n -->
+        <div class="sub-contenedor">
+            <div class="row">
+                <!-- Isologotipo -->
+                <div class="logotipo col-4"><a href="#"><img src="../../../img/Isologotipo variacion horizontal.png" alt="" class="justify-content-center"/></a></div>
+                <div class="options col-8">
+                    <!-- Cerrar sesi&oacute;n -->
+                    <h:form>
                         <div class="cerrar">
                             <h:commandButton class="btn bg-dark text-white bg-gradient-dark active" action="#{sesionControlador.cerrarSesion()}" value="Cerrar sesi&oacute;n"></h:commandButton>
                         </div>
@@ -30,33 +30,45 @@
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <div class="row">
+                                                <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+                                                    <div class="col-12 col-sm-6">
+                                                        <strong><label for="user-nombre">Nombres y Apellidos</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.nombre} #{sesion.apellido}"></h:inputText>
 
-                                                <div class="col-12 col-sm-6">
-                                                    <strong><label for="user-nombre">Nombres y Apellidos</label></strong>
-                                                    <input type="text" class="form-control-plaintext" name="user-nombre" id="user-nombre" disabled="disabled"/>
+                                                        <strong><label for="user-identificacion">Numero de identificaci&oacute;n</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.documento}"></h:inputText>
 
-                                                    <strong><label for="user-identificacion">Numero de identificaci&oacute;n</label></strong>
-                                                    <input type="number" class="form-control-plaintext" value="#{sesionControlador.documento}" disabled="disabled"/>
+                                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                                                            <strong><label for="user-torre">Torre</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="15"></h:inputText>
 
-                                                    <strong><label for="user-torre">Torre</label></strong>
-                                                    <input type="number" class="form-control-plaintext" placeholder="15"  disabled="disabled"/>
+                                                            <strong><label for="user-apto">Apartamento</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="507"></h:inputText>
+                                                        </c:if>
 
-                                                    <strong><label for="user-apto">Apartamento</label></strong>
-                                                    <input type="number" class="form-control-plaintext" placeholder="701"  disabled="disabled"/>
-                                                </div>
-                                                <div class="col-12 col-sm-6">
-                                                    <strong><label for="user-correo">Email</label></strong>
-                                                    <input type="email" class="form-control-plaintext" placeholder="addmin@conjuntoweb.com.co"  disabled="disabled"/>
+                                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                                                            <strong><label for="user-torre">Inicio turno</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="12:00 PM"></h:inputText>
 
-                                                    <strong><label for="user-direccion">Direcci&oacute;n</label></strong>
-                                                    <input type="text" class="form-control-plaintext" placeholder="Tv - 29 #22 - 09"  disabled="disabled"/>
+                                                            <strong><label for="user-apto">Fin turno</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="5:00 PM"></h:inputText>
+                                                        </c:if>
 
-                                                    <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
-                                                    <input type="tel" class="form-control-plaintext" placeholder="3146694458"  disabled="disabled"/>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <strong><label for="user-correo">Email</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.correo}"></h:inputText>
 
-                                                    <strong><label for="user-rol">Rol</label></strong>
-                                                    <input type="text" class="form-control-plaintext" value="#{sesionControlador.rolSeleccionado.nombre}" disabled="disabled"/>
-                                                </div>
+                                                        <strong><label for="user-direccion">Direcci&oacute;n</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.direccion}"></h:inputText>
+
+                                                        <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.celular}"></h:inputText>
+
+                                                        <strong><label for="user-rol">Rol</label></strong>
+                                                        <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </div>
@@ -67,6 +79,8 @@
                                 </div>
                             </div>
                         </div>
+                    </h:form>
+                    <h:form>
                         <!-- Modal cambiar contrase&ntilde;a -->
                         <div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true" >
                             <div class="modal-dialog modal-lg">
@@ -104,11 +118,13 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
-                                        <button class="btn btn-success">Guardar cambios</button>
+                                        <h:commandButton class="btn btn-success" value="Guardar cambios"></h:commandButton>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </h:form>
+                    <h:form>
                         <!-- Modal actualizar datos -->
                         <div class="modal fade" id="modal-3" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" >
                             <div class="modal-dialog modal-lg">
@@ -126,28 +142,28 @@
                                                 <div class="alert alert-info col-12">
                                                     Si requiere actualizar mas datos porfavor dirigirse al administrador de sistema.
                                                 </div>
-                                                <div class="col-12 col-md-6 mb-3">
-                                                    <strong><label for="user-tel">N&uacute;mero de celular</label></strong>
-                                                    <input type="tel" class="form-control" placeholder="N&uacute;mero con 10 d&iacute;gitos" name="user-tel" id="user-tel"/>
-                                                </div>
-                                                <div class="col-12 col-md-6 mb-3">
-                                                    <strong><label for="user-correo">Correo electr&oacute;nico</label></strong>
-                                                    <input type="email" class="form-control" placeholder="Ingrese un email v&aacute;lido" name="user-correo" id="user-correo"/>
-                                                </div>
-                                                <div class="col-12 col-md-6 mb-3">
-                                                    <strong><label for="user-confirm-email">Confirme su correo electr&oacute;nico</label></strong>
-                                                    <input type="email" class="form-control" placeholder="Repita el email" name="user-confirm-email" id="user-confirm-email"/>
-                                                </div>
+                                                <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesion.celular}"></h:inputText>
+                                                    </div>                                                    
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <strong><label for="user-correo">Correo electr&oacute;nico</label></strong>
+                                                        <h:inputText class="form-control-plaintext" a:placeholder="Ingrese un email v&aacute;lido" value="#{sesion.correo}"></h:inputText>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
-                                        <button class="btn btn-success">Actualizar</button>
+                                        <h:commandButton class="btn btn-success" value="Actualizar"></h:commandButton>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </h:form>
+                    <h:form>
                         <!-- Usuario -->
                         <h1 class="usuario">#{sesionControlador.rolSeleccionado.nombre}</h1>
                         <!-- Idioma -->
@@ -170,11 +186,11 @@
                                         </ul>
                                 </li>-->
                             </ul>
-                        </div> 			
-                    </div>
+                        </div> 
+                    </h:form>
                 </div>
             </div>
-        </h:form>
+        </div>
 
     </header>
 </ui:fragment>

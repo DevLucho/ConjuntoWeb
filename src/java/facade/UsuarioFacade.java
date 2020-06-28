@@ -46,16 +46,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public List<Usuario> sesionUsuario(int idPerfil) {
-        Usuario usuario = null;
-        try {
-            Query query;
-            query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
-            query.setParameter("idPerfil", idPerfil);
-            return query.getResultList();
-        } catch (Exception e) {
-            System.out.println("Error en lista usuario revisar: " + e.getMessage());
-        }
-        return (List<Usuario>) usuario;
+        Query query;
+        query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
+        query.setParameter("idPerfil", idPerfil);
+        return query.getResultList();
     }
-
 }
