@@ -33,8 +33,9 @@ public class SesionControlador implements Serializable {
     private int documento;
     private String contrasenia;
     private Rol rolSeleccionado;
-    private Usuario usuario;
-
+    private Usuario usuario; // logout
+    private Usuario user; // login
+    
     @EJB
     UsuarioFacade usuarioFacade;
 
@@ -51,7 +52,6 @@ public class SesionControlador implements Serializable {
     }
 
     public String iniciarSesion() {
-        Usuario user;
         user = usuarioFacade.iniciarSesion(documento, contrasenia);
         if (user.getDocumento() != 0) {
             rolSeleccionado = user.getIdRol();
@@ -122,6 +122,14 @@ public class SesionControlador implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
 
 }
