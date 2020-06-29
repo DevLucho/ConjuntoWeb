@@ -32,23 +32,50 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public Usuario iniciarSesion(int documento, String contrasenia) {
-        Usuario usuario = null;
         try {
             Query query;
             query = em.createQuery("SELECT u FROM Usuario u WHERE u.documento=:documento and u.contrasenia=:contrasenia");
             query.setParameter("documento", documento);
             query.setParameter("contrasenia", contrasenia);
-            usuario = (Usuario) query.getSingleResult();
+            return (Usuario) query.getSingleResult();
         } catch (Exception e) {
             System.out.println("Error en login revisar: " + e.getMessage());
         }
-        return usuario;
+        return null;
     }
 
     public List<Usuario> sesionUsuario(int idPerfil) {
         Query query;
         query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
         query.setParameter("idPerfil", idPerfil);
+        return query.getResultList();
+    }
+
+    public List<Usuario> usuarioBloquedo(String estado) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Usuario u WHERE u.estado=:estado");
+        query.setParameter("estado", estado);
+        return query.getResultList();
+    }
+
+    public int contarBloqueados(String estado) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.estado=:estado");
+        query.setParameter("estado", estado);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
+    public int contarAdministradores(int idRol) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.idRol.idRol=:idRol");
+        query.setParameter("idRol", idRol);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+    
+    public List<Usuario> usuarioAdmin(int idRol){
+        Query query;
+        query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol");
+        query.setParameter("idRol", idRol);
         return query.getResultList();
     }
 }

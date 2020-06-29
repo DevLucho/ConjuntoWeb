@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -65,7 +66,10 @@
                                     <a href="#tab3" class="nav-link" data-toggle="tab">Vigilantes<span class="badge badge-info" style="margin-left: 5px;">#{vigilanteControlador.contarVigilantes()}</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tab4" class="nav-link" data-toggle="tab">Administrador<span class="badge badge-info" style="margin-left: 5px;">1</span></a>
+                                    <a href="#tab4" class="nav-link" data-toggle="tab">Administrador<span class="badge badge-info" style="margin-left: 5px;">#{usuarioControlador.contarAdministradores()}</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tab5" class="nav-link" data-toggle="tab">Bloqueados<span class="badge badge-info" style="margin-left: 5px;">#{usuarioControlador.contarBloqueados()}</span></a>
                                 </li>
                             </ul>
                             <!-- Tablas -->
@@ -105,20 +109,6 @@
                                                 </f:facet>
                                                 <h:outputText value="#{usuario.documento}"/>
                                             </h:column>
-                                            <!--
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Clave"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usuario.contrasenia}"/>
-                                            </h:column>
-                                            -->
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Celular"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usuario.celular}"/>
-                                            </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Email"/>
@@ -133,12 +123,18 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
+                                                    <h:outputText value="Estado"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.estado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
                                                     <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar usuario" action="#{usuarioControlador.preActualizar(usuario)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.eliminar(usuario)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.cancelar(usuario)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver usuario" action="#{usuarioControlador.consultarUsuario(usuario)}"></h:commandButton>
                                                 </div>
@@ -196,12 +192,18 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
+                                                    <h:outputText value="Estado"/>
+                                                </f:facet>
+                                                <h:outputText value="#{residente.idPerfil.estado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar residente" ></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar residente" action="#{usuarioControlador.preActualizarR(residente)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar residente" action="#{usuarioControlador.eliminar(residente.idPerfil)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar residente" action="#{usuarioControlador.cancelar(residente.idPerfil)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver residente" action="#{usuarioControlador.consultarResidente(residente)}"></h:commandButton>
                                                 </div>
@@ -263,12 +265,18 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
+                                                    <h:outputText value="Estado"/>
+                                                </f:facet>
+                                                <h:outputText value="#{vigilante.idPerfil.estado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar vigilante"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar vigilante" action="#{usuarioControlador.preActualizarV(vigilante)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar vigilante" action="#{usuarioControlador.eliminar(vigilante.idPerfil)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar vigilante" action="#{usuarioControlador.cancelar(vigilante.idPerfil)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver vigilante" action="#{usuarioControlador.consultarVigilante(vigilante)}"></h:commandButton>
                                                 </div>
@@ -278,6 +286,141 @@
                                 </div>
                                 <div class="tab-pane" id="tab4" role="tabpanel">
                                     <h4 class="mt-3 text-center">Todos los administradores</h4>
+                                    <h:form>
+                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{usuarioControlador.consultarAdmin()}" var="usuario">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Id"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.idPerfil}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombres"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Apellidos"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.apellido}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Tipo documento"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.tipoDocumento.tipo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Documento"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.documento}"/>
+                                            </h:column>                                        
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Email"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.correo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Rol"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.idRol.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Estado"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.estado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Acciones"/>
+                                                </f:facet>
+                                                <div class="btn-group-sm text-center">
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar usuario" action="#{usuarioControlador.preActualizar(usuario)}"></h:commandButton>
+                                                    <!-- . -->
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="Eliminar usuario" action="#{usuarioControlador.cancelar(usuario)}"></h:commandButton>
+                                                    <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
+                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver usuario" action="#{usuarioControlador.consultarUsuario(usuario)}"></h:commandButton>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </div>
+                                <div class="tab-pane" id="tab5" role="tabpanel">
+                                    <h4 class="mt-3 text-center">Todos los usuarios bloqueados</h4>
+                                    <h:form>
+                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{usuarioControlador.consultarBloqueados()}" var="bloqueado">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Id"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.idPerfil}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombres"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Apellidos"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.apellido}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Tipo documento"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.tipoDocumento.tipo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Documento"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.documento}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Celular"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.celular}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Email"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.correo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Rol"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.idRol.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Estado"/>
+                                                </f:facet>
+                                                <h:outputText value="#{bloqueado.estado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Acciones"/>
+                                                </f:facet>
+                                                <div class="btn-group-sm text-center">
+                                                    <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="Editar usuario" action="#{usuarioControlador.preActualizar(bloqueado)}"></h:commandButton>
+                                                    <!-- . -->
+                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="Ver usuario" action="#{usuarioControlador.consultarUsuario(bloqueado)}"></h:commandButton>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>
@@ -304,4 +447,3 @@
         <script src="../../navs/nav.js"></script>
     </h:body>
 </html>
-

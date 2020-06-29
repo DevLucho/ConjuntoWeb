@@ -1,5 +1,5 @@
 function Mensaje(titulo, texto, icono) {
-    Swal.fire({title: titulo, text: texto, icon: icono, showConfirmButton: false, timer: 2000});
+    Swal.fire({title: titulo, text: texto, icon: icono, showConfirmButton: false, timer: 4000});
 };
 
 function Mensajes(titulo, texto, icono) {
@@ -23,7 +23,7 @@ function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
     })
 };
 
-// Mensaje para redirigir (index)
+// Mensaje para redirigir (login) - registro residente
 function ConfirmacionResidente(linkURL) {
     Swal.fire({
         icon: 'success',
