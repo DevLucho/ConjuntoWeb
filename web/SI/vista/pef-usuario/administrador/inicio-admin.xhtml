@@ -41,8 +41,8 @@
                             <div class="icono">
                                 <i class="far fa-comments" ></i>
                             </div>
-                            <p>PQRS sin responder</p>
-                            <a href="../modulo_pqrs_comunicados/pqrs.html" class="text-right d-block">Consultar PQRs >></a>
+                            <p>#{formdashboardadmin.txtPQRS}</p>
+                            <a href="../modulo_pqrs_comunicados/pqrs.html" class="text-right d-block">#{formdashboardadmin.txtConsultarPQRS}</a>
                         </div>
                         <!-- Reservas -->
                         <div class="modulo col-12 col-md-5">
@@ -52,8 +52,8 @@
                             <div class="icono">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <p>Reservas pendientes</p>
-                            <a href="#" class="text-right d-block">Consultar reservas >></a>
+                            <p>#{formdashboardadmin.txtReservas}</p>
+                            <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarReservas}</a>
                         </div>
                         <!-- Inscripciones -->
                         <div class="modulo col-12 col-md-5">
@@ -63,12 +63,12 @@
                             <div class="icono">
                                 <i class="fas fa-envelope-open-text"></i>
                             </div>
-                            <p>Inscripciones</p>
+                            <p>#{formdashboardadmin.txtInscripciones}</p>
                             <div class="consult-inscriptions-2"> 
-                                <a href="#"  class="text-right d-block">inscripciones >></a>
+                                <a href="#"  class="text-right d-block">#{formdashboardadmin.txtInscripciones}</a>
                             </div>	
                             <div class="consult-inscriptions">
-                                <a href="#" class="text-right d-block">Consultar inscripciones >></a>
+                                <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarInscripciones}</a>
                             </div>
                         </div>
                         <!-- Usuarios -->
@@ -79,8 +79,8 @@
                             <div class="icono">
                                 <i class="fas fa-users"></i>
                             </div>
-                            <p>Usuarios</p>
-                            <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">Consultar usuarios >></a>
+                            <p>#{formdashboardadmin.txtUsuarios}</p>
+                            <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarUsuarios}</a>
                         </div>
                         <!-- Visitantes -->
                         <div class="modulo col-12 col-md-5">
@@ -90,15 +90,15 @@
                             <div class="icono">
                                 <i class="fas fa-id-card-alt"></i>
                             </div>
-                            <p>Visitantes</p>
-                            <a href="#" class="text-right d-block">Consultar visitantes >></a>
+                            <p>#{formdashboardadmin.txtVisitantes}</p>
+                            <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarVisitantes}</a>
                         </div>
                     </section>
                     <!-- Seccion derecha -->
                     <aside class="novedades col-12 col-md-4">
                         <!-- Eventos -->
                         <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
+                            <h6><i class="icalendar far fa-calendar-alt"></i>#{formdashboardadmin.lblEventos}</h6>
                             <h:form>
                                 <ul id="lista">
                                     <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
@@ -114,12 +114,12 @@
                                 </ul>
                             </h:form>
                             <div class="link">
-                                <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">#{formdashboardadmin.txtConsultarEventos}<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>
                         <!-- Documentos -->
                         <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>Ultimos documentos</h6>
+                            <h6><i class="icalendar far fa-file-alt"></i>#{formdashboardadmin.lblEventos}</h6>
                             <ul id="lista">
                                 <li>
                                     <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
