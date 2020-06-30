@@ -17,7 +17,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -30,12 +32,14 @@ public class SesionControlador implements Serializable {
     /**
      * Creates a new instance of SesionControlador
      */
+    @Inject
+    private MensajeControlador mensaje;
     private int documento;
     private String contrasenia;
     private Rol rolSeleccionado;
     private Usuario usuario; // logout
-    private Usuario user; // login
-    
+    private Usuario user = null; // login
+
     @EJB
     UsuarioFacade usuarioFacade;
 
@@ -53,7 +57,7 @@ public class SesionControlador implements Serializable {
 
     public String iniciarSesion() {
         user = usuarioFacade.iniciarSesion(documento, contrasenia);
-        if (user.getDocumento() != 0) {
+        if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("") && "Activo".equals(user.getEstado())) {
             rolSeleccionado = user.getIdRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
             if (rolSeleccionado.getIdRol() == 1) {

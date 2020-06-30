@@ -132,7 +132,6 @@ public class ZonaComunalControlador implements Serializable {
     public String consultarZona(int id) {
         zonaComunal = zonaComunalFacade.find(id);
         return "detalle-zona";
-
     }
 
     public int contarZonas() {

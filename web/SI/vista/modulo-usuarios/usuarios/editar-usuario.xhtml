@@ -20,137 +20,163 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar usuario</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <!-- header -->
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <!-- nav -->
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <div class="contenedor">
-            <!-- miga pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml">Consultar usuario</a></li>
-                    <li class="breadcrumb-item active">Editar usuario</li>
-                </ol>
-            </div>
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h3><i class="far fa-edit"></i>Editar usuario # #{usuarioControlador.usuario.idPerfil}</h3>
-                        <hr/>	
-                    </div>
-                    <div class="col-12 col-md-8 form">
-                        <f:view>
-                            <!--formulario-->
-                            <h:form class="recorrer-dato"><!--Falta atributo name=""-->
-                                <div class="col-12">
-                                    <div class="caja bg-faded border-bottom-0">Datos básicos</div>
-                                </div>  
-                                <div class="form-group row sombra">
-                                    <div class="col-12" style="margin-top: 1rem;"></div> 
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="nombre">Nombres</label></strong> 
-                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}"/>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="apellido">Apellidos</label></strong> 
-                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}"/>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <strong><label for="tipoDocumento">Tipo documento</label></strong> 
-                                        <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}">
-                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <strong><label for="identificacion">Numero de identificación</label></strong> 
-                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}"/>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="correo">Email</label></strong> 
-                                        <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}"/>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="phone">Número de celular</label></strong> 
-                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}"/>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="direccion">Dirección</label></strong> 
-                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" />
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="Rol">Rol</label></strong>
-                                        <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();">
-                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
-                                            <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <!--
-                                    <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="direccion">Automovil</label></strong>
-                                            <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
-                                                <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
-                                            </h:selectOneMenu>
-                                        </div>
-
-                                        <div class="torre col-12 col-md mb-3">
-                                            <strong><label for="torre">Torre</label></strong>
-                                            <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-12 col-md mb-3">
-                                            <strong><label for="apto">Apartamento</label></strong>
-                                            <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
-                                            </h:selectOneMenu>
-                                        </div>  
-                                    </c:if>
-                                    <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="inicioTurno">Inicio turno</label></strong>
-                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="finTurno">Fin turno</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" requiredMessage="The FinTurno field is required.">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
-                                        </div>
-                                    </c:if>-->
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
-                                        <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
-                                        <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="confirmar">Confirme contrase&ntilde;a</label></strong>
-                                        <input type="password" class="form-control-plaintext" placeholder="Repita la contrase&ntilde;a"/>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <h:commandButton value="Guardar cambios" class="btn btn-outline-success btn-block" action="#{usuarioControlador.actualizar()}"></h:commandButton>
-                                    </div>
-                                </div>
-                            </h:form>
-                        </f:view>     
-                    </div>
+        <f:view>
+            <script>#{mensajeControlador.mensaje}</script>
+            <!-- Contenedor principal -->
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <div class="contenedor">
+                <!-- miga pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml">Consultar usuario</a></li>
+                        <li class="breadcrumb-item active">Editar usuario</li>
+                    </ol>
                 </div>
-            </section> 
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                <section class="container-fluid" id="principal">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3><i class="far fa-edit"></i>Editar usuario # #{usuarioControlador.usuario.idPerfil}</h3>
+                            <hr/>	
+                        </div>
+                        <div class="col-12 col-md-8 form">
+                            <f:view>
+                                <!--formulario-->
+                                <h:form class="recorrer-dato"><!--Falta atributo name=""-->
+                                    <div class="col-12">
+                                        <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                    </div>  
+                                    <div class="form-group row sombra">
+                                        <div class="col-12" style="margin-top: 1rem;"></div> 
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="nombre">Nombres</label></strong> 
+                                            <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}"/>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="apellido">Apellidos</label></strong> 
+                                            <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}"/>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                            <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}">
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                            <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}"/>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="correo">Email</label></strong> 
+                                            <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}"/>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="phone">Número de celular</label></strong> 
+                                            <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}"/>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="direccion">Dirección</label></strong> 
+                                            <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" />
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="Rol">Rol</label></strong>
+                                            <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();">
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        
+                                        <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
+                                            <div class="col-12 col-md-6 mb-3">
+                                                <strong><label for="direccion">Automovil</label></strong>
+                                                <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
+                                                    <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
+                                                </h:selectOneMenu>
+                                            </div>
+    
+                                            <div class="torre col-12 col-md mb-3">
+                                                <strong><label for="torre">Torre</label></strong>
+                                                <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-12 col-md mb-3">
+                                                <strong><label for="apto">Apartamento</label></strong>
+                                                <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
+                                                </h:selectOneMenu>
+                                            </div>  
+                                        </c:if>
+                                        <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
+                                            <div class="col-12 col-md-6 mb-3">
+                                                <strong><label for="inicioTurno">Inicio turno</label></strong>
+                                                <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-3">
+                                                <strong><label for="finTurno">Fin turno</label></strong>
+                                                <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" requiredMessage="The FinTurno field is required.">
+                                                    <f:convertDateTime pattern="HH:mm" />
+                                                </h:inputText>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="#{usuarioControlador.rol.idRol == 1}">
+                                            <div class="col-12 mb-3">
+                                                <strong><label for="Rol">Estado</label></strong>
+                                                <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}" disabled="true">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="Activo" itemValue="Activo"/>
+                                                    <f:selectItem itemLabel="Bloqueado" itemValue="Bloqueado"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="#{usuarioControlador.rol.idRol != 1}">
+                                            <div class="col-12 mb-3">
+                                                <strong><label for="Rol">Estado</label></strong>
+                                                <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="Activo" itemValue="Activo"/>
+                                                    <f:selectItem itemLabel="Bloqueado" itemValue="Bloqueado"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </c:if>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
+                                            <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
+                                            <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="confirmar">Confirme contrase&ntilde;a</label></strong>
+                                            <input type="password" class="form-control-plaintext" placeholder="Repita la contrase&ntilde;a"/>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <h:commandButton value="Guardar cambios" class="btn btn-outline-success btn-block" action="#{usuarioControlador.actualizar()}"></h:commandButton>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </f:view>     
+                        </div>
+                    </div>
+                </section> 
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- Validar formulario -->
         <script src="../../../../vista/registro/registro.js"></script>
         <!-- bootstrap y jquery -->

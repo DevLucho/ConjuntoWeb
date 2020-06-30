@@ -118,13 +118,13 @@
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="inicioTurno">Inicio turno</label></strong>
-                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno" disabled="true">
+                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.inicioTurno}" title="InicioTurno" disabled="true">
                                                 <f:convertDateTime pattern="HH:mm"/>
                                             </h:inputText>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="finTurno">Fin turno</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" disabled="true">
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.finTurno}" title="FinTurno" disabled="true">
                                                 <f:convertDateTime pattern="HH:mm"/>
                                             </h:inputText>
                                         </div>

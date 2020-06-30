@@ -91,6 +91,7 @@ public class ResidenteControlador implements Serializable {
     public void registrar() {
         usuario.setIdRol(rolFacade.find(2));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+        usuario.setEstado("Activo");
         usuarioFacade.create(usuario);
         residente.setIdPerfil(usuario);
         inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));

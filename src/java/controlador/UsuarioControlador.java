@@ -26,6 +26,7 @@ import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -43,6 +44,8 @@ public class UsuarioControlador implements Serializable {
     /**
      * Creates a new instance of UsuarioControlador
      */
+    @Inject
+    private MensajeControlador mensaje;
     private Usuario usuario;
     private TipoDocumento tipoDocumento;
     private Rol rol;
@@ -79,9 +82,6 @@ public class UsuarioControlador implements Serializable {
 
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
-    
-    @Inject
-    private MensajeControlador mensaje;
 
     // Incremental para menu dinamico
     /*private int valor = 0;
@@ -112,6 +112,7 @@ public class UsuarioControlador implements Serializable {
     public void registrar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+        usuario.setEstado("Activo");
         usuarioFacade.create(usuario);
         if (rol.getIdRol() == 2) {
             residente.setIdPerfil(usuario);
@@ -123,8 +124,10 @@ public class UsuarioControlador implements Serializable {
             usuario = new Usuario();
             rol = new Rol();
             tipoDocumento = new TipoDocumento();
-            inmueble = new Inmueble();
+            torre = new Torre();
+            apartamento = new Apartamento();
             residente = new Residente();
+            mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
         } else if (rol.getIdRol() == 3) {
             vigilante.setIdPerfil(usuario);
             turnoVigilanteFacade.create(turnoVigilante);
@@ -135,12 +138,23 @@ public class UsuarioControlador implements Serializable {
             tipoDocumento = new TipoDocumento();
             vigilante = new Vigilante();
             turnoVigilante = new TurnoVigilante();
+            mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
         }
+        usuario = new Usuario();
+        rol = new Rol();
+        tipoDocumento = new TipoDocumento();
+        mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
     }
 
-    public void eliminar(Usuario usuarioEliminar) {
-        mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar este usuario?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado exitosamente el usuario.','success');");
-        usuarioFacade.remove(usuarioEliminar);
+    public void cancelar(Usuario usuarioCancelar) {
+        if (usuarioCancelar.getIdRol().getIdRol() == 1) {
+            mensaje.setMensaje("Mensajes('Error!','No puedes bloquear usuarios con rol Administrador','error');");
+        } else {
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear este usuario?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
+            usuario = usuarioCancelar;
+            usuario.setEstado("Bloqueado");
+            usuarioFacade.edit(usuarioCancelar);
+        }
     }
 
     public String preActualizar(Usuario usuarioActualizar) {
@@ -150,14 +164,42 @@ public class UsuarioControlador implements Serializable {
         return "editar-usuario";
     }
 
+    public String preActualizarR(Residente residenteActualizar) {
+        rol = residenteActualizar.getIdPerfil().getIdRol();
+        tipoDocumento = residenteActualizar.getIdPerfil().getTipoDocumento();
+        torre = residenteActualizar.getIdInmueble().getIdTorre();
+        usuario = residenteActualizar.getIdPerfil();
+        apartamento = residenteActualizar.getIdInmueble().getIdApartamento();
+        residente = residenteActualizar;
+        return "editar-usuario";
+    }
+
+    public String preActualizarV(Vigilante vigilanteActualizar) {
+        rol = vigilanteActualizar.getIdPerfil().getIdRol();
+        tipoDocumento = vigilanteActualizar.getIdPerfil().getTipoDocumento();
+        usuario = vigilanteActualizar.getIdPerfil();
+        turnoVigilante = vigilanteActualizar.getIdTurno();
+        vigilante = vigilanteActualizar;
+        return "editar-usuario";
+    }
+
     public void actualizar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
         usuarioFacade.edit(usuario);
+        mensaje.setMensaje("Mensajes('Exito!','Usuario modificado satisfactoriamente','success');");
     }
 
     public List<Usuario> consultarTodos() {
         return usuarioFacade.findAll();
+    }
+
+    public List<Usuario> consultarBloqueados() {
+        return usuarioFacade.usuarioBloquedo("Bloqueado");
+    }
+
+    public List<Usuario> consultarAdmin() {
+        return usuarioFacade.usuarioAdmin(1);
     }
 
     public String consultarUsuario(Usuario usuarioConsultar) {
@@ -185,13 +227,21 @@ public class UsuarioControlador implements Serializable {
         vigilante = vigilanteConsultar;
         return "detalle-usuario";
     }
-    
-    public List<Usuario> sesionUsuario (int idPerfil){
+
+    public List<Usuario> sesionUsuario(int idPerfil) {
         return usuarioFacade.sesionUsuario(idPerfil);
     }
 
     public int contarUsuarios() {
         return usuarioFacade.count();
+    }
+
+    public int contarAdministradores() {
+        return usuarioFacade.contarAdministradores(1);
+    }
+
+    public int contarBloqueados() {
+        return usuarioFacade.contarBloqueados("Bloqueado");
     }
 
     public Usuario getUsuario() {
