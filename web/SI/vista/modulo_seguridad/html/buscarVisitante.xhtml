@@ -170,6 +170,9 @@
                                     </f:facet>
                                     <div class="btn-group-sm text-center"> 
                                         <h:commandButton class="fas fa-highlighter confi" value=""  action="#{visitanteControlador.preActulizr(visi)}" title="Modificar Visitante"></h:commandButton>
+                                        <!-- . -->
+                                        <h:commandButton class="fas fa-backspace confi" value="" action="#{fichadeIngresoControlador.eliminar(visi.idFicha)}" title="Eliminar Visitante"></h:commandButton>
+                                        <!-- . -->
                                         <h:commandButton class="fas fa-door-open confi" value="" action="#{visitanteControlador.salida(visi.idFicha)}" title="Salida del Visitante"></h:commandButton>
                                     </div>
                                 </h:column>

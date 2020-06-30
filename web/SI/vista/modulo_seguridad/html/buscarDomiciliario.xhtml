@@ -203,6 +203,9 @@
                                         </f:facet>
                                         <div class="btn-group-sm text-center">
                                             <h:commandButton class="fas fa-highlighter confi" value="" action="#{domiciliarioControlador.preActualizar(dom)}" title="Modificar Domiciliario"></h:commandButton>
+                                            <!-- . -->
+                                            <h:commandButton class="fas fa-backspace confi" value="" action="#{fichadeIngresoControlador.eliminar(dom.idFicha)}" title="Eliminar Domiciliario"></h:commandButton>
+                                            <!-- . -->
                                             <h:commandButton class="fas fa-door-open confi" value="" action="#{domiciliarioControlador.salida(dom.idFicha)}" title="Salida del Domiciliario"></h:commandButton>
                                         </div>
                                     </h:column>
