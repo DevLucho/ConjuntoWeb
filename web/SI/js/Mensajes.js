@@ -74,3 +74,23 @@ function EdicionVisitante(linkURL,titulo,html) {
         }
     });
 }
+function ConfirmarPaquete(titulo){
+    Swal.fire({
+        icon:'info',
+        title: titulo,
+        text:'El paquete se ha entregado al residente...',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        customClass:{
+            title:'title-class',
+            icon:'icon-class',
+            popup:'popup-class'
+        },
+        timer:900000,
+        allowOutsideClick:false
+    });
+}
