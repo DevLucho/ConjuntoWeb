@@ -20,6 +20,10 @@ import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,6 +36,9 @@ import javax.inject.Inject;
 @Named(value = "domiciliarioControlador")
 @SessionScoped
 public class DomiciliarioControlador implements Serializable {
+
+    private String horaEntrada = "";
+    private String horaSalida = "";
 
     /**
      * Creates a new instance of DomiciliarioControlador
@@ -129,6 +136,11 @@ public class DomiciliarioControlador implements Serializable {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setEstadoFicha("Activo");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        horaEntrada = dateFormat.format(date);
+        fichaIngreso.setHoraEntrada(date);
         fichaIngresoFacade.create(fichaIngreso);
 
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
@@ -144,6 +156,17 @@ public class DomiciliarioControlador implements Serializable {
         mensaje.setMensaje("RegistrarVisitante('Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
 
+    public void salida(FichaIngreso fichaIngresoSalida){
+        fichaIngreso = fichaIngresoSalida;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        horaSalida = dateFormat.format(date);
+        fichaIngreso.setHoraSalida(date);
+        fichaIngreso.setEstadoFicha("Inactivo");
+        fichaIngresoFacade.edit(fichaIngresoSalida);       
+    }
+    
     public List<Domiciliario> consultar() {
         return domiciliarioFacade.findAll();
     }

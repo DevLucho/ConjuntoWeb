@@ -74,10 +74,10 @@ function EdicionVisitante(linkURL,titulo,html) {
         }
     });
 }
-function confirmar(){
+function ConfirmarPaquete(titulo){
     Swal.fire({
         icon:'info',
-        title: 'Entrega Exitosa',
+        title: titulo,
         text:'El paquete se ha entregado al residente...',
         showClass: {
             popup: 'animate__animated animate__fadeInDown'

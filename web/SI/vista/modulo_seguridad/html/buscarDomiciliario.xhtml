@@ -84,7 +84,7 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
-        <link rel="stylesheet" href="../css/buscarMensajeria.css"/>
+        <link rel="stylesheet" href="../css/findMensajeria.css"/>
         <style>
             .title-class{
                 color: black !important;
@@ -173,7 +173,7 @@
                                         <h:outputText value="Entrada"/>
                                     </f:facet>
                                     <h:outputText value="#{dom.idFicha.horaEntrada}">
-                                        <f:convertDateTime pattern="HH:mm" />
+                                        <f:convertDateTime pattern="HH:mm:ss" />
                                     </h:outputText>
                                 </h:column>  
                                 <h:column>
@@ -181,7 +181,7 @@
                                         <h:outputText value="Salida"/>
                                     </f:facet>
                                     <h:outputText value="#{dom.idFicha.horaSalida}">
-                                        <f:convertDateTime pattern="HH:mm" />
+                                        <f:convertDateTime pattern="HH:mm:ss" />
                                     </h:outputText>
                                 </h:column>  
                                 <h:column>
@@ -200,8 +200,11 @@
                                     <f:facet name="header">
                                         <h:outputText value="Acciones"/>
                                     </f:facet>
-                                    <h:commandButton value="Actualizar" class="confi" action="#{domiciliarioControlador.preActualizar(dom)}" title="Modificar Domiciliario"></h:commandButton>
-                                    <h:commandButton value="Eliminar" class="confi" action="#{fichadeIngresoControlador.eliminar(dom.idFicha)}" title="Eliminar Domiciliario"></h:commandButton>
+                                    <div class="btn-group-sm text-center">
+                                        <h:commandButton class="fas fa-highlighter confi" value="" action="#{domiciliarioControlador.preActualizar(dom)}" title="Modificar Domiciliario"></h:commandButton>
+                                        <h:commandButton class="fas fa-backspace confi" value="" action="#{fichadeIngresoControlador.eliminar(dom.idFicha)}" title="Eliminar Domiciliario"></h:commandButton>
+                                        <h:commandButton class="fas fa-door-open confi" value="" action="#{domiciliarioControlador.salida(dom.idFicha)}" title="Salida del Domiciliario"></h:commandButton>
+                                    </div>
                                 </h:column>
                                 <tfoot>
                                     <tr>
