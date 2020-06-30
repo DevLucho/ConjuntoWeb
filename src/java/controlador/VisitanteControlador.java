@@ -16,8 +16,11 @@ import facade.VisitanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +33,9 @@ import javax.inject.Inject;
 @Named(value = "visitanteControlador")
 @SessionScoped
 public class VisitanteControlador implements Serializable {
+
+    private String horaEntrada = "";
+    private String horaSalida = "";
 
     /**
      * Creates a new instance of VisitanteControlador
@@ -100,6 +106,11 @@ public class VisitanteControlador implements Serializable {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setEstadoFicha("Activo");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        horaEntrada = dateFormat.format(date);
+        fichaIngreso.setHoraEntrada(date);
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
         visitanteFacade.create(visitante);
@@ -109,7 +120,18 @@ public class VisitanteControlador implements Serializable {
         visitante = new Visitante();
         mensaje.setMensaje("RegistrarVisitante('Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
     }
-
+    
+    public void salida(FichaIngreso fichaIngresoSalida){
+        fichaIngreso = fichaIngresoSalida;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        horaSalida = dateFormat.format(date);
+        fichaIngreso.setHoraSalida(date);
+        fichaIngreso.setEstadoFicha("Inactivo");
+        fichaIngresoFacade.edit(fichaIngresoSalida);       
+    }
+    
     public String preActulizr(Visitante visitanteActualizar) {
         visitante = visitanteActualizar;
         fichaIngreso = visitanteActualizar.getIdFicha();

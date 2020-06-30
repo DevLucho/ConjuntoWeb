@@ -18,6 +18,10 @@ import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +34,9 @@ import javax.inject.Inject;
 @Named(value = "correspondenciaControlador")
 @SessionScoped
 public class CorrespondenciaControlador implements Serializable {
+
+    private String fechaIngreso = "";
+    private String fechaSalida = "";
 
     /**
      * Creates a new instance of CorrespondenciaControlador
@@ -113,6 +120,11 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         correspondencia.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         correspondencia.setEstado("No reclamado");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaIngreso = dateFormat.format(date);
+        correspondencia.setFechaIngreso(date);
         correspondenciaFacade.create(correspondencia);
         empresa = new Empresa();
         inmueble = new Inmueble();
@@ -122,6 +134,18 @@ public class CorrespondenciaControlador implements Serializable {
         mensaje.setMensaje("RegistrarVisitante('Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
+    public void salida(Correspondencia correspondenciaSalida){
+        correspondencia = correspondenciaSalida;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaSalida = dateFormat.format(date);
+        correspondencia.setFechaSalida(date);
+        correspondencia.setEstado("Reclamado");
+        correspondenciaFacade.edit(correspondencia);
+        mensaje.setMensaje("ConfirmarPaquete('Entrega Exitosa');");
+    }
+    
     public List<Correspondencia> consultar() {
         return correspondenciaFacade.findAll();
     }

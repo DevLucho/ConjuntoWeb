@@ -1,6 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-jun-2020, 0:43:26
+    Author     : Sebastian
+*/
+
 .confi{
     background-color: transparent !important;
-    width: 150px;
+    width: 50px !important;
     height: 40px;
     font-size: 19px;
     border: solid  3px #33406A;
