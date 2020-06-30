@@ -30,7 +30,6 @@ public class ZonaComunalControlador implements Serializable {
      * Creates a new instance of ZonaComunalControlador
      */
     //private String[] disponibilidadDias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
-
     private boolean domingo;
     private boolean lunes;
     private boolean martes;
@@ -44,13 +43,13 @@ public class ZonaComunalControlador implements Serializable {
     private Disponibilidad disponibilidad;
 
     DisponibilidadDia disponibilidadDia;
-    
+
     @EJB
     ZonaComunalFacade zonaComunalFacade;
 
     @EJB
     DisponibilidadFacade disponibilidadFacade;
-    
+
     @EJB
     DisponibilidadDiaFacade disponibilidadDiaFacade;
 
@@ -74,32 +73,48 @@ public class ZonaComunalControlador implements Serializable {
     public void registrar() {
         zonaComunalFacade.create(zonaComunal);
         if (domingo) {
-           disponibilidadDia.setIdDia(1);
-        }/*
+            disponibilidadDia.setIdDia(1);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
         if (lunes) {
-            diasDisponibilidad += disponibilidadDias[1] + ", ";
+            disponibilidadDia.setIdDia(2);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (martes) {
-            diasDisponibilidad += disponibilidadDias[2] + ", ";
+            disponibilidadDia.setIdDia(3);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (miercoles) {
-            diasDisponibilidad += disponibilidadDias[3] + ", ";
+            disponibilidadDia.setIdDia(4);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (jueves) {
-            diasDisponibilidad += disponibilidadDias[4] + ", ";
+            disponibilidadDia.setIdDia(5);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (viernes) {
-            diasDisponibilidad += disponibilidadDias[5] + ", ";
+            disponibilidadDia.setIdDia(6);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (sabado) {
-            diasDisponibilidad += disponibilidadDias[6] + ", ";
-        }*/
-        /*
-        disponibilidad.setDias(diasDisponibilidad);
-        disponibilidadFacade.create(disponibilidad);
-        zonaComunal.setIdDisponibilidad(disponibilidad);
-        */
-        
+            disponibilidadDia.setIdDia(7);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+
         domingo = false;
         lunes = false;
         martes = false;
@@ -114,6 +129,7 @@ public class ZonaComunalControlador implements Serializable {
     public void eliminar(ZonaComunal zonaComunalEliminar) {
         zonaComunalFacade.remove(zonaComunalEliminar);
     }
+
     /*
     public String preActualizar(ZonaComunal zonaComunalActualizar) {
         disponibilidad = zonaComunalActualizar.getIdDisponibilidad();
@@ -124,9 +140,8 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
         zonaComunalFacade.edit(zonaComunal);
     }*/
-
-    public List<ZonaComunal> consultarTodos() {
-        return zonaComunalFacade.findAll();
+    public List<Disponibilidad> consultarTodos() {
+        return disponibilidadFacade.findAll();
     }
 
     public String consultarZona(int id) {

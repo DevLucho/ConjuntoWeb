@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Comunicado;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,12 @@ public class ComunicadoFacade extends AbstractFacade<Comunicado> {
 
     public ComunicadoFacade() {
         super(Comunicado.class);
+    }
+    
+    public List<Comunicado> consultarTodos(){
+        Query query;
+        query = em.createQuery("SELECT u FROM Comunicado AS u");
+        return query.getResultList();
     }
     
 }

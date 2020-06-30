@@ -12,6 +12,10 @@ import facade.UsuarioFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,6 +36,8 @@ public class ComunicadoControlador implements Serializable {
     private Comunicado comunicado;
     
     private Usuario usuario;
+    
+    String fechaPublicacion="";
     
     @EJB
     ComunicadoFacade comunicadoFacade;
@@ -54,6 +60,11 @@ public class ComunicadoControlador implements Serializable {
     public void registrar(){
         usuario.setIdPerfil(1);
         comunicado.setIdPerfil(usuario);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaPublicacion = dateFormat.format(date);
+        comunicado.setFechaPublicacion(date);
         comunicadoFacade.create(comunicado);
         usuario = new Usuario();
         comunicado = new Comunicado();
@@ -62,6 +73,10 @@ public class ComunicadoControlador implements Serializable {
     
     public List<Comunicado> consultarTodos(){
         return comunicadoFacade.findAll();
+    }
+    
+    public List<Comunicado> consultar(){
+        return comunicadoFacade.consultarTodos();
     }
     
     public String preActualizar(Comunicado comunicadoActualizar){
