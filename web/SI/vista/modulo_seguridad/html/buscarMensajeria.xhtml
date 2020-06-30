@@ -89,157 +89,158 @@
 
     <h:body>
         <f:view>
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <script>#{mensajeControlador.mensaje}</script>
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <script>#{mensajeControlador.mensaje}</script>
 
-        <!-- fin de header y poput -->
-        <!-- inicio tabla -->
+            <!-- fin de header y poput -->
+            <!-- inicio tabla -->
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 mt-3 text-center">
-                    Consulta de Correspondencia
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 mt-3 text-center">
+                        Consulta de Correspondencia
+                    </div>
+                </div>
+
+                <div class="row table-responsive">
+                    <div class="col-sm-12 col-md-11 col-xl-11 xxx">
+                        <f:view>
+                            <h:form>  
+                                <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{correspondenciaControlador.consultar()}" var="paq">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+
+                                            <th>Empresa</th>
+
+                                            <th>Estado</th>
+
+                                            <th>Torre-App</th>
+
+                                            <th>Entrega</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Tipo"/>
+                                            </f:facet>
+                                            <h:outputText  value="#{paq.idPaquete.tipo}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Empresa"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.idEmpresa.nombre}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descripcion"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.descripcion}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Ingreso"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.fechaIngreso}">
+                                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Salida"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.fechaSalida}">
+                                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Inmueble"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/> -
+                                            <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Estado"/>
+                                            </f:facet>
+                                            <h:outputText value="#{paq.estado}"></h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Acciones"/>
+                                            </f:facet>
+                                            <div class="btn-group-sm text-center">
+                                                <h:commandButton class="fas fa-door-open confi" value="" action="#{correspondenciaControlador.salida(paq)}"></h:commandButton>
+                                                <!-- . -->
+                                                <h:commandButton class="fas fa-highlighter confi" value="" action="#{correspondenciaControlador.preActualizar(paq)}" title="Modificar Paquete"></h:commandButton>
+                                            </div>
+                                        </h:column>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tipo</th>
+
+                                            <th>Empresa</th>
+
+                                            <th>Entrada-Salida</th>
+
+                                            <th>Torre-App</th>
+
+                                            <th>Entrega</th>
+                                        </tr>
+                                    </tfoot>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                    </div>
                 </div>
             </div>
+            <div class="thor">
 
-            <div class="row table-responsive">
-                <div class="col-sm-12 col-md-11 col-xl-11 xxx">
-                    <f:view>
-                        <h:form>  
-                            <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{correspondenciaControlador.consultar()}" var="paq">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-
-                                        <th>Empresa</th>
-
-                                        <th>Estado</th>
-
-                                        <th>Torre-App</th>
-
-                                        <th>Entrega</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Tipo"/>
-                                        </f:facet>
-                                        <h:outputText  value="#{paq.idPaquete.tipo}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Empresa"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.idEmpresa.nombre}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Descripcion"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.descripcion}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Ingreso"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.fechaIngreso}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
-                                        </h:outputText>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Salida"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.fechaSalida}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
-                                        </h:outputText>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Torre"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Apto"/>
-                                        </f:facet>
-                                        <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Acciones"/>
-                                        </f:facet>
-                                        <div class="btn-group-sm text-center">
-                                            <h:commandButton class="fas fa-door-open confi" value="" action="#{correspondenciaControlador.salida(paq)}"></h:commandButton>
-                                        <h:commandButton class="fas fa-highlighter confi" value="" action="#{correspondenciaControlador.preActualizar(paq)}" title="Modificar Paquete"></h:commandButton>
-                                        <h:commandButton class="fas fa-backspace confi" value="" action="#{correspondenciaControlador.eliminar(paq)}" title="Eliminar Paquete"></h:commandButton>
-                                        </div>
-                                    </h:column>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Tipo</th>
-
-                                        <th>Empresa</th>
-
-                                        <th>Entrada-Salida</th>
-
-                                        <th>Torre-App</th>
-
-                                        <th>Entrega</th>
-                                    </tr>
-                                </tfoot>
-                            </h:dataTable>
-                        </h:form>
-                    </f:view>
-                </div>
             </div>
-        </div>
-        <div class="thor">
+            <!-- fin tabla -->
+            <!--__________________________- inicio del footer __________________________- -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
 
-        </div>
-        <!-- fin tabla -->
-        <!--__________________________- inicio del footer __________________________- -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
+            <!--______________________________- fin del footer __________________________-->
+            <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
 
-        <!--______________________________- fin del footer __________________________-->
-        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <!-- bootstrap and jquery -->
 
-        <!-- bootstrap and jquery -->
+            <script src="../../../../js/jquery-3.4.1.min.js"></script>
 
-        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+            <script src="../../../../js/bootstrap.min.js"></script>
 
-        <script src="../../../../js/bootstrap.min.js"></script>
+            <!-- Datatable -->
 
-        <!-- Datatable -->
+            <script src="../../../js/dataTables/datatables.min.js"></script>
+            <!-- Botones datatable -->
 
-        <script src="../../../js/dataTables/datatables.min.js"></script>
-        <!-- Botones datatable -->
+            <script src="../../../js/dataTables/dataTables.buttons.min.js"></script>
 
-        <script src="../../../js/dataTables/dataTables.buttons.min.js"></script>
+            <script src="../../../js/dataTables/jszip.min.js"></script>
 
-        <script src="../../../js/dataTables/jszip.min.js"></script>
+            <script src="../../../js/dataTables/pdfmake.min.js"></script>
 
-        <script src="../../../js/dataTables/pdfmake.min.js"></script>
+            <script src="../../../js/dataTables/vfs_fonts.js"></script>
 
-        <script src="../../../js/dataTables/vfs_fonts.js"></script>
+            <script src="../../../js/dataTables/buttons.html5.min.js"></script>
 
-        <script src="../../../js/dataTables/buttons.html5.min.js"></script>
+            <script src="../../../js/dataTables/exportar_tablas.js"></script>
 
-        <script src="../../../js/dataTables/exportar_tablas.js"></script>
+            <script src="../../../js/alert.js"></script>
 
-        <script src="../../../js/alert.js"></script>
+            <script src="../../../js/scriptvigilante.js"></script>
 
-        <script src="../../../js/scriptvigilante.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <!-- Menu responsive -->
-        <script src="../../nav/nav.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <!-- Menu responsive -->
+            <script src="../../nav/nav.js"></script>
         </f:view>
     </h:body>
 </html>

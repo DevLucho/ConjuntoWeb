@@ -107,6 +107,12 @@
                             <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.consultarVisitante()}" var="visi">
                                 <h:column>
                                     <f:facet name="header">
+                                        <h:outputText value="Ficha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.idFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
                                         <h:outputText value="Nombre"/>
                                     </f:facet>
                                     <h:outputText value="#{visi.idFicha.nombre}"/>
@@ -141,26 +147,9 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Ficha"/>
+                                        <h:outputText value="Inmueble"/>
                                     </f:facet>
-                                    <h:outputText value="#{visi.idFicha.idFicha}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Estado"/>
-                                    </f:facet>
-                                    <h:outputText value="#{visi.idFicha.estadoFicha}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Torre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{visi.idFicha.idInmueble.idTorre.idTorre}"/>
-                                </h:column>  
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apto"/>
-                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.idInmueble.idTorre.idTorre}"/> - 
                                     <h:outputText value="#{visi.idFicha.idInmueble.idApartamento.idApartamento}"/>
                                 </h:column>  
                                 <h:column>
@@ -171,13 +160,16 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{visi.idFicha.estadoFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
                                         <h:outputText value="Acciones"/>
                                     </f:facet>
                                     <div class="btn-group-sm text-center"> 
                                         <h:commandButton class="fas fa-highlighter confi" value=""  action="#{visitanteControlador.preActulizr(visi)}" title="Modificar Visitante"></h:commandButton>
-                                        <!-- . -->
-                                        <h:commandButton class="fas fa-backspace confi" value="" action="#{fichadeIngresoControlador.eliminar(visi.idFicha)}" title="Eliminar Visitante"></h:commandButton>
-                                        <!-- . -->
                                         <h:commandButton class="fas fa-door-open confi" value="" action="#{visitanteControlador.salida(visi.idFicha)}" title="Salida del Visitante"></h:commandButton>
                                     </div>
                                 </h:column>
