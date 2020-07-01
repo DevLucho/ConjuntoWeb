@@ -153,7 +153,7 @@ public class DomiciliarioControlador implements Serializable {
         empresa = new Empresa();
         paquete = new Paquete();
         domiciliario = new Domiciliario();
-        mensaje.setMensaje("RegistrarVisitante('Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
+        mensaje.setMensaje("RegistrarVisitante('success','Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
 
     public void salida(FichaIngreso fichaIngresoSalida){
@@ -164,7 +164,8 @@ public class DomiciliarioControlador implements Serializable {
         horaSalida = dateFormat.format(date);
         fichaIngreso.setHoraSalida(date);
         fichaIngreso.setEstadoFicha("Inactivo");
-        fichaIngresoFacade.edit(fichaIngresoSalida);       
+        fichaIngresoFacade.edit(fichaIngresoSalida);   
+        mensaje.setMensaje("ConfirmarSalida('info','Salida Registrada','El domiciliario ha abandonado, <br> el conjunto residencial <br><br>');");
     }
     
     public List<Domiciliario> consultar() {

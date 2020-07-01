@@ -1,3 +1,13 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-jul-2020, 2:24:40
+    Author     : Sebastian
+*/
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pacifico');
 *{
     box-sizing: border-box;
@@ -65,7 +75,10 @@ border: solid 1px black;
     float: left;
     width: 31%;
     height: 90vh;
-}
+    overflow: hidden;
+    overflow: scroll}
+.noticiasSeguridad::-webkit-scrollbar{width: 5px;}
+.noticiasSeguridad::-webkit-scrollbar-thumb{background-color: #c1c1d3;}
 .noticiah1{
     text-align: center;
     padding-top: 20px;

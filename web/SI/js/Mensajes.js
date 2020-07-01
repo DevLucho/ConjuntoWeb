@@ -37,9 +37,9 @@ function ConfirmacionResidente(linkURL) {
     });
 }
 
-function RegistrarVisitante(titulo, html) {
+function RegistrarVisitante(icono,titulo, html) {
     Swal.fire({
-        icon: 'success',
+        icon: icono,
         title:titulo,
         html:html,
         confirmButtonColor: '#2A6378',
@@ -74,11 +74,11 @@ function EdicionVisitante(linkURL,titulo,html) {
         }
     });
 }
-function ConfirmarPaquete(titulo){
+function ConfirmarSalida(icono,titulo,html){
     Swal.fire({
-        icon:'info',
+        icon:icono,
         title: titulo,
-        text:'El paquete se ha entregado al residente...',
+        html: html,
         showClass: {
             popup: 'animate__animated animate__fadeInDown'
         },
@@ -87,10 +87,9 @@ function ConfirmarPaquete(titulo){
         },
         customClass:{
             title:'title-class',
-            icon:'icon-class',
+            icon:'icon-class2',
             popup:'popup-class'
         },
-        timer:900000,
         allowOutsideClick:false
     });
 }

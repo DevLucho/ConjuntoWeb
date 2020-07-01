@@ -4,6 +4,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
+    Created on : 01-jul-2020, 2:30:11
+    Author     : Sebastian
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
     Created on : 17-jun-2020, 23:34:53
     Author     : Sebastian
 */
@@ -145,7 +155,12 @@ and open the template in the editor.
     width: 100%;
     border: black 1px solid;
     height: 102vh;
+    overflow: hidden;
+    overflow: scroll;
 }
+.noticiasSeguridad::-webkit-scrollbar{width: 5px;}
+.noticiasSeguridad::-webkit-scrollbar-thumb{background-color: #c1c1d3;}
+
 .noticiah1{
     text-align: center;
     padding-top: 20px;

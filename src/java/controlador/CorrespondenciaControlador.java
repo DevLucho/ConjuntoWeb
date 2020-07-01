@@ -131,7 +131,7 @@ public class CorrespondenciaControlador implements Serializable {
         paquete = new Paquete();
         vigilante = new Vigilante();
         correspondencia = new Correspondencia();
-        mensaje.setMensaje("RegistrarVisitante('Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
+        mensaje.setMensaje("RegistrarVisitante('success','Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
     public void salida(Correspondencia correspondenciaSalida){
@@ -143,7 +143,7 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia.setFechaSalida(date);
         correspondencia.setEstado("Reclamado");
         correspondenciaFacade.edit(correspondencia);
-        mensaje.setMensaje("ConfirmarPaquete('Entrega Exitosa');");
+        mensaje.setMensaje("ConfirmarSalida('info','Entrega Exitosa','El paquete se ha <br> entregado al residente... <br><br>');");
     }
     
     public List<Correspondencia> consultar() {

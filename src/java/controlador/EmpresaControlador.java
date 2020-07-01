@@ -57,7 +57,7 @@ public class EmpresaControlador implements Serializable {
     public void registrar() {
         empresaFacade.create(empresa);
         empresa = new Empresa();
-        mensaje.setMensaje("RegistrarVisitante('Empresa Registrada','<br>');");
+        mensaje.setMensaje("RegistrarVisitante('success','Empresa Registrada','<br>');");
     }
 
     public String preActualizar(Empresa empresaActualizar) {

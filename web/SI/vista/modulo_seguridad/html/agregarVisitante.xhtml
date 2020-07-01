@@ -6,7 +6,8 @@
 
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8" />
 
@@ -19,7 +20,7 @@
             href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
             integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
             crossorigin="anonymous" />
-        <link rel="stylesheet" href="../css/agregarDomiciliarioo.css" />
+        <link rel="stylesheet" href="../css/addDomiciliario.css" />
         <link rel="stylesheet" href="../css/addVisitantee.css" />
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
@@ -48,19 +49,6 @@
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <style>
-            .title-class{
-                color: black !important;
-                font-family: Righteous;
-                font-size: 50px !important;
-            }
-            .icon-class{
-                background-color: #3ed363;
-            }
-            .popup-class{
-                -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-                -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-                box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-            }
             nav ul li{ width:20%;}
             @media screen and (max-width:903px){
                 nav ul li{
@@ -135,53 +123,23 @@
 
                     <div class="col-sm-0 col-md-4 col-xl-4 pepue">
                         <!--________________________ inicio de seccion de noticias __________________- -->
-                        <section class="noticiasSeguridad">
-                            <h1 class="noticiah1">Noticias</h1>
-
-                            <div class="linea">
-                                <figure class="efectoNoticia">
-                                    <img
-                                        class="pito"
-                                        height="200"
-                                        width="400"
-                                        src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg"
-                                        alt="sample45"
-                                        />
-                                    <figcaption>
-                                        <h3>Ultima Hora</h3>
-
-                                        <p>
-                                            un osito dormilon te
-                                            regaleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-                                        </p>
-                                    </figcaption>
-                                    <a href="#" />
-                                </figure>
-                            </div>
-
-                            <div class="linea2" />
-
-                            <div class="linea2 line3">
-                                <figure class="efectoNoticia">
-                                    <img
-                                        class="pito"
-                                        height="200"
-                                        width="400"
-                                        src="../../../img/WhatsApp-Image-2019-10-07-at-8.06.01-PM.jpeg"
-                                        alt="sample45"
-                                        />
-                                    <figcaption>
-                                        <h3>Bartholemew Shoe</h3>
-
-                                        <p>
-                                            Weekends don't count unless you spend them doing something
-                                            completely pointless.
-                                        </p>
-                                    </figcaption>
-                                    <a href="#" />
-                                </figure>
-                            </div>
-                        </section>
+                        <h:form>
+                            <section class="noticiasSeguridad border">
+                                <h3 class="noticiah1"><i class="fas fa-bullhorn mr-3"></i>Ultimos comunicados</h3>
+                                <div class="linea border">
+                                    <c:forEach items="#{comunicadoControlador.consultarTodos()}" var="comunicado">
+                                        <figure class="efectoNoticia">
+                                            <img height="200" width="400" src="#{comunicado.img}" alt="sample45" />
+                                            <figcaption>
+                                                <h3>#{comunicado.titulo}</h3>
+                                                <p>#{comunicado.descripcion}</p>
+                                            </figcaption>
+                                            <a href="#" /> 
+                                        </figure>
+                                    </c:forEach>
+                                </div>
+                            </section>
+                        </h:form>
                         <!-- ________________________- fin de seccion de noticias __________________- -->
                     </div>
                 </div>

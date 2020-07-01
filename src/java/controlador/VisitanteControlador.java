@@ -118,7 +118,7 @@ public class VisitanteControlador implements Serializable {
         inmueble = new Inmueble();
         vigilante = new Vigilante();
         visitante = new Visitante();
-        mensaje.setMensaje("RegistrarVisitante('Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
+        mensaje.setMensaje("RegistrarVisitante('success','Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
     }
     
     public void salida(FichaIngreso fichaIngresoSalida){
@@ -129,7 +129,8 @@ public class VisitanteControlador implements Serializable {
         horaSalida = dateFormat.format(date);
         fichaIngreso.setHoraSalida(date);
         fichaIngreso.setEstadoFicha("Inactivo");
-        fichaIngresoFacade.edit(fichaIngresoSalida);       
+        fichaIngresoFacade.edit(fichaIngresoSalida);  
+        mensaje.setMensaje("ConfirmarSalida('info','Salida Registrada','El visitante ha abandonado, <br> el conjunto residencial <br><br>');");
     }
     
     public String preActulizr(Visitante visitanteActualizar) {
