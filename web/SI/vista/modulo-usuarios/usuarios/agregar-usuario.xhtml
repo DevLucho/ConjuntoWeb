@@ -23,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar usuario</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formcrearusuario.bcAgregarUsuario}</title>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -37,7 +37,7 @@
                 <!-- miga pan -->
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
                         <li class="breadcrumb-item active">#{formcrearusuario.bcAgregarUsuario}</li>
                     </ol>
                 </div>
@@ -125,14 +125,14 @@
                                     </c:if>
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="inicioTurno">Inicio turno</label></strong>
+                                            <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>
                                             <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="finTurno">Fin turno</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" requiredMessage="The FinTurno field is required.">
+                                            <strong><label for="finTurno">#{formconsultarusuario.lblFinTurno}</label></strong>
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
                                         </div>
@@ -140,7 +140,7 @@
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="contrasenia">#{formcrearusuario.lblContraseña}</label></strong>
                                         <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
-                                        <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
+                                        <small id="contrasenia" class="form-text text-muted">#{formcrearusuario.txtContraseña}</small>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="confirmar">#{formcrearusuario.phConfirmarContraseña}</label></strong>

@@ -14,7 +14,7 @@
                     <!-- Cerrar sesi&oacute;n -->
                     <h:form>
                         <div class="cerrar">
-                            <h:commandButton class="btn bg-dark text-white bg-gradient-dark active" action="#{sesionControlador.cerrarSesion()}" value="Cerrar sesi&oacute;n"></h:commandButton>
+                            <h:commandButton class="btn bg-dark text-white bg-gradient-dark active" action="#{sesionControlador.cerrarSesion()}" value="#{formdashboardadmin.txtCerrarSesion}"></h:commandButton>
                         </div>
                         <i class="icono fas fa-user" id="user" data-toggle="modal" data-target="#modal"></i>						
                         <!-- modal datos usuario -->
@@ -32,40 +32,40 @@
                                             <div class="row">
                                                 <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
                                                     <div class="col-12 col-sm-6">
-                                                        <strong><label for="user-nombre">Nombres y Apellidos</label></strong>
+                                                        <strong><label for="user-nombre">#{formconsultarusuario.lblNombres} y #{formconsultarusuario.lblApellidos}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.nombre} #{sesion.apellido}"></h:inputText>
 
-                                                        <strong><label for="user-identificacion">Numero de identificaci&oacute;n</label></strong>
+                                                        <strong><label for="user-identificacion">#{formcrearusuario.lblNumeroId}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.documento}"></h:inputText>
 
                                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                                                            <strong><label for="user-torre">Torre</label></strong>
+                                                            <strong><label for="user-torre">#{formcrearusuario.lblTorre}</label></strong>
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="15"></h:inputText>
 
-                                                            <strong><label for="user-apto">Apartamento</label></strong>
+                                                            <strong><label for="user-apto">#{formcrearusuario.lblApartamento}</label></strong>
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="507"></h:inputText>
                                                         </c:if>
 
                                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
-                                                            <strong><label for="user-torre">Inicio turno</label></strong>
+                                                            <strong><label for="user-torre">#{formconsultarusuario.lblInicioTurno}</label></strong>
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="12:00 PM"></h:inputText>
 
-                                                            <strong><label for="user-apto">Fin turno</label></strong>
+                                                            <strong><label for="user-apto">#{formconsultarusuario.lblFinTurno}</label></strong>
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="5:00 PM"></h:inputText>
                                                         </c:if>
 
                                                     </div>
                                                     <div class="col-12 col-sm-6">
-                                                        <strong><label for="user-correo">Email</label></strong>
+                                                        <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.correo}"></h:inputText>
 
-                                                        <strong><label for="user-direccion">Direcci&oacute;n</label></strong>
+                                                        <strong><label for="user-direccion">#{formcrearusuario.lblDireccion}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.direccion}"></h:inputText>
 
-                                                        <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
+                                                        <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.celular}"></h:inputText>
 
-                                                        <strong><label for="user-rol">Rol</label></strong>
+                                                        <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
                                                         <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
                                                     </div>
                                                 </c:forEach>
@@ -108,7 +108,7 @@
                                                 <div class="col-12 col-sm-6">
                                                     <p><strong>Recuerda:</strong><br/>
                                                         <ul style="padding-left: 40px;">
-                                                            <li style="list-style:circle;">Debe tener una longitud de 8 a 20 caracteres</li><br/>
+                                                            <li style="list-style:circle;">#{formcrearusuario.txtContraseña}</li><br/>
                                                             <li style="list-style:circle;">No datos personales</li>
                                                         </ul>
                                                     </p>

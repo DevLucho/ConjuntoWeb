@@ -20,7 +20,7 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <style>.icalendar{color:white;}</style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formconsultarusuario.bcInicio}</title>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -120,7 +120,7 @@
                             </div>
                             <!-- Documentos -->
                             <div class="novedades-eventos">
-                                <h6><i class="icalendar far fa-file-alt"></i>#{formdashboardadmin.lblEventos}</h6>
+                                <h6><i class="icalendar far fa-file-alt"></i>#{formdashboardadmin.lblDocumentos}</h6>
                                 <ul id="lista">
                                     <li>
                                         <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
