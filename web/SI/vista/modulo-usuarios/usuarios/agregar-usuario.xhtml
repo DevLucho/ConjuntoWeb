@@ -38,61 +38,61 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Agregar usuario</li>
+                        <li class="breadcrumb-item active">#{formcrearusuario.bcAgregarUsuario}</li>
                     </ol>
                 </div>
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><i class="fas fa-user-plus" id="icono"></i>Crear nuevo usuario</h3>
+                            <h3><i class="fas fa-user-plus" id="icono"></i>#{formcrearusuario.bcAgregarUsuario}</h3>
                             <hr/>
                         </div>
 
                         <div class="col-12 col-md-8 form">
-                            <h3 class="col-12 text-center mb-3">Registro usuario</h3>
+                            <h3 class="col-12 text-center mb-3">#{formcrearusuario.txtCrearNuevoUsuario}</h3>
                             <div class="alert alert-info text-center">
-                                <a href="#" class="close" data-dismiss="alert">&times;</a>El usuario y contraseña se notificar&aacute; v&iacute;a email.
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>#{formcrearusuario.notiViaEmail}
                             </div>
                             <!--formulario-->
                             <h:form class="recorrer-dato was-validated"><!--Falta atributo name=""-->
                                 <div class="col-12">
-                                    <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                    <div class="caja bg-faded border-bottom-0">#{formcrearusuario.txtDatos}</div>
                                 </div>  
                                 <div class="form-group row sombra">
                                     <div id="alerta" class="col-12" style="margin-top: 1rem;"></div> 
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="nombre">Nombres</label></strong> 
+                                        <strong><label for="nombre">#{formcrearusuario.lblNombres}</label></strong> 
                                         <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="apellido">Apellidos</label></strong> 
+                                        <strong><label for="apellido">#{formcrearusuario.lblApellidos}</label></strong> 
                                         <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}"/>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                        <strong><label for="tipoDocumento">#{formcrearusuario.lblTipoDocumento}</label></strong> 
                                         <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}">
                                             <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                             <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                        <strong><label for="identificacion">#{formcrearusuario.lblNumeroId}</label></strong> 
                                         <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="correo">Email</label></strong> 
+                                        <strong><label for="correo">#{formcrearusuario.lblEmail}</label></strong> 
                                         <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="phone">Número de celular</label></strong> 
+                                        <strong><label for="phone">#{formcrearusuario.lvlCelular}</label></strong> 
                                         <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="direccion">Dirección</label></strong> 
+                                        <strong><label for="direccion">#{formcrearusuario.lblDireccion}</label></strong> 
                                         <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" />
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="Rol">Rol</label></strong>
+                                        <strong><label for="Rol">#{formcrearusuario.lblRol}</label></strong>
                                         <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();">
                                             <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
                                             <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
@@ -109,14 +109,14 @@
                                         </div>
 
                                         <div class="torre col-12 col-md mb-3">
-                                            <strong><label for="torre">Torre</label></strong>
+                                            <strong><label for="torre">#{formcrearusuario.lblTorre}</label></strong>
                                             <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="col-12 col-md mb-3">
-                                            <strong><label for="apto">Apartamento</label></strong>
+                                            <strong><label for="apto">#{formcrearusuario.lblApartamento}</label></strong>
                                             <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
@@ -138,16 +138,16 @@
                                         </div>
                                     </c:if>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
+                                        <strong><label for="contrasenia">#{formcrearusuario.lblContraseña}</label></strong>
                                         <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
                                         <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="confirmar">Confirme contrase&ntilde;a</label></strong>
+                                        <strong><label for="confirmar">#{formcrearusuario.phConfirmarContraseña}</label></strong>
                                         <input type="password" class="form-control-plaintext" placeholder="Repita la contrase&ntilde;a"/>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <h:commandButton value="Agregar" class="btn btn-outline-success btn-block" action="#{usuarioControlador.registrar()}"></h:commandButton>
+                                        <h:commandButton value="#{formcrearusuario.btnRegistrar}" class="btn btn-outline-success btn-block" action="#{usuarioControlador.registrar()}"></h:commandButton>
                                     </div>
                                 </div>
                             </h:form>
