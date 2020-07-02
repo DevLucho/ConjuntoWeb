@@ -10,7 +10,7 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8" />
-
+        
         <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar Visitante</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
@@ -103,12 +103,29 @@
                                             </li>
                                             <li>
                                                 <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
-                                                <h:selectOneMenu class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
+                                                <h:selectOneMenu onchange="submit();" class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
+                                                    
                                                     <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
                                                     <f:selectItem itemValue="Si" itemLabel="Si"/>
                                                     <f:selectItem itemValue="No" itemLabel="No"/>
                                                 </h:selectOneMenu> 
-                                            </li><br/>           
+                                            </li>
+                                            <c:if test="#{visitanteControlador.visitante.vehiculo== 'Si'}">
+                                                <li>
+                                                    <h:outputLabel for="placa">Placa</h:outputLabel>
+                                                    <h:inputText class="field-long correcto" value="#{visitanteControlador.vehiculo.placa}"></h:inputText>
+                                                    <h:outputLabel for="tipoveh">Tipo vehiculo</h:outputLabel>
+                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.vehiculo.tipoVehiculo}">
+                                                        <f:selectItem itemLabel="Automovil" itemValue="Automovil"/>
+                                                        <f:selectItem itemLabel="Bicicleta" itemValue="Bicicleta"/>
+                                                        <f:selectItem itemLabel="Motocicleta" itemValue="Motocicleta"/>
+                                                    </h:selectOneMenu>
+                                                    <h:outputLabel for="idpar">idParqueadero</h:outputLabel>
+                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.parqueadero.idParqueadero}">
+                                                        <f:selectItems var="p" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{p.idParqueadero}" itemLabel="#{p.lugar}"/>
+                                                    </h:selectOneMenu>
+                                                </li><br/>
+                                            </c:if>       
                                             <li>
                                                 <h:commandButton class="enviarcrud" id="botones" value="Guardar" action="#{visitanteControlador.registrar()}"></h:commandButton>
                                             </li>  

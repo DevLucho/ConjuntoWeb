@@ -56,11 +56,11 @@ and open the template in the editor.
 
 /* inicio de estilos de formulario*/
 .inicioSeguridad{
-    width: 90%;
-     height: 160vh;
+     width: 90%;
+     height: 300vh;
      margin: 5% 3% 0% 3%;
      border: #141414 solid 1px;
-     overflow: hidden;
+     overflow: auto;
      background-color: #2A6378;
  }
  .alex{

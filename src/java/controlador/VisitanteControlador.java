@@ -7,10 +7,14 @@ package controlador;
 
 import entidades.FichaIngreso;
 import entidades.Inmueble;
+import entidades.Parqueadero;
+import entidades.Vehiculo;
 import entidades.Vigilante;
 import entidades.Visitante;
 import facade.FichaIngresoFacade;
 import facade.InmuebleFacade;
+import facade.ParqueaderoFacade;
+import facade.VehiculoFacade;
 import facade.VigilanteFacade;
 import facade.VisitanteFacade;
 import javax.inject.Named;
@@ -46,6 +50,8 @@ public class VisitanteControlador implements Serializable {
     FichaIngreso fichaIngreso;
     Inmueble inmueble;
     Vigilante vigilante;
+    private Vehiculo vehiculo;
+    private Parqueadero parqueadero;
 
     @PostConstruct
     public void init() {
@@ -53,6 +59,8 @@ public class VisitanteControlador implements Serializable {
         fichaIngreso = new FichaIngreso();
         inmueble = new Inmueble();
         vigilante = new Vigilante();
+        vehiculo = new Vehiculo();
+        parqueadero = new Parqueadero();
     }
 
     @EJB
@@ -66,6 +74,12 @@ public class VisitanteControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
+    
+    @EJB
+    VehiculoFacade vehiculoFacade;
+    
+    @EJB
+    ParqueaderoFacade parqueaderoFacade;
 
     @Inject
     private MensajeControlador mensaje;
@@ -101,6 +115,8 @@ public class VisitanteControlador implements Serializable {
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
+    
+    
 
     public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
@@ -114,6 +130,11 @@ public class VisitanteControlador implements Serializable {
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
         visitanteFacade.create(visitante);
+        if ("Si".equals(visitante.getVehiculo())){
+            vehiculo.setIdVisitante(visitante);
+            vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
+            
+        }
         fichaIngreso = new FichaIngreso();
         inmueble = new Inmueble();
         vigilante = new Vigilante();
@@ -187,5 +208,21 @@ public class VisitanteControlador implements Serializable {
             System.out.println("errormmm: " + e.getMessage());
         }
         return listaVisitante;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public Parqueadero getParqueadero() {
+        return parqueadero;
+    }
+
+    public void setParqueadero(Parqueadero parqueadero) {
+        this.parqueadero = parqueadero;
     }
 }
