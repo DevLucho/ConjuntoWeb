@@ -26,7 +26,7 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Listar usuarios</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
@@ -134,7 +134,7 @@
                                                 <div class="btn-group-sm text-center">
                                                     <h:commandButton value="" class="fas fa-user-edit btn btn-outline-success" title="#{formconsultarusuario.hoverAccionModificar}" action="#{usuarioControlador.preActualizar(usuario)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title=""#{formconsultarusuario.hoverAccionCancelar}" action="#{usuarioControlador.cancelar(usuario)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="#{formconsultarusuario.hoverAccionCancelar}" action="#{usuarioControlador.cancelar(usuario)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
                                                     <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionEditar}" action="#{usuarioControlador.consultarUsuario(usuario)}"></h:commandButton>
                                                 </div>
@@ -205,7 +205,7 @@
                                                     <!-- . -->
                                                     <h:commandButton value="" class="fas fa-user-times btn btn-outline-danger btn-cancelar-usuario" title="#{formconsultarusuario.hoverAccionCancelar}" action="#{usuarioControlador.cancelar(residente.idPerfil)}"></h:commandButton>
                                                     <!--<button class="btn btn-outline-info" title="Modificar permisos" onclick="location.href = '/modificar-permisos.xhtml'"><i class="fas fa-user-cog"></i></button>-->
-                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionEditar}"" action="#{usuarioControlador.consultarResidente(residente)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionEditar}" action="#{usuarioControlador.consultarResidente(residente)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>
@@ -213,7 +213,7 @@
                                 </div>
                                 <!-- Tabla todos los vigilantes -->
                                 <div class="tab-pane" id="tab3" role="tabpanel">
-                                    <h4 class="mt-3 text-center">>#{formconsultarusuario.txtTodosVigilantes}</h4>
+                                    <h4 class="mt-3 text-center">#{formconsultarusuario.txtTodosVigilantes}</h4>
                                     <h:form>
 
                                         <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{vigilanteControlador.consultarTodos()}" var="vigilante">

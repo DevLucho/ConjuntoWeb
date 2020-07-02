@@ -23,124 +23,126 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- Main -->
-            <main>
-                <div class="row">
-                    <section class=" modulos col-12 col-md-8 "> 
-                        <!-- PQRS -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="pqrs">#{pqrsControlador.contarPqrs()}</h1>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- Main -->
+                <main>
+                    <div class="row">
+                        <section class=" modulos col-12 col-md-8 "> 
+                            <!-- PQRS -->
+                            <div class="modulo col-12 col-md-5">
+                                <div class="cantidad">
+                                    <h1 id="pqrs">#{pqrsControlador.contarPqrs()}</h1>
+                                </div>
+                                <div class="icono">
+                                    <i class="far fa-comments" ></i>
+                                </div>
+                                <p>#{formdashboardadmin.txtPQRS}</p>
+                                <a href="../../modulo-pqrs-comunicados/pqrs/consultar-pqrs.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarPQRS}<i class="greater fas fa-greater-than"></i></a>
                             </div>
-                            <div class="icono">
-                                <i class="far fa-comments" ></i>
+                            <!-- Reservas -->
+                            <div class="modulo col-12 col-md-5">
+                                <div class="cantidad">
+                                    <h1 id="reservas">#{reservaControlador.contarReservas()}</h1>
+                                </div>
+                                <div class="icono">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <p>#{formdashboardadmin.txtReservas}</p>
+                                <a href="../../modulo-zona-comun/zona/consultar-reserva.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarReservas}<i class="greater fas fa-greater-than"></i></a>
                             </div>
-                            <p>#{formdashboardadmin.txtPQRS}</p>
-                            <a href="../modulo_pqrs_comunicados/pqrs.html" class="text-right d-block">#{formdashboardadmin.txtConsultarPQRS}</a>
-                        </div>
-                        <!-- Reservas -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="reservas">#{reservaControlador.contarReservas()}</h1>
+                            <!-- Inscripciones -->
+                            <div class="modulo col-12 col-md-5">
+                                <div class="cantidad">
+                                    <h1 id="inscripciones">#{inscripcionControlador.contarInscripciones()}</h1>
+                                </div>
+                                <div class="icono">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                </div>
+                                <p>#{formdashboardadmin.txtInscripciones}</p>
+                                <div class="consult-inscriptions-2"> 
+                                    <a href="../../modulo-zona-comun/evento/consultar-inscripcion.xhtml"  class="text-right d-block">#{formdashboardadmin.txtInscripciones}</a>
+                                </div>	
+                                <div class="consult-inscriptions">
+                                    <a href="../../modulo-zona-comun/evento/consultar-inscripcion.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarInscripciones}<i class="greater fas fa-greater-than"></i></a>
+                                </div>
                             </div>
-                            <div class="icono">
-                                <i class="fas fa-calendar-alt"></i>
+                            <!-- Usuarios -->
+                            <div class="modulo col-12 col-md-5">
+                                <div class="cantidad">
+                                    <h1 id="usuarios">#{usuarioControlador.contarUsuarios()}</h1>
+                                </div>
+                                <div class="icono">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <p>#{formdashboardadmin.txtUsuarios}</p>
+                                <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarUsuarios}<i class="greater fas fa-greater-than"></i></a>
                             </div>
-                            <p>#{formdashboardadmin.txtReservas}</p>
-                            <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarReservas}</a>
-                        </div>
-                        <!-- Inscripciones -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="inscripciones">#{inscripcionControlador.contarInscripciones()}</h1>
+                            <!-- Visitantes -->
+                            <div class="modulo col-12 col-md-5">
+                                <div class="cantidad">
+                                    <h1 id="visitantes">#{visitanteControlador.contarVisitantes()}</h1>
+                                </div>
+                                <div class="icono">
+                                    <i class="fas fa-id-card-alt"></i>
+                                </div>
+                                <p>#{formdashboardadmin.txtVisitantes}</p>
+                                <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarVisitantes}<i class="greater fas fa-greater-than"></i></a>
                             </div>
-                            <div class="icono">
-                                <i class="fas fa-envelope-open-text"></i>
+                        </section>
+                        <!-- Seccion derecha -->
+                        <aside class="novedades col-12 col-md-4">
+                            <!-- Eventos -->
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar far fa-calendar-alt"></i>#{formdashboardadmin.lblEventos}</h6>
+                                <h:form>
+                                    <ul id="lista">
+                                        <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
+                                            <li>
+                                                <label class="date">
+                                                    <h:outputText value="#{evento.fechaInicio}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </label>
+                                                <p><strong>#{evento.titulo}</strong></p>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </h:form>
+                                <div class="link">
+                                    <li><a href="../../modulo-zona-comun/evento/consultar-evento.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarEventos}<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
                             </div>
-                            <p>#{formdashboardadmin.txtInscripciones}</p>
-                            <div class="consult-inscriptions-2"> 
-                                <a href="#"  class="text-right d-block">#{formdashboardadmin.txtInscripciones}</a>
-                            </div>	
-                            <div class="consult-inscriptions">
-                                <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarInscripciones}</a>
-                            </div>
-                        </div>
-                        <!-- Usuarios -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="usuarios">#{usuarioControlador.contarUsuarios()}</h1>
-                            </div>
-                            <div class="icono">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <p>#{formdashboardadmin.txtUsuarios}</p>
-                            <a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml" class="text-right d-block">#{formdashboardadmin.txtConsultarUsuarios}</a>
-                        </div>
-                        <!-- Visitantes -->
-                        <div class="modulo col-12 col-md-5">
-                            <div class="cantidad">
-                                <h1 id="visitantes">#{visitanteControlador.contarVisitantes()}</h1>
-                            </div>
-                            <div class="icono">
-                                <i class="fas fa-id-card-alt"></i>
-                            </div>
-                            <p>#{formdashboardadmin.txtVisitantes}</p>
-                            <a href="#" class="text-right d-block">#{formdashboardadmin.txtConsultarVisitantes}</a>
-                        </div>
-                    </section>
-                    <!-- Seccion derecha -->
-                    <aside class="novedades col-12 col-md-4">
-                        <!-- Eventos -->
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-calendar-alt"></i>#{formdashboardadmin.lblEventos}</h6>
-                            <h:form>
+                            <!-- Documentos -->
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar far fa-file-alt"></i>#{formdashboardadmin.lblEventos}</h6>
                                 <ul id="lista">
-                                    <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
-                                        <li>
-                                            <label class="date">
-                                                <h:outputText value="#{evento.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText>
-                                            </label>
-                                            <p><strong>#{evento.titulo}</strong></p>
-                                        </li>
-                                    </c:forEach>
+                                    <li>
+                                        <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../documentacion/documentos/ieee830.xhtml"><i class="pdf far fa-file-pdf" ></i>Formato IEEE830</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../documentacion/documentos/informe-analisis.xhtml"><i class="pdf far fa-file-pdf" ></i>Informe de analisis</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../documentacion/documentos/manual-corporativo.xhtml"><i class="pdf far fa-file-pdf"></i>Manual de identidad corporativa</a>
+                                    </li>
                                 </ul>
-                            </h:form>
-                            <div class="link">
-                                <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">#{formdashboardadmin.txtConsultarEventos}<i class="greater fas fa-greater-than"></i></a></li>
-                            </div>
-                        </div>
-                        <!-- Documentos -->
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>#{formdashboardadmin.lblEventos}</h6>
-                            <ul id="lista">
-                                <li>
-                                    <a href="../../documentacion/documentos/catalogo-patrones.xhtml"><i class="pdf far fa-file-pdf" ></i>Catalogo patrones de diseño</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/ieee830.xhtml"><i class="pdf far fa-file-pdf" ></i>Formato IEEE830</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/informe-analisis.xhtml"><i class="pdf far fa-file-pdf" ></i>Informe de analisis</a>
-                                </li>
-                                <li>
-                                    <a href="../../documentacion/documentos/manual-corporativo.xhtml"><i class="pdf far fa-file-pdf"></i>Manual de identidad corporativa</a>
-                                </li>
-                            </ul>
-                        </div>		
-                    </aside>
-                </div>
-            </main>		
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                            </div>		
+                        </aside>
+                    </div>
+                </main>		
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- bootstrap and jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
