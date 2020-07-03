@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../estilos-parqueaderos.css"/>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <style>
+            nav ul li{ width:20%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar parqueadero</title>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Agregar parqueadero</li>
+                </ol>
+            </div>
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3><i class="fas fa-parking" id="icono"></i>Crear nuevo parqueadero</h3>
+                        <hr/>
+                    </div>
+                    <div class="col-12 col-md-8 form">
+                        <!-- formulario -->
+                        <f:view>
+                            <!--formulario-->
+                            <h:form class="recorrer-dato was-validated sombra form">
+                                <div class="col-12">
+                                    <div class="caja bg-faded border-bottom-0">Parqueadero nuevo</div>
+                                </div><br></br>
+                                <div class="form-group row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><h:outputLabel value="Identificador parqueadero" for="idParqueadero" /></strong>
+                                        <h:inputText id="idParqueadero" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.idParqueadero}" title="Id Parquedero" required="true" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="apellido">Lugar</label></strong> 
+                                        <h:inputText id="lugar" class="form-control-plaintext" value="#{parqueaderoControlador.parqueadero.lugar}" required="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-12 mb-3">
+                                        <strong><label for="tipoDocumento">Estado</label></strong> 
+                                        <h:selectOneMenu id="estado" class="form-control-plaintext" value="#{parqueaderoControlador.parqueadero.estado}" required="true">
+                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
+                                            <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <h:commandButton value="Registrar" class="btn btn-outline-success btn-block" onclick="validar_formulario();" action="#{parqueaderoControlador.registrar()}"></h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </f:view>      
+                    </div>
+                </div>
+            </section> 
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- bootstrap and jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Validar formulario -->
+        <script src="../../../../vista/registro/registro.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+    </h:body>
+</html>
+
