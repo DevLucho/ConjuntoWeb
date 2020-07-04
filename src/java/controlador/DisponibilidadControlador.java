@@ -6,10 +6,15 @@
 package controlador;
 
 import entidades.Disponibilidad;
+import entidades.DisponibilidadDia;
+import entidades.ZonaComunal;
+import facade.DisponibilidadDiaFacade;
 import facade.DisponibilidadFacade;
+import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -21,8 +26,6 @@ import javax.ejb.EJB;
 @SessionScoped
 public class DisponibilidadControlador implements Serializable {
 
-    private String[] disponibilidadDias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
-
     private boolean domingo;
     private boolean lunes;
     private boolean martes;
@@ -31,10 +34,20 @@ public class DisponibilidadControlador implements Serializable {
     private boolean viernes;
     private boolean sabado;
 
+    private ZonaComunal zonaComunal;
+
     private Disponibilidad disponibilidad;
+
+    private DisponibilidadDia disponibilidadDia;
+
+    @EJB
+    ZonaComunalFacade zonaComunalFacade;
 
     @EJB
     DisponibilidadFacade disponibilidadFacade;
+
+    @EJB
+    DisponibilidadDiaFacade disponibilidadDiaFacade;
 
     /**
      * Creates a new instance of DisponibilidadControlador
@@ -44,6 +57,7 @@ public class DisponibilidadControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        zonaComunal = new ZonaComunal();
         domingo = false;
         lunes = false;
         martes = false;
@@ -52,55 +66,92 @@ public class DisponibilidadControlador implements Serializable {
         viernes = false;
         sabado = false;
         disponibilidad = new Disponibilidad();
+        disponibilidadDia = new DisponibilidadDia();
     }
 
     public void registrar() {
-        String diasDisponibilidad = "";
-
+        zonaComunalFacade.create(zonaComunal);
         if (domingo) {
-            diasDisponibilidad += disponibilidadDias[0] + ",";
+            disponibilidadDia.setIdDia(1);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (lunes) {
-            diasDisponibilidad += disponibilidadDias[1] + ",";
+            disponibilidadDia.setIdDia(2);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (martes) {
-            diasDisponibilidad += disponibilidadDias[2] + ",";
+            disponibilidadDia.setIdDia(3);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (miercoles) {
-            diasDisponibilidad += disponibilidadDias[3] + ",";
+            disponibilidadDia.setIdDia(4);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (jueves) {
-            diasDisponibilidad += disponibilidadDias[4] + ",";
+            disponibilidadDia.setIdDia(5);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (viernes) {
-            diasDisponibilidad += disponibilidadDias[5] + ",";
+            disponibilidadDia.setIdDia(6);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
         if (sabado) {
-            diasDisponibilidad += disponibilidadDias[6] + ",";
+            disponibilidadDia.setIdDia(7);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
         }
-        /*
-        disponibilidad.setDias(diasDisponibilidad);
-        disponibilidadFacade.create(disponibilidad);
+
+        domingo = false;
+        lunes = false;
+        martes = false;
+        miercoles = false;
+        jueves = false;
+        viernes = false;
+        sabado = false;
         disponibilidad = new Disponibilidad();
-    
-        */
-        }
-    
-    public String preActualizar(Disponibilidad disponibilidadActualizar){
+        zonaComunal = new ZonaComunal();
+    }
+
+    public String preActualizar(Disponibilidad disponibilidadActualizar) {
         disponibilidad = disponibilidadActualizar;
         return "prueba-d";
     }
     
-    public void actualizar(){
+    public List<Disponibilidad> consultarTodos() {
+        return disponibilidadFacade.findAll();
+    }
+
+    public void actualizar() {
         disponibilidadFacade.edit(disponibilidad);
     }
 
-    public String[] getDisponibilidadDias() {
-        return disponibilidadDias;
+    public DisponibilidadDia getDisponibilidadDia() {
+        return disponibilidadDia;
     }
 
-    public void setDisponibilidadDias(String[] disponibilidadDias) {
-        this.disponibilidadDias = disponibilidadDias;
+    public void setDisponibilidadDia(DisponibilidadDia disponibilidadDia) {
+        this.disponibilidadDia = disponibilidadDia;
+    }
+
+    public ZonaComunal getZonaComunal() {
+        return zonaComunal;
+    }
+
+    public void setZonaComunal(ZonaComunal zonaComunal) {
+        this.zonaComunal = zonaComunal;
     }
 
     public Disponibilidad getDisponibilidad() {

@@ -59,7 +59,7 @@
                                 <div class="collapse" id="titulo">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h:inputText id="nombre" class="form-control" value="#{zonaComunalControlador.zonaComunal.nombre}" title="Nombre zona comun" pt:placeholder="Ingrese el nombre de la zona comunal" required="true"/>
+                                            <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="Nombre zona comun" pt:placeholder="Ingrese el nombre de la zona comunal" required="true"/>
                                         </div>
                                     </div>
                                 </div>
@@ -82,19 +82,19 @@
                                             <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                                 <div class="form-group row">
                                                     <div class="col-12 col-sm col-md col-lg col-xl">
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.domingo}"></h:selectBooleanCheckbox>Domingo
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>Domingo
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.lunes}"></h:selectBooleanCheckbox>Lunes
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>Lunes
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.martes}"></h:selectBooleanCheckbox>Martes
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}"></h:selectBooleanCheckbox>Martes
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.miercoles}"></h:selectBooleanCheckbox>Miercoles
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}"></h:selectBooleanCheckbox>Miercoles
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.jueves}"></h:selectBooleanCheckbox>Jueves
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}"></h:selectBooleanCheckbox>Jueves
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.viernes}"></h:selectBooleanCheckbox>Viernes
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}"></h:selectBooleanCheckbox>Viernes
                                                         <!-- . -->
-                                                        <h:selectBooleanCheckbox value="#{zonaComunalControlador.sabado}"></h:selectBooleanCheckbox>Sabado
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}"></h:selectBooleanCheckbox>Sabado
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,7 +105,7 @@
                                             <div class="form-group row">
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones desde las:</label></b>
-                                                    <h:inputText a:type="time" value="#{zonaComunalControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
+                                                    <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
                                                         <f:convertDateTime pattern="HH:mm" />
                                                     </h:inputText>
                                                     <!--
@@ -163,7 +163,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones hasta las:</label></b>
-                                                    <h:inputText a:type="time" value="#{zonaComunalControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
+                                                    <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
                                                         <f:convertDateTime pattern="HH:mm" />
                                                     </h:inputText>
                                                     <!--
@@ -221,7 +221,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 mt-3">
                                                     <b><label>Tiempo maximo de reserva en horas:</label></b>
-                                                    <h:selectOneMenu value="#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
+                                                    <h:selectOneMenu value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
                                                         <f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
@@ -261,7 +261,7 @@
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle zona comun" id="descripcion" value="#{zonaComunalControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
+                                <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle zona comun" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
                             </div>
 
                             <div class="col-12 col-md-3">
@@ -275,7 +275,7 @@
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
-                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{zonaComunalControlador.zonaComunal.img}" required="true"/>
+                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">
@@ -287,7 +287,7 @@
                             <!-- Boton publicar -->
                             <div class="row justify-content-center mt-3 mb-3">
                                 <div class="col-12 col-md-2">
-                                    <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{zonaComunalControlador.registrar()}"></h:commandButton>
+                                    <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{disponibilidadControlador.registrar()}"></h:commandButton>
                                 </div>
                             </div>
                         </div>
