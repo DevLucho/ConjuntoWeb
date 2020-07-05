@@ -19,16 +19,7 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <style>
-            nav ul li{ width:20%;}
-            @media screen and (max-width:903px){
-                nav ul li{
-                    width: 100%;
-                    text-align: left;
-                }
-            }
-        </style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar parqueadero</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar vehiculo</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -41,13 +32,14 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item active">Agregar parqueadero</li>
+                    <li class="breadcrumb-item"><a href="./consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
+                    <li class="breadcrumb-item active">Agregar vehiculo</li>
                 </ol>
             </div>
             <section class="container-fluid" id="principal">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3><i class="fas fa-parking" id="icono"></i>Crear nuevo parqueadero</h3>
+                        <h3><i class="fas fa-car" id="icono"></i>Agregar nuevo vehiculo de residente</h3>
                         <hr/>
                     </div>
                     <div class="col-12 col-md-8 form">
@@ -56,27 +48,45 @@
                             <!--formulario-->
                             <h:form class="recorrer-dato was-validated sombra form">
                                 <div class="col-12">
-                                    <div class="caja bg-faded border-bottom-0">Parqueadero nuevo</div>
+                                    <div class="caja bg-faded border-bottom-0">Vehiculo nuevo de residente</div>
                                 </div><br></br>
                                 <div class="form-group row">
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="Identificador parqueadero" for="idParqueadero" /></strong>
-                                        <h:inputText id="idParqueadero" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.idParqueadero}" title="Id Parquedero" required="true" disabled="true"/>
+                                        <strong><h:outputLabel value="Placa" for="placa" /></strong>
+                                        <h:inputText id="placa" styleClass="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" disabled="false"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="apellido">Lugar</label></strong> 
-                                        <h:inputText id="lugar" class="form-control-plaintext" value="#{parqueaderoControlador.parqueadero.lugar}" required="true"/>
-                                    </div>
-                                    <div class="col-12 col-md-12 mb-3">
-                                        <strong><label for="tipoDocumento">Estado</label></strong> 
-                                        <h:selectOneMenu id="estado" class="form-control-plaintext" value="#{parqueaderoControlador.parqueadero.estado}" required="true">
+                                        <strong><label for="tipoVehiculo">Tipo Vehiculo</label></strong> 
+                                        <h:selectOneMenu id="tipoVehiculo" class="form-control-plaintext" value="#{vehiculoControlador.vehiculo.tipoVehiculo}" required="true">
                                             <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
-                                            <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
+                                            <f:selectItem itemValue = "Automovil" itemLabel = "Automovil" /> 
+                                            <f:selectItem itemValue = "Bicicleta" itemLabel = "Bicicleta" /> 
+                                            <f:selectItem itemValue = "Motocicleta" itemLabel = "Motocicleta" /> 
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><h:outputLabel value="idParqueadero" for="idParqueadero"/></strong>
+                                        <h:selectOneMenu id="idParqueadero" class="form-control-plaintext" value="#{vehiculoControlador.vehiculo.tipoVehiculo}" required="true">
+                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.idParqueadero}" itemLabel="#{parCont.lugar}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><h:outputLabel value="idResidente" for="idResidente" /></strong>
+                                        <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{residenteControlador.residente.idResidente}" required="true">
+                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idResidente}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><h:outputLabel value="idVisitante" for="idVisitante" /></strong>
+                                        <h:selectOneMenu id="idVisitante" class="form-control-plaintext" value="#{visitanteControlador.visitante.idVisitante}" required="true">
+                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems var="visCont" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{visCont.idVisitante}" itemLabel="#{visCont.idVisitante}" itemDisabled="true"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <h:commandButton value="Registrar" class="btn btn-outline-success btn-block" onclick="validar_formulario();" action="#{parqueaderoControlador.registrar()}"></h:commandButton>
+                                        <h:commandButton value="Registrar" class="btn btn-outline-success btn-block" action="#{vehiculoControlador.registrar()}"></h:commandButton>
                                     </div>
                                 </div>
                             </h:form>

@@ -21,16 +21,7 @@
         <!-- Estilos datatables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" href="../../../style-tablas.css"/>
-        <style>
-            nav ul li{ width:20%;}
-            @media screen and (max-width:903px){
-                nav ul li{
-                    width: 100%;
-                    text-align: left;
-                }
-            }
-        </style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar parqueaderos</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar vehiculos</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -43,7 +34,7 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item active">Consultar parqueaderos</li>
+                    <li class="breadcrumb-item active">Consultar vehiculos</li>
                 </ol>
             </div>
             <!-- Contenido principal -->
@@ -51,7 +42,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>
-                            <i class="fas fa-parking"></i>Consultar parqueaderos
+                            <i class="fas fa-car"></i>Consultar vehiculos
                         </h3>
                         <hr/>
                     </div>
@@ -61,32 +52,44 @@
                     <f:view>
                         <h:form>
                             <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                         value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
+                                         value="#{vehiculoControlador.consultarTodos()}" var="vc">
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Identificador Parqueadero"/>
+                                        <h:outputText value="Identificador vehiculo"/>
                                     </f:facet>
-                                    <h:outputText value="#{parqueadero.idParqueadero}"/>
+                                    <h:outputText value="#{vc.placa}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Lugar"/>
                                     </f:facet>
-                                    <h:outputText value="#{parqueadero.lugar}"/>
+                                    <h:outputText value="#{vc.idParqueadero.lugar}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Estado"/>
+                                        <h:outputText value="Tipo"/>
                                     </f:facet>
-                                    <h:outputText value="#{parqueadero.estado}"/>
+                                    <h:outputText value="#{vc.tipoVehiculo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Visitante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vc.idVisitante.idVisitante}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Residente"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vc.idResidente.idResidente}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Acciones"/>
                                     </f:facet>
                                     <div class="btn-group-sm">
-                                        <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar parqueadero" action="#{parqueaderoControlador.eliminar(parqueadero)}"></h:commandButton>
-                                        <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar parqueadero" action="#{parqueaderoControlador.preActulizar(parqueadero)}"></h:commandButton>
+                                        <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar vehiculo" action="#{vehiculoControlador.eliminar(vc)}"></h:commandButton>
+                                        <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar vehiculo" action="#{vehiculoControlador.preActulizar(vc)}"></h:commandButton>
                                     </div>
                                 </h:column>
                             </h:dataTable>

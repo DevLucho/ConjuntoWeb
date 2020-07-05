@@ -30,7 +30,7 @@
                 }
             }
         </style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar parqueadero</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar vehiculo</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -43,16 +43,16 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./ConsultarParqueaderos.xhtml">Consultar parqueaderos</a></li>
-                    <li class="breadcrumb-item active">Editar parqueaderos</li>
+                    <li class="breadcrumb-item"><a href="./consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
+                    <li class="breadcrumb-item active">Editar vehiculos</li>
                 </ol>
             </div>
             <!-- Contenido principal -->
-            <section class="container-fluid" id="principal" style="height:560px;">
+            <section class="container-fluid" id="principal">
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>
-                            <i class="fas fa-edit"></i>Editar parqueaderos
+                            <i class="fas fa-edit"></i>Editar vehiculos
                         </h3>
                         <hr/>
                     </div>
@@ -64,29 +64,44 @@
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <div class="col-12 font">
-                                        <h:outputLabel value="Id Parquedero" for="idParqueadero" />
-                                        <h:inputText id="idParqueadero" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.idParqueadero}" title="Id Parquedero" required="true" requiredMessage="The IdRol field is required." disabled="true"/>
+                                        <h:outputLabel value="Placa" for="Placa" />
+                                        <h:inputText id="Placa" styleClass="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" requiredMessage="The IdRol field is required." disabled="true"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-12 font">
-                                        <h:outputLabel value="Lugar" for="lugar" />
-                                        <h:inputText id="lugar" styleClass="form-control" value="#{parqueaderoControlador.parqueadero.lugar}" title="Lugar" required="true"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-12 font">
-                                        <h:outputLabel value="Estado" for="estado"/><br></br>
-                                        <h:selectOneMenu class="custom-select" value = "#{parqueaderoControlador.parqueadero.estado}"> 
+                                        <h:outputLabel value="Tipo vehiculo" for="tipoveh"/><br></br>
+                                        <h:selectOneMenu class="custom-select" value = "#{vehiculoControlador.vehiculo.tipoVehiculo}"> 
                                             <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItem itemValue = "Ocupado" itemLabel = "Ocupado" /> 
-                                            <f:selectItem itemValue = "Desocupado" itemLabel = "Desocupado" /> 
+                                            <f:selectItem itemValue = "Bicicleta" itemLabel = "Bicicleta" /> 
+                                            <f:selectItem itemValue = "Motocicleta" itemLabel = "Motocicleta" /> 
+                                            <f:selectItem itemValue = "Automovil" itemLabel = "Automovil" /> 
                                         </h:selectOneMenu> 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="id Parqueadero" for="idpar"/>
+                                        <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idParqueadero.lugar}">
+                                            <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.lugar}" itemDisabled="true" itemLabel="#{parCont.lugar}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="id Visitante" for="idVisitante" />
+                                        <h:inputText id="idVisitante" styleClass="form-control" value="#{vehiculoControlador.vehiculo.idVisitante.idVisitante}" title="Id Visitante" required="true" requiredMessage="The field is required." disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 font">
+                                        <h:outputLabel value="id Residente" for="idResidente" />
+                                        <h:inputText id="idResidente" styleClass="form-control" value="#{vehiculoControlador.vehiculo.idResidente.idResidente}" title="Id Residente" required="true" requiredMessage="The field is required." disabled="true"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{parqueaderoControlador.actualizar()}"></h:commandButton>
+                                <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{vehiculoControlador.actualizar()}"></h:commandButton>
                             </div>
                         </h:form>
                     </f:view>
