@@ -55,14 +55,15 @@
                         <!-- formulario -->
                         <f:view>
                             <!--formulario-->
-                            <h:form class="recorrer-dato was-validated sombra form">
+                            
                                 <div class="col-12">
                                     <div class="caja bg-faded border-bottom-0">Vehiculo nuevo de residente</div>
-                                </div><br></br>
+                                </div>
+                                <h:form class="recorrer-dato was-validated sombra form">
                                 <div class="form-group row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><h:outputLabel value="Placa" for="placa" /></strong>
-                                        <h:inputText id="placa" styleClass="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" disabled="false"/>
+                                        <h:inputText id="placa" class="form-control-plaintext" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" disabled="false"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="tipoVehiculo">Tipo Vehiculo</label></strong> 
