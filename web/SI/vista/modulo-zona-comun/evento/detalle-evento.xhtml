@@ -1,12 +1,178 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <!-- Font righteous -->
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <style>
+            *{
+                font-family: 'Helvetica';
+            }
+            /* inicio de estilos de descripcion de zona */
+            svg{
+                background:url("#{eventoControlador.evento.img}");
+                background-size:cover;
+                width:35vmin; 
+                height:auto;
+                display:block;
+            }
+            text{
+                font-size:10px;
+                transition:font-size .9s ease-out;
+                font-weight:900;
+                font-family:arial;
+            }
+            svg:hover text{
+                transition:font-size .9s ease-in;
+                font-size: 300px;
+            }
+            .sobree{
+                margin: -2.5% 0% 4% 30%;
+            }
+            .contenidodescri{
+                margin-top: 25px;
+            }
+
+            h3{
+                color:#33406A;
+                margin-bottom: 0;
+            }
+        </style>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <title>Administrador | Zona comunal</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <!-- Contenedor principal -->
+        <div class="contenedor">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- miga de pan -->
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    </c:if>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                        <style>
+                            nav ul li{ width:25%;}
+                            @media screen and (max-width:903px){
+                                nav ul li{
+                                    width: 100%;
+                                    text-align: left;
+                                }
+                            }
+                        </style>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                    </c:if>
+                    <li class="breadcrumb-item"><a href="./consultar-evento.xhtml">Consultar evento</a></li>
+                    <li class="breadcrumb-item active">Detalle evento</li>
+                </ol>
+            </div>
+            <!-- main -->
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="fas fa-stream"></i>
+                            Detalle evento
+                        </h3>
+                    </div>
+                </div>
+                <hr/>
+                <h:form>
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12 col-md-10">
+                            <h2>#{eventoControlador.evento.titulo}</h2>
+                            <hr/>
+
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="mt-0">Descripción</h4>
+                                    <p>#{eventoControlador.evento.detalle}</p>
+                                    <hr/>
+                                    <div class="media">
+                                        <i class="far fa-clock d-flex align-self-start mr-3"></i>
+                                        <div class="media-body">
+                                            <h4 class="mt-0">Datos</h4>
+                                            <p>
+                                                El evento #{eventoControlador.evento.titulo} se realizara en la zona 
+                                                #{eventoControlador.evento.idZonaComunal.nombre}, empieza a las 
+                                                <mark>
+                                                    <h:outputText value="#{eventoControlador.evento.fechaInicio}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText> 
+                                                    <h:outputText value="#{eventoControlador.evento.horaInicio}">
+                                                        <f:convertDateTime pattern="HH:mm a" />
+                                                    </h:outputText>
+                                                </mark> 
+                                                hasta las 
+                                                <mark>
+                                                    <h:outputText value="#{eventoControlador.evento.fechaFin}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText> 
+                                                    <h:outputText value="#{eventoControlador.evento.horaFin}">
+                                                        <f:convertDateTime pattern="HH:mm a" />
+                                                    </h:outputText>
+                                                </mark>
+                                            </p>
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="media">
+                                <div class="media-body">
+                                    <strong><h4 class="mt-0 text-right">Notas</h4></strong>
+                                    <p class="text-right">
+                                        El organizador del evento es #{eventoControlador.evento.organizador}.
+                                    </p>
+                                </div>
+                                <img src="#{eventoControlador.evento.img}" width="64" height="64" alt="" class="ml-3"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2" style="text-align: center; padding: 0;">
+                            <button type="button" class="btn btn-success btn-block" onclick="location.href = './generar-reserva.xhtml'">Inscribirme</button>
+                            <div class="contenidodescri">
+                                <svg viewbox="0 0 50 50" width="50" height="50">
+                                    <defs>
+                                        <mask id="mask" x="0" y="0" width="100" height="49">
+                                            <rect x="0.5" y="0.5" width="49" height="49" fill="#fff"/>
+                                            <text x="10" text-anchor="middle" y="50" dy="0">F</text>
+                                            <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">O</text>
+                                            <text x="30" text-anchor="middle" y="50" dy="0">T</text>
+                                            <text x="40" text-anchor="middle" y="50" dy="0">O</text>
+                                        </mask>
+                                    </defs>
+                                    <rect x="0.5" y="0.5" width="49" height="49" mask="url(#mask)" fill-opacity="1" fill="#e7e7e8"/>
+                                </svg>
+                            </div>
+                        </div> 
+                    </div> 
+                </h:form>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </div>
+        <!-- Bootstrap y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Menu responsive-->
+        <script src="../../navs/nav.js"></script>
     </h:body>
 </html>
 

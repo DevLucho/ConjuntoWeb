@@ -54,6 +54,12 @@
                                 <li class="nav-item ">
                                     <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;">#{eventoControlador.contarEventos()}</span></a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a href="#tab2" class="nav-link" data-toggle="tab">Finalizados<span class="badge badge-info" style="margin-left: 5px;"></span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="#tab3" class="nav-link" data-toggle="tab">Cancelados<span class="badge badge-info" style="margin-left: 5px;"></span></a>
+                                </li>
                             </ul>
                             <!-- Tablas -->
                             <div class="tab-content">
@@ -117,7 +123,7 @@
                                                     <!-- . -->
                                                     <h:commandButton value="" class="fas fa-ban btn btn-outline-danger btn-cancelar-evento" title="Cancelar evento" action="#{eventoControlador.eliminar(evento)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="far fa-eye btn btn-outline-info" title="Ver evento" action="#{usuarioControlador.consultarPorId(usuario.idPerfil)}"></h:commandButton>
+                                                    <h:commandButton value="" class="far fa-eye btn btn-outline-info" title="Ver evento" action="#{eventoControlador.consultarEvento(evento.idEvento)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>

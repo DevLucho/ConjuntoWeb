@@ -43,7 +43,7 @@ public class FichaIngresoFacade extends AbstractFacade<FichaIngreso> {
             System.out.println(item[4]);
             System.out.println(item[6]);
             System.out.println(item[7]);
-        }
+}
         return listaFicha;
     }
 }

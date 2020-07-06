@@ -25,7 +25,7 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar rol</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
@@ -36,9 +36,9 @@
                 <!-- miga pan -->
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">Consultar roles &amp; funciones</a></li>
-                        <li class="breadcrumb-item active">Consultar roles</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarroles.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">#{formconsultarroles.ConsultarRoles}</a></li>
+                        <li class="breadcrumb-item active">#{formconsultarroles.txtConsultarRoles}</li>
                     </ol>
                 </div>
                 <!-- Contenido principal -->
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-12 text-center">
                             <h3>
-                                <i class="fas fa-users"></i>Consultar roles
+                                <i class="fas fa-users"></i>#{formconsultarroles.txtConsultarRoles}
                             </h3>
                             <hr/>
                         </div>
@@ -58,19 +58,19 @@
                                 <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%" value="#{rolControlador.consultarTodos()}" var="rol">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Id rol"/>
+                                            <h:outputText value="Id #{formconsultarusuario.lblRol}"/>
                                         </f:facet>
                                         <h:outputText value="#{rol.idRol}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Nombre"/>
+                                            <h:outputText value="#{formconsultarusuario.lblRol}"/>
                                         </f:facet>
                                         <h:outputText value="#{rol.nombre}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones"/>
+                                            <h:outputText value="#{formconsultarusuario.lblAcciones}"/>
                                         </f:facet>
                                         <div class="btn-group-sm">
                                             <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar rol" action="#{rolControlador.eliminar(rol)}"></h:commandButton>

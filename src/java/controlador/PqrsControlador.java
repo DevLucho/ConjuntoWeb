@@ -14,6 +14,10 @@ import facade.TipoPqrsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,6 +33,8 @@ public class PqrsControlador implements Serializable {
     /**
      * Creates a new instance of PqrsControlador
      */
+    private String horaI = "";
+    private String fechaI = "";
     private Pqrs pqrs;
     private Residente residente;
     private TipoPqrs tipoPqrs;
@@ -56,6 +62,19 @@ public class PqrsControlador implements Serializable {
         pqrs.setIdResidente(residente);
         pqrs.setIdTipoPqrs(tipoPqrs);
         pqrs.setEstado("Abierto");
+        
+        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaI = fecha.format(date);
+        pqrs.setFecha(date);
+        
+        DateFormat hora = new SimpleDateFormat("HH:mm:ss");
+        Calendar cale = Calendar.getInstance();
+        Date dates = cale.getTime();
+        horaI = hora.format(dates);
+        pqrs.setHora(dates);
+        
         pqrsFacade.create(pqrs);
         residente = new Residente();
         tipoPqrs = new TipoPqrs();

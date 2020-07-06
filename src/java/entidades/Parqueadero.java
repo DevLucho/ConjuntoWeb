@@ -49,9 +49,7 @@ public class Parqueadero implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "lugar")
     private String lugar;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    @Size(max = 10)
     @Column(name = "estado")
     private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idParqueadero", fetch = FetchType.LAZY)
@@ -64,10 +62,9 @@ public class Parqueadero implements Serializable {
         this.idParqueadero = idParqueadero;
     }
 
-    public Parqueadero(Integer idParqueadero, String lugar, String estado) {
+    public Parqueadero(Integer idParqueadero, String lugar) {
         this.idParqueadero = idParqueadero;
         this.lugar = lugar;
-        this.estado = estado;
     }
 
     public Integer getIdParqueadero() {

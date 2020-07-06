@@ -93,8 +93,10 @@
 
                                 </div>
                                 <div class="col-6">
-                                    <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="The IdTipoPqrs field is required.">
-                                        <f:selectItems var="residente" value="#{residenteControlador.consultarTodos()}" itemValue="#{residente.idResidente}" itemLabel="#{residente.idResidente}"/>
+                                    <p>Residente:</p>
+                                    <hr/>
+                                    <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" class="form-control col-12 col-md-4" title="IdResidente" required="true" requiredMessage="The IdTipoPqrs field is required.">
+                                        <f:selectItems var="residente" value="#{residenteControlador.consultarTodos()}" itemValue="#{residente.idResidente}" itemLabel="#{residente.idPerfil.nombre}"/>
                                     </h:selectOneMenu>
                                 </div>
 
@@ -118,8 +120,9 @@
                     </div>
                 </div>
             </h:form>
-
         </section>
+        <!-- footer -->
+        <ui:include src="../../footer/footer.xhtml"></ui:include>
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>

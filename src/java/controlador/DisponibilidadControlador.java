@@ -133,6 +133,10 @@ public class DisponibilidadControlador implements Serializable {
     public List<Disponibilidad> consultarTodos() {
         return disponibilidadFacade.findAll();
     }
+    
+    public List<Disponibilidad> consultarZonaComunal(){
+        return disponibilidadFacade.consultarZonaComunal();
+    }
 
     public void actualizar() {
         disponibilidadFacade.edit(disponibilidad);

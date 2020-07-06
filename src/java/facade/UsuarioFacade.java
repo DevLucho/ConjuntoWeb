@@ -71,8 +71,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         query.setParameter("idRol", idRol);
         return ((Long) query.getSingleResult()).intValue();
     }
-    
-    public List<Usuario> usuarioAdmin(int idRol){
+
+    public List<Usuario> usuarioAdmin(int idRol) {
         Query query;
         query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol");
         query.setParameter("idRol", idRol);

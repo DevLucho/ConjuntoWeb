@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Disponibilidad;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,11 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
     public DisponibilidadFacade() {
         super(Disponibilidad.class);
     }
-    
+
+    public List<Disponibilidad> consultarZonaComunal() {
+        Query query;
+        query = em.createQuery("SELECT DISTINCT c.idZonaComunal FROM Disponibilidad c");
+        return query.getResultList();
+    }
+
 }

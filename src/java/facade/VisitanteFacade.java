@@ -40,7 +40,7 @@ public class VisitanteFacade extends AbstractFacade<Visitante> {
             System.out.println(iten[1]);
             System.out.println(iten[2]);
             System.out.println(iten[3]);
-        }
+}
         return listaVisitante;
     }
 }

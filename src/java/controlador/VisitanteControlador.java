@@ -133,7 +133,7 @@ public class VisitanteControlador implements Serializable {
         if ("Si".equals(visitante.getVehiculo())){
             vehiculo.setIdVisitante(visitante);
             vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
-            
+            vehiculoFacade.create(vehiculo);
         }
         fichaIngreso = new FichaIngreso();
         inmueble = new Inmueble();

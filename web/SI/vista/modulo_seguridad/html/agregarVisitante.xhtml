@@ -10,7 +10,7 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8" />
-        
+
         <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar Visitante</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"
@@ -55,6 +55,21 @@
                     width: 100%;
                     text-align: left;
                 }
+            }
+            /* Scroll */
+            section::-webkit-scrollbar {    
+                width: 10px;
+                height: 5px;
+            }
+            section::-webkit-scrollbar-thumb {
+                background:#c1c1d3;
+                border-radius:5px;
+            }
+            section::-webkit-scrollbar-thumb:hover {
+                background:#c1c1d3;
+            }
+            section::-webkit-scrollbar-track {
+                background:#2A6378;
             }
         </style>
     </h:head>
@@ -104,7 +119,7 @@
                                             <li>
                                                 <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
                                                 <h:selectOneMenu onchange="submit();" class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
-                                                    
+
                                                     <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
                                                     <f:selectItem itemValue="Si" itemLabel="Si"/>
                                                     <f:selectItem itemValue="No" itemLabel="No"/>
@@ -120,7 +135,7 @@
                                                         <f:selectItem itemLabel="Bicicleta" itemValue="Bicicleta"/>
                                                         <f:selectItem itemLabel="Motocicleta" itemValue="Motocicleta"/>
                                                     </h:selectOneMenu>
-                                                    <h:outputLabel for="idpar">idParqueadero</h:outputLabel>
+                                                    <h:outputLabel for="idpar">Parqueadero</h:outputLabel>
                                                     <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.parqueadero.idParqueadero}">
                                                         <f:selectItems var="p" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{p.idParqueadero}" itemLabel="#{p.lugar}"/>
                                                     </h:selectOneMenu>
@@ -141,7 +156,7 @@
                     <div class="col-sm-0 col-md-4 col-xl-4 pepue">
                         <!--________________________ inicio de seccion de noticias __________________- -->
                         <h:form>
-                            <section class="noticiasSeguridad border">
+                            <div class="noticiasSeguridad border">
                                 <h3 class="noticiah1"><i class="fas fa-bullhorn mr-3"></i>Ultimos comunicados</h3>
                                 <div class="linea border">
                                     <c:forEach items="#{comunicadoControlador.consultarTodos()}" var="comunicado">
@@ -155,7 +170,7 @@
                                         </figure>
                                     </c:forEach>
                                 </div>
-                            </section>
+                            </div>
                         </h:form>
                         <!-- ________________________- fin de seccion de noticias __________________- -->
                     </div>
