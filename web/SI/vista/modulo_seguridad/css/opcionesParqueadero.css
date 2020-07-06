@@ -4,22 +4,24 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 16-jun-2020, 1:25:23
+    Created on : 05-jul-2020, 21:12:34
     Author     : Sebastian
 */
-  .map{
-      font-size: 160px;
-      margin-left: 35%;
+.map{
+      font-size: 130px;
+      margin-left: 29%;
   }
-  .mn{margin-left: 30%;}
+  .mn{margin-left: 25%;}
+  .mm{margin-left: 20%;}
   .opciones{
-      width: 75%;
-      margin-left: 12.5%;
+      width: 95%;
+      margin-left: 2.5%;
   }
-  .agregar{width: 42.5%}
-  h3{margin-top:1%  !important;}
+  .agregar{width: 18.6%}
+  h3{margin-top:18% !important; font-size: 31px !important}
 @media screen and (max-width: 800px){/*inicio de responsive para tablet*/
-    .map{font-size: 100px;}
+    .map{font-size: 80px;}
+    h3{font-size: 18px !important}
 }
 @media screen and (max-width: 600px){/*inicio de responsive para cel*/
     .agregar{width: 80%}
@@ -28,11 +30,13 @@ and open the template in the editor.
         margin-top: -1%;
     }
     h3{
-        margin-top: -25% !important;
+        margin-top: -18% !important;
         margin-right: 7% !important;
+        font-size: 31px !important;
     }
     .opciones{
-        height: 70vh;
+        height: 140vh;
         padding-top: 3%;
     }
+    .container-fluid{height: 170vh}
 }
