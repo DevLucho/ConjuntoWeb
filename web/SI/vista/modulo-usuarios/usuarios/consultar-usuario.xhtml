@@ -14,7 +14,7 @@
         <!-- Estilos -->
         <link rel="stylesheet" href="../../../style-tablas.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
-        <link rel="stylesheet" href="../../navs/nav.css"/>
+        <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <!-- css bootstrap 4 datatable -->
         <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css"/>
@@ -111,13 +111,13 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="#{formconsultarusuario.lblCelular}"/>
+                                                    <h:outputText value="#{formconsultarusuario.lblEmail}"/>
                                                 </f:facet>
                                                 <h:outputText value="#{usuario.correo}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="#{formconsultarusuario.lblEmail}"/>
+                                                    <h:outputText value="#{formconsultarusuario.lblRol}"/>
                                                 </f:facet>
                                                 <h:outputText value="#{usuario.idRol.nombre}"/>
                                             </h:column>
@@ -179,7 +179,7 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="#{formconsultarusuario.lblApartamento}"/>
+                                                    <h:outputText value="#{formconsultarusuario.lblInmueble}"/>
                                                 </f:facet>
                                                 <h:outputText value="#{residente.idInmueble.idTorre.idTorre}"/> -
                                                 <h:outputText value="#{residente.idInmueble.idApartamento.idApartamento}"/>

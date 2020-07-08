@@ -46,9 +46,7 @@ public class Inscripcion implements Serializable {
     @Basic(optional = false)
     @Column(name = "CodInscripcion")
     private Integer codInscripcion;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "fechaInscripcion")
@@ -73,9 +71,8 @@ public class Inscripcion implements Serializable {
         this.codInscripcion = codInscripcion;
     }
 
-    public Inscripcion(Integer codInscripcion, String nombre, String estado) {
+    public Inscripcion(Integer codInscripcion, String estado) {
         this.codInscripcion = codInscripcion;
-        this.nombre = nombre;
         this.estado = estado;
     }
 
