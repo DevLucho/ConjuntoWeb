@@ -31,16 +31,17 @@ public class VisitanteFacade extends AbstractFacade<Visitante> {
     public VisitanteFacade() {
         super(Visitante.class);
     }
-     public List<Object[]> consultarVis(){
+
+    public List<Object[]> consultarVis() {
         List<Object[]> listaVisitante = new ArrayList();
         Query query = em.createNativeQuery("select * from visitante");
         listaVisitante = query.getResultList();
-        for(Object[] iten: listaVisitante){
+        for (Object[] iten : listaVisitante) {
             System.out.println(iten[0]);
             System.out.println(iten[1]);
             System.out.println(iten[2]);
             System.out.println(iten[3]);
-}
+        }
         return listaVisitante;
     }
 }
