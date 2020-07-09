@@ -14,9 +14,11 @@ import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -26,6 +28,8 @@ import javax.ejb.EJB;
 @SessionScoped
 public class DisponibilidadControlador implements Serializable {
 
+    @Inject
+    private MensajeControlador mensaje;
     private boolean domingo;
     private boolean lunes;
     private boolean martes;
@@ -39,6 +43,8 @@ public class DisponibilidadControlador implements Serializable {
     private Disponibilidad disponibilidad;
 
     private DisponibilidadDia disponibilidadDia;
+    
+    private List<Disponibilidad> disponibilidadZona;
 
     @EJB
     ZonaComunalFacade zonaComunalFacade;
@@ -67,6 +73,7 @@ public class DisponibilidadControlador implements Serializable {
         sabado = false;
         disponibilidad = new Disponibilidad();
         disponibilidadDia = new DisponibilidadDia();
+        disponibilidadZona = new ArrayList();
     }
 
     public void registrar() {
@@ -123,19 +130,26 @@ public class DisponibilidadControlador implements Serializable {
         sabado = false;
         disponibilidad = new Disponibilidad();
         zonaComunal = new ZonaComunal();
+        mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
     }
 
     public String preActualizar(Disponibilidad disponibilidadActualizar) {
         disponibilidad = disponibilidadActualizar;
         return "prueba-d";
     }
-    
+
     public List<Disponibilidad> consultarTodos() {
         return disponibilidadFacade.findAll();
     }
-    
-    public List<Disponibilidad> consultarZonaComunal(){
+
+    public List<Disponibilidad> consultarZonaComunal() {
         return disponibilidadFacade.consultarZonaComunal();
+    }
+    
+    public String consultarDisponibilidad(ZonaComunal zonaComunal){
+        this.zonaComunal = zonaComunal;
+        disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal);
+        return "detalle-zona";
     }
 
     public void actualizar() {
@@ -220,6 +234,22 @@ public class DisponibilidadControlador implements Serializable {
 
     public void setSabado(boolean sabado) {
         this.sabado = sabado;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public List<Disponibilidad> getDisponibilidadZona() {
+        return disponibilidadZona;
+    }
+
+    public void setDisponibilidadZona(List<Disponibilidad> disponibilidadZona) {
+        this.disponibilidadZona = disponibilidadZona;
     }
 
 }

@@ -35,9 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ZonaComunal.findAll", query = "SELECT z FROM ZonaComunal z")
     , @NamedQuery(name = "ZonaComunal.findByIdZonaComunal", query = "SELECT z FROM ZonaComunal z WHERE z.idZonaComunal = :idZonaComunal")
     , @NamedQuery(name = "ZonaComunal.findByNombre", query = "SELECT z FROM ZonaComunal z WHERE z.nombre = :nombre")
-    , @NamedQuery(name = "ZonaComunal.findByTiempoMaximoReserva", query = "SELECT z FROM ZonaComunal z WHERE z.tiempoMaximoReserva = :tiempoMaximoReserva")
     , @NamedQuery(name = "ZonaComunal.findByDescripcion", query = "SELECT z FROM ZonaComunal z WHERE z.descripcion = :descripcion")
-    , @NamedQuery(name = "ZonaComunal.findByImg", query = "SELECT z FROM ZonaComunal z WHERE z.img = :img")})
+    , @NamedQuery(name = "ZonaComunal.findByImg", query = "SELECT z FROM ZonaComunal z WHERE z.img = :img")
+    , @NamedQuery(name = "ZonaComunal.findByTiempoMaximoReserva", query = "SELECT z FROM ZonaComunal z WHERE z.tiempoMaximoReserva = :tiempoMaximoReserva")})
 public class ZonaComunal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,16 +53,16 @@ public class ZonaComunal implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tiempoMaximoReserva")
-    private int tiempoMaximoReserva;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
     @Size(max = 100)
     @Column(name = "img")
     private String img;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tiempoMaximoReserva")
+    private int tiempoMaximoReserva;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
     private List<Evento> eventoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
@@ -77,11 +77,11 @@ public class ZonaComunal implements Serializable {
         this.idZonaComunal = idZonaComunal;
     }
 
-    public ZonaComunal(Integer idZonaComunal, String nombre, int tiempoMaximoReserva, String descripcion) {
+    public ZonaComunal(Integer idZonaComunal, String nombre, String descripcion, int tiempoMaximoReserva) {
         this.idZonaComunal = idZonaComunal;
         this.nombre = nombre;
-        this.tiempoMaximoReserva = tiempoMaximoReserva;
         this.descripcion = descripcion;
+        this.tiempoMaximoReserva = tiempoMaximoReserva;
     }
 
     public Integer getIdZonaComunal() {
@@ -100,14 +100,6 @@ public class ZonaComunal implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getTiempoMaximoReserva() {
-        return tiempoMaximoReserva;
-    }
-
-    public void setTiempoMaximoReserva(int tiempoMaximoReserva) {
-        this.tiempoMaximoReserva = tiempoMaximoReserva;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -122,6 +114,14 @@ public class ZonaComunal implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getTiempoMaximoReserva() {
+        return tiempoMaximoReserva;
+    }
+
+    public void setTiempoMaximoReserva(int tiempoMaximoReserva) {
+        this.tiempoMaximoReserva = tiempoMaximoReserva;
     }
 
     @XmlTransient

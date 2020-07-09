@@ -5,11 +5,7 @@
  */
 package controlador;
 
-import entidades.Disponibilidad;
-import entidades.DisponibilidadDia;
 import entidades.ZonaComunal;
-import facade.DisponibilidadDiaFacade;
-import facade.DisponibilidadFacade;
 import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -68,6 +64,7 @@ public class ZonaComunalControlador implements Serializable {
 
     public String consultarZona(int id) {
         zonaComunal = zonaComunalFacade.find(id);
+        
         return "detalle-zona";
     }
 

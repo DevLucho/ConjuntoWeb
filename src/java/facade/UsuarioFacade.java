@@ -32,16 +32,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public Usuario iniciarSesion(int documento, String contrasenia) {
+        Usuario usuario = new Usuario();
         try {
             Query query;
             query = em.createQuery("SELECT u FROM Usuario u WHERE u.documento=:documento and u.contrasenia=:contrasenia");
             query.setParameter("documento", documento);
             query.setParameter("contrasenia", contrasenia);
-            return (Usuario) query.getSingleResult();
+            usuario = (Usuario) query.getResultList().get(0);
         } catch (Exception e) {
             System.out.println("Error en login revisar: " + e.getMessage());
         }
-        return null;
+        return usuario;
     }
 
     public List<Usuario> sesionUsuario(int idPerfil) {

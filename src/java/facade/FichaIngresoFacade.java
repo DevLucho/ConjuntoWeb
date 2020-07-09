@@ -31,11 +31,12 @@ public class FichaIngresoFacade extends AbstractFacade<FichaIngreso> {
     public FichaIngresoFacade() {
         super(FichaIngreso.class);
     }
-    public List<Object[]> consultarFichas(){
-        List<Object[]> listaFicha = new ArrayList();  
+
+    public List<Object[]> consultarFichas() {
+        List<Object[]> listaFicha = new ArrayList();
         Query query = em.createNativeQuery("select * from ficha_ingreso");
         listaFicha = query.getResultList();
-        for(Object[] item: listaFicha){
+        for (Object[] item : listaFicha) {
             System.out.println(item[0]);
             System.out.println(item[1]);
             System.out.println(item[2]);
@@ -43,7 +44,7 @@ public class FichaIngresoFacade extends AbstractFacade<FichaIngreso> {
             System.out.println(item[4]);
             System.out.println(item[6]);
             System.out.println(item[7]);
-}
+        }
         return listaFicha;
     }
  public List<FichaIngreso> fichaBloqueada(String estadoFicha) {
