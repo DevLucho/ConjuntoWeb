@@ -181,6 +181,10 @@ public class VisitanteControlador implements Serializable {
         return visitanteFacade.findAll();
     }
 
+    public List<FichaIngreso> consultarBloqueador(){
+        return fichaIngresoFacade.fichaBloqueada("Inactivo");
+    }
+    
     public String consultarID(int id) {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";

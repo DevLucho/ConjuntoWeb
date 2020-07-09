@@ -102,9 +102,100 @@
 
             <div class="row table-responsive">
                 <div class="col-sm-12 col-md-11 col-xl-11 xxx">
+                    
+                    <ul class="nav nav-tabs">
+                                <li class="nav-item ">
+                                    <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;">#{visitanteControlador.consultarVisitante()}</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tab2" class="nav-link" data-toggle="tab">Activos<span class="badge badge-info" style="margin-left: 5px;">#{visitanteControlador.consultarBloqueador()}</span></a>
+                                </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1" role="tabpanel">
                     <f:view>
                         <h:form>    
-                            <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.consultarVisitante()}" var="visi">
+                            <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.consultarVisitante()}" var="blo">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ficha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.idFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.apellido}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Documento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.documento}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Entrada"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.horaEntrada}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salida"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.horaSalida}">
+                                        <f:convertDateTime pattern="HH:mm a" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Inmueble"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.idInmueble.idTorre.idTorre}"/> - 
+                                    <h:outputText value="#{blo.idFicha.idInmueble.idApartamento.idApartamento}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Automovil"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.vehiculo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{blo.idFicha.estadoFicha}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    <div class="btn-group-sm text-center"> 
+                                        <h:commandButton class="fas fa-highlighter confi" value=""  action="#{visitanteControlador.preActulizr(blo)}" title="Modificar Visitante"></h:commandButton>
+                                        <!-- . -->
+                                        <h:commandButton class="fas fa-backspace confi" value="" action="#{fichadeIngresoControlador.eliminar(blo.idFicha)}" title="Eliminar Visitante"></h:commandButton>
+                                        <!-- . -->
+                                        <h:commandButton class="fas fa-door-open confi" value="" action="#{visitanteControlador.salida(blo.idFicha)}" title="Salida del Visitante"></h:commandButton>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                    </div>
+                    
+                    <div class="tab-pane active" id="tab2" role="tabpanel">
+                    <f:view>
+                        <h:form>    
+                            <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.consultarBloqueador()}" var="visi">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Ficha"/>
@@ -179,8 +270,10 @@
                             </h:dataTable>
                         </h:form>
                     </f:view>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
         <!-- fin tabla -->
         <!--__________________________- inicio del footer __________________________- -->
