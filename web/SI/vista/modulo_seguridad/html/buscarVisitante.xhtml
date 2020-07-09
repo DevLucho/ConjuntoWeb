@@ -105,10 +105,10 @@
                     
                     <ul class="nav nav-tabs">
                                 <li class="nav-item ">
-                                    <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;">#{visitanteControlador.consultarVisitante()}</span></a>
+                                    <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;"></span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tab2" class="nav-link" data-toggle="tab">Activos<span class="badge badge-info" style="margin-left: 5px;">#{visitanteControlador.consultarBloqueador()}</span></a>
+                                    <a href="#tab2" class="nav-link" data-toggle="tab">Activos<span class="badge badge-info" style="margin-left: 5px;"></span></a>
                                 </li>
                     </ul>
                     <div class="tab-content">
@@ -192,10 +192,10 @@
                     </f:view>
                     </div>
                     
-                    <div class="tab-pane active" id="tab2" role="tabpanel">
+                    <div class="tab-pane" id="tab2" role="tabpanel">
                     <f:view>
                         <h:form>    
-                            <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.consultarBloqueador()}" var="visi">
+                            <h:dataTable class="table table-striped table-bordered tabla text-center" style="width: 100%;" value="#{visitanteControlador.busquedaBlo(estadoFicha,idFicha)}" var="visi">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Ficha"/>

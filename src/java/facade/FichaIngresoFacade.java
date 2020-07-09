@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.FichaIngreso;
+import entidades.Visitante;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -50,6 +51,13 @@ public class FichaIngresoFacade extends AbstractFacade<FichaIngreso> {
  public List<FichaIngreso> fichaBloqueada(String estadoFicha) {
         Query query;
         query = em.createQuery("SELECT u FROM FichaIngreso u WHERE u.estadoFicha=:estadoFicha");
+        query.setParameter("estadoFicha", estadoFicha);
+        return query.getResultList();
+    }
+    public List<Visitante> consultaBlo(String estadoFicha, FichaIngreso idFicha){
+        Query query;
+        query = em.createQuery("SELECT u FROM Visitante u WHERE u.idFicha=:idFicha AND u.idFicha.estadoFicha=:estadoFicha");
+        query.setParameter("idFicha", idFicha);
         query.setParameter("estadoFicha", estadoFicha);
         return query.getResultList();
     }

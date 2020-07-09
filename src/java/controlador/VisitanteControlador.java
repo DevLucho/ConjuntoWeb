@@ -52,7 +52,9 @@ public class VisitanteControlador implements Serializable {
     Vigilante vigilante;
     private Vehiculo vehiculo;
     private Parqueadero parqueadero;
-
+    private List<Visitante> consultaVisitante;
+    
+    
     @PostConstruct
     public void init() {
         visitante = new Visitante();
@@ -61,6 +63,8 @@ public class VisitanteControlador implements Serializable {
         vigilante = new Vigilante();
         vehiculo = new Vehiculo();
         parqueadero = new Parqueadero();
+        consultaVisitante = new ArrayList();
+        
     }
 
     @EJB
@@ -185,6 +189,11 @@ public class VisitanteControlador implements Serializable {
         return fichaIngresoFacade.fichaBloqueada("Inactivo");
     }
     
+    public List<Visitante> busquedaBlo(String estadoFicha , FichaIngreso idFicha){
+        this.fichaIngreso = idFicha;
+        return consultaVisitante = fichaIngresoFacade.consultaBlo("estadoFicha", idFicha);
+    }
+    
     public String consultarID(int id) {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";
@@ -228,5 +237,13 @@ public class VisitanteControlador implements Serializable {
 
     public void setParqueadero(Parqueadero parqueadero) {
         this.parqueadero = parqueadero;
+    }
+
+    public List<Visitante> getConsultaVisitante() {
+        return consultaVisitante;
+    }
+
+    public void setConsultaVisitante(List<Visitante> consultaVisitante) {
+        this.consultaVisitante = consultaVisitante;
     }
 }
