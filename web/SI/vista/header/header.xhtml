@@ -4,7 +4,8 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-             xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+             xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
     <header>
         <div class="sub-contenedor">
             <div class="row">
@@ -22,7 +23,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id=""><i class="fas fa-user-cog"></i>Mi cuenta</h5>
+                                        <h5 class="modal-title" id=""><i class="fas fa-user-cog"></i>#{formconsultarusuario.txtCuenta}</h5>
                                         <button class="close" data-dismiss="modal" aria-label="Cerrar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -30,45 +31,98 @@
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <div class="row">
-                                                <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
-                                                    <div class="col-12 col-sm-6">
-                                                        <strong><label for="user-nombre">#{formconsultarusuario.lblNombres} y #{formconsultarusuario.lblApellidos}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.nombre} #{sesion.apellido}"></h:inputText>
+                                                <!-- Otros roles -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-nombre">#{formconsultarusuario.lblNombres} y #{formconsultarusuario.lblApellidos}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.nombre} #{sesion.apellido}"></h:inputText>
 
-                                                        <strong><label for="user-identificacion">#{formcrearusuario.lblNumeroId}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.documento}"></h:inputText>
+                                                            <strong><label for="user-identificacion">#{formcrearusuario.lblNumeroId}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.documento}"></h:inputText>
 
-                                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                                                            <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.correo}"></h:inputText>
+
+                                                        </div>
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-direccion">#{formcrearusuario.lblDireccion}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.direccion}"></h:inputText>
+
+                                                            <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.celular}"></h:inputText>
+
+                                                            <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
+                                                            <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <!-- Residente -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesionR">
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-nombre">#{formconsultarusuario.lblNombres} y #{formconsultarusuario.lblApellidos}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.nombre} #{sesionR.idPerfil.apellido}"></h:inputText>
+
+                                                            <strong><label for="user-identificacion">#{formcrearusuario.lblNumeroId}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.documento}"></h:inputText>
+
                                                             <strong><label for="user-torre">#{formcrearusuario.lblTorre}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="15"></h:inputText>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idInmueble.idApartamento.idApartamento}"></h:inputText>
 
                                                             <strong><label for="user-apto">#{formcrearusuario.lblApartamento}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="507"></h:inputText>
-                                                        </c:if>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idInmueble.idTorre.idTorre}"></h:inputText>
+                                                        </div>
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.correo}"></h:inputText>
 
-                                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
-                                                            <strong><label for="user-torre">#{formconsultarusuario.lblInicioTurno}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="12:00 PM"></h:inputText>
+                                                            <strong><label for="user-direccion">#{formcrearusuario.lblDireccion}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.direccion}"></h:inputText>
+
+                                                            <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.celular}"></h:inputText>
+
+                                                            <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
+                                                            <input type="text" class="form-control-plaintext" value="#{sesionR.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <!-- Vigilante -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" var="sesionV">
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-nombre">#{formconsultarusuario.lblNombres} y #{formconsultarusuario.lblApellidos}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.nombre} #{sesionV.idPerfil.apellido}"></h:inputText>
+
+                                                            <strong><label for="user-identificacion">#{formcrearusuario.lblNumeroId}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.documento}"></h:inputText>
+
+                                                            <strong><label for="user-apto">#{formconsultarusuario.lblInicioTurno}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idTurno.inicioTurno}">
+                                                                <f:convertDateTime pattern="HH:mm a" />
+                                                            </h:inputText>
 
                                                             <strong><label for="user-apto">#{formconsultarusuario.lblFinTurno}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="5:00 PM"></h:inputText>
-                                                        </c:if>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idTurno.finTurno}">
+                                                                <f:convertDateTime pattern="HH:mm a" />
+                                                            </h:inputText>
+                                                        </div>
+                                                        <div class="col-12 col-sm-6">
+                                                            <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.correo}"></h:inputText>
 
-                                                    </div>
-                                                    <div class="col-12 col-sm-6">
-                                                        <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.correo}"></h:inputText>
+                                                            <strong><label for="user-direccion">#{formcrearusuario.lblDireccion}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.direccion}"></h:inputText>
 
-                                                        <strong><label for="user-direccion">#{formcrearusuario.lblDireccion}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.direccion}"></h:inputText>
+                                                            <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.celular}"></h:inputText>
 
-                                                        <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.celular}"></h:inputText>
-
-                                                        <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
-                                                        <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
-                                                    </div>
-                                                </c:forEach>
+                                                            <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
+                                                            <input type="text" class="form-control-plaintext" value="#{sesionV.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -144,11 +198,11 @@
                                                 </div>
                                                 <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
                                                     <div class="col-12 col-md-6 mb-3">
-                                                        <strong><label for="user-phone">N&uacute;mero de celular</label></strong>
+                                                        <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesion.celular}"></h:inputText>
                                                     </div>                                                    
                                                     <div class="col-12 col-md-6 mb-3">
-                                                        <strong><label for="user-correo">Correo electr&oacute;nico</label></strong>
+                                                        <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
                                                         <h:inputText class="form-control-plaintext" a:placeholder="Ingrese un email v&aacute;lido" value="#{sesion.correo}"></h:inputText>
                                                     </div>
                                                 </c:forEach>

@@ -5,7 +5,9 @@
  */
 package facade;
 
+import entidades.Residente;
 import entidades.Usuario;
+import entidades.Vigilante;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,6 +50,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public List<Usuario> sesionUsuario(int idPerfil) {
         Query query;
         query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
+        query.setParameter("idPerfil", idPerfil);
+        return query.getResultList();
+    }
+
+    public List<Residente> sesionUsuarioR(int idPerfil) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Residente u WHERE u.idPerfil.idPerfil=:idPerfil");
+        query.setParameter("idPerfil", idPerfil);
+        return query.getResultList();
+    }
+
+    public List<Vigilante> sesionUsuarioV(int idPerfil) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Vigilante u WHERE u.idPerfil.idPerfil=:idPerfil");
         query.setParameter("idPerfil", idPerfil);
         return query.getResultList();
     }

@@ -232,6 +232,14 @@ public class UsuarioControlador implements Serializable {
         return usuarioFacade.sesionUsuario(idPerfil);
     }
 
+    public List<Residente> sesionUsuarioR(int idPerfil) {
+        return usuarioFacade.sesionUsuarioR(idPerfil);
+    }
+
+    public List<Vigilante> sesionUsuarioV(int idPerfil) {
+        return usuarioFacade.sesionUsuarioV(idPerfil);
+    }
+    
     public int contarUsuarios() {
         return usuarioFacade.count();
     }
