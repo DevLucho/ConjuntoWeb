@@ -185,13 +185,8 @@ public class VisitanteControlador implements Serializable {
         return visitanteFacade.findAll();
     }
 
-    public List<FichaIngreso> consultarBloqueador(){
-        return fichaIngresoFacade.fichaBloqueada("Inactivo");
-    }
-    
-    public List<Visitante> busquedaBlo(String estadoFicha , FichaIngreso idFicha){
-        this.fichaIngreso = idFicha;
-        return consultaVisitante = fichaIngresoFacade.consultaBlo("estadoFicha", idFicha);
+    public List<Visitante> consultarEstado(String estadoFicha){
+        return fichaIngresoFacade.fichaBloqueada(estadoFicha);
     }
     
     public String consultarID(int id) {
