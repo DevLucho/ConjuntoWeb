@@ -172,6 +172,10 @@ public class DomiciliarioControlador implements Serializable {
         return domiciliarioFacade.findAll();
     }
 
+    public List<Domiciliario> consultarEstadoD(String estadoFicha){
+        return domiciliarioFacade.fichaBloqueadaD(estadoFicha);
+    }
+    
     public String preActualizar(Domiciliario domiciliarioActualizar) {
         domiciliario = domiciliarioActualizar;
         fichaIngreso = domiciliarioActualizar.getIdFicha();

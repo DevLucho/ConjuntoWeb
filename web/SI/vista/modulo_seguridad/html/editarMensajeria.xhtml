@@ -93,21 +93,13 @@
                                         <li>
                                             <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
                                             <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true">
-                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idInmueble}"></f:selectItems>
+                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems var="inmue" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idTorre.idTorre} - #{inmue.idApartamento.idApartamento}"></f:selectItems>
                                             </h:selectOneMenu>
                                         </li>
                                         <li>
                                             <h:outputLabel class="label" for="descripcion">Descripcion</h:outputLabel>
                                             <h:inputTextarea class="field-long correcto corto2" id="descripcion" a:type="text" title="Descripcion" required="true" value="#{correspondenciaControlador.correspondencia.descripcion}"></h:inputTextarea>
-                                        </li>
-                                        <li>
-                                            <h:outputLabel for="entrada" class="label">Fecha<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="date" id="entrada" value="#{correspondenciaControlador.correspondencia.fechaIngreso}" class="field-divided correcto kk" title="Entrada" required="true">
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
-                                            <h:inputText a:type="date" id="salida" value="#{correspondenciaControlador.correspondencia.fechaSalida}" class="field-divided correcto lll" title="Salida" required="false">
-                                                <f:convertDateTime pattern="yyyy-mm-dd" />
-                                            </h:inputText>
                                         </li>
                                         <li>
                                             <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
@@ -119,7 +111,7 @@
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                             </h:selectOneMenu>
                                         </li>  
                                         <li>

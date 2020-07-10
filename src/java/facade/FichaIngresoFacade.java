@@ -48,11 +48,4 @@ public class FichaIngresoFacade extends AbstractFacade<FichaIngreso> {
         }
         return listaFicha;
     }
-    
-    public List<Visitante> fichaBloqueada(String estadoFicha) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Visitante u JOIN FichaIngreso F WHERE u.idFicha.idFicha=F.idFicha AND F.estadoFicha=:estadoFicha");
-        query.setParameter("estadoFicha", estadoFicha);
-        return query.getResultList();
-    }
 }

@@ -85,7 +85,7 @@
                                                 <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{correspondenciaControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                                 </h:selectOneMenu>
                                             </li>  
                                             <li>

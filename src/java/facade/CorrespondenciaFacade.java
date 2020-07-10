@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Correspondencia;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,13 @@ public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
 
     public CorrespondenciaFacade() {
         super(Correspondencia.class);
+    }
+    
+    public List<Correspondencia> paqueteEntregado(String estado){
+        Query query;
+        query = em.createQuery("SELECT u FROM Correspondencia u WHERE u.estado=:estado");
+        query.setParameter("estado", estado);
+        return query.getResultList();
     }
     
 }

@@ -186,7 +186,7 @@ public class VisitanteControlador implements Serializable {
     }
 
     public List<Visitante> consultarEstado(String estadoFicha){
-        return fichaIngresoFacade.fichaBloqueada(estadoFicha);
+        return visitanteFacade.fichaBloqueada(estadoFicha);
     }
     
     public String consultarID(int id) {

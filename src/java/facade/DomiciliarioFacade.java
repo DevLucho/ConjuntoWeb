@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Domiciliario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,10 @@ public class DomiciliarioFacade extends AbstractFacade<Domiciliario> {
         super(Domiciliario.class);
     }
     
+    public List<Domiciliario> fichaBloqueadaD(String estadoFicha){
+        Query query;
+        query = em.createQuery("SELECT u FROM Domiciliario u JOIN FichaIngreso F WHERE u.idFicha.idFicha=F.idFicha AND F.estadoFicha=:estadoFicha");
+        query.setParameter("estadoFicha", estadoFicha);
+        return query.getResultList();
+    }
 }

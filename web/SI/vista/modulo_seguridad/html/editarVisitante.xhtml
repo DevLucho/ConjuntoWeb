@@ -108,18 +108,9 @@
                                         <li>
                                             <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
                                             <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
-
-                                                <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idInmueble}"/>
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
                                             </h:selectOneMenu>
-                                        </li>
-                                        <li>
-                                            <h:outputLabel for="entrada" class="label">Hora entrada y salida<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="time" id="entrada" value="#{visitanteControlador.fichaIngreso.horaEntrada}" class="field-divided correcto corto2 kk" title="Entrada" required="true">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
-                                            <h:inputText a:type="time" id="salida" value="#{visitanteControlador.fichaIngreso.horaSalida}" title="Salida" class="field-divided correcto corto3 lll" required="true">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
                                         </li>
                                         <li>
                                             <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
@@ -132,7 +123,7 @@
                                             <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
                                             <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{vigilanteControlador.consultarTodos()}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                             </h:selectOneMenu>
                                         </li> 
                                         <li>

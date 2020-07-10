@@ -105,100 +105,202 @@
 
                 <div class="row table-responsive">
                     <div class="col-sm-12 col-md-11 col-xl-11 xxx">
-                        <f:view>
-                            <h:form>  
-                                <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{correspondenciaControlador.consultar()}" var="paq">
-                                    <thead>
-                                        <tr>
-                                            <th>Tipo</th>
+                        <ul class="nav nav-tabs">
+                                <li class="nav-item ">
+                                    <a href="#tab1" class="nav-link active" data-toggle="tab">No reclamados<span class="badge badge-info" style="margin-left: 5px;"></span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tab2" class="nav-link" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;"></span></a>
+                                </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1" role="tabpanel">
+                                <f:view>
+                                    <h:form>  
+                                        <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{correspondenciaControlador.consultarEntrega('No reclamado')}" var="Npaq">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo</th>
 
-                                            <th>Empresa</th>
+                                                    <th>Empresa</th>
 
-                                            <th>Estado</th>
+                                                    <th>Estado</th>
 
-                                            <th>Torre-App</th>
+                                                    <th>Torre-App</th>
 
-                                            <th>Entrega</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Tipo"/>
-                                            </f:facet>
-                                            <h:outputText  value="#{paq.idPaquete.tipo}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Empresa"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.idEmpresa.nombre}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Descripcion"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.descripcion}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Ingreso"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.fechaIngreso}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Salida"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.fechaSalida}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Inmueble"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/> -
-                                            <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Estado"/>
-                                            </f:facet>
-                                            <h:outputText value="#{paq.estado}"></h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Acciones"/>
-                                            </f:facet>
-                                            <div class="btn-group-sm text-center">
-                                                <h:commandButton class="fas fa-highlighter confi" value="" action="#{correspondenciaControlador.preActualizar(paq)}" title="Modificar Paquete"></h:commandButton>
-                                                <!-- . -->
-                                                <h:commandButton class="fas fa-backspace confi" value="" action="#{correspondenciaControlador.eliminar(paq)}" title="Eliminar Paquete"></h:commandButton>
-                                                <!-- . -->
-                                                <h:commandButton class="fas fa-door-open confi" value="" action="#{correspondenciaControlador.salida(paq)}"></h:commandButton>
+                                                    <th>Entrega</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Tipo"/>
+                                                    </f:facet>
+                                                    <h:outputText  value="#{Npaq.idPaquete.tipo}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Empresa"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.idEmpresa.nombre}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Descripcion"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.descripcion}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Ingreso"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.fechaIngreso}">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                    </h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Salida"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.fechaSalida}">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                    </h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Inmueble"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.idInmueble.idTorre.idTorre}"/> -
+                                                    <h:outputText value="#{Npaq.idInmueble.idApartamento.idApartamento}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Estado"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{Npaq.estado}"></h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Acciones"/>
+                                                    </f:facet>
+                                                    <div class="btn-group-sm text-center">
+                                                        <h:commandButton class="fas fa-highlighter confi" value="" action="#{correspondenciaControlador.preActualizar(Npaq)}" title="Modificar Paquete"></h:commandButton>
+                                                        <!-- . -->
+                                                        <h:commandButton class="fas fa-door-open confi" value="" action="#{correspondenciaControlador.salida(Npaq)}"></h:commandButton>
+                                                    </div>
+                                                </h:column>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tipo</th>
 
-                                            </div>
-                                        </h:column>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Tipo</th>
+                                                    <th>Empresa</th>
 
-                                            <th>Empresa</th>
+                                                    <th>Entrada-Salida</th>
 
-                                            <th>Entrada-Salida</th>
+                                                    <th>Torre-App</th>
 
-                                            <th>Torre-App</th>
+                                                    <th>Entrega</th>
+                                                </tr>
+                                            </tfoot>
+                                        </h:dataTable>
+                                    </h:form>
+                                </f:view>
+                            </div>
+                            <div class="tab-pane" id="tab2" role="tabpanel">                            
+                                <f:view>
+                                    <h:form>  
+                                        <h:dataTable class="table table-striped table-bordered tabla" style="width: 100%;" value="#{correspondenciaControlador.consultar()}" var="paq">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo</th>
 
-                                            <th>Entrega</th>
-                                        </tr>
-                                    </tfoot>
-                                </h:dataTable>
-                            </h:form>
-                        </f:view>
+                                                    <th>Empresa</th>
+
+                                                    <th>Estado</th>
+
+                                                    <th>Torre-App</th>
+
+                                                    <th>Entrega</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Tipo"/>
+                                                    </f:facet>
+                                                    <h:outputText  value="#{paq.idPaquete.tipo}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Empresa"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.idEmpresa.nombre}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Descripcion"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.descripcion}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Ingreso"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.fechaIngreso}">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                    </h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Salida"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.fechaSalida}">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                    </h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Inmueble"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.idInmueble.idTorre.idTorre}"/> -
+                                                    <h:outputText value="#{paq.idInmueble.idApartamento.idApartamento}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Estado"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{paq.estado}"></h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Acciones"/>
+                                                    </f:facet>
+                                                    <div class="btn-group-sm text-center">
+                                                        <h:commandButton class="fas fa-highlighter confi" value="" action="#{correspondenciaControlador.preActualizar(paq)}" title="Modificar Paquete"></h:commandButton>
+                                                        <!-- . -->
+                                                        <h:commandButton class="fas fa-door-open confi" value="" action="#{correspondenciaControlador.salida(paq)}"></h:commandButton>
+                                                    </div>
+                                                </h:column>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tipo</th>
+
+                                                    <th>Empresa</th>
+
+                                                    <th>Entrada-Salida</th>
+
+                                                    <th>Torre-App</th>
+
+                                                    <th>Entrega</th>
+                                                </tr>
+                                            </tfoot>
+                                        </h:dataTable>
+                                    </h:form>
+                                </f:view>
+                            </div>    
+                        </div>    
                     </div>
                 </div>
             </div>

@@ -150,6 +150,10 @@ public class CorrespondenciaControlador implements Serializable {
         return correspondenciaFacade.findAll();
     }
 
+    public List<Correspondencia> consultarEntrega(String estado){
+        return correspondenciaFacade.paqueteEntregado(estado);
+    }
+    
     public String preActualizar(Correspondencia correspondenciaActualizar) {
         correspondencia = correspondenciaActualizar;
         inmueble = correspondenciaActualizar.getIdInmueble();
