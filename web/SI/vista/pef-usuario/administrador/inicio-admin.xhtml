@@ -102,6 +102,11 @@
                                 <h6><i class="icalendar far fa-calendar-alt"></i>#{formdashboardadmin.lblEventos}</h6>
                                 <h:form>
                                     <ul id="lista">
+                                        <c:if test="#{eventoControlador.contarEventos() == 0}">
+                                            <li>
+                                                <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
+                                            </li>
+                                        </c:if>
                                         <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
                                             <li>
                                                 <label class="date">
@@ -109,7 +114,7 @@
                                                         <f:convertDateTime pattern="MM/dd/yyyy" />
                                                     </h:outputText>
                                                 </label>
-                                                <p><strong>#{evento.titulo}</strong></p>
+                                                <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
                                             </li>
                                         </c:forEach>
                                     </ul>

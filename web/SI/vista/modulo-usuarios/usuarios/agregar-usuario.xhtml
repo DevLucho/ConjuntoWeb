@@ -54,7 +54,7 @@
                                 <a href="#" class="close" data-dismiss="alert">&times;</a>#{formcrearusuario.notiViaEmail}
                             </div>
                             <!--formulario-->
-                            <h:form class="recorrer-dato was-validated"><!--Falta atributo name=""-->
+                            <h:form class="recorrer-dato">
                                 <div class="col-12">
                                     <div class="caja bg-faded border-bottom-0">#{formcrearusuario.txtDatos}</div>
                                 </div>  
@@ -98,6 +98,7 @@
                                             <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                         </h:selectOneMenu>
                                     </div>
+                                    <!-- if is residente -->
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="direccion">Automovil</label></strong>
@@ -123,6 +124,7 @@
                                             </h:selectOneMenu>
                                         </div>  
                                     </c:if>
+                                    <!-- if is vigilante -->
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>

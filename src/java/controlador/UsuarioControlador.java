@@ -149,12 +149,23 @@ public class UsuarioControlador implements Serializable {
     public void cancelar(Usuario usuarioCancelar) {
         if (usuarioCancelar.getIdRol().getIdRol() == 1) {
             mensaje.setMensaje("Mensajes('Error!','No puedes bloquear usuarios con rol Administrador','error');");
+        }
+        else if ("Bloqueado".equals(usuarioCancelar.getEstado())) {
+            mensaje.setMensaje("Mensajes('Advertencia!','Este usuario ya esta bloqueado','warning');");
         } else {
             mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear este usuario?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
             usuario = usuarioCancelar;
             usuario.setEstado("Bloqueado");
             usuarioFacade.edit(usuarioCancelar);
         }
+
+    }
+
+    public void desbloquear(Usuario usuarioDesbloquear) {
+        usuario = usuarioDesbloquear;
+        usuario.setEstado("Activo");
+        usuarioFacade.edit(usuarioDesbloquear);
+        mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario','success');");
     }
 
     public String preActualizar(Usuario usuarioActualizar) {
@@ -239,7 +250,7 @@ public class UsuarioControlador implements Serializable {
     public List<Vigilante> sesionUsuarioV(int idPerfil) {
         return usuarioFacade.sesionUsuarioV(idPerfil);
     }
-    
+
     public int contarUsuarios() {
         return usuarioFacade.count();
     }

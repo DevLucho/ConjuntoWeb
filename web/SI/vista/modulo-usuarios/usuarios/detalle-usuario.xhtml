@@ -41,7 +41,7 @@
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><i class="fas fa-user-tie"></i>Detalle usuario # #{usuarioControlador.usuario.idPerfil}</h3>
+                            <h3><i class="fas fa-user-tie"></i>Detalle usuario: #{usuarioControlador.usuario.nombre} #{usuarioControlador.usuario.apellido}</h3>
                             <hr/>
                         </div>
                         <div class="col-12 col-md-8 form">
@@ -103,17 +103,11 @@
 
                                             <div class="torre col-12 col-md mb-3">
                                                 <strong><label for="torre">Torre</label></strong>
-                                                <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext" disabled="true">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
-                                                </h:selectOneMenu>
+                                                <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}"></h:inputText>
                                             </div>
                                             <div class="col-12 col-md mb-3">
                                                 <strong><label for="apto">Apartamento</label></strong>
-                                                <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext" disabled="true">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
-                                                </h:selectOneMenu>
+                                                <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}"></h:inputText>
                                             </div>  
                                         </c:if>
                                         <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
@@ -133,7 +127,6 @@
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
                                             <h:inputText class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" disabled="true"/>
-                                            <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
                                         </div>
                                     </div>
                                 </h:form>
