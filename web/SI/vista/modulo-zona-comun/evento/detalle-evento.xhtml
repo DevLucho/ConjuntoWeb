@@ -110,11 +110,11 @@
                                             <h4 class="mt-0">Datos</h4>
                                             <p>
                                                 El evento #{eventoControlador.evento.titulo} se realizara en la zona 
-                                                #{eventoControlador.evento.idZonaComunal.nombre}, empieza a las 
+                                                <mark>#{eventoControlador.evento.idZonaComunal.nombre}</mark>, empieza a las 
                                                 <mark>
                                                     <h:outputText value="#{eventoControlador.evento.fechaInicio}">
                                                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText> 
+                                                    </h:outputText> -
                                                     <h:outputText value="#{eventoControlador.evento.horaInicio}">
                                                         <f:convertDateTime pattern="HH:mm a" />
                                                     </h:outputText>
@@ -123,7 +123,7 @@
                                                 <mark>
                                                     <h:outputText value="#{eventoControlador.evento.fechaFin}">
                                                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText> 
+                                                    </h:outputText> -
                                                     <h:outputText value="#{eventoControlador.evento.horaFin}">
                                                         <f:convertDateTime pattern="HH:mm a" />
                                                     </h:outputText>

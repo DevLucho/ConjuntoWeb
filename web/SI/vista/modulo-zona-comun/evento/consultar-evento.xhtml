@@ -63,7 +63,7 @@
                 </ol>
             </div>
             <!-- main -->
-            <section class="container-fluid" id="principal">
+            <section class="container-fluid" id="principal" style="margin-bottom: 350px">
                 <div class="row">
                     <div class="col-12">
                         <h3>
@@ -75,8 +75,11 @@
                 <hr/>
                 <h:form class="row mt-3 mb-3">
                     <div class="col">
+                        <c:if test="#{eventoControlador.contarVigentes() == 0 }">
+                            <h6 class="text-center">No hay eventos publicados</h6>
+                        </c:if>
                         <div class="card-columns">
-                            <c:forEach items="#{eventoControlador.consultarTodos()}" var="e">
+                            <c:forEach items="#{eventoControlador.consultarVigentes()}" var="e">
                                 <div class="card">
                                     <img src="#{e.img}" class="card-img-top img-fluid" alt=""/>
                                     <div class="card-block">

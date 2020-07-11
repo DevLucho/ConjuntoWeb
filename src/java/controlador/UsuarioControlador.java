@@ -55,31 +55,31 @@ public class UsuarioControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
-
+    
     @EJB
     UsuarioFacade usuarioFacade;
-
+    
     @EJB
     ResidenteFacade residenteFacade;
-
+    
     @EJB
     TorreFacade torreFacade;
-
+    
     @EJB
     ApartamentoFacade apartamentoFacade;
-
+    
     @EJB
     InmuebleFacade inmuebleFacade;
-
+    
     @EJB
     VigilanteFacade vigilanteFacade;
-
+    
     @EJB
     TurnoVigilanteFacade turnoVigilanteFacade;
-
+    
     @EJB
     RolFacade rolFacade;
-
+    
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
 
@@ -95,7 +95,7 @@ public class UsuarioControlador implements Serializable {
     }*/
     public UsuarioControlador() {
     }
-
+    
     @PostConstruct
     public void init() {
         rol = new Rol();
@@ -108,7 +108,7 @@ public class UsuarioControlador implements Serializable {
         torre = new Torre();
         usuario = new Usuario();
     }
-
+    
     public void registrar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
@@ -145,12 +145,11 @@ public class UsuarioControlador implements Serializable {
         tipoDocumento = new TipoDocumento();
         mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
     }
-
+    
     public void cancelar(Usuario usuarioCancelar) {
         if (usuarioCancelar.getIdRol().getIdRol() == 1) {
             mensaje.setMensaje("Mensajes('Error!','No puedes bloquear usuarios con rol Administrador','error');");
-        }
-        else if ("Bloqueado".equals(usuarioCancelar.getEstado())) {
+        } else if ("Bloqueado".equals(usuarioCancelar.getEstado())) {
             mensaje.setMensaje("Mensajes('Advertencia!','Este usuario ya esta bloqueado','warning');");
         } else {
             mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear este usuario?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
@@ -158,23 +157,22 @@ public class UsuarioControlador implements Serializable {
             usuario.setEstado("Bloqueado");
             usuarioFacade.edit(usuarioCancelar);
         }
-
     }
-
+    
     public void desbloquear(Usuario usuarioDesbloquear) {
         usuario = usuarioDesbloquear;
         usuario.setEstado("Activo");
         usuarioFacade.edit(usuarioDesbloquear);
         mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario','success');");
     }
-
+    
     public String preActualizar(Usuario usuarioActualizar) {
         rol = usuarioActualizar.getIdRol();
         tipoDocumento = usuarioActualizar.getTipoDocumento();
         usuario = usuarioActualizar;
         return "editar-usuario";
     }
-
+    
     public String preActualizarR(Residente residenteActualizar) {
         rol = residenteActualizar.getIdPerfil().getIdRol();
         tipoDocumento = residenteActualizar.getIdPerfil().getTipoDocumento();
@@ -184,7 +182,7 @@ public class UsuarioControlador implements Serializable {
         residente = residenteActualizar;
         return "editar-usuario";
     }
-
+    
     public String preActualizarV(Vigilante vigilanteActualizar) {
         rol = vigilanteActualizar.getIdPerfil().getIdRol();
         tipoDocumento = vigilanteActualizar.getIdPerfil().getTipoDocumento();
@@ -193,33 +191,37 @@ public class UsuarioControlador implements Serializable {
         vigilante = vigilanteActualizar;
         return "editar-usuario";
     }
-
+    
     public void actualizar() {
         usuario.setIdRol(rolFacade.find(rol.getIdRol()));
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
         usuarioFacade.edit(usuario);
+        if (rol.getIdRol() == 2) {
+            residente.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
+            residenteFacade.edit(residente);
+        }
         mensaje.setMensaje("Mensajes('Exito!','Usuario modificado satisfactoriamente','success');");
     }
-
+    
     public List<Usuario> consultarTodos() {
         return usuarioFacade.findAll();
     }
-
+    
     public List<Usuario> consultarBloqueados() {
         return usuarioFacade.usuarioBloquedo("Bloqueado");
     }
-
+    
     public List<Usuario> consultarAdmin() {
         return usuarioFacade.usuarioAdmin(1);
     }
-
+    
     public String consultarUsuario(Usuario usuarioConsultar) {
         rol = usuarioConsultar.getIdRol();
         tipoDocumento = usuarioConsultar.getTipoDocumento();
         usuario = usuarioConsultar;
         return "detalle-usuario";
     }
-
+    
     public String consultarResidente(Residente residenteConsultar) {
         rol = residenteConsultar.getIdPerfil().getIdRol();
         tipoDocumento = residenteConsultar.getIdPerfil().getTipoDocumento();
@@ -229,7 +231,7 @@ public class UsuarioControlador implements Serializable {
         residente = residenteConsultar;
         return "detalle-usuario";
     }
-
+    
     public String consultarVigilante(Vigilante vigilanteConsultar) {
         rol = vigilanteConsultar.getIdPerfil().getIdRol();
         tipoDocumento = vigilanteConsultar.getIdPerfil().getTipoDocumento();
@@ -238,109 +240,109 @@ public class UsuarioControlador implements Serializable {
         vigilante = vigilanteConsultar;
         return "detalle-usuario";
     }
-
+    
     public List<Usuario> sesionUsuario(int idPerfil) {
         return usuarioFacade.sesionUsuario(idPerfil);
     }
-
+    
     public List<Residente> sesionUsuarioR(int idPerfil) {
         return usuarioFacade.sesionUsuarioR(idPerfil);
     }
-
+    
     public List<Vigilante> sesionUsuarioV(int idPerfil) {
         return usuarioFacade.sesionUsuarioV(idPerfil);
     }
-
+    
     public int contarUsuarios() {
         return usuarioFacade.count();
     }
-
+    
     public int contarAdministradores() {
         return usuarioFacade.contarAdministradores(1);
     }
-
+    
     public int contarBloqueados() {
         return usuarioFacade.contarBloqueados("Bloqueado");
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    
     public TipoDocumento getTipoDocumento() {
         return tipoDocumento;
     }
-
+    
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-
+    
     public Rol getRol() {
         return rol;
     }
-
+    
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
+    
     public Residente getResidente() {
         return residente;
     }
-
+    
     public void setResidente(Residente residente) {
         this.residente = residente;
     }
-
+    
     public Vigilante getVigilante() {
         return vigilante;
     }
-
+    
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
-
+    
     public Inmueble getInmueble() {
         return inmueble;
     }
-
+    
     public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
     }
-
+    
     public Torre getTorre() {
         return torre;
     }
-
+    
     public void setTorre(Torre torre) {
         this.torre = torre;
     }
-
+    
     public Apartamento getApartamento() {
         return apartamento;
     }
-
+    
     public void setApartamento(Apartamento apartamento) {
         this.apartamento = apartamento;
     }
-
+    
     public TurnoVigilante getTurnoVigilante() {
         return turnoVigilante;
     }
-
+    
     public void setTurnoVigilante(TurnoVigilante turnoVigilante) {
         this.turnoVigilante = turnoVigilante;
     }
-
+    
     public MensajeControlador getMensaje() {
         return mensaje;
     }
-
+    
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
     }
-
+    
 }

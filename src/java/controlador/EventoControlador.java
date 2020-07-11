@@ -68,9 +68,14 @@ public class EventoControlador implements Serializable {
     }
 
     public String preActualizar(Evento eventoActualizar) {
-        zonaComunal = eventoActualizar.getIdZonaComunal();
-        evento = eventoActualizar;
-        return "editar-evento";
+        if ("Cancelado".equals(eventoActualizar.getEstado()) || "Finalizado".equals(eventoActualizar.getEstado())) {
+            mensaje.setMensaje("Mensajes('Atención!','No puedes editar un evento que no este vigente.','warning');");
+        } else {
+            zonaComunal = eventoActualizar.getIdZonaComunal();
+            evento = eventoActualizar;
+            return "editar-evento";
+        }
+        return "";
     }
 
     public void actualizar() {
@@ -92,8 +97,43 @@ public class EventoControlador implements Serializable {
         return eventoFacade.count();
     }
 
+    public int contarCancelados() {
+        return eventoFacade.countEstado("Cancelado");
+    }
+
+    public int contarFinalizados() {
+        return eventoFacade.countEstado("Finalizado");
+    }
+
+    public int contarVigentes() {
+        return eventoFacade.countEstado("Vigente");
+    }
+
+    public List<Evento> consultarCancelados() {
+        return eventoFacade.estadoEvento("Cancelado");
+    }
+
+    public List<Evento> consultarVigentes() {
+        return eventoFacade.estadoEvento("Vigente");
+    }
+
+    public List<Evento> consultarFinalizados() {
+        return eventoFacade.estadoEvento("Finalizado");
+    }
+
     public void eliminar(Evento eventoEliminar) {
         eventoFacade.remove(eventoEliminar);
+    }
+
+    public void cancelar(Evento eventoCancelar) {
+        if ("Cancelado".equals(eventoCancelar.getEstado()) || "Finalizado".equals(eventoCancelar.getEstado())) {
+            mensaje.setMensaje("Mensajes('Atención!','Este evento ya ha sido cancelado.','warning');");
+        } else {
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar este evento?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado exitosamente el evento.','success');");
+            evento = eventoCancelar;
+            evento.setEstado("Cancelado");
+            eventoFacade.edit(evento);
+        }
     }
 
     public Evento getEvento() {

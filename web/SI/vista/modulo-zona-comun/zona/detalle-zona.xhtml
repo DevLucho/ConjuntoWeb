@@ -122,10 +122,8 @@
                                         <div class="media-body">
                                             <h4 class="mt-0">Disponibildiad en horas</h4>
                                             <p>La #{zonaComunalControlador.zonaComunal.nombre} estara disponible desde las 
-                                                <c:forEach items="#{disponibilidadControlador.disponibilidadZona}" var="d">
-                                                    <mark><h:outputText value="#{d.horaInicialReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> 
-                                                    hasta las <mark><h:outputText value="#{d.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> horas.
-                                                </c:forEach>
+                                                <mark><h:outputText value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> 
+                                                    hasta las <mark><h:outputText value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText></mark> horas.
                                             </p>
                                             <p> 
                                                 El tiempo maximo de reserva en la zona común es <mark>#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}</mark> horas.

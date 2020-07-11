@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Pqrs;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,19 @@ public class PqrsFacade extends AbstractFacade<Pqrs> {
     public PqrsFacade() {
         super(Pqrs.class);
     }
-    
+
+    public List<Pqrs> estadoPqrs(String estado) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Pqrs u WHERE u.estado=:estado");
+        query.setParameter("estado", estado);
+        return query.getResultList();
+    }
+
+    public int countEstado(String estado) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Pqrs u WHERE u.estado=:estado");
+        query.setParameter("estado", estado);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }

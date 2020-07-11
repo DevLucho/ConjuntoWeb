@@ -91,14 +91,19 @@
                             <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
                             <h:form>
                                 <ul id="lista">
-                                    <c:forEach items="#{eventoControlador.consultarTodos()}" var="evento">
+                                    <c:if test="#{eventoControlador.contarVigentes()== 0}">
+                                        <li>
+                                            <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
+                                        </li>
+                                    </c:if>
+                                    <c:forEach items="#{eventoControlador.consultarVigentes()}" var="evento">
                                         <li>
                                             <label class="date">
                                                 <h:outputText value="#{evento.fechaInicio}">
                                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                                 </h:outputText>
                                             </label>
-                                            <p><strong>#{evento.titulo}</strong></p>
+                                            <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -111,9 +116,8 @@
                         <div class="novedades-eventos">
                             <h6><i class="icalendar fas fa-box-open"></i>Correspondencia</h6>
                             <ul id="lista">
-                                <c:forEach items="#{correspondenciaControlador.consultar()}" var="c">
+                                <c:forEach items="#{correspondenciaControlador.consultarEntrega('No reclamado')}" var="c">
                                     <li>
-
                                         <label class="date">Fecha de ingreso:
                                             <h:outputText value="#{c.fechaIngreso}">
                                                 <f:convertDateTime pattern="yyyy/MM/dd" />
@@ -132,7 +136,9 @@
                             <h6><i class="icalendar fas fa-thumbtack"></i>Mis reservas</h6>
                             <ul id="lista">
                                 <li>
-
+                                    <c:if test="#{reservaControlador.contarReservas() == 0}">
+                                        <p style="margin:0px" class="text-muted">No hay reservas pendientes</p>
+                                    </c:if>
                                 </li>
                             </ul>
                             <div class="link">
@@ -143,7 +149,9 @@
                             <h6><i class="icalendar far fa-file-alt"></i>Mis inscripciones</h6>
                             <ul id="lista">
                                 <li>
-
+                                    <c:if test="#{inscripcionControlador.contarInscripciones() == 0}">
+                                        <p style="margin:0px" class="text-muted">No hay inscripciones realizadas</p>
+                                    </c:if>
                                 </li>
                             </ul>
                             <div class="link">
@@ -154,7 +162,9 @@
                             <h6><i class="icalendar far fa-comment-alt"></i>Mis pqrs</h6>
                             <ul id="lista">
                                 <li>
-
+                                    <c:if test="#{pqrsControlador.contarPendiente() == 0}">
+                                        <p style="margin:0px" class="text-muted">No hay PQRS pendientes</p>
+                                    </c:if>
                                 </li>
                             </ul>
                             <div class="link">

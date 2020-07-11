@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -47,6 +48,9 @@ public class PqrsControlador implements Serializable {
 
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
+        
+    @Inject
+    private MensajeControlador mensaje;
 
     public PqrsControlador() {
     }
@@ -62,23 +66,25 @@ public class PqrsControlador implements Serializable {
         pqrs.setIdResidente(residente);
         pqrs.setIdTipoPqrs(tipoPqrs);
         pqrs.setEstado("Abierto");
-        
+
         DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         Date date = cal.getTime();
         fechaI = fecha.format(date);
         pqrs.setFecha(date);
-        
+
         DateFormat hora = new SimpleDateFormat("HH:mm:ss");
         Calendar cale = Calendar.getInstance();
         Date dates = cale.getTime();
         horaI = hora.format(dates);
         pqrs.setHora(dates);
-        
+
         pqrsFacade.create(pqrs);
         residente = new Residente();
         tipoPqrs = new TipoPqrs();
         pqrs = new Pqrs();
+        mensaje.setMensaje("Mensaje('Exito','Se ha generado la PQRS.','success');");
+
     }
 
     public List<Pqrs> consultar() {
@@ -107,6 +113,38 @@ public class PqrsControlador implements Serializable {
         return pqrsFacade.count();
     }
 
+    public List<Pqrs> consultarCancelados() {
+        return pqrsFacade.estadoPqrs("Cancelado");
+    }
+
+    public List<Pqrs> consultarResueltos() {
+        return pqrsFacade.estadoPqrs("Resuelto");
+    }
+
+    public List<Pqrs> consultarPendientes() {
+        return pqrsFacade.estadoPqrs("Pendiente");
+    }
+
+    public List<Pqrs> consultarAbiertos() {
+        return pqrsFacade.estadoPqrs("Abierto");
+    }
+
+    public int contarCancelados() {
+        return pqrsFacade.countEstado("Cancelado");
+    }
+
+    public int contarResueltos() {
+        return pqrsFacade.countEstado("Resuelto");
+    }
+
+    public int contarAbierto() {
+        return pqrsFacade.countEstado("Abierto");
+    }
+
+    public int contarPendiente() {
+        return pqrsFacade.countEstado("Pendiente");
+    }
+
     public Pqrs getPqrs() {
         return pqrs;
     }
@@ -129,6 +167,14 @@ public class PqrsControlador implements Serializable {
 
     public void setTipoPqrs(TipoPqrs tipoPqrs) {
         this.tipoPqrs = tipoPqrs;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
 
 }
