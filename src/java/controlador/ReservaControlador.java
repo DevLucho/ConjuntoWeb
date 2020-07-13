@@ -14,6 +14,11 @@ import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -28,6 +33,7 @@ public class ReservaControlador implements Serializable {
     /**
      * Creates a new instance of ReservaControlador
      */
+    private String fechaI = "";
     private Residente residente;
     private ZonaComunal zonaComunal;
     private Reserva reserva;
@@ -49,6 +55,27 @@ public class ReservaControlador implements Serializable {
         residente = new Residente();
         zonaComunal = new ZonaComunal();
         reserva = new Reserva();
+    }
+
+    public void registrar() {
+        reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
+        reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+        reserva.setEstado("Pendiente");
+
+        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaI = fecha.format(date);
+        
+        reserva.setFechaInicioReserva(date);
+        reserva.setFechaFinReserva(date);
+        
+
+        reservaFacade.create(reserva);
+    }
+
+    public List<Reserva> consultar() {
+        return reservaFacade.findAll();
     }
 
     public int contarReservas() {

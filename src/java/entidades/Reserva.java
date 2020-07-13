@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")
     , @NamedQuery(name = "Reserva.findByIdReserva", query = "SELECT r FROM Reserva r WHERE r.idReserva = :idReserva")
-    , @NamedQuery(name = "Reserva.findByNombre", query = "SELECT r FROM Reserva r WHERE r.nombre = :nombre")
     , @NamedQuery(name = "Reserva.findByMotivoReserva", query = "SELECT r FROM Reserva r WHERE r.motivoReserva = :motivoReserva")
     , @NamedQuery(name = "Reserva.findByFechaInicioReserva", query = "SELECT r FROM Reserva r WHERE r.fechaInicioReserva = :fechaInicioReserva")
     , @NamedQuery(name = "Reserva.findByFechaFinReserva", query = "SELECT r FROM Reserva r WHERE r.fechaFinReserva = :fechaFinReserva")
@@ -48,11 +47,6 @@ public class Reserva implements Serializable {
     @Basic(optional = false)
     @Column(name = "idReserva")
     private Integer idReserva;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "nombre")
-    private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -87,9 +81,8 @@ public class Reserva implements Serializable {
         this.idReserva = idReserva;
     }
 
-    public Reserva(Integer idReserva, String nombre, String motivoReserva, Date fechaInicioReserva, Date fechaFinReserva, String estado) {
+    public Reserva(Integer idReserva, String motivoReserva, Date fechaInicioReserva, Date fechaFinReserva, String estado) {
         this.idReserva = idReserva;
-        this.nombre = nombre;
         this.motivoReserva = motivoReserva;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
@@ -102,14 +95,6 @@ public class Reserva implements Serializable {
 
     public void setIdReserva(Integer idReserva) {
         this.idReserva = idReserva;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getMotivoReserva() {

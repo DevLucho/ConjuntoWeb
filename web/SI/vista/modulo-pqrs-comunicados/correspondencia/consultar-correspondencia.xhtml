@@ -1,12 +1,148 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>  
+        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../../header/header.css"/>
+        <link rel="stylesheet" href="../../nav/nav.css"/>
+        <link rel="stylesheet" href="../../footer/footer.css"/>
+        <link rel="stylesheet" href="../../../style-tablas.css"/>
+        <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css"/>
+        <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <style>
+            nav ul li{ width:25%;}
+            @media screen and (max-width:903px){
+                nav ul li{
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar Correspondencia</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <!-- header -->
+        <ui:include src="../../header/header.xhtml"></ui:include>
+        <!-- nav -->
+        <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                <li class="breadcrumb-item active">Consultar correspondencia</li>
+            </ol>
+        </div>
+        <section class="container-fluid" id="principal">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <i class="fas fa-inbox"></i> 
+                        Consultar Correspondencia
+                    </h3>
+                    <hr/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 table-responsive-lg mt-3 mb-3">
+                    <!-- Secciones por rol -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item ">
+                            <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;"></span></a>
+                        </li>
+                    </ul>
+                    <!-- Tablas -->
+                    <div class="tab-content">
+                        <!-- Tabla todas las pqrs -->
+                        <div class="tab-pane active" id="tab1" role="tabpanel">
+                            <h4 class="mt-3 text-center">Correspondencia</h4>
+                            <f:view>
+                                <h:form>
+                                    <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.consultar()}" var="correspondencia">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="IdCorrespondencia"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idCorrespondencia}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descripcion"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.descripcion}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="FechaIngreso"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.fechaIngreso}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="FechaSalida"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.fechaSalida}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="IdInmueble"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idInmueble.idInmueble}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Empresa"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idEmpresa.nombre}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="TipoPaquete"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Vigilante"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre}"/>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </f:view>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- footer -->
+        <ui:include src="../../footer/footer.xhtml"></ui:include>
+        <!-- bootstrap, popper y jquery -->
+        <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        <script src="../../../../js/popper.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Datatable -->
+        <script src="../../../js/dataTables/datatables.min.js"></script>
+        <!-- Botones datatable -->
+        <script src="../../../js/dataTables/dataTables.buttons.min.js"></script>
+        <script src="../../../js/dataTables/jszip.min.js"></script>
+        <script src="../../../js/dataTables/pdfmake.min.js"></script>
+        <script src="../../../js/dataTables/vfs_fonts.js"></script>
+        <script src="../../../js/dataTables/buttons.html5.min.js"></script>
+        <script src="../../../js/dataTables/exportar_tablas.js"></script>
+        <!-- Menu responsive -->
+        <script src="../../navs/nav.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/sweetAlert.js"></script>       	
     </h:body>
 </html>
 

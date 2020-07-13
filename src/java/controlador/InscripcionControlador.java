@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -60,7 +61,7 @@ public class InscripcionControlador implements Serializable {
     public void init() {
         evento = new Evento();
         inscripcion = new Inscripcion();
-        residente = new Residente(2);
+        residente = new Residente();
     }
 
     public void registrar(int evento) {
@@ -78,7 +79,11 @@ public class InscripcionControlador implements Serializable {
         inscripcionFacade.create(inscripcion);
         mensaje.setMensaje("Mensajes('Exito!','Se ha inscrito satisfactoriamente al evento','success');");
     }
-
+    
+    public List<Inscripcion> consultarTodos(){
+        return inscripcionFacade.findAll();
+    }
+    
     public int contarInscripciones() {
         return inscripcionFacade.count();
     }
