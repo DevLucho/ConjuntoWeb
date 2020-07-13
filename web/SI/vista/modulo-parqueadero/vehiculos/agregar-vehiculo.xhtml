@@ -75,24 +75,17 @@
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="idParqueadero" for="idParqueadero"/></strong>
-                                        <h:selectOneMenu id="idParqueadero" class="form-control-plaintext" value="#{vehiculoControlador.vehiculo.tipoVehiculo}" required="true">
+                                        <strong><h:outputLabel value="Identificador parqueadero" for="idParqueadero"/></strong>
+                                        <h:selectOneMenu id="idParqueadero" class="form-control-plaintext" value="#{vehiculoControlador.parqueadero.idParqueadero}" required="true">
                                             <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                             <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.idParqueadero}" itemLabel="#{parCont.lugar}"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="idResidente" for="idResidente" /></strong>
-                                        <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{residenteControlador.residente.idResidente}" required="true">
+                                        <strong><h:outputLabel value="Documento residente" for="idResidente" /></strong>
+                                        <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{vehiculoControlador.residente.idResidente}" required="true">
                                             <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idResidente}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="idVisitante" for="idVisitante" /></strong>
-                                        <h:selectOneMenu id="idVisitante" class="form-control-plaintext" value="#{visitanteControlador.visitante.idVisitante}" required="true">
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItems var="visCont" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{visCont.idVisitante}" itemLabel="#{visCont.idVisitante}" itemDisabled="true"/>
+                                            <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idPerfil.documento}"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 mb-3">

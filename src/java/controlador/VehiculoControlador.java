@@ -5,12 +5,9 @@
  */
 package controlador;
 
-import entidades.FichaIngreso;
-import entidades.Inmueble;
 import entidades.Vehiculo;
 import entidades.Parqueadero;
 import entidades.Residente;
-import entidades.Vigilante;
 import entidades.Visitante;
 import facade.ParqueaderoFacade;
 import facade.ResidenteFacade;
@@ -59,13 +56,13 @@ public class VehiculoControlador implements Serializable {
     @PostConstruct
     public void init() {
         visitante = new Visitante();
+        residente = new Residente();
         vehiculo = new Vehiculo();
         parqueadero = new Parqueadero();
     }
 
     public void registrar() {
         vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
-        vehiculo.setIdVisitante(visitanteFacade.find(visitante.getIdVisitante()));
         vehiculo.setIdResidente(residenteFacade.find(residente.getIdResidente()));
         
         vehiculoFacade.create(vehiculo);
@@ -92,6 +89,14 @@ public class VehiculoControlador implements Serializable {
         vehiculo.setIdResidente(residenteFacade.find(residente.getIdResidente()));
         
         vehiculoFacade.edit(vehiculo);
+    }
+
+    public List<Vehiculo> consultarTodosResidente() {
+        return vehiculoFacade.vehiculoResidente();
+    }
+
+    public List<Vehiculo> consultarTodosVisitante() {
+        return vehiculoFacade.vehiculoVisitante();
     }
 
     public List<Vehiculo> consultarTodos() {
