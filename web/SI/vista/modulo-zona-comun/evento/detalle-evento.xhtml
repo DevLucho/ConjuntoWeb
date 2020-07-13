@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -50,10 +51,14 @@
                 margin-bottom: 0;
             }
         </style>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <title>Administrador | Zona comunal</title>
     </h:head>
     <h:body>
+        <script>#{mensajeControlador.mensaje}</script>
         <!-- Contenedor principal -->
         <div class="contenedor">
             <!-- header -->
@@ -88,17 +93,32 @@
                     <div class="col-12">
                         <h3>
                             <i class="fas fa-stream"></i>
-                            Detalle evento
+                            Detalle evento #{eventoControlador.evento.titulo}
                         </h3>
                     </div>
                 </div>
                 <hr/>
-                <h:form>
-                    <div class="row mt-3 mb-3">
-                        <div class="col-12 col-md-10">
+                <div class="col-12 col-md-2 mt-3 mb-3" style="text-align: center; padding: 0; margin-left: auto; margin-right: auto">
+                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#modal-comunicado">Inscribirme</button>
+                </div>
+                <hr/>
+                <h:form class="mt-3 mb-3">
+                    <div class="row">
+                        <div class="col-6 mt-3" style="border-right: 1px solid rgba(0,0,0,.1)">
+                            <div class="carousel slide text-center" id="principal-carousel" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#principal-carousel" data-slid-to="0" class="active"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="#{eventoControlador.evento.img}" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
                             <h2>#{eventoControlador.evento.titulo}</h2>
                             <hr/>
-
                             <div class="media">
                                 <div class="media-body">
                                     <h4 class="mt-0">Descripción</h4>
@@ -145,25 +165,56 @@
                                 <img src="#{eventoControlador.evento.img}" width="64" height="64" alt="" class="ml-3"/>
                             </div>
                         </div>
-                        <div class="col-12 col-md-2" style="text-align: center; padding: 0;">
-                            <button type="button" class="btn btn-success btn-block" onclick="location.href = './generar-reserva.xhtml'">Inscribirme</button>
-                            <div class="contenidodescri">
-                                <svg viewbox="0 0 50 50" width="50" height="50">
-                                    <defs>
-                                        <mask id="mask" x="0" y="0" width="100" height="49">
-                                            <rect x="0.5" y="0.5" width="49" height="49" fill="#fff"/>
-                                            <text x="10" text-anchor="middle" y="50" dy="0">F</text>
-                                            <text x="20" id="ltrV" text-anchor="middle" y="50" dy="0">O</text>
-                                            <text x="30" text-anchor="middle" y="50" dy="0">T</text>
-                                            <text x="40" text-anchor="middle" y="50" dy="0">O</text>
-                                        </mask>
-                                    </defs>
-                                    <rect x="0.5" y="0.5" width="49" height="49" mask="url(#mask)" fill-opacity="1" fill="#e7e7e8"/>
-                                </svg>
-                            </div>
-                        </div> 
-                    </div> 
+                    </div>
                 </h:form>
+                <!-- Modal inscripcion a evento -->
+                <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>Inscripción ha evento</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- Formulario comunicado -->
+                            <h:form class="row">
+                                <div class="modal-body">
+                                    <div class="form-group row font">
+                                        <div class="col-12">
+                                            <b><label for="titulo">Nombre y apellido</label></b>
+                                            <h:inputText class="form-control" a:placeholder="Nombre y apellido del participante" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row font">
+                                        <div class="col-12 col-md-6">
+                                            <b><label>Residente responsable:</label></b>
+                                            <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <b><label>Torre:</label></b>
+                                            <h:selectOneMenu class="form-control">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <b><label>Apartamento:</label></b>
+                                            <h:selectOneMenu class="form-control">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer col-12">
+                                    <h:commandButton value="Confirmar" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>

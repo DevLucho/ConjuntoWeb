@@ -7,13 +7,20 @@ package controlador;
 
 import entidades.Evento;
 import entidades.Inscripcion;
+import entidades.Residente;
 import facade.EventoFacade;
 import facade.InscripcionFacade;
+import facade.ResidenteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -26,7 +33,14 @@ public class InscripcionControlador implements Serializable {
     /**
      * Creates a new instance of InscripcionControlador
      */
+    private String fechaI = "";
+
+    @Inject
+    private MensajeControlador mensaje;
+
     private Inscripcion inscripcion;
+
+    private Residente residente;
 
     private Evento evento;
 
@@ -36,6 +50,9 @@ public class InscripcionControlador implements Serializable {
     @EJB
     EventoFacade eventoFacade;
 
+    @EJB
+    ResidenteFacade residenteFacade;
+
     public InscripcionControlador() {
     }
 
@@ -43,6 +60,23 @@ public class InscripcionControlador implements Serializable {
     public void init() {
         evento = new Evento();
         inscripcion = new Inscripcion();
+        residente = new Residente(2);
+    }
+
+    public void registrar(int evento) {
+        inscripcion.setIdEvento(eventoFacade.find(evento));
+        inscripcion.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+
+        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        fechaI = fecha.format(date);
+
+        inscripcion.setFechaInscripcion(date);
+        inscripcion.setEstado("Inscrito");
+
+        inscripcionFacade.create(inscripcion);
+        mensaje.setMensaje("Mensajes('Exito!','Se ha inscrito satisfactoriamente al evento','success');");
     }
 
     public int contarInscripciones() {
@@ -63,6 +97,22 @@ public class InscripcionControlador implements Serializable {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public Residente getResidente() {
+        return residente;
+    }
+
+    public void setResidente(Residente residente) {
+        this.residente = residente;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
 
 }

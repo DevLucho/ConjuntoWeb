@@ -63,7 +63,7 @@
                 </ol>
             </div>
             <!-- main -->
-            <section class="container-fluid" id="principal">
+            <section class="container-fluid" id="principal" style="margin-bottom: 350px">
                 <div class="row">
                     <div class="col-12">
                         <h3>
@@ -75,6 +75,9 @@
                 <hr/>
                 <h:form class="row mt-3 mb-3">
                     <div class="col">
+                        <c:if test="#{zonaComunalControlador.contarZonas() == 0}">
+                            <h6 class="text-center">No hay zona comunes publicadas</h6>
+                        </c:if>
                         <div class="card-columns">
                             <c:forEach items="#{zonaComunalControlador.consultarTodos()}" var="zona">
                                 <div class="card">

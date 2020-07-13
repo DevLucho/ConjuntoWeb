@@ -43,7 +43,7 @@ public class DisponibilidadControlador implements Serializable {
     private Disponibilidad disponibilidad;
 
     private DisponibilidadDia disponibilidadDia;
-    
+
     private List<Disponibilidad> disponibilidadZona;
 
     @EJB
@@ -133,27 +133,53 @@ public class DisponibilidadControlador implements Serializable {
         mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
     }
 
-    public String preActualizar(Disponibilidad disponibilidadActualizar) {
-        disponibilidad = disponibilidadActualizar;
-        return "prueba-d";
+    public String preActualizar(Disponibilidad zonaActualizar) {
+        if (zonaActualizar.getIdDia().getIdDia() == 1) {
+            domingo = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 2) {
+            lunes = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 3) {
+            martes = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 4) {
+            miercoles = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 5) {
+            jueves = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 6) {
+            viernes = true;
+        }
+        if (zonaActualizar.getIdDia().getIdDia() == 7) {
+            sabado = true;
+        }
+        disponibilidadDia = zonaActualizar.getIdDia();
+        zonaComunal = zonaActualizar.getIdZonaComunal();
+        disponibilidad = zonaActualizar;
+        return "editar-zona";
+    }
+
+    public void actualizar() {
+        disponibilidad.setIdDia(disponibilidadDiaFacade.find(disponibilidadDia.getIdDia()));
+        disponibilidad.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
+        disponibilidadFacade.edit(disponibilidad);
+        mensaje.setMensaje("Mensajes('Exito!','Zona común modificada satisfactoriamente','success');");
     }
 
     public List<Disponibilidad> consultarTodos() {
         return disponibilidadFacade.findAll();
     }
 
-    public List<Disponibilidad> consultarZonaComunal() {
-        return disponibilidadFacade.consultarZonaComunal();
+    public List<Disponibilidad> consultarZonaComunal(ZonaComunal zonaComunal) {
+        return disponibilidadFacade.consultarZonaComunal(zonaComunal);
     }
-    
-    public String consultarDisponibilidad(ZonaComunal zonaComunal){
+
+    public String consultarDisponibilidad(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
         disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal);
         return "detalle-zona";
-    }
-
-    public void actualizar() {
-        disponibilidadFacade.edit(disponibilidad);
     }
 
     public DisponibilidadDia getDisponibilidadDia() {

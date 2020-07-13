@@ -74,6 +74,7 @@
                                                 </f:facet>
                                                 <h:outputText value="#{zona.idZonaComunal.nombre}"/>
                                             </h:column>
+                                            <!--
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Reservaciones desde"/>
@@ -96,22 +97,23 @@
                                                 </f:facet>
                                                 <h:outputText value="#{zona.idDia.nombre}"/>
                                             </h:column>
+                                           
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Tiempo maximo de reserva"/>
                                                 </f:facet>
                                                 <h:outputText value="#{zona.tiempoMaximoReserva}"></h:outputText> H
-                                            </h:column>
+                                            </h:column> -->
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="btn btn-outline-success fas fa-pen-square" title="Editar zona" action="#{zonaComunalControlador.preActualizar(zona)}"></h:commandButton>
+                                                    <h:commandButton value="" class="btn btn-outline-success fas fa-pen-square" title="Editar zona" action="#{disponibilidadControlador.preActualizar(zona)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="btn btn-outline-danger btn-cancelar-zona fas fa-ban" title="Cancelar zona" action="#{zonaComunalControlador.eliminar(zona)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Cancelar zona" action="#{zonaComunalControlador.eliminar(zona)}"></h:commandButton>
                                                     <!-- . -->
-                                                    <h:commandButton value="" class="btn btn-outline-info far fa-eye" title="Ver zona" action="#{zonaComunalControlador.consultarZona(zona.idZonaComunal)}"></h:commandButton>
+                                                    <h:commandButton value="" class="btn btn-outline-info far fa-eye" title="Ver zona" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>
@@ -141,9 +143,6 @@
         <script src="../../../js/dataTables/exportar_tablas.js"></script>
         <!-- Menu responsive -->
         <script src="../../navs/nav.js"></script>
-        <!-- Sweet Alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="../../../js/sweetAlert.js"></script>
     </h:body>
 </html>
 

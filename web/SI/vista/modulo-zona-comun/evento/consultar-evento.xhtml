@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -30,10 +32,14 @@
                 padding: 1.25rem;
             }
         </style>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar evento</title>
     </h:head>
     <h:body>
+        <script>#{mensajeControlador.mensaje}</script>
         <!-- Contenedor principal -->
         <div class="contenedor">
             <!-- header -->
@@ -85,13 +91,62 @@
                                     <div class="card-block">
                                         <h3 class="card-title">#{e.titulo}</h3>
                                         <p class="card-text">#{e.detalle}<h:commandLink class="card-link" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="...Leer más"></h:commandLink></p>
-                                        <a href="./generar-reserva.xhtml" class="btn  btn-outline-success btn-block btn-lg">¡Inscribirme!</a>
+                                        <h:commandLink class="btn btn-outline-success btn-block btn-lg" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="¡Inscribirme!"></h:commandLink>
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
                 </h:form>
+                <!-- Modal inscripcion a evento -->
+                <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>Inscripción ha evento</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- Formulario comunicado -->
+                            <h:form class="row">
+                                <div class="modal-body">
+                                    <div class="form-group row font">
+                                        <div class="col-12">
+                                            <label for="titulo">Nombre y apellidos</label>
+                                            <h:inputText class="form-control" a:placeholder="Nombre y apellido del participante" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row font">
+                                        <div class="col-12 col-md-6">
+                                            <label>Residente</label>
+                                            <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <label>Torre</label>
+                                            <h:selectOneMenu class="form-control">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <label>Apartamento</label>
+                                            <h:selectOneMenu class="form-control">
+                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer col-12">
+                                    <h:commandButton value="Confirmar" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>
