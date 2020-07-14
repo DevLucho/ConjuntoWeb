@@ -31,14 +31,14 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
     public DisponibilidadFacade() {
         super(Disponibilidad.class);
     }
-
+    /*
     public List<Disponibilidad> consultarZonaComunal(ZonaComunal idZonaComunal) {
         Query query;
         query = em.createQuery("SELECT DISTINCT c.idZonaComunal FROM Disponibilidad c WHERE c.idZonaComunal=:idZonaComunal");
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
-    }
-
+    }*/
+    
     public List<Disponibilidad> consultarDisponibilidadZona(ZonaComunal idZonaComunal) {
         Query query;
         query = em.createQuery("SELECT u FROM Disponibilidad u WHERE u.idZonaComunal=:idZonaComunal");

@@ -30,12 +30,12 @@ public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
     public CorrespondenciaFacade() {
         super(Correspondencia.class);
     }
-    
-    public List<Correspondencia> paqueteEntregado(String estado){
+
+    public List<Correspondencia> paqueteEntregado(String estado) {
         Query query;
         query = em.createQuery("SELECT u FROM Correspondencia u WHERE u.estado=:estado");
         query.setParameter("estado", estado);
         return query.getResultList();
     }
-    
+
 }

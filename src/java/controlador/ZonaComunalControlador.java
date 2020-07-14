@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,7 +26,8 @@ public class ZonaComunalControlador implements Serializable {
     /**
      * Creates a new instance of ZonaComunalControlador
      */
-
+    @Inject
+    private MensajeControlador mensaje;
     private ZonaComunal zonaComunal;
 
     @EJB
@@ -44,9 +46,9 @@ public class ZonaComunalControlador implements Serializable {
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) {
+        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar esta zona común?','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
         zonaComunalFacade.remove(zonaComunalEliminar);
     }
-
     /*
     public String preActualizar(ZonaComunal zonaComunalActualizar) {
         disponibilidad = zonaComunalActualizar.getIdDisponibilidad();
@@ -57,14 +59,13 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
         zonaComunalFacade.edit(zonaComunal);
     }*/
-    
     public List<ZonaComunal> consultarTodos() {
         return zonaComunalFacade.findAll();
     }
 
     public String consultarZona(int id) {
         zonaComunal = zonaComunalFacade.find(id);
-        
+
         return "detalle-zona";
     }
 
@@ -78,6 +79,14 @@ public class ZonaComunalControlador implements Serializable {
 
     public void setZonaComunal(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
     }
 
 }

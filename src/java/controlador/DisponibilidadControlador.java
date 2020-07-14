@@ -172,10 +172,6 @@ public class DisponibilidadControlador implements Serializable {
         return disponibilidadFacade.findAll();
     }
 
-    public List<Disponibilidad> consultarZonaComunal(ZonaComunal zonaComunal) {
-        return disponibilidadFacade.consultarZonaComunal(zonaComunal);
-    }
-
     public String consultarDisponibilidad(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
         disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal);

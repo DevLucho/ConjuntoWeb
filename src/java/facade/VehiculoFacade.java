@@ -30,17 +30,17 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
     public VehiculoFacade() {
         super(Vehiculo.class);
     }
-    
+
     public List<Vehiculo> vehiculoVisitante() {
         Query query;
         query = em.createQuery("SELECT u.placa, u.tipoVehiculo, u.idParqueadero, u.idVisitante FROM Vehiculo u");
         return query.getResultList();
     }
-    
+
     public List<Vehiculo> vehiculoResidente() {
         Query query;
         query = em.createQuery("SELECT u.placa, u.tipoVehiculo, u.idParqueadero, u.idResidente FROM Vehiculo u");
         return query.getResultList();
     }
-    
+
 }

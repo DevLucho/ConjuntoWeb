@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")
     , @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol")
-    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")})
+    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")
+    , @NamedQuery(name = "Rol.findByName", query = "SELECT r FROM Rol r WHERE r.name = :name")})
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +49,9 @@ public class Rol implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "nombre")
     private String nombre;
+    @Size(max = 30)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRol", fetch = FetchType.LAZY)
     private List<RolPermiso> rolPermisoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRol", fetch = FetchType.LAZY)
@@ -79,6 +83,14 @@ public class Rol implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @XmlTransient

@@ -30,8 +30,8 @@ public class DomiciliarioFacade extends AbstractFacade<Domiciliario> {
     public DomiciliarioFacade() {
         super(Domiciliario.class);
     }
-    
-    public List<Domiciliario> fichaBloqueadaD(String estadoFicha){
+
+    public List<Domiciliario> fichaBloqueadaD(String estadoFicha) {
         Query query;
         query = em.createQuery("SELECT u FROM Domiciliario u JOIN FichaIngreso F WHERE u.idFicha.idFicha=F.idFicha AND F.estadoFicha=:estadoFicha");
         query.setParameter("estadoFicha", estadoFicha);

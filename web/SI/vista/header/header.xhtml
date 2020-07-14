@@ -53,7 +53,12 @@
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesion.celular}"></h:inputText>
 
                                                             <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
-                                                            <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesion.idRol.name}" disabled="disabled"/>
+                                                            </c:if>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesion.idRol.nombre}" disabled="disabled"/>
+                                                            </c:if>
                                                         </div>
                                                     </c:forEach>
                                                 </c:if>
@@ -84,7 +89,12 @@
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionR.idPerfil.celular}"></h:inputText>
 
                                                             <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
-                                                            <input type="text" class="form-control-plaintext" value="#{sesionR.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesionR.idPerfil.idRol.name}" disabled="disabled"/>
+                                                            </c:if>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesionR.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                            </c:if>
                                                         </div>
                                                     </c:forEach>
                                                 </c:if>
@@ -119,7 +129,12 @@
                                                             <h:inputText class="form-control-plaintext" a:disabled="disabled" value="#{sesionV.idPerfil.celular}"></h:inputText>
 
                                                             <strong><label for="user-rol">#{formcrearusuario.lblRol}</label></strong>
-                                                            <input type="text" class="form-control-plaintext" value="#{sesionV.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesionV.idPerfil.idRol.name}" disabled="disabled"/>
+                                                            </c:if>
+                                                            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                                                                <input type="text" class="form-control-plaintext" value="#{sesionV.idPerfil.idRol.nombre}" disabled="disabled"/>
+                                                            </c:if>
                                                         </div>
                                                     </c:forEach>
                                                 </c:if>
@@ -218,8 +233,13 @@
                         </div>
                     </h:form>
                     <h:form>
-                        <!-- Usuario -->
-                        <h1 class="usuario">#{sesionControlador.rolSeleccionado.nombre}</h1>
+                        <!-- Usuario - Rol -->
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                            <h1 class="usuario">#{sesionControlador.rolSeleccionado.name}</h1>
+                        </c:if>
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                            <h1 class="usuario">#{sesionControlador.rolSeleccionado.nombre}</h1>
+                        </c:if>
                         <!-- Idioma -->
                         <div class="country-flag">
                             <ul>
