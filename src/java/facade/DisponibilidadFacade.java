@@ -31,6 +31,7 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
     public DisponibilidadFacade() {
         super(Disponibilidad.class);
     }
+
     /*
     public List<Disponibilidad> consultarZonaComunal(ZonaComunal idZonaComunal) {
         Query query;
@@ -38,12 +39,19 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
     }*/
-    
-    public List<Disponibilidad> consultarDisponibilidadZona(ZonaComunal idZonaComunal) {
+
+    public List<Disponibilidad> consultarDisponibilidadZona(int idZonaComunal) {
         Query query;
-        query = em.createQuery("SELECT u FROM Disponibilidad u WHERE u.idZonaComunal=:idZonaComunal");
+        query = em.createQuery("SELECT u FROM Disponibilidad u WHERE u.idZonaComunal.idZonaComunal=:idZonaComunal");
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
+    }
+
+    public void eliminarZona(ZonaComunal idZonaComunal) {
+        Query query;
+        query = em.createQuery("DELETE FROM Disponibilidad u WHERE u.idZonaComunal=:idZonaComunal");
+        query.setParameter("idZonaComunal", idZonaComunal);
+        query.executeUpdate();
     }
 
 }

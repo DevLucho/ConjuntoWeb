@@ -79,11 +79,18 @@ public class InscripcionControlador implements Serializable {
         inscripcionFacade.create(inscripcion);
         mensaje.setMensaje("Mensajes('Exito!','Se ha inscrito satisfactoriamente al evento','success');");
     }
-    
-    public List<Inscripcion> consultarTodos(){
+
+    public List<Inscripcion> consultarTodos() {
         return inscripcionFacade.findAll();
     }
-    
+
+    public void cancelar(Inscripcion inscripcionCancelar) {
+        mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar la inscripción?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado exitosamente la inscripción.','success');");
+        inscripcion = inscripcionCancelar;
+        inscripcion.setEstado("Cancelado");
+        inscripcionFacade.edit(inscripcionCancelar);
+    }
+
     public int contarInscripciones() {
         return inscripcionFacade.count();
     }

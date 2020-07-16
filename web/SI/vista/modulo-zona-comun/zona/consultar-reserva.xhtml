@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
@@ -15,15 +16,6 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="stylesheet" href="../../../dataTables.bootstrap4.min.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
-        <style>
-            nav ul li{ width:25%;}
-            @media screen and (max-width:903px){
-                nav ul li{
-                    width: 100%;
-                    text-align: left;
-                }
-            }
-        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar mis reservas</title>
     </h:head>
     <h:body>
@@ -34,7 +26,23 @@
         <div aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                <li class="breadcrumb-item active">Consultar mis reservas</li>
+                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Consultar reservas</li>
+                </c:if>
+                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Consultar reservas</li>
+                    <style>
+                        nav ul li{ width:25%;}
+                        @media screen and (max-width:903px){
+                            nav ul li{
+                                width: 100%;
+                                text-align: left;
+                            }
+                        }
+                    </style>
+                </c:if>
             </ol>
         </div>
         <section class="container-fluid" id="principal">
@@ -110,15 +118,15 @@
                                             <h:outputText value="#{reserva.estado}"/>
                                         </h:column>
                                         <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Acciones"/>
-                                                </f:facet>
-                                                <div class="btn-group-sm text-center">
-                                                    <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar reserva"></h:commandButton>
-                                                    <!-- . -->
-                                                    <h:commandButton value="" class="btn btn-outline-info far fa-eye" title="Ver reserva"></h:commandButton>
-                                                </div>
-                                            </h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Acciones"/>
+                                            </f:facet>
+                                            <div class="btn-group-sm text-center">
+                                                <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar reserva"></h:commandButton>
+                                                <!-- . -->
+                                                <h:commandButton value="" class="btn btn-outline-info far fa-eye" title="Ver reserva"></h:commandButton>
+                                            </div>
+                                        </h:column>
                                     </h:dataTable>
                                 </h:form>
                             </f:view>

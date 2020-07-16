@@ -30,6 +30,7 @@ public class DisponibilidadControlador implements Serializable {
 
     @Inject
     private MensajeControlador mensaje;
+    // Dias de la semana
     private boolean domingo;
     private boolean lunes;
     private boolean martes;
@@ -121,50 +122,93 @@ public class DisponibilidadControlador implements Serializable {
             disponibilidadFacade.create(disponibilidad);
         }
 
-        domingo = false;
-        lunes = false;
-        martes = false;
-        miercoles = false;
-        jueves = false;
-        viernes = false;
-        sabado = false;
-        disponibilidad = new Disponibilidad();
-        zonaComunal = new ZonaComunal();
+        this.domingo = false;
+        this.lunes = false;
+        this.martes = false;
+        this.miercoles = false;
+        this.jueves = false;
+        this.viernes = false;
+        this.sabado = false;
+        this.disponibilidad = new Disponibilidad();
+        this.zonaComunal = new ZonaComunal();
         mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
     }
 
-    public String preActualizar(Disponibilidad zonaActualizar) {
-        if (zonaActualizar.getIdDia().getIdDia() == 1) {
-            domingo = true;
+    public String preActualizar(ZonaComunal zonaActualizar) {
+        disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaActualizar.getIdZonaComunal());
+        for (Disponibilidad disponibilidad : disponibilidadZona) {
+            if (disponibilidad.getIdDia().getIdDia() == 1) {
+                domingo = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 2) {
+                lunes = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 3) {
+                martes = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 4) {
+                miercoles = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 5) {
+                jueves = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 6) {
+                viernes = true;
+            }
+            if (disponibilidad.getIdDia().getIdDia() == 7) {
+                sabado = true;
+            }
         }
-        if (zonaActualizar.getIdDia().getIdDia() == 2) {
-            lunes = true;
-        }
-        if (zonaActualizar.getIdDia().getIdDia() == 3) {
-            martes = true;
-        }
-        if (zonaActualizar.getIdDia().getIdDia() == 4) {
-            miercoles = true;
-        }
-        if (zonaActualizar.getIdDia().getIdDia() == 5) {
-            jueves = true;
-        }
-        if (zonaActualizar.getIdDia().getIdDia() == 6) {
-            viernes = true;
-        }
-        if (zonaActualizar.getIdDia().getIdDia() == 7) {
-            sabado = true;
-        }
-        disponibilidadDia = zonaActualizar.getIdDia();
-        zonaComunal = zonaActualizar.getIdZonaComunal();
-        disponibilidad = zonaActualizar;
+        disponibilidad = disponibilidadZona.get(0);
+        zonaComunal = zonaActualizar;
         return "editar-zona";
     }
 
     public void actualizar() {
-        disponibilidad.setIdDia(disponibilidadDiaFacade.find(disponibilidadDia.getIdDia()));
-        disponibilidad.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
-        disponibilidadFacade.edit(disponibilidad);
+        disponibilidadFacade.eliminarZona(zonaComunal);
+        if (domingo) {
+            disponibilidadDia.setIdDia(1);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (lunes) {
+            disponibilidadDia.setIdDia(2);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (martes) {
+            disponibilidadDia.setIdDia(3);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (miercoles) {
+            disponibilidadDia.setIdDia(4);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (jueves) {
+            disponibilidadDia.setIdDia(5);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (viernes) {
+            disponibilidadDia.setIdDia(6);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        if (sabado) {
+            disponibilidadDia.setIdDia(7);
+            disponibilidad.setIdDia(disponibilidadDia);
+            disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidadFacade.create(disponibilidad);
+        }
+        zonaComunalFacade.edit(zonaComunal);
         mensaje.setMensaje("Mensajes('Exito!','Zona común modificada satisfactoriamente','success');");
     }
 
@@ -174,9 +218,16 @@ public class DisponibilidadControlador implements Serializable {
 
     public String consultarDisponibilidad(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
-        disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal);
+        disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
         return "detalle-zona";
     }
+    /*
+    public List<Disponibilidad> consultaDisponiblidad() {
+        for (Disponibilidad disponibilidad : disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal())) {
+            System.out.println("Dia: " + disponibilidad.getIdDia().getIdDia());
+        }
+        return disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
+    }*/
 
     public DisponibilidadDia getDisponibilidadDia() {
         return disponibilidadDia;
