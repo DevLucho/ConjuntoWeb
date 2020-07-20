@@ -37,10 +37,18 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return query.getResultList();
     }
 
-    public List<Vehiculo> vehiculoResidente() {
+    public List<Vehiculo> vehiculoResidente(int idResidente) {
         Query query;
-        query = em.createQuery("SELECT u.placa, u.tipoVehiculo, u.idParqueadero, u.idResidente FROM Vehiculo u");
+        query = em.createQuery("SELECT u FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
+        query.setParameter("idResidente", idResidente);
         return query.getResultList();
+    }
+
+    public int contarVehiculoR(int idResidente) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
+        query.setParameter("idResidente", idResidente);
+        return ((Long) query.getSingleResult()).intValue();
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package facade;
 
+import entidades.FichaIngreso;
 import entidades.Visitante;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,20 @@ public class VisitanteFacade extends AbstractFacade<Visitante> {
         query = em.createQuery("SELECT u FROM Visitante u JOIN FichaIngreso F WHERE u.idFicha.idFicha=F.idFicha AND F.estadoFicha=:estadoFicha");
         query.setParameter("estadoFicha", estadoFicha);
         return query.getResultList();
+    }
+
+    public List<Visitante> fichaVisitante(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Visitante u WHERE u.idFicha.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return query.getResultList();
+    }
+
+    public int contarVisitanteR(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Visitante u WHERE u.idFicha.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return ((Long) query.getSingleResult()).intValue();
     }
 
 }

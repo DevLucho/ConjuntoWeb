@@ -65,9 +65,15 @@
                                     <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.consultar()}" var="correspondencia">
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="IdCorrespondencia"/>
+                                                <h:outputText value="Id"/>
                                             </f:facet>
                                             <h:outputText value="#{correspondencia.idCorrespondencia}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Tipo"/>
+                                            </f:facet>
+                                            <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
@@ -77,7 +83,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="FechaIngreso"/>
+                                                <h:outputText value="Fecha ingreso"/>
                                             </f:facet>
                                             <h:outputText value="#{correspondencia.fechaIngreso}">
                                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -85,17 +91,11 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="FechaSalida"/>
+                                                <h:outputText value="Fecha salida"/>
                                             </f:facet>
                                             <h:outputText value="#{correspondencia.fechaSalida}">
                                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                                             </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="IdInmueble"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.idInmueble.idInmueble}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
@@ -105,15 +105,15 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="TipoPaquete"/>
+                                                <h:outputText value="Resgistrado por:"/>
                                             </f:facet>
-                                            <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
+                                            <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="Vigilante"/>
+                                                <h:outputText value="Estado"/>
                                             </f:facet>
-                                            <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre}"/>
+                                            <h:outputText value="#{correspondencia.estado}"/>
                                         </h:column>
                                     </h:dataTable>
                                 </h:form>

@@ -37,4 +37,19 @@ public class DomiciliarioFacade extends AbstractFacade<Domiciliario> {
         query.setParameter("estadoFicha", estadoFicha);
         return query.getResultList();
     }
+
+    public List<Domiciliario> fichaDomiciliario(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Domiciliario u WHERE u.idFicha.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return query.getResultList();
+    }
+
+    public int contarDomiclioR(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Domiciliario u WHERE u.idFicha.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }

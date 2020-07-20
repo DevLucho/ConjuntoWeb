@@ -154,6 +154,14 @@ public class CorrespondenciaControlador implements Serializable {
         return correspondenciaFacade.paqueteEntregado(estado);
     }
     
+    public List<Correspondencia> correspondenciaResidente(int idInmueble){
+        return correspondenciaFacade.correspondenciaResidente(idInmueble);
+    }
+    
+    public int contarConrrespondenciaR(int idInmueble){
+        return correspondenciaFacade.contarCorrespondenciaR(idInmueble);
+    }
+    
     public String preActualizar(Correspondencia correspondenciaActualizar) {
         correspondencia = correspondenciaActualizar;
         inmueble = correspondenciaActualizar.getIdInmueble();

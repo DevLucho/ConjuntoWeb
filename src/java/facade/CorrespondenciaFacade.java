@@ -38,4 +38,18 @@ public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
         return query.getResultList();
     }
 
+    public List<Correspondencia> correspondenciaResidente(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Correspondencia u WHERE u.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return query.getResultList();
+    }
+
+    public int contarCorrespondenciaR(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Correspondencia u WHERE u.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }

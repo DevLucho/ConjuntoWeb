@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -13,24 +14,19 @@
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
         <!-- Estilos -->
-        <link rel="stylesheet" href="../estilos-parqueaderos.css"/>
+        <link href="../../modulo-parqueadero/estilos-parqueaderos.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <style>
-            nav ul li{ width:20%;}
-            @media screen and (max-width:903px){
-                nav ul li{
-                    width: 100%;
-                    text-align: left;
-                }
-            }
-        </style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar vehiculo</title>
     </h:head>
     <h:body>
+        <script>#{mensajeControlador.mensaje}</script>
         <!-- Contenedor principal -->
         <div class="contenedor">
             <!-- header -->
@@ -40,26 +36,45 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
-                    <li class="breadcrumb-item active">Agregar vehiculo</li>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">Consultar usuarios</a></li>
+                        <li class="breadcrumb-item active">Agregar vehiculo</li>
+                    </c:if>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                        <style>
+                            nav ul li{ width:20%;}
+                            @media screen and (max-width:903px){
+                                nav ul li{
+                                    width: 100%;
+                                    text-align: left;
+                                }
+                            }
+                        </style>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="../../modulo-parqueadero/vehiculos/consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
+                        <li class="breadcrumb-item active">Agregar vehiculo</li>
+                    </c:if>
+
                 </ol>
             </div>
             <section class="container-fluid" id="principal">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3><i class="fas fa-car" id="icono"></i>Agregar nuevo vehiculo de residente</h3>
+                        <h3><i class="fas fa-car" id="icono"></i><c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">Agregar nuevo vehiculo a: #{usuarioControlador.usuario.nombre}</c:if>
+                            <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">Agregar nuevo vehiculo a residente</c:if>
+                        </h3>
                         <hr/>
                     </div>
                     <div class="col-12 col-md-8 form">
                         <!-- formulario -->
                         <f:view>
                             <!--formulario-->
-                            
-                                <div class="col-12">
-                                    <div class="caja bg-faded border-bottom-0">Vehiculo nuevo de residente</div>
-                                </div>
-                                <h:form class="recorrer-dato was-validated sombra form">
+
+                            <div class="col-12">
+                                <div class="caja bg-faded border-bottom-0">Vehiculo nuevo de residente</div>
+                            </div>
+                            <h:form class="recorrer-dato was-validated sombra form">
                                 <div class="form-group row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><h:outputLabel value="Placa" for="placa" /></strong>
@@ -82,11 +97,22 @@
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="Documento residente" for="idResidente" /></strong>
-                                        <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{vehiculoControlador.residente.idResidente}" required="true">
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idPerfil.documento}"/>
-                                        </h:selectOneMenu>
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                                            <strong><label for="identificacion">Residente:</label></strong> 
+                                            <div class="mb-3">
+                                                <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{vehiculoControlador.residente.idResidente}" required="true">
+                                                    <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(usuarioControlador.usuario.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre} #{r.idPerfil.apellido}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                                            <strong><h:outputLabel value="Documento residente" for="idResidente" /></strong>
+                                            <h:selectOneMenu id="idResidente" class="form-control-plaintext" value="#{vehiculoControlador.residente.idResidente}" required="true">
+                                                <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idPerfil.documento}"/>
+                                            </h:selectOneMenu>
+                                        </c:if>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <h:commandButton value="Registrar" class="btn btn-outline-success btn-block" action="#{vehiculoControlador.registrar()}"></h:commandButton>

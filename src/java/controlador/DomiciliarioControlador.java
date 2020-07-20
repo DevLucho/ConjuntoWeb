@@ -176,6 +176,14 @@ public class DomiciliarioControlador implements Serializable {
         return domiciliarioFacade.fichaBloqueadaD(estadoFicha);
     }
     
+    public List<Domiciliario> fichaDomiciliario(int idInmueble){
+        return domiciliarioFacade.fichaDomiciliario(idInmueble);
+    }
+    
+    public int contarDomiciliarioR(int idInmueble){
+        return domiciliarioFacade.contarDomiclioR(idInmueble);
+    }
+    
     public String preActualizar(Domiciliario domiciliarioActualizar) {
         domiciliario = domiciliarioActualizar;
         fichaIngreso = domiciliarioActualizar.getIdFicha();

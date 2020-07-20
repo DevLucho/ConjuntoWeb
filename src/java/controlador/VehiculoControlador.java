@@ -5,9 +5,15 @@
  */
 package controlador;
 
+import entidades.Apartamento;
+import entidades.Inmueble;
 import entidades.Vehiculo;
 import entidades.Parqueadero;
 import entidades.Residente;
+import entidades.Rol;
+import entidades.TipoDocumento;
+import entidades.Torre;
+import entidades.Usuario;
 import entidades.Visitante;
 import facade.ParqueaderoFacade;
 import facade.ResidenteFacade;
@@ -20,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -32,21 +39,23 @@ public class VehiculoControlador implements Serializable {
     /**
      * Creates a new instance of vehiculoControlador
      */
-    private Vehiculo vehiculo;    
+    @Inject
+    private MensajeControlador mensaje;
+    private Vehiculo vehiculo;
     private Parqueadero parqueadero;
     private Visitante visitante;
     private Residente residente;
-    
+    private Usuario usuario;
 
     @EJB
-    VehiculoFacade vehiculoFacade;    
-    
+    VehiculoFacade vehiculoFacade;
+
     @EJB
     VisitanteFacade visitanteFacade;
-    
+
     @EJB
     ParqueaderoFacade parqueaderoFacade;
-    
+
     @EJB
     ResidenteFacade residenteFacade;
 
@@ -59,16 +68,20 @@ public class VehiculoControlador implements Serializable {
         residente = new Residente();
         vehiculo = new Vehiculo();
         parqueadero = new Parqueadero();
+        usuario = new Usuario();
     }
 
     public void registrar() {
         vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
         vehiculo.setIdResidente(residenteFacade.find(residente.getIdResidente()));
-        
+
         vehiculoFacade.create(vehiculo);
         vehiculo = new Vehiculo();
         residente = new Residente();
         visitante = new Visitante();
+        usuario = new Usuario();
+        parqueadero = new Parqueadero();
+        mensaje.setMensaje("Mensajes('Exito!','Vehiculo agregado satisfactoriamente','success');");
     }
 
     public void eliminar(Vehiculo vehiculoEliminar) {
@@ -87,12 +100,11 @@ public class VehiculoControlador implements Serializable {
         vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
         vehiculo.setIdVisitante(visitanteFacade.find(visitante.getIdVisitante()));
         vehiculo.setIdResidente(residenteFacade.find(residente.getIdResidente()));
-        
         vehiculoFacade.edit(vehiculo);
     }
 
-    public List<Vehiculo> consultarTodosResidente() {
-        return vehiculoFacade.vehiculoResidente();
+    public List<Vehiculo> vehiculoResidente(int idResidente) {
+        return vehiculoFacade.vehiculoResidente(idResidente);
     }
 
     public List<Vehiculo> consultarTodosVisitante() {
@@ -102,7 +114,11 @@ public class VehiculoControlador implements Serializable {
     public List<Vehiculo> consultarTodos() {
         return vehiculoFacade.findAll();
     }
-
+    
+    public int contarVehiculoR(int idResidente){
+        return vehiculoFacade.contarVehiculoR(idResidente);
+    }
+    
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
@@ -135,5 +151,20 @@ public class VehiculoControlador implements Serializable {
         this.residente = residente;
     }
 
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
+    }
+
 }

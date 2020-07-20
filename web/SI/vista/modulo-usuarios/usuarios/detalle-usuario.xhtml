@@ -46,91 +46,89 @@
                         </div>
                         <div class="col-12 col-md-8 form">
                             <!-- formulario name="form" -->
-                            <f:view> 
-                                <h:form class="recorrer-dato">
-                                    <div class="col-12">
-                                        <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                            <h:form class="recorrer-dato">
+                                <div class="col-12">
+                                    <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                </div>
+                                <div class="form-group row sombra">
+                                    <div class="col-12" style="margin-top: 1rem;"></div> 
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="nombre">Nombres</label></strong> 
+                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" disabled="true"/>
                                     </div>
-                                    <div class="form-group row sombra">
-                                        <div class="col-12" style="margin-top: 1rem;"></div> 
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="apellido">Apellidos</label></strong> 
+                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" disabled="true"/>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}" disabled="true">
+                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="correo">Email</label></strong> 
+                                        <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="phone">Número de celular</label></strong> 
+                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="direccion">Dirección</label></strong> 
+                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" disabled="true"/>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="Rol">Rol</label></strong>
+                                        <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" disabled="true">
+                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                            <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="nombre">Nombres</label></strong> 
-                                            <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" disabled="true"/>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="apellido">Apellidos</label></strong> 
-                                            <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" disabled="true"/>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <strong><label for="tipoDocumento">Tipo documento</label></strong> 
-                                            <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}" disabled="true">
+                                            <strong><label for="direccion">Automovil</label></strong>
+                                            <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil" disabled="true">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
+                                                <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
+                                                <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
                                             </h:selectOneMenu>
                                         </div>
-                                        <div class="col-6 mb-3">
-                                            <strong><label for="identificacion">Numero de identificación</label></strong> 
-                                            <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}" disabled="true"/>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="correo">Email</label></strong> 
-                                            <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}" disabled="true"/>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="phone">Número de celular</label></strong> 
-                                            <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}" disabled="true"/>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="direccion">Dirección</label></strong> 
-                                            <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" disabled="true"/>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="Rol">Rol</label></strong>
-                                            <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" disabled="true">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
-                                                <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
-                                            <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="direccion">Automovil</label></strong>
-                                                <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil" disabled="true">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
-                                                    <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
-                                                </h:selectOneMenu>
-                                            </div>
 
-                                            <div class="torre col-12 col-md mb-3">
-                                                <strong><label for="torre">Torre</label></strong>
-                                                <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}"></h:inputText>
-                                            </div>
-                                            <div class="col-12 col-md mb-3">
-                                                <strong><label for="apto">Apartamento</label></strong>
-                                                <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}"></h:inputText>
-                                            </div>  
-                                        </c:if>
-                                        <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
-                                            <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="inicioTurno">Inicio turno</label></strong>
-                                                <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.inicioTurno}" title="InicioTurno" disabled="true">
-                                                    <f:convertDateTime pattern="HH:mm"/>
-                                                </h:inputText>
-                                            </div>
-                                            <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="finTurno">Fin turno</label></strong>
-                                                <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.finTurno}" title="FinTurno" disabled="true">
-                                                    <f:convertDateTime pattern="HH:mm"/>
-                                                </h:inputText>
-                                            </div>
-                                        </c:if>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
-                                            <h:inputText class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" disabled="true"/>
+                                        <div class="torre col-12 col-md mb-3">
+                                            <strong><label for="torre">Torre</label></strong>
+                                            <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}"></h:inputText>
                                         </div>
+                                        <div class="col-12 col-md mb-3">
+                                            <strong><label for="apto">Apartamento</label></strong>
+                                            <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}"></h:inputText>
+                                        </div>  
+                                    </c:if>
+                                    <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="inicioTurno">Inicio turno</label></strong>
+                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.inicioTurno}" title="InicioTurno" disabled="true">
+                                                <f:convertDateTime pattern="HH:mm"/>
+                                            </h:inputText>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <strong><label for="finTurno">Fin turno</label></strong>
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.finTurno}" title="FinTurno" disabled="true">
+                                                <f:convertDateTime pattern="HH:mm"/>
+                                            </h:inputText>
+                                        </div>
+                                    </c:if>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
+                                        <h:inputText class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" disabled="true"/>
                                     </div>
-                                </h:form>
-                            </f:view>      
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </section> 

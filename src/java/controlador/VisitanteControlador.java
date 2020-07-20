@@ -189,6 +189,10 @@ public class VisitanteControlador implements Serializable {
         return visitanteFacade.fichaBloqueada(estadoFicha);
     }
     
+    public List<Visitante> fichaVisitante(int idInmueble){
+        return visitanteFacade.fichaVisitante(idInmueble);
+    }
+    
     public String consultarID(int id) {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";
@@ -196,6 +200,10 @@ public class VisitanteControlador implements Serializable {
     
     public int contarVisitantes(){
         return visitanteFacade.count();
+    }
+    
+    public int contarVisitantesR(int idInmueble){
+        return visitanteFacade.contarVisitanteR(idInmueble);
     }
     
      public List<Visitante> consultaSQL(){
