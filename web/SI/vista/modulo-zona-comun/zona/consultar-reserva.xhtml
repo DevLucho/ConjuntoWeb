@@ -25,7 +25,6 @@
         <ui:include src="../../nav/nav.xhtml"></ui:include>
         <div aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
                 <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
                     <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
                     <li class="breadcrumb-item active">Consultar reservas</li>

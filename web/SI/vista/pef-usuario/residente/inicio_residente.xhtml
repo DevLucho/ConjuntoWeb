@@ -110,12 +110,16 @@
                             </h:form>
 
                             <div class="link">
-                                <li><a href="../modulo_zona_comun/consultar-calendario-eventos.html" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../../modulo-zona-comun/evento/consultar-evento.xhtml" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>
                         <div class="novedades-eventos">
                             <h6><i class="icalendar fas fa-box-open"></i>Correspondencia</h6>
                             <ul id="lista">
+                                <li>
+                                    <p style="margin:0px" class="text-muted">No hay correspondencia pendiente</p>
+                                </li>
+                                <!-- . 
                                 <c:forEach items="#{correspondenciaControlador.consultarEntrega('No reclamado')}" var="c">
                                     <li>
                                         <label class="date">Fecha de ingreso:
@@ -126,49 +130,49 @@
                                         <p>Tipo Paquete: <strong>#{c.idPaquete.tipo}</strong></p>
                                         <p>Estado: <strong>#{c.estado}</strong></p>
                                     </li>
-                                </c:forEach>
+                                </c:forEach>-->
                             </ul>
                             <div class="link">
-                                <li><a href="#" class="text-right d-block">Consultar correspondencia<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../../modulo-pqrs-comunicados/correspondencia/consultar-correspondencia.xhtml" class="text-right d-block">Consultar correspondencia<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>
                         <div class="novedades-eventos">
                             <h6><i class="icalendar fas fa-thumbtack"></i>Mis reservas</h6>
                             <ul id="lista">
                                 <li>
-                                    <c:if test="#{reservaControlador.contarReservas() == 0}">
+                                    <!--<c:if test="#{reservaControlador.contarReservas() == 0}">-->
                                         <p style="margin:0px" class="text-muted">No hay reservas pendientes</p>
-                                    </c:if>
+                                    <!--</c:if>-->
                                 </li>
                             </ul>
                             <div class="link">
-                                <li><a href="#" class="text-right d-block">Consultar reservas<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../../modulo-zona-comun/zona/consultar-reserva.xhtml" class="text-right d-block">Consultar reservas<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>	
                         <div class="novedades-eventos">
                             <h6><i class="icalendar far fa-file-alt"></i>Mis inscripciones</h6>
                             <ul id="lista">
                                 <li>
-                                    <c:if test="#{inscripcionControlador.contarInscripciones() == 0}">
+                                    <!--<c:if test="#{inscripcionControlador.contarInscripciones() == 0}">-->
                                         <p style="margin:0px" class="text-muted">No hay inscripciones realizadas</p>
-                                    </c:if>
+                                    <!--</c:if>-->
                                 </li>
                             </ul>
                             <div class="link">
-                                <li><a href="#" class="text-right d-block">Consultar inscripciones<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../../modulo-zona-comun/evento/consultar-inscripcion.xhtml" class="text-right d-block">Consultar inscripciones<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>
                         <div class="novedades-eventos">
                             <h6><i class="icalendar far fa-comment-alt"></i>Mis pqrs</h6>
                             <ul id="lista">
                                 <li>
-                                    <c:if test="#{pqrsControlador.contarPendiente() == 0}">
+                                    <!--<c:if test="#{pqrsControlador.contarPendiente() == 0}">-->
                                         <p style="margin:0px" class="text-muted">No hay PQRS pendientes</p>
-                                    </c:if>
+                                    <!--</c:if>-->
                                 </li>
                             </ul>
                             <div class="link">
-                                <li><a href="#" class="text-right d-block">Consultar Pqrs<i class="greater fas fa-greater-than"></i></a></li>
+                                <li><a href="../../modulo-pqrs-comunicados/pqrs/consultar-pqrs.xhtml" class="text-right d-block">Consultar Pqrs<i class="greater fas fa-greater-than"></i></a></li>
                             </div>
                         </div>	
                     </aside>

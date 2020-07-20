@@ -65,7 +65,7 @@ public class PqrsControlador implements Serializable {
     public void registar() {
         pqrs.setIdResidente(residente);
         pqrs.setIdTipoPqrs(tipoPqrs);
-        pqrs.setEstado("Abierto");
+        pqrs.setEstado("Pendiente");
 
         DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
@@ -128,6 +128,14 @@ public class PqrsControlador implements Serializable {
     public List<Pqrs> consultarAbiertos() {
         return pqrsFacade.estadoPqrs("Abierto");
     }
+    
+    public List<Pqrs> estadoPqrsR(String estado, int idResidente){
+        return pqrsFacade.estadoPqrsR(estado, idResidente);
+    }
+    
+    public List<Pqrs> pqrsResidente(int idResidente){
+        return pqrsFacade.pqrsResidente(idResidente);
+    }
 
     public int contarCancelados() {
         return pqrsFacade.countEstado("Cancelado");
@@ -143,6 +151,14 @@ public class PqrsControlador implements Serializable {
 
     public int contarPendiente() {
         return pqrsFacade.countEstado("Pendiente");
+    }
+    
+    public int contarEstadoR(String estado, int idResidente) {
+        return pqrsFacade.countEstadoR(estado, idResidente);
+    }
+    
+    public int contarR(int idResidente) {
+        return pqrsFacade.countR(idResidente);
     }
 
     public Pqrs getPqrs() {
