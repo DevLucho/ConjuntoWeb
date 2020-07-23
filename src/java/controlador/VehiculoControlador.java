@@ -46,6 +46,10 @@ public class VehiculoControlador implements Serializable {
     private Visitante visitante;
     private Residente residente;
     private Usuario usuario;
+    private Rol rol;
+    private TipoDocumento tipoDocumento;
+    private Apartamento apartamento;
+    private Torre torre;
 
     @EJB
     VehiculoFacade vehiculoFacade;
@@ -103,6 +107,16 @@ public class VehiculoControlador implements Serializable {
         vehiculoFacade.edit(vehiculo);
     }
 
+    public String asignarVehiculoR(Residente residenteConsultar) {
+        rol = residenteConsultar.getIdPerfil().getIdRol();
+        tipoDocumento = residenteConsultar.getIdPerfil().getTipoDocumento();
+        usuario = residenteConsultar.getIdPerfil();
+        torre = residenteConsultar.getIdInmueble().getIdTorre();
+        apartamento = residenteConsultar.getIdInmueble().getIdApartamento();
+        residente = residenteConsultar;
+        return "/SI/vista/modulo-parqueadero/vehiculos/agregar-vehiculo?faces-redirect=true";
+    }
+
     public List<Vehiculo> vehiculoResidente(int idResidente) {
         return vehiculoFacade.vehiculoResidente(idResidente);
     }
@@ -114,11 +128,11 @@ public class VehiculoControlador implements Serializable {
     public List<Vehiculo> consultarTodos() {
         return vehiculoFacade.findAll();
     }
-    
-    public int contarVehiculoR(int idResidente){
+
+    public int contarVehiculoR(int idResidente) {
         return vehiculoFacade.contarVehiculoR(idResidente);
     }
-    
+
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
@@ -165,6 +179,38 @@ public class VehiculoControlador implements Serializable {
 
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public Apartamento getApartamento() {
+        return apartamento;
+    }
+
+    public void setApartamento(Apartamento apartamento) {
+        this.apartamento = apartamento;
+    }
+
+    public Torre getTorre() {
+        return torre;
+    }
+
+    public void setTorre(Torre torre) {
+        this.torre = torre;
     }
 
 }

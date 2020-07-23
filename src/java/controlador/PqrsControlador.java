@@ -7,6 +7,7 @@ package controlador;
 
 import entidades.Pqrs;
 import entidades.Residente;
+import entidades.Respuesta;
 import entidades.TipoPqrs;
 import facade.PqrsFacade;
 import facade.ResidenteFacade;
@@ -48,7 +49,7 @@ public class PqrsControlador implements Serializable {
 
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
-        
+
     @Inject
     private MensajeControlador mensaje;
 
@@ -91,6 +92,19 @@ public class PqrsControlador implements Serializable {
         return pqrsFacade.findAll();
     }
 
+    public String consultarPqrs(Pqrs pqrsConsultar) {
+        residente = pqrsConsultar.getIdResidente();
+        tipoPqrs = pqrsConsultar.getIdTipoPqrs();
+        pqrs = pqrsConsultar;
+        return "detalle-pqrs";
+    }
+
+    public String consultarRespuesta(Respuesta respuestaConsultar) {
+        pqrs = respuestaConsultar.getNroRadicado();
+        tipoPqrs = respuestaConsultar.getNroRadicado().getIdTipoPqrs();
+        return "respuesta-pqrs";
+    }
+
     public String preActualizar(Pqrs pqrsActualizar) {
         residente = pqrsActualizar.getIdResidente();
         tipoPqrs = pqrsActualizar.getIdTipoPqrs();
@@ -103,6 +117,17 @@ public class PqrsControlador implements Serializable {
         pqrs.setIdTipoPqrs(tipoPqrs);
         pqrsFacade.edit(pqrs);
         return "consultar_mis_solicitudes";
+    }
+
+    public void cancelar(Pqrs pqrsCancelar) {
+        if ("Cancelado".equals(pqrsCancelar.getEstado())) {
+            mensaje.setMensaje("Mensajes('Advertencia!','Esta pqrs ya esta cancelada','warning');");
+        } else {
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar la pqrs?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado la pqrs.','success');");
+            pqrs = pqrsCancelar;
+            pqrs.setEstado("Cancelado");
+            pqrsFacade.edit(pqrsCancelar);
+        }
     }
 
     public void eliminar(Pqrs pqrsEliminar) {
@@ -128,12 +153,12 @@ public class PqrsControlador implements Serializable {
     public List<Pqrs> consultarAbiertos() {
         return pqrsFacade.estadoPqrs("Abierto");
     }
-    
-    public List<Pqrs> estadoPqrsR(String estado, int idResidente){
+
+    public List<Pqrs> estadoPqrsR(String estado, int idResidente) {
         return pqrsFacade.estadoPqrsR(estado, idResidente);
     }
-    
-    public List<Pqrs> pqrsResidente(int idResidente){
+
+    public List<Pqrs> pqrsResidente(int idResidente) {
         return pqrsFacade.pqrsResidente(idResidente);
     }
 
@@ -152,11 +177,11 @@ public class PqrsControlador implements Serializable {
     public int contarPendiente() {
         return pqrsFacade.countEstado("Pendiente");
     }
-    
+
     public int contarEstadoR(String estado, int idResidente) {
         return pqrsFacade.countEstadoR(estado, idResidente);
     }
-    
+
     public int contarR(int idResidente) {
         return pqrsFacade.countR(idResidente);
     }

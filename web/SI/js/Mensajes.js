@@ -6,6 +6,21 @@ function Mensajes(titulo, texto, icono) {
     Swal.fire({title: titulo, text: texto, icon: icono});
 };
 
+// Mensaje para redirigir
+function MensajeRedirect(link) {
+    Swal.fire({
+        title: 'Advertencia!',
+        text: 'Esta pqrs ya esta resuelta',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+    }).then(function (result) {
+        console.log(result);
+        if (result.value) {
+            window.location.href = link;
+        }
+    });
+}
+
 function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
     Swal.fire({
         title: titulo,
@@ -29,6 +44,20 @@ function ConfirmacionResidente(linkURL) {
         icon: 'success',
         title: "Registro exitoso",
         confirmButtonText: 'Iniciar sesi&oacute;n'
+    }).then(function (result) {
+        console.log(result);
+        if (result.value) {
+            window.location.href = linkURL;
+        }
+    });
+}
+
+function ConfirmacionResidenteR(linkURL) {
+    Swal.fire({
+        icon: 'warning',
+        title: "Esta pqrs ya esta resuelta",
+        confirmButtonText: 'Volver',
+        allowOutsideClick:false
     }).then(function (result) {
         console.log(result);
         if (result.value) {

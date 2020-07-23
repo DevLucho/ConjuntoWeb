@@ -1,17 +1,22 @@
 *{
-  font-family: 'Helvetica';
+    font-family: 'Helvetica';
 }
 h3, h4{
-  color:#33406A;
+    color:#33406A;
 }
 .btn-secondary {
-  background-color: transparent;
+    background-color: transparent;
 }
 /*estilos para la tabla*/
 table th {
     background-color:#2A6378 !important;
     color: white;
 }
+/*
+.dtsp-pill{
+    background: linear-gradient(to right, #2A6378, #1f2223);
+    color:white;
+}*/
 table>tbody>tr>td {
     vertical-align: middle !important;
 }
@@ -21,34 +26,34 @@ table>tbody>tr>td {
     display: block;
 }
 .page-item.active .page-link {
-  background-color:#33406A;
-  border-color: #33406A;
+    background-color:#33406A;
+    border-color: #33406A;
 }
 .page-link {
-  color:#33406A;
+    color:#33406A;
 }
 a {
-  color:#2A6378;
+    color:#2A6378;
 }
 /* Estilos botones para roles */
 .btn-style{
-  -webkit-transition-duration: 0.5s; 
-  color:#2A6378;
-  border-color: #2A6378;
-  font-family: 'Righteous';
-  border-radius: 6px;
+    -webkit-transition-duration: 0.5s; 
+    color:#2A6378;
+    border-color: #2A6378;
+    font-family: 'Righteous';
+    border-radius: 6px;
 }
 .btn-toolbar .btn:hover {
-  background-color: #2A6378;
-  color: white;
+    background-color: #2A6378;
+    color: white;
 }
 form .font label{
-  font-family: 'Righteous';
-  font-size:1rem;
-  color: #33406A;
+    font-family: 'Righteous';
+    font-size:1rem;
+    color: #33406A;
 }
 @media screen and (max-width:523px){
-  input[type=search]{
-    margin-top:50px;
-  }
+    input[type=search]{
+        margin-top:50px;
+    }
 }

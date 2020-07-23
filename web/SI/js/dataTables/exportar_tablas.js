@@ -4,9 +4,27 @@ $(document).ready(function () {
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
+        // paneles de busqueda
+        searchPanes: {
+            cascadePanes: true,
+            dtOpts: {
+                dom: 'tp',
+                paging: 'true',
+                pagingType: 'simple',
+                searching: false
+            }
+        },
+        dom: 'PBfrtilp',
+        columnDefs: [{
+                searchPanes: {
+                    show: false
+                },
+                targets: [5]
+            }
+        ],
         //para los botones de exportar  
         responsive: "true",
-        dom: 'Bfrtilp',
+        //dom: 'Bfrtilp',
         buttons: [
             {
                 extend: 'excelHtml5',
@@ -25,7 +43,7 @@ $(document).ready(function () {
                 text: '<i class="fa fa-print"></i> ',
                 titleAttr: 'Imprimir',
                 className: 'btn btn-outline-info'
-            },
+            }
         ]
     });
 });
