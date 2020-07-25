@@ -10,8 +10,10 @@ import facade.CodigoFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -24,9 +26,16 @@ public class CodigoControlador implements Serializable {
     /**
      * Creates a new instance of CodigoControlador
      */
+    @Inject
+    private MensajeControlador mensaje;
     private Codigo codigo;
     private String cod;
     private Codigo codr = null;
+    // Generar codigo aleatorio
+    Random rnd = new Random();
+    String abecedario = "ABCDEFGHIJKLMOPQRSTUVWXYZ";
+    String codgenerado = "";
+    int pos = 0, num;
 
     @EJB
     CodigoFacade codigoFacade;
@@ -40,14 +49,32 @@ public class CodigoControlador implements Serializable {
     }
 
     public void generarCodigo() {
-        codigoFacade.create(codigo);
+        try {
+            // generar codigo aleatorio
+            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            num = (int) (rnd.nextDouble() * 9999 + 1000);
+            codgenerado = codgenerado + abecedario.charAt(pos) + num;
+            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            codigo.setCodigo(codgenerado);
+            codigo.setEstado("Valido");
+            codigoFacade.create(codigo);
+            codigo = new Codigo();
+            codgenerado = "";
+            mensaje.setMensaje("Mensaje('Exito!','Codigo generado satistactoriamente.','success');");
+        } catch (Exception e) {
+            System.out.println("Error en codigo generado revisar: " + e.getMessage());
+        }
+
     }
 
     public String validarCodigo() {
         codr = codigoFacade.validarCodigo(cod);
-        if (codr.getCodigo() != null) {
+        if (codr.getCodigo() != null && "Valido".equals(codr.getEstado())) {
+            codr.setEstado("Invalido");
+            codigoFacade.edit(codr);
             return "vista/registro/registro?faces-redirect=true";
         } else {
+            mensaje.setMensaje("Mensajes('Error!','Codigo invalido. Contacta al Administrador.','error');");
             return "";
         }
     }

@@ -542,12 +542,6 @@ nav .start-contact, a:nth-child(6):hover~.animation{
     text-decoration: none;
     color: #F00;
 }
-.imgpoput{
-    width: 400px;
-    margin-left: 12%;
-    padding-bottom: 5%;
-    border-bottom: black 3px solid;
-}
 h2{
     color:rgb(0, 0, 0);
     text-align: center;
@@ -564,7 +558,6 @@ h2{
     padding-bottom: 2%;
     margin: -7% 0% 0% 23%;
     position: absolute;
-    text-align: center;
 }
 .colorincolorado{
     text-decoration: none;

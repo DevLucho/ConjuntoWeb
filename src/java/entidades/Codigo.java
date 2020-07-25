@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Codigo.findAll", query = "SELECT c FROM Codigo c")
     , @NamedQuery(name = "Codigo.findByIdCodigo", query = "SELECT c FROM Codigo c WHERE c.idCodigo = :idCodigo")
-    , @NamedQuery(name = "Codigo.findByCodigo", query = "SELECT c FROM Codigo c WHERE c.codigo = :codigo")})
+    , @NamedQuery(name = "Codigo.findByCodigo", query = "SELECT c FROM Codigo c WHERE c.codigo = :codigo")
+    , @NamedQuery(name = "Codigo.findByEstado", query = "SELECT c FROM Codigo c WHERE c.estado = :estado")})
 public class Codigo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,11 @@ public class Codigo implements Serializable {
     @Size(min = 1, max = 11)
     @Column(name = "codigo")
     private String codigo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
+    @Column(name = "estado")
+    private String estado;
 
     public Codigo() {
     }
@@ -51,9 +57,10 @@ public class Codigo implements Serializable {
         this.idCodigo = idCodigo;
     }
 
-    public Codigo(Integer idCodigo, String codigo) {
+    public Codigo(Integer idCodigo, String codigo, String estado) {
         this.idCodigo = idCodigo;
         this.codigo = codigo;
+        this.estado = estado;
     }
 
     public Integer getIdCodigo() {
@@ -70,6 +77,14 @@ public class Codigo implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override
