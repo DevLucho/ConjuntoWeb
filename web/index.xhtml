@@ -60,15 +60,20 @@
                             <a id="cerrar" href="#">×</a>
                             <div class="popupContent">
                                 <i class="fas fa-qrcode code" aria-hidden="true" />
-                                <form action="" class="carajo">
-                                    <input class="lol" type="number" required="" />
-                                    <input
-                                        type="submit"
-                                        value="Confirmar"
-                                        onclick="location.href = 'faces/vista/registro/registro.xhtml'"
-                                        class="colorincolorado"
-                                        />
-                                </form>
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <div class="col-12 font">
+                                                <h:outputLabel value="Nombre rol" for="nombre" />
+                                                <h:inputText styleClass="form-control" value="#{codigoControlador.cod}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <h:commandButton value="Confirmar" styleClass="btn btn-outline-success" action="#{codigoControlador.validarCodigo()}"></h:commandButton>
+                                    </div>
+                                </h:form>
+                                
                             </div>
                         </div>
                     </div>

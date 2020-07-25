@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="col-12 col-md-8 form">
-                            <h3 class="col-12 text-center mb-3">#{formcrearusuario.txtCrearNuevoUsuario}</h3>
+                            <h3 class="col-12 text-center mb-3"><button class="btn btn-outline-success" data-toggle="modal" data-target="#modal-rol"><i class="fas fa-plus-circle mr-1"></i>Generar codigo de registro</button></h3>
                             <div class="alert alert-info text-center">
                                 <a href="#" class="close" data-dismiss="alert">&times;</a>#{formcrearusuario.notiViaEmail}
                             </div>
@@ -156,6 +156,35 @@
                         </div>
                     </div>
                 </section> 
+                <!-- Modal generar codigo -->
+                    <div class="modal fade" id="modal-rol" tabindex="-1" role="dialog" aria-labelledby="fm-modal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle mr-1"></i>Generar codigo</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <h:form>
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <div class="col-12 font">
+                                                <h:outputLabel value="Nombre rol" for="nombre" />
+                                                <h:inputText styleClass="form-control" value="#{codigoControlador.codigo.codigo}" pt:placeholder="Maximo 12 caracteres"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                                        <h:commandButton value="Confirmar" styleClass="btn btn-outline-success" action="#{codigoControlador.generarCodigo()}"></h:commandButton>
+                                    </div>
+                                </h:form>
+
+                            </div>
+                        </div>
+                    </div>
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
