@@ -44,6 +44,17 @@ public class UsuarioControlador implements Serializable {
     /**
      * Creates a new instance of UsuarioControlador
      */
+    
+    /*
+     Incremental para menu dinamico
+     private int valor = 0;
+     public void incrementar() {
+         valor++;
+     }
+     public int getValor() {
+         return valor;
+     }
+    */
     @Inject
     private MensajeControlador mensaje;
     private Usuario usuario;
@@ -83,16 +94,6 @@ public class UsuarioControlador implements Serializable {
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
 
-    // Incremental para menu dinamico
-    /*private int valor = 0;
-
-    public void incrementar() {
-        valor++;
-    }
-
-    public int getValor() {
-        return valor;
-    }*/
     public UsuarioControlador() {
     }
 
@@ -197,8 +198,17 @@ public class UsuarioControlador implements Serializable {
         usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
         usuarioFacade.edit(usuario);
         if (rol.getIdRol() == 2) {
+            residente.getIdInmueble().setIdTorre(torreFacade.find(torre.getIdTorre()));
+            residente.getIdInmueble().setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
+            inmuebleFacade.edit(residente.getIdInmueble());
             residente.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
             residenteFacade.edit(residente);
+        }
+        if (rol.getIdRol() == 3) {
+            vigilante.setIdTurno(turnoVigilanteFacade.find(turnoVigilante.getIdTurno()));
+            turnoVigilanteFacade.edit(turnoVigilante);
+            vigilante.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
+            vigilanteFacade.edit(vigilante);
         }
         mensaje.setMensaje("Mensajes('Exito!','Usuario modificado satisfactoriamente','success');");
     }
@@ -263,6 +273,7 @@ public class UsuarioControlador implements Serializable {
         return usuarioFacade.sesionUsuarioV(idPerfil);
     }
 
+    // Metodos count ↓
     public int contarUsuarios() {
         return usuarioFacade.count();
     }
@@ -275,6 +286,7 @@ public class UsuarioControlador implements Serializable {
         return usuarioFacade.contarBloqueados("Bloqueado");
     }
 
+    // Get's y Set's ↓
     public Usuario getUsuario() {
         return usuario;
     }

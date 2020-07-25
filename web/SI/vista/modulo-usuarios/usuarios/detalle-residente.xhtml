@@ -86,10 +86,7 @@
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <strong><label for="tipoDocumento">Tipo documento</label></strong> 
-                                                    <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}" disabled="true">
-                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
-                                                    </h:selectOneMenu>
+                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idPerfil.tipoDocumento.tipo}" disabled="true"></h:inputText>
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <strong><label for="identificacion">Numero de identificación</label></strong> 
@@ -109,27 +106,20 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <strong><label for="Rol">Rol</label></strong>
-                                                    <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" disabled="true">
-                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
-                                                        <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
-                                                    </h:selectOneMenu>
+                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idPerfil.idRol.nombre}" disabled="true"></h:inputText>
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <strong><label for="direccion">Automovil</label></strong>
-                                                    <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil" disabled="true">
-                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
-                                                        <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
-                                                    </h:selectOneMenu>
+                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.automovil}" disabled="true"></h:inputText>
                                                 </div>
 
                                                 <div class="torre col-12 col-md mb-3">
                                                     <strong><label for="torre">Torre</label></strong>
-                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}"></h:inputText>
+                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}" disabled="true"></h:inputText>
                                                 </div>
                                                 <div class="col-12 col-md mb-3">
                                                     <strong><label for="apto">Apartamento</label></strong>
-                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}"></h:inputText>
+                                                    <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}" disabled="true"></h:inputText>
                                                 </div>  
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>

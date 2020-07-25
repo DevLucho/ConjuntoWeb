@@ -17,6 +17,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -56,6 +57,7 @@ public class SesionControlador implements Serializable {
 
     public String iniciarSesion() {
         user = usuarioFacade.iniciarSesion(documento, contrasenia);
+        FacesContext fc = FacesContext.getCurrentInstance();
         if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("") && "Activo".equals(user.getEstado())) {
             rolSeleccionado = user.getIdRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
@@ -67,6 +69,10 @@ public class SesionControlador implements Serializable {
             }
             return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
         } else {
+            FacesMessage m = new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "Usuario bloqueado", "Contacte al administrador para solucionar el inconveniente.");
+            fc.addMessage(null, m);
             return "login?faces-redirect=true";
         }
     }
