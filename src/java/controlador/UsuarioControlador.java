@@ -128,7 +128,6 @@ public class UsuarioControlador implements Serializable {
             torre = new Torre();
             apartamento = new Apartamento();
             residente = new Residente();
-            mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
         } else if (rol.getIdRol() == 3) {
             vigilante.setIdPerfil(usuario);
             turnoVigilanteFacade.create(turnoVigilante);
@@ -139,12 +138,11 @@ public class UsuarioControlador implements Serializable {
             tipoDocumento = new TipoDocumento();
             vigilante = new Vigilante();
             turnoVigilante = new TurnoVigilante();
-            mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
         }
         usuario = new Usuario();
         rol = new Rol();
         tipoDocumento = new TipoDocumento();
-        mensaje.setMensaje("Mensajes('Exito!','Usuario creado satisfactoriamente','success');");
+        mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
     }
 
     public void cancelar(Usuario usuarioCancelar) {

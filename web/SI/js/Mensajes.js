@@ -6,6 +6,10 @@ function Mensajes(titulo, texto, icono) {
     Swal.fire({title: titulo, text: texto, icon: icono});
 };
 
+function MensajeAlertify(mensaje, icon){   
+     alertify.notify(mensaje, icon, 5);
+};
+
 // Mensaje para redirigir
 function MensajeRedirect(link) {
     Swal.fire({

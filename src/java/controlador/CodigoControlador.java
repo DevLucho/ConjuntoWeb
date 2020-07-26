@@ -53,14 +53,14 @@ public class CodigoControlador implements Serializable {
             // generar codigo aleatorio
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num;
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos+1); //Estructura codigo
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");
             codigoFacade.create(codigo);
             codigo = new Codigo();
             codgenerado = "";
-            mensaje.setMensaje("Mensaje('Exito!','Codigo generado satistactoriamente.','success');");
+            mensaje.setMensaje("MensajeAlertify('Código generado exitosamente!','success');");
         } catch (Exception e) {
             System.out.println("Error en codigo generado revisar: " + e.getMessage());
         }
@@ -74,7 +74,7 @@ public class CodigoControlador implements Serializable {
             codigoFacade.edit(codr);
             return "vista/registro/registro?faces-redirect=true";
         } else {
-            mensaje.setMensaje("Mensajes('Error!','Codigo invalido. Contacta al Administrador.','error');");
+            mensaje.setMensaje("MensajeAlertify('Código inválido. Contacta el Administrador.','error');");
             return "";
         }
     }

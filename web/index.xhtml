@@ -14,8 +14,10 @@
         <link href="https://fonts.googleapis.com/css?family=Merriweather&amp;display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
         <link rel="stylesheet" href="index.css" />
-        <!-- Sweet alert -->
+        <!-- Alertify -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <link href="vista/login/css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vista/login/css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="SI/js/Mensajes.js" type="text/javascript"></script>
         <link rel="shortcut icon" href="img/Logo ShortCut.png" />
         <style>
@@ -39,12 +41,12 @@
         <title>Conjunto Residencial Torres de Lucerna</title>
     </h:head>
     <h:body>
-        <script>#{mensajeControlador.mensaje}</script>
+
         <script src="SI/js/opcionesSeguridad.js" type="text/javascript"></script>
         <script src="js/swiper.min.js"></script>
         <!--__________________________________________ Contenedor Principal de la pag ____________________________________________________-->
         <div class="contenedor1">
-            
+
             <!--____________________________________________________________- Encabezado de pagina____________________________________________-->
             <header id="header">
                 <div class="logoindex">
@@ -675,8 +677,13 @@ Mensaje</textarea
                     </p>
                 </div>
             </footer>
+
             <!-- fin del footer -->
         </div>
-        <!--______________________________________________________- Fin de contenedor Principal __________________________________________-->
+        <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="SI/js/alertify.min.js" type="text/javascript"></script>
+        <script>#{mensajeControlador.mensaje}</script>
     </h:body>
 </html>

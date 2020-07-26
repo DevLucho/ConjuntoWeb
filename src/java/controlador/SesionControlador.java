@@ -58,31 +58,49 @@ public class SesionControlador implements Serializable {
     public String iniciarSesion() {
         user = usuarioFacade.iniciarSesion(documento, contrasenia);
         FacesContext fc = FacesContext.getCurrentInstance();
-        if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("") && "Activo".equals(user.getEstado())) {
+        if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("")) {
             rolSeleccionado = user.getIdRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
-            if (rolSeleccionado.getIdRol() == 1) {
-                return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+            if ("Activo".equals(user.getEstado())) {
+                if (rolSeleccionado.getIdRol() == 1) {
+                    return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+                }
+                if (rolSeleccionado.getIdRol() == 2) {
+                    return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
+                }
+                return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
+            } else {
+                mensaje.setMensaje("MensajeAlertify('Usuario bloqueado. Contacte al administrador para solucionar el inconveniente.','error');");
+                return "";
             }
-            if (rolSeleccionado.getIdRol() == 2) {
-                return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
-            }
-            return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
+
         } else {
-            FacesMessage m = new FacesMessage(
-                    FacesMessage.SEVERITY_ERROR,
-                    "Usuario bloqueado", "Contacte al administrador para solucionar el inconveniente.");
-            fc.addMessage(null, m);
-            return "login?faces-redirect=true";
+            mensaje.setMensaje("MensajeAlertify('Documento y/o clave inválidos','error');");
+            return "";
         }
     }
 
     public String cerrarSesion() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        this.usuario = null;
-        this.documento = 0;
-        this.contrasenia = "";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            this.usuario = null;
+            this.documento = 0;
+            this.contrasenia = "";
+            //mensaje.setMensaje("MensajeAlertify('Logout exitoso','success');");
+            //Thread.sleep(5 * 1000);
+        } catch (Exception e) {
+            System.out.println("Error en logout revisar: " + e.getMessage());
+        }
         return "/index.xhtml?faces-redirect=true";
+    }
+
+    public void cambiarContrasenia() {
+        user = usuarioFacade.cambiarContrasenia(user.getContrasenia());
+        if (contrasenia != null && !contrasenia.equals("")) {
+            usuarioFacade.edit(user);
+        } else {
+            mensaje.setMensaje("MensajeAlertify('Contraseña inválida','error');");
+        }
     }
 
     public Boolean validarPermiso() {

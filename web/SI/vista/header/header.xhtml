@@ -166,10 +166,10 @@
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
                                                     <strong><label for="user-password">Contrase&ntilde;a actual</label></strong>
-                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+                                                    <input type="password" class="form-control-plaintext" placeholder="" value="#{usuarioControlador.usuario.contrasenia}"/>
 
                                                     <strong><label for="user-new-password">Nueva contrase&ntilde;a</label></strong>
-                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+                                                    <input type="password" class="form-control-plaintext" placeholder="" value="#{usuarioControlador.usuario.contrasenia}"/>
 
                                                     <strong><label for="user-confirm-pasword">Confirma contrase&ntilde;a</label></strong>
                                                     <input type="password" class="form-control-plaintext" placeholder=""/>
@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
-                                        <h:commandButton class="btn btn-success" value="Guardar cambios"></h:commandButton>
+                                        <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{sesionControlador.cambiarContrasenia()}"></h:commandButton>
                                     </div>
                                 </div>
                             </div>

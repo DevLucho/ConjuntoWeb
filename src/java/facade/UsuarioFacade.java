@@ -46,6 +46,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         }
         return usuario;
     }
+    
+    public Usuario cambiarContrasenia (String contrasenia){
+        Usuario usuario = new Usuario();
+        try {
+            Query query;
+            query = em.createQuery("SELECT u FROM Usuario u WHERE u.contrasenia=:contrasenia");
+            query.setParameter("contrasenia", contrasenia);
+            usuario = (Usuario) query.getResultList().get(0);
+        } catch (Exception e) {
+            System.out.println("Error en cambiar contrasenia revisar: " + e.getMessage());
+        }
+        return usuario;
+    }
 
     public List<Usuario> sesionUsuario(int idPerfil) {
         Query query;
