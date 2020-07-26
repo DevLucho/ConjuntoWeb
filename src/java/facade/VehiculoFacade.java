@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Vehiculo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,21 +34,25 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     public List<Vehiculo> vehiculoVisitante() {
         Query query;
-        query = em.createQuery("SELECT u.placa, u.tipoVehiculo, u.idParqueadero, u.idVisitante FROM Vehiculo u");
+        query = em.createQuery("SELECT a FROM Vehiculo a WHERE a.idResidente is null");
         return query.getResultList();
     }
 
-    public List<Vehiculo> vehiculoResidente(int idResidente) {
+    public List<Vehiculo> vehiculoResidente() {
         Query query;
-        query = em.createQuery("SELECT u FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
-        query.setParameter("idResidente", idResidente);
+        query = em.createQuery("SELECT a FROM Vehiculo a WHERE a.idVisitante is null");
         return query.getResultList();
     }
 
-    public int contarVehiculoR(int idResidente) {
+    public int contarVehiculoR() {
         Query query;
-        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
-        query.setParameter("idResidente", idResidente);
+        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idVisitante is null");
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
+    public int contarVehiculoV() {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idResidente is null");
         return ((Long) query.getSingleResult()).intValue();
     }
 
