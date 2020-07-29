@@ -49,10 +49,10 @@ public class RolControlador implements Serializable {
 
     public void eliminar(Rol rolEliminar) {
         if (rolEliminar.getIdRol() == 1 || rolEliminar.getIdRol() == 2 || rolEliminar.getIdRol() == 3) {
-            mensaje.setMensaje("Mensajes('Error!','No puedes eliminar este rol','error');");
+            mensaje.setMensaje("Mensajes('Error!','No puedes eliminar el rol "+rolEliminar.getNombre()+"','error');");
         } else {
             rolFacade.remove(rolEliminar);
-            mensaje.setMensaje("Mensajes('Exito!','Rol eliminado satistactoriamente','success');");
+            mensaje.setMensaje("Mensajes('Exito!','El rol "+rolEliminar.getNombre()+" fue eliminado satistactoriamente','success');");
         }
     }
 

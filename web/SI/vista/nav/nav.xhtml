@@ -14,7 +14,12 @@
                 <!-- Cuenta de usuario -->
                 <li class="user-account">
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modal"></i>
-                    <h6>#{sesionControlador.rolSeleccionado.nombre}</h6>
+                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                        <h6>#{sesionControlador.rolSeleccionado.name}</h6>
+                    </c:if>
+                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                        <h6>#{sesionControlador.rolSeleccionado.nombre}</h6>
+                    </c:if>
                 </li>
 
                 <!-- Nav -->
@@ -51,7 +56,7 @@
 
                 <!-- Cerrar sesion -->
                 <div class="logout  borde-left">
-                    <h:commandLink action="#{sesionControlador.cerrarSesion()}"><span class="span2"><i class="fas fa-sign-out-alt"></i></span>Cerrar Sesión</h:commandLink>
+                    <h:commandLink action="#{sesionControlador.cerrarSesion()}"><span class="span2"><i class="fas fa-sign-out-alt"></i></span>#{formdashboardadmin.txtCerrarSesion}</h:commandLink>
                 </div>
 
                 <!-- Internacionalizacion -->

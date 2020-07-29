@@ -53,7 +53,7 @@ public class CodigoControlador implements Serializable {
             // generar codigo aleatorio
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos+1); //Estructura codigo
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1); //Estructura codigo
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");
@@ -69,12 +69,17 @@ public class CodigoControlador implements Serializable {
 
     public String validarCodigo() {
         codr = codigoFacade.validarCodigo(cod);
-        if (codr.getCodigo() != null && "Valido".equals(codr.getEstado())) {
-            codr.setEstado("Invalido");
-            codigoFacade.edit(codr);
-            return "vista/registro/registro?faces-redirect=true";
+        if (codr.getCodigo() != null) {
+            if ("Valido".equals(codr.getEstado())) {
+                codr.setEstado("Invalido");
+                codigoFacade.edit(codr);
+                return "vista/registro/registro?faces-redirect=true";
+            } else {
+                mensaje.setMensaje("MensajeAlertify('Lo sentimos el código ingresado ya no es válido.','error');");
+                return "";
+            }
         } else {
-            mensaje.setMensaje("MensajeAlertify('Código inválido. Contacta el Administrador.','error');");
+            mensaje.setMensaje("MensajeAlertify('El código ingresado no existe o es incorrecto.','error');");
             return "";
         }
     }

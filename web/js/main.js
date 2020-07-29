@@ -53,7 +53,7 @@
     }
     
     /*==================================================================
-    [ Show pass ]*/
+    [ Mostrar pass ]*/
     var showPass = 0;
     $('.btn-show-pass').on('click', function(){
         if(showPass == 0) {

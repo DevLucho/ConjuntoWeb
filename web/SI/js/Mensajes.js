@@ -6,8 +6,28 @@ function Mensajes(titulo, texto, icono) {
     Swal.fire({title: titulo, text: texto, icon: icono});
 };
 
+/*
 function MensajeAlertify(mensaje, icon){   
      alertify.notify(mensaje, icon, 5);
+};
+ */
+
+function MensajeAlertify(mensaje, icon) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    Toast.fire({
+        icon: icon,
+        title: mensaje
+    });
 };
 
 // Mensaje para redirigir
@@ -39,7 +59,7 @@ function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
         if (result.value) {
             Swal.fire(tituloc, textoc, iconoc)
         }
-    })
+    });
 };
 
 // Mensaje para redirigir (login) - registro residente
@@ -61,7 +81,7 @@ function ConfirmacionResidenteR(linkURL) {
         icon: 'warning',
         title: "Esta pqrs ya esta resuelta",
         confirmButtonText: 'Volver',
-        allowOutsideClick:false
+        allowOutsideClick: false
     }).then(function (result) {
         console.log(result);
         if (result.value) {
@@ -70,36 +90,37 @@ function ConfirmacionResidenteR(linkURL) {
     });
 }
 
-function RegistrarVisitante(icono,titulo, html) {
+function RegistrarVisitante(icono, titulo, html) {
     Swal.fire({
         icon: icono,
-        title:titulo,
-        html:html,
+        title: titulo,
+        html: html,
         confirmButtonColor: '#2A6378',
-        confirmButtonText:'Volver',
-        padding:'2% 2% 3% 2%',
-        customClass:{
-            title:'title-class',
-            icon:'icon-class',
-            popup:'popup-class'
+        confirmButtonText: 'Volver',
+        padding: '2% 2% 3% 2%',
+        customClass: {
+            title: 'title-class',
+            icon: 'icon-class',
+            popup: 'popup-class'
         },
-        allowOutsideClick:false
+        allowOutsideClick: false
     });
 }
-function EdicionVisitante(linkURL,titulo,html) {
+
+function EdicionVisitante(linkURL, titulo, html) {
     Swal.fire({
         icon: 'success',
-        title:titulo,
-        html:html,
+        title: titulo,
+        html: html,
         confirmButtonColor: '#2A6378',
-        confirmButtonText:'Ver',
-        padding:'0% 0% 2% 0%',
-        customClass:{
-            title:'title-class',
-            icon:'icon-class',
-            popup:'popup-class'
+        confirmButtonText: 'Ver',
+        padding: '0% 0% 2% 0%',
+        customClass: {
+            title: 'title-class',
+            icon: 'icon-class',
+            popup: 'popup-class'
         },
-        allowOutsideClick:false
+        allowOutsideClick: false
     }).then(function (result) {
         console.log(result);
         if (result.value) {
@@ -107,9 +128,10 @@ function EdicionVisitante(linkURL,titulo,html) {
         }
     });
 }
-function ConfirmarSalida(icono,titulo,html){
+
+function ConfirmarSalida(icono, titulo, html) {
     Swal.fire({
-        icon:icono,
+        icon: icono,
         title: titulo,
         html: html,
         showClass: {
@@ -118,11 +140,11 @@ function ConfirmarSalida(icono,titulo,html){
         hideClass: {
             popup: 'animate__animated animate__fadeOutUp'
         },
-        customClass:{
-            title:'title-class',
-            icon:'icon-class2',
-            popup:'popup-class'
+        customClass: {
+            title: 'title-class',
+            icon: 'icon-class2',
+            popup: 'popup-class'
         },
-        allowOutsideClick:false
+        allowOutsideClick: false
     });
 }
