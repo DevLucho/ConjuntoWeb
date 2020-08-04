@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -35,11 +36,16 @@ public class PqrsControlador implements Serializable {
     /**
      * Creates a new instance of PqrsControlador
      */
-    private String horaI = "";
-    private String fechaI = "";
     private Pqrs pqrs;
     private Residente residente;
     private TipoPqrs tipoPqrs;
+    private String horaI = "";
+    private String fechaI = "";
+    // Generar numero radicado
+    Random rnd = new Random();
+    String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String radicado = "";
+    int pos = 0, num;
 
     @EJB
     PqrsFacade pqrsFacade;
@@ -64,27 +70,38 @@ public class PqrsControlador implements Serializable {
     }
 
     public void registar() {
-        pqrs.setIdResidente(residente);
-        pqrs.setIdTipoPqrs(tipoPqrs);
-        pqrs.setEstado("Pendiente");
-
-        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaI = fecha.format(date);
-        pqrs.setFecha(date);
-
-        DateFormat hora = new SimpleDateFormat("HH:mm:ss");
-        Calendar cale = Calendar.getInstance();
-        Date dates = cale.getTime();
-        horaI = hora.format(dates);
-        pqrs.setHora(dates);
-
-        pqrsFacade.create(pqrs);
-        residente = new Residente();
-        tipoPqrs = new TipoPqrs();
-        pqrs = new Pqrs();
-        mensaje.setMensaje("Mensaje('Exito','Se ha generado la PQRS.','success');");
+        try {
+            // generar numero radicado
+            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            num = (int) (rnd.nextDouble() * 9999 + 1000);
+            radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos + 2) + num + abecedario.charAt(pos - 1); //Estructura codigo
+            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            pqrs.setNroRadicado(radicado);
+            // generar fecha de solicitud
+            DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            Date date = cal.getTime();
+            fechaI = fecha.format(date);
+            pqrs.setFecha(date);
+            // generar hora de solicitud
+            DateFormat hora = new SimpleDateFormat("HH:mm:ss");
+            Calendar cale = Calendar.getInstance();
+            Date dates = cale.getTime();
+            horaI = hora.format(dates);
+            pqrs.setHora(dates);
+            // generar pqrs
+            pqrs.setIdResidente(residente);
+            pqrs.setIdTipoPqrs(tipoPqrs);
+            pqrs.setEstado("Pendiente");
+            pqrsFacade.create(pqrs);
+            residente = new Residente();
+            tipoPqrs = new TipoPqrs();
+            pqrs = new Pqrs();
+            mensaje.setMensaje("Mensajes('Se ha generado la PQRS','Su número de radicado es: " + radicado + "','success');");
+            radicado = "";
+        } catch (Exception e) {
+            System.out.println("error en pqrs revisar: " + e.getMessage());
+        }
 
     }
 
@@ -100,8 +117,8 @@ public class PqrsControlador implements Serializable {
     }
 
     public String consultarRespuesta(Respuesta respuestaConsultar) {
-        pqrs = respuestaConsultar.getNroRadicado();
-        tipoPqrs = respuestaConsultar.getNroRadicado().getIdTipoPqrs();
+        pqrs = respuestaConsultar.getIdPqrs();
+        tipoPqrs = respuestaConsultar.getIdPqrs().getIdTipoPqrs();
         return "respuesta-pqrs";
     }
 

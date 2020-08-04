@@ -46,6 +46,8 @@ public class ResidenteControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
+    // validar campos
+    private int documento;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -89,23 +91,28 @@ public class ResidenteControlador implements Serializable {
     }
     
     public void registrar() {
+        usuario = usuarioFacade.validarDocumento(documento);
+        if(documento==0){
         usuario.setIdRol(rolFacade.find(2));
-        usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
-        usuario.setEstado("Activo");
-        usuarioFacade.create(usuario);
-        residente.setIdPerfil(usuario);
-        inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
-        inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
-        inmuebleFacade.create(inmueble);
-        residente.setIdInmueble(inmueble);
-        residenteFacade.create(residente);
-        usuario = new Usuario();
-        rol = new Rol();
-        tipoDocumento = new TipoDocumento();
-        torre = new Torre();
-        apartamento = new Apartamento();
-        residente = new Residente();
-        mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml');");
+            usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+            usuario.setEstado("Activo");
+            usuarioFacade.create(usuario);
+            residente.setIdPerfil(usuario);
+            inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
+            inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
+            inmuebleFacade.create(inmueble);
+            residente.setIdInmueble(inmueble);
+            residenteFacade.create(residente);
+            usuario = new Usuario();
+            rol = new Rol();
+            tipoDocumento = new TipoDocumento();
+            torre = new Torre();
+            apartamento = new Apartamento();
+            residente = new Residente();
+            mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml');");
+        }else{
+            mensaje.setMensaje("Mensajes('Error','El número de documento: "+documento+" ya se encuentra registrado en el sistema.','error');");
+        }
     }
 
     public List<Residente> consultarTodos() {
@@ -178,6 +185,14 @@ public class ResidenteControlador implements Serializable {
 
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
     }
 
 }

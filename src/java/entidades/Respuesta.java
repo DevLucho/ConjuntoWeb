@@ -55,12 +55,12 @@ public class Respuesta implements Serializable {
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
-    @JoinColumn(name = "nroRadicado", referencedColumnName = "nroRadicado")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Pqrs nroRadicado;
     @JoinColumn(name = "idPerfil", referencedColumnName = "idPerfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idPerfil;
+    @JoinColumn(name = "id_pqrs", referencedColumnName = "id_pqrs")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Pqrs idPqrs;
 
     public Respuesta() {
     }
@@ -101,20 +101,20 @@ public class Respuesta implements Serializable {
         this.hora = hora;
     }
 
-    public Pqrs getNroRadicado() {
-        return nroRadicado;
-    }
-
-    public void setNroRadicado(Pqrs nroRadicado) {
-        this.nroRadicado = nroRadicado;
-    }
-
     public Usuario getIdPerfil() {
         return idPerfil;
     }
 
     public void setIdPerfil(Usuario idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    public Pqrs getIdPqrs() {
+        return idPqrs;
+    }
+
+    public void setIdPqrs(Pqrs idPqrs) {
+        this.idPqrs = idPqrs;
     }
 
     @Override

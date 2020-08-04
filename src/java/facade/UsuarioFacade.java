@@ -33,6 +33,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
 
+    public Usuario validarDocumento(int documento) {
+        Usuario usuario = new Usuario();
+        try {
+            Query query;
+            query = em.createQuery("SELECT u FROM Usuario u WHERE u.documento=:documento");
+            query.setParameter("documento", documento);
+            usuario = (Usuario) query.getResultList().get(0);
+        } catch (Exception e) {
+            System.out.println("Error en documento revisar: " + e.getMessage());
+        }
+        return usuario;
+    }
+
     public Usuario iniciarSesion(int documento, String contrasenia) {
         Usuario usuario = new Usuario();
         try {
@@ -46,8 +59,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         }
         return usuario;
     }
-    
-    public Usuario cambiarContrasenia (String contrasenia){
+
+    public Usuario cambiarContrasenia(String contrasenia) {
         Usuario usuario = new Usuario();
         try {
             Query query;

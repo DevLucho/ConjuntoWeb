@@ -131,7 +131,7 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Fecha"/>
+                                                    <h:outputText value="Fecha solicitud"/>
                                                 </f:facet>
                                                 <h:outputText value="#{p.fecha}">
                                                     <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -203,7 +203,7 @@
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
-                                                        <h:outputText value="Fecha"/>
+                                                        <h:outputText value="Fecha solicitud"/>
                                                     </f:facet>
                                                     <h:outputText value="#{pq.fecha}">
                                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -279,7 +279,7 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Fecha"/>
+                                                    <h:outputText value="Fecha solicitud"/>
                                                 </f:facet>
                                                 <h:outputText value="#{pp.fecha}">
                                                     <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -351,7 +351,7 @@
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
-                                                        <h:outputText value="Fecha"/>
+                                                        <h:outputText value="Fecha solicitud"/>
                                                     </f:facet>
                                                     <h:outputText value="#{ppr.fecha}">
                                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -411,22 +411,33 @@
                                 <h:form>
                                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
                                         <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                                     value="#{pqrsControlador.consultarResueltos()}" var="pr">
+                                                     value="#{respuestaControlador.consultar()}" var="pr">
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Numero radicado"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.nroRadicado}"/>
+                                                <h:outputText value="#{pr.idPqrs.nroRadicado}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Asunto"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.asunto}"/>
+                                                <h:outputText value="#{pr.idPqrs.asunto}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Fecha"/>
+                                                    <h:outputText value="Fecha solicitud"/>
+                                                </f:facet>
+                                                <h:outputText value="#{pr.idPqrs.fecha}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                </h:outputText> -
+                                                <h:outputText value="#{pr.idPqrs.hora}">
+                                                    <f:convertDateTime pattern="HH:mm a"/>
+                                                </h:outputText>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Fecha respuesta"/>
                                                 </f:facet>
                                                 <h:outputText value="#{pr.fecha}">
                                                     <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -439,26 +450,26 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Residente"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.idResidente.idPerfil.nombre}"/>
+                                                <h:outputText value="#{pr.idPqrs.idResidente.idPerfil.nombre}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Inmueble"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.idResidente.idInmueble.idTorre.idTorre}"/> -
-                                                <h:outputText value="#{pr.idResidente.idInmueble.idApartamento.idApartamento}"/>
+                                                <h:outputText value="#{pr.idPqrs.idResidente.idInmueble.idTorre.idTorre}"/> -
+                                                <h:outputText value="#{pr.idPqrs.idResidente.idInmueble.idApartamento.idApartamento}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Tipo"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.idTipoPqrs.tipo}"/>
+                                                <h:outputText value="#{pr.idPqrs.idTipoPqrs.tipo}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Estado"/>
                                                 </f:facet>
-                                                <h:outputText value="#{pr.estado}"/>
+                                                <h:outputText value="#{pr.idPqrs.estado}"/>
                                             </h:column>
 
                                             <h:column>

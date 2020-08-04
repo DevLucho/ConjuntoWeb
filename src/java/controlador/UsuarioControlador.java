@@ -149,9 +149,9 @@ public class UsuarioControlador implements Serializable {
         if (usuarioCancelar.getIdRol().getIdRol() == 1) {
             mensaje.setMensaje("Mensajes('Error!','No puedes bloquear usuarios con rol Administrador','error');");
         } else if ("Bloqueado".equals(usuarioCancelar.getEstado())) {
-            mensaje.setMensaje("Mensajes('Advertencia!','Este usuario ya esta bloqueado','warning');");
+            mensaje.setMensaje("Mensajes('Advertencia!','El usuario "+usuarioCancelar.getNombre()+" "+usuarioCancelar.getApellido()+" ya esta bloqueado','warning');");
         } else {
-            mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear este usuario?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear el usuario "+usuarioCancelar.getNombre()+" "+usuarioCancelar.getApellido()+"?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
             usuario = usuarioCancelar;
             usuario.setEstado("Bloqueado");
             usuarioFacade.edit(usuarioCancelar);
@@ -162,7 +162,7 @@ public class UsuarioControlador implements Serializable {
         usuario = usuarioDesbloquear;
         usuario.setEstado("Activo");
         usuarioFacade.edit(usuarioDesbloquear);
-        mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario','success');");
+        mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario "+usuarioDesbloquear.getNombre()+" "+usuarioDesbloquear.getApellido()+"','success');");
     }
 
     public String preActualizar(Usuario usuarioActualizar) {

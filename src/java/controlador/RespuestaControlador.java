@@ -79,7 +79,7 @@ public class RespuestaControlador implements Serializable {
 
     public void registrar(Pqrs pqrs) {
         respuesta.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
-        respuesta.setNroRadicado(pqrsFacade.find(pqrs.getNroRadicado()));
+        respuesta.setIdPqrs(pqrsFacade.find(pqrs.getIdPqrs()));
         this.pqrs = pqrs;
         pqrs.setEstado("Resuelto");
         pqrsFacade.edit(pqrs);

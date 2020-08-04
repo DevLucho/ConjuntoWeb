@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -67,28 +68,14 @@
                                             </f:facet>
                                             <h:outputText value="#{permiso.nombre}"/>
                                         </h:column>
-
-                                        <h:column> 
-                                            <f:facet name="header" >
-                                                <h:outputText value="#{rolControlador.rol.nombre}"/><i class="far fa-edit" style="margin-left: 5px;"></i>
-                                            </f:facet>
-                                            <input type="checkbox" checked="checked"/>
-                                        </h:column>
-
-                                        <h:column> 
-                                            <f:facet name="header" >
-                                                <h:outputText value="Residente"/><i class="far fa-edit" style="margin-left: 5px;"></i>
-                                            </f:facet>
-                                            <input type="checkbox" checked="checked"/>
-                                        </h:column>
-
-                                        <h:column> 
-                                            <f:facet name="header" >
-                                                <h:outputText value="Vigilante"/><i class="far fa-edit" style="margin-left: 5px;"></i>
-                                            </f:facet>
-                                            <input type="checkbox"/>
-                                        </h:column>
-
+                                        <c:forEach items="#{rolControlador.consultarTodos()}" var="rol">
+                                            <h:column> 
+                                                <f:facet name="header" >
+                                                    <h:outputText value="#{rol.nombre}"/><i class="far fa-edit" style="margin-left: 5px;"></i>
+                                                </f:facet>
+                                                <input type="checkbox" checked="checked"/>
+                                            </h:column>
+                                        </c:forEach>
                                     </h:dataTable>
                                 </h:form>
                             </div>

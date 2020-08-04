@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pqrs.findAll", query = "SELECT p FROM Pqrs p")
+    , @NamedQuery(name = "Pqrs.findByIdPqrs", query = "SELECT p FROM Pqrs p WHERE p.idPqrs = :idPqrs")
     , @NamedQuery(name = "Pqrs.findByNroRadicado", query = "SELECT p FROM Pqrs p WHERE p.nroRadicado = :nroRadicado")
     , @NamedQuery(name = "Pqrs.findByAsunto", query = "SELECT p FROM Pqrs p WHERE p.asunto = :asunto")
     , @NamedQuery(name = "Pqrs.findByFecha", query = "SELECT p FROM Pqrs p WHERE p.fecha = :fecha")
@@ -50,8 +51,13 @@ public class Pqrs implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "id_pqrs")
+    private Integer idPqrs;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "nroRadicado")
-    private Integer nroRadicado;
+    private String nroRadicado;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -79,28 +85,37 @@ public class Pqrs implements Serializable {
     @JoinColumn(name = "idTipoPqrs", referencedColumnName = "idTipoPqrs")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoPqrs idTipoPqrs;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nroRadicado", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPqrs", fetch = FetchType.LAZY)
     private List<Respuesta> respuestaList;
 
     public Pqrs() {
     }
 
-    public Pqrs(Integer nroRadicado) {
-        this.nroRadicado = nroRadicado;
+    public Pqrs(Integer idPqrs) {
+        this.idPqrs = idPqrs;
     }
 
-    public Pqrs(Integer nroRadicado, String asunto, String descripcion, String estado) {
+    public Pqrs(Integer idPqrs, String nroRadicado, String asunto, String descripcion, String estado) {
+        this.idPqrs = idPqrs;
         this.nroRadicado = nroRadicado;
         this.asunto = asunto;
         this.descripcion = descripcion;
         this.estado = estado;
     }
 
-    public Integer getNroRadicado() {
+    public Integer getIdPqrs() {
+        return idPqrs;
+    }
+
+    public void setIdPqrs(Integer idPqrs) {
+        this.idPqrs = idPqrs;
+    }
+
+    public String getNroRadicado() {
         return nroRadicado;
     }
 
-    public void setNroRadicado(Integer nroRadicado) {
+    public void setNroRadicado(String nroRadicado) {
         this.nroRadicado = nroRadicado;
     }
 
@@ -172,7 +187,7 @@ public class Pqrs implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nroRadicado != null ? nroRadicado.hashCode() : 0);
+        hash += (idPqrs != null ? idPqrs.hashCode() : 0);
         return hash;
     }
 
@@ -183,7 +198,7 @@ public class Pqrs implements Serializable {
             return false;
         }
         Pqrs other = (Pqrs) object;
-        if ((this.nroRadicado == null && other.nroRadicado != null) || (this.nroRadicado != null && !this.nroRadicado.equals(other.nroRadicado))) {
+        if ((this.idPqrs == null && other.idPqrs != null) || (this.idPqrs != null && !this.idPqrs.equals(other.idPqrs))) {
             return false;
         }
         return true;
@@ -191,7 +206,7 @@ public class Pqrs implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Pqrs[ nroRadicado=" + nroRadicado + " ]";
+        return "entidades.Pqrs[ idPqrs=" + idPqrs + " ]";
     }
     
 }

@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -84,28 +85,14 @@
                                                 </f:facet>
                                                 <h:outputText value="#{permiso.nombre}"/>
                                             </h:column>
-                                            
-                                            <h:column> 
-                                                <f:facet name="header" >
-                                                    <h:outputText value="#{formconsultarroles.lblAdministrador}"/>
-                                                </f:facet>
-                                                <input type="checkbox" disabled="disabled" checked="checked"/>
-                                            </h:column>
-                                            
-                                            <h:column> 
-                                                <f:facet name="header" >
-                                                    <h:outputText value="#{formconsultarroles.lblResidente}"/>
-                                                </f:facet>
-                                                <input type="checkbox" disabled="disabled" checked="checked"/>
-                                            </h:column>
-                                            
-                                            <h:column> 
-                                                <f:facet name="header" >
-                                                    <h:outputText value="#{formconsultarroles.lblVigilante}"/>
-                                                </f:facet>
-                                                <input type="checkbox" disabled="disabled"/>
-                                            </h:column>
-                                          
+                                            <c:forEach items="#{rolControlador.consultarTodos()}" var="rol">
+                                                <h:column> 
+                                                    <f:facet name="header" >
+                                                        <h:outputText value="#{rol.nombre}"/>
+                                                    </f:facet>
+                                                    <input type="checkbox" disabled="disabled" checked="checked"/>
+                                                </h:column>
+                                            </c:forEach>
                                         </h:dataTable>
                                     </h:form>
                                 </div>

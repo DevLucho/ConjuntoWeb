@@ -46,26 +46,16 @@ public class ZonaComunalControlador implements Serializable {
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) {
-        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar esta zona común?','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
+        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar "+zonaComunalEliminar.getNombre()+"','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
         zonaComunalFacade.remove(zonaComunalEliminar);
     }
-    /*
-    public String preActualizar(ZonaComunal zonaComunalActualizar) {
-        disponibilidad = zonaComunalActualizar.getIdDisponibilidad();
-        zonaComunal = zonaComunalActualizar;
-        return "editar-zona";
-    }
-    public void actualizar() {
-        zonaComunal.setIdDisponibilidad(disponibilidadFacade.find(disponibilidad.getIdDisponibilidad()));
-        zonaComunalFacade.edit(zonaComunal);
-    }*/
+
     public List<ZonaComunal> consultarTodos() {
         return zonaComunalFacade.findAll();
     }
 
     public String consultarZona(int id) {
         zonaComunal = zonaComunalFacade.find(id);
-
         return "detalle-zona";
     }
 

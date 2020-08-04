@@ -33,7 +33,7 @@ public class CodigoControlador implements Serializable {
     private Codigo codr = null;
     // Generar codigo aleatorio
     Random rnd = new Random();
-    String abecedario = "ABCDEFGHIJKLMOPQRSTUVWXYZ";
+    String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String codgenerado = "";
     int pos = 0, num;
 
@@ -59,8 +59,8 @@ public class CodigoControlador implements Serializable {
             codigo.setEstado("Valido");
             codigoFacade.create(codigo);
             codigo = new Codigo();
+            mensaje.setMensaje("MensajeAlertify('Código generado: "+codgenerado+"','success');");
             codgenerado = "";
-            mensaje.setMensaje("MensajeAlertify('Código generado exitosamente!','success');");
         } catch (Exception e) {
             System.out.println("Error en codigo generado revisar: " + e.getMessage());
         }
