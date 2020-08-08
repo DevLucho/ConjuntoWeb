@@ -56,7 +56,7 @@
 
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="identificacion">Numero de identificación</label></strong>
-                                <h:inputText a:type="number" class="form-control" id="documento" value="#{residenteControlador.documento}" a:placeholder="Documento de identidad" required="required"/>
+                                <h:inputText a:type="number" class="form-control" id="documento" value="#{residenteControlador.documentoc}" a:placeholder="Documento de identidad" required="required"/>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="correo">Email</label></strong>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="phone">Número de celular</label></strong>
-                                <h:inputText a:type="tel" class="form-control" id="celular" value="#{residenteControlador.usuario.celular}" required="required"/>
+                                <h:inputText a:type="tel" class="form-control" id="celular" value="#{residenteControlador.nrocel}" required="required"/>
                                 <small id="phone" class="form-text text-muted">Debe tener 10 digitos.</small>
                             </div>
 
@@ -108,7 +108,7 @@
                             </div>
 
                             <div class="col-12">
-                                <h:commandButton class="btn btn-outline-success btn-block" style="margin-bottom: 25px;" value="Registrar" action="#{residenteControlador.registrar()}"></h:commandButton>
+                                <h:commandButton class="btn btn-outline-success btn-block" style="margin-bottom: 25px;" value="Registrar" action="#{residenteControlador.registrar()}" onclick="validar_formulario();"></h:commandButton>
                             </div>
 
                         </div>

@@ -30,13 +30,14 @@ function MensajeAlertify(mensaje, icon) {
     });
 };
 
-// Mensaje para redirigir
-function MensajeRedirect(link) {
+// Mensaje para redirigir con texto
+function MensajeRedirect(link, titulo, texto, icono) {
     Swal.fire({
-        title: 'Advertencia!',
-        text: 'Esta pqrs ya esta resuelta',
-        icon: 'warning',
-        confirmButtonText: 'Ok'
+        title: titulo,
+        text: texto,
+        icon: icono,
+        confirmButtonText: 'Ok',
+        allowOutsideClick: false
     }).then(function (result) {
         console.log(result);
         if (result.value) {
@@ -45,6 +46,22 @@ function MensajeRedirect(link) {
     });
 }
 
+// Mensaje para redirigir sin texto
+function ConfirmacionResidente(linkURL, icono, titulo, txtbtn) {
+    Swal.fire({
+        icon: icono,
+        title: titulo,
+        confirmButtonText: txtbtn,
+        allowOutsideClick: false
+    }).then(function (result) {
+        console.log(result);
+        if (result.value) {
+            window.location.href = linkURL;
+        }
+    });
+}
+
+// ejecutar despues de confirmar
 function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
     Swal.fire({
         title: titulo,
@@ -61,20 +78,6 @@ function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
         }
     });
 };
-
-// Mensaje para redirigir (login) - registro residente
-function ConfirmacionResidente(linkURL) {
-    Swal.fire({
-        icon: 'success',
-        title: "Registro exitoso",
-        confirmButtonText: 'Iniciar sesi&oacute;n'
-    }).then(function (result) {
-        console.log(result);
-        if (result.value) {
-            window.location.href = linkURL;
-        }
-    });
-}
 
 function ConfirmacionResidenteR(linkURL) {
     Swal.fire({

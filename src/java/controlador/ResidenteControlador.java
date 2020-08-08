@@ -40,6 +40,7 @@ public class ResidenteControlador implements Serializable {
      * Creates a new instance of ResidenteControlador
      */
     private Usuario usuario;
+    private Usuario user = null;
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Residente residente;
@@ -47,7 +48,10 @@ public class ResidenteControlador implements Serializable {
     private Apartamento apartamento;
     private Inmueble inmueble;
     // validar campos
+    private String documentoc;
     private int documento;
+    private String nrocel;
+    private long nrocelular;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -72,7 +76,7 @@ public class ResidenteControlador implements Serializable {
 
     @EJB
     TipoDocumentoFacade tipoDocumentoFacade;
-    
+
     @Inject
     private MensajeControlador mensaje;
 
@@ -89,12 +93,16 @@ public class ResidenteControlador implements Serializable {
         apartamento = new Apartamento();
         torre = new Torre();
     }
-    
+
     public void registrar() {
-        usuario = usuarioFacade.validarDocumento(documento);
-        if(documento==0){
-        usuario.setIdRol(rolFacade.find(2));
+        user = usuarioFacade.validarDocumento(documento = Integer.parseInt(documentoc));
+        if (user.getDocumento() != 0) {
+            mensaje.setMensaje("Mensajes('Error','El número de documento: " + documento + " ya se encuentra registrado en el sistema.','error');");
+        } else {
+            usuario.setIdRol(rolFacade.find(2));
             usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+            usuario.setCelular(nrocelular = Long.parseLong(nrocel));
+            usuario.setDocumento(documento = Integer.parseInt(documentoc));
             usuario.setEstado("Activo");
             usuarioFacade.create(usuario);
             residente.setIdPerfil(usuario);
@@ -109,9 +117,9 @@ public class ResidenteControlador implements Serializable {
             torre = new Torre();
             apartamento = new Apartamento();
             residente = new Residente();
-            mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml');");
-        }else{
-            mensaje.setMensaje("Mensajes('Error','El número de documento: "+documento+" ya se encuentra registrado en el sistema.','error');");
+            documentoc = "";
+            nrocel = "";
+            mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml','success','Registro exitoso','Iniciar sesi&oacute;n');");
         }
     }
 
@@ -193,6 +201,38 @@ public class ResidenteControlador implements Serializable {
 
     public void setDocumento(int documento) {
         this.documento = documento;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public String getDocumentoc() {
+        return documentoc;
+    }
+
+    public void setDocumentoc(String documentoc) {
+        this.documentoc = documentoc;
+    }
+
+    public String getNrocel() {
+        return nrocel;
+    }
+
+    public void setNrocel(String nrocel) {
+        this.nrocel = nrocel;
+    }
+
+    public long getNrocelular() {
+        return nrocelular;
+    }
+
+    public void setNrocelular(long nrocelular) {
+        this.nrocelular = nrocelular;
     }
 
 }

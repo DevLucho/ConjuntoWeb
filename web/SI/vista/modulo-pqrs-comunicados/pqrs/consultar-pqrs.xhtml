@@ -80,13 +80,13 @@
                                     <a href="#tab1" class="nav-link active" data-toggle="tab">Todas las PQRs<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.contarPqrs()}</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a href="#tab3" class="nav-link" data-toggle="tab">Pendiendes<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.contarPendiente()}</span></a>
+                                    <a href="#tab3" class="nav-link" data-toggle="tab">Pendiendes<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.countState("Pendiente")}</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a href="#tab4" class="nav-link" data-toggle="tab">Resueltos<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.contarResueltos()}</span></a>
+                                    <a href="#tab4" class="nav-link" data-toggle="tab">Resueltos<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.countState("Resuelto")}</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a href="#tab5" class="nav-link" data-toggle="tab">Cancelados<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.contarCancelados()}</span></a>
+                                    <a href="#tab5" class="nav-link" data-toggle="tab">Cancelados<span class="badge badge-info" style="margin-left: 5px;">#{pqrsControlador.countState("Cancelado")}</span></a>
                                 </li>
                             </c:if>
                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">

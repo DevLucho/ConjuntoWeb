@@ -97,7 +97,13 @@ public class RespuestaControlador implements Serializable {
         respuesta.setHora(dates);
 
         respuestaFacade.create(respuesta);
-        mensaje.setMensaje("Mensaje('Exito','Se ha generado la respuesta a la PQRS.','success');");
+        
+        mensaje.setMensaje("MensajeRedirect('consultar-pqrs.xhtml','PQRS resuelta','El estado de la pqrs con el radicado: "+pqrs.getNroRadicado()+" ahora es resuelta!','success');");
+        this.usuario = new Usuario();
+        this.respuesta = new Respuesta();
+        this.residente = new Residente();
+        this.tipoPqrs = new TipoPqrs();
+        this.pqrs = new Pqrs();
     }
 
     public List<Respuesta> consultar() {

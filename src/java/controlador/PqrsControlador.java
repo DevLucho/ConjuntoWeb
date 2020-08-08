@@ -179,20 +179,8 @@ public class PqrsControlador implements Serializable {
         return pqrsFacade.pqrsResidente(idResidente);
     }
 
-    public int contarCancelados() {
-        return pqrsFacade.countEstado("Cancelado");
-    }
-
-    public int contarResueltos() {
-        return pqrsFacade.countEstado("Resuelto");
-    }
-
-    public int contarAbierto() {
-        return pqrsFacade.countEstado("Abierto");
-    }
-
-    public int contarPendiente() {
-        return pqrsFacade.countEstado("Pendiente");
+    public int countState(String estado) {
+        return pqrsFacade.countEstado(estado);
     }
 
     public int contarEstadoR(String estado, int idResidente) {

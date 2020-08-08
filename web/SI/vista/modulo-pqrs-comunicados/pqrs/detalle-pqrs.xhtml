@@ -122,7 +122,7 @@
                                     <div class="col-6">
                                         <p>Nro radicado</p>
                                         <hr/>
-                                        <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.respuesta.nroRadicado}" class="form-control col-12 col-md-4" title="IdResidente" required="true" disabled="true" >
+                                        <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.respuesta.idPqrs.nroRadicado}" class="form-control col-12" title="IdResidente" required="true" disabled="true" >
                                             <f:selectItems var="radicado" value="#{pqrsControlador.consultar()}" itemValue="#{radicado.nroRadicado}" itemLabel="#{radicado.nroRadicado}"/>
                                         </h:selectOneMenu>                        
                                     </div>

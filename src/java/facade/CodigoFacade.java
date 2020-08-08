@@ -6,6 +6,8 @@
 package facade;
 
 import entidades.Codigo;
+import entidades.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,4 +45,23 @@ public class CodigoFacade extends AbstractFacade<Codigo> {
         return c;
     }
 
+    public Usuario recuperarPass(String correo) {
+        Usuario usuario = new Usuario();
+        try {
+            Query query;
+            query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo=:correo");
+            query.setParameter("correo", correo);
+            usuario = (Usuario) query.getResultList().get(0);
+        } catch (Exception e) {
+            System.out.println("Error en recuperar pass revisar: " + e.getMessage());
+        }
+        return usuario;
+    }
+    
+    public List<Usuario> cambiarPass(int idPerfil) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
+        query.setParameter("idPerfil", idPerfil);
+        return query.getResultList();
+    }
 }

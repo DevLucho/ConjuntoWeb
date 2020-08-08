@@ -44,7 +44,6 @@ public class UsuarioControlador implements Serializable {
     /**
      * Creates a new instance of UsuarioControlador
      */
-    
     /*
      Incremental para menu dinamico
      private int valor = 0;
@@ -54,7 +53,7 @@ public class UsuarioControlador implements Serializable {
      public int getValor() {
          return valor;
      }
-    */
+     */
     @Inject
     private MensajeControlador mensaje;
     private Usuario usuario;
@@ -66,6 +65,11 @@ public class UsuarioControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
+    // campos form
+    private String nrodoc;
+    private int nrodocumento;
+    private String nrocel;
+    private long nrocelular;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -111,47 +115,56 @@ public class UsuarioControlador implements Serializable {
     }
 
     public void registrar() {
-        usuario.setIdRol(rolFacade.find(rol.getIdRol()));
-        usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
-        usuario.setEstado("Activo");
-        usuarioFacade.create(usuario);
-        if (rol.getIdRol() == 2) {
-            residente.setIdPerfil(usuario);
-            inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
-            inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
-            inmuebleFacade.create(inmueble);
-            residente.setIdInmueble(inmueble);
-            residenteFacade.create(residente);
+        try {
+            usuario.setIdRol(rolFacade.find(rol.getIdRol()));
+            usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+            usuario.setCelular(nrocelular = Long.parseLong(nrocel));
+            usuario.setDocumento(nrodocumento = Integer.parseInt(nrodoc));
+            usuario.setEstado("Activo");
+            usuarioFacade.create(usuario);
+            if (rol.getIdRol() == 2) {
+                residente.setIdPerfil(usuario);
+                inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
+                inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
+                inmuebleFacade.create(inmueble);
+                residente.setIdInmueble(inmueble);
+                residenteFacade.create(residente);
+                usuario = new Usuario();
+                rol = new Rol();
+                tipoDocumento = new TipoDocumento();
+                torre = new Torre();
+                apartamento = new Apartamento();
+                residente = new Residente();
+            } else if (rol.getIdRol() == 3) {
+                vigilante.setIdPerfil(usuario);
+                turnoVigilanteFacade.create(turnoVigilante);
+                vigilante.setIdTurno(turnoVigilante);
+                vigilanteFacade.create(vigilante);
+                usuario = new Usuario();
+                rol = new Rol();
+                tipoDocumento = new TipoDocumento();
+                vigilante = new Vigilante();
+                turnoVigilante = new TurnoVigilante();
+            }
             usuario = new Usuario();
             rol = new Rol();
             tipoDocumento = new TipoDocumento();
-            torre = new Torre();
-            apartamento = new Apartamento();
-            residente = new Residente();
-        } else if (rol.getIdRol() == 3) {
-            vigilante.setIdPerfil(usuario);
-            turnoVigilanteFacade.create(turnoVigilante);
-            vigilante.setIdTurno(turnoVigilante);
-            vigilanteFacade.create(vigilante);
-            usuario = new Usuario();
-            rol = new Rol();
-            tipoDocumento = new TipoDocumento();
-            vigilante = new Vigilante();
-            turnoVigilante = new TurnoVigilante();
+            nrodoc = "";
+            nrocel = "";
+            mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
+
+        } catch (Exception e) {
+            System.out.println("Error en registro usuario: " + e.getMessage());
         }
-        usuario = new Usuario();
-        rol = new Rol();
-        tipoDocumento = new TipoDocumento();
-        mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
     }
 
     public void cancelar(Usuario usuarioCancelar) {
         if (usuarioCancelar.getIdRol().getIdRol() == 1) {
             mensaje.setMensaje("Mensajes('Error!','No puedes bloquear usuarios con rol Administrador','error');");
         } else if ("Bloqueado".equals(usuarioCancelar.getEstado())) {
-            mensaje.setMensaje("Mensajes('Advertencia!','El usuario "+usuarioCancelar.getNombre()+" "+usuarioCancelar.getApellido()+" ya esta bloqueado','warning');");
+            mensaje.setMensaje("Mensajes('Advertencia!','El usuario " + usuarioCancelar.getNombre() + " " + usuarioCancelar.getApellido() + " ya esta bloqueado','warning');");
         } else {
-            mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear el usuario "+usuarioCancelar.getNombre()+" "+usuarioCancelar.getApellido()+"?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas bloquear el usuario " + usuarioCancelar.getNombre() + " " + usuarioCancelar.getApellido() + "?','Podras revertilo!','warning','Si, bloquear!','Bloqueado!','Se ha bloqueado exitosamente el usuario.','success');");
             usuario = usuarioCancelar;
             usuario.setEstado("Bloqueado");
             usuarioFacade.edit(usuarioCancelar);
@@ -162,7 +175,7 @@ public class UsuarioControlador implements Serializable {
         usuario = usuarioDesbloquear;
         usuario.setEstado("Activo");
         usuarioFacade.edit(usuarioDesbloquear);
-        mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario "+usuarioDesbloquear.getNombre()+" "+usuarioDesbloquear.getApellido()+"','success');");
+        mensaje.setMensaje("Mensaje('Desbloqueado!','Se ha desbloqueado satisfactoriamente el usuario " + usuarioDesbloquear.getNombre() + " " + usuarioDesbloquear.getApellido() + "','success');");
     }
 
     public String preActualizar(Usuario usuarioActualizar) {
@@ -363,6 +376,22 @@ public class UsuarioControlador implements Serializable {
 
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getNrodoc() {
+        return nrodoc;
+    }
+
+    public void setNrodoc(String nrodoc) {
+        this.nrodoc = nrodoc;
+    }
+
+    public String getNrocel() {
+        return nrocel;
+    }
+
+    public void setNrocel(String nrocel) {
+        this.nrocel = nrocel;
     }
 
 }

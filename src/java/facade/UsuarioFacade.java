@@ -100,6 +100,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         query.setParameter("estado", estado);
         return query.getResultList();
     }
+    
+    // count
 
     public int contarBloqueados(String estado) {
         Query query;

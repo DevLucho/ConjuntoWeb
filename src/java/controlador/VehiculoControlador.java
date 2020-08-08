@@ -117,6 +117,10 @@ public class VehiculoControlador implements Serializable {
         return "/SI/vista/modulo-parqueadero/vehiculos/agregar-vehiculo?faces-redirect=true";
     }
 
+    public List<Vehiculo> vehiculoResidente(int idResidente) {
+        return vehiculoFacade.vehiculoResidente(idResidente);
+    }
+
     public List<Vehiculo> vehiculoResidente() {
         return vehiculoFacade.vehiculoResidente();
     }
@@ -131,6 +135,10 @@ public class VehiculoControlador implements Serializable {
 
     public List<Vehiculo> consultarTodos() {
         return vehiculoFacade.findAll();
+    }
+
+    public int contarVehiculoR(int idResidente) {
+        return vehiculoFacade.contarVehiculoR(idResidente);
     }
 
     public int contarVehiculoR() {

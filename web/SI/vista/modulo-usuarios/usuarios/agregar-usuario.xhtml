@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <link href="../../../css/validate.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/util.css" rel="stylesheet" type="text/css"/>
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formcrearusuario.bcAgregarUsuario}</title>
     </h:head>
     <h:body>
@@ -72,7 +74,7 @@
                                     </div>
                                     <div class="col-6 mb-3">
                                         <strong><label for="identificacion">#{formcrearusuario.lblNumeroId}</label></strong> 
-                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}"/>
+                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.nrodoc}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="correo">#{formcrearusuario.lblEmail}</label></strong> 
@@ -80,7 +82,7 @@
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="phone">#{formcrearusuario.lvlCelular}</label></strong> 
-                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}"/>
+                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.nrocel}"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="direccion">#{formcrearusuario.lblDireccion}</label></strong> 
@@ -152,38 +154,35 @@
                     </div>
                 </section> 
                 <!-- Modal generar codigo -->
-                    <div class="modal fade" id="modal-rol" tabindex="-1" role="dialog" aria-labelledby="fm-modal" aria-hidden="true">
+                <div class="modal fade style-input" id="modal-rol" tabindex="-1" role="dialog" aria-labelledby="fm-modal" aria-hidden="true">
+                    <h:form class="login100-form validate-form flex-sb flex-w">
                         <div class="modal-dialog">
-                            <div class="modal-content">
+                            <div class="modal-content"> 
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle mr-1"></i>Generar codigo</h5>
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle mr-1"></i>Generar código | residente</h5>
                                     <button class="close" data-dismiss="modal" aria-label="Cerrar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
-
-                                <h:form>
-                                    <div class="modal-body">
-                                        <div class="form-group row">
-                                            <div class="col-12 col-md-6 font">
-                                                <h:outputLabel value="Enviar al celular:"/>
-                                                <h:inputText styleClass="form-control"/>
-                                            </div>
-                                            <div class="col-12 col-md-6 font">
-                                                <h:outputLabel value="Enviar vía email:" />
-                                                <h:inputText styleClass="form-control"/>
+                                </div> 
+                                <div class="modal-body">
+                                    <div class="form-group row">
+                                        <div class="col-12 font">
+                                            <b><h:outputLabel value="Enviar código vía email:" /></b>
+                                            <div class="wrap-input100 validate-input m-b-36" data-validate = "Digité un correo valido">
+                                                <h:inputText class="input100" a:type="email" value="#{codigoControlador.correo}" required="true" a:placeholder="ejemplo@dominio.com"/>
+                                                <span class="focus-input100"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                                        <h:commandButton value="Confirmar" styleClass="btn btn-outline-success" action="#{codigoControlador.generarCodigo()}"></h:commandButton>
-                                    </div>
-                                </h:form>
-
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                                    <h:commandButton value="Enviar" styleClass="btn btn-outline-success" action="#{codigoControlador.generarCodigo()}"></h:commandButton>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </h:form>
+                </div>
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
@@ -194,6 +193,7 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive -->
         <script src="../../navs/nav.js"></script>
+        <script src="../../../../js/main.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <!-- SweetAlert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

@@ -1,59 +1,3 @@
-* {
-    margin: 0px; 
-    padding: 0px; 
-    box-sizing: border-box;
-    font-family: Helvetica;
-}
-
-body, html {
-    height: 100%;
-}
-
-body{
-    background-image:url(../../../img/login.jpg);
-    background-size:100% 100%;
-    background-attachment: fixed;
-}
-
-/*---------------------------------------------*/
-a {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #666666;
-    margin: 0px;
-    transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-}
-
-a:focus {
-    outline: none !important;
-}
-
-a:hover {
-    text-decoration: none;
-    color: #2A6378;
-}
-
-/*---------------------------------------------*/
-h1,h2,h3,h4,h5,h6 {
-    margin: 0px;
-}
-
-p {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #666666;
-    margin: 0px;
-}
-
-ul, li {
-    margin: 0px;
-    list-style-type: none;
-}
-
-
 /*---------------------------------------------*/
 input {
     outline: none;
@@ -89,48 +33,8 @@ textarea:-moz-placeholder { color: #999999;}
 textarea::-moz-placeholder { color: #999999;}
 textarea:-ms-input-placeholder { color: #999999;}
 
-label {
-    display: block;
-    margin: 0;
-}
 
 /*---------------------------------------------*/
-button {
-    outline: none !important;
-    border: none;
-    background: transparent;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-iframe {
-    border: none !important;
-}
-
-
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
-.txt1 {
-    font-size: 13px;
-    color: #555555;
-    line-height: 1.4;
-    text-transform: uppercase;
-}
-
-.txt2 {
-    font-size: 13px;
-    color: #999999;
-    line-height: 1.4;
-}
-
-.txt3 {
-    font-size: 13px;
-    color: #555555;
-    line-height: 1.4;
-}
-
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -259,86 +163,6 @@ iframe {
 }
 
 /*---------------------------------------------*/
-.btn-show-pass {
-    font-size: 15px;
-    color: #999999;
-
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 12px;
-    padding: 0 5px;
-    cursor: pointer;
-    -webkit-transition: background 0.4s;
-    -o-transition: background 0.4s;
-    -moz-transition: background 0.4s;
-    transition: background 0.4s;
-}
-
-.btn-show-pass:hover {
-    color: #2A6378;
-}
-
-.btn-show-pass.active {
-    color: #2A6378;
-}
-
-/*[ Restyle Checkbox ]*/
-
-.input-checkbox100 {
-    display: none;
-}
-
-.label-checkbox100 {
-    font-size: 13px;
-    color: #999999;
-    line-height: 1.4;
-
-    display: block;
-    position: relative;
-    padding-left: 26px;
-    cursor: pointer;
-}
-
-.label-checkbox100::before {
-    content: "\f00c";
-    font-family: FontAwesome;
-    font-size: 13px;
-    color: transparent;
-
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 2px;
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    left: 0;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.input-checkbox100:checked + .label-checkbox100::before {
-    color: #57b846;
-}
-
-
 /*[ Button ]*/
 .container-login100-form-btn {
     width: 100%;

@@ -38,15 +38,25 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return query.getResultList();
     }
 
+    public List<Vehiculo> vehiculoResidente(int idResidente) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
+        query.setParameter("idResidente", idResidente);
+        return query.getResultList();
+    }
+
     public List<Vehiculo> vehiculoResidente() {
         Query query;
         query = em.createQuery("SELECT a FROM Vehiculo a WHERE a.idVisitante is null");
         return query.getResultList();
     }
+    
+    // count
 
-    public int contarVehiculoR() {
+    public int contarVehiculoR(int idResidente) {
         Query query;
-        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idVisitante is null");
+        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idResidente.idResidente=:idResidente");
+        query.setParameter("idResidente", idResidente);
         return ((Long) query.getSingleResult()).intValue();
     }
 
@@ -56,4 +66,9 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return ((Long) query.getSingleResult()).intValue();
     }
 
+    public int contarVehiculoR() {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Vehiculo u WHERE u.idVisitante is null");
+        return ((Long) query.getSingleResult()).intValue();
+    }
 }

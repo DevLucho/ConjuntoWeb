@@ -34,6 +34,7 @@ public class SesionControlador implements Serializable {
      */
     @Inject
     private MensajeControlador mensaje;
+    private String documentoc;
     private int documento;
     private String contrasenia;
     private Rol rolSeleccionado;
@@ -56,7 +57,7 @@ public class SesionControlador implements Serializable {
     }
 
     public String iniciarSesion() {
-        user = usuarioFacade.iniciarSesion(documento, contrasenia);
+        user = usuarioFacade.iniciarSesion(documento = Integer.parseInt(documentoc), contrasenia);
         FacesContext fc = FacesContext.getCurrentInstance();
         if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("")) {
             rolSeleccionado = user.getIdRol();
@@ -157,6 +158,14 @@ public class SesionControlador implements Serializable {
 
     public void setUser(Usuario user) {
         this.user = user;
+    }
+
+    public String getDocumentoc() {
+        return documentoc;
+    }
+
+    public void setDocumentoc(String documentoc) {
+        this.documentoc = documentoc;
     }
 
 }
