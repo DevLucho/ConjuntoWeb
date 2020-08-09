@@ -48,9 +48,15 @@
                         </div>
                     </div>
                     <hr/>
-                    <div class="row">
-                        <div class="col-12 col-md-2" style="margin-left:auto; margin-right:auto;">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-2">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modal-comunicado">Crear comunicado</button>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-noticia">Crear noticia (index)</button>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-foto">Añadir foto a galeria (index)</button>
                         </div>
                     </div>
                     <hr/>
@@ -99,7 +105,92 @@
                                     </div>
 
                                     <div class="modal-footer col-12">
-                                        <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar()}"></h:commandButton>
+                                        <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Interno')}"></h:commandButton>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal crear noticia -->
+                    <div class="modal fade" id="modal-noticia" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>Crear noticia</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- Formulario comunicado -->
+                                <h:form class="row">
+                                    <div class="modal-body">
+                                        <div class="form-group row font">
+                                            <div class="col-12 col-md-6">
+                                                <label for="titulo">Título de la noticia:</label>
+                                                <h:inputText class="form-control" a:placeholder="Título comunicado" id="titulo" value="#{comunicadoControlador.comunicado.titulo}" required="true"/>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label for="fechafinal">Publicar hasta:</label>
+                                                <input type="date" class="form-control" name="fechai" id="fechafinal"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row font">
+                                            <div class="col-12">
+                                                <label for="descripcion">Descripción:</label>
+                                                <h:inputTextarea class="form-control" a:placeholder="Mensaje" value="#{comunicadoControlador.comunicado.descripcion}" title="Descripcion" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <!-- Subir foto -->
+                                            <div class="col-5" style="padding-right:0 ;">
+                                                <label for="file" class="subir-foto"> <span>+</span><br/> Adjuntar<br/>imagen</label>
+                                                <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
+                                                <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{comunicadoControlador.comunicado.img}" required="true"/>
+                                            </div>
+                                            <!-- Pre-visualizar foto -->
+                                            <div class="contenedor-imagen col-7" style="padding-left: 0;">
+                                                <div id="pre-visualizar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer col-12">
+                                        <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Externo')}"></h:commandButton>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal añadir foto -->
+                    <div class="modal fade" id="modal-foto" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>Añadir foto a galeria</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- Formulario foto-->
+                                <h:form class="row">
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <!-- Subir foto -->
+                                            <div class="col-5" style="padding-right:0 ;">
+                                                <label for="file" class="subir-foto"> <span>+</span><br/> Adjuntar<br/>imagen</label>
+                                                <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
+                                                <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{comunicadoControlador.comunicado.img}" required="true"/>
+                                            </div>
+                                            <!-- Pre-visualizar foto -->
+                                            <div class="contenedor-imagen col-7" style="padding-left: 0;">
+                                                <div id="pre-visualizar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer col-12">
+                                        <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Galeria')}"></h:commandButton>
                                     </div>
                                 </h:form>
                             </div>
@@ -107,7 +198,7 @@
                     </div>
                     <!-- Comunicados publicados -->
                     <h:form class="row">
-                        <c:forEach items="#{comunicadoControlador.consultar()}" var="comunicado">
+                        <c:forEach items="#{comunicadoControlador.consultar('Interno')}" var="comunicado">
                             <div class="mt-3 mb-3 col-12 col-md-6">
                                 <div>
                                     <div class="card border-light" style="padding: 20px;">

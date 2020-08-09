@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Comunicado.findByFechaPublicacion", query = "SELECT c FROM Comunicado c WHERE c.fechaPublicacion = :fechaPublicacion")
     , @NamedQuery(name = "Comunicado.findByTitulo", query = "SELECT c FROM Comunicado c WHERE c.titulo = :titulo")
     , @NamedQuery(name = "Comunicado.findByDescripcion", query = "SELECT c FROM Comunicado c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "Comunicado.findByImg", query = "SELECT c FROM Comunicado c WHERE c.img = :img")})
+    , @NamedQuery(name = "Comunicado.findByImg", query = "SELECT c FROM Comunicado c WHERE c.img = :img")
+    , @NamedQuery(name = "Comunicado.findByTipo", query = "SELECT c FROM Comunicado c WHERE c.tipo = :tipo")})
 public class Comunicado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,6 +64,11 @@ public class Comunicado implements Serializable {
     @Size(max = 100)
     @Column(name = "img")
     private String img;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
+    @Column(name = "tipo")
+    private String tipo;
     @JoinColumn(name = "idPerfil", referencedColumnName = "idPerfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idPerfil;
@@ -74,10 +80,11 @@ public class Comunicado implements Serializable {
         this.idComunicado = idComunicado;
     }
 
-    public Comunicado(Integer idComunicado, String titulo, String descripcion) {
+    public Comunicado(Integer idComunicado, String titulo, String descripcion, String tipo) {
         this.idComunicado = idComunicado;
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.tipo = tipo;
     }
 
     public Integer getIdComunicado() {
@@ -118,6 +125,14 @@ public class Comunicado implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Usuario getIdPerfil() {

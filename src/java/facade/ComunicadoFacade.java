@@ -31,9 +31,10 @@ public class ComunicadoFacade extends AbstractFacade<Comunicado> {
         super(Comunicado.class);
     }
 
-    public List<Comunicado> consultarTodos() {
+    public List<Comunicado> consultarTodos(String tipo) {
         Query query;
-        query = em.createQuery("SELECT u FROM Comunicado AS u");
+        query = em.createQuery("SELECT u FROM Comunicado u WHERE u.tipo=:tipo");
+        query.setParameter("tipo", tipo);
         return query.getResultList();
     }
 

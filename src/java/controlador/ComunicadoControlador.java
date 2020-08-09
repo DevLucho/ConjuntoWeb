@@ -32,70 +32,98 @@ public class ComunicadoControlador implements Serializable {
     /**
      * Creates a new instance of ComunicadoControlador
      */
-    
     private Comunicado comunicado;
-    
+
     private Usuario usuario;
-    
-    String fechaPublicacion="";
-    
+
+    String fechaPublicacion = "";
+
     @EJB
     ComunicadoFacade comunicadoFacade;
-    
+
     @EJB
     UsuarioFacade usuarioFacade;
-    
+
     @Inject
     private MensajeControlador mensaje;
-    
+
     public ComunicadoControlador() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         usuario = new Usuario();
         comunicado = new Comunicado();
     }
-    
-    public void registrar(){
-        usuario.setIdPerfil(1);
-        comunicado.setIdPerfil(usuario);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaPublicacion = dateFormat.format(date);
-        comunicado.setFechaPublicacion(date);
-        comunicadoFacade.create(comunicado);
-        usuario = new Usuario();
-        comunicado = new Comunicado();
-        mensaje.setMensaje("Mensaje('Exito','Se ha publicado el comunicado','success');");
+
+    public void registrar(String tipo) {
+        switch (tipo) {
+            case "Interno":
+                usuario.setIdPerfil(1);
+                comunicado.setIdPerfil(usuario);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar cal = Calendar.getInstance();
+                Date date = cal.getTime();
+                fechaPublicacion = dateFormat.format(date);
+                comunicado.setFechaPublicacion(date);
+                comunicado.setTipo("Interno");
+                comunicadoFacade.create(comunicado);
+                usuario = new Usuario();
+                comunicado = new Comunicado();
+                mensaje.setMensaje("Mensaje('Exito','Se ha publicado el comunicado','success');");
+                break;
+            case "Externo":
+                usuario.setIdPerfil(1);
+                comunicado.setIdPerfil(usuario);
+                comunicado.setTipo("Externo");
+                comunicadoFacade.create(comunicado);
+                usuario = new Usuario();
+                comunicado = new Comunicado();
+                mensaje.setMensaje("Mensaje('Exito','Se ha publicado la noticia','success');");
+                break;
+            case "Galeria":
+                usuario.setIdPerfil(1);
+                comunicado.setIdPerfil(usuario);
+                comunicado.setTitulo(".");
+                comunicado.setDescripcion(".");
+                comunicado.setTipo("Galeria");
+                comunicadoFacade.create(comunicado);
+                usuario = new Usuario();
+                comunicado = new Comunicado();
+                mensaje.setMensaje("Mensaje('Exito','Se ha publicado la foto','success');");
+                break;
+            default:
+                mensaje.setMensaje("Mensaje('Error','No se ha podido publicar el contenido.','error');");
+                break;
+        }
+
     }
-    
-    public List<Comunicado> consultarTodos(){
+
+    public List<Comunicado> consultarTodos() {
         return comunicadoFacade.findAll();
     }
-    
-    public List<Comunicado> consultar(){
-        return comunicadoFacade.consultarTodos();
+
+    public List<Comunicado> consultar(String tipo) {
+        return comunicadoFacade.consultarTodos(tipo);
     }
-    
-    public String preActualizar(Comunicado comunicadoActualizar){
+
+    public String preActualizar(Comunicado comunicadoActualizar) {
         usuario = comunicadoActualizar.getIdPerfil();
         comunicado = comunicadoActualizar;
         return "";
     }
-    
-    public void actualizar(){
+
+    public void actualizar() {
         comunicado.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
         comunicadoFacade.edit(comunicado);
     }
-    
-    public void eliminar(Comunicado comunicadoEliminar){
+
+    public void eliminar(Comunicado comunicadoEliminar) {
         comunicadoFacade.remove(comunicadoEliminar);
     }
-    
+
     // Pendiente 
-    public void asignarImg(Comunicado comunicadoImg){
+    public void asignarImg(Comunicado comunicadoImg) {
         comunicado = comunicadoImg;
     }
 
@@ -122,5 +150,5 @@ public class ComunicadoControlador implements Serializable {
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
     }
-    
+
 }
