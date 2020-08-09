@@ -95,8 +95,8 @@
                                         <ul class="form-style-1">
                                             <li>
                                                 <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
-                                                <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true"/>
-                                                <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true"/>
+                                                <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="  Debe rellenar este campo" validator="#{visitanteControlador.validarLong}"></h:inputText><h:message for="nombre" style="color: red"/>
+                                                <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true"><f:validator validatorId="valnu"/></h:inputText>
                                             </li>
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
