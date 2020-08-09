@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,15 +16,12 @@
         <link href="https://fonts.googleapis.com/css?family=Merriweather&amp;display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
         <link rel="stylesheet" href="index.css" />
-        <!--<link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
-        <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>
-        -->
-        <!-- Alertify -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <link href="SI/css/alertify.min.css" rel="stylesheet" type="text/css"/>
-        <link href="SI/css/default.min.css" rel="stylesheet" type="text/css"/>
-        <script src="SI/js/Mensajes.js" type="text/javascript"></script>
+        <link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
+        <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>        
         <link rel="shortcut icon" href="img/Logo ShortCut.png" />
+        <!-- Bootstrap 4
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        -->
         <style>
             html{
                 scroll-behavior: smooth;
@@ -89,16 +87,19 @@
                                 </div>
                                 <a id="cerrar" href="#">×</a>
                                 <div class="popupContent">
-                                    <i class="fas fa-qrcode code" aria-hidden="true" />
-                                    <h:form class="carajo">
-                                        <div class="modal-body">
-                                            <div class="form-group row">
-                                                <div class="col-12 font">
-                                                    <h:inputText class="lol" value="#{codigoControlador.cod}" required="true"/>
+                                    <h:form class="login100-form validate-form flex-sb flex-w">
+                                        <div class="modal-body m-t-36" style="width: 100%;margin-left: 80px;margin-right: auto;">
+                                            <div style="width: 10%; float: left"> 
+                                                <i class="fas fa-qrcode code" aria-hidden="true" />
+                                            </div>
+                                            <div style="width: 70%; float: left; margin-left: 10px">
+                                                <div class="col-12 font wrap-input100 validate-input m-b-10" data-validate = "Digite un código" >
+                                                    <h:inputText class="input100" value="#{codigoControlador.cod}" required="true" a:placeholder="Ingrese código"/>
+                                                    <span class="focus-input100"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="width: 100%">
                                             <h:commandButton value="Confirmar" class="colorincolorado" action="#{codigoControlador.validarCodigo()}"></h:commandButton>
                                         </div>
                                     </h:form>
@@ -686,10 +687,14 @@ Mensaje</textarea
             </div>
         </f:view>   
         <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <!--
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        -->
         <script src="js/popper.min.js" type="text/javascript"></script>
-        <!--<script src="js/main.js" type="text/javascript"></script>-->
-        <script src="SI/js/alertify.min.js" type="text/javascript"></script>
+        <!-- validaciones y mensaje -->
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="SI/js/Mensajes.js" type="text/javascript"></script>
         <script>#{mensajeControlador.mensaje}</script>
     </h:body>
 </html>
