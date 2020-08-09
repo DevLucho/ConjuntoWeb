@@ -29,6 +29,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.faces.component.UIInput;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+
 
 /**
  *
@@ -248,5 +253,15 @@ public class VisitanteControlador implements Serializable {
 
     public void setConsultaVisitante(List<Visitante> consultaVisitante) {
         this.consultaVisitante = consultaVisitante;
+    }
+    
+    public void validarLong(FacesContext context, UIComponent comp, Object value){
+        context = FacesContext.getCurrentInstance();
+        String texto = (String)value;
+        
+        if(texto.length() < 4 || texto.length() > 10){
+            ((UIInput)comp).setValid(false);
+            context.addMessage(comp.getClientId(context),new FacesMessage("Nombre de visitante no valido por tamaño"));
+        }
     }
 }
