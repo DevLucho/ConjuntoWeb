@@ -52,10 +52,12 @@ public class CodigoControlador implements Serializable {
     String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     String codgenerado = "";
     int pos = 0, num;
+    // campos form
     private String correo = "";
     private String recorreo;
     private String contrasenia = "";
     private String vcontrasenia;
+
     @EJB
     CodigoFacade codigoFacade;
 
@@ -68,7 +70,6 @@ public class CodigoControlador implements Serializable {
     @PostConstruct
     public void init() {
         codigo = new Codigo();
-        user = new Usuario();
     }
 
     // notificar via email
@@ -118,8 +119,7 @@ public class CodigoControlador implements Serializable {
             // generar codigo alfanumerico
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1); //Estructura codigo
-            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1); //Estructura codigo 6 caracteres
             // set y crear codigo
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");
@@ -138,13 +138,18 @@ public class CodigoControlador implements Serializable {
 
     }
 
+    // condigo registro - contraseña
     public String validarCodigo() {
         codr = codigoFacade.validarCodigo(cod);
         if (codr.getCodigo() != null) {
             if ("Valido".equals(codr.getEstado())) {
                 codr.setEstado("Invalido");
                 codigoFacade.edit(codr);
-                return "nueva-clave?faces-redirect=true";
+                if (codr.getCodigo().length() >= 7) {
+                    return "nueva-clave?faces-redirect=true";
+                } else {
+                    return "vista/registro/registro?faces-redirect=true";
+                }
             } else {
                 mensaje.setMensaje("MensajeAlertify('Lo sentimos el código ingresado ya no es válido.','error');");
                 return "";
@@ -155,18 +160,16 @@ public class CodigoControlador implements Serializable {
         }
     }
 
+    // Metodos recuperar contraseña ↓↓
+    
     public String recuperarPass() throws NoSuchProviderException, MessagingException {
         user = codigoFacade.recuperarPass(recorreo);
-        if (user == null) {
-            mensaje.setMensaje("MensajeAlertify('El correo especificado no existe en el sistema.','error');");
-            return "restablecer-clave";
-        } else {
+        if (user.getCorreo() != null) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userPass", user);
             // generar codigo alfanumerico
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1); //Estructura codigo
-            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos); //Estructura codigo 7 caracteres
             // set y crear codigo
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");
@@ -180,32 +183,18 @@ public class CodigoControlador implements Serializable {
             codgenerado = "";
             recorreo = "";
             return "validar-cod";
-        }
-    }
-
-    public String recuperarCon() {
-        codr = codigoFacade.validarCodigo(cod);
-        if (codr.getCodigo() != null) {
-            if ("Valido".equals(codr.getEstado())) {
-                codr.setEstado("Invalido");
-                codigoFacade.edit(codr);
-                return "vista/registro/registro?faces-redirect=true";
-            } else {
-                mensaje.setMensaje("MensajeAlertify('Lo sentimos el código ingresado ya no es válido.','error');");
-                return "";
-            }
         } else {
-            mensaje.setMensaje("MensajeAlertify('El código ingresado no existe o es incorrecto.','error');");
+            mensaje.setMensaje("MensajeAlertify('El correo especificado no existe en el sistema.','error');");
             return "";
         }
     }
 
     public void cambiarPass() {
         user.setContrasenia(contrasenia);
-        if (contrasenia == null ? vcontrasenia != null : !contrasenia.equals(vcontrasenia)) {
-            mensaje.setMensaje("MensajeAlertify('Contraseñas no coinciden','error');");
-        } else if (contrasenia.length() < 7 || contrasenia.length() > 20) {
+        if (contrasenia.length() < 8 || contrasenia.length() > 20) {
             mensaje.setMensaje("MensajeAlertify('Contrase&ntilde;a inv&aacute;lida','error');");
+        } else if (contrasenia == null ? vcontrasenia != null : !contrasenia.equals(vcontrasenia)) {
+            mensaje.setMensaje("MensajeAlertify('Contraseñas no coinciden','error');");
         } else {
             usuarioFacade.edit(user);
             mensaje.setMensaje("MensajeRedirect('login.xhtml','Su contraseña se ha registrado satisfactoriamente.','A continuación sera redireccionado al inicio de sesión del sistema','success');");
@@ -220,6 +209,7 @@ public class CodigoControlador implements Serializable {
         }
     }
 
+    // Metodos set y get ↓↓
     public Codigo getCodigo() {
         return codigo;
     }
