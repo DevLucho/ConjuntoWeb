@@ -208,19 +208,26 @@
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <div class="form-group row">
-                                                <div class="alert alert-info col-12">
-                                                    Si requiere actualizar mas datos porfavor dirigirse al administrador de sistema.
-                                                </div>
-                                                <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
-                                                    <div class="col-12 col-md-6 mb-3">
-                                                        <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesion.celular}"></h:inputText>
-                                                    </div>                                                    
-                                                    <div class="col-12 col-md-6 mb-3">
-                                                        <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
-                                                        <h:inputText class="form-control-plaintext" a:placeholder="Ingrese un email v&aacute;lido" value="#{sesion.correo}"></h:inputText>
-                                                    </div>
-                                                </c:forEach>
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2 or sesionControlador.rolSeleccionado.idRol == 3}">
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+                                                        <div class="alert alert-info col-12">
+                                                            Si requiere actualizar mas datos porfavor dirigirse al Administrador del sistema.
+                                                        </div>
+                                                        <div class="col-12 col-md-6 mb-3">
+                                                            <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesion.celular}"></h:inputText>
+                                                        </div>                                                    
+                                                        <div class="col-12 col-md-6 mb-3">
+                                                            <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
+                                                            <h:inputText class="form-control-plaintext" a:placeholder="Ingrese un email v&aacute;lido" value="#{sesion.correo}"></h:inputText>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
