@@ -133,9 +133,11 @@ public class UsuarioControlador implements Serializable {
         apartamento = new Apartamento();
         torre = new Torre();
         usuario = new Usuario();
+        codigoControlador = new CodigoControlador();
     }
 
-    public void registrar() /*throws NoSuchProviderException, MessagingException*/ {
+    public void registrar() throws NoSuchProviderException, MessagingException {
+
         try {
             user = usuarioFacade.validarDocumento(nrodocumento = Integer.parseInt(nrodoc));
             useremail = usuarioFacade.validarEmail(correo);
@@ -158,8 +160,6 @@ public class UsuarioControlador implements Serializable {
                 usuario.setContrasenia(clavegenerada);
                 usuario.setCorreo(correo);
                 usuarioFacade.create(usuario);
-                // enviar email con usuario y contraseña
-                // codigoControlador.enviarEmail(correo, "Registro exitoso", "Ingresa con: <br/> usuario: <b>" + nrodoc + "</b><br/>contraseña: <b>" + clavegenerada + "");
                 // if is residente
                 if (rol.getIdRol() == 2) {
                     residente.setIdPerfil(usuario);
@@ -168,25 +168,23 @@ public class UsuarioControlador implements Serializable {
                     inmuebleFacade.create(inmueble);
                     residente.setIdInmueble(inmueble);
                     residenteFacade.create(residente);
-                    usuario = new Usuario();
-                    rol = new Rol();
-                    tipoDocumento = new TipoDocumento();
                     torre = new Torre();
                     apartamento = new Apartamento();
                     residente = new Residente();
-                } // if is vigilante
+                } 
+                // if is vigilante
                 else if (rol.getIdRol() == 3) {
                     vigilante.setIdPerfil(usuario);
                     turnoVigilanteFacade.create(turnoVigilante);
                     vigilante.setIdTurno(turnoVigilante);
                     vigilanteFacade.create(vigilante);
-                    usuario = new Usuario();
-                    rol = new Rol();
-                    tipoDocumento = new TipoDocumento();
                     vigilante = new Vigilante();
                     turnoVigilante = new TurnoVigilante();
                 }
-                
+
+                // enviar email con usuario y contraseña            
+                codigoControlador.enviarEmail(correo, "Registro exitoso", "Usuario: <b>" + nrodocumento + "</b><br/>Contraseña: <b>" + clavegenerada + "</b>");
+
                 usuario = new Usuario();
                 rol = new Rol();
                 tipoDocumento = new TipoDocumento();
@@ -196,9 +194,8 @@ public class UsuarioControlador implements Serializable {
                 correo = "";
                 mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
             }
-
         } catch (Exception e) {
-            System.out.println("Error en registro usuario: " + e.getMessage());
+            System.out.println("Error registro de usuario: " + e.getMessage());
         }
     }
 
