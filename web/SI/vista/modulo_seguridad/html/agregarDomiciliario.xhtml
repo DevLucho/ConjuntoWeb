@@ -79,40 +79,47 @@
 
                                             <li>
                                                 <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
-                                                <h:inputText a:type="text" id="nombre" value="#{domiciliarioControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true"/>
-                                                <h:inputText a:type="text" id="apellido" value="#{domiciliarioControlador.fichaIngreso.apellido}" class="field-divided correcto corto3 lll" title="Apellido" required="true"  />
+                                                
+                                                <h:inputText a:type="text" id="nombre" value="#{domiciliarioControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="Campo vacio" validator="#{domiciliarioControlador.validarLong}"/>
+                                                <h:message for="nombre" style="color: white;margin-left:-235px;margin-top: 45px; position: absolute;"/>
+
+                                                <h:inputText a:type="text" id="apellido" value="#{domiciliarioControlador.fichaIngreso.apellido}" class="field-divided correcto corto3 lll" title="Apellido" required="true"  requiredMessage="Campo vacio" validator="#{domiciliarioControlador.validarLong}"/>
+                                                <h:message for="apellido" style="color: White;margin-left:170px;margin-top: 45px;"/>
                                             </li>
 
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
-                                                <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{domiciliarioControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{domiciliarioControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="Seleccionar un inmueble">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
                                                 </h:selectOneMenu>
+                                                <h:message for="inmueble" style="color: white;"/>
                                             </li>
 
                                             <li>
                                                 <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{domiciliarioControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{domiciliarioControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                    <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                                 </h:selectOneMenu>
                                             </li>   
 
                                             <li>
                                                 <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
-                                                <h:selectOneMenu class="field-select correcto" id="paquete" value="#{domiciliarioControlador.paquete.idPaquete}" title="Paquete" required="true">
+                                                <h:selectOneMenu class="field-select correcto" id="paquete" value="#{domiciliarioControlador.paquete.idPaquete}" title="Paquete" required="true" requiredMessage="Seleccionar el paquete">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>
                                                 </h:selectOneMenu>
+                                                <h:message for="paquete" style="color: white;"/>
                                             </li>
 
                                             <li>
                                                 <h:outputLabel for="empresa" class="label">Nombre de la Empresa<span class="required">*</span></h:outputLabel>
-                                                <h:selectOneMenu class="field-select correcto " id="empresa" value="#{domiciliarioControlador.empresa.idEmpresa}" title="Empresa" required="true">
+                                                <h:selectOneMenu class="field-select correcto " id="empresa" value="#{domiciliarioControlador.empresa.idEmpresa}" title="Empresa" required="true" requiredMessage="Seleccionar Empresa">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="empre" value="#{empresaControlador.consultar()}" itemValue="#{empre.idEmpresa}" itemLabel="#{empre.nombre}"></f:selectItems>
                                                 </h:selectOneMenu>
+                                                <h:message for="empresa" style="color: white;"/>
                                             </li>
                                             <li>
                                                 <h:commandButton  class="enviarcrud"   id="botones" value="Guardar" action="#{domiciliarioControlador.registrar()}"></h:commandButton>

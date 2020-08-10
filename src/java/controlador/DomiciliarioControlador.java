@@ -27,6 +27,10 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -214,5 +218,13 @@ public class DomiciliarioControlador implements Serializable {
         domiciliario = domiciliarioFacade.find(id);
         return "buscarDomiciliario";
     }
-
+    public void validarLong(FacesContext context, UIComponent comp, Object value){
+        context = FacesContext.getCurrentInstance();
+        String texto = (String)value;
+        
+        if(texto.length() < 4 || texto.length() > 10){
+            ((UIInput)comp).setValid(false);
+            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+        }
+    }
 }
