@@ -22,7 +22,7 @@ public class validacionVisitante implements Validator{
         String texto = (String)value;
         
         if(texto.length() < 4 || texto.length() > 10){
-            FacesMessage msg = new FacesMessage("Apellido no valido por tamaño");
+            FacesMessage msg = new FacesMessage("tamaño no valido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

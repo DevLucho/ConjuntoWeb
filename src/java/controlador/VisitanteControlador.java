@@ -33,6 +33,7 @@ import javax.faces.component.UIInput;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -45,6 +46,7 @@ public class VisitanteControlador implements Serializable {
 
     private String horaEntrada = "";
     private String horaSalida = "";
+    private String nombre;
 
     /**
      * Creates a new instance of VisitanteControlador
@@ -261,7 +263,33 @@ public class VisitanteControlador implements Serializable {
         
         if(texto.length() < 4 || texto.length() > 10){
             ((UIInput)comp).setValid(false);
-            context.addMessage(comp.getClientId(context),new FacesMessage("Nombre de visitante no valido por tamaño"));
+            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
         }
+    }
+    public void validarplaca(FacesContext context, UIComponent comp, Object value){
+        context = FacesContext.getCurrentInstance();
+        String text = (String)value;
+        
+        if(text.length() < 5 || text.length() > 8){
+            ((UIInput)comp).setValid(false);
+            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+        }
+    }
+    
+    //public void validarC(FacesContext context, UIComponent comp, Object value){
+    //    context = FacesContext.getCurrentInstance();
+    //    String texto = (String)value;
+    //    if(validarCa(nombre.getBytes(texto))){
+    //        JOptionPane.showMessageDialog(rootPane, "correcto");
+    //    } else {
+    //    }
+    //    if(texto.length() < 4 || texto.length() > 10){
+    //        ((UIInput)comp).setValid(false);
+    //        context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+    //    }
+    //}
+    public static boolean validarCa(String datos)
+    {
+        return datos.matches("[a-zA-Z]{1,10}*");
     }
 }
