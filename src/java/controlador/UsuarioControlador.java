@@ -26,12 +26,24 @@ import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.security.NoSuchProviderException;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -57,6 +69,8 @@ public class UsuarioControlador implements Serializable {
     @Inject
     private MensajeControlador mensaje;
     private Usuario usuario;
+    private Usuario user = null;
+    private Usuario useremail = null;
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Residente residente;
@@ -65,11 +79,18 @@ public class UsuarioControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
+    private CodigoControlador codigoControlador;
     // campos form
     private String nrodoc;
     private int nrodocumento;
     private String nrocel;
     private long nrocelular;
+    private String correo;
+    // Generar contraseña aleatoria
+    Random rnd = new Random();
+    String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String clavegenerada = "";
+    int pos = 0, num;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -114,44 +135,67 @@ public class UsuarioControlador implements Serializable {
         usuario = new Usuario();
     }
 
-    public void registrar() {
+    public void registrar() /*throws NoSuchProviderException, MessagingException*/ {
         try {
-            usuario.setIdRol(rolFacade.find(rol.getIdRol()));
-            usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
-            usuario.setCelular(nrocelular = Long.parseLong(nrocel));
-            usuario.setDocumento(nrodocumento = Integer.parseInt(nrodoc));
-            usuario.setEstado("Activo");
-            usuarioFacade.create(usuario);
-            if (rol.getIdRol() == 2) {
-                residente.setIdPerfil(usuario);
-                inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
-                inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
-                inmuebleFacade.create(inmueble);
-                residente.setIdInmueble(inmueble);
-                residenteFacade.create(residente);
+            user = usuarioFacade.validarDocumento(nrodocumento = Integer.parseInt(nrodoc));
+            useremail = usuarioFacade.validarEmail(correo);
+            if (user.getDocumento() != 0 && useremail.getCorreo() != null) {
+                mensaje.setMensaje("Mensajes('Error','El número de documento: <b>" + nrodocumento + "</b> y el correo: <b>" + correo + "</b> ya se encuentran registrados en el sistema.','error');");
+            } else if (user.getDocumento() != 0) {
+                mensaje.setMensaje("Mensajes('Error','El número de documento: " + nrodocumento + " ya se encuentra registrado en el sistema.','error');");
+            } else if (useremail.getCorreo() != null) {
+                mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + correo + " ya se encuentra registrado en el sistema.','error');");
+            } else {
+                usuario.setIdRol(rolFacade.find(rol.getIdRol()));
+                usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+                usuario.setCelular(nrocelular = Long.parseLong(nrocel));
+                usuario.setDocumento(nrodocumento = Integer.parseInt(nrodoc));
+                usuario.setEstado("Activo");
+                // generar contraseña
+                pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+                num = (int) (rnd.nextDouble() * 9999 + 1000);
+                clavegenerada = clavegenerada + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos - 1) + abecedario.charAt(pos); //Estructura codigo 8 caracteres
+                usuario.setContrasenia(clavegenerada);
+                usuario.setCorreo(correo);
+                usuarioFacade.create(usuario);
+                // enviar email con usuario y contraseña
+                // codigoControlador.enviarEmail(correo, "Registro exitoso", "Ingresa con: <br/> usuario: <b>" + nrodoc + "</b><br/>contraseña: <b>" + clavegenerada + "");
+                // if is residente
+                if (rol.getIdRol() == 2) {
+                    residente.setIdPerfil(usuario);
+                    inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
+                    inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
+                    inmuebleFacade.create(inmueble);
+                    residente.setIdInmueble(inmueble);
+                    residenteFacade.create(residente);
+                    usuario = new Usuario();
+                    rol = new Rol();
+                    tipoDocumento = new TipoDocumento();
+                    torre = new Torre();
+                    apartamento = new Apartamento();
+                    residente = new Residente();
+                } // if is vigilante
+                else if (rol.getIdRol() == 3) {
+                    vigilante.setIdPerfil(usuario);
+                    turnoVigilanteFacade.create(turnoVigilante);
+                    vigilante.setIdTurno(turnoVigilante);
+                    vigilanteFacade.create(vigilante);
+                    usuario = new Usuario();
+                    rol = new Rol();
+                    tipoDocumento = new TipoDocumento();
+                    vigilante = new Vigilante();
+                    turnoVigilante = new TurnoVigilante();
+                }
+                
                 usuario = new Usuario();
                 rol = new Rol();
                 tipoDocumento = new TipoDocumento();
-                torre = new Torre();
-                apartamento = new Apartamento();
-                residente = new Residente();
-            } else if (rol.getIdRol() == 3) {
-                vigilante.setIdPerfil(usuario);
-                turnoVigilanteFacade.create(turnoVigilante);
-                vigilante.setIdTurno(turnoVigilante);
-                vigilanteFacade.create(vigilante);
-                usuario = new Usuario();
-                rol = new Rol();
-                tipoDocumento = new TipoDocumento();
-                vigilante = new Vigilante();
-                turnoVigilante = new TurnoVigilante();
+                nrodoc = "";
+                clavegenerada = "";
+                nrocel = "";
+                correo = "";
+                mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
             }
-            usuario = new Usuario();
-            rol = new Rol();
-            tipoDocumento = new TipoDocumento();
-            nrodoc = "";
-            nrocel = "";
-            mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
 
         } catch (Exception e) {
             System.out.println("Error en registro usuario: " + e.getMessage());
@@ -392,6 +436,22 @@ public class UsuarioControlador implements Serializable {
 
     public void setNrocel(String nrocel) {
         this.nrocel = nrocel;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public CodigoControlador getCodigoControlador() {
+        return codigoControlador;
+    }
+
+    public void setCodigoControlador(CodigoControlador codigoControlador) {
+        this.codigoControlador = codigoControlador;
     }
 
 }

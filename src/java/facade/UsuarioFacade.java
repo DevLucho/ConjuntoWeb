@@ -46,6 +46,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return usuario;
     }
 
+    public Usuario validarEmail(String correo) {
+        Usuario usuario = new Usuario();
+        try {
+            Query query;
+            query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo=:correo");
+            query.setParameter("correo", correo);
+            usuario = (Usuario) query.getResultList().get(0);
+        } catch (Exception e) {
+            System.out.println("Error en documento revisar: " + e.getMessage());
+        }
+        return usuario;
+    }
+
     public Usuario iniciarSesion(int documento, String contrasenia) {
         Usuario usuario = new Usuario();
         try {
@@ -100,9 +113,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         query.setParameter("estado", estado);
         return query.getResultList();
     }
-    
-    // count
 
+    // count
     public int contarBloqueados(String estado) {
         Query query;
         query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.estado=:estado");

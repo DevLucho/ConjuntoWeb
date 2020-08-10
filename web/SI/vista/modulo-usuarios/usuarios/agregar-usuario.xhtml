@@ -59,92 +59,109 @@
                                     <div id="alerta" class="col-12" style="margin-top: 1rem;"></div> 
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="nombre">#{formcrearusuario.lblNombres}</label></strong> 
-                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}"/>
+                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" required="true" requiredMessage="El campo nombre es requerido"/>
+                                        <h:message for="nombre" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="apellido">#{formcrearusuario.lblApellidos}</label></strong> 
-                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}"/>
+                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" requiredMessage="El campo apellido es requerido"/>
+                                        <h:message for="apellido" style="color: red"/>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <strong><label for="tipoDocumento">#{formcrearusuario.lblTipoDocumento}</label></strong> 
-                                        <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}">
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}" required="true" requiredMessage="Seleccione tipo de documento">
                                             <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                             <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
                                         </h:selectOneMenu>
+                                        <h:message for="tipoDocumento" style="color: red"/>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <strong><label for="identificacion">#{formcrearusuario.lblNumeroId}</label></strong> 
-                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.nrodoc}"/>
+                                        <strong><label for="documento">#{formcrearusuario.lblNumeroId}</label></strong> 
+                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.nrodoc}" required="true" requiredMessage="Especifique el número de documento"/>
+                                        <h:message for="documento" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="correo">#{formcrearusuario.lblEmail}</label></strong> 
-                                        <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}"/>
+                                        <h:inputText id="correo" a:type="email" class="form-control-plaintext" value="#{usuarioControlador.correo}" required="true" requiredMessage="Especifique un correo electrónico"/>
+                                        <h:message for="correo" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="phone">#{formcrearusuario.lvlCelular}</label></strong> 
-                                        <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.nrocel}"/>
+                                        <strong><label for="celular">#{formcrearusuario.lvlCelular}</label></strong> 
+                                        <h:inputText id="celular" a:type="number"  class="form-control-plaintext" value="#{usuarioControlador.nrocel}" required="true" requiredMessage="El campo celular es requerido"/>
+                                        <h:message for="celular" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="direccion">#{formcrearusuario.lblDireccion}</label></strong> 
-                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" />
+                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" required="true" requiredMessage="El campo dirección es requerido"/>
+                                        <h:message for="direccion" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="Rol">#{formcrearusuario.lblRol}</label></strong>
-                                        <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();">
-                                            <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                        <strong><label for="rol">#{formcrearusuario.lblRol}</label></strong>
+                                        <h:selectOneMenu id="rol" class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" required="true" requiredMessage="Seleccione rol a asignar">
+                                            <f:selectItem  itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
                                             <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                         </h:selectOneMenu>
+                                        <h:message for="rol" style="color: red"/>
                                     </div>
                                     <!-- if is residente -->
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="direccion">Automovil</label></strong>
-                                            <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil">
+                                            <strong><label for="automovil">Automovil</label></strong>
+                                            <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil" required="true" requiredMessage="Seleccione una opción">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
                                                 <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
                                             </h:selectOneMenu>
+                                            <h:message for="automovil" style="color: red"/>
                                         </div>
 
                                         <div class="torre col-12 col-md mb-3">
                                             <strong><label for="torre">#{formcrearusuario.lblTorre}</label></strong>
-                                            <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext">
+                                            <h:selectOneMenu  id="torre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext" required="true" requiredMessage="Seleccione una Torre">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
                                             </h:selectOneMenu>
+                                            <h:message for="torre" style="color: red"/>
                                         </div>
                                         <div class="col-12 col-md mb-3">
                                             <strong><label for="apto">#{formcrearusuario.lblApartamento}</label></strong>
-                                            <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext">
+                                            <h:selectOneMenu  id="apto" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext" required="true" requiredMessage="Seleccione un Apto">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
                                             </h:selectOneMenu>
+                                            <h:message for="apto" style="color: red"/>
                                         </div>  
                                     </c:if>
                                     <!-- if is vigilante -->
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>
-                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno">
+                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno" required="true" requiredMessage="Asigne la hora de inicio">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
+                                            <h:message for="inicioTurno" style="color: red"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="finTurno">#{formconsultarusuario.lblFinTurno}</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno">
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" required="true" requiredMessage="Asigne la hora fin">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
+                                            <h:message for="finTurno" style="color: red"/>
                                         </div>
                                     </c:if>
+                                    <!--
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="contrasenia">#{formcrearusuario.lblContraseña}</label></strong>
-                                        <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
+                                        <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" required="true" requiredMessage="Este campo es requerido"/>
                                         <small id="contrasenia" class="form-text text-muted">#{formcrearusuario.txtContraseña}</small>
+                                        <h:message for="contrasenia" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="confirmar">#{formcrearusuario.phConfirmarContraseña}</label></strong>
-                                        <input type="password" class="form-control-plaintext" placeholder="Repita la contrase&ntilde;a"/>
+                                        <h:inputText  id="confirmar" a:type="password" class="form-control-plaintext" a:placeholder="Repita la contrase&ntilde;a" required="true" requiredMessage="Este campo es requerido"></h:inputText>
+                                        <h:message for="confirmar" style="color: red"/>
                                     </div>
+                                    -->
                                     <div class="col-12 mb-3">
                                         <h:commandButton value="#{formcrearusuario.btnRegistrar}" class="btn btn-outline-success btn-block" action="#{usuarioControlador.registrar()}"></h:commandButton>
                                     </div>

@@ -41,6 +41,7 @@ public class ResidenteControlador implements Serializable {
      */
     private Usuario usuario;
     private Usuario user = null;
+    private Usuario useremail = null;
     private TipoDocumento tipoDocumento;
     private Rol rol;
     private Residente residente;
@@ -52,6 +53,7 @@ public class ResidenteControlador implements Serializable {
     private int documento;
     private String nrocel;
     private long nrocelular;
+    private String correo;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -96,8 +98,11 @@ public class ResidenteControlador implements Serializable {
 
     public void registrar() {
         user = usuarioFacade.validarDocumento(documento = Integer.parseInt(documentoc));
+        useremail = usuarioFacade.validarEmail(correo);
         if (user.getDocumento() != 0) {
             mensaje.setMensaje("Mensajes('Error','El número de documento: " + documento + " ya se encuentra registrado en el sistema.','error');");
+        } else if (useremail.getCorreo() != null) {
+            mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + correo + " ya se encuentra registrado en el sistema.','error');");
         } else {
             usuario.setIdRol(rolFacade.find(2));
             usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
@@ -233,6 +238,14 @@ public class ResidenteControlador implements Serializable {
 
     public void setNrocelular(long nrocelular) {
         this.nrocelular = nrocelular;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
 }
