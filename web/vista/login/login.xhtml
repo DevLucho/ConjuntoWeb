@@ -27,20 +27,20 @@
                     <div class="row">
                         <div class="wrap-login100 p-l-85 p-r-85 p-t-40 p-b-40">
 
-                            <div class="d-flex flex-nowrap">
-                                <h:form class="col-6 text-left border-left-0 order-1 p-2 m-0">
-                                    <a class="btn-floating btn-lg btn-white" href="../../index.xhtml"><i class="fas fa-arrow-left"></i></a>
-                                </h:form>
+                            <div class="col-12 d-flex flex-nowrap">
+                                <div class="col text-left border-left-0 order-1 p-2 m-0" >
+                                    <a class="btn-floating btn-lg btn-white m-0" href="../../index.xhtml" style="padding:0px"><i class="fas fa-arrow-left"></i></a>
+                                </div>
 
-                                <h:form class="col-6 p-1 text-right order-2" style="width: 100%;"> 
+                                <h:form class="col-10 p-1 text-right order-2" style="width: 100%;"> 
                                     <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
                                         <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
-                                            <img src="../../SI/img/country-es.png" width="40px"/>
+                                            <img src="../../SI/img/country-es.png" width="32px"/>
                                         </h:commandLink>
                                     </c:if>
                                     <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.espaniol}">
                                         <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
-                                            <img src="../../SI/img/country-us.png" width="40px"/>
+                                            <img src="../../SI/img/country-us.png" width="32px"/>
                                         </h:commandLink>
                                     </c:if>
                                 </h:form> 
