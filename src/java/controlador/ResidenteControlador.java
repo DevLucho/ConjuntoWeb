@@ -58,6 +58,7 @@ public class ResidenteControlador implements Serializable {
     private String nrocel;
     private long nrocelular;
     private String correo;
+    private String clave;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -133,7 +134,6 @@ public class ResidenteControlador implements Serializable {
     }
 
     // validaciones
-    String clave;
 
     public void validarClave(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
@@ -286,6 +286,14 @@ public class ResidenteControlador implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
 }

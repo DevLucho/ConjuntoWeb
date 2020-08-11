@@ -76,6 +76,11 @@ public class ComunicadoControlador implements Serializable {
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
                 comunicado.setTipo("Externo");
+                DateFormat dateFormatt = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar cale = Calendar.getInstance();
+                Date dates = cale.getTime();
+                fechaPublicacion = dateFormatt.format(dates);
+                comunicado.setFechaPublicacion(dates);
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
                 comunicado = new Comunicado();
@@ -120,6 +125,10 @@ public class ComunicadoControlador implements Serializable {
 
     public void eliminar(Comunicado comunicadoEliminar) {
         comunicadoFacade.remove(comunicadoEliminar);
+    }
+    
+    public int contarComunicado(String tipo){
+        return comunicadoFacade.contarComunicados(tipo);
     }
 
     // Pendiente 

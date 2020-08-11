@@ -82,7 +82,10 @@
                 <h:form class="row mt-3 mb-3">
                     <div class="col">
                         <c:if test="#{eventoControlador.contarVigentes() == 0 }">
-                            <h6 class="text-center">No hay eventos publicados</h6>
+                            <div class="alert alert-warning">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+                                No hay eventos publicados.
+                            </div>
                         </c:if>
                         <div class="card-columns">
                             <c:forEach items="#{eventoControlador.consultarVigentes()}" var="e">

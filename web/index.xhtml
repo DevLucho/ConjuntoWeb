@@ -150,21 +150,22 @@
                 </section>
                 <!-- slider noticias -->
                 <h:form class="swiper-container">
-                    <c:forEach items="#{comunicadoControlador.consultar('Externo')}" var="comunicado">
-                        <div class="swiper-wrapper">
+                    <div class="swiper-wrapper">
+                        <c:forEach items="#{comunicadoControlador.consultar('Externo')}" var="comunicado">
                             <div class="swiper-slide">
                                 <div class="imgsss">
-                                    <img src="#{comunicado.img}"/>
+                                    <img src="#{comunicado.img}" width="435px" height="360px"/>
                                 </div>
                                 <div class="textSlider">
-                                    <h2>#{comunicado.titulo}</h2>
-                                    <br/>
+                                    <h2 style="margin:2px">#{comunicado.titulo}</h2>
                                     <p>#{comunicado.descripcion}</p>
+                                    <br/>
+                                    <small><b>Fecha de publicación: </b><h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MMM-dd"/></h:outputText></small>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-pagination" />
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
+                    <div class="swiper-pagination" />
                 </h:form>
                 <!-- zona de publicidad -->
                 <section class="fonfo2">
@@ -237,17 +238,19 @@
                     </div>
                 </section>
                 <!-- slider galeria -->
-                <h:form class="swiper-container">
-                    <c:forEach items="#{comunicadoControlador.consultar('Galeria')}" var="comunicado">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="imgsss">
-                                    <img src="#{comunicado.img}" width="430px" height="360px" alt="" />
+                <h:form class="swiper-container"> 
+
+                    <div class="swiper-wrapper">
+                        <c:forEach items="#{comunicadoControlador.consultar('Galeria')}" var="comunicado">
+                            <div class="swiper-slide" style="background-color: transparent">
+                                <div>
+                                    <img src="#{comunicado.img}" width="100% 100%" alt="" />
                                 </div>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination" />
-                    </c:forEach>
+                            </div> 
+                        </c:forEach>
+                    </div>
+
+                    <div class="swiper-pagination" />
                 </h:form>
                 <!-- segunda zona de publicidad -->
                 <section class="fonfo2 fonfo3">
@@ -323,20 +326,28 @@
                         </table>
                     </div>
                     <h:form class="form">
-                        <h:inputText a:type="text" class="duos" a:placeholder="Nombres"/>
-                        <h:inputText a:type="text" class="duos" a:placeholder="Apellidos"/>
-                        <h:inputText a:type="email" class="duos com" a:placeholder="Correo Electronico"/>
-                        <h:inputText a:type="number" class="duos com" a:placeholder="Numero"/>
-                        <h:selectOneMenu class="duos mierda">
+                        <h:inputText id="nombre" a:type="text" class="duos" a:placeholder="Nombres" required="true" requiredMessage="El campo nombre es requerido" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                        <h:message for="nombre" style="color: red"/>
+                        <h:inputText id="apellido" a:type="text" class="duos" a:placeholder="Apellidos" required="true" requiredMessage="El campo nombre es requerido" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                        <h:message for="apellido" style="color: red"/>
+                        <h:inputText id="email" a:type="email" class="duos com" a:placeholder="Correo Electronico" title="ejemplo@dominio.com" required="true" requiredMessage="Especifique un correo electrónico" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        <h:message for="email" style="color: red"/>
+                        <h:inputText id="celular" a:type="tel" class="duos com" a:placeholder="Numero"  required="true" requiredMessage="El campo celular es requerido" a:pattern="[0-9]{10}" title="10 digitos"/>
+                        <h:message for="celular" style="color: red"/>
+                        <h:selectOneMenu id="torre" class="duos mierda" required="true" requiredMessage="Seleccione una Torre">
                             <f:selectItem itemLabel="Torre" itemValue=""></f:selectItem>
                             <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
-                        <h:selectOneMenu class="duos mierda">
+                        <h:message for="torre" style="color: red"/>
+                        <h:selectOneMenu id="apto" class="duos mierda" required="true" requiredMessage="Seleccione un Apto">
                             <f:selectItem itemLabel="Apartamento" itemValue=""></f:selectItem>
                             <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
-                        <h:inputText a:type="text" class="duos com" a:placeholder="Asunto"/>
-                        <h:inputTextarea class="duos com furor" cols="1" rows="1" a:placeholder="Mensaje"/>
+                        <h:message for="apto" style="color: red"/>
+                        <h:inputText id="asunto" a:type="text" class="duos com" a:placeholder="Asunto"/>
+                        <h:message for="asunto" style="color: red"/>
+                        <h:inputTextarea id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="Mensaje" required="true" requiredMessage="Digite su mensaje"/>
+                        <h:message for="msj" style="color: red"/>
                         <h:inputText a:type="submit" class="duos enviar" value="Enviar" a:placeholder="Enviar"/>
                     </h:form>
                 </section>
@@ -374,14 +385,14 @@
         -->
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script>
-            var swiper = new Swiper(".swiper-container", {
-                slidesPerView: 3,
-                spaceBetween: 30,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true
-                }
-            });
+                            var swiper = new Swiper(".swiper-container", {
+                                slidesPerView: 3,
+                                spaceBetween: 30,
+                                pagination: {
+                                    el: ".swiper-pagination",
+                                    clickable: true
+                                }
+                            });
         </script>
         <!-- validaciones y mensaje -->
         <script src="js/main.js" type="text/javascript"></script>

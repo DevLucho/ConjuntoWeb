@@ -76,7 +76,10 @@
                 <h:form class="row mt-3 mb-3">
                     <div class="col">
                         <c:if test="#{zonaComunalControlador.contarZonas() == 0}">
-                            <h6 class="text-center">No hay zona comunes publicadas</h6>
+                            <div class="alert alert-warning">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+                                No hay zona comunes publicadas
+                            </div>
                         </c:if>
                         <div class="card-columns">
                             <c:forEach items="#{zonaComunalControlador.consultarTodos()}" var="zona">

@@ -38,4 +38,11 @@ public class ComunicadoFacade extends AbstractFacade<Comunicado> {
         return query.getResultList();
     }
 
+    public int contarComunicados(String tipo) {
+        Query query;
+        query = em.createQuery("SELECT COUNT(u) FROM Comunicado u WHERE u.tipo=:tipo");
+        query.setParameter("tipo", tipo);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }
