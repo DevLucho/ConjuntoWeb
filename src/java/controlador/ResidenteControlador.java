@@ -26,6 +26,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -125,6 +129,42 @@ public class ResidenteControlador implements Serializable {
             documentoc = "";
             nrocel = "";
             mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml','success','Registro exitoso','Iniciar sesi&oacute;n');");
+        }
+    }
+
+    // validaciones
+    String clave;
+
+    public void validarClave(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        this.clave = (String) value;
+
+        if (this.clave.length() < 8 || this.clave.length() > 20) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña invalida"));
+            mensaje.setMensaje("MensajeAlertify('Contraseña invalida','error');");
+        }
+    }
+
+    public void confirmarClave(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String confirm = (String) value;
+
+        if (confirm == null ? this.clave != null : !confirm.equals(this.clave)) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña no coincide"));
+            mensaje.setMensaje("MensajeAlertify('Contraseñas no coinciden','error');");
+        }
+    }
+
+    public void validarDoc(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String doc = (String) value;
+
+        if (doc.length() <8 || doc.length()>10) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Documento incorrecto"));
+            mensaje.setMensaje("MensajeAlertify('Nº de documento incorrecto','error');");
         }
     }
 

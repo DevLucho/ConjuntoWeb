@@ -7,10 +7,10 @@ function Mensajes(titulo, texto, icono) {
 };
 
 /*
-function MensajeAlertify(mensaje, icon){   
+function Alertify(mensaje, icon){   
      alertify.notify(mensaje, icon, 5);
 };
- */
+*/
 
 function MensajeAlertify(mensaje, icon) {
     const Toast = Swal.mixin({
