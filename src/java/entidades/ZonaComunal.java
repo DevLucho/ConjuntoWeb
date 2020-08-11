@@ -53,7 +53,7 @@ public class ZonaComunal implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
+    @Size(min = 1, max = 500)
     @Column(name = "descripcion")
     private String descripcion;
     @Size(max = 100)
