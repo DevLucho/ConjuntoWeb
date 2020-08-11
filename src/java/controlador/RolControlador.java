@@ -29,6 +29,7 @@ public class RolControlador implements Serializable {
     @Inject
     private MensajeControlador mensaje;
     private Rol rol;
+    private String nombre;
 
     @EJB
     RolFacade rolFacade;
@@ -42,9 +43,11 @@ public class RolControlador implements Serializable {
     }
 
     public void registrar() {
+        rol.setNombre(nombre);
         rolFacade.create(rol);
         rol = new Rol();
-        mensaje.setMensaje("Mensaje('Exito!','Rol creado satisfactoriamente','success');");
+        mensaje.setMensaje("Mensaje('Exito!','Rol "+nombre+" creado satisfactoriamente','success');");
+        nombre="";
     }
 
     public void eliminar(Rol rolEliminar) {
@@ -63,7 +66,7 @@ public class RolControlador implements Serializable {
 
     public void actualizar() {
         rolFacade.edit(rol);
-        mensaje.setMensaje("Mensaje('Exito!','Rol modificado satisfactoriamente','success');");
+        mensaje.setMensaje("Mensaje('Exito!','Rol "+rol.getNombre()+" modificado satisfactoriamente','success');");
     }
 
     public List<Rol> consultarTodos() {
@@ -76,6 +79,14 @@ public class RolControlador implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }
