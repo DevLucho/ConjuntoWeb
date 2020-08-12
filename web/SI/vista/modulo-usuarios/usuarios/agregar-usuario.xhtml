@@ -48,10 +48,11 @@
                         <div class="col-12 col-md-8 form">
                             <h3 class="col-12 text-center mb-3"><button class="btn btn-outline-success" data-toggle="modal" data-target="#modal-rol"><i class="fas fa-plus-circle mr-1"></i>#{formcrearusuario.generarCodigo}</button></h3>
                             <div class="alert alert-info text-center">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
                                 <a href="#" class="close" data-dismiss="alert">&times;</a>#{formcrearusuario.notiViaEmail}
                             </div>
                             <!--formulario-->
-                            <h:form class="recorrer-dato">
+                            <h:form class="recorrer-dato m-b-100">
                                 <div class="col-12">
                                     <div class="caja bg-faded border-bottom-0">#{formcrearusuario.txtDatos}</div>
                                 </div>  
@@ -59,12 +60,12 @@
                                     <div id="alerta" class="col-12" style="margin-top: 1rem;"></div> 
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="nombre">#{formcrearusuario.lblNombres}</label></strong> 
-                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" required="true" requiredMessage="#{formcrearusuario.camponombre}"/>
+                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" required="true" requiredMessage="#{formcrearusuario.camponombre}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
                                         <h:message for="nombre" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="apellido">#{formcrearusuario.lblApellidos}</label></strong> 
-                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" requiredMessage="#{formcrearusuario.campoapellido}"/>
+                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" requiredMessage="#{formcrearusuario.campoapellido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
                                         <h:message for="apellido" style="color: red"/>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -77,17 +78,17 @@
                                     </div>
                                     <div class="col-6 mb-3">
                                         <strong><label for="documento">#{formcrearusuario.lblNumeroId}</label></strong> 
-                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.nrodoc}" required="true" requiredMessage="#{formcrearusuario.camponumeroid}"/>
+                                        <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.nrodoc}" required="true" requiredMessage="#{formcrearusuario.camponumeroid}" validator="#{residenteControlador.validarDoc}"/>
                                         <h:message for="documento" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="correo">#{formcrearusuario.lblEmail}</label></strong> 
-                                        <h:inputText id="correo" a:type="email" class="form-control-plaintext" value="#{usuarioControlador.correo}" required="true" requiredMessage="#{formcrearusuario.campocorreo}"/>
+                                        <h:inputText id="correo" a:type="email" class="form-control-plaintext" value="#{usuarioControlador.correo}" a:placeholder="ejemplo@dominio.com" title="ejemplo@dominio.com" required="true" requiredMessage="#{formcrearusuario.campocorreo}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
                                         <h:message for="correo" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="celular">#{formcrearusuario.lvlCelular}</label></strong> 
-                                        <h:inputText id="celular" a:type="number"  class="form-control-plaintext" value="#{usuarioControlador.nrocel}" required="true" requiredMessage="#{formcrearusuario.campocelular}"/>
+                                        <h:inputText id="celular" a:type="number"  class="form-control-plaintext" value="#{usuarioControlador.nrocel}" required="true" requiredMessage="#{formcrearusuario.campocelular}" a:pattern="[0-9]{10}" title="10 digitos"/>
                                         <h:message for="celular" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
@@ -149,19 +150,7 @@
                                             <h:message for="finTurno" style="color: red"/>
                                         </div>
                                     </c:if>
-                                    <!--
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="contrasenia">#{formcrearusuario.lblContraseña}</label></strong>
-                                        <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" required="true" requiredMessage="Este campo es requerido"/>
-                                        <small id="contrasenia" class="form-text text-muted">#{formcrearusuario.txtContraseña}</small>
-                                        <h:message for="contrasenia" style="color: red"/>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="confirmar">#{formcrearusuario.phConfirmarContraseña}</label></strong>
-                                        <h:inputText  id="confirmar" a:type="password" class="form-control-plaintext" a:placeholder="Repita la contrase&ntilde;a" required="true" requiredMessage="Este campo es requerido"></h:inputText>
-                                        <h:message for="confirmar" style="color: red"/>
-                                    </div>
-                                    -->
+                                    
                                     <div class="col-12 mb-3">
                                         <h:commandButton value="#{formcrearusuario.btnRegistrar}" class="btn btn-outline-success btn-block" action="#{usuarioControlador.registrar()}"></h:commandButton>
                                     </div>
