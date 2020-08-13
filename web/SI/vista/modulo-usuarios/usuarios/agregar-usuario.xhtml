@@ -25,6 +25,12 @@
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
+            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                #{lenguajeControlador.setLenguaje('es')}
+            </c:if>
+            <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                #{lenguajeControlador.setLenguaje('en')}
+            </c:if>
             <!-- Contenedor principal -->
             <div class="contenedor">                
                 <!-- header -->
@@ -150,7 +156,7 @@
                                             <h:message for="finTurno" style="color: red"/>
                                         </div>
                                     </c:if>
-                                    
+
                                     <div class="col-12 mb-3">
                                         <h:commandButton value="#{formcrearusuario.btnRegistrar}" class="btn btn-outline-success btn-block" action="#{usuarioControlador.registrar()}"></h:commandButton>
                                     </div>

@@ -84,6 +84,11 @@
                                             <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                                 <div class="form-group row">
                                                     <div class="col-12 col-sm col-md col-lg col-xl">
+                                                        <!-- 
+                                                        <h:selectManyCheckbox>
+                                                            <f:selectItems value="#{disponibilidadControlador.consultarToodos()}" var="d" itemValue="#{d.idDia}" itemLabel="#{d.nombre}"></f:selectItems>
+                                                        </h:selectManyCheckbox>
+                                                        -->
                                                         <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>Domingo
                                                         <!-- . -->
                                                         <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>Lunes

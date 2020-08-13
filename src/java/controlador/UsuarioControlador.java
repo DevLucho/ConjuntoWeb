@@ -67,7 +67,9 @@ public class UsuarioControlador implements Serializable {
      }
      */
     @Inject
-    private MensajeControlador mensaje;
+    private LenguajeControlador lenguaje; // internacionalizacion
+    @Inject
+    private MensajeControlador mensaje; 
     private Usuario usuario;
     private Usuario user = null;
     private Usuario useremail = null;
@@ -171,8 +173,7 @@ public class UsuarioControlador implements Serializable {
                     torre = new Torre();
                     apartamento = new Apartamento();
                     residente = new Residente();
-                } 
-                // if is vigilante
+                } // if is vigilante
                 else if (rol.getIdRol() == 3) {
                     vigilante.setIdPerfil(usuario);
                     turnoVigilanteFacade.create(turnoVigilante);
@@ -192,7 +193,11 @@ public class UsuarioControlador implements Serializable {
                 clavegenerada = "";
                 nrocel = "";
                 correo = "";
-                mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
+                if ("es".equals(lenguaje.getLenguaje())) {
+                    mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
+                } else {
+                    mensaje.setMensaje("MensajeAlertify('user created successfully','success');");
+                }
             }
         } catch (Exception e) {
             System.out.println("Error registro de usuario: " + e.getMessage());

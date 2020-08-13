@@ -22,6 +22,7 @@ public class LenguajeControlador implements Serializable {
     private Locale languageSelected;
     private Locale espaniol;
     private Locale ingles;
+    private String lenguaje;
 
     public Locale getEspaniol() {
         return espaniol;
@@ -61,6 +62,14 @@ public class LenguajeControlador implements Serializable {
             FacesContext.getCurrentInstance().getViewRoot().setLocale(languageSelected);
         }
         return "";
+    }
+
+    public String getLenguaje() {
+        return lenguaje;
+    }
+
+    public void setLenguaje(String lenguaje) {
+        this.lenguaje = lenguaje;
     }
     
 }
