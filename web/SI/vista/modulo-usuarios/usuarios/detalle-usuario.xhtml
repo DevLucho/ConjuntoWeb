@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Detalle usuario</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formconsultarusuario.detalleusuario}</title>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -33,89 +33,89 @@
                 <!-- miga pan -->
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">Consultar usuario</a></li>
-                        <li class="breadcrumb-item active">Detalle usuario</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">#{formconsultarusuario.txtConsultar}</a></li>
+                        <li class="breadcrumb-item active">#{formconsultarusuario.detalleusuario}</li>
                     </ol>
                 </div>
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><i class="fas fa-user-tie"></i>Detalle usuario: #{usuarioControlador.usuario.nombre} #{usuarioControlador.usuario.apellido}</h3>
+                            <h3><i class="fas fa-user-tie"></i>#{formconsultarusuario.detalleusuario}: #{usuarioControlador.usuario.nombre} #{usuarioControlador.usuario.apellido}</h3>
                             <hr/>
                         </div>
                         <div class="col-12 col-md-8 form">
                             <!-- formulario name="form" -->
                             <h:form class="recorrer-dato">
                                 <div class="col-12">
-                                    <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                    <div class="caja bg-faded border-bottom-0">#{formcrearusuario.txtDatos}</div>
                                 </div>
                                 <div class="form-group row sombra">
                                     <div class="col-12" style="margin-top: 1rem;"></div> 
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="nombre">Nombres</label></strong> 
+                                        <strong><label for="nombre">#{formconsultarusuario.lblNombres}</label></strong> 
                                         <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" disabled="true"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="apellido">Apellidos</label></strong> 
+                                        <strong><label for="apellido">#{formconsultarusuario.lblApellidos}</label></strong> 
                                         <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" disabled="true"/>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                        <strong><label for="tipoDocumento">#{formconsultarusuario.lblTipo}</label></strong> 
                                         <h:inputText class="form-control-plaintext" value="#{usuarioControlador.usuario.tipoDocumento.tipo}" disabled="true"></h:inputText>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                        <strong><label for="identificacion">#{formconsultarusuario.lblDocumento}</label></strong> 
                                         <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}" disabled="true"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="correo">Email</label></strong> 
+                                        <strong><label for="correo">#{formconsultarusuario.lblEmail}</label></strong> 
                                         <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}" disabled="true"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="phone">Número de celular</label></strong> 
+                                        <strong><label for="phone">#{formconsultarusuario.lblCelular}</label></strong> 
                                         <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}" disabled="true"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="direccion">Dirección</label></strong> 
-                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" disabled="true"/>
+                                        <strong><label for="direccion">#{formcrearusuario.lblDireccion}</label></strong> 
+                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="#{formcrearusuario.lblDireccion}" disabled="true"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="Rol">Rol</label></strong>
+                                        <strong><label for="Rol">#{formconsultarusuario.lblRol}</label></strong>
                                         <h:inputText class="form-control-plaintext" value="#{usuarioControlador.usuario.idRol.nombre}" disabled="true"></h:inputText>
                                     </div>
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="direccion">Automovil</label></strong>
+                                            <strong><label for="direccion">#{formconsultarusuario.lblAutomovil}</label></strong>
                                             <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.automovil}" disabled="true"></h:inputText>
                                         </div>
 
                                         <div class="torre col-12 col-md mb-3">
-                                            <strong><label for="torre">Torre</label></strong>
+                                            <strong><label for="torre">#{formconsultarusuario.lblTorre}</label></strong>
                                             <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idTorre.idTorre}" disabled="true"></h:inputText>
                                         </div>
                                         <div class="col-12 col-md mb-3">
-                                            <strong><label for="apto">Apartamento</label></strong>
+                                            <strong><label for="apto">#{formconsultarusuario.lblTorre}</label></strong>
                                             <h:inputText class="form-control-plaintext" value="#{usuarioControlador.residente.idInmueble.idApartamento.idApartamento}" disabled="true"></h:inputText>
                                         </div>  
                                     </c:if>
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="inicioTurno">Inicio turno</label></strong>
-                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.inicioTurno}" title="InicioTurno" disabled="true">
+                                            <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>
+                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.inicioTurno}" title="#{formconsultarusuario.lblInicioTurno}" disabled="true">
                                                 <f:convertDateTime pattern="HH:mm"/>
                                             </h:inputText>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="finTurno">Fin turno</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.finTurno}" title="FinTurno" disabled="true">
+                                            <strong><label for="finTurno">#{formconsultarusuario.lblFinTurno}</label></strong>
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.vigilante.idTurno.finTurno}" title="#{formconsultarusuario.lblFinTurno}" disabled="true">
                                                 <f:convertDateTime pattern="HH:mm"/>
                                             </h:inputText>
                                         </div>
                                     </c:if>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
-                                        <h:inputText class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a" disabled="true"/>
+                                        <strong><label for="contrasenia">#{formconsultarusuario.contraseña}</label></strong>
+                                        <h:inputText class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="#{formcrearusuario.phContraseña}" disabled="true"/>
                                     </div>
                                 </div>
                             </h:form>
