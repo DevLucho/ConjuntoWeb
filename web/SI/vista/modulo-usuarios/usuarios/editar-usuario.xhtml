@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="Rol">Rol</label></strong>
-                                            <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();">
+                                            <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" disabled="true">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
                                                 <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                             </h:selectOneMenu>
