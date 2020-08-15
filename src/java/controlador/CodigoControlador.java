@@ -126,7 +126,38 @@ public class CodigoControlador implements Serializable {
             codigoFacade.create(codigo);
 
             // envio email
-            enviarEmail(correo, "Código de registro", "Registrate con este codigo: <b>" + codgenerado + "</b>");
+            enviarEmail(correo, "Código de registro",
+                    "<link href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet'>\n" +
+"<div style='margin: 0;padding: 0;box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;font-size: 20px;'>\n" +
+"    <div\n" +
+"        style='width: 60;height: 150; margin: 3% 20% 5% 20%; overflow: hidden; -webkit-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);-moz-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);'>\n" +
+"        <section\n" +
+"            style='padding: 3% 3%; background-color: rgb(231, 231, 231); border-bottom: solid rgba(212, 197, 197, 0.383) 2px;'>\n" +
+"            <img style='width: 99%;' src='http://imgfz.com/i/MBLyXhF.png'>\n" +
+"        </section>\n" +
+"        <section style='padding-left: 9%;padding-top: 4%;'>\n" +
+"            <img src='http://imgfz.com/i/Gv0ib8s.jpeg' style='width:90%;'>\n" +
+"            <h1\n" +
+"                style='font-family: Righteous, cursive;font-size: 50px;color: #33406A;position: absolute;margin: -22% 25%;'>\n" +
+"                ¡Registro <br> Exitoso!</h1>\n" +
+"        </section>\n" +
+"        <section style='padding-left: 15%;padding-top: 2%;'>\n" +
+"            <strong>Hola!!</strong><br><br>\n" +
+"            <p>Has ingresado satisfactoriamente a tu <strong><i>ConjuntoWEB </i></strong>, explora <br> con libertad\n" +
+"                todos\n" +
+"                nuestros beneficios y aplicaciones.</p><br>\n" +
+"        </section>\n" +
+"        <p style='text-align: center;'>Usuario : 1000383826</p><br>\n" +
+"        <p style='text-align: center;'>Contraseña : H5375IGH</p><br><br>\n" +
+"        <section\n" +
+"            style='text-align: center;padding-top: 3%;background-color: rgb(231, 231, 231);height: 40vh;font-size: 10px !important;border-top: solid rgba(212, 197, 197, 0.383) 2px;'>\n" +
+"            <a style='font-size: 10px !important;' href='http://'>Términos y condiciones</a> | <a\n" +
+"                href='http://'>Políticas de Privacidad</a>\n" +
+"            <br><br><br>\n" +
+"            <p style=\"font-size: 10px !important;\">© 2020 ConjuntoWEB · Todos los derechos reservados.</p>\n" +
+"        </section>\n" +
+"    </div>\n" +
+"</div>");
 
             codigo = new Codigo();
             mensaje.setMensaje("MensajeAlertify('Código generado: " + codgenerado + "','success');");
@@ -161,7 +192,6 @@ public class CodigoControlador implements Serializable {
     }
 
     // Metodos recuperar contraseña ↓↓
-    
     public String recuperarPass() throws NoSuchProviderException, MessagingException {
         user = codigoFacade.recuperarPass(recorreo);
         if (user.getCorreo() != null) {
