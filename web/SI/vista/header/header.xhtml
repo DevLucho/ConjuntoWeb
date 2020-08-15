@@ -17,7 +17,7 @@
                         <div class="cerrar">
                             <h:commandButton class="btn bg-dark text-white bg-gradient-dark active" action="#{sesionControlador.cerrarSesion()}" value="#{formdashboardadmin.txtCerrarSesion}"></h:commandButton>
                         </div>
-                        <i class="icono fas fa-user" id="user" data-toggle="modal" data-target="#modal"></i>						
+                        <i title="Ver perfil" class="icono fas fa-user" id="user" data-toggle="modal" data-target="#modal"></i>						
                         <!-- modal datos usuario -->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -248,7 +248,7 @@
                             <h1 class="usuario">#{sesionControlador.rolSeleccionado.nombre}</h1>
                         </c:if>
                         <!-- Idioma -->
-                        <div class="country-flag">
+                        <div class="country-flag" title="Cambiar idioma">
                             <ul>
                                 <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
                                     <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >

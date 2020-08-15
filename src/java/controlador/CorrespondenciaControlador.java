@@ -9,23 +9,28 @@ import entidades.Correspondencia;
 import entidades.Empresa;
 import entidades.Inmueble;
 import entidades.Paquete;
+import entidades.Residente;
 import entidades.Vigilante;
 import facade.CorrespondenciaFacade;
 import facade.EmpresaFacade;
 import facade.InmuebleFacade;
 import facade.PaqueteFacade;
+import facade.ResidenteFacade;
 import facade.VigilanteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.security.NoSuchProviderException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -49,7 +54,13 @@ public class CorrespondenciaControlador implements Serializable {
     Paquete paquete;
     Empresa empresa;
     Vigilante vigilante;
+    Residente residente;
+    CodigoControlador codigoControlador;
+    List<Residente> residenteList;
+    String correo;
 
+    @EJB
+    ResidenteFacade residenteFacade;
     @EJB
     CorrespondenciaFacade correspondenciaFacade;
     @EJB
@@ -60,11 +71,10 @@ public class CorrespondenciaControlador implements Serializable {
     EmpresaFacade empresaFacade;
     @EJB
     VigilanteFacade vigilanteFacade;
-    
-    
+
     @Inject
     private MensajeControlador mensaje;
-    
+
     public Correspondencia getCorrespondencia() {
         return correspondencia;
     }
@@ -107,14 +117,22 @@ public class CorrespondenciaControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        residente = new Residente();
         correspondencia = new Correspondencia();
         inmueble = new Inmueble();
         paquete = new Paquete();
         empresa = new Empresa();
         vigilante = new Vigilante();
+        residenteList = new ArrayList();
+        codigoControlador = new CodigoControlador();
     }
 
-    public void registrar() {
+    // consultar inmueble residente
+    public List<Residente> inmuebleR(int idInmueble) {
+        return correspondenciaFacade.inmuebleR(idInmueble);
+    }
+
+    public void registrar() throws NoSuchProviderException, MessagingException {
         correspondencia.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
@@ -126,6 +144,12 @@ public class CorrespondenciaControlador implements Serializable {
         fechaIngreso = dateFormat.format(date);
         correspondencia.setFechaIngreso(date);
         correspondenciaFacade.create(correspondencia);
+
+        residenteList = inmuebleR(correspondencia.getIdInmueble().getIdInmueble());
+
+        this.correo = residenteList.get(0).getIdPerfil().getCorreo();
+        codigoControlador.enviarEmail(correo, "Correpondencia nueva", "Correspondencia");
+
         empresa = new Empresa();
         inmueble = new Inmueble();
         paquete = new Paquete();
@@ -134,7 +158,7 @@ public class CorrespondenciaControlador implements Serializable {
         mensaje.setMensaje("RegistrarVisitante('success','Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
-    public void salida(Correspondencia correspondenciaSalida){
+    public void salida(Correspondencia correspondenciaSalida) {
         correspondencia = correspondenciaSalida;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
@@ -145,23 +169,23 @@ public class CorrespondenciaControlador implements Serializable {
         correspondenciaFacade.edit(correspondencia);
         mensaje.setMensaje("ConfirmarSalida('info','Entrega Exitosa','El paquete se ha <br> entregado al residente... <br><br>');");
     }
-    
+
     public List<Correspondencia> consultar() {
         return correspondenciaFacade.findAll();
     }
 
-    public List<Correspondencia> consultarEntrega(String estado){
+    public List<Correspondencia> consultarEntrega(String estado) {
         return correspondenciaFacade.paqueteEntregado(estado);
     }
-    
-    public List<Correspondencia> correspondenciaResidente(int idInmueble){
+
+    public List<Correspondencia> correspondenciaResidente(int idInmueble) {
         return correspondenciaFacade.correspondenciaResidente(idInmueble);
     }
-    
-    public int contarConrrespondenciaR(int idInmueble){
+
+    public int contarConrrespondenciaR(int idInmueble) {
         return correspondenciaFacade.contarCorrespondenciaR(idInmueble);
     }
-    
+
     public String preActualizar(Correspondencia correspondenciaActualizar) {
         correspondencia = correspondenciaActualizar;
         inmueble = correspondenciaActualizar.getIdInmueble();
@@ -188,4 +212,5 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia = correspondenciaFacade.find(id);
         return "ListaPaquete";
     }
+
 }

@@ -10,9 +10,9 @@
 
         <!-- Menu admin-->
         <nav id="nav">
-            <ul>
+            <ul style="width: 100%;display:flex;flex-flow:row wrap;justify-content: flex-start;align-items: center;">
                 <!-- Cuenta de usuario -->
-                <li class="user-account">
+                <li class="user-account" title="Ver perfil">
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modal"></i>
                     <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
                         <h6>#{sesionControlador.rolSeleccionado.name}</h6>
@@ -57,20 +57,19 @@
                 <!-- Cerrar sesion -->
                 <div class="logout  borde-left">
                     <h:commandLink action="#{sesionControlador.cerrarSesion()}"><span class="span2"><i class="fas fa-sign-out-alt"></i></span>#{formdashboardadmin.txtCerrarSesion}</h:commandLink>
-                </div>
-
-                <!-- Internacionalizacion -->
-                <div class="idioma">
-                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
-                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
-                            <img src="../../../img/country-es.png" class="country" style="opacity: 50%;"/>
-                        </h:commandLink>
-                    </c:if>
-                    <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
-                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
-                            <img src="../../../img/country-us.png" class="country" style="opacity: 50%;"/>
-                        </h:commandLink> 
-                    </c:if>  
+                    <!-- Internacionalizacion -->
+                    <div class="idioma" title="Cambiar idioma">
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
+                                <img src="../../../img/country-es.png" class="country" style="opacity: 50%;"/>
+                            </h:commandLink>
+                        </c:if>
+                        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
+                                <img src="../../../img/country-us.png" class="country" style="opacity: 50%;"/>
+                            </h:commandLink> 
+                        </c:if>  
+                    </div>
                 </div>
             </ul>
         </nav>

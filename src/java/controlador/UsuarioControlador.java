@@ -56,20 +56,10 @@ public class UsuarioControlador implements Serializable {
     /**
      * Creates a new instance of UsuarioControlador
      */
-    /*
-     Incremental para menu dinamico
-     private int valor = 0;
-     public void incrementar() {
-         valor++;
-     }
-     public int getValor() {
-         return valor;
-     }
-     */
     @Inject
     private LenguajeControlador lenguaje; // internacionalizacion
     @Inject
-    private MensajeControlador mensaje; 
+    private MensajeControlador mensaje;
     private Usuario usuario;
     private Usuario user = null;
     private Usuario useremail = null;

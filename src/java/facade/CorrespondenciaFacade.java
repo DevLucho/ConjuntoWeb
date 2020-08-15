@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Correspondencia;
+import entidades.Residente;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,6 +51,13 @@ public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
         query = em.createQuery("SELECT COUNT(u) FROM Correspondencia u WHERE u.idInmueble.idInmueble=:idInmueble");
         query.setParameter("idInmueble", idInmueble);
         return ((Long) query.getSingleResult()).intValue();
+    }
+    
+    public List<Residente> inmuebleR(int idInmueble) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Residente u WHERE u.idInmueble.idInmueble=:idInmueble");
+        query.setParameter("idInmueble", idInmueble);
+        return query.getResultList();
     }
 
 }
