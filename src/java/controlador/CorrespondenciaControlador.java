@@ -148,27 +148,29 @@ public class CorrespondenciaControlador implements Serializable {
         residenteList = inmuebleR(correspondencia.getIdInmueble().getIdInmueble());
 
         this.correo = residenteList.get(0).getIdPerfil().getCorreo();
-        codigoControlador.enviarEmail(correo, "Correpondencia nueva", "<div style='margin: 0;padding: 0;box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;font-size: 20px;'>\n" +
-"    <div style='width: 60;height: 1120px; margin: 3% 20% 5% 20%; overflow: hidden; -webkit-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);-moz-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);'>\n" +
-"        <section style='padding: 3% 3%; background-color: #282828; border-bottom: solid rgba(212, 197, 197, 0.383) 2px;'>\n" +
-"            <img style='width: 99%;' src='http://imgfz.com/i/MBLyXhF.png'>\n" +
-"        </section>\n" +
-"        <section style='padding-left: 9%;padding-top: 4%;'>\n" +
-"            <img src='http://imgfz.com/i/xP0vmL4.jpeg' style='width: 70%; margin-left: 11%;'>\n" +
-"        </section>\n" +
-"        <section style='padding-left: 15%;padding-top: 2%;'>\n" +
-"            <strong>Hola!!</strong><br><br>\n" +
-"            <p>Te informamos que te ha llegado un nuevo paquete, recibo<br> o carta. Lo podras encontrar en tu portería mas cercana.</p><br>\n" +
-"        </section>\n" +
-"        <p style='text-align: center;'>Torre : 12</p><br>\n" +
-"        <p style='text-align: center;'>Apartamento : 204</p><br><br>\n" +
-"        <section style='text-align: center;padding-top: 3%;background-color: rgb(231, 231, 231);height: 120px;font-size: 10px !important;border-top: solid rgba(212, 197, 197, 0.383) 2px;'>\n" +
-"            <a style='font-size: 10px !important;' href='#'>Términos y condiciones</a> | <a href='#'>Políticas de Privacidad</a>\n" +
-"            <br><br>\n" +
-"            <p style='font-size: 10px !important;'>© 2020 ConjuntoWEB · Todos los derechos reservados.</p>\n" +
-"        </section>\n" +
-"    </div>\n" +
-"</div>");
+        codigoControlador.enviarEmail(correo, "Correpondencia nueva",
+                "<div style='margin: 0;padding: 0;box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;font-size: 20px;'>\n"
+                + "    <div style='width: 60;height: 1120px; margin: 3% 20% 5% 20%; overflow: hidden; -webkit-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);-moz-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);'>\n"
+                + "        <section style='padding: 3% 3%; background-color: #282828; border-bottom: solid rgba(212, 197, 197, 0.383) 2px;'>\n"
+                + "            <img style='width: 99%;' src='http://imgfz.com/i/MBLyXhF.png'>\n"
+                + "        </section>\n"
+                + "        <section style='padding-left: 9%;padding-top: 4%;'>\n"
+                + "            <img src='http://imgfz.com/i/xP0vmL4.jpeg' style='width: 70%; margin-left: 11%;'>\n"
+                + "        </section>\n"
+                + "        <section style='padding-left: 15%;padding-top: 2%;'>\n"
+                + "            <strong>Hola!!</strong><br><br>\n"
+                + "            <p>Te informamos que te ha llegado un nuevo paquete, recibo<br> o carta. Lo podras encontrar en tu portería mas cercana.</p><br>\n"
+                + "        </section>\n"
+                + "        <p style='text-align: center;'>Torre : 12</p><br>\n"
+                + "        <p style='text-align: center;'>Apartamento : 204</p><br><br>\n"
+                + "        <section style='text-align: center;padding-top: 3%;background-color: rgb(231, 231, 231);height: 120px;font-size: 10px !important;border-top: solid rgba(212, 197, 197, 0.383) 2px;'>\n"
+                + "            <a style='font-size: 10px !important;' href='#'>Términos y condiciones</a> | <a href='#'>Políticas de Privacidad</a>\n"
+                + "            <br><br>\n"
+                + "            <p style='font-size: 10px !important;'>© 2020 ConjuntoWEB · Todos los derechos reservados.</p>\n"
+                + "        </section>\n"
+                + "    </div>\n"
+                + "</div>"
+        );
 
         empresa = new Empresa();
         inmueble = new Inmueble();
