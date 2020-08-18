@@ -111,9 +111,9 @@
                                     <div class="modal-body">
                                         <div class="form-group row">
                                             <div class="col-12 font">
-                                                <b><h:outputLabel value="Nombre rol:" /></b>
-                                                <div class="wrap-input100 validate-input m-b-36" data-validate = "Campo requerido">
-                                                    <h:inputText class="input100" a:type="text" value="#{rolControlador.nombre}" required="true" a:placeholder="Maximo 12 caracteres"/>
+                                                <b><h:outputLabel value="#{formconsultarroles.nombrerol}:" /></b>
+                                                <div class="wrap-input100 validate-input m-b-36" data-validate = "#{formcrearusuario.camporequerido}">
+                                                    <h:inputText class="input100" a:type="text" value="#{rolControlador.nombre}" required="true" a:placeholder="#{formconsultarroles.maximocaracteres}"/>
                                                     <span class="focus-input100"></span>
                                                 </div>
                                             </div>
@@ -139,8 +139,8 @@
                                         -->
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                                        <h:commandButton value="Crear" styleClass="btn btn-outline-success" action="#{rolControlador.registrar()}"></h:commandButton>
+                                        <button class="btn btn-outline-danger" data-dismiss="modal">#{formconsultarroles.CancelarRol}</button>
+                                        <h:commandButton value="#{formconsultarroles.txtCrearRol}" styleClass="btn btn-outline-success" action="#{rolControlador.registrar()}"></h:commandButton>
                                     </div>
                                 </div>
                             </div>
