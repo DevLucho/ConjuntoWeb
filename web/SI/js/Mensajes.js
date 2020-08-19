@@ -78,7 +78,7 @@ function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
         }
     });
 };
-
+/*
 function ConfirmacionResidenteR(linkURL) {
     Swal.fire({
         icon: 'warning',
@@ -92,7 +92,7 @@ function ConfirmacionResidenteR(linkURL) {
         }
     });
 }
-
+*/
 function RegistrarVisitante(icono, titulo, html) {
     Swal.fire({
         icon: icono,

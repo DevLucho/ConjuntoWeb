@@ -112,7 +112,7 @@ public class RespuestaControlador implements Serializable {
 
     public String consultarRespuesta(Pqrs respuestaConsultar) {
         if ("Resuelto".equals(respuestaConsultar.getEstado()) || "Cancelado".equals(respuestaConsultar.getEstado())) {
-            mensaje.setMensaje("ConfirmacionResidenteR('./consultar-pqrs.xhtml');");
+            mensaje.setMensaje("ConfirmacionResidente('./consultar-pqrs.xhtml','warning','Esta pqrs ya esta resuelta','Volver');");
         }
         residente = respuestaConsultar.getIdResidente();
         tipoPqrs = respuestaConsultar.getIdTipoPqrs();

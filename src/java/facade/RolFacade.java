@@ -55,4 +55,10 @@ public class RolFacade extends AbstractFacade<Rol> {
         return rol;
     }
 
+    public int contarRol() {
+        Query query;
+        query = em.createQuery("SELECT COUNT(r) FROM Rol r");
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }

@@ -35,7 +35,7 @@ public class RolControlador implements Serializable {
     @Inject
     private MensajeControlador mensaje;
     private Rol rol;
-    private Rol rol2 = null; // validar nombre
+    private Rol rol2 = null; // validar nombre rol
     private RolPermiso rolPermiso;
     private Permiso permiso;
     private String nombre;
@@ -77,17 +77,14 @@ public class RolControlador implements Serializable {
         permiso = new Permiso();
     }
 
-    public String registrar() {
+    public void registrar() {
         rol2 = rolFacade.nombreRol(nombre);
         if (rol2.getNombre() == null) {
             if (cont == 0) {
                 rol.setNombre(nombre);
                 rolFacade.create(rol);
                 this.id = rol.getIdRol();
-                rol = new Rol();
-                mensaje.setMensaje("Mensaje('Exito!','Rol " + nombre + " creado satisfactoriamente','success');");
-                nombre = "";
-                return "asignar-permiso";
+                mensaje.setMensaje("MensajeRedirect('asignar-permiso.xhtml','¡Se ha creado un nuevo rol!','A continuación sera redireccionado para asignar permisos al rol " + nombre + "','success');");
             } else {
                 this.rolPermisoList = rolPermisoFacade.rolPermisos(cont);
                 rol.setNombre(nombre);
@@ -99,15 +96,18 @@ public class RolControlador implements Serializable {
                     rolPermiso.setIdPermiso(permiso);
                     rolPermisoFacade.create(rolPermiso);
                 }
-                return "";
+                mensaje.setMensaje("Mensajes('¡Rol creado y permisos asignados!','Has creado el rol " + nombre + " y asignado permisos del rol " + rolPermisoList.get(0).getIdRol().getNombre() + "','success');");
+                rolPermiso = new RolPermiso();
+                rol = new Rol();
+                nombre = "";
             }
         } else {
             mensaje.setMensaje("MensajeAlertify('Ya existe un rol con el nombre: " + nombre + ", prueba con otro.','error');");
-            return "";
         }
     }
 
-    public String registrarP() {
+    // Registrar permisos
+    public void registrarP() {
         if (this.id != 0) {
             int permisos[] = new int[this.usuarios.length + this.comunicados.length + this.eventos.length
                     + this.zonasComunes.length + this.servicioPqrs.length + this.reportes.length + this.documentacion.length
@@ -157,9 +157,13 @@ public class RolControlador implements Serializable {
                     rolPermiso.setIdRol(rol);
                     rolPermisoFacade.create(rolPermiso);
                 }
+                mensaje.setMensaje("MensajeRedirect('roles-permisos.xhtml','¡Permisos asignados!','Has asignado satisfactoriamente permisos al rol " + nombre + "','success');");
+                rol = new Rol();
+                nombre = "";
+                rolPermiso = new RolPermiso();
+                permiso = new Permiso();
             }
         }
-        return "";
     }
 
     public void eliminar(Rol rolEliminar) {
@@ -189,6 +193,11 @@ public class RolControlador implements Serializable {
         return permisoFacade.consultarHijos(idPermiso);
     }
 
+    public int contarRol() {
+        return rolFacade.contarRol();
+    }
+
+    // Get's y Set's ↓
     public Rol getRol() {
         return rol;
     }
