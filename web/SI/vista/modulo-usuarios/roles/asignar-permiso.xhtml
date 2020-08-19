@@ -32,9 +32,9 @@
             <!-- miga pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">Consultar roles &amp; funciones</a></li>
-                    <li class="breadcrumb-item active">Editar roles &amp; funciones</li>
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarroles.bcInicio}</a></li>
+                    <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">#{formconsultarroles.ConsultarRoles}</a></li>
+                    <li class="breadcrumb-item active">#{formconsultarroles.editarrolesyfunciones}</li>
                 </ol>
             </div>
             <!-- Contenido principal -->
@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>
-                            <i class="far fa-edit mr-1"></i>Editar roles &amp; funciones
+                            <i class="far fa-edit mr-1"></i>#{formconsultarroles.editarrolesyfunciones}
                         </h3>
                         <hr/>
                     </div>
@@ -52,7 +52,7 @@
                         <!-- Secciones por funciones -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item ">
-                                <a href="#tab1" class="nav-link active" data-toggle="tab">Permisos | Privilegios<span class="badge badge-info" style="margin-left: 5px;">#{permisoControlador.contarPermisos()}</span></a>
+                                <a href="#tab1" class="nav-link active" data-toggle="tab">#{formconsultarroles.permisosprivilegios}<span class="badge badge-info" style="margin-left: 5px;">#{permisoControlador.contarPermisos()}</span></a>
                             </li>
                         </ul>
                         <!-- Tablas -->
