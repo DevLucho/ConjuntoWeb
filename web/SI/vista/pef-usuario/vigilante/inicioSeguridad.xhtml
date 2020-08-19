@@ -52,9 +52,9 @@
             <section class="noticiasSeguridad border">
                 <h3 class="noticiah1"><i class="fas fa-bullhorn mr-3"></i>Ultimos comunicados</h3>
                 <div class="linea border">
-                    <c:forEach items="#{comunicadoControlador.consultarTodos()}" var="comunicado">
+                    <c:forEach items="#{comunicadoControlador.consultar('Interno')}" var="comunicado">
                         <figure class="efectoNoticia">
-                            <img height="200" width="400" src="#{comunicado.img}" alt="sample45" />
+                            <img height="200" width="400" src="#{comunicado.img}" alt="#{comunicado.titulo}" />
                             <figcaption>
                                 <h3>#{comunicado.titulo}</h3>
                                 <p>#{comunicado.descripcion}</p>

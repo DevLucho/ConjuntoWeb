@@ -490,21 +490,6 @@ nav .start-contact, a:nth-child(6):hover~.animation{
 .tarjeta-contenedor:hover .tarjeta{
     transform: rotateY(180deg);    
 }
-.card1{
-    background-image: url(img/unadetres.jpg);
-    background-size: cover;
-    border-radius: 50%;
-}
-.card5{
-    background-image: url(img/dosdetres.jpg);
-    border-radius: 50%;
-    background-size: cover;
-}
-.card8{
-    background-image: url(img/tresdetres.jpg);
-    border-radius: 50%;
-    background-size: cover; 
-}
 /* fin de primera parte de publicidad */
 .overlay {
     position: fixed;

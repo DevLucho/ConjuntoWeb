@@ -175,6 +175,8 @@ public class ResidenteControlador implements Serializable {
     public int contarResidentes() {
         return residenteFacade.count();
     }
+    
+    // Get's y Set's ↓
 
     public Residente getResidente() {
         return residente;

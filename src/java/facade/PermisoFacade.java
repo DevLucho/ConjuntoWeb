@@ -41,8 +41,22 @@ public class PermisoFacade extends AbstractFacade<Permiso> {
         } catch (Exception e) {
             System.err.println("Error en consulta submenus: " + e.getMessage());
         }
-
         return listaPerPadre;
     }
+    
+    public Permiso consultarPermiso(int idPermiso) {
+        Permiso permiso = null;
+        try {
+            Query q = em.createQuery("SELECT r FROM Permiso r WHERE r.idPermiso=:idPermiso ");
+            q.setParameter("idPermiso", idPermiso);
+            permiso = (Permiso) q.getSingleResult();
 
+        } catch (Exception e) {
+            System.out.println("Error en consulta permiso: " + e.getMessage());
+        }
+        return permiso;
+    }
+    
+    
+    
 }

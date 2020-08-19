@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.RolPermiso;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,12 @@ public class RolPermisoFacade extends AbstractFacade<RolPermiso> {
 
     public RolPermisoFacade() {
         super(RolPermiso.class);
+    }
+    
+    public List<RolPermiso> rolPermisos(int idRol){
+        Query q = em.createQuery("SELECT r FROM RolPermiso r WHERE r.estado='Activo' AND r.idRol.idRol=:idRol");
+        q.setParameter("idRol", idRol);
+        return q.getResultList();
     }
     
 }

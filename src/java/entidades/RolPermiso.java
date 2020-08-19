@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,7 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RolPermiso.findAll", query = "SELECT r FROM RolPermiso r")
-    , @NamedQuery(name = "RolPermiso.findByIdRolPermiso", query = "SELECT r FROM RolPermiso r WHERE r.idRolPermiso = :idRolPermiso")})
+    , @NamedQuery(name = "RolPermiso.findByIdRolPermiso", query = "SELECT r FROM RolPermiso r WHERE r.idRolPermiso = :idRolPermiso")
+    , @NamedQuery(name = "RolPermiso.findByEstado", query = "SELECT r FROM RolPermiso r WHERE r.estado = :estado")})
 public class RolPermiso implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +41,11 @@ public class RolPermiso implements Serializable {
     @Basic(optional = false)
     @Column(name = "idRolPermiso")
     private Integer idRolPermiso;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "idRol", referencedColumnName = "idRol")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Rol idRol;
@@ -52,12 +60,25 @@ public class RolPermiso implements Serializable {
         this.idRolPermiso = idRolPermiso;
     }
 
+    public RolPermiso(Integer idRolPermiso, String estado) {
+        this.idRolPermiso = idRolPermiso;
+        this.estado = estado;
+    }
+
     public Integer getIdRolPermiso() {
         return idRolPermiso;
     }
 
     public void setIdRolPermiso(Integer idRolPermiso) {
         this.idRolPermiso = idRolPermiso;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Rol getIdRol() {
