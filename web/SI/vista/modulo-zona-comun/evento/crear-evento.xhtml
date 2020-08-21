@@ -21,11 +21,27 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!--
+        <style>
+            .loader {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url('../../../../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+                background-size: 100px;
+                opacity: .8;
+            } 
+        </style>
+        -->
         <title>#{sesionControlador.rolSeleccionado.nombre} | Crear evento</title>
     </h:head>
     <h:body>
         <f:view>
             <script>#{mensajeControlador.mensaje}</script>
+            <!--<div class="loader"></div>-->
             <!-- Contenedor principal -->
             <div class="contenedor">
                 <!-- header -->
@@ -53,10 +69,11 @@
                             <!-- Titulo -->
                             <div class="col-12">
                                 <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Titulo</a></p>
-                                <div class="collapse" id="titulo">
+                                <div class="collapse show" id="titulo">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese el nombre del evento" id="titulo" value="#{eventoControlador.evento.titulo}" required="required"/>
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese el nombre del evento" id="titulo" value="#{eventoControlador.evento.titulo}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                            <h:message for="titulo" style="color: red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -68,15 +85,17 @@
                                     <div class="form-group row">
                                         <div class="col-5">
                                             <strong><label for="fechai">Fecha inicio</label></strong>
-                                            <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" required="required">
+                                            <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
+                                            <h:message for="fechaInicio" style="color: red"/>
                                         </div>
                                         <div class="col-4">
                                             <strong><label for="fechai">Empieza a las</label></strong>
-                                            <h:inputText a:type="time" class="form-control" id="horaInicio" value="#{eventoControlador.evento.horaInicio}" required="required">
+                                            <h:inputText a:type="time" class="form-control" id="horaInicio" value="#{eventoControlador.evento.horaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
+                                            <h:message for="horaInicio" style="color: red"/>
                                         </div>
 
                                         <div class="col-3">
@@ -89,15 +108,17 @@
                                     <div class="form-group row">
                                         <div class="col-5">
                                             <strong><label for="fechaf">Fecha fin</label></strong>
-                                            <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" required="required"> 
+                                            <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"> 
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
+                                            <h:message for="fechaFin" style="color: red"/>
                                         </div>
                                         <div class="col-4">
                                             <strong><label for="fechaf">Termina a las</label></strong>
-                                            <h:inputText a:type="time" class="form-control" id="horaFin" value="#{eventoControlador.evento.horaFin}" required="required">
+                                            <h:inputText a:type="time" class="form-control" id="horaFin" value="#{eventoControlador.evento.horaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
+                                            <h:message for="horaFin" style="color: red"/> 
                                         </div>
                                     </div>
                                 </div>
@@ -109,10 +130,11 @@
                                     <div class="form-group row">
                                         <div class="col-12">
                                             <strong><label for="torre">Zona común</label></strong>
-                                            <h:selectOneMenu id="idZonaComunal" class="form-control" value="#{eventoControlador.zonaComunal.idZonaComunal}" title="IdZonaComunal" required="true">
+                                            <h:selectOneMenu id="idZonaComunal" class="form-control" value="#{eventoControlador.zonaComunal.idZonaComunal}" title="IdZonaComunal" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}"/>
                                             </h:selectOneMenu>
+                                            <h:message for="idZonaComunal" style="color: red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +145,9 @@
                                 <div class="collapse" id="contacto">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese nombre del organizador del evento" id="organizador" value="#{eventoControlador.evento.organizador}" required="required"></h:inputText>
+                                            <strong><label for="torre">Organizador</label></strong>
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese nombre del organizador del evento" id="organizador" value="#{eventoControlador.evento.organizador}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"></h:inputText>
+                                            <h:message for="organizador" style="color: red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -135,12 +159,13 @@
                                     <div class="form-group row">
                                         <div class="torre col-12 col-md-6">
                                             <strong><label for="torre">Notificar a</label></strong>
-                                            <h:selectOneMenu class="form-control" value="#{eventoControlador.rol.idRol}">
-                                                <f:selectItem itemLabel="- Seleccione invitados -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItem itemLabel="Todos los usuarios" itemValue="" ></f:selectItem>
+                                            <h:selectOneMenu id="notificar" class="form-control" value="#{eventoControlador.notificar}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                <f:selectItem itemLabel="- Seleccione invitados -" itemValue="0" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="Todos los usuarios" itemValue="1000" ></f:selectItem>
                                                 <f:selectItems var="rol" value="#{rolControlador.consultarTodos()}" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"></f:selectItems>
-                                                <f:selectItem itemLabel="Ninguno" itemValue="" ></f:selectItem>
+                                                <f:selectItem itemLabel="Ninguno" itemValue="1100" ></f:selectItem>
                                             </h:selectOneMenu>
+                                            <h:message for="notificar" style="color: red"/>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <strong><label for="correo" id="email">Otros destinarios</label></strong>
@@ -156,7 +181,8 @@
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle del evento" value="#{eventoControlador.evento.detalle}" id="descripcion" required="required" style="height:100px;"/>
+                                <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle del evento" value="#{eventoControlador.evento.detalle}" id="descripcion" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="height:100px;"/>
+                                <h:message for="descripcion" style="color: red"/>
                             </div>
 
                             <div class="col-12 col-md-3">
@@ -170,8 +196,8 @@
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
-                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{eventoControlador.evento.img}" required="true"/>
-
+                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{eventoControlador.evento.img}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                    <h:message for="ruta" style="color: red"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">
@@ -222,6 +248,13 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
         <script src="../../navs/nav.js"></script>
+        <!-- page loader
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $(".loader").fadeOut("slow");
+            });
+        </script> -->
     </h:body>
 </html>
 

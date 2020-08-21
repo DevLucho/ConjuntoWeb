@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Rol;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +29,12 @@ public class RolFacade extends AbstractFacade<Rol> {
 
     public RolFacade() {
         super(Rol.class);
+    }
+
+    public List<Rol> consultar(int idRol) {
+        Query q = em.createQuery("SELECT r FROM Rol r WHERE r.idRol=:idRol ");
+        q.setParameter("idRol", idRol);
+        return q.getResultList();
     }
 
     public Rol consultarRol(int idRol) {

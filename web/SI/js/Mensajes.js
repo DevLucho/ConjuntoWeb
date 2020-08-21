@@ -32,12 +32,7 @@ function MensajeAlertify(mensaje, icon) {
 
 // Mensaje para redirigir con texto
 function MensajeRedirect(link, titulo, texto, icono) {
-    Swal.fire({
-        title: titulo,
-        text: texto,
-        icon: icono,
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false
+    Swal.fire({title: titulo, text: texto, icon: icono, confirmButtonText: 'Ok', allowOutsideClick: false
     }).then(function (result) {
         console.log(result);
         if (result.value) {
@@ -48,11 +43,7 @@ function MensajeRedirect(link, titulo, texto, icono) {
 
 // Mensaje para redirigir sin texto
 function ConfirmacionResidente(linkURL, icono, titulo, txtbtn) {
-    Swal.fire({
-        icon: icono,
-        title: titulo,
-        confirmButtonText: txtbtn,
-        allowOutsideClick: false
+    Swal.fire({icon: icono, title: titulo, confirmButtonText: txtbtn, allowOutsideClick: false
     }).then(function (result) {
         console.log(result);
         if (result.value) {

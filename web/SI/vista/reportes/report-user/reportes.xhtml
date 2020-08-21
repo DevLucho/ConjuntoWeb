@@ -55,7 +55,27 @@
         <!-- Reporte -->
         <script src="../../../js/highcharts.js"></script>
         <script src="../../../js/exporting.js"></script>
+        <!--
         <script>
+          
+                var ctx = document.getElementById("grafica").getContext("2d");
+                var graf = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: role,
+                        datasets: [{
+                                label: "cosas",
+                                data: dataUs,
+                                backgroundColor: colores
+                            }]
+                    }
+
+                });
+        </script>
+        -->
+        <script>
+            
+            var nom=#{rolControlador.contarRol()};
             Highcharts.chart('report-users', {
             chart: {
                 plotBackgroundColor: '',
@@ -94,20 +114,20 @@
                 colorByPoint: true,
                 data: [{
                     name: 'Residentes',
-                    y: 10,
+                    y:nom,
                     sliced: true,
                     selected: true
                 }, {
                     name: 'Administrador',
-                    y: 1
+                    y:nom
                 }, {
                     name: 'Vigilante',
-                    y: 3
+                    y:nom
                 }]
             }]
         });
-
-
+        
+        
         Highcharts.chart('report-zona-comun', {
             chart: {
                 type: 'spline',
@@ -170,6 +190,7 @@
             }]
         });
         </script>
+        
     </h:body>
 </html>
 

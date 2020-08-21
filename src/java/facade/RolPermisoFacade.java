@@ -30,11 +30,11 @@ public class RolPermisoFacade extends AbstractFacade<RolPermiso> {
     public RolPermisoFacade() {
         super(RolPermiso.class);
     }
-    
-    public List<RolPermiso> rolPermisos(int idRol){
+
+    public List<RolPermiso> rolPermisos(int idRol) {
         Query q = em.createQuery("SELECT r FROM RolPermiso r WHERE r.estado='Activo' AND r.idRol.idRol=:idRol");
         q.setParameter("idRol", idRol);
         return q.getResultList();
     }
-    
+
 }

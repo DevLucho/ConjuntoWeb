@@ -57,6 +57,18 @@ public class PermisoFacade extends AbstractFacade<Permiso> {
         return permiso;
     }
     
+    public List<Permiso> consultarTodos(){
+        List<Permiso> listaPer = new ArrayList<>();
+        try {
+            Query q = em.createQuery("SELECT r FROM Permiso r");
+            listaPer = q.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Error en consulta permiso: " + e.getMessage());
+        }
+        return listaPer;
+    }
+    
     
     
 }

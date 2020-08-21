@@ -57,7 +57,13 @@ public class RolControlador implements Serializable {
     private int[] correspondenciaV;
     private List<RolPermiso> rolPermisoList;
     private List<Permiso> permisoPadreList;
-
+    // Actulizar permisos
+    private int[] permisosEliminados;
+    private int[] permisoAgredados;
+    private List<RolPermiso> permisosAsignados;
+    private List<RolPermiso> permisosNoAsinados;
+    
+    
     @EJB
     RolFacade rolFacade;
 
@@ -157,6 +163,19 @@ public class RolControlador implements Serializable {
                     rolPermiso.setIdRol(rol);
                     rolPermisoFacade.create(rolPermiso);
                 }
+                usuarios = null;
+                comunicados=null;
+                eventos=null;
+                zonasComunes=null;
+                servicioPqrs=null;
+                reportes=null;
+                documentacion=null;
+                domiciliario=null;
+                visitante=null;
+                correspondencia=null;
+                inicio=null;
+                parqueadero=null;
+                correspondenciaV=null;
                 mensaje.setMensaje("MensajeRedirect('roles-permisos.xhtml','¡Permisos asignados!','Has asignado satisfactoriamente permisos al rol " + nombre + "','success');");
                 rol = new Rol();
                 nombre = "";
@@ -177,6 +196,14 @@ public class RolControlador implements Serializable {
 
     public String preActualizar(Rol rolActualizar) {
         rol = rolActualizar;
+        /*
+        this.permisosAsignados = rolPermisoFacade.rolPermisos(rol.getIdRol());
+        List<Permiso> consultarTodosP = permisoFacade.consultarTodos();
+        for (int i = 0; i < permisosAsignados.size(); i++) {
+            for (int j = 0; j < consultarTodosP.size(); j++) {
+                
+            }
+        }*/
         return "editar-rol";
     }
 
@@ -184,10 +211,26 @@ public class RolControlador implements Serializable {
         rolFacade.edit(rol);
         mensaje.setMensaje("Mensaje('Exito!','Rol " + rol.getNombre() + " modificado satisfactoriamente','success');");
     }
-
+    
+    public void actulizarPermisos(){
+        
+    }
+    
     public List<Rol> consultarTodos() {
         return rolFacade.findAll();
     }
+    
+    public List<String> consultarRolNombre() {
+        List<String> nombres = new ArrayList<>();
+        List<Rol> roleList = rolFacade.findAll();
+        for (int i = 0; i < roleList.size(); i++) {
+            String nameRol = roleList.get(i).getNombre();
+            nombres.add("'" + nameRol + "'");
+        }
+
+        return nombres;
+    }
+
 
     public List<Permiso> consultarPermisos(int idPermiso) {
         return permisoFacade.consultarHijos(idPermiso);
@@ -372,6 +415,38 @@ public class RolControlador implements Serializable {
 
     public void setRol2(Rol rol2) {
         this.rol2 = rol2;
+    }
+
+    public int[] getPermisosEliminados() {
+        return permisosEliminados;
+    }
+
+    public void setPermisosEliminados(int[] permisosEliminados) {
+        this.permisosEliminados = permisosEliminados;
+    }
+
+    public int[] getPermisoAgredados() {
+        return permisoAgredados;
+    }
+
+    public void setPermisoAgredados(int[] permisoAgredados) {
+        this.permisoAgredados = permisoAgredados;
+    }
+
+    public List<RolPermiso> getPermisosAsignados() {
+        return permisosAsignados;
+    }
+
+    public void setPermisosAsignados(List<RolPermiso> permisosAsignados) {
+        this.permisosAsignados = permisosAsignados;
+    }
+
+    public List<RolPermiso> getPermisosNoAsinados() {
+        return permisosNoAsinados;
+    }
+
+    public void setPermisosNoAsinados(List<RolPermiso> permisosNoAsinados) {
+        this.permisosNoAsinados = permisosNoAsinados;
     }
 
 }

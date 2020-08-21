@@ -108,7 +108,7 @@
                                             <div class="col-12 font">
                                                 <b><h:outputLabel value="#{formconsultarroles.nombrerol}:" /></b>
                                                 <div class="wrap-input100 validate-input m-b-36" data-validate = "#{formcrearusuario.camporequerido}">
-                                                    <h:inputText class="input100" a:type="text" value="#{rolControlador.nombre}" required="true" a:placeholder="#{formconsultarroles.maximocaracteres}"/>
+                                                    <h:inputText class="input100" a:type="text" value="#{rolControlador.nombre}" required="true" a:placeholder="#{formconsultarroles.maximocaracteres}" maxlength="12"/>
                                                     <span class="focus-input100"></span>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                         <div class="form-group row">
                                             <div class="form-check">
                                                 <label class="custom-control custom-checkbox">
-                                                    <input empty="empty" type="checkbox" class="custom-control-input" id="asignar-rol" href="#mas" aria-expanded="false" aria-controls="mas" data-toggle="collapse"/>
+                                                    <input empty="true" type="checkbox" class="custom-control-input" id="asignar-rol" href="#mas" aria-expanded="false" aria-controls="mas" data-toggle="collapse"/>
                                                     <span class="custom-control-indicator"></span>
                                                     <label class="custom-control-label" for="asignar-rol">Asignar permisos de otro rol</label>
                                                 </label>

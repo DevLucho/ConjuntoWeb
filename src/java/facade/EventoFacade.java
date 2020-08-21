@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Evento;
+import entidades.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,5 +44,17 @@ public class EventoFacade extends AbstractFacade<Evento> {
         query = em.createQuery("SELECT COUNT(u) FROM Evento u WHERE u.estado=:estado");
         query.setParameter("estado", estado);
         return ((Long) query.getSingleResult()).intValue();
+    }
+
+    // coreos masivos
+    public List<Usuario> correos(int idRol) {
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol");
+        query.setParameter("idRol", idRol);
+        return query.getResultList();
+    }
+    
+    public List<Usuario> allMails() {
+        Query query = em.createQuery("SELECT u FROM Usuario u");
+        return query.getResultList();
     }
 }
