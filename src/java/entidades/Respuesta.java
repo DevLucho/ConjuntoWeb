@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Respuesta.findAll", query = "SELECT r FROM Respuesta r")
     , @NamedQuery(name = "Respuesta.findByIdRespuesta", query = "SELECT r FROM Respuesta r WHERE r.idRespuesta = :idRespuesta")
     , @NamedQuery(name = "Respuesta.findByFecha", query = "SELECT r FROM Respuesta r WHERE r.fecha = :fecha")
-    , @NamedQuery(name = "Respuesta.findByHora", query = "SELECT r FROM Respuesta r WHERE r.hora = :hora")})
+    , @NamedQuery(name = "Respuesta.findByHora", query = "SELECT r FROM Respuesta r WHERE r.hora = :hora")
+    , @NamedQuery(name = "Respuesta.findByAdjunto", query = "SELECT r FROM Respuesta r WHERE r.adjunto = :adjunto")})
 public class Respuesta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +56,9 @@ public class Respuesta implements Serializable {
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
+    @Size(max = 100)
+    @Column(name = "adjunto")
+    private String adjunto;
     @JoinColumn(name = "idPerfil", referencedColumnName = "idPerfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idPerfil;
@@ -99,6 +103,14 @@ public class Respuesta implements Serializable {
 
     public void setHora(Date hora) {
         this.hora = hora;
+    }
+
+    public String getAdjunto() {
+        return adjunto;
+    }
+
+    public void setAdjunto(String adjunto) {
+        this.adjunto = adjunto;
     }
 
     public Usuario getIdPerfil() {

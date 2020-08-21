@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pqrs.findByFecha", query = "SELECT p FROM Pqrs p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Pqrs.findByHora", query = "SELECT p FROM Pqrs p WHERE p.hora = :hora")
     , @NamedQuery(name = "Pqrs.findByDescripcion", query = "SELECT p FROM Pqrs p WHERE p.descripcion = :descripcion")
+    , @NamedQuery(name = "Pqrs.findByAdjunto", query = "SELECT p FROM Pqrs p WHERE p.adjunto = :adjunto")
     , @NamedQuery(name = "Pqrs.findByEstado", query = "SELECT p FROM Pqrs p WHERE p.estado = :estado")})
 public class Pqrs implements Serializable {
 
@@ -74,6 +75,9 @@ public class Pqrs implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
+    @Size(max = 100)
+    @Column(name = "adjunto")
+    private String adjunto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -149,6 +153,14 @@ public class Pqrs implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getAdjunto() {
+        return adjunto;
+    }
+
+    public void setAdjunto(String adjunto) {
+        this.adjunto = adjunto;
     }
 
     public String getEstado() {
