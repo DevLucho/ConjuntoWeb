@@ -64,12 +64,12 @@
                     </div>
                     <!-- Navegacion -->
                     <nav>
-                        <a href="#header">InIcio</a>
-                        <a href="#Ventajas">Ventajas</a>
-                        <a href="#noticias">Noticias</a>
-                        <a href="#galeria" class="men">Galeria</a>
-                        <a class="men masss" href="#contacto">Contacto</a>
-                        <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">Iniciar Sesión</a>
+                        <a href="#header">#{formlogin.inicio}</a>
+                        <a href="#Ventajas">#{formlogin.ventajas}</a>
+                        <a href="#noticias">#{formlogin.noti}</a>
+                        <a href="#galeria" class="men">#{formlogin.galeria}</a>
+                        <a class="men masss" href="#contacto">#{formlogin.contacto}</a>
+                        <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
                         <div class="animation start-home" />
                     </nav>
                 </header>
@@ -77,10 +77,10 @@
                 <section class="fonfo">
                     <div class="capanegra">
                         <h2 class="textPrin">
-                            Bienvenidos<br />a nuestro Conjunto Residencial Torres de Lucerna.
+                            #{formlogin.bienvenida}
                         </h2>
                         <button onclick="location.href = '#popup'" class="button type3">
-                            Registrarse
+                            #{formlogin.registro}
                         </button>
                         <!-- modal validar cod registro -->
                         <div id="popup" class="overlay">
@@ -89,9 +89,9 @@
                                     <img class="imgpoput" src="img/logo.png" alt="img de logo" style="margin:0;"/>
                                 </div>
 
-                                <h2>Ingrese código de registro</h2>
+                                <h2>#{formlogin.registrocodigo}</h2>
                                 <div style="text-align: center;width:100%;">
-                                    <em >Si no cuentas con un código contacta con el Administrador.</em> 
+                                    <em >#{formlogin.codigocontactaradmin}</em> 
                                 </div>
                                 <a id="cerrar" href="#">×</a>
                                 <div class="popupContent">
@@ -101,8 +101,8 @@
                                                 <i class="fas fa-qrcode code" aria-hidden="true" />
                                             </div>
                                             <div style="width: 70%; float: left; margin-left: 10px">
-                                                <div class="col-12 font wrap-input100 validate-input m-b-10" data-validate = "Digite un código" >
-                                                    <h:inputText class="input100" value="#{codigoControlador.cod}" required="true" a:placeholder="Ingrese código"/>
+                                                <div class="col-12 font wrap-input100 validate-input m-b-10" data-validate = "#{formlogin.digiteuncodigo}" >
+                                                    <h:inputText class="input100" value="#{codigoControlador.cod}" required="true" a:placeholder="#{formlogin.digiteuncodigo}"/>
                                                     <span class="focus-input100"></span>
                                                 </div>                       
                                             </div>
@@ -118,19 +118,17 @@
                 </section>
                 <!-- info ventajas -->
                 <section class="MOVER" id="Ventajas">
-                    <h1 class="Ventajas">Ventajas</h1>
+                    <h1 class="Ventajas">#{formlogin.ventajas}</h1>
                     <div class="trianculosjajaxd">
                         <i class="fas fa-shield-alt segurity" aria-hidden="true" />
                         <p class="segutrian">
-                            La seguridad es prioridad y los <br /> modulos de Cobjunto Web estan
-                            <br /> hechos para controlar lo relacionado <br /> con su proteccion
+                            #{formlogin.seguridadmensaje}
                         </p>
                     </div>
                     <div class="trianculosjajaxd2">
                         <i class="fas fa-hourglass-half segurity2" aria-hidden="true" />
                         <p class="segutrian2">
-                            La seguridad es prioridad y los <br /> modulos de Cobjunto Web estan
-                            <br /> hechos para controlar lo relacionado <br /> con su proteccion
+                            #{formlogin.seguridadmensaje}
                         </p>
                     </div>
                     <div class="trianculosjajaxd2 trianculosjajaxd3">
@@ -139,8 +137,7 @@
                             aria-hidden="true"
                             />
                         <p class="segutrian2">
-                            La seguridad es prioridad y los <br /> modulos de Cobjunto Web estan
-                            <br /> hechos para controlar lo relacionado <br /> con su proteccion
+                            #{formlogin.seguridadmensaje}
                         </p>
                     </div>
                 </section>
@@ -154,7 +151,7 @@
                             </div>
                             <div class="section11">
                                 <div class="redondo">
-                                    <h1 class="hnoti">Noticias</h1>
+                                    <h1 class="hnoti">#{formlogin.noti}</h1>
                                 </div>
                             </div>
                             <div class="section111">
@@ -175,7 +172,7 @@
                                     <h2 style="margin:2px">#{comunicado.titulo}</h2>
                                     <p>#{comunicado.descripcion}</p>
                                     <br/>
-                                    <small><b>Fecha de publicación: </b><h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MMM-dd"/></h:outputText></small>
+                                    <small><b>#{formlogin.fechadepublicacion}: </b><h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MMM-dd"/></h:outputText></small>
                                 </div>
                             </div>
                         </c:forEach>
@@ -187,7 +184,7 @@
                     <div class="capanegra2">
                         <div class="not1">
                             <h2 class="textPrin2">
-                                Mira unos ejemplos y <br /> no pienses más
+                                #{formlogin.ejemplos}
                             </h2>
                         </div>
                         <div class="not2">
@@ -243,7 +240,7 @@
                             </div>
                             <div class="section11">
                                 <div class="redondo">
-                                    <h1 class="hnoti">Galería</h1>
+                                    <h1 class="hnoti">#{formlogin.galeria}</h1>
                                 </div>
                             </div>
                             <div class="section111">
@@ -274,19 +271,19 @@
                             <div class="for fosi">
                                 <div class="thumb">
                                     <a href="#">
-                                        <span>Espacios recreativos</span>
+                                        <span>#{formlogin.espaciosrecreativos}</span>
                                     </a>
                                 </div>
-                                <p>Zonas<br/>Deportivas</p>
+                                <p>#{formlogin.zonasdeportivas}</p>
                             </div>
                         </div>
                         <div class="not2 not11">
                             <div class="for fosi fosi2">
-                                <p>La ubicacion trae <br /> muchos beneficios <br /> ¿Sabias?</p>
+                                <p>#{formlogin.ubicacionbeneficios}</p>
 
                                 <div class="rarfo">
                                     <a href="#">
-                                        <span>Zonas comerciales</span>
+                                        <span>#{formlogin.zonascomerciales}</span>
                                     </a>
                                 </div>
                             </div>
@@ -295,10 +292,10 @@
                             <div class="for fosi fosi3">
                                 <div class="mordo">
                                     <a href="#">
-                                        <span>Seguridad</span>
+                                        <span>#{formlogin.seguridad}</span>
                                     </a>
                                 </div>
-                                <p>Seguridad y <br /> Entretenimiento</p>
+                                <p>#{formlogin.seguridadyentreten}</p>
                             </div>
                         </div>
                     </div>
@@ -306,16 +303,14 @@
                 <!-- form de contacto -->
                 <section class="conteForm" id="contacto">
                     <div class="datosss">
-                        <h3>Ponte en Contacto</h3>
+                        <h3>#{formlogin.contactoponte}</h3>
                         <p>
-                            Si tienes dudas sobre algo, problemas o cosas <br /> por el estilo
-                            no dudes en contactar con nosotros <br /> para que podamos aclarar o
-                            satisfacer todos <br /> tus problemas, mejorando tu estilo de vida
+                            #{formlogin.contactomensaje}
                         </p>
                         <table class="border">
                             <tbody>
                                 <tr>
-                                    <th colspan="3" class="border">Direccion</th>
+                                    <th colspan="3" class="border">#{formlogin.direccion}</th>
                                 </tr>
                                 <tr class="border">
                                     <td class="border">
@@ -373,11 +368,9 @@
                             <img src="img/LogoCW.png" width="300px" alt="" />
                         </div>
                         <div class="divi diva">
-                            <h4>Sobre Nosotros</h4>
+                            <h4>#{formlogin.SobreNosotros}</h4>
                             <p class="pexs">
-                                Nuestro conjunto se encarga de dar lo mejor de si mismo para que
-                                nuestros residente tengan una excelente vivienda con todas las
-                                comodidades que podemos ofrecer y a muy buen precio
+                                #{formlogin.sobremensaje}
                             </p>
                             <a href="#header" ><i class="fas fa-arrow-alt-circle-up black2" aria-hidden="true"/></a>
                         </div>
@@ -387,7 +380,7 @@
                     </div>
                     <div class="parI">
                         <p>
-                            © 2020 Todos los derechos reservados.
+                            #{formlogin.derechosresevados}
                             <a href="#"><img src="././SI/img/derechos.png" alt="" /></a>
                         </p>
                     </div>
