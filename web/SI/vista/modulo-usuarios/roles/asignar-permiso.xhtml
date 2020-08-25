@@ -91,7 +91,7 @@
                     <div class="row">
                         <div class="col-12 text-center">
                             <h4>
-                                <i class="far fa-edit mr-1"></i>Asignar permisos al rol:  #{rolControlador.nombre}
+                                <i class="far fa-edit mr-1"></i>#{formdashboardadmin.asignarpermisos}:  #{rolControlador.nombre}
                             </h4>
                             <hr/>
                         </div>
@@ -118,7 +118,7 @@
                                         <div class="checkbox">
                                             <div class="row">
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Usuarios</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Usuarios}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.usuarios}">
@@ -127,7 +127,7 @@
                                                     </div>
                                                 </div>  
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Comunicados</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Comunicados}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.comunicados}">
@@ -136,7 +136,7 @@
                                                     </div>
                                                 </div>  
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Eventos</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Eventos}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.eventos}">
@@ -145,7 +145,7 @@
                                                     </div>
                                                 </div> 
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Zonas comunes</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.zonascomunes}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.zonasComunes}">
@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Reportes</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Reportes}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.reportes}">
@@ -174,7 +174,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Documentación</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Documentacion}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.documentacion}">
@@ -183,7 +183,7 @@
                                                     </div>
                                                 </div> 
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Domiciliario</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Domiciliario}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.domiciliario}">
@@ -192,7 +192,7 @@
                                                     </div>
                                                 </div> 
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Visitante</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Visitante}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.visitante}">
@@ -201,7 +201,7 @@
                                                     </div>
                                                 </div> 
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Parqueadero</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Parqueadero}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.parqueadero}">
@@ -210,7 +210,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Correspondencia</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Correspondencia}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.correspondenciaV}">
@@ -219,13 +219,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-md-2 mb-3">
-                                                    <div class="caja bg-faded border-1" >Correspondencia</div>
+                                                    <div class="caja bg-faded border-1" >#{formdashboardadmin.Correspondencia}</div>
                                                     <br/>
                                                     <div class="content">
                                                         <h:selectManyCheckbox class="center" layout="pageDirection" value="#{rolControlador.correspondencia}">
                                                             <f:selectItems var="cor" value="#{rolControlador.consultarPermisos(28)}" itemValue="#{cor.idPermiso}" itemLabel="#{cor.nombre}"></f:selectItems>
                                                         </h:selectManyCheckbox>
-                                                        <small><b>Para su funcionalidad debe ser residente.</b></small>
+                                                        <small><b>#{formdashboardadmin.funcionalidadresidente}</b></small>
                                                     </div>
                                                 </div>
                                                 <h:selectManyCheckbox layout="pageDirection" value="#{rolControlador.inicio}">
