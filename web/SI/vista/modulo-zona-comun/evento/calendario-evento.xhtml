@@ -22,7 +22,7 @@
                 }
             }
         </style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Calendario de eventos</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.calendariodeeventos}</title>
     </h:head>
     <h:body>
         <!-- header -->
@@ -31,13 +31,13 @@
         <ui:include src="../../nav/nav.xhtml"></ui:include>
         <div aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                <li class="breadcrumb-item active">Calendario de eventos</li>
+                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                <li class="breadcrumb-item active">#{formdashboardadmin.calendariodeeventos}</li>
             </ol>
         </div>
         <div class="row">
             <div class="col-12">
-                <h3><i class="far fa-calendar-alt mr-3"></i>Calendario evento</h3>
+                <h3><i class="far fa-calendar-alt mr-3"></i>#{formdashboardadmin.calendariodeeventos}</h3>
             </div>
         </div>
         <hr/>
@@ -50,7 +50,7 @@
                 <div class="calendar-container">
                     <div class="calendar-header">
                         <h1>
-                            Diciembre
+                            #{formdashboardadmin.diciembre}
                             <button>▾</button>
                         </h1>
                         <p>
@@ -94,7 +94,7 @@
                         <div class="day">31</div>   
                         <div class="day day--disabled">1</div>
                         <div class="day day--disabled">2</div>
-                        <section class="cuadrodia dianueve"><a class= "cuadroevento" href="consultar_evento_jornada_de_vacunacion.html">Jornada de vacunacion</a></section>
+                        <section class="cuadrodia dianueve"><a class= "cuadroevento" href="consultar_evento_jornada_de_vacunacion.html">#{formdashboardadmin.jornadavacunacion}</a></section>
                     </div>
                 </div>
             </div>
