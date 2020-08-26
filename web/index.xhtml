@@ -72,6 +72,18 @@
                         <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
                         <div class="animation start-home" />
                     </nav>
+                    <h:form class="col-10 p-1 text-right" style="width: 100%;"> 
+                        <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
+                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
+                                <img src="SI/img/country-es.png" width="32px"/>
+                            </h:commandLink>
+                        </c:if>
+                        <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.espaniol}">
+                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
+                                <img src="SI/img/country-us.png" width="32px"/>
+                            </h:commandLink>
+                        </c:if>
+                    </h:form> 
                 </header>
                 <!-- Capa presentacion pag. -->
                 <section class="fonfo">
