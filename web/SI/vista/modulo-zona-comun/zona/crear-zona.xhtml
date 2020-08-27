@@ -62,6 +62,7 @@
                                     <div class="form-group row">
                                         <div class="col-12">
                                             <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="Nombre zona comun" pt:placeholder="Ingrese el nombre de la zona comunal" required="true"/>
+                                            <h:message for="nombre" style="color: red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -112,10 +113,11 @@
                                             <div class="form-group row">
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones desde las:</label></b>
-                                                    
-                                                    <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
+
+                                                    <h:inputText id="horaI" a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
                                                         <f:convertDateTime pattern="HH:mm" />
                                                     </h:inputText>
+                                                    <h:message for="horaI" style="color: red"/>
                                                     <!--
                                                     <h:selectOneMenu a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
@@ -171,9 +173,10 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones hasta las:</label></b>
-                                                    <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
+                                                    <h:inputText id="horaF" a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
                                                         <f:convertDateTime pattern="HH:mm" />
                                                     </h:inputText>
+                                                    <h:message for="horaF" style="color: red"/>
                                                     <!--
                                                     <h:selectOneMenu value="" class="form-control">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
@@ -229,7 +232,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 mt-3">
                                                     <b><label>Tiempo maximo de reserva en horas:</label></b>
-                                                    <h:selectOneMenu value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
+                                                    <h:selectOneMenu id="tiempoM" value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
                                                         <f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
@@ -256,6 +259,7 @@
                                                         <f:selectItem itemValue="23" itemLabel="23"></f:selectItem>
                                                         <f:selectItem itemValue="24" itemLabel="24"></f:selectItem>
                                                     </h:selectOneMenu> 
+                                                    <h:message for="tiempoMR" style="color: red"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -284,6 +288,7 @@
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
                                     <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
+                                    <h:message for="ruta" style="color: red"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">

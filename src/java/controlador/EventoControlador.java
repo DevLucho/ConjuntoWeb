@@ -88,6 +88,7 @@ public class EventoControlador implements Serializable {
         horaF = hora.format(evento.getHoraFin());
         if (notificar == 1000) { // 1000 notifica todos los usuarios
             allMails();
+            // Correos masivos 
             for (int i = 0; i < allMails().size(); i++) {
                 codigoControlador.enviarEmail(allMails().get(i).getCorreo(), "Invitación a evento",
                         "<div style='\n"

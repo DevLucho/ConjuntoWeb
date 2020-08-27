@@ -223,4 +223,20 @@ public class PqrsControlador implements Serializable {
         this.mensaje = mensaje;
     }
 
+    public String getHoraI() {
+        return horaI;
+    }
+
+    public void setHoraI(String horaI) {
+        this.horaI = horaI;
+    }
+
+    public String getFechaI() {
+        return fechaI;
+    }
+
+    public void setFechaI(String fechaI) {
+        this.fechaI = fechaI;
+    }
+
 }
