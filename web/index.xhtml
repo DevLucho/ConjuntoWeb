@@ -348,29 +348,29 @@
                         </table>
                     </div>
                     <h:form class="form">
-                        <h:inputText id="nombre" a:type="text" class="duos" a:placeholder="Nombres" required="true" requiredMessage="El campo nombre es requerido" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                        <h:inputText id="nombre" a:type="text" class="duos" a:placeholder="#{formlogin.Nombres}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
                         <h:message for="nombre" style="color: red"/>
-                        <h:inputText id="apellido" a:type="text" class="duos" a:placeholder="Apellidos" required="true" requiredMessage="El campo nombre es requerido" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                        <h:inputText id="apellido" a:type="text" class="duos" a:placeholder="#{formlogin.Apellidos}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
                         <h:message for="apellido" style="color: red"/>
-                        <h:inputText id="email" a:type="email" class="duos com" a:placeholder="Correo Electronico" title="ejemplo@dominio.com" required="true" requiredMessage="Especifique un correo electrónico" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        <h:inputText id="email" a:type="email" class="duos com" a:placeholder="#{formlogin.CorreoElectrónico}" title="ejemplo@dominio.com" required="true" requiredMessage="#{formlogin.Especifiqueuncorreoelectrónico}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
                         <h:message for="email" style="color: red"/>
-                        <h:inputText id="celular" a:type="tel" class="duos com" a:placeholder="Numero"  required="true" requiredMessage="El campo celular es requerido" a:pattern="[0-9]{10}" title="10 digitos"/>
+                        <h:inputText id="celular" a:type="tel" class="duos com" a:placeholder="#{formlogin.Númerotelefónico}"  required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
                         <h:message for="celular" style="color: red"/>
-                        <h:selectOneMenu id="torre" class="duos mierda" required="true" requiredMessage="Seleccione una Torre">
+                        <h:selectOneMenu id="torre" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunaTorre}">
                             <f:selectItem itemLabel="Torre" itemValue=""></f:selectItem>
                             <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
                         <h:message for="torre" style="color: red"/>
-                        <h:selectOneMenu id="apto" class="duos mierda" required="true" requiredMessage="Seleccione un Apto">
+                        <h:selectOneMenu id="apto" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunApto}">
                             <f:selectItem itemLabel="Apartamento" itemValue=""></f:selectItem>
                             <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
                         <h:message for="apto" style="color: red"/>
-                        <h:inputText id="asunto" a:type="text" class="duos com" a:placeholder="Asunto"/>
+                        <h:inputText id="asunto" a:type="text" class="duos com" a:placeholder="#{formlogin.Asunto}"/>
                         <h:message for="asunto" style="color: red"/>
-                        <h:inputTextarea id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="Mensaje" required="true" requiredMessage="Digite su mensaje"/>
+                        <h:inputTextarea id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="#{formlogin.Mensaje}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
                         <h:message for="msj" style="color: red"/>
-                        <h:inputText a:type="submit" class="duos enviar" value="Enviar" a:placeholder="Enviar"/>
+                        <h:inputText a:type="submit" class="duos enviar" value="#{formlogin.Enviar}" a:placeholder="#{formlogin.Enviar}"/>
                     </h:form>
                 </section>
                 <!-- footer -->
