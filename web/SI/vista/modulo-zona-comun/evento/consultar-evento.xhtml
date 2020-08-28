@@ -51,7 +51,7 @@
                 <ol class="breadcrumb">
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultar zona común</li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Consultarevento}</li>
                     </c:if>
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>

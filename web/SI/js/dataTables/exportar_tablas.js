@@ -1,9 +1,5 @@
 $(document).ready(function () {
     $('.tabla').DataTable({
-        // Para cambiar idioma   
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-        },
         // paneles de busqueda
         searchPanes: {
             cascadePanes: true,

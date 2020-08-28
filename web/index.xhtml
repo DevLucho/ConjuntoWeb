@@ -89,8 +89,10 @@
                 <section class="fonfo">
                     <div class="capanegra">
                         <h2 class="textPrin">
-                            #{formlogin.bienvenida}
+                            #{formlogin.bienvenida}<br/>
+                            Torres de Lucerna
                         </h2>
+
                         <button onclick="location.href = '#popup'" class="button type3">
                             #{formlogin.registro}
                         </button>
@@ -128,33 +130,10 @@
                         </div>
                     </div>
                 </section>
-                <!-- info ventajas -->
-                <section class="MOVER" id="Ventajas">
-                    <h1 class="Ventajas">#{formlogin.ventajas}</h1>
-                    <div class="trianculosjajaxd">
-                        <i class="fas fa-shield-alt segurity" aria-hidden="true" />
-                        <p class="segutrian">
-                            #{formlogin.seguridadmensaje}
-                        </p>
-                    </div>
-                    <div class="trianculosjajaxd2">
-                        <i class="fas fa-hourglass-half segurity2" aria-hidden="true" />
-                        <p class="segutrian2">
-                            #{formlogin.seguridadmensaje}
-                        </p>
-                    </div>
-                    <div class="trianculosjajaxd2 trianculosjajaxd3">
-                        <i
-                            class="far fa-comments segurity2 menosmenitos"
-                            aria-hidden="true"
-                            />
-                        <p class="segutrian2">
-                            #{formlogin.seguridadmensaje}
-                        </p>
-                    </div>
-                </section>
-                <!-- titulo noticias -->
                 <section class="cont" id="noticias">
+                    <br/>
+                    <hr/>
+                    <br/>
                     <div class="notinoti">
                         <div class="capi">
                             <br />
@@ -173,7 +152,7 @@
                     </div>
                 </section>
                 <!-- slider noticias -->
-                <h:form class="swiper-container">
+                <h:form class="swiper-container" style="margin-bottom: 0px;">
                     <div class="swiper-wrapper">
                         <c:forEach items="#{comunicadoControlador.consultar('Externo')}" var="comunicado">
                             <div class="swiper-slide">
@@ -191,6 +170,9 @@
                     </div>
                     <div class="swiper-pagination" />
                 </h:form>
+                <br/>
+                <hr/>
+                <br/>
                 <!-- zona de publicidad -->
                 <section class="fonfo2">
                     <div class="capanegra2">
@@ -241,12 +223,14 @@
                             </div>
                         </div>
                     </div>
-                </section> <br/><br/><br/><br/>
+                </section>
+                <br/>
+                <hr/>
+                <br/>
                 <!-- titulo galeria -->
                 <section class="cont" id="galeria">
                     <div class="notinoti">
                         <div class="capi">
-                            <br />
                             <div class="section1">
                                 <div class="lineassss float" />
                             </div>
@@ -276,6 +260,9 @@
 
                     <div class="swiper-pagination" />
                 </h:form>
+                <br/>
+                <hr/>
+                <br/>
                 <!-- segunda zona de publicidad -->
                 <section class="fonfo2 fonfo3">
                     <div class="capanegra2">
