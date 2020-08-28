@@ -36,7 +36,7 @@
             } 
         </style>
         -->
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Crear evento</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Evento}</title>
     </h:head>
     <h:body>
         <f:view>
@@ -51,15 +51,15 @@
                 <!-- miga de pan -->
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Crear evento</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Crearevento}</li>
                     </ol>
                 </div>
                 <!-- Contenido principal -->
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12">
-                            <h3><i class="fas fa-calendar-alt" id="icono"></i>Nuevo evento</h3>
+                            <h3><i class="fas fa-calendar-alt" id="icono"></i>#{formdashboardadmin.Nuevoevento}</h3>
                         </div>
                     </div>
                     <hr/>
@@ -68,11 +68,11 @@
                         <div class="row mt-3">
                             <!-- Titulo -->
                             <div class="col-12">
-                                <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Titulo</a></p>
+                                <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">#{formdashboardadmin.Titulo}</a></p>
                                 <div class="collapse show" id="titulo">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese el nombre del evento" id="titulo" value="#{eventoControlador.evento.titulo}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="#{formdashboardadmin.Ingreseelnombredelevento}" id="titulo" value="#{eventoControlador.evento.titulo}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
                                             <h:message for="titulo" style="color: red"/>
                                         </div>
                                     </div>
@@ -80,18 +80,18 @@
                             </div>
                             <!-- Fecha y hora -->
                             <div class="col-12 col-md-6">
-                                <p><a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date" data-toggle="collapse"><i class="far fa-clock"></i>Fecha y hora del evento</a></p>
+                                <p><a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date" data-toggle="collapse"><i class="far fa-clock"></i>#{formdashboardadmin.Fechayhoradelevento}</a></p>
                                 <div class="collapse" id="date">
                                     <div class="form-group row">
                                         <div class="col-5">
-                                            <strong><label for="fechai">Fecha inicio</label></strong>
+                                            <strong><label for="fechai">#{formdashboardadmin.Fechainicio}</label></strong>
                                             <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
                                             <h:message for="fechaInicio" style="color: red"/>
                                         </div>
                                         <div class="col-4">
-                                            <strong><label for="fechai">Empieza a las</label></strong>
+                                            <strong><label for="fechai">#{formdashboardadmin.Empiezaalas}</label></strong>
                                             <h:inputText a:type="time" class="form-control" id="horaInicio" value="#{eventoControlador.evento.horaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
@@ -101,20 +101,20 @@
                                         <div class="col-3">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="checkhora"/>
-                                                <label class="custom-control-label" for="checkhora">Todo el día</label>
+                                                <label class="custom-control-label" for="checkhora">#{formdashboardadmin.Todoeldía}</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-5">
-                                            <strong><label for="fechaf">Fecha fin</label></strong>
+                                            <strong><label for="fechaf">#{formdashboardadmin.Fechafin}</label></strong>
                                             <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"> 
                                                 <f:convertDateTime pattern="yyyy-mm-dd" />
                                             </h:inputText>
                                             <h:message for="fechaFin" style="color: red"/>
                                         </div>
                                         <div class="col-4">
-                                            <strong><label for="fechaf">Termina a las</label></strong>
+                                            <strong><label for="fechaf">#{formdashboardadmin.Terminaalas}</label></strong>
                                             <h:inputText a:type="time" class="form-control" id="horaFin" value="#{eventoControlador.evento.horaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
@@ -129,9 +129,9 @@
                                 <div class="collapse" id="lugar">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <strong><label for="torre">Zona común</label></strong>
-                                            <h:selectOneMenu id="idZonaComunal" class="form-control" value="#{eventoControlador.zonaComunal.idZonaComunal}" title="IdZonaComunal" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <strong><label for="torre">#{formdashboardadmin.Zonacomún}</label></strong>
+                                            <h:selectOneMenu id="idZonaComunal" class="form-control" value="#{eventoControlador.zonaComunal.idZonaComunal}" title="#{formdashboardadmin.Zonacomún}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}"/>
                                             </h:selectOneMenu>
                                             <h:message for="idZonaComunal" style="color: red"/>
@@ -141,12 +141,12 @@
                             </div>
                             <!-- Contacto -->
                             <div class="col-12 col-md-6">
-                                <p><a href="#contacto" class="btn btn-primary text-left" aria-expanded="false" aria-controls="contacto" data-toggle="collapse"><i class="fas fa-phone-alt"></i>Contacto del organizador</a></p>
+                                <p><a href="#contacto" class="btn btn-primary text-left" aria-expanded="false" aria-controls="contacto" data-toggle="collapse"><i class="fas fa-phone-alt"></i>#{formdashboardadmin.Contactodelorganizador}</a></p>
                                 <div class="collapse" id="contacto">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <strong><label for="torre">Organizador</label></strong>
-                                            <h:inputText a:type="text" class="form-control" a:placeholder="Ingrese nombre del organizador del evento" id="organizador" value="#{eventoControlador.evento.organizador}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"></h:inputText>
+                                            <strong><label for="torre">#{formdashboardadmin.Organizador}</label></strong>
+                                            <h:inputText a:type="text" class="form-control" a:placeholder="#{formdashboardadmin.Ingresenombredelorganizadordelevento}" id="organizador" value="#{eventoControlador.evento.organizador}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"></h:inputText>
                                             <h:message for="organizador" style="color: red"/>
                                         </div>
                                     </div>
@@ -158,9 +158,9 @@
                                 <div class="collapse" id="invitados">
                                     <div class="form-group row">
                                         <div class="torre col-12 col-md-6">
-                                            <strong><label for="torre">Notificar a</label></strong>
+                                            <strong><label for="torre">#{formdashboardadmin.Notificara}</label></strong>
                                             <h:selectOneMenu id="notificar" class="form-control" value="#{eventoControlador.notificar}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
-                                                <f:selectItem itemLabel="- Seleccione invitados -" itemValue="0" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="#{formdashboardadmin.Seleccioneinvitados}" itemValue="0" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItem itemLabel="Todos los usuarios" itemValue="1000" ></f:selectItem>
                                                 <f:selectItems var="rol" value="#{rolControlador.consultarTodos()}" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"></f:selectItems>
                                                 <f:selectItem itemLabel="Ninguno" itemValue="1100" ></f:selectItem>
@@ -168,8 +168,8 @@
                                             <h:message for="notificar" style="color: red"/>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <strong><label for="correo" id="email">Otros destinarios</label></strong>
-                                            <input type="email" class="form-control" placeholder="Correos separados por coma."/>
+                                            <strong><label for="correo" id="email">#{formdashboardadmin.Otrosdestinarios}</label></strong>
+                                            <input type="email" class="form-control" placeholder="#{formdashboardadmin.Correosseparadosporcoma}."/>
                                         </div>
                                     </div>
                                 </div>
@@ -177,11 +177,11 @@
                         </div>
                         <!-- Descripción -->
                         <hr/>
-                        <h4 class="col-12">Detalle</h4>
+                        <h4 class="col-12">#{formdashboardadmin.Detalle}</h4>
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle del evento" value="#{eventoControlador.evento.detalle}" id="descripcion" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="height:100px;"/>
+                                <h:inputTextarea class="form col-12 form-control" a:placeholder="#{formdashboardadmin.Detalledelevento}" value="#{eventoControlador.evento.detalle}" id="descripcion" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="height:100px;"/>
                                 <h:message for="descripcion" style="color: red"/>
                             </div>
 
@@ -189,14 +189,14 @@
                                 <div class="row">
                                     <!--Subir foto--> 
                                     <div class="col-5" style="padding: 0;">
-                                        <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
+                                        <label for="file" class="subir-foto"> <span>+</span> <br/> #{formdashboardadmin.Adjuntarimagen}</label>
                                         <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;"/>
                                     </div>
                                     <!--Pre-visualizar foto-->
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
-                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{eventoControlador.evento.img}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                    <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Rutaimg}" id="ruta" value="#{eventoControlador.evento.img}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
                                     <h:message for="ruta" style="color: red"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
@@ -211,7 +211,7 @@
                             <!-- Boton publicar -->
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-2 mt-3 mb-3">
-                                    <h:commandButton class="btn btn-outline-success btn-block" value="Publicar" action="#{eventoControlador.registrar()}"></h:commandButton>
+                                    <h:commandButton class="btn btn-outline-success btn-block" value="#{formdashboardadmin.Publicar}" action="#{eventoControlador.registrar()}"></h:commandButton>
                                 </div>
                             </div>
                         </div>
