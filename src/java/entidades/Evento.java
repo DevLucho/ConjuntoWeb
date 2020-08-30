@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Huertas
  */
 @Entity
 @Table(name = "evento")
@@ -41,9 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Evento.findByIdEvento", query = "SELECT e FROM Evento e WHERE e.idEvento = :idEvento")
     , @NamedQuery(name = "Evento.findByTitulo", query = "SELECT e FROM Evento e WHERE e.titulo = :titulo")
     , @NamedQuery(name = "Evento.findByFechaInicio", query = "SELECT e FROM Evento e WHERE e.fechaInicio = :fechaInicio")
-    , @NamedQuery(name = "Evento.findByHoraInicio", query = "SELECT e FROM Evento e WHERE e.horaInicio = :horaInicio")
     , @NamedQuery(name = "Evento.findByFechaFin", query = "SELECT e FROM Evento e WHERE e.fechaFin = :fechaFin")
-    , @NamedQuery(name = "Evento.findByHoraFin", query = "SELECT e FROM Evento e WHERE e.horaFin = :horaFin")
     , @NamedQuery(name = "Evento.findByDetalle", query = "SELECT e FROM Evento e WHERE e.detalle = :detalle")
     , @NamedQuery(name = "Evento.findByOrganizador", query = "SELECT e FROM Evento e WHERE e.organizador = :organizador")
     , @NamedQuery(name = "Evento.findByEstado", query = "SELECT e FROM Evento e WHERE e.estado = :estado")
@@ -66,17 +64,9 @@ public class Evento implements Serializable {
     @Column(name = "fechaInicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "horaInicio")
-    @Temporal(TemporalType.TIME)
-    private Date horaInicio;
     @Column(name = "fechaFin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    @Column(name = "horaFin")
-    @Temporal(TemporalType.TIME)
-    private Date horaFin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -95,6 +85,12 @@ public class Evento implements Serializable {
     @Size(max = 100)
     @Column(name = "img")
     private String img;
+    @JoinColumn(name = "horaInicio", referencedColumnName = "idHora")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private HoraInicial horaInicio;
+    @JoinColumn(name = "horaFin", referencedColumnName = "idHora")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private HoraFinal horaFin;
     @JoinColumn(name = "idZonaComunal", referencedColumnName = "idZonaComunal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ZonaComunal idZonaComunal;
@@ -108,11 +104,10 @@ public class Evento implements Serializable {
         this.idEvento = idEvento;
     }
 
-    public Evento(Integer idEvento, String titulo, Date fechaInicio, Date horaInicio, String detalle, String organizador, String estado) {
+    public Evento(Integer idEvento, String titulo, Date fechaInicio, String detalle, String organizador, String estado) {
         this.idEvento = idEvento;
         this.titulo = titulo;
         this.fechaInicio = fechaInicio;
-        this.horaInicio = horaInicio;
         this.detalle = detalle;
         this.organizador = organizador;
         this.estado = estado;
@@ -142,28 +137,12 @@ public class Evento implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(Date horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
     public Date getFechaFin() {
         return fechaFin;
     }
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public Date getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
     }
 
     public String getDetalle() {
@@ -196,6 +175,22 @@ public class Evento implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public HoraInicial getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(HoraInicial horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public HoraFinal getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(HoraFinal horaFin) {
+        this.horaFin = horaFin;
     }
 
     public ZonaComunal getIdZonaComunal() {

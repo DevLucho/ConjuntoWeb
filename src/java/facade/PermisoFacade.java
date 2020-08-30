@@ -43,7 +43,7 @@ public class PermisoFacade extends AbstractFacade<Permiso> {
         }
         return listaPerPadre;
     }
-    
+
     public Permiso consultarPermiso(int idPermiso) {
         Permiso permiso = null;
         try {
@@ -56,8 +56,8 @@ public class PermisoFacade extends AbstractFacade<Permiso> {
         }
         return permiso;
     }
-    
-    public List<Permiso> consultarTodos(){
+
+    public List<Permiso> consultarTodos() {
         List<Permiso> listaPer = new ArrayList<>();
         try {
             Query q = em.createQuery("SELECT r FROM Permiso r");
@@ -68,7 +68,5 @@ public class PermisoFacade extends AbstractFacade<Permiso> {
         }
         return listaPer;
     }
-    
-    
-    
+
 }

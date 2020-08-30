@@ -113,122 +113,19 @@
                                             <div class="form-group row">
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones desde las:</label></b>
-
-                                                    <h:inputText id="horaI" a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
-                                                        <f:convertDateTime pattern="HH:mm" />
-                                                    </h:inputText>
-                                                    <h:message for="horaI" style="color: red"/>
-                                                    <!--
-                                                    <h:selectOneMenu a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control">
+                                                    <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.horaInicial.idHora}"  required="true">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItem itemValue="00:00" itemLabel="00:00"></f:selectItem>
-                                                        <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
-                                                        <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
-                                                        <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
-                                                        <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
-                                                        <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
-                                                        <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
-                                                        <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
-                                                        <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
-                                                        <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
-                                                        <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
-                                                        <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
-                                                        <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
-                                                        <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
-                                                        <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
-                                                        <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
-                                                        <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
-                                                        <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
-                                                        <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
-                                                        <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
-                                                        <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
-                                                        <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
-                                                        <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
-                                                        <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
-                                                        <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
-                                                        <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
-                                                        <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
-                                                        <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
-                                                        <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
-                                                        <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
-                                                        <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
-                                                        <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
-                                                        <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
-                                                        <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
-                                                        <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
-                                                        <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
-                                                        <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
-                                                        <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
-                                                        <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
-                                                        <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
-                                                        <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
-                                                        <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
-                                                        <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
-                                                        <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
-                                                        <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
-                                                        <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
-                                                        <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
-                                                        <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
-                                                    </h:selectOneMenu>-->
+                                                        <f:selectItems value="#{disponibilidadControlador.consultarHoraInical()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{disponibilidadControlador.convertir(hi.hora)}"/>
+                                                    </h:selectOneMenu>
+                                                    <h:message for="horaI" style="color: red"/>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <b><label>Reservaciones hasta las:</label></b>
-                                                    <h:inputText id="horaF" a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
-                                                        <f:convertDateTime pattern="HH:mm" />
-                                                    </h:inputText>
-                                                    <h:message for="horaF" style="color: red"/>
-                                                    <!--
-                                                    <h:selectOneMenu value="" class="form-control">
+                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal.idHora}"  required="true">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
-                                                        <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
-                                                        <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
-                                                        <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
-                                                        <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
-                                                        <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
-                                                        <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
-                                                        <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
-                                                        <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
-                                                        <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
-                                                        <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
-                                                        <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
-                                                        <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
-                                                        <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
-                                                        <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
-                                                        <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
-                                                        <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
-                                                        <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
-                                                        <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
-                                                        <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
-                                                        <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
-                                                        <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
-                                                        <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
-                                                        <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
-                                                        <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
-                                                        <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
-                                                        <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
-                                                        <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
-                                                        <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
-                                                        <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
-                                                        <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
-                                                        <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
-                                                        <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
-                                                        <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
-                                                        <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
-                                                        <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
-                                                        <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
-                                                        <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
-                                                        <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
-                                                        <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
-                                                        <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
-                                                        <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
-                                                        <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
-                                                        <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
-                                                        <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
-                                                        <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
-                                                        <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
-                                                        <f:selectItem itemValue="23:30" itemLabel="23:59"></f:selectItem>
-                                                    </h:selectOneMenu>-->
+                                                        <f:selectItems value="#{disponibilidadControlador.consultarHoraFinal()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{disponibilidadControlador.convertir(hf.hora)}"/>
+                                                    </h:selectOneMenu>
+                                                    <h:message for="horaF" style="color: red"/>
                                                 </div>
                                                 <div class="col-12 col-md-6 mt-3">
                                                     <b><label>Tiempo maximo de reserva en horas:</label></b>

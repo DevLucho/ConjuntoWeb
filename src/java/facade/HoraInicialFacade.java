@@ -5,18 +5,17 @@
  */
 package facade;
 
-import entidades.Residente;
+import entidades.HoraInicial;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author Huertas
  */
 @Stateless
-public class ResidenteFacade extends AbstractFacade<Residente> {
+public class HoraInicialFacade extends AbstractFacade<HoraInicial> {
 
     @PersistenceContext(unitName = "ProyectoConjuntoWebPU")
     private EntityManager em;
@@ -26,8 +25,8 @@ public class ResidenteFacade extends AbstractFacade<Residente> {
         return em;
     }
 
-    public ResidenteFacade() {
-        super(Residente.class);
+    public HoraInicialFacade() {
+        super(HoraInicial.class);
     }
     
 }

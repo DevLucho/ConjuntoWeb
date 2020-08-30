@@ -39,7 +39,6 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
     }*/
-
     public List<Disponibilidad> consultarDisponibilidadZona(int idZonaComunal) {
         Query query;
         query = em.createQuery("SELECT u FROM Disponibilidad u WHERE u.idZonaComunal.idZonaComunal=:idZonaComunal");

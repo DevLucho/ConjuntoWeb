@@ -57,7 +57,7 @@ public class CodigoFacade extends AbstractFacade<Codigo> {
         }
         return usuario;
     }
-    
+
     public List<Usuario> cambiarPass(int idPerfil) {
         Query query;
         query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");

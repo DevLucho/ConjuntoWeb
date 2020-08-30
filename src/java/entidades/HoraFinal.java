@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,8 +20,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,54 +31,65 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Huertas
  */
 @Entity
-@Table(name = "disponibilidad_dia")
+@Table(name = "hora_final")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DisponibilidadDia.findAll", query = "SELECT d FROM DisponibilidadDia d")
-    , @NamedQuery(name = "DisponibilidadDia.findByIdDia", query = "SELECT d FROM DisponibilidadDia d WHERE d.idDia = :idDia")
-    , @NamedQuery(name = "DisponibilidadDia.findByNombre", query = "SELECT d FROM DisponibilidadDia d WHERE d.nombre = :nombre")})
-public class DisponibilidadDia implements Serializable {
+    @NamedQuery(name = "HoraFinal.findAll", query = "SELECT h FROM HoraFinal h")
+    , @NamedQuery(name = "HoraFinal.findByIdHora", query = "SELECT h FROM HoraFinal h WHERE h.idHora = :idHora")
+    , @NamedQuery(name = "HoraFinal.findByHora", query = "SELECT h FROM HoraFinal h WHERE h.hora = :hora")})
+public class HoraFinal implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idDia")
-    private Integer idDia;
+    @Column(name = "idHora")
+    private Integer idHora;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "nombre")
-    private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDia", fetch = FetchType.LAZY)
+    @Column(name = "hora")
+    @Temporal(TemporalType.TIME)
+    private Date hora;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horaFin", fetch = FetchType.LAZY)
+    private List<Evento> eventoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horaFinalReserva", fetch = FetchType.LAZY)
     private List<Disponibilidad> disponibilidadList;
 
-    public DisponibilidadDia() {
+    public HoraFinal() {
     }
 
-    public DisponibilidadDia(Integer idDia) {
-        this.idDia = idDia;
+    public HoraFinal(Integer idHora) {
+        this.idHora = idHora;
     }
 
-    public DisponibilidadDia(Integer idDia, String nombre) {
-        this.idDia = idDia;
-        this.nombre = nombre;
+    public HoraFinal(Integer idHora, Date hora) {
+        this.idHora = idHora;
+        this.hora = hora;
     }
 
-    public Integer getIdDia() {
-        return idDia;
+    public Integer getIdHora() {
+        return idHora;
     }
 
-    public void setIdDia(Integer idDia) {
-        this.idDia = idDia;
+    public void setIdHora(Integer idHora) {
+        this.idHora = idHora;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Date getHora() {
+        return hora;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+
+    @XmlTransient
+    public List<Evento> getEventoList() {
+        return eventoList;
+    }
+
+    public void setEventoList(List<Evento> eventoList) {
+        this.eventoList = eventoList;
     }
 
     @XmlTransient
@@ -91,18 +104,18 @@ public class DisponibilidadDia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDia != null ? idDia.hashCode() : 0);
+        hash += (idHora != null ? idHora.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DisponibilidadDia)) {
+        if (!(object instanceof HoraFinal)) {
             return false;
         }
-        DisponibilidadDia other = (DisponibilidadDia) object;
-        if ((this.idDia == null && other.idDia != null) || (this.idDia != null && !this.idDia.equals(other.idDia))) {
+        HoraFinal other = (HoraFinal) object;
+        if ((this.idHora == null && other.idHora != null) || (this.idHora != null && !this.idHora.equals(other.idHora))) {
             return false;
         }
         return true;
@@ -110,7 +123,7 @@ public class DisponibilidadDia implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.DisponibilidadDia[ idDia=" + idDia + " ]";
+        return "entidades.HoraFinal[ idHora=" + idHora + " ]";
     }
     
 }

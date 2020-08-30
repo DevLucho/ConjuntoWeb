@@ -54,7 +54,6 @@ public class PqrsFacade extends AbstractFacade<Pqrs> {
     }
 
     // count
-    
     public int countEstadoR(String estado, int idResidente) {
         Query query;
         query = em.createQuery("SELECT COUNT(u) FROM Pqrs u WHERE u.estado=:estado AND u.idResidente.idResidente=:idResidente");
@@ -69,7 +68,7 @@ public class PqrsFacade extends AbstractFacade<Pqrs> {
         query.setParameter("estado", estado);
         return ((Long) query.getSingleResult()).intValue();
     }
-    
+
     public int countR(int idResidente) {
         Query query;
         query = em.createQuery("SELECT COUNT(u) FROM Pqrs u WHERE u.idResidente.idResidente=:idResidente");

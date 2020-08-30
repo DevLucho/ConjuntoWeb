@@ -52,7 +52,7 @@ public class EventoFacade extends AbstractFacade<Evento> {
         query.setParameter("idRol", idRol);
         return query.getResultList();
     }
-    
+
     public List<Usuario> allMails() {
         Query query = em.createQuery("SELECT u FROM Usuario u");
         return query.getResultList();

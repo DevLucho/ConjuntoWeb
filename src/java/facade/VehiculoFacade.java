@@ -50,7 +50,7 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         query = em.createQuery("SELECT a FROM Vehiculo a WHERE a.idVisitante is null");
         return query.getResultList();
     }
-    
+
     // count
 
     public int contarVehiculoR(int idResidente) {

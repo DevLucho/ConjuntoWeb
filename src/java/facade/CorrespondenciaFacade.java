@@ -52,7 +52,7 @@ public class CorrespondenciaFacade extends AbstractFacade<Correspondencia> {
         query.setParameter("idInmueble", idInmueble);
         return ((Long) query.getSingleResult()).intValue();
     }
-    
+
     public List<Residente> inmuebleR(int idInmueble) {
         Query query;
         query = em.createQuery("SELECT u FROM Residente u WHERE u.idInmueble.idInmueble=:idInmueble");

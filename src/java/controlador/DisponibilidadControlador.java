@@ -7,14 +7,21 @@ package controlador;
 
 import entidades.Disponibilidad;
 import entidades.DisponibilidadDia;
+import entidades.HoraFinal;
+import entidades.HoraInicial;
 import entidades.ZonaComunal;
 import facade.DisponibilidadDiaFacade;
 import facade.DisponibilidadFacade;
+import facade.HoraFinalFacade;
+import facade.HoraInicialFacade;
 import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -43,6 +50,10 @@ public class DisponibilidadControlador implements Serializable {
 
     private Disponibilidad disponibilidad;
 
+    private HoraInicial horaInicial;
+
+    private HoraFinal horaFinal;
+
     private DisponibilidadDia disponibilidadDia;
 
     private List<Disponibilidad> disponibilidadZona;
@@ -56,6 +67,12 @@ public class DisponibilidadControlador implements Serializable {
     @EJB
     DisponibilidadDiaFacade disponibilidadDiaFacade;
 
+    @EJB
+    HoraInicialFacade horaInicialFacade;
+
+    @EJB
+    HoraFinalFacade horaFinalFacade;
+
     /**
      * Creates a new instance of DisponibilidadControlador
      */
@@ -64,6 +81,8 @@ public class DisponibilidadControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        horaInicial = new HoraInicial();
+        horaFinal = new HoraFinal();
         zonaComunal = new ZonaComunal();
         domingo = false;
         lunes = false;
@@ -83,45 +102,58 @@ public class DisponibilidadControlador implements Serializable {
             disponibilidadDia.setIdDia(1);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (lunes) {
             disponibilidadDia.setIdDia(2);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (martes) {
             disponibilidadDia.setIdDia(3);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (miercoles) {
             disponibilidadDia.setIdDia(4);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (jueves) {
             disponibilidadDia.setIdDia(5);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (viernes) {
             disponibilidadDia.setIdDia(6);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
         if (sabado) {
             disponibilidadDia.setIdDia(7);
             disponibilidad.setIdDia(disponibilidadDia);
             disponibilidad.setIdZonaComunal(zonaComunal);
+            disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
+            disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             disponibilidadFacade.create(disponibilidad);
         }
-
         this.domingo = false;
         this.lunes = false;
         this.martes = false;
@@ -129,6 +161,8 @@ public class DisponibilidadControlador implements Serializable {
         this.jueves = false;
         this.viernes = false;
         this.sabado = false;
+        this.horaInicial = new HoraInicial();
+        this.horaFinal = new HoraFinal();
         this.disponibilidad = new Disponibilidad();
         this.zonaComunal = new ZonaComunal();
         mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
@@ -215,9 +249,17 @@ public class DisponibilidadControlador implements Serializable {
     public List<Disponibilidad> consultarTodos() {
         return disponibilidadFacade.findAll();
     }
-    
-    public List<DisponibilidadDia> consultarToodos(){
+
+    public List<DisponibilidadDia> consultarToodos() {
         return disponibilidadDiaFacade.findAll();
+    }
+
+    public List<HoraInicial> consultarHoraInical() {
+        return horaInicialFacade.findAll();
+    }
+
+    public List<HoraFinal> consultarHoraFinal() {
+        return horaFinalFacade.findAll();
     }
 
     public String consultarDisponibilidad(ZonaComunal zonaComunal) {
@@ -225,6 +267,13 @@ public class DisponibilidadControlador implements Serializable {
         disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
         return "detalle-zona";
     }
+
+    public String convertir(Date hora) {
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        String time = df.format(hora);
+        return time;
+    }
+
     /*
     public List<Disponibilidad> consultaDisponiblidad() {
         for (Disponibilidad disponibilidad : disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal())) {
@@ -232,7 +281,6 @@ public class DisponibilidadControlador implements Serializable {
         }
         return disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
     }*/
-
     public DisponibilidadDia getDisponibilidadDia() {
         return disponibilidadDia;
     }
@@ -327,6 +375,22 @@ public class DisponibilidadControlador implements Serializable {
 
     public void setDisponibilidadZona(List<Disponibilidad> disponibilidadZona) {
         this.disponibilidadZona = disponibilidadZona;
+    }
+
+    public HoraFinal getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(HoraFinal horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
+    public HoraInicial getHoraInicial() {
+        return horaInicial;
+    }
+
+    public void setHoraInicial(HoraInicial horaInicial) {
+        this.horaInicial = horaInicial;
     }
 
 }
