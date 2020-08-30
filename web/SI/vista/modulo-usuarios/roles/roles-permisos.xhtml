@@ -152,7 +152,28 @@
         <!-- DataTables -->
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../../../js/dataTables/dataTables.js"></script>
+        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
+            <script>
+                $(document).ready(function () {
+                    // Ejecutar dataTable
+                    $(document).ready(function () {
+                        $('.tabla').DataTable();
+                    });
+                });
+            </script>
+        </c:if>
+        <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
+            <script>
+                $(document).ready(function () {
+                    // Cambiar idioma a español
+                    $('.tabla').DataTable({
+                        "language": {
+                            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                        }
+                    });
+                });
+            </script>
+        </c:if>
         <script src="../../../../js/main.js" type="text/javascript"></script>
         <!-- Menu responsive -->
         <script src="../../navs/nav.js"></script>

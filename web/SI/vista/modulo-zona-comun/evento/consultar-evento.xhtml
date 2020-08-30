@@ -39,121 +39,123 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Consultarevento}</title>
     </h:head>
     <h:body>
-        <script>#{mensajeControlador.mensaje}</script>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga de pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">#{formdashboardadmin.Consultarevento}</li>
-                    </c:if>
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>
-                        <li class="breadcrumb-item active">#{formdashboardadmin.Consultarevento}</li>
-                        <style>
-                            nav ul li{ width:25%;}
-                            @media screen and (max-width:903px){
-                                nav ul li{
-                                    width: 100%;
-                                    text-align: left;
-                                }
-                            }
-                        </style>
-                    </c:if>
-                </ol>
-            </div>
-            <!-- main -->
-            <section class="container-fluid" id="principal" style="margin-bottom: 350px">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>
-                            <i class="fas fa-calendar-day"></i>
-                            #{formdashboardadmin.Consultarevento}
-                        </h3>
-                    </div>
-                </div>
-                <hr/>
-                <h:form class="row mt-3 mb-3">
-                    <div class="col">
-                        <c:if test="#{eventoControlador.contarVigentes() == 0 }">
-                            <div class="alert alert-warning">
-                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
-                                #{formdashboardadmin.Noeventospublicados}
-                            </div>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <script>#{mensajeControlador.mensaje}</script>
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga de pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                            <li class="breadcrumb-item active">#{formdashboardadmin.Consultarevento}</li>
                         </c:if>
-                        <div class="card-columns">
-                            <c:forEach items="#{eventoControlador.consultarVigentes()}" var="e">
-                                <div class="card">
-                                    <img src="#{e.img}" class="card-img-top img-fluid" alt=""/>
-                                    <div class="card-block">
-                                        <h3 class="card-title">#{e.titulo}</h3>
-                                        <p class="card-text">#{e.detalle}<h:commandLink class="card-link" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="...#{formdashboardadmin.Leermas}"></h:commandLink></p>
-                                        <h:commandLink class="btn btn-outline-success btn-block btn-lg" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="#{formdashboardadmin.Inscribirme}"></h:commandLink>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </h:form>
-                <!-- Modal inscripcion a evento -->
-                <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>#{formdashboardadmin.Inscripciónaevento}</h5>
-                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <!-- Formulario comunicado -->
-                            <h:form class="row">
-                                <div class="modal-body">
-                                    <div class="form-group row font">
-                                        <div class="col-12">
-                                            <label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label>
-                                            <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row font">
-                                        <div class="col-12 col-md-6">
-                                            <label>#{formdashboardadmin.Residente}</label>
-                                            <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            <label>#{formdashboardadmin.Torre}</label>
-                                            <h:selectOneMenu class="form-control">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            <label>#{formdashboardadmin.Apartamento}</label>
-                                            <h:selectOneMenu class="form-control">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer col-12">
-                                    <h:commandButton value="#{formdashboardadmin.confirmar}" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
-                                </div>
-                            </h:form>
-                        </div>
-                    </div>
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                            <li class="breadcrumb-item active">#{formdashboardadmin.Consultarevento}</li>
+                            <style>
+                                nav ul li{ width:25%;}
+                                @media screen and (max-width:903px){
+                                    nav ul li{
+                                        width: 100%;
+                                        text-align: left;
+                                    }
+                                }
+                            </style>
+                        </c:if>
+                    </ol>
                 </div>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                <!-- main -->
+                <section class="container-fluid" id="principal" style="margin-bottom: 350px">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>
+                                <i class="fas fa-calendar-day"></i>
+                                #{formdashboardadmin.Consultarevento}
+                            </h3>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h:form class="row mt-3 mb-3">
+                        <div class="col">
+                            <c:if test="#{eventoControlador.contarVigentes() == 0 }">
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+                                    #{formdashboardadmin.Noeventospublicados}
+                                </div>
+                            </c:if>
+                            <div class="card-columns">
+                                <c:forEach items="#{eventoControlador.consultarVigentes()}" var="e">
+                                    <div class="card">
+                                        <img src="#{e.img}" class="card-img-top img-fluid" alt=""/>
+                                        <div class="card-block">
+                                            <h3 class="card-title">#{e.titulo}</h3>
+                                            <p class="card-text">#{e.detalle}<h:commandLink class="card-link" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="...#{formdashboardadmin.Leermas}"></h:commandLink></p>
+                                            <h:commandLink class="btn btn-outline-success btn-block btn-lg" action="#{eventoControlador.consultarEvento(e.idEvento)}" value="#{formdashboardadmin.Inscribirme}"></h:commandLink>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </h:form>
+                    <!-- Modal inscripcion a evento -->
+                    <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>#{formdashboardadmin.Inscripciónaevento}</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- Formulario comunicado -->
+                                <h:form class="row">
+                                    <div class="modal-body">
+                                        <div class="form-group row font">
+                                            <div class="col-12">
+                                                <label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label>
+                                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row font">
+                                            <div class="col-12 col-md-6">
+                                                <label>#{formdashboardadmin.Residente}</label>
+                                                <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <label>#{formdashboardadmin.Torre}</label>
+                                                <h:selectOneMenu class="form-control">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <label>#{formdashboardadmin.Apartamento}</label>
+                                                <h:selectOneMenu class="form-control">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer col-12">
+                                        <h:commandButton value="#{formdashboardadmin.confirmar}" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- Bootstrap y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>

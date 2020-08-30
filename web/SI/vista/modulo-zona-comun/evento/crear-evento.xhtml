@@ -39,7 +39,7 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Evento}</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!--<div class="loader"></div>-->
             <!-- Contenedor principal -->
@@ -125,7 +125,7 @@
                             </div>
                             <!-- Datos del lugar -->
                             <div class="col-12 col-md-6">
-                                <p><a href="#lugar" class="btn btn-primary text-left" aria-expanded="false" aria-controls="lugar" data-toggle="collapse"><i class="fas fa-map-marker-alt"></i>Datos del lugar del evento</a></p>
+                                <p><a href="#lugar" class="btn btn-primary text-left" aria-expanded="false" aria-controls="lugar" data-toggle="collapse"><i class="fas fa-map-marker-alt"></i>#{formdashboardadmin.Zonacomún}</a></p>
                                 <div class="collapse" id="lugar">
                                     <div class="form-group row">
                                         <div class="col-12">
@@ -154,7 +154,7 @@
                             </div>
                             <!-- Notificar invitados -->
                             <div class="col-12 col-md-6">
-                                <p><a href="#invitados" class="btn btn-primary text-left" aria-expanded="false" aria-controls="invitados" data-toggle="collapse"><i class="far fa-envelope"></i>Notificar vía email</a></p>
+                                <p><a href="#invitados" class="btn btn-primary text-left" aria-expanded="false" aria-controls="invitados" data-toggle="collapse"><i class="far fa-envelope"></i>#{formdashboardadmin.Notificarvíaemail}</a></p>
                                 <div class="collapse" id="invitados">
                                     <div class="form-group row">
                                         <div class="torre col-12 col-md-6">
