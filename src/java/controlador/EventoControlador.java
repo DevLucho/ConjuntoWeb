@@ -109,10 +109,10 @@ public class EventoControlador implements Serializable {
         if (notificar == 1000) { // 1000 notifica todos los usuarios
             allMails();
             // Correos masivos 
-            for (int i = 0; i < allMails().size(); i++) {
-                email.enviarEmail(allMails().get(i).getCorreo(), "Invitación a evento",
+            for (Usuario u:allMails()) {
+                email.enviarEmail(u.getCorreo(), "Invitación a evento",
                         email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
-                                "<p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + correos().get(i).getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
+                                "<p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
@@ -122,10 +122,10 @@ public class EventoControlador implements Serializable {
             notifico = true;
         } else if (notificar != 1100) { // 1100 = ningun usuario, notifica segun rol
             correos();
-            for (int i = 0; i < correos().size(); i++) {
-                email.enviarEmail(correos().get(i).getCorreo(), "Invitación a evento",
+            for (Usuario u:correos()) {
+                email.enviarEmail(u.getCorreo(), "Invitación a evento",
                         email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
-                                " <p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + correos().get(i).getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
+                                " <p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
