@@ -55,7 +55,8 @@ public class CorrespondenciaControlador implements Serializable {
     Empresa empresa;
     Vigilante vigilante;
     Residente residente;
-    CodigoControlador codigoControlador;
+    CorreoControlador email;
+    
     List<Residente> residenteList;
     String correo;
 
@@ -124,7 +125,7 @@ public class CorrespondenciaControlador implements Serializable {
         empresa = new Empresa();
         vigilante = new Vigilante();
         residenteList = new ArrayList();
-        codigoControlador = new CodigoControlador();
+        email = new CorreoControlador();
     }
 
     // consultar inmueble residente
@@ -148,7 +149,7 @@ public class CorrespondenciaControlador implements Serializable {
         residenteList = inmuebleR(correspondencia.getIdInmueble().getIdInmueble());
 
         this.correo = residenteList.get(0).getIdPerfil().getCorreo();
-        codigoControlador.enviarEmail(correo, "Correpondencia nueva",
+        email.enviarEmail(correo, "Correpondencia nueva",
                 "<div style='margin: 0;padding: 0;box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;font-size: 20px;'>\n"
                 + "    <div style='width: 60;height: 1120px; margin: 3% 20% 5% 20%; overflow: hidden; -webkit-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);-moz-box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);box-shadow: 0px 7px 12px 2px rgba(0, 0, 0, 0.53);'>\n"
                 + "        <section style='padding: 3% 3%; background-color: #282828; border-bottom: solid rgba(212, 197, 197, 0.383) 2px;'>\n"

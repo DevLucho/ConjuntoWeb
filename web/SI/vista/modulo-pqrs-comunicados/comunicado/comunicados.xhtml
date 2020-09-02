@@ -77,7 +77,7 @@
                                             </button>
                                         </div>
                                         <!-- Formulario comunicado -->
-                                        <h:form class="row">
+                                        <h:form class="row" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group row font">
                                                     <div class="col-12 col-md-6">
@@ -87,7 +87,7 @@
                                                     </div>
                                                     <div class="col-12 col-md-6">
                                                         <label for="fechafinal">Publicar hasta:</label>
-                                                        <input type="date" class="form-control" name="fechai" id="fechafinal"/>
+                                                        <input type="date" class="form-control" name="publicar" id="publicar"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row font">
@@ -100,10 +100,11 @@
                                                 <div class="form-group row">
                                                     <!-- Subir foto -->
                                                     <div class="col-5" style="padding-right:0 ;">
-                                                        <label for="file" class="subir-foto"> <span>+</span><br/> Adjuntar<br/>imagen</label>
-                                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
-                                                        <h:inputText class="form-control" a:placeholder="Ruta img" id="rutac" value="#{comunicadoControlador.comunicado.img}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                                                        <h:message for="rutac" style="color: red"/>
+                                                        <h:outputLabel for="file" class="subir-foto">
+                                                            <span>+</span> <br/> Adjuntar <br/> imagen
+                                                        </h:outputLabel>
+                                                        <h:inputFile id="file" value="#{comunicadoControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                                        <h:message for="file" style="color: red"/>
                                                     </div>
                                                     <!-- Pre-visualizar foto -->
                                                     <div class="contenedor-imagen col-7" style="padding-left: 0;">
@@ -185,7 +186,7 @@
                                             </button>
                                         </div>
                                         <!-- Formulario comunicado -->
-                                        <h:form class="row">
+                                        <h:form class="row" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group row font">
                                                     <div class="col-12 col-md-6">
@@ -195,7 +196,7 @@
                                                     </div>
                                                     <div class="col-12 col-md-6">
                                                         <label for="fechafinal">Publicar hasta:</label>
-                                                        <input type="date" class="form-control" name="fechai" id="fechafinal"/>
+                                                        <input type="date" class="form-control" name="publicar2" id="publicar2"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row font">
@@ -208,14 +209,15 @@
                                                 <div class="form-group row">
                                                     <!-- Subir foto -->
                                                     <div class="col-5" style="padding-right:0 ;">
-                                                        <label for="file" class="subir-foto"> <span>+</span><br/> Adjuntar<br/>imagen</label>
-                                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
-                                                        <h:inputText class="form-control" a:placeholder="Ruta img" id="rutan" value="#{comunicadoControlador.comunicado.img}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                                                        <h:message for="rutan" style="color: red"/>
+                                                       <h:outputLabel for="file" class="subir-foto">
+                                                            <span>+</span> <br/> Adjuntar <br/> imagen
+                                                        </h:outputLabel>
+                                                        <h:inputFile id="file" value="#{comunicadoControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                                        <h:message for="file" style="color: red"/>
                                                     </div>
                                                     <!-- Pre-visualizar foto -->
                                                     <div class="contenedor-imagen col-7" style="padding-left: 0;">
-                                                        <div id="pre-visualizar"></div>
+                                                        <div id="pre-visualizar2"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,7 +244,7 @@
                                                         </div>
                                                     </h3>
                                                     <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{noticia.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{noticia.idPerfil.idRol.nombre}</p>
-                                                    <img src="../../../../#{noticia.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
+                                                    <img src="#{noticia.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
                                                     <p class="card-text mt-3">#{noticia.descripcion}</p>
                                                 </div>
                                             </div>
@@ -278,19 +280,20 @@
                                             </button>
                                         </div>
                                         <!-- Formulario foto-->
-                                        <h:form class="row">
+                                        <h:form class="row" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group row">
                                                     <!-- Subir foto -->
                                                     <div class="col-5" style="padding-right:0 ;">
-                                                        <label for="file" class="subir-foto"> <span>+</span><br/> Adjuntar<br/>imagen</label>
-                                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
-                                                        <h:inputText class="form-control" a:placeholder="Ruta img" id="rutai" value="#{comunicadoControlador.comunicado.img}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                                                        <h:message for="rutai" style="color: red"/>
+                                                        <h:outputLabel for="file" class="subir-foto">
+                                                            <span>+</span> <br/> Adjuntar <br/> imagen
+                                                        </h:outputLabel>
+                                                        <h:inputFile id="file" value="#{comunicadoControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                                        <h:message for="file" style="color: red"/>
                                                     </div>
                                                     <!-- Pre-visualizar foto -->
                                                     <div class="contenedor-imagen col-7" style="padding-left: 0;">
-                                                        <div id="pre-visualizar"></div>
+                                                        <div id="pre-visualizar3"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -313,7 +316,7 @@
                                                         <h:commandButton value="" class="btn btn-outline-danger float-right fas fa-trash-alt btn-eliminar-comunicado" title="Eliminar foto" action="#{comunicadoControlador.eliminar(galeria)}"></h:commandButton>
                                                         <!-- . -->
                                                     </div>
-                                                    <img src="../../../../#{galeria.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
+                                                    <img src="#{galeria.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -330,7 +333,7 @@
         <!-- Previsulizar img -->
         <script>
             // Previsualizar imagen input type file
-            document.getElementById("file").onchange = function (e) {
+            document.getElementById("j_idt46:file").onchange = function (e) {
                 // Creamos el objeto de la clase FileReader
                 let reader = new FileReader();
 
@@ -340,6 +343,49 @@
                 // Le decimos que cuando este listo ejecute el código interno
                 reader.onload = function () {
                     let preview = document.getElementById('pre-visualizar'),
+                            image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("j_idt66:file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar2'),
+                            image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("j_idt101:file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar3'),
                             image = document.createElement('img');
 
                     image.src = reader.result;

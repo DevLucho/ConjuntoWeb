@@ -64,7 +64,7 @@
                     </div>
                     <hr/>
                     <!-- Formulario -->
-                    <h:form>
+                    <h:form enctype="multipart/form-data">
                         <div class="row mt-3">
                             <!-- Titulo -->
                             <div class="col-12">
@@ -91,10 +91,11 @@
                                             <h:message for="fechaInicio" style="color: red"/>
                                         </div>
                                         <div class="col-4">
-                                            <strong><label for="fechai">#{formdashboardadmin.Empiezaalas}</label></strong>
-                                            <h:inputText a:type="time" class="form-control" id="horaInicio" value="#{eventoControlador.evento.horaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
+                                            <strong><label for="horaInicio">#{formdashboardadmin.Empiezaalas}</label></strong>
+                                            <h:selectOneMenu id="horaInicio" class="form-control" value="#{eventoControlador.horaInicial.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                            </h:selectOneMenu>
                                             <h:message for="horaInicio" style="color: red"/>
                                         </div>
 
@@ -115,9 +116,10 @@
                                         </div>
                                         <div class="col-4">
                                             <strong><label for="fechaf">#{formdashboardadmin.Terminaalas}</label></strong>
-                                            <h:inputText a:type="time" class="form-control" id="horaFin" value="#{eventoControlador.evento.horaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
-                                                <f:convertDateTime pattern="HH:mm" />
-                                            </h:inputText>
+                                            <h:selectOneMenu id="horaFin" class="form-control" value="#{eventoControlador.horaFinal.idHora}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                            </h:selectOneMenu>
                                             <h:message for="horaFin" style="color: red"/> 
                                         </div>
                                     </div>
@@ -189,21 +191,22 @@
                                 <div class="row">
                                     <!--Subir foto--> 
                                     <div class="col-5" style="padding: 0;">
-                                        <label for="file" class="subir-foto"> <span>+</span> <br/> #{formdashboardadmin.Adjuntarimagen}</label>
-                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;"/>
+                                        <h:outputLabel for="file" class="subir-foto">
+                                            <span>+</span> <br/> Adjuntar <br/> imagen
+                                        </h:outputLabel>                                        
+                                        <h:inputFile id="file" value="#{eventoControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                        <h:message for="file" style="color: red"/>
                                     </div>
                                     <!--Pre-visualizar foto-->
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
-                                    <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Rutaimg}" id="ruta" value="#{eventoControlador.evento.img}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
-                                    <h:message for="ruta" style="color: red"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">
                                     <div class="modal-dialog d-flex justify-content-center align-items-center">
                                         <div class="modal-content">
-                                            <img src="../../../img/bbq.jpg" alt=""/>
+                                            <img/>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +227,7 @@
         <!-- Previsulizar img -->
         <script>
             // Previsualizar imagen input type file
-            document.getElementById("file").onchange = function (e) {
+            document.getElementById("j_idt46:file").onchange = function (e) {
                 // Creamos el objeto de la clase FileReader
                 let reader = new FileReader();
 

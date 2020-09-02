@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 /**
@@ -47,15 +48,11 @@ public class DisponibilidadControlador implements Serializable {
     private boolean sabado;
 
     private ZonaComunal zonaComunal;
-
+    private ImagenControlador imagen;
     private Disponibilidad disponibilidad;
-
     private HoraInicial horaInicial;
-
     private HoraFinal horaFinal;
-
     private DisponibilidadDia disponibilidadDia;
-
     private List<Disponibilidad> disponibilidadZona;
 
     @EJB
@@ -81,9 +78,6 @@ public class DisponibilidadControlador implements Serializable {
 
     @PostConstruct
     public void init() {
-        horaInicial = new HoraInicial();
-        horaFinal = new HoraFinal();
-        zonaComunal = new ZonaComunal();
         domingo = false;
         lunes = false;
         martes = false;
@@ -94,9 +88,15 @@ public class DisponibilidadControlador implements Serializable {
         disponibilidad = new Disponibilidad();
         disponibilidadDia = new DisponibilidadDia();
         disponibilidadZona = new ArrayList();
+        horaInicial = new HoraInicial();
+        horaFinal = new HoraFinal();
+        zonaComunal = new ZonaComunal();
+        imagen = new ImagenControlador();
     }
 
     public void registrar() {
+        imagen.subirImagen();
+        zonaComunal.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
         zonaComunalFacade.create(zonaComunal);
         if (domingo) {
             disponibilidadDia.setIdDia(1);
@@ -165,6 +165,7 @@ public class DisponibilidadControlador implements Serializable {
         this.horaFinal = new HoraFinal();
         this.disponibilidad = new Disponibilidad();
         this.zonaComunal = new ZonaComunal();
+        this.imagen = new ImagenControlador();
         mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
     }
 
@@ -246,6 +247,7 @@ public class DisponibilidadControlador implements Serializable {
         mensaje.setMensaje("Mensajes('Exito!','Zona común modificada satisfactoriamente','success');");
     }
 
+    // Metodos consultar
     public List<Disponibilidad> consultarTodos() {
         return disponibilidadFacade.findAll();
     }
@@ -254,33 +256,21 @@ public class DisponibilidadControlador implements Serializable {
         return disponibilidadDiaFacade.findAll();
     }
 
-    public List<HoraInicial> consultarHoraInical() {
-        return horaInicialFacade.findAll();
-    }
-
-    public List<HoraFinal> consultarHoraFinal() {
-        return horaFinalFacade.findAll();
-    }
-
     public String consultarDisponibilidad(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
         disponibilidadZona = disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
         return "detalle-zona";
     }
 
-    public String convertir(Date hora) {
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        String time = df.format(hora);
-        return time;
+    public List<SelectItem> horaReserva() {
+        List<SelectItem> numeros = new ArrayList<>();
+        for (int i = 1; i <= 24; i++) {
+            numeros.add(new SelectItem(i, "" + i + ""));
+        }
+        return numeros;
     }
 
-    /*
-    public List<Disponibilidad> consultaDisponiblidad() {
-        for (Disponibilidad disponibilidad : disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal())) {
-            System.out.println("Dia: " + disponibilidad.getIdDia().getIdDia());
-        }
-        return disponibilidadFacade.consultarDisponibilidadZona(zonaComunal.getIdZonaComunal());
-    }*/
+    // Metodos get y set
     public DisponibilidadDia getDisponibilidadDia() {
         return disponibilidadDia;
     }
@@ -391,6 +381,14 @@ public class DisponibilidadControlador implements Serializable {
 
     public void setHoraInicial(HoraInicial horaInicial) {
         this.horaInicial = horaInicial;
+    }
+
+    public ImagenControlador getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenControlador imagen) {
+        this.imagen = imagen;
     }
 
 }

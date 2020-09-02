@@ -52,8 +52,7 @@
                     </div>
                     <hr/>                 
                     <!-- Formulario -->
-
-                    <h:form>
+                    <h:form enctype="multipart/form-data">
                         <div class="row">
                             <!-- Titulo -->
                             <div class="col-12 ">
@@ -115,7 +114,7 @@
                                                     <b><label>Reservaciones desde las:</label></b>
                                                     <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.horaInicial.idHora}"  required="true">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItems value="#{disponibilidadControlador.consultarHoraInical()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{disponibilidadControlador.convertir(hi.hora)}"/>
+                                                        <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
                                                     </h:selectOneMenu>
                                                     <h:message for="horaI" style="color: red"/>
                                                 </div>
@@ -123,7 +122,7 @@
                                                     <b><label>Reservaciones hasta las:</label></b>
                                                     <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal.idHora}"  required="true">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItems value="#{disponibilidadControlador.consultarHoraFinal()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{disponibilidadControlador.convertir(hf.hora)}"/>
+                                                        <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                                     </h:selectOneMenu>
                                                     <h:message for="horaF" style="color: red"/>
                                                 </div>
@@ -131,32 +130,9 @@
                                                     <b><label>Tiempo maximo de reserva en horas:</label></b>
                                                     <h:selectOneMenu id="tiempoM" value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
-                                                        <f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
-                                                        <f:selectItem itemValue="3" itemLabel="3"></f:selectItem>
-                                                        <f:selectItem itemValue="4" itemLabel="4"></f:selectItem>
-                                                        <f:selectItem itemValue="5" itemLabel="5"></f:selectItem>
-                                                        <f:selectItem itemValue="6" itemLabel="6"></f:selectItem>
-                                                        <f:selectItem itemValue="7" itemLabel="7"></f:selectItem>
-                                                        <f:selectItem itemValue="8" itemLabel="8"></f:selectItem>
-                                                        <f:selectItem itemValue="9" itemLabel="9"></f:selectItem>
-                                                        <f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
-                                                        <f:selectItem itemValue="11" itemLabel="11"></f:selectItem>
-                                                        <f:selectItem itemValue="12" itemLabel="12"></f:selectItem>
-                                                        <f:selectItem itemValue="13" itemLabel="13"></f:selectItem>
-                                                        <f:selectItem itemValue="14" itemLabel="14"></f:selectItem>
-                                                        <f:selectItem itemValue="15" itemLabel="15"></f:selectItem>
-                                                        <f:selectItem itemValue="16" itemLabel="16"></f:selectItem>
-                                                        <f:selectItem itemValue="17" itemLabel="17"></f:selectItem>
-                                                        <f:selectItem itemValue="18" itemLabel="18"></f:selectItem>
-                                                        <f:selectItem itemValue="19" itemLabel="19"></f:selectItem>
-                                                        <f:selectItem itemValue="20" itemLabel="20"></f:selectItem>
-                                                        <f:selectItem itemValue="21" itemLabel="21"></f:selectItem>
-                                                        <f:selectItem itemValue="22" itemLabel="22"></f:selectItem>
-                                                        <f:selectItem itemValue="23" itemLabel="23"></f:selectItem>
-                                                        <f:selectItem itemValue="24" itemLabel="24"></f:selectItem>
+                                                        <f:selectItems value="#{disponibilidadControlador.horaReserva()}"/>
                                                     </h:selectOneMenu> 
-                                                    <h:message for="tiempoMR" style="color: red"/>
+                                                    <h:message for="tiempoM" style="color: red"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,15 +153,16 @@
                                 <div class="row">
                                     <!--Subir foto--> 
                                     <div class="col-5" style="padding: 0;">
-                                        <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
-                                        <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
+                                        <h:outputLabel for="file" class="subir-foto">
+                                            <span>+</span> <br/> Adjuntar <br/> imagen
+                                        </h:outputLabel>
+                                        <h:inputFile id="file" value="#{disponibilidadControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                        <h:message for="file" style="color: red"/>
                                     </div>
                                     <!--Pre-visualizar foto--> 
                                     <div class="contenedor-imagen col-7" style="padding: 0;">
                                         <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                     </div>
-                                    <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
-                                    <h:message for="ruta" style="color: red"/>
                                 </div>
                                 <!--Mostrar foto en modal-->
                                 <div class="modal fade" id="modal-img">
@@ -211,7 +188,7 @@
         <!-- Previsulizar img -->
         <script>
             // Previsualizar imagen input type file
-            document.getElementById("file").onchange = function (e) {
+            document.getElementById("j_idt46:file").onchange = function (e) {
                 // Creamos el objeto de la clase FileReader
                 let reader = new FileReader();
 

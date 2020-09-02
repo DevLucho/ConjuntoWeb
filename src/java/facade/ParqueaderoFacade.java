@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Parqueadero;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,11 @@ public class ParqueaderoFacade extends AbstractFacade<Parqueadero> {
     public ParqueaderoFacade() {
         super(Parqueadero.class);
     }
-    
+
+    public List<Parqueadero> consultarP(String estado) {
+        Query query = em.createQuery("SELECT a FROM Parqueadero a WHERE a.estado=:estado");
+        query.setParameter("estado", estado);
+        return query.getResultList();
+    }
+
 }

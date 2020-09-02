@@ -88,7 +88,7 @@
                                         <strong><h:outputLabel value="Parqueadero disponible" for="idParqueadero"/></strong>
                                         <h:selectOneMenu id="idParqueadero" class="custom-select" value="#{vehiculoControlador.parqueadero.idParqueadero}" required="true">
                                             <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.idParqueadero}" itemLabel="#{parCont.lugar}"/>
+                                            <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarP('Desocupado')}" itemValue="#{parCont.idParqueadero}" itemLabel="#{parCont.lugar}"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">

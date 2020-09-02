@@ -40,12 +40,12 @@ h3,h4{
 .subir-foto:hover{
     background: #e7e7e7;
 }
-#pre-visualizar{
+#pre-visualizar, #pre-visualizar2, #pre-visualizar3{
     border: 1px dashed #e7e7e7;
     width:100%;
     border-radius: 5px;
 }
-#pre-visualizar img{
+#pre-visualizar img, #pre-visualizar2 img, #pre-visualizar3 img{
     width: 100%;
     height:100px;
     background-repeat: no-repeat;
@@ -68,7 +68,7 @@ p i, .container-fluid h3 i{
     margin-right: 5px;
 }
 @media only screen and (max-width: 768px) {
-    .subir-foto, #pre-visualizar{
+    .subir-foto, #pre-visualizar, #pre-visualizar2, #pre-visualizar3{
         margin-top: 1rem;
     }
     #email{

@@ -59,6 +59,10 @@ public class ParqueaderoControlador implements Serializable {
     public List<Parqueadero> consultarTodos() {
         return parqueaderoFacade.findAll();
     }
+    
+    public List<Parqueadero> consultarP(String estado){
+        return parqueaderoFacade.consultarP(estado);
+    }
 
     public Parqueadero getParqueadero() {
         return parqueadero;

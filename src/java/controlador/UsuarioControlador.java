@@ -60,6 +60,7 @@ public class UsuarioControlador implements Serializable {
     private LenguajeControlador lenguaje; // internacionalizacion
     @Inject
     private MensajeControlador mensaje;
+    private CorreoControlador email;
     private Usuario usuario;
     private Usuario user = null;
     private Usuario useremail = null;
@@ -71,7 +72,6 @@ public class UsuarioControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
-    private CodigoControlador codigoControlador;
     // campos form
     private String nrodoc;
     private int nrodocumento;
@@ -125,7 +125,7 @@ public class UsuarioControlador implements Serializable {
         apartamento = new Apartamento();
         torre = new Torre();
         usuario = new Usuario();
-        codigoControlador = new CodigoControlador();
+        email = new CorreoControlador();
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
@@ -174,90 +174,13 @@ public class UsuarioControlador implements Serializable {
                 }
 
                 // enviar email con usuario y contraseña          
-                codigoControlador.enviarEmail(correo, "Registro exitoso",
-                        "<div style='\n"
-                        + "    width:500px;\n"
-                        + "    background-color:\n"
-                        + "    #282828;margin-top: 50px !important;\n"
-                        + "    min-height: 115px;\n"
-                        + "    border-radius: 4px 4px 0 0 ;\n"
-                        + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                        + "    position: relative;\n"
-                        + "    min-height: 70px;\n"
-                        + "    margin: 0 auto;\n"
-                        + "    padding: 20px;\n"
-                        + "    text-align: center;'>\n"
-                        + "        <div>\n"
-                        + "            <div>\n"
-                        + "                <a href='#'>\n"
-                        + "                    <img src='http://imgfz.com/i/9mEWVtU.png' style='width: 300px;'>\n"
-                        + "                </a>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
-                        + "    </div>\n"
-                        + "    <hr style='\n"
-                        + "    margin-top: 1rem;\n"
-                        + "    margin-bottom: 1rem;\n"
-                        + "    border: 0;\n"
-                        + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                        + "    <div style='padding:20px;width: 500px;margin-right: auto;margin-left: auto;border: 1px solid rgba(0,0,0,.1);'>\n"
-                        + "        <div style='\n"
-                        + "        margin:0 auto;\n"
-                        + "        background: #ffffff;\n"
-                        + "        box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                        + "        border-radius: 0 0 4px 4px ;'>\n"
-                        + "            <img src='http://imgfz.com/i/7ocMf5s.jpeg' style='width: 100% ;background-attachment: fixed'>\n"
-                        + "        </div>\n"
-                        + "            <!-- Titulo y texto informativo -->\n"
-                        + "        <div>\n"
-                        + "            <h2 style='font-family: Arial, Helvetica, sans-serif;color:#33406A;font-weight: bold;'>\n"
-                        + "                Bienvenido!\n"
-                        + "            </h2>\n"
-                        + "            <hr>\n"
-                        + "            <p style='font-family: Arial, Helvetica, sans-serif;'><b>¡Hola, " + usuario.getNombre() +"!</b></p>\n"
-                        + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Aquí tienes la información de tu <b>cuenta</b> para acceder al sistema de tu conjunto residencial:</p>\n"
-                        + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: "+usuario.getDocumento()+"<br/>Contraseña: "+clavegenerada+"</p>\n"
-                        + "        </div>\n"
-                        + "    </div>\n"
-                        + "    <hr style='\n"
-                        + "    margin-top: 1rem;\n"
-                        + "    margin-bottom: 1rem;\n"
-                        + "    border: 0;\n"
-                        + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                        + "    <div style='\n"
-                        + "    width:500px;\n"
-                        + "    background-color:#282828;\n"
-                        + "    min-height: 115px;\n"
-                        + "    border-radius: 0px 0px 4px 4px ;\n"
-                        + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                        + "    position: relative;\n"
-                        + "    min-height: 70px;\n"
-                        + "    margin: 0 auto;\n"
-                        + "    padding: 20px;\n"
-                        + "    text-align: center;'>\n"
-                        + "        <div>\n"
-                        + "            <div style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                        + "                <small>\n"
-                        + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                        + "                        Términos y condiciones\n"
-                        + "                    </a>\n"
-                        + "                    &nbsp;\n"
-                        + "                    |\n"
-                        + "                    &nbsp;\n"
-                        + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                        + "                        Políticas de privacidad\n"
-                        + "                    </a>\n"
-                        + "                </small>\n"
-                        + "                <br />\n"
-                        + "                <br />\n"
-                        + "                <div>\n"
-                        + "                    <small>© 2020 Todos los derechos reservados.</small>\n"
-                        + "                    <br>\n"
-                        + "                    <a href='#'><img src='http://imgfz.com/i/HxYQDRd.png' /></a>\n"
-                        + "                </div>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
-                        + "    </div>");
+                email.enviarEmail(correo, "Registro exitoso",
+                        email.paginaCorreo("Bienvenido!",
+                                "<p style='font-family: Arial, Helvetica, sans-serif;'><b>¡Hola, " + usuario.getNombre() + "!</b></p>\n"
+                                + "<p style='font-family: Arial, Helvetica, sans-serif;'>Aquí tienes la información de tu <b>cuenta</b> para acceder al sistema de tu conjunto residencial:</p>\n"
+                                + "<p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: " + usuario.getDocumento() + "<br/>Contraseña: " + clavegenerada + "</p>",
+                                "http://imgfz.com/i/7ocMf5s.jpeg")
+                );
 
                 usuario = new Usuario();
                 rol = new Rol();
@@ -519,14 +442,6 @@ public class UsuarioControlador implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public CodigoControlador getCodigoControlador() {
-        return codigoControlador;
-    }
-
-    public void setCodigoControlador(CodigoControlador codigoControlador) {
-        this.codigoControlador = codigoControlador;
     }
 
 }

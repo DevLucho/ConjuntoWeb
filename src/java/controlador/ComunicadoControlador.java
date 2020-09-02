@@ -33,8 +33,8 @@ public class ComunicadoControlador implements Serializable {
      * Creates a new instance of ComunicadoControlador
      */
     private Comunicado comunicado;
-
     private Usuario usuario;
+    private ImagenControlador imagen;
 
     String fechaPublicacion = "";
 
@@ -54,9 +54,12 @@ public class ComunicadoControlador implements Serializable {
     public void init() {
         usuario = new Usuario();
         comunicado = new Comunicado();
+        imagen = new ImagenControlador();
     }
 
     public void registrar(String tipo) {
+        imagen.subirImagen();
+        comunicado.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
         switch (tipo) {
             case "Interno":
                 usuario.setIdPerfil(1);
@@ -135,6 +138,8 @@ public class ComunicadoControlador implements Serializable {
     public void asignarImg(Comunicado comunicadoImg) {
         comunicado = comunicadoImg;
     }
+    
+    // Metodos get y set
 
     public Comunicado getComunicado() {
         return comunicado;
@@ -158,6 +163,14 @@ public class ComunicadoControlador implements Serializable {
 
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public ImagenControlador getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenControlador imagen) {
+        this.imagen = imagen;
     }
 
 }

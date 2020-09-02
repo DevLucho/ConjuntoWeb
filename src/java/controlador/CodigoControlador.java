@@ -43,6 +43,7 @@ public class CodigoControlador implements Serializable {
      */
     @Inject
     private MensajeControlador mensaje;
+    private CorreoControlador email;
     private Codigo codigo;
     private String cod;
     private Codigo codr = null;
@@ -69,48 +70,8 @@ public class CodigoControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        email = new CorreoControlador();
         codigo = new Codigo();
-    }
-
-    // notificar via email
-    public void enviarEmail(String destinatario, String asunto, String descripcion) throws NoSuchProviderException, MessagingException {
-        try {
-            // propiedades  
-            Properties propiedad = new Properties();
-            propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
-            propiedad.setProperty("mail.smtp.starttls.enable", "true");
-            propiedad.setProperty("mail.smtp.port", "587");
-            propiedad.setProperty("mail.smtp.auth", "true");
-            // otros correos = conjuntow@gmail.com, conjuntooweb@gmail.com - misma contraseña
-            String correoEnvia = "noresponder.conjuntoweb@gmail.com";
-            String contrasena = "conjunto123";
-
-            Session sesion = Session.getDefaultInstance(propiedad);
-
-            // envio email
-            MimeMessage mail = new MimeMessage(sesion);
-
-            try {
-                mail.setFrom(new InternetAddress(correoEnvia));
-                mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-                mail.setSubject(asunto);
-                mail.setContent(descripcion, "text/html");
-
-                Transport transporte = sesion.getTransport("smtp");
-                transporte.connect(correoEnvia, contrasena);
-                transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
-                transporte.close();
-
-            } catch (AddressException ex) {
-                Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-
-            } catch (MessagingException ex) {
-                Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error en envio email revisar: " + e.getMessage());
-        }
     }
 
     public void generarCodigo() throws NoSuchProviderException, MessagingException {
@@ -126,96 +87,19 @@ public class CodigoControlador implements Serializable {
             codigoFacade.create(codigo);
 
             // envio email
-            enviarEmail(correo, "Código de registro",
-                    "<div style='\n"
-                    + "    width:500px;\n"
-                    + "    background-color:\n"
-                    + "    #282828;margin-top: 50px !important;\n"
-                    + "    min-height: 115px;\n"
-                    + "    border-radius: 4px 4px 0 0 ;\n"
-                    + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "    position: relative;\n"
-                    + "    min-height: 70px;\n"
-                    + "    margin: 0 auto;\n"
-                    + "    padding: 20px;\n"
-                    + "    text-align: center;'>\n"
-                    + "        <div>\n"
-                    + "            <div>\n"
-                    + "                <a href='#'>\n"
-                    + "                    <img src='http://imgfz.com/i/9mEWVtU.png' style='width: 300px;'>\n"
-                    + "                </a>\n"
-                    + "            </div>\n"
-                    + "        </div>\n"
-                    + "    </div>\n"
-                    + "    <hr style='\n"
-                    + "    margin-top: 1rem;\n"
-                    + "    margin-bottom: 1rem;\n"
-                    + "    border: 0;\n"
-                    + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "    <div style='padding:20px;width: 500px;margin-right: auto;margin-left: auto;border: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "        <div style='\n"
-                    + "        margin:0 auto;\n"
-                    + "        background: #ffffff;\n"
-                    + "        box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "        border-radius: 0 0 4px 4px ;'>\n"
-                    + "            <img src='http://imgfz.com/i/65vndEs.png' style='width: 100% ;background-attachment: fixed'>\n"
-                    + "        </div>\n"
-                    + "            <!-- Titulo y texto informativo -->\n"
-                    + "        <div>\n"
-                    + "            <h2 style='font-family: Arial, Helvetica, sans-serif;color:#33406A;font-weight: bold;'>\n"
-                    + "                Código de registro\n"
-                    + "            </h2>\n"
-                    + "            <hr>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Para continuar con el proceso de registro al sistema porfavor utilize el siguiente código de registro que ha sido generado por tu administrador.</p>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Código: <b>" + codgenerado + "</b></p>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Una vez utilizado el código este expirará.</p>\n"
-                    + "        </div>\n"
-                    + "    </div>\n"
-                    + "    <hr style='\n"
-                    + "    margin-top: 1rem;\n"
-                    + "    margin-bottom: 1rem;\n"
-                    + "    border: 0;\n"
-                    + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "    <div style='\n"
-                    + "    width:500px;\n"
-                    + "    background-color:#282828;\n"
-                    + "    min-height: 115px;\n"
-                    + "    border-radius: 0px 0px 4px 4px ;\n"
-                    + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "    position: relative;\n"
-                    + "    min-height: 70px;\n"
-                    + "    margin: 0 auto;\n"
-                    + "    padding: 20px;\n"
-                    + "    text-align: center;'>\n"
-                    + "        <div>\n"
-                    + "            <div style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                <small>\n"
-                    + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                        Términos y condiciones\n"
-                    + "                    </a>\n"
-                    + "                    &nbsp;\n"
-                    + "                    |\n"
-                    + "                    &nbsp;\n"
-                    + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                        Políticas de privacidad\n"
-                    + "                    </a>\n"
-                    + "                </small>\n"
-                    + "                <br />\n"
-                    + "                <br />\n"
-                    + "                <div>\n"
-                    + "                    <small>© 2020 Todos los derechos reservados.</small>\n"
-                    + "                    <br>\n"
-                    + "                    <a href='#'><img src='http://imgfz.com/i/HxYQDRd.png' /></a>\n"
-                    + "                </div>\n"
-                    + "            </div>\n"
-                    + "        </div>\n"
-                    + "    </div>"
+            email.enviarEmail(correo, "Código de registro",
+                    email.paginaCorreo("Código de registro",
+                            "<p style='font-family: Arial, Helvetica, sans-serif;'>Para continuar con el proceso de registro al sistema porfavor utilize el siguiente código de registro que ha sido generado por tu administrador.</p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'>Código: <b>" + codgenerado + "</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Una vez utilizado el código este expirará.</p>",
+                            "http://imgfz.com/i/65vndEs.png")
             );
 
             codigo = new Codigo();
             mensaje.setMensaje("MensajeAlertify('Código enviado: " + codgenerado + "','success');");
             codgenerado = "";
             correo = "";
+            email = new CorreoControlador();
         } else {
             mensaje.setMensaje("MensajeAlertify('Error de envio, digité un correo','error');");
         }
@@ -259,93 +143,16 @@ public class CodigoControlador implements Serializable {
             codigoFacade.create(codigo);
 
             // envio email
-            enviarEmail(recorreo, "Restablecer contraseña",
-                    "<div style='\n"
-                    + "    width:500px;\n"
-                    + "    background-color:\n"
-                    + "    #282828;margin-top: 50px !important;\n"
-                    + "    min-height: 115px;\n"
-                    + "    border-radius: 4px 4px 0 0 ;\n"
-                    + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "    position: relative;\n"
-                    + "    min-height: 70px;\n"
-                    + "    margin: 0 auto;\n"
-                    + "    padding: 20px;\n"
-                    + "    text-align: center;'>\n"
-                    + "        <div>\n"
-                    + "            <div>\n"
-                    + "                <a href='#'>\n"
-                    + "                    <img src='http://imgfz.com/i/9mEWVtU.png' style='width: 300px;'>\n"
-                    + "                </a>\n"
-                    + "            </div>\n"
-                    + "        </div>\n"
-                    + "    </div>\n"
-                    + "    <hr style='\n"
-                    + "    margin-top: 1rem;\n"
-                    + "    margin-bottom: 1rem;\n"
-                    + "    border: 0;\n"
-                    + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "    <div style='padding:20px;width: 500px;margin-right: auto;margin-left: auto;border: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "        <div style='\n"
-                    + "        margin:0 auto;\n"
-                    + "        background: #ffffff;\n"
-                    + "        box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "        border-radius: 0 0 4px 4px ;'>\n"
-                    + "            <!--<img src='#' style='width: 100% ;background-attachment: fixed'>-->\n"
-                    + "        </div>\n"
-                    + "            <!-- Titulo y texto informativo -->\n"
-                    + "        <div>\n"
-                    + "            <h2 style='font-family: Arial, Helvetica, sans-serif;color:#33406A;font-weight: bold;margin-top:0px;'>\n"
-                    + "                Restablecer la contraseña\n"
-                    + "            </h2>\n"
-                    + "            <hr>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Hola " + user.getNombre() + "," + "</p>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Has solicitado restablecer la contraseña de tu cuenta. Para continuar utilice el siguiente código de verificación:</p>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'>Código: <b>" + codgenerado + "</b></p>\n"
-                    + "            <p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Si no solicitaste restablecer la contraseña, por favor ignorar este mensaje. </p>\n"
-                    + "        </div>\n"
-                    + "    </div>\n"
-                    + "    <hr style='\n"
-                    + "    margin-top: 1rem;\n"
-                    + "    margin-bottom: 1rem;\n"
-                    + "    border: 0;\n"
-                    + "    border-top: 1px solid rgba(0,0,0,.1);'>\n"
-                    + "    <div style='\n"
-                    + "    width:500px;\n"
-                    + "    background-color:#282828;\n"
-                    + "    min-height: 115px;\n"
-                    + "    border-radius: 0px 0px 4px 4px ;\n"
-                    + "    box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
-                    + "    position: relative;\n"
-                    + "    min-height: 70px;\n"
-                    + "    margin: 0 auto;\n"
-                    + "    padding: 20px;\n"
-                    + "    text-align: center;'>\n"
-                    + "        <div>\n"
-                    + "            <div style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                <small>\n"
-                    + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                        Términos y condiciones\n"
-                    + "                    </a>\n"
-                    + "                    &nbsp;\n"
-                    + "                    |\n"
-                    + "                    &nbsp;\n"
-                    + "                    <a href='#' style=\"color: white;font-family: Arial, Helvetica, sans-serif;\">\n"
-                    + "                        Políticas de privacidad\n"
-                    + "                    </a>\n"
-                    + "                </small>\n"
-                    + "                <br />\n"
-                    + "                <br />\n"
-                    + "                <div>\n"
-                    + "                    <small>© 2020 Todos los derechos reservados.</small>\n"
-                    + "                    <br>\n"
-                    + "                    <a href='#'><img src='http://imgfz.com/i/HxYQDRd.png' /></a>\n"
-                    + "                </div>\n"
-                    + "            </div>\n"
-                    + "        </div>\n"
-                    + "    </div>"
+            email.enviarEmail(recorreo, "Restablecer contraseña",
+                    email.paginaCorreo("Restablecer la contraseña",
+                            "<p style='font-family: Arial, Helvetica, sans-serif;'>Hola " + user.getNombre() + ",</p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'>Has solicitado restablecer la contraseña de tu cuenta. Para continuar utilice el siguiente código de verificación:</p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'>Código: <b>" + codgenerado + "</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Si no solicitaste restablecer la contraseña, por favor ignorar este mensaje. </p>",
+                            "'#'")
             );
-
+            
+            email = new CorreoControlador();
             codigo = new Codigo();
             mensaje.setMensaje("MensajeAlertify('Código generado','success');");
             codgenerado = "";
