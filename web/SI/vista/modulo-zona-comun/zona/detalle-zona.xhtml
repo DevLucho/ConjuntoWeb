@@ -52,7 +52,7 @@
             }
         </style>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>Administrador | Zona comunal</title>
+        <title>#{formdashboardadmin.Zonacomún}</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -65,7 +65,7 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
                     </c:if>
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                         <style>
@@ -77,10 +77,10 @@
                                 }
                             }
                         </style>
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
                     </c:if>
-                    <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">Consultar zona común</a></li>
-                    <li class="breadcrumb-item active">Detalle zona común</li>
+                    <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">#{formdashboardadmin.Consultarzonacomún}</a></li>
+                    <li class="breadcrumb-item active">#{formdashboardadmin.Detallezonacomún}</li>
                 </ol>
             </div>
             <!-- main -->
@@ -89,13 +89,13 @@
                     <div class="col-12">
                         <h3>
                             <i class="fas fa-stream"></i>
-                            Detalle zona común
+                            #{formdashboardadmin.Detallezonacomún}
                         </h3>
                     </div>
                 </div>
                 <hr/>
                 <div class="col-12 col-md-2 mt-3 mb-3" style="text-align: center; padding: 0; margin-left: auto; margin-right: auto">
-                    <button type="button" class="btn btn-success btn-block" onclick="location.href = './generar-reserva.xhtml'">Reservar Ahora <i class="fas fa-exclamation"></i></button>
+                    <button type="button" class="btn btn-success btn-block" onclick="location.href = './generar-reserva.xhtml'">#{formdashboardadmin.Reservar} <i class="fas fa-exclamation"></i></button>
                 </div>
                 <hr/>
                 <h:form class="mt-3 mb-3">
@@ -117,21 +117,21 @@
                             <hr/>
                             <div class="media">
                                 <div class="media-body">
-                                    <h4 class="mt-0">Descripción</h4>
+                                    <h4 class="mt-0">#{formdashboardadmin.Descripción}</h4>
                                     <p>#{disponibilidadControlador.zonaComunal.descripcion}</p>
                                     <hr/>
                                     <div class="media">
                                         <i class="far fa-clock d-flex align-self-start mr-3"></i>
                                         <div class="media-body">
-                                            <h4 class="mt-0">Disponibilidad</h4>
+                                            <h4 class="mt-0">#{formdashboardadmin.Disponibilidad}</h4>
                                             <p>
-                                                La <mark>#{disponibilidadControlador.zonaComunal.nombre}</mark> estara disponible:<br/><br/> 
+                                                #{formdashboardadmin.La} <mark>#{disponibilidadControlador.zonaComunal.nombre}</mark> #{formdashboardadmin.estarádisponible}:<br/><br/> 
                                                 <c:forEach items="#{disponibilidadControlador.disponibilidadZona}" var="d">
-                                                    <mark>#{d.idDia.nombre}:</mark> Desde las <h:outputText value="#{d.horaInicialReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText> - Hasta las <h:outputText value="#{d.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText><br/>
+                                                    <mark>#{d.idDia.nombre}:</mark> #{formdashboardadmin.Desdelas} <h:outputText value="#{d.horaInicialReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText> - #{formdashboardadmin.hastalas} <h:outputText value="#{d.horaFinalReserva}"><f:convertDateTime pattern="HH:mm a" /></h:outputText><br/>
                                                 </c:forEach>
                                             </p>
                                             <p>
-                                                El tiempo maximo de reserva en la zona común es <mark>#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}</mark> horas.
+                                                #{formdashboardadmin.Tiempomáximodereservaenhoras} <mark>#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}</mark>.
                                             </p>
                                             <hr/>
                                         </div>
@@ -141,9 +141,9 @@
                             <hr/>
                             <div class="media">
                                 <div class="media-body">
-                                    <strong><h4 class="mt-0 text-right">Notas</h4></strong>
+                                    <strong><h4 class="mt-0 text-right">#{formdashboardadmin.Notas}</h4></strong>
                                     <p class="text-right">
-                                        Recuerde que el administrador del conjunto aprobará su solicitud de <mark>reserva</mark>.
+                                        #{formdashboardadmin.Recuerdequeeladministrador} <mark>#{formdashboardadmin.reserva}</mark>.
                                     </p>
                                 </div>
                                 <img src="#{disponibilidadControlador.zonaComunal.img}" width="64" height="64" alt="" class="ml-3"/>
