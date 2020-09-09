@@ -155,23 +155,17 @@ nav .start-contact, a:nth-child(6):hover~.animation{
 /* inicio de estilos de capa de incio de pag */
 .fonfo{
     width: 100%;
-    height: 745px;
+    height: 655px;
     background-image:url(img/conjunto-lucerna.png);
     background-repeat: no-repeat;
     background-size: 100%;
     float:left;
 }
-.capanegra{
-    background-size: 100%;    
-    width: 100%;
-    height: 745px;
-    float: left;
-}
 .textPrin{
-    color: white;
+    color: black;
     text-align: center;
     font-size: 40px;
-    padding-top: 350px;
+    padding-top: 300px;
     font-family: helvetica ;
 }
 .button.type3 {
@@ -398,13 +392,12 @@ nav .start-contact, a:nth-child(6):hover~.animation{
 .fonfo2{
     width: 100%;
     height: 645px;
-    background-image:url(img/coco.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
 .capanegra2{
     background-size: 100%;    
-    background-color: rgba(0, 0, 0, 0.493);
+    background-color: transparent;
     width: 100%;
     height: 645px;
 }
@@ -596,7 +589,7 @@ h2{
 }
 .thumb a {
     display: block;
-    width: 100%;
+    width: 95%;
     height: 100%;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0, 0, 0, 0.4)), url("img/reemplazo.jpg");
     background-size: 0, cover;

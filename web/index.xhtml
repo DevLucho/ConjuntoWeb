@@ -10,15 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
-        <!-- 
-        <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all"/>
-        <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all"/>
-        <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all"/>
-        -->
         <!-- swiper css -->
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
         <!-- styles -->
-        <link rel="stylesheet" href="index.css" />
+        <link href="index.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>        
@@ -36,19 +31,19 @@
                 border-bottom: black 3px solid;
             }
             .card1{
-                background-image: url();
+                background-image: url('http://imgfz.com/i/dskNMfY.png');
                 background-size: cover;
                 border-radius: 50%;
             }
             .card5{
-                background-image: url();
+                background-image: url('img/Sin título-1.png');
                 border-radius: 50%;
                 background-size: cover;
             }
             .card8{
-                background-image: url();
+                background-image: url('img/comuni.PNG');
                 border-radius: 50%;
-                background-size: cover; 
+                background-size: cover;
             }
         </style>
         <title>Conjunto Residencial Torres de Lucerna</title>
@@ -58,16 +53,16 @@
             <script src="js/swiper.min.js"></script>
             <div class="contenedor1">
                 <!-- Encabezado -->
-                <header id="header">
+                <header id="header" style="position: fixed; z-index: 1000; background: white">
                     <div class="logoindex">
                         <img width="350" src="img/logo.png" alt="" />
                     </div>
                     <!-- Navegacion -->
                     <nav>
-                        <a href="#header">#{formlogin.inicio}</a>
-                        <a href="#Ventajas">#{formlogin.ventajas}</a>
+                        <a href="#inicio">#{formlogin.inicio}</a>
                         <a href="#noticias">#{formlogin.noti}</a>
-                        <a href="#galeria" class="men">#{formlogin.galeria}</a>
+                        <a href="#galeria">#{formlogin.galeria}</a>
+                        <a href="#ventajas" class="men">#{formlogin.ventajas}</a>
                         <a class="men masss" href="#contacto">#{formlogin.contacto}</a>
                         <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
                         <div class="animation start-home" />
@@ -86,7 +81,7 @@
                     </h:form> 
                 </header>
                 <!-- Capa presentacion pag. -->
-                <section class="fonfo">
+                <section class="fonfo" id="inicio">
                     <div class="capanegra">
                         <h2 class="textPrin">
                             #{formlogin.bienvenida}<br/>
@@ -132,7 +127,6 @@
                 </section>
                 <section class="cont" id="noticias">
                     <br/>
-                    <hr/>
                     <br/>
                     <div class="notinoti">
                         <div class="capi">
@@ -171,64 +165,9 @@
                     <div class="swiper-pagination" />
                 </h:form>
                 <br/>
-                <hr/>
-                <br/>
-                <!-- zona de publicidad -->
-                <section class="fonfo2">
-                    <div class="capanegra2">
-                        <div class="not1">
-                            <h2 class="textPrin2">
-                                #{formlogin.ejemplos}
-                            </h2>
-                        </div>
-                        <div class="not2">
-                            <div class="for2">
-                                <div class="tarjeta-contenedor">
-                                    <div class="tarjeta">
-                                        <div class="adelante card8" />
-                                        <div class="atras">
-                                            <p>
-                                                m praesentium dicta assumenda quam eaque alias molestias!
-                                                Doloribus soluta, similique doeserunt vitae.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="for2">
-                                <div class="tarjeta-contenedor">
-                                    <div class="tarjeta">
-                                        <div class="adelante card5" />
-                                        <div class="atras">
-                                            <p>
-                                                dolorem qui modi fugit hic, odit distinctio perspiciatis
-                                                maxime deserunt vitae.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="not3">
-                            <div class="tarjeta-contenedor">
-                                <div class="tarjeta">
-                                    <div class="adelante card1" />
-                                    <div class="atras">
-                                        <p>
-                                            que dolorem qui modi fugit hic, odit distinctio perspiciatis
-                                            maxime deserunt vitae.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <br/>
-                <hr/>
                 <br/>
                 <!-- titulo galeria -->
-                <section class="cont" id="galeria">
+                <section class="cont" id="galeria" style="margin:0px">
                     <div class="notinoti">
                         <div class="capi">
                             <div class="section1">
@@ -260,11 +199,59 @@
 
                     <div class="swiper-pagination" />
                 </h:form>
+
+                <!-- zona de  -->
+                <section class="fonfo2">
+                    <div class="capanegra2">
+                        <div class="not1">
+                            <h2 class="textPrin2">
+                                Toda la información del conjunto a tu alcance
+                            </h2>
+                        </div>
+                        <div class="not2">
+                            <div class="for2">
+                                <div class="tarjeta-contenedor">
+                                    <div class="tarjeta">
+                                        <div class="adelante card8" />
+                                        <div class="atras">
+                                            <p>
+                                                Consulta noticias y actividades del conjunto.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="for2">
+                                <div class="tarjeta-contenedor">
+                                    <div class="tarjeta">
+                                        <div class="adelante card5" />
+                                        <div class="atras">
+                                            <p>
+                                                Recuerda solicitar el código de registro a tu administrador para acceder al sistema
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="not3">
+                            <div class="tarjeta-contenedor">
+                                <div class="tarjeta">
+                                    <div class="adelante card1" />
+                                    <div class="atras">
+                                        <p>
+                                           Reservar las zonas comunes ahora es mas facil !!!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <br/>
-                <hr/>
                 <br/>
                 <!-- segunda zona de publicidad -->
-                <section class="fonfo2 fonfo3">
+                <section id="ventajas" class="fonfo2 fonfo3">
                     <div class="capanegra2">
                         <div class="not1 not11">
                             <div class="for fosi">
@@ -344,12 +331,12 @@
                         <h:inputText id="celular" a:type="tel" class="duos com" a:placeholder="#{formlogin.Númerotelefónico}"  required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
                         <h:message for="celular" style="color: red"/>
                         <h:selectOneMenu id="torre" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunaTorre}">
-                            <f:selectItem itemLabel="Torre" itemValue=""></f:selectItem>
+                            <f:selectItem itemLabel="#{formlogin.Torre}" itemValue=""></f:selectItem>
                             <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
                         <h:message for="torre" style="color: red"/>
                         <h:selectOneMenu id="apto" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunApto}">
-                            <f:selectItem itemLabel="Apartamento" itemValue=""></f:selectItem>
+                            <f:selectItem itemLabel="#{formlogin.Apartamento}" itemValue=""></f:selectItem>
                             <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
                         </h:selectOneMenu>
                         <h:message for="apto" style="color: red"/>
@@ -364,14 +351,14 @@
                 <footer>
                     <div class="parS">
                         <div class="divi cono">
-                            <img src="img/LogoCW.png" width="300px" alt="" />
+                            <img src="img/Logo ShortCut.png" width="200px" alt="" />
                         </div>
                         <div class="divi diva">
                             <h4>#{formlogin.SobreNosotros}</h4>
                             <p class="pexs">
                                 #{formlogin.sobremensaje}
                             </p>
-                            <a href="#header" ><i class="fas fa-arrow-alt-circle-up black2" aria-hidden="true"/></a>
+                            <a href="#inicio" ><i class="fas fa-arrow-alt-circle-up black2" aria-hidden="true"/></a>
                         </div>
                         <div class="divi divo">
                             <img src="img/Redes.png" width="300px" alt="" />
