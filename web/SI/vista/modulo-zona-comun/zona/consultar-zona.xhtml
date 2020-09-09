@@ -31,7 +31,7 @@
             }
         </style>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar zona comunal</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Consultarzonacomún}</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -44,12 +44,12 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultar zona común</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Consultarzonacomún}</li>
                     </c:if>
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultar zona común</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Consultarzonacomún}</li>
                         <style>
                             nav ul li{ width:25%;}
                             @media screen and (max-width:903px){
@@ -68,7 +68,7 @@
                     <div class="col-12">
                         <h3>
                             <i class="fas fa-thumbtack"></i>
-                            Consultar zonas comunes reservables
+                            #{formdashboardadmin.Consultarzonascomunesreservables}
                         </h3>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <c:if test="#{zonaComunalControlador.contarZonas() == 0}">
                             <div class="alert alert-warning">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
-                                No hay zona comunes publicadas
+                                #{formdashboardadmin.Nohayzonacomunpublicada}
                             </div>
                         </c:if>
                         <div class="card-columns">
@@ -87,8 +87,8 @@
                                     <img src="#{zona.img}" class="card-img-top img-fluid" alt=""/>
                                     <div class="card-block">
                                         <h3 class="card-title">#{zona.nombre}</h3>
-                                        <p class="card-text">#{zona.descripcion}<h:commandLink class="card-link" value="...Leer más" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandLink></p>
-                                        <a href="./generar-reserva.xhtml" class="btn  btn-outline-success btn-block btn-lg">¡Reservar!</a>
+                                        <p class="card-text">#{zona.descripcion}<h:commandLink class="card-link" value="...#{formdashboardadmin.Leermas}" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandLink></p>
+                                        <a href="./generar-reserva.xhtml" class="btn  btn-outline-success btn-block btn-lg">¡#{formdashboardadmin.Reservar}!</a>
                                     </div>
                                 </div>
                             </c:forEach>

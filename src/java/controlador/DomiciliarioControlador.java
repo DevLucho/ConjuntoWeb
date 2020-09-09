@@ -146,7 +146,7 @@ public class DomiciliarioControlador implements Serializable {
         horaEntrada = dateFormat.format(date);
         fichaIngreso.setHoraEntrada(date);
         fichaIngresoFacade.create(fichaIngreso);
-
+        
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         domiciliario.setIdFicha(fichaIngreso);
@@ -159,7 +159,23 @@ public class DomiciliarioControlador implements Serializable {
         domiciliario = new Domiciliario();
         mensaje.setMensaje("RegistrarVisitante('success','Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
-
+    /*public static void delaySegundos(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+    }
+    public static void pepe{
+    for(int min=0;min < 2; min++){
+            for(int seg=0;seg<60;seg++){
+                //System.out.println(min+"+"+seg);
+                delaySegundos();
+                if (min == 1) {
+                    mensaje.setMensaje("RegistrarVisitante('success','Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
+                }
+            }
+        }
+    }*/
     public void salida(FichaIngreso fichaIngresoSalida){
         fichaIngreso = fichaIngresoSalida;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

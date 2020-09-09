@@ -20,6 +20,7 @@ public class MensajeControlador{
      * Creates a new instance of MensajeControlador
      */
     private String mensaje;
+    private String mensaje2;
 
     public MensajeControlador() {
     }
@@ -30,6 +31,14 @@ public class MensajeControlador{
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getMensaje2() {
+        return mensaje2;
+    }
+
+    public void setMensaje2(String mensaje2) {
+        this.mensaje2 = mensaje2;
     }
 
 }
