@@ -26,6 +26,8 @@ import java.io.Serializable;
 import java.security.NoSuchProviderException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -101,6 +103,18 @@ public class EventoControlador implements Serializable {
         evento.setHoraFin(horaFiFacade.find(horaFinal.getIdHora()));
         evento.setEstado("Vigente");
         eventoFacade.create(evento);
+        
+        Calendar f = Calendar.getInstance();
+        f.setTime(evento.getFechaInicio());
+        f.add(Calendar.DATE, 1);
+        evento.setFechaInicio(f.getTime());
+        
+        f.setTime(evento.getFechaFin());
+        f.add(Calendar.DATE, 1);
+        evento.setFechaFin(f.getTime());
+        
+        eventoFacade.edit(evento);
+        
         // mostrar fechas - horas con formato
         fechaI = fecha.format(evento.getFechaInicio());
         horaI = hora.format(evento.getHoraInicio().getHora());
@@ -296,5 +310,5 @@ public class EventoControlador implements Serializable {
     public void setImagen(ImagenControlador imagen) {
         this.imagen = imagen;
     }
-
+    
 }
