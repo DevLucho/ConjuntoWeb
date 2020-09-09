@@ -47,7 +47,12 @@ public class ExportUControlador {
         try {
             Driver dvr = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(dvr);
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/conjuntoweb?user=root&password=&useSSL=false");
+            /*
+            Pongan sus conexiones locales:
+            Avendaño: jdbc:mysql://localhost:3306/conjuntoweb?user=root&password=&useSSL=false
+            Lucho: jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false
+            */
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false");
             
             Workbook libro = WorkbookFactory.create(excel.getInputStream());
             XSSFSheet hoja = (XSSFSheet) libro.getSheetAt(0);

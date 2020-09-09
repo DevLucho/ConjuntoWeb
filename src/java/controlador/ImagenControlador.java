@@ -32,6 +32,10 @@ public class ImagenControlador implements Serializable {
     public void subirImagen() {
         try {
             InputStream in = img.getInputStream();
+            /*
+            Pongan su ruta local:
+            Lucho: C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\BackEnd-and-FrontEnd\\web\\SI\\img\\
+            */ 
             File f = new File("C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\BackEnd-and-FrontEnd\\web\\SI\\img\\" + img.getSubmittedFileName());
             f.createNewFile();
             FileOutputStream nf = new FileOutputStream(f);

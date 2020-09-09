@@ -1,5 +1,9 @@
 function Mensaje(titulo, texto, icono) {
-    Swal.fire({title: titulo, text: texto, icon: icono, showConfirmButton: false, timer: 3000});
+    Swal.fire({title: titulo, text: texto, icon: icono, showConfirmButton: false, timer: 3000, timerProgressBar: true,
+        onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }});
 };
 
 function Mensajes(titulo, texto, icono) {
