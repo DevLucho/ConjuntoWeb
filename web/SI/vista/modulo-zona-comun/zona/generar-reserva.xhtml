@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Calendario de reserva</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.calendariodereserva}</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -30,10 +30,10 @@
             <!-- miga de pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">Consultar zona común</a></li>
-                    <li class="breadcrumb-item"><a href="./detalle-zona.xhtml">Detalle zona común</a></li>
-                    <li class="breadcrumb-item active">Calendario de reserva</li>
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                    <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">#{formdashboardadmin.Consultarzonacomún}</a></li>
+                    <li class="breadcrumb-item"><a href="./detalle-zona.xhtml">#{formdashboardadmin.Detallezonacomún}</a></li>
+                    <li class="breadcrumb-item active">#{formdashboardadmin.calendariodereserva}</li>
                 </ol>
             </div>
             <!-- main -->
@@ -42,7 +42,7 @@
                     <div class="col-12">
                         <h3>
                             <i class="far fa-calendar-alt"></i>
-                            Calendario de reserva
+                            #{formdashboardadmin.Calendariodereserva}
                         </h3>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
                     <div class="col-12 panel">
                         <div class="panel-heading">
-                            <span>Filtros</span>
+                            <span>#{formdashboardadmin.Filtros}</span>
                         </div>
                     </div>
                     <div class="col-12 reserva">
@@ -58,10 +58,10 @@
                             <div class="col-12 col-md-5" style="padding: 0;">
                                 <div class="form-group row">
                                     <div class="col-12 mt-3" style="padding: 0;">
-                                        <strong><label for="zona-comun">Zona común</label></strong>
+                                        <strong><label for="zona-comun">#{formdashboardadmin.Zonacomún}</label></strong>
                                         <div class="box">
                                             <h:selectOneMenu id="idZonaComunal" value="#{zonaComunalControlador.zonaComunal.idZonaComunal}" required="true">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}"/>
                                             </h:selectOneMenu>
                                         </div>
@@ -71,13 +71,13 @@
                             <div class="col-12" style="padding: 0;">
                                 <div class="form-group row">
                                     <div class="col-12 col-md-5 mb-3" style="padding: 0;">
-                                        <strong><label for="fecha-inicial">Fecha inicial</label></strong>
+                                        <strong><label for="fecha-inicial">#{formdashboardadmin.Fechainicio}</label></strong>
                                         <div class="box date">
                                             <h:inputText a:type="date" required="true"></h:inputText>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-5 mb-3 sin-padding">
-                                        <strong><label for="fecha-final">Fecha fin</label></strong>
+                                        <strong><label for="fecha-final">#{formdashboardadmin.Fechafin}</label></strong>
                                         <div class="box date">
                                             <h:inputText a:type="date" required="true"></h:inputText>
                                         </div>
@@ -85,7 +85,7 @@
                                     <div class="col-12 col-md-2 mb-3" style="text-align: center; padding-top: 33px;">
                                         <button type="submit" style="--content: 'BUSCAR';">
                                             <div class="left"></div>
-                                                BUSCAR
+                                                #{formdashboardadmin.Buscar}
                                             <div class="right"></div>
                                         </button>
                                     </div>
@@ -98,7 +98,7 @@
                 <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
                     <div class="col-12 panel">
                         <div class="panel-heading">
-                            <span>Disponibilidad de la zona comunal</span>
+                            <span>#{formdashboardadmin.Disponibilidadlazonacomunal}</span>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 mt-3 mb-3">
@@ -106,19 +106,19 @@
                         <div class="calendar">
                             <div class="calendar-header">
                                 <button class="control">&lt;</button>
-                                <span class="month-name">abril 2020</span>
+                                <span class="month-name">#{formdashboardadmin.abril2020}</span>
                                 <button type="button" class="control">&gt;</button>
                             </div>
                             <div class="calendar-body">
                                 <div class="grid">
                                     <div class="grid__header">
-                                        <span class="celdas">Lun</span>
-                                        <span class="celdas">Mar</span>
-                                        <span class="celdas">Mie</span>
-                                        <span class="celdas">Jue</span>
-                                        <span class="celdas">Vie</span>
-                                        <span class="celdas">Sab</span>
-                                        <span class="celdas">Dom</span>
+                                        <span class="celdas">#{formdashboardadmin.Lunes}</span>
+                                        <span class="celdas">#{formdashboardadmin.Martes}</span>
+                                        <span class="celdas">#{formdashboardadmin.Miércoles}</span>
+                                        <span class="celdas">#{formdashboardadmin.Jueves}span>
+                                        <span class="celdas">#{formdashboardadmin.Viernes}</span>
+                                        <span class="celdas">#{formdashboardadmin.Sábado}</span>
+                                        <span class="celdas">#{formdashboardadmin.Domingo}</span>
                                     </div>
                                     <div class="grid__body">
                                         <span class="celdas disabled">29</span>
@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="alert alert-success" style="margin:0; margin-top: 20px;">Días con reservas disponibles</div>
+                            <div class="alert alert-success" style="margin:0; margin-top: 20px;">#{formdashboardadmin.Díasconreservasdisponibles}</div>
                         </div>
                     </div>
                     <!-- Horas disponibles -->
@@ -193,9 +193,9 @@
                                     </ul>
                                 </div>
                                 <div class="contenedor-footer">
-                                    <button id="btn-confirmar">Reservar</button>
+                                    <button id="btn-confirmar">#{formdashboardadmin.Reservar}</button>
                                 </div>
-                                <h6 style="padding: 10px 0; color: white;">Usted reservará desde las 10:00 am hasta las 11:00 am</h6>
+                                <h6 style="padding: 10px 0; color: white;">#{formdashboardadmin.Ustedreservarádesdelas}</h6>
                             </div>
                             <!--Modal reserva-->
                             <!-- <div class="modal fade" id="modal-reserva" tabindex="-1" role="dialog" aria-labelledby="modal-reserva" aria-hidden="true">

@@ -21,7 +21,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar zona común</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.editarzonacomún}</title>
     </h:head>
     <h:body>
         <script>#{mensajeControlador.mensaje}</script>
@@ -34,9 +34,9 @@
             <!-- miga de pan -->
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./organizar-zona.xhtml">Organizar zona común</a></li>
-                    <li class="breadcrumb-item active">Editar zona común</li>
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                    <li class="breadcrumb-item"><a href="./organizar-zona.xhtml">#{formdashboardadmin.Organizarzonacomún}</a></li>
+                    <li class="breadcrumb-item active">#{formdashboardadmin.editarzonacomún}</li>
                 </ol>
             </div>
             <!-- main -->
@@ -45,7 +45,7 @@
                     <div class="col-12">
                         <h3>
                             <i class="far fa-edit"></i>
-                            Editar zona común: #{disponibilidadControlador.zonaComunal.nombre}
+                            #{formdashboardadmin.Editarzonacomún}: #{disponibilidadControlador.zonaComunal.nombre}
                         </h3>
                     </div>
                 </div>
@@ -55,11 +55,11 @@
                     <div class="row">
                         <!-- Titulo -->
                         <div class="col-12 ">
-                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Zona común</a></p>
+                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">#{formdashboardadmin.Zonacomún}</a></p>
                             <div class="collapse" id="titulo">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="Nombre zona comun" a:placeholder="Ingrese el nombre de la zona comunal" required="true"/>
+                                        <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="#{formdashboardadmin.Nombrezonacomún}" a:placeholder="#{formdashboardadmin.Ingreseelnombredezonacomunal}" required="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -70,31 +70,31 @@
                         <div class="col-12">
                             <p>
                                 <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                                   data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>Disponibilidad</a>
+                                   data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>#{formdashboardadmin.Disponibilidad}</a>
                             </p>
                             <div class="collapse" id="date">
                                 <div class="from-group row">
                                     <div class="col-6" style="border-right: 1px solid #efefef ;">
                                         <b>
-                                            <p>Disponibilidad en días</p>
+                                            <p>#{formdashboardadmin.Disponibilidadendías}</p>
                                         </b>
                                         <hr/>
                                         <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                             <div class="form-group row">
                                                 <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>Domingo
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>#{formdashboardadmin.Domingo}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>Lunes
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Lunes}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}"></h:selectBooleanCheckbox>Martes
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Martes}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}"></h:selectBooleanCheckbox>Miercoles
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}"></h:selectBooleanCheckbox>#{formdashboardadmin.Miércoles}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}"></h:selectBooleanCheckbox>Jueves
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}"></h:selectBooleanCheckbox>#{formdashboardadmin.Jueves}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}"></h:selectBooleanCheckbox>Viernes
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Viernes}
                                                     <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}"></h:selectBooleanCheckbox>Sabado
+                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}"></h:selectBooleanCheckbox>#{formdashboardadmin.Sábado}
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                         <hr/>
                                         <div class="form-group row">
                                             <div class="col-12 col-md-6">
-                                                <b><label>Reservaciones desde las:</label></b>
+                                                <b><label>#{formdashboardadmin.Reservacionesdesdelas}:</label></b>
                                                 <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
                                                     <f:convertDateTime pattern="HH:mm" />
                                                 </h:inputText>
@@ -162,7 +162,7 @@
                                                 </h:selectOneMenu>-->
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <b><label>Reservaciones hasta las:</label></b>
+                                                <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
                                                 <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
                                                     <f:convertDateTime pattern="HH:mm" />
                                                 </h:inputText>
@@ -220,7 +220,7 @@
                                                 </h:selectOneMenu>-->
                                             </div>
                                             <div class="col-12 col-md-6 mt-3">
-                                                <b><label>Tiempo maximo de reserva en horas:</label></b>
+                                                <b><label>#{formdashboardadmin.Tiempomáximodereservaenhoras}:</label></b>
                                                 <h:selectOneMenu value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
@@ -257,25 +257,25 @@
                     </div>
                     <!-- Descripción -->
                     <hr/>
-                    <h4 class="col-12">Descripción</h4>
+                    <h4 class="col-12">#{formdashboardadmin.Descripción}</h4>
                     <hr/>
                     <div class="form-group row">
                         <div class="col-12 col-md-9">
-                            <h:inputTextarea class="form col-12 form-control" a:placeholder="Detalle zona comun" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
+                            <h:inputTextarea class="form col-12 form-control" a:placeholder="#{formdashboardadmin.Detallezonacomún}" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
                         </div>
 
                         <div class="col-12 col-md-3">
                             <div class="row">
                                 <!--Subir foto--> 
                                 <div class="col-5" style="padding: 0;">
-                                    <label for="file" class="subir-foto"> <span>+</span> <br/> Adjuntar <br/> imagen</label>
+                                    <label for="file" class="subir-foto"> <span>+</span> <br/> #{formdashboardadmin.Adjuntar} <br/> #{formdashboardadmin.imagen}</label>
                                     <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
                                 </div>
                                 <!--Pre-visualizar foto--> 
                                 <div class="contenedor-imagen col-7" style="padding: 0;">
                                     <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
                                 </div>
-                                <h:inputText class="form-control" a:placeholder="Ruta img" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
+                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Rutaimg}" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
                             </div>
                             <!--Mostrar foto en modal-->
                             <div class="modal fade" id="modal-img">
@@ -287,7 +287,7 @@
                         <!-- Boton actualizar -->
                         <div class="row justify-content-center mt-3 mb-3">
                             <div class="col-12 col-md-2">
-                                <h:commandButton class="btn btn-outline-success btn-block" value="Guardar cambios" action="#{disponibilidadControlador.actualizar()}"></h:commandButton>
+                                <h:commandButton class="btn btn-outline-success btn-block" value="#{formdashboardadmin.Guardarcambios}" action="#{disponibilidadControlador.actualizar()}"></h:commandButton>
                             </div>
                         </div>
                     </div>
