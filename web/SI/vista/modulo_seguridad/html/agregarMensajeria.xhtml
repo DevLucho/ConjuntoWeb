@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
               integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
-        <link rel="stylesheet" href="../css/addMensajeriaa.css" />
+        <link rel="stylesheet" href="../css/addMensajeriaa_1.css" />
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -101,7 +101,6 @@
                                             </li>
 
                                             <li>
-                                                <input type="button" disabled="disabled" value="Notificar" class="kk" id="btoE" onclick="activiti()" />
                                                 <h:commandButton  class="enviarcrud lll" value="Guardar" action="#{correspondenciaControlador.registrar()}"></h:commandButton>
                                                 <!---->
                                             </li>
@@ -121,7 +120,7 @@
                                             <li>
                                                 <h:outputLabel for="nombre">Nombre</h:outputLabel>
                                                 <h:inputText a:type="text" id="nombre" value="#{empresaControlador.empresa.nombre}"  title="Nombre" required="true" class="field-long"></h:inputText><br /><br />
-                                                <h:commandButton value="Registrar" action="#{empresaControlador.registrar()}"></h:commandButton>
+                                                <h:commandButton class="bts" value="Registrar" action="#{empresaControlador.registrar()}"></h:commandButton>
                                             </li>
                                         </ul>
                                     </h:form>

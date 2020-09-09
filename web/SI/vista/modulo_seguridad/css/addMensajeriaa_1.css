@@ -35,7 +35,6 @@ and open the template in the editor.
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
-.kk{float: left}
 .lll{float: right}
 .container-fluid{
     margin-top: 3%;
@@ -141,8 +140,12 @@ and open the template in the editor.
      width: 100%;
      margin: 5% 3% 12% 0%;
      height:40vh; 
+     overflow: hidden;
      border: solid black 1px;
      text-align: center;
+ }
+ .bts{
+     margin-top: -20px;
  }
  .menos{
      margin-left:0%;

@@ -57,7 +57,7 @@ and open the template in the editor.
 /* inicio de estilos de formulario*/
 .inicioSeguridad{
      width: 90%;
-     height: 300vh;
+     height: 130vh;
      margin: 5% 3% 0% 3%;
      border: #141414 solid 1px;
      overflow: auto;
@@ -157,6 +157,10 @@ and open the template in the editor.
      height:40vh; 
      border: solid black 1px;
      text-align: center;
+     overflow: hidden;
+ }
+ .butE{
+     margin-top: -20px;
  }
  .menos{
      margin-left:0%;
@@ -169,7 +173,7 @@ and open the template in the editor.
     margin: 10% 5% 0% -7%;
     width: 100%;
     border: black 1px solid;
-    height: 102vh;
+    height: 80vh;
     overflow: hidden;
     overflow: scroll;
 }
@@ -311,7 +315,7 @@ and open the template in the editor.
         height: 180vh;
         margin-top: 60vh;
     }
-    .form2{margin:-250% 3%; width: 80%;}
+    .form2{margin:-235% 3%; width: 80%;}
     .form2 .form-style-1{margin-left: 18%;}
 }/* fin de responsive de cel */
 

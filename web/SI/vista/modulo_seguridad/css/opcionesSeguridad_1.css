@@ -12,21 +12,21 @@
 /* inicio de estilos de capá principal*/
 .espacio{
       width: 100%;
-      height: 80px;
+      height: 40px;
   }
 .opciones{
     background-color: #e7e7e7;
-    width: 90%;
-    margin-left: 5%;
+    width: 52%;
+    margin-left: 24%;
     height: 74vh;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
     padding-top:1%;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
   }
   .agregar{
-    width: 26.5%;
+    width: 42.5%;
     height: 84%;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;

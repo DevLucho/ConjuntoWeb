@@ -12,8 +12,8 @@
 /* inicio de estilos de capá principal*/
 .opciones{
     background-color: #e7e7e7;
-    width: 90%;
-    margin-left: 5%;
+    width: 52%;
+    margin-left: 24%;
     height: 74vh;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
@@ -21,7 +21,7 @@
     padding-top:1%;
   }
   .agregar{
-    width: 26.5%;
+    width: 42.5%;
     height: 84%;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
@@ -79,7 +79,9 @@
 }/* fin de responsive de tablet*/
 @media screen and (max-width: 600px){/* inicio de responsive de cel*/
     .opciones{
-        height: 110vh;
+        height: 80vh;
+        margin-left: 5%;
+        width: 90%;
         margin-bottom: 10%;
     }
     .agregar{
