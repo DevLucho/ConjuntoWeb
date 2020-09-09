@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Agregar vehiculo</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formcrearusuario.Agregarvehículo}</title>
     </h:head>
     <h:body>
         <!-- Contenedor principal -->
@@ -32,9 +32,9 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
                         <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">Consultar usuarios</a></li>
-                        <li class="breadcrumb-item active">Agregar vehiculo</li>
+                        <li class="breadcrumb-item active">#{formcrearusuario.Agregarvehículo}</li>
                     </c:if>
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
                         <style>
@@ -46,9 +46,9 @@
                                 }
                             }
                         </style>
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="../../modulo-parqueadero/vehiculos/consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
-                        <li class="breadcrumb-item active">Agregar vehiculo</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="../../modulo-parqueadero/vehiculos/consultar-vehiculo.xhtml">#{formcrearusuario.Consultarvehiculos}</a></li>
+                        <li class="breadcrumb-item active">#{formcrearusuario.Agregarvehículo}</li>
                     </c:if>
 
                 </ol>
@@ -56,8 +56,8 @@
             <section class="container-fluid" id="principal">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3><i class="fas fa-car" id="icono"></i><c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">Agregar nuevo vehiculo a: #{usuarioControlador.usuario.nombre}</c:if>
-                            <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">Agregar nuevo vehiculo a residente</c:if>
+                        <h3><i class="fas fa-car" id="icono"></i><c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">#{formcrearusuario.Agregarnuevovehículoa}: #{usuarioControlador.usuario.nombre}</c:if>
+                            <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">#{formcrearusuario.Agregarnuevovehículoaresidente}</c:if>
                         </h3>
                         <hr/>
                     </div>
@@ -67,33 +67,33 @@
                             <!--formulario-->
 
                             <div class="col-12">
-                                <div class="caja bg-faded border-bottom-0">Vehiculo nuevo de residente</div>
+                                <div class="caja bg-faded border-bottom-0">#{formcrearusuario.Vehículonuevoderesidente}</div>
                             </div>
                             <h:form class="sombra form-group row">
                                 <div class="row modal-body">
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="Placa" for="placa" /></strong>
+                                        <strong><h:outputLabel value="#{formcrearusuario.Placa}" for="placa" /></strong>
                                         <h:inputText id="placa" class="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" disabled="false"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><label for="tipoVehiculo">Tipo Vehiculo</label></strong> 
+                                        <strong><label for="tipoVehiculo">#{formcrearusuario.TipoVehículo}</label></strong> 
                                         <h:selectOneMenu id="tipoVehiculo" class="custom-select" value="#{vehiculoControlador.vehiculo.tipoVehiculo}" required="true">
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItem itemValue = "Automovil" itemLabel = "Automovil" /> 
-                                            <f:selectItem itemValue = "Bicicleta" itemLabel = "Bicicleta" /> 
-                                            <f:selectItem itemValue = "Motocicleta" itemLabel = "Motocicleta" /> 
+                                            <f:selectItem itemLabel = "#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItem itemValue = "Automovil" itemLabel = "#{formcrearusuario.Automóvil}"/> 
+                                            <f:selectItem itemValue = "Bicicleta" itemLabel = "#{formcrearusuario.Bicicleta}"/> 
+                                            <f:selectItem itemValue = "Motocicleta" itemLabel = "#{formcrearusuario.Motocicleta}"/> 
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <strong><h:outputLabel value="Parqueadero disponible" for="idParqueadero"/></strong>
+                                        <strong><h:outputLabel value="#{formcrearusuario.Parqueaderodisponible}" for="idParqueadero"/></strong>
                                         <h:selectOneMenu id="idParqueadero" class="custom-select" value="#{vehiculoControlador.parqueadero.idParqueadero}" required="true">
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItem itemLabel = "#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                             <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarP('Desocupado')}" itemValue="#{parCont.idParqueadero}" itemLabel="#{parCont.lugar}"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                            <strong><label for="identificacion">Residente</label></strong> 
+                                            <strong><label for="identificacion">#{formcrearusuario.Residente}</label></strong> 
                                             <div class="mb-3">
                                                 <h:selectOneMenu id="idResidente" class="custom-select" value="#{vehiculoControlador.residente.idResidente}" required="true">
                                                     <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(usuarioControlador.usuario.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre} #{r.idPerfil.apellido}"/>
@@ -101,15 +101,15 @@
                                             </div>
                                         </c:if>
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
-                                            <strong><h:outputLabel value="Documento residente" for="idResidente" /></strong>
+                                            <strong><h:outputLabel value="#{formcrearusuario.Documentoresidente}" for="idResidente" /></strong>
                                             <h:selectOneMenu id="idResidente" class="custom-select" value="#{vehiculoControlador.residente.idResidente}" required="true">
-                                                <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel = "#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems var="resCont" value="#{residenteControlador.consultarTodos()}" itemValue="#{resCont.idResidente}" itemLabel="#{resCont.idPerfil.documento}"/>
                                             </h:selectOneMenu>
                                         </c:if>
                                     </div>
                                     <div class="modal-footer col">
-                                        <h:commandButton value="Registrar" class="btn btn-outline-success btn-block" action="#{vehiculoControlador.registrar()}"></h:commandButton>
+                                        <h:commandButton value="#{formcrearusuario.Registrar}" class="btn btn-outline-success btn-block" action="#{vehiculoControlador.registrar()}"></h:commandButton>
                                     </div>
                                 </div>
                             </h:form>

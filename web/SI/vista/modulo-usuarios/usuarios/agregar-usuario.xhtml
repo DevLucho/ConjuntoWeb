@@ -66,12 +66,12 @@
                                     <div id="alerta" class="col-12" style="margin-top: 1rem;"></div> 
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="nombre">#{formcrearusuario.lblNombres}</label></strong> 
-                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" required="true" requiredMessage="#{formcrearusuario.camponombre}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                                        <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}" required="true" requiredMessage="#{formcrearusuario.camponombre}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}"/>
                                         <h:message for="nombre" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="apellido">#{formcrearusuario.lblApellidos}</label></strong> 
-                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" requiredMessage="#{formcrearusuario.campoapellido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="Solo texto, no se permiten numeros."/>
+                                        <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}" required="true" requiredMessage="#{formcrearusuario.campoapellido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}"/>
                                         <h:message for="apellido" style="color: red"/>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -94,12 +94,12 @@
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="celular">#{formcrearusuario.lvlCelular}</label></strong> 
-                                        <h:inputText id="celular" a:type="number"  class="form-control-plaintext" value="#{usuarioControlador.nrocel}" required="true" requiredMessage="#{formcrearusuario.campocelular}" a:pattern="[0-9]{10}" title="10 digitos"/>
+                                        <h:inputText id="celular" a:type="number"  class="form-control-plaintext" value="#{usuarioControlador.nrocel}" required="true" requiredMessage="#{formcrearusuario.campocelular}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
                                         <h:message for="celular" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <strong><label for="direccion">#{formcrearusuario.lblDireccion}</label></strong> 
-                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" required="true" requiredMessage="#{formcrearusuario.campodireccion}"/>
+                                        <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="#{formlogin.direccion}" required="true" requiredMessage="#{formcrearusuario.campodireccion}"/>
                                         <h:message for="direccion" style="color: red"/>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
@@ -113,11 +113,11 @@
                                     <!-- if is residente -->
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="automovil">Automovil</label></strong>
+                                            <strong><label for="automovil">#{formcrearusuario.Automóvil}</label></strong>
                                             <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil" required="true" requiredMessage="#{formcrearusuario.seleccione}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
-                                                <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
+                                                <f:selectItem itemValue="Si" itemLabel="#{formcrearusuario.Si}"></f:selectItem>
+                                                <f:selectItem itemValue="No" itemLabel="#{formcrearusuario.No}"></f:selectItem>
                                             </h:selectOneMenu>
                                             <h:message for="automovil" style="color: red"/>
                                         </div>
@@ -143,14 +143,14 @@
                                     <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>
-                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno" required="true" requiredMessage="#{formcrearusuario.campohorainicio}">
+                                            <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="#{formcrearusuario.InicioTurno}" required="true" requiredMessage="#{formcrearusuario.campohorainicio}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
                                             <h:message for="inicioTurno" style="color: red"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="finTurno">#{formconsultarusuario.lblFinTurno}</label></strong>
-                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" required="true" requiredMessage="#{formcrearusuario.campohorafin}">
+                                            <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="#{formcrearusuario.FinTurno}" required="true" requiredMessage="#{formcrearusuario.campohorafin}">
                                                 <f:convertDateTime pattern="HH:mm" />
                                             </h:inputText>
                                             <h:message for="finTurno" style="color: red"/>
@@ -171,15 +171,15 @@
                         <div class="modal-dialog">
                             <div class="modal-content"> 
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle mr-1"></i>#{formcrearusuario.generarcodigo} | residente</h5>
-                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle mr-1"></i>#{formcrearusuario.generarcodigo} | #{formcrearusuario.Residente}</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="#{formdashboardadmin.Cerrrar}">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div> 
                                 <div class="modal-body">
                                     <div class="form-group row">
                                         <div class="col-12 font">
-                                            <b><h:outputLabel value="Enviar código vía email:" /></b>
+                                            <b><h:outputLabel value="#{formcrearusuario.notiViaEmail}:" /></b>
                                             <div class="wrap-input100 validate-input m-b-36" data-validate = "#{formcrearusuario.correovalido}">
                                                 <h:inputText class="input100" a:type="email" value="#{codigoControlador.correo}" required="true" a:placeholder="ejemplo@dominio.com"/>
                                                 <span class="focus-input100"></span>
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-outline-danger" data-dismiss="modal">#{formcrearusuario.cancelar}</button>
-                                    <h:commandButton value="Enviar" styleClass="btn btn-outline-success" action="#{codigoControlador.generarCodigo()}"></h:commandButton>
+                                    <h:commandButton value="#{formdashboardadmin.confirmar}" styleClass="btn btn-outline-success" action="#{codigoControlador.generarCodigo()}"></h:commandButton>
                                 </div>
                             </div>
                         </div>
