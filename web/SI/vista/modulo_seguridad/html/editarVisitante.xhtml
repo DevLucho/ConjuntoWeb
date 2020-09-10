@@ -56,7 +56,7 @@
         <!-- Sweet alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
-        
+
         <style>
             .title-class{
                 color: black !important;
@@ -81,103 +81,92 @@
         </style>
     </h:head>
     <h:body>
-        <f:view>
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <!-- fin de header y poput -->
-        <script>#{mensajeControlador.mensaje}</script>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- fin de header y poput -->
+            <script>#{mensajeControlador.mensaje}</script>
 
-        <!--________________________ Inicio de formulario ______________________- -->
-        <div class="container-fluid">
-            <div class="row">
+            <!--________________________ Inicio de formulario ______________________- -->
+            <div class="container-fluid">
+                <div class="row">
 
-                <!--________________________ inicio de seccion de noticias __________________- -->
-                <div class="col-xl-2"></div>
-                <div class="pep col-sm-12 col-md-12 col-xl-8">
-                    <section class="inicioSeguridad border">
-                        <div class="titulazo">
-                            Editar Visitante
-                            <f:view>
-                                <h:form class="duque">
-                                    <ul class="form-style-1">
-                                        <li>
-                                            <h:outputLabel for="nombre" class="">Nombre Completo<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto  corto2 kk" title="Nombre" required="true"/>
-                                            <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true"/>
-                                        </li>
-                                        <li>
-                                            <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
-                                            <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                    <!--________________________ inicio de seccion de noticias __________________- -->
+                    <div class="col-xl-2"></div>
+                    <div class="pep col-sm-12 col-md-12 col-xl-8">
+                        <section class="inicioSeguridad border">
+                            <div class="titulazo">
+                                Editar Visitante
+                                <f:view>
+                                    <h:form class="duque">
+                                        <ul class="form-style-1">
+                                            <li>
+                                                <h:outputLabel for="nombre" class="">Nombre Completo<span class="required">*</span></h:outputLabel>
+                                                <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto  corto2 kk" title="Nombre" required="true"/>
+                                                <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true"/>
+                                            </li>
+                                            <li>
+                                                <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
+                                                <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
-                                            </h:selectOneMenu>
-                                        </li>
-                                        <li>
-                                            <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="estado" value="#{visitanteControlador.fichaIngreso.estadoFicha}" title="Estado" required="true" requiredMessage="The IdTorre field is required.">
+                                                </h:selectOneMenu>
+                                            </li>
+                                            <li>
+                                                <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="estado" value="#{visitanteControlador.fichaIngreso.estadoFicha}" title="Estado" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
-                                                <f:selectItem itemValue="Activo" itemLabel="Activo"/>
-                                                <f:selectItem itemValue="Inactivo" itemLabel="Inactivo"/>
-                                            </h:selectOneMenu>
-                                            <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                    <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                    <f:selectItem itemValue="Activo" itemLabel="Activo"/>
+                                                    <f:selectItem itemValue="Inactivo" itemLabel="Inactivo"/>
+                                                </h:selectOneMenu>
+                                                <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
-                                            </h:selectOneMenu>
-                                        </li> 
-                                        <li>
-                                            <h:outputLabel for="identificacion" class="label"> Num. de documento <span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="number" id="identificicacion" value="#{visitanteControlador.visitante.documento}" class="field-long correcto" title="Identificacion" />
-                                        </li>
-                                        <li>
-                                            <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
+                                                    <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                </h:selectOneMenu>
+                                            </li> 
+                                            <li>
+                                                <h:outputLabel for="identificacion" class="label"> Num. de documento <span class="required">*</span></h:outputLabel>
+                                                <h:inputText a:type="number" id="identificicacion" value="#{visitanteControlador.visitante.documento}" class="field-long correcto" title="Identificacion" />
+                                            </li>
+                                            <li>
+                                                <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
-                                                <f:selectItem itemValue="Si" itemLabel="Si"/>
-                                                <f:selectItem itemValue="No" itemLabel="No"/>
-                                            </h:selectOneMenu> 
-                                        </li>
-                                        <li><br/><br/>
-                                            <h:commandButton class="enviarcrud" id="botones" value="Actualizar" action="#{visitanteControlador.actualizar()}"></h:commandButton>
+                                                    <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                    <f:selectItem itemValue="Si" itemLabel="Si"/>
+                                                    <f:selectItem itemValue="No" itemLabel="No"/>
+                                                </h:selectOneMenu> 
+                                            </li>
+                                            <li><br/><br/>
+                                                <h:commandButton class="enviarcrud" id="botones" value="Actualizar" action="#{visitanteControlador.actualizar()}"></h:commandButton>
 
-                                        </li>
-                                    </ul>
-                                </h:form>
-                            </f:view>
-                        </div>
-                    </section>
-                    <!--______________________- fin de capa formulario ____________________- -->
+                                            </li>
+                                        </ul>
+                                    </h:form>
+                                </f:view>
+                            </div>
+                        </section>
+                        <!--______________________- fin de capa formulario ____________________- -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- ________________________- fin de seccion de noticias __________________- -->
+            <!-- ________________________- fin de seccion de noticias __________________- -->
 
-        <!--__________________________- inicio del footer __________________________- -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
-        <!--______________________________- fin del footer __________________________-->
-        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
-
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-        <script src="../../../js/scriptvigilante.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-        <script src="../../../js/alert.js"></script>
-
-        <!-- bootstrap, popper y jquery -->
-
-        <script src="../../../../js/jquery-3.4.1.min.js"></script>
-
-        <script src="../../../../js/popper.min.js"></script>
-
-        <script src="../../../../js/bootstrap.min.js"></script>
-
-
-        <!-- Menu responsive -->
-        <script src="../../nav/nav.js"></script>
+            <!--__________________________- inicio del footer __________________________- -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+            <!--______________________________- fin del footer __________________________-->
+            <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+            <!-- bootstrap, popper y jquery -->
+            <script src="../../../../js/jquery-3.4.1.min.js"></script>
+            <script src="../../../../js/popper.min.js"></script>
+            <script src="../../../../js/bootstrap.min.js"></script>
+            <script src="../../../js/scriptvigilante.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+            <!-- Menu responsive -->
+            <script src="../../nav/nav.js"></script>
         </f:view>
     </h:body>
 </html>

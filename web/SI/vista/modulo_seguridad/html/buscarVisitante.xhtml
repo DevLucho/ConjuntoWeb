@@ -91,7 +91,7 @@
         </style>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
 
             <ui:include src="../../header/header.xhtml"></ui:include>
             <ui:include src="../../nav/nav.xhtml"></ui:include>
@@ -150,17 +150,18 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Entrada"/>
                                                 </f:facet>
-                                                <h:outputText value="#{visi.idFicha.horaEntrada}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirfh(visi.idFicha.horaEntrada)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Salida"/>
                                                 </f:facet>
-                                                <h:outputText value="#{visi.idFicha.horaSalida}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <c:if test="#{visi.idFicha.horaSalida!=null}">
+                                                    <h:outputText value="#{horaControlador.convertir(visi.idFicha.horaSalida)}"></h:outputText>
+                                                </c:if>
+                                                <c:if test="#{visi.idFicha.horaSalida==null}">
+                                                    <h:outputText value="No"></h:outputText>
+                                                </c:if>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -228,17 +229,18 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Entrada"/>
                                                 </f:facet>
-                                                <h:outputText value="#{blo.idFicha.horaEntrada}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirfh(blo.idFicha.horaEntrada)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Salida"/>
                                                 </f:facet>
-                                                <h:outputText value="#{blo.idFicha.horaSalida}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <c:if test="#{blo.idFicha.horaSalida!=null}">
+                                                    <h:outputText value="#{horaControlador.convertir(blo.idFicha.horaSalida)}"></h:outputText>
+                                                </c:if>
+                                                <c:if test="#{blo.idFicha.horaSalida==null}">
+                                                    <h:outputText value="No"></h:outputText>
+                                                </c:if>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -310,7 +312,7 @@
             </c:if>
             <script src="../../../js/scriptvigilante.js"></script>
             <!-- Menu responsive -->
-            <script src="../../navs/nav.js"></script>
+            <script src="../../nav/nav.js"></script>
         </f:view>
     </h:body>
 </html>

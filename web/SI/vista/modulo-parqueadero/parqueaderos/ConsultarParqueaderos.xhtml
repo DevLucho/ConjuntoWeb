@@ -34,70 +34,72 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar parqueaderos</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item active">Consultar parqueaderos</li>
-                </ol>
-            </div>
-            <!-- Contenido principal -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h3>
-                            <i class="fas fa-parking"></i>Consultar parqueaderos
-                        </h3>
-                        <hr/>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item active">Consultar parqueaderos</li>
+                    </ol>
+                </div>
+                <!-- Contenido principal -->
+                <section class="container-fluid" id="principal">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3>
+                                <i class="fas fa-parking"></i>Consultar parqueaderos
+                            </h3>
+                            <hr/>
+                        </div>
                     </div>
-                </div>
-                <div class="row table-responsive mt-3 mb-3">
-                    <!-- Tabla -->
-                    <f:view>
-                        <h:form>
-                            <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                         value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Identificador Parqueadero"/>
-                                    </f:facet>
-                                    <h:outputText value="#{parqueadero.idParqueadero}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Lugar"/>
-                                    </f:facet>
-                                    <h:outputText value="#{parqueadero.lugar}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Estado"/>
-                                    </f:facet>
-                                    <h:outputText value="#{parqueadero.estado}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Acciones"/>
-                                    </f:facet>
-                                    <div class="btn-group-sm">
-                                        <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar parqueadero" action="#{parqueaderoControlador.eliminar(parqueadero)}"></h:commandButton>
-                                        <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar parqueadero" action="#{parqueaderoControlador.preActulizar(parqueadero)}"></h:commandButton>
-                                    </div>
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
-                    </f:view>
-                </div>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                    <div class="row table-responsive mt-3 mb-3">
+                        <!-- Tabla -->
+                        <f:view>
+                            <h:form>
+                                <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
+                                             value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Identificador Parqueadero"/>
+                                        </f:facet>
+                                        <h:outputText value="#{parqueadero.idParqueadero}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Lugar"/>
+                                        </f:facet>
+                                        <h:outputText value="#{parqueadero.lugar}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{parqueadero.estado}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                        <div class="btn-group-sm">
+                                            <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar parqueadero" action="#{parqueaderoControlador.eliminar(parqueadero)}"></h:commandButton>
+                                            <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar parqueadero" action="#{parqueaderoControlador.preActulizar(parqueadero)}"></h:commandButton>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- bootstrap y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
@@ -127,7 +129,7 @@
             </script>
         </c:if>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/sweetAlert.js"></script>

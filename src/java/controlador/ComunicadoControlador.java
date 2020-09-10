@@ -32,6 +32,10 @@ public class ComunicadoControlador implements Serializable {
     /**
      * Creates a new instance of ComunicadoControlador
      */
+    @Inject
+    private MensajeControlador mensaje;
+    @Inject
+    private HoraControlador hora;
     private Comunicado comunicado;
     private Usuario usuario;
     private ImagenControlador imagen;
@@ -43,9 +47,6 @@ public class ComunicadoControlador implements Serializable {
 
     @EJB
     UsuarioFacade usuarioFacade;
-
-    @Inject
-    private MensajeControlador mensaje;
 
     public ComunicadoControlador() {
     }
@@ -64,11 +65,7 @@ public class ComunicadoControlador implements Serializable {
             case "Interno":
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar cal = Calendar.getInstance();
-                Date date = cal.getTime();
-                fechaPublicacion = dateFormat.format(date);
-                comunicado.setFechaPublicacion(date);
+                comunicado.setFechaPublicacion(hora.now());
                 comunicado.setTipo("Interno");
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
@@ -78,12 +75,8 @@ public class ComunicadoControlador implements Serializable {
             case "Externo":
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
-                comunicado.setTipo("Externo");
-                DateFormat dateFormatt = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar cale = Calendar.getInstance();
-                Date dates = cale.getTime();
-                fechaPublicacion = dateFormatt.format(dates);
-                comunicado.setFechaPublicacion(dates);
+                comunicado.setTipo("Externo");       
+                comunicado.setFechaPublicacion(hora.now());
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
                 comunicado = new Comunicado();

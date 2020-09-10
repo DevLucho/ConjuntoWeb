@@ -40,15 +40,15 @@ import javax.mail.MessagingException;
 @SessionScoped
 public class CorrespondenciaControlador implements Serializable {
 
-    private String fechaIngreso = "";
-    private String fechaSalida = "";
-
     /**
      * Creates a new instance of CorrespondenciaControlador
      */
     public CorrespondenciaControlador() {
     }
-
+    @Inject
+    private HoraControlador hora;
+    @Inject
+    private MensajeControlador mensaje;
     Correspondencia correspondencia;
     Inmueble inmueble;
     Paquete paquete;
@@ -56,7 +56,7 @@ public class CorrespondenciaControlador implements Serializable {
     Vigilante vigilante;
     Residente residente;
     CorreoControlador email;
-    
+
     List<Residente> residenteList;
     String correo;
 
@@ -72,9 +72,6 @@ public class CorrespondenciaControlador implements Serializable {
     EmpresaFacade empresaFacade;
     @EJB
     VigilanteFacade vigilanteFacade;
-
-    @Inject
-    private MensajeControlador mensaje;
 
     public Correspondencia getCorrespondencia() {
         return correspondencia;
@@ -139,11 +136,7 @@ public class CorrespondenciaControlador implements Serializable {
         correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         correspondencia.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         correspondencia.setEstado("No reclamado");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaIngreso = dateFormat.format(date);
-        correspondencia.setFechaIngreso(date);
+        correspondencia.setFechaIngreso(hora.now());
         correspondenciaFacade.create(correspondencia);
 
         residenteList = inmuebleR(correspondencia.getIdInmueble().getIdInmueble());
@@ -183,11 +176,7 @@ public class CorrespondenciaControlador implements Serializable {
 
     public void salida(Correspondencia correspondenciaSalida) {
         correspondencia = correspondenciaSalida;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaSalida = dateFormat.format(date);
-        correspondencia.setFechaSalida(date);
+        correspondencia.setFechaSalida(hora.now());
         correspondencia.setEstado("Reclamado");
         correspondenciaFacade.edit(correspondencia);
         mensaje.setMensaje("ConfirmarSalida('info','Entrega Exitosa','El paquete se ha <br> entregado al residente... <br><br>');");

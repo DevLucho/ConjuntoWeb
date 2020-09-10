@@ -14,10 +14,6 @@ import facade.ResidenteFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,10 +30,11 @@ public class InscripcionControlador implements Serializable {
     /**
      * Creates a new instance of InscripcionControlador
      */
-    private String fechaI = "";
-
     @Inject
     private MensajeControlador mensaje;
+    
+    @Inject
+    private HoraControlador hora;
 
     private Inscripcion inscripcion;
 
@@ -67,15 +64,8 @@ public class InscripcionControlador implements Serializable {
     public void registrar(int evento) {
         inscripcion.setIdEvento(eventoFacade.find(evento));
         inscripcion.setIdResidente(residenteFacade.find(residente.getIdResidente()));
-
-        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaI = fecha.format(date);
-
-        inscripcion.setFechaInscripcion(date);
+        inscripcion.setFechaInscripcion(hora.now());
         inscripcion.setEstado("Inscrito");
-
         inscripcionFacade.create(inscripcion);
         mensaje.setMensaje("Mensajes('Exito!','Se ha inscrito satisfactoriamente al evento','success');");
     }

@@ -22,10 +22,10 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Crearzonacomú}</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Crearzonacomún}</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
@@ -37,7 +37,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
-                        <li class="breadcrumb-item active">#{formdashboardadmin.Crearzonacomú}</li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Crearzonacomún}</li>
                     </ol>
                 </div>
                 <!-- main -->
@@ -211,7 +211,7 @@
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

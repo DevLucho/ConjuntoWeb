@@ -33,106 +33,104 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar vehiculo visitante</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href=".../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
-                    <li class="breadcrumb-item active">Editar vehiculo visitantes</li>
-                </ol>
-            </div>
-            <!-- Contenido principal -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h3>
-                            <i class="fas fa-edit"></i>Editar vehiculo visitantes
-                        </h3>
-                        <hr/>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href=".../../pef-usuario/vigilante/inicioSeguridad.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="./consultar-vehiculo.xhtml">Consultar vehiculos</a></li>
+                        <li class="breadcrumb-item active">Editar vehiculo visitantes</li>
+                    </ol>
+                </div>
+                <!-- Contenido principal -->
+                <section class="container-fluid" id="principal">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3>
+                                <i class="fas fa-edit"></i>Editar vehiculo visitantes
+                            </h3>
+                            <hr/>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-8 form">
-                    <!-- Tabla -->
-                    <f:view>
-                        <h:form class="sombra form-group row">
-                            <div class="row modal-body">
-                                <div class="form-group col-12 col-md-6 mb-3 ">
-                                    <div class="font">
-                                        <h:outputLabel value="Placa" for="Placa" />
-                                        <h:inputText id="Placa" styleClass="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" requiredMessage="The IdRol field is required." disabled="false"/>
+                    <div class="col-12 col-md-8 form">
+                        <!-- Tabla -->
+                        <f:view>
+                            <h:form class="sombra form-group row">
+                                <div class="row modal-body">
+                                    <div class="form-group col-12 col-md-6 mb-3 ">
+                                        <div class="font">
+                                            <h:outputLabel value="Placa" for="Placa" />
+                                            <h:inputText id="Placa" styleClass="form-control" value="#{vehiculoControlador.vehiculo.placa}" title="Placa" required="true" requiredMessage="The IdRol field is required." disabled="false"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6 mb-3 ">
+                                        <div>
+                                            <h:outputLabel value="id Parqueadero" for="idpar"/>
+                                            <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idParqueadero.lugar}">
+                                                <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.lugar}" itemDisabled="true" itemLabel="#{parCont.lugar}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6 mb-3 ">
+                                        <div>
+                                            <h:outputLabel value="Tipo vehiculo" for="tipoveh"/><br></br>
+                                            <h:selectOneMenu class="custom-select" value = "#{vehiculoControlador.vehiculo.tipoVehiculo}"> 
+                                                <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemValue = "Bicicleta" itemLabel = "Bicicleta" /> 
+                                                <f:selectItem itemValue = "Motocicleta" itemLabel = "Motocicleta" /> 
+                                                <f:selectItem itemValue = "Automovil" itemLabel = "Automovil" /> 
+                                            </h:selectOneMenu> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6 mb-3 ">
+                                        <div>
+                                            <h:outputLabel value="Propietario" for="Propietario"/>
+                                            <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idVisitante.idFicha.nombre}">
+                                                <f:selectItems var="propieVisit" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{propieVisit.idFicha.nombre}" itemDisabled="true" itemLabel="#{propieVisit.idFicha.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6 mb-3 ">
+                                        <div>
+                                            <h:outputLabel value="Documento" for="Documento"/>
+                                            <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idVisitante.documento}">
+                                                <f:selectItems var="docuVisit" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{docuVisit.documento}" itemLabel="#{docuVisit.documento}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6 mb-3">
+                                        <div>
+                                            <h:outputLabel value="Estado" for="Estado"/>
+                                            <h:selectOneMenu class="custom-select" value = "#{vehiculoControlador.vehiculo.idVisitante.idFicha.estadoFicha}"> 
+                                                <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemValue = "Activo" itemLabel = "Activo" /> 
+                                                <f:selectItem itemValue = "Inactivo" itemLabel = "Inactivo" /> 
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer col">
+                                        <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{vehiculoControlador.actualizar()}"></h:commandButton>
                                     </div>
                                 </div>
-                                <div class="form-group col-12 col-md-6 mb-3 ">
-                                    <div>
-                                        <h:outputLabel value="id Parqueadero" for="idpar"/>
-                                        <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idParqueadero.lugar}">
-                                            <f:selectItems var="parCont" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{parCont.lugar}" itemDisabled="true" itemLabel="#{parCont.lugar}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12 col-md-6 mb-3 ">
-                                    <div>
-                                        <h:outputLabel value="Tipo vehiculo" for="tipoveh"/><br></br>
-                                        <h:selectOneMenu class="custom-select" value = "#{vehiculoControlador.vehiculo.tipoVehiculo}"> 
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItem itemValue = "Bicicleta" itemLabel = "Bicicleta" /> 
-                                            <f:selectItem itemValue = "Motocicleta" itemLabel = "Motocicleta" /> 
-                                            <f:selectItem itemValue = "Automovil" itemLabel = "Automovil" /> 
-                                        </h:selectOneMenu> 
-                                    </div>
-                                </div>
-                                <div class="form-group col-12 col-md-6 mb-3 ">
-                                    <div>
-                                        <h:outputLabel value="Propietario" for="Propietario"/>
-                                        <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idVisitante.idFicha.nombre}">
-                                            <f:selectItems var="propieVisit" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{propieVisit.idFicha.nombre}" itemDisabled="true" itemLabel="#{propieVisit.idFicha.nombre}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12 col-md-6 mb-3 ">
-                                    <div>
-                                        <h:outputLabel value="Documento" for="Documento"/>
-                                        <h:selectOneMenu class="custom-select" value="#{vehiculoControlador.vehiculo.idVisitante.documento}">
-                                            <f:selectItems var="docuVisit" value="#{visitanteControlador.consultarVisitante()}" itemValue="#{docuVisit.documento}" itemLabel="#{docuVisit.documento}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12 col-md-6 mb-3">
-                                    <div>
-                                        <h:outputLabel value="Estado" for="Estado"/>
-                                        <h:selectOneMenu class="custom-select" value = "#{vehiculoControlador.vehiculo.idVisitante.idFicha.estadoFicha}"> 
-                                            <f:selectItem itemLabel = "- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                            <f:selectItem itemValue = "Activo" itemLabel = "Activo" /> 
-                                            <f:selectItem itemValue = "Inactivo" itemLabel = "Inactivo" /> 
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <div class="modal-footer col">
-                                    <h:commandButton value="Guardar cambios" title="Guardar cambios" styleClass="btn btn-outline-success form" action="#{vehiculoControlador.actualizar()}"></h:commandButton>
-                                </div>
-                            </div>
-                        </h:form>
-                    </f:view>
-                </div>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- bootstrap y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../../../js/dataTables/dataTables.js"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/sweetAlert.js"></script>

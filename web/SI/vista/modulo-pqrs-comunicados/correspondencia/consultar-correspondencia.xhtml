@@ -28,115 +28,113 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar Correspondencia</title>
     </h:head>
     <h:body>
-        <!-- header -->
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <!-- nav -->
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <div aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                <li class="breadcrumb-item active">Consultar correspondencia</li>
-            </ol>
-        </div>
-        <section class="container-fluid" id="principal">
-            <div class="row">
-                <div class="col-12">
-                    <h3>
-                        <i class="fas fa-inbox"></i> 
-                        Consultar Correspondencia
-                    </h3>
-                    <hr/>
-                </div>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active">Consultar correspondencia</li>
+                </ol>
             </div>
-            <div class="row">
-                <div class="col-12 table-responsive-lg mt-3 mb-3">
-                    <!-- Secciones por rol -->
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item ">
-                            <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesion">
-                                <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;">#{correspondenciaControlador.contarConrrespondenciaR(sesion.idInmueble.idInmueble)}</span></a>
-                            </c:forEach>
-                        </li>
-                    </ul>
-                    <!-- Tablas -->
-                    <div class="tab-content">
-                        <!-- Tabla todas las pqrs -->
-                        <div class="tab-pane active" id="tab1" role="tabpanel">
-                            <h4 class="mt-3 text-center">Mi correspondencia</h4>
-                            <f:view>
-                                <h:form>
-                                    <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesion">
-                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.correspondenciaResidente(sesion.idInmueble.idInmueble)}" var="correspondencia">
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Id"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.idCorrespondencia}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Tipo"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Descripcion"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.descripcion}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Fecha ingreso"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.fechaIngreso}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Fecha salida"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.fechaSalida}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Empresa"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.idEmpresa.nombre}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Inmueble"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.idInmueble.idTorre.idTorre}"/> -
-                                                <h:outputText value="#{correspondencia.idInmueble.idApartamento.idApartamento}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Resgistrado por:"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre} #{correspondencia.idVigilante.idPerfil.apellido}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Estado"/>
-                                                </f:facet>
-                                                <h:outputText value="#{correspondencia.estado}"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </c:forEach>
-                                </h:form>
-                            </f:view>
+            <section class="container-fluid" id="principal">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="fas fa-inbox"></i> 
+                            Consultar Correspondencia
+                        </h3>
+                        <hr/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 table-responsive-lg mt-3 mb-3">
+                        <!-- Secciones por rol -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item ">
+                                <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesion">
+                                    <a href="#tab1" class="nav-link active" data-toggle="tab">Todos<span class="badge badge-info" style="margin-left: 5px;">#{correspondenciaControlador.contarConrrespondenciaR(sesion.idInmueble.idInmueble)}</span></a>
+                                </c:forEach>
+                            </li>
+                        </ul>
+                        <!-- Tablas -->
+                        <div class="tab-content">
+                            <!-- Tabla todas las pqrs -->
+                            <div class="tab-pane active" id="tab1" role="tabpanel">
+                                <h4 class="mt-3 text-center">Mi correspondencia</h4>
+                                <f:view>
+                                    <h:form>
+                                        <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesion">
+                                            <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.correspondenciaResidente(sesion.idInmueble.idInmueble)}" var="correspondencia">
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Id"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.idCorrespondencia}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Tipo"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Descripcion"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.descripcion}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Fecha ingreso"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{horaControlador.convertirf(correspondencia.fechaIngreso)}"></h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Fecha salida"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{horaControlador.convertirf(correspondencia.fechaSalida)}"></h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Empresa"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.idEmpresa.nombre}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Inmueble"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.idInmueble.idTorre.idTorre}"/> -
+                                                    <h:outputText value="#{correspondencia.idInmueble.idApartamento.idApartamento}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Resgistrado por:"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre} #{correspondencia.idVigilante.idPerfil.apellido}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Estado"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{correspondencia.estado}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </c:forEach>
+                                    </h:form>
+                                </f:view>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- footer -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </f:view>
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
@@ -156,7 +154,7 @@
             <script src="../../../js/dataTables/exportar_tablas_en.js" type="text/javascript"></script>
         </c:if>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/sweetAlert.js"></script>       	

@@ -33,158 +33,160 @@
                 color:white;
             }
         </style>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Inicio</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formconsultarusuario.bcInicio}</title>
     </h:head>
     <h:body>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- Main -->
-            <main>
-                <div class="row">
-                    <section class=" modulos col-12 col-md-8 container-fluid" id="principal"> 
-                        <div class="row">
-                            <div class="col-12 text-left">
-                                <h3><i class="fas fa-bullhorn mr-3"></i>Comunicados</h3>
-                            </div>
-                        </div>
-                        <hr/>
-                        <h:form class="row mt-3 mb-3">
-                            <c:forEach items="#{comunicadoControlador.consultar('Interno')}" var="comunicado">
-                                <div class="col-12 col-md-6">
-                                    <div class="card border-light" style="padding: 20px;">
-                                        <div class="card-block text-dark">
-
-                                            <h3 class="card-title">#{comunicado.titulo}</h3>
-                                            <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}
-                                            </p>
-                                            <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
-                                            <p class="card-text mt-3">#{comunicado.descripcion}</p>
-
-                                        </div>
-                                    </div>
-                                </div>  
-                                <!-- Mostrar foto en modal -->
-                                <div class="modal fade" id="modal-img">
-                                    <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <img src="#{comunicado.img}" alt=""/>
-                                        </div>
-                                    </div>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- Main -->
+                <main>
+                    <div class="row">
+                        <section class=" modulos col-12 col-md-8 container-fluid" id="principal"> 
+                            <div class="row">
+                                <div class="col-12 text-left">
+                                    <h3><i class="fas fa-bullhorn mr-3"></i>Comunicados</h3>
                                 </div>
-                            </c:forEach>
-                        </h:form>
-                        <hr/>
-                    </section>
-                    <!-- Seccion derecha -->
-                    <aside class="novedades col-12 col-md-4">
-                        <!-- Eventos -->
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-calendar-alt"></i>Próximos eventos</h6>
-                            <h:form>
+                            </div>
+                            <hr/>
+                            <h:form class="row mt-3 mb-3">
+                                <c:forEach items="#{comunicadoControlador.consultar('Interno')}" var="comunicado">
+                                    <div class="col-12 col-md-6">
+                                        <div class="card border-light" style="padding: 20px;">
+                                            <div class="card-block text-dark">
+
+                                                <h3 class="card-title">#{comunicado.titulo}</h3>
+                                                <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{horaControlador.convertirf(comunicado.fechaPublicacion)}"></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}
+                                                </p>
+                                                <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
+                                                <p class="card-text mt-3">#{comunicado.descripcion}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <!-- Mostrar foto en modal -->
+                                    <div class="modal fade" id="modal-img">
+                                        <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <img src="#{comunicado.img}" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </h:form>
+                            <hr/>
+                        </section>
+                        <!-- Seccion derecha -->
+                        <aside class="novedades col-12 col-md-4">
+                            <!-- Eventos -->
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar far fa-calendar-alt"></i>#{formdashboardadmin.lblEventos}</h6>
+                                <h:form>
+                                    <ul id="lista">
+                                        <c:if test="#{eventoControlador.contarVigentes()== 0}">
+                                            <li>
+                                                <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach items="#{eventoControlador.consultarVigentes()}" var="evento">
+                                            <li>
+                                                <label class="date">
+                                                    <h:outputText value="#{evento.fechaInicio}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </label>
+                                                <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </h:form>
+
+                                <div class="link">
+                                    <li><a href="../../modulo-zona-comun/evento/consultar-evento.xhtml" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
+                            </div>
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar fas fa-box-open"></i>Correspondencia</h6>
                                 <ul id="lista">
-                                    <c:if test="#{eventoControlador.contarVigentes()== 0}">
+                                    <li>
+                                        <p style="margin:0px" class="text-muted">No hay correspondencia pendiente</p>
+                                    </li>
+                                    <!-- . 
+                                    <c:forEach items="#{correspondenciaControlador.consultarEntrega('No reclamado')}" var="c">
                                         <li>
-                                            <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
-                                        </li>
-                                    </c:if>
-                                    <c:forEach items="#{eventoControlador.consultarVigentes()}" var="evento">
-                                        <li>
-                                            <label class="date">
-                                                <h:outputText value="#{evento.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            <label class="date">Fecha de ingreso:
+                                                <h:outputText value="#{c.fechaIngreso}">
+                                                    <f:convertDateTime pattern="yyyy/MM/dd" />
                                                 </h:outputText>
                                             </label>
-                                            <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
+                                            <p>Tipo Paquete: <strong>#{c.idPaquete.tipo}</strong></p>
+                                            <p>Estado: <strong>#{c.estado}</strong></p>
                                         </li>
-                                    </c:forEach>
+                                    </c:forEach>-->
                                 </ul>
-                            </h:form>
-
-                            <div class="link">
-                                <li><a href="../../modulo-zona-comun/evento/consultar-evento.xhtml" class="text-right d-block">Consultar eventos<i class="greater fas fa-greater-than"></i></a></li>
+                                <div class="link">
+                                    <li><a href="../../modulo-pqrs-comunicados/correspondencia/consultar-correspondencia.xhtml" class="text-right d-block">Consultar correspondencia<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
                             </div>
-                        </div>
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar fas fa-box-open"></i>Correspondencia</h6>
-                            <ul id="lista">
-                                <li>
-                                    <p style="margin:0px" class="text-muted">No hay correspondencia pendiente</p>
-                                </li>
-                                <!-- . 
-                                <c:forEach items="#{correspondenciaControlador.consultarEntrega('No reclamado')}" var="c">
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar fas fa-thumbtack"></i>Mis reservas</h6>
+                                <ul id="lista">
                                     <li>
-                                        <label class="date">Fecha de ingreso:
-                                            <h:outputText value="#{c.fechaIngreso}">
-                                                <f:convertDateTime pattern="yyyy/MM/dd" />
-                                            </h:outputText>
-                                        </label>
-                                        <p>Tipo Paquete: <strong>#{c.idPaquete.tipo}</strong></p>
-                                        <p>Estado: <strong>#{c.estado}</strong></p>
+                                        <!--<c:if test="#{reservaControlador.contarReservas() == 0}">-->
+                                        <p style="margin:0px" class="text-muted">No hay reservas pendientes</p>
+                                        <!--</c:if>-->
                                     </li>
-                                </c:forEach>-->
-                            </ul>
-                            <div class="link">
-                                <li><a href="../../modulo-pqrs-comunicados/correspondencia/consultar-correspondencia.xhtml" class="text-right d-block">Consultar correspondencia<i class="greater fas fa-greater-than"></i></a></li>
+                                </ul>
+                                <div class="link">
+                                    <li><a href="../../modulo-zona-comun/zona/consultar-reserva.xhtml" class="text-right d-block">Consultar reservas<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
+                            </div>	
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar far fa-file-alt"></i>Mis inscripciones</h6>
+                                <ul id="lista">
+                                    <li>
+                                        <!--<c:if test="#{inscripcionControlador.contarInscripciones() == 0}">-->
+                                        <p style="margin:0px" class="text-muted">No hay inscripciones realizadas</p>
+                                        <!--</c:if>-->
+                                    </li>
+                                </ul>
+                                <div class="link">
+                                    <li><a href="../../modulo-zona-comun/evento/consultar-inscripcion.xhtml" class="text-right d-block">Consultar inscripciones<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
                             </div>
-                        </div>
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar fas fa-thumbtack"></i>Mis reservas</h6>
-                            <ul id="lista">
-                                <li>
-                                    <!--<c:if test="#{reservaControlador.contarReservas() == 0}">-->
-                                    <p style="margin:0px" class="text-muted">No hay reservas pendientes</p>
-                                    <!--</c:if>-->
-                                </li>
-                            </ul>
-                            <div class="link">
-                                <li><a href="../../modulo-zona-comun/zona/consultar-reserva.xhtml" class="text-right d-block">Consultar reservas<i class="greater fas fa-greater-than"></i></a></li>
-                            </div>
-                        </div>	
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-file-alt"></i>Mis inscripciones</h6>
-                            <ul id="lista">
-                                <li>
-                                    <!--<c:if test="#{inscripcionControlador.contarInscripciones() == 0}">-->
-                                    <p style="margin:0px" class="text-muted">No hay inscripciones realizadas</p>
-                                    <!--</c:if>-->
-                                </li>
-                            </ul>
-                            <div class="link">
-                                <li><a href="../../modulo-zona-comun/evento/consultar-inscripcion.xhtml" class="text-right d-block">Consultar inscripciones<i class="greater fas fa-greater-than"></i></a></li>
-                            </div>
-                        </div>
-                        <div class="novedades-eventos">
-                            <h6><i class="icalendar far fa-comment-alt"></i>Mis pqrs</h6>
-                            <ul id="lista">
-                                <li>
-                                    <p style="margin:0px" class="text-muted">No hay PQRS pendientes</p>
-                                </li>
-                            </ul>
-                            <div class="link">
-                                <li><a href="../../modulo-pqrs-comunicados/pqrs/consultar-pqrs.xhtml" class="text-right d-block">Consultar Pqrs<i class="greater fas fa-greater-than"></i></a></li>
-                            </div>
-                        </div>	
-                    </aside>
-                </div>
-            </main>            
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                            <div class="novedades-eventos">
+                                <h6><i class="icalendar far fa-comment-alt"></i>Mis pqrs</h6>
+                                <ul id="lista">
+                                    <li>
+                                        <p style="margin:0px" class="text-muted">No hay PQRS pendientes</p>
+                                    </li>
+                                </ul>
+                                <div class="link">
+                                    <li><a href="../../modulo-pqrs-comunicados/pqrs/consultar-pqrs.xhtml" class="text-right d-block">Consultar Pqrs<i class="greater fas fa-greater-than"></i></a></li>
+                                </div>
+                            </div>	
+                        </aside>
+                    </div>
+                </main>            
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/sweetAlert.js"></script>   

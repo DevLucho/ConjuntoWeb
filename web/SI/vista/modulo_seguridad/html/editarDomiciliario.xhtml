@@ -59,7 +59,7 @@
         <!-- Sweet alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
-        
+
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
@@ -94,109 +94,101 @@
         </style>
     </h:head>
     <h:body>
-        <f:view>
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <script>#{mensajeControlador.mensaje}</script>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <script>#{mensajeControlador.mensaje}</script>
 
-        <!-- fin de header y poput -->
+            <!-- fin de header y poput -->
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-2"></div>
-                <div class="pep col-sm-12 col-md-12 col-xl-8">
-                    <!--________________________ Inicio de formulario ______________________- -->
-                    <section class="inicioSeguridad">
-                        <div class="titulazo">
-                            Editar Domiciliario
-                            <f:view>    
-                                <h:form id="form" class="duque">
-                                    <div id="alerta" class="col-md-12 col-12 alex" />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-2"></div>
+                    <div class="pep col-sm-12 col-md-12 col-xl-8">
+                        <!--________________________ Inicio de formulario ______________________- -->
+                        <section class="inicioSeguridad">
+                            <div class="titulazo">
+                                Editar Domiciliario
+                                <f:view>    
+                                    <h:form id="form" class="duque">
+                                        <div id="alerta" class="col-md-12 col-12 alex" />
 
-                                    <ul class="form-style-1">
+                                        <ul class="form-style-1">
 
-                                        <li>
-                                            <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
-                                            <h:inputText a:type="text" id="nombre" value="#{domiciliarioControlador.fichaIngreso.nombre}" class="field-divided correcto kk" title="Nombre" required="true"/>
-                                            <h:inputText a:type="text" id="apellido" value="#{domiciliarioControlador.fichaIngreso.apellido}" class="field-divided correcto corto3 lll" title="Apellido" required="true"  />
-                                        </li>
+                                            <li>
+                                                <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
+                                                <h:inputText a:type="text" id="nombre" value="#{domiciliarioControlador.fichaIngreso.nombre}" class="field-divided correcto kk" title="Nombre" required="true"/>
+                                                <h:inputText a:type="text" id="apellido" value="#{domiciliarioControlador.fichaIngreso.apellido}" class="field-divided correcto corto3 lll" title="Apellido" required="true"  />
+                                            </li>
 
-                                        <li>
-                                            <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
-                                            <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{domiciliarioControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
-                                            </h:selectOneMenu>
-                                        </li>
+                                            <li>
+                                                <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
+                                                <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{domiciliarioControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems var="inmueble" value="#{inmuebleControlador.consultarTodos()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
+                                                </h:selectOneMenu>
+                                            </li>
 
-                                        <li>
-                                            <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="estado" value="#{domiciliarioControlador.fichaIngreso.estadoFicha}" title="Estado" required="true" requiredMessage="The IdTorre field is required.">
+                                            <li>
+                                                <h:outputLabel class="label" for="estado">Estado</h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="estado" value="#{domiciliarioControlador.fichaIngreso.estadoFicha}" title="Estado" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
-                                                <f:selectItem itemValue="Activo" itemLabel="Activo"/>
-                                                <f:selectItem itemValue="Inactivo" itemLabel="Inactivo"/>
-                                            </h:selectOneMenu>
+                                                    <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
+                                                    <f:selectItem itemValue="Activo" itemLabel="Activo"/>
+                                                    <f:selectItem itemValue="Inactivo" itemLabel="Inactivo"/>
+                                                </h:selectOneMenu>
 
-                                            <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{domiciliarioControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{domiciliarioControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
 
-                                                <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
-                                            </h:selectOneMenu>
-                                        </li>
+                                                    <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
+                                                </h:selectOneMenu>
+                                            </li>
 
-                                        <li>
-                                            <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto" id="paquete" value="#{domiciliarioControlador.paquete.idPaquete}" title="Paquete" required="true">
-                                                <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>
-                                            </h:selectOneMenu>
-                                        </li>
+                                            <li>
+                                                <h:outputLabel for="paquete" class="label">Paquete a ingresar<span class="required">*</span></h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto" id="paquete" value="#{domiciliarioControlador.paquete.idPaquete}" title="Paquete" required="true">
+                                                    <f:selectItems var="paque" value="#{paqueteControlador.consultar()}" itemValue="#{paque.idPaquete}" itemLabel="#{paque.tipo}"/>
+                                                </h:selectOneMenu>
+                                            </li>
 
-                                        <li>
-                                            <h:outputLabel for="empresa" class="label">Nombre de la Empresa<span class="required">*</span></h:outputLabel>
-                                            <h:selectOneMenu class="field-select correcto " id="empresa" value="#{domiciliarioControlador.empresa.idEmpresa}" title="Empresa" required="true">
-                                                <f:selectItems var="empre" value="#{empresaControlador.consultar()}" itemValue="#{empre.idEmpresa}" itemLabel="#{empre.nombre}"></f:selectItems>
-                                            </h:selectOneMenu>  
-                                        </li>
-                                        <li>
-                                            <h:commandButton  class="enviarcrud"   id="botones" value="Guardar" action="#{domiciliarioControlador.actualizar()}"></h:commandButton>
-                                            <!-- onclick="validar_formulario" -->
-                                            <!-- <button class="btn btn-outline-success" type="button" onclick="validar_formulario();" style="margin-bottom: 25px;">Registrar</button> -->
-                                            <!-- <button onclick="obtener()">gsgsgs</button> -->
-                                            <!-- <input type="button" name="btn1" value="Enviar" onclick="obtener()"> -->
-                                            <!-- <input type="text" name="nombreobtenido" id="nombreobtenido"> -->
-                                        </li>
-                                    </ul>
-                                </h:form>
-                            </f:view>
+                                            <li>
+                                                <h:outputLabel for="empresa" class="label">Nombre de la Empresa<span class="required">*</span></h:outputLabel>
+                                                <h:selectOneMenu class="field-select correcto " id="empresa" value="#{domiciliarioControlador.empresa.idEmpresa}" title="Empresa" required="true">
+                                                    <f:selectItems var="empre" value="#{empresaControlador.consultar()}" itemValue="#{empre.idEmpresa}" itemLabel="#{empre.nombre}"></f:selectItems>
+                                                </h:selectOneMenu>  
+                                            </li>
+                                            <li>
+                                                <h:commandButton  class="enviarcrud"   id="botones" value="Guardar" action="#{domiciliarioControlador.actualizar()}"></h:commandButton>
+                                                <!-- onclick="validar_formulario" -->
+                                                <!-- <button class="btn btn-outline-success" type="button" onclick="validar_formulario();" style="margin-bottom: 25px;">Registrar</button> -->
+                                                <!-- <button onclick="obtener()">gsgsgs</button> -->
+                                                <!-- <input type="button" name="btn1" value="Enviar" onclick="obtener()"> -->
+                                                <!-- <input type="text" name="nombreobtenido" id="nombreobtenido"> -->
+                                            </li>
+                                        </ul>
+                                    </h:form>
+                                </f:view>
 
-                        </div>
-                    </section>
-                    <!--______________________- fin de capa formulario ____________________- -->
+                            </div>
+                        </section>
+                        <!--______________________- fin de capa formulario ____________________- -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--__________________________- inicio del footer __________________________- -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
-        <!--______________________________- fin del footer __________________________-->
-        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+            <!--__________________________- inicio del footer __________________________- -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+            <!--______________________________- fin del footer __________________________-->
+            <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <!-- <script src="../../js/scriptvigilante.js"></script> -->
-        <!-- bootstrap and jquery -->
-
-        <script src="../../../../js/jquery-3.4.1.min.js"></script>
-
-        <script src="../../../../js/bootstrap.min.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-        <script src="../../../js/alert.js"></script>
-
-        <script src="../../../js/scriptvigilante.js"></script>
-
-        <!-- Menu responsive -->
-        <script src="../../nav/nav.js"></script>
+            <!-- bootstrap and jquery -->
+            <script src="../../../../js/jquery-3.4.1.min.js"></script>
+            <script src="../../../../js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+            <script src="../../../js/scriptvigilante.js"></script>
+            <!-- Menu responsive -->
+            <script src="../../nav/nav.js"></script>
         </f:view>
     </h:body>
 </html>

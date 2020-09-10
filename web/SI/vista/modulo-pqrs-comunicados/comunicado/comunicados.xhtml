@@ -25,7 +25,7 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Comunicados</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
@@ -136,7 +136,7 @@
                                                             -->
                                                         </div>
                                                     </h3>
-                                                    <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}</p>
+                                                    <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{horaControlador.convertirf(comunicado.fechaPublicacion)}"></h:outputText>, Por: #{comunicado.idPerfil.idRol.nombre}</p>
                                                     <img src="#{comunicado.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;" data-toggle="modal" data-target="#modal-img"/>
                                                     <p class="card-text mt-3">#{comunicado.descripcion}</p>
                                                 </div>
@@ -243,7 +243,7 @@
                                                             <!-- . -->
                                                         </div>
                                                     </h3>
-                                                    <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{noticia.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MM-dd"/></h:outputText>, Por: #{noticia.idPerfil.idRol.nombre}</p>
+                                                    <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{horaControlador.convertirf(noticia.fechaPublicacion)}"></h:outputText>, Por: #{noticia.idPerfil.idRol.nombre}</p>
                                                     <img src="#{noticia.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
                                                     <p class="card-text mt-3">#{noticia.descripcion}</p>
                                                 </div>
@@ -399,7 +399,7 @@
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

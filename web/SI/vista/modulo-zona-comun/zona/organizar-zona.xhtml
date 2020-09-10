@@ -25,7 +25,7 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Organizarzonacomún}</title>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
             <script>#{mensajeControlador.mensaje}</script>
             <!-- Contenedor principal -->
             <div class="contenedor">
@@ -66,12 +66,6 @@
                                     <h4 class="mt-3 text-center"><i class="fas fa-thumbtack mt-3 mr-3"></i>#{formdashboardadmin.Todoslaszonascomunesreservables}</h4>
                                     <h:form>
                                         <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{zonaComunalControlador.consultarTodos()}" var="zona">
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Id"/>
-                                                </f:facet>
-                                                <h:outputText value="#{zona.idZonaComunal}"/>
-                                            </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Zonacomún}"/>
@@ -137,7 +131,7 @@
             </script>
         </c:if>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

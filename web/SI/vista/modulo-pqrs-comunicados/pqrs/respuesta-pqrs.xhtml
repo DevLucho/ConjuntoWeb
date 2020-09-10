@@ -33,145 +33,143 @@
         <title>#{sesionControlador.rolSeleccionado.nombre} | Responder PQRS</title>
     </h:head>
     <h:body>
-        <!-- header -->
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <!-- nav -->
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <div aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./consultar-pqrs.xhtml">Consultar pqrs</a></li>
-                    <li class="breadcrumb-item active">Respuesta pqrs</li>
-                </c:if>
-                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="./consultar-pqrs.xhtml">Consultar pqrs</a></li>
-                    <li class="breadcrumb-item active">Respuesta pqrs</li>
-                    <style>
-                        nav ul li{ width:25%;}
-                        @media screen and (max-width:903px){
-                            nav ul li{
-                                width: 100%;
-                                text-align: left;
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="./consultar-pqrs.xhtml">Consultar pqrs</a></li>
+                        <li class="breadcrumb-item active">Respuesta pqrs</li>
+                    </c:if>
+                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="./consultar-pqrs.xhtml">Consultar pqrs</a></li>
+                        <li class="breadcrumb-item active">Respuesta pqrs</li>
+                        <style>
+                            nav ul li{ width:25%;}
+                            @media screen and (max-width:903px){
+                                nav ul li{
+                                    width: 100%;
+                                    text-align: left;
+                                }
                             }
-                        }
-                    </style>
-                </c:if>
-            </ol>
-        </div>
-        <section class="container-fluid" id="principal">
-            <div class="row">
-                <div class="col-12">
-                    <h3>
-                        <i class="far fa-comment-alt"></i>
-                        Responder pqrs
-                    </h3>
-                </div>
+                        </style>
+                    </c:if>
+                </ol>
             </div>
-            <hr/>                 
-            <!-- Formulario -->
-
-            <h:form>
+            <section class="container-fluid" id="principal">
                 <div class="row">
-                    <!-- Titulo -->
-                    <div class="col-12 ">
-                        <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Información del residente</a></p>
-                        <div class="collapse" id="titulo">
-                            <div class="form-group row">
-                                <div class="col-12 col-md-6">
-                                    <b><label>Residente:</label></b>
-                                    <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idPerfil.nombre} #{respuestaControlador.pqrs.idResidente.idPerfil.apellido}" ></h:outputText>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <b><label>Inmueble:</label></b>
-                                    <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idInmueble.idTorre.idTorre}-#{respuestaControlador.pqrs.idResidente.idInmueble.idApartamento.idApartamento}" ></h:outputText>
+                    <div class="col-12">
+                        <h3>
+                            <i class="far fa-comment-alt"></i>
+                            Responder pqrs
+                        </h3>
+                    </div>
+                </div>
+                <hr/>                 
+                <!-- Formulario -->
+
+                <h:form>
+                    <div class="row">
+                        <!-- Titulo -->
+                        <div class="col-12 ">
+                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Información del residente</a></p>
+                            <div class="collapse" id="titulo">
+                                <div class="form-group row">
+                                    <div class="col-12 col-md-6">
+                                        <b><label>Residente:</label></b>
+                                        <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idPerfil.nombre} #{respuestaControlador.pqrs.idResidente.idPerfil.apellido}" ></h:outputText>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <b><label>Inmueble:</label></b>
+                                        <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idInmueble.idTorre.idTorre}-#{respuestaControlador.pqrs.idResidente.idInmueble.idApartamento.idApartamento}" ></h:outputText>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- Disponibilidad -->
-                    <div class="col-12">
-                        <p>
-                            <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                               data-toggle="collapse"><i></i>Detalle PQRS</a>
-                        </p>
-                        <div class="collapse" id="date">
-                            <div class="from-group row">
-                                <div class="col-6" style="border-right: 1px solid #efefef ;">
-                                    <b><p>Asunto:</p></b>
-                                    <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.asunto}"></h:outputText>
-                                    <hr/>
-                                    <b><p>Descripción:</p></b>
-                                    <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{respuestaControlador.pqrs.descripcion}" required="required" style="height:100px;" disabled="true"/>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <b><p>Tipo pqrs:</p></b>
-                                            <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idTipoPqrs.tipo}"></h:outputText>
-                                        </div>
-                                        <div class="col-6">
-                                            <b><p>Nro radicado:</p></b>
-                                            <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.pqrs.nroRadicado}" class="form-control-plaintext form-plain col-12" disabled="true">
-                                                <f:selectItems var="radicado" value="#{pqrsControlador.consultar()}" itemValue="#{radicado.nroRadicado}" itemLabel="#{radicado.nroRadicado}"/>
-                                            </h:selectOneMenu>  
-                                        </div>
+                    <div class="row">
+                        <!-- Disponibilidad -->
+                        <div class="col-12">
+                            <p>
+                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                                   data-toggle="collapse"><i></i>Detalle PQRS</a>
+                            </p>
+                            <div class="collapse" id="date">
+                                <div class="from-group row">
+                                    <div class="col-6" style="border-right: 1px solid #efefef ;">
+                                        <b><p>Asunto:</p></b>
+                                        <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.asunto}"></h:outputText>
+                                        <hr/>
+                                        <b><p>Descripción:</p></b>
+                                        <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{respuestaControlador.pqrs.descripcion}" required="required" style="height:100px;" disabled="true"/>
                                     </div>
-                                    <hr/>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <b><p>Dirigido al administrador del conjunto:</p></b>
-                                            <h:selectOneMenu class="form-control-plaintext form-plain col-12" id="vigilante" value="#{respuestaControlador.usuario.idPerfil}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
-                                                <f:selectItems var="u" value="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" itemValue="#{u.idPerfil}" itemLabel="#{u.nombre} #{u.apellido}"></f:selectItems> 
-                                            </h:selectOneMenu>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <b><p>Tipo pqrs:</p></b>
+                                                <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idTipoPqrs.tipo}"></h:outputText>
+                                            </div>
+                                            <div class="col-6">
+                                                <b><p>Nro radicado:</p></b>
+                                                <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.pqrs.nroRadicado}" class="form-control-plaintext form-plain col-12" disabled="true">
+                                                    <f:selectItems var="radicado" value="#{pqrsControlador.consultar()}" itemValue="#{radicado.nroRadicado}" itemLabel="#{radicado.nroRadicado}"/>
+                                                </h:selectOneMenu>  
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <b><label>Fecha de generación:</label><br/></b>
-                                            <div class="form-plain">
-                                                <h:outputText value="#{respuestaControlador.pqrs.fecha}" a:disabled="true">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
-                                                </h:outputText> -
-                                                <h:outputText value="#{respuestaControlador.pqrs.hora}" a:disabled="true">
-                                                    <f:convertDateTime pattern="HH:mm a"/>
-                                                </h:outputText>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <b><p>Dirigido al administrador del conjunto:</p></b>
+                                                <h:selectOneMenu class="form-control-plaintext form-plain col-12" id="vigilante" value="#{respuestaControlador.usuario.idPerfil}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                    <f:selectItems var="u" value="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" itemValue="#{u.idPerfil}" itemLabel="#{u.nombre} #{u.apellido}"></f:selectItems> 
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-6">
+                                                <b><label>Fecha de generación:</label><br/></b>
+                                                <div class="form-plain">
+                                                    <h:outputText value="#{horaControlador.convertirf(respuestaControlador.pqrs.fecha)}" a:disabled="true"></h:outputText> -
+                                                    <h:outputText value="#{horaControlador.convertir(respuestaControlador.pqrs.hora)}" a:disabled="true"></h:outputText>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>                
-                <!-- Respuesta -->
-                <hr/>
-                <h4 class="col-12">Respuesta</h4>
-                <hr/>
-                <div class="form-group row">
-                    <div class="col-12">
-                        <h:inputTextarea class="form col-12 form-control" pt:placeholder="Digite su respuesta . . ." id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;border: 1px solid #2A6378;"/>
-                    </div>
-                    <!-- Boton registrar -->
-                    <div class="row justify-content-center mt-3 mb-3">
-                        <div class="col-12 col-md-2">
-                            <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                <h:commandButton class="btn btn-outline-success btn-block" value="Responder" action="#{respuestaControlador.registrar(respuestaControlador.pqrs)}"></h:commandButton>
-                            </c:if>
+                    </div>                
+                    <!-- Respuesta -->
+                    <hr/>
+                    <h4 class="col-12">Respuesta</h4>
+                    <hr/>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Digite su respuesta . . ." id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;border: 1px solid #2A6378;"/>
+                        </div>
+                        <!-- Boton registrar -->
+                        <div class="row justify-content-center mt-3 mb-3">
+                            <div class="col-12 col-md-2">
+                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                                    <h:commandButton class="btn btn-outline-success btn-block" value="Responder" action="#{respuestaControlador.registrar(respuestaControlador.pqrs)}"></h:commandButton>
+                                </c:if>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </h:form>
-        </section>
-        <!-- footer -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
+                </h:form>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </f:view>
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
         <!-- Sweet alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>

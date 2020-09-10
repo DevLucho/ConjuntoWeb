@@ -35,7 +35,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Sebastian
@@ -44,15 +43,15 @@ import javax.swing.JOptionPane;
 @SessionScoped
 public class VisitanteControlador implements Serializable {
 
-    private String horaEntrada = "";
-    private String horaSalida = "";
-    private String nombre;
-
     /**
      * Creates a new instance of VisitanteControlador
      */
     public VisitanteControlador() {
     }
+    @Inject
+    private HoraControlador hora;
+    @Inject
+    private MensajeControlador mensaje;
     Visitante visitante;
     FichaIngreso fichaIngreso;
     Inmueble inmueble;
@@ -60,8 +59,7 @@ public class VisitanteControlador implements Serializable {
     private Vehiculo vehiculo;
     private Parqueadero parqueadero;
     private List<Visitante> consultaVisitante;
-    
-    
+
     @PostConstruct
     public void init() {
         visitante = new Visitante();
@@ -71,7 +69,6 @@ public class VisitanteControlador implements Serializable {
         vehiculo = new Vehiculo();
         parqueadero = new Parqueadero();
         consultaVisitante = new ArrayList();
-        
     }
 
     @EJB
@@ -85,15 +82,12 @@ public class VisitanteControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
-    
+
     @EJB
     VehiculoFacade vehiculoFacade;
-    
+
     @EJB
     ParqueaderoFacade parqueaderoFacade;
-
-    @Inject
-    private MensajeControlador mensaje;
 
     public Visitante getVisitante() {
         return visitante;
@@ -126,22 +120,16 @@ public class VisitanteControlador implements Serializable {
     public void setVigilante(Vigilante vigilante) {
         this.vigilante = vigilante;
     }
-    
-    
 
     public void registrar() {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setEstadoFicha("Activo");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        horaEntrada = dateFormat.format(date);
-        fichaIngreso.setHoraEntrada(date);
+        fichaIngreso.setHoraEntrada(hora.now());
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
         visitanteFacade.create(visitante);
-        if ("Si".equals(visitante.getVehiculo())){
+        if ("Si".equals(visitante.getVehiculo())) {
             vehiculo.setIdVisitante(visitante);
             vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
             vehiculoFacade.create(vehiculo);
@@ -152,19 +140,15 @@ public class VisitanteControlador implements Serializable {
         visitante = new Visitante();
         mensaje.setMensaje("RegistrarVisitante('success','Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
     }
-    
-    public void salida(FichaIngreso fichaIngresoSalida){
+
+    public void salida(FichaIngreso fichaIngresoSalida) {
         fichaIngreso = fichaIngresoSalida;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        horaSalida = dateFormat.format(date);
-        fichaIngreso.setHoraSalida(date);
+        fichaIngreso.setHoraSalida(hora.now());
         fichaIngreso.setEstadoFicha("Inactivo");
-        fichaIngresoFacade.edit(fichaIngresoSalida);  
+        fichaIngresoFacade.edit(fichaIngresoSalida);
         mensaje.setMensaje("ConfirmarSalida('info','Salida Registrada','El visitante ha abandonado, <br> el conjunto residencial <br><br>');");
     }
-    
+
     public String preActulizr(Visitante visitanteActualizar) {
         visitante = visitanteActualizar;
         fichaIngreso = visitanteActualizar.getIdFicha();
@@ -180,7 +164,7 @@ public class VisitanteControlador implements Serializable {
         visitante.setIdFicha(fichaIngresoFacade.find(fichaIngreso.getIdFicha()));
         visitanteFacade.edit(visitante);
         mensaje.setMensaje("EdicionVisitante('buscarVisitante.xhtml','Ficha de visitante modificada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
-        
+
     }
 
     public void eliminar(Visitante visitanteEliminar) {
@@ -192,33 +176,33 @@ public class VisitanteControlador implements Serializable {
         return visitanteFacade.findAll();
     }
 
-    public List<Visitante> consultarEstado(String estadoFicha){
+    public List<Visitante> consultarEstado(String estadoFicha) {
         return visitanteFacade.fichaBloqueada(estadoFicha);
     }
-    
-    public List<Visitante> fichaVisitante(int idInmueble){
+
+    public List<Visitante> fichaVisitante(int idInmueble) {
         return visitanteFacade.fichaVisitante(idInmueble);
     }
-    
+
     public String consultarID(int id) {
         visitante = visitanteFacade.find(id);
         return "buscarVisitante";
     }
-    
-    public int contarVisitantes(){
+
+    public int contarVisitantes() {
         return visitanteFacade.count();
     }
-    
-    public int contarVisitantesR(int idInmueble){
+
+    public int contarVisitantesR(int idInmueble) {
         return visitanteFacade.contarVisitanteR(idInmueble);
     }
-    
-     public List<Visitante> consultaSQL(){
+
+    public List<Visitante> consultaSQL() {
         SimpleDateFormat hora = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
         List<Object[]> listaTres = visitanteFacade.consultarVis();
         List<Visitante> listaVisitante = new ArrayList();
         try {
-            for(Object[] iten : listaTres){
+            for (Object[] iten : listaTres) {
                 Visitante visitante = new Visitante();
                 FichaIngreso fichaIngreso = fichaIngresoFacade.find(Integer.parseInt(iten[3].toString()));
                 visitante.setIdVisitante(Integer.parseInt(iten[0].toString()));
@@ -256,26 +240,27 @@ public class VisitanteControlador implements Serializable {
     public void setConsultaVisitante(List<Visitante> consultaVisitante) {
         this.consultaVisitante = consultaVisitante;
     }
-    
-    public void validarLong(FacesContext context, UIComponent comp, Object value){
+
+    public void validarLong(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
-        String texto = (String)value;
-        
-        if(texto.length() < 4 || texto.length() > 10){
-            ((UIInput)comp).setValid(false);
-            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+        String texto = (String) value;
+
+        if (texto.length() < 4 || texto.length() > 10) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("tamaño no valido"));
         }
     }
-    public void validarplaca(FacesContext context, UIComponent comp, Object value){
+
+    public void validarplaca(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
-        String text = (String)value;
-        
-        if(text.length() < 5 || text.length() > 8){
-            ((UIInput)comp).setValid(false);
-            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+        String text = (String) value;
+
+        if (text.length() < 5 || text.length() > 8) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("tamaño no valido"));
         }
     }
-    
+
     //public void validarC(FacesContext context, UIComponent comp, Object value){
     //    context = FacesContext.getCurrentInstance();
     //    String texto = (String)value;
@@ -288,8 +273,7 @@ public class VisitanteControlador implements Serializable {
     //        context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
     //    }
     //}
-    public static boolean validarCa(String datos)
-    {
+    public static boolean validarCa(String datos) {
         return datos.matches("[a-zA-Z]{1,10}*");
     }
 }

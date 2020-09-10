@@ -58,173 +58,170 @@
         <title>Administrador | Zona comunal</title>
     </h:head>
     <h:body>
-        <script>#{mensajeControlador.mensaje}</script>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga de pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
-                    </c:if>
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                        <style>
-                            nav ul li{ width:25%;}
-                            @media screen and (max-width:903px){
-                                nav ul li{
-                                    width: 100%;
-                                    text-align: left;
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <script>#{mensajeControlador.mensaje}</script>
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga de pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                        </c:if>
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                            <style>
+                                nav ul li{ width:25%;}
+                                @media screen and (max-width:903px){
+                                    nav ul li{
+                                        width: 100%;
+                                        text-align: left;
+                                    }
                                 }
-                            }
-                        </style>
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>
-                    </c:if>
-                    <li class="breadcrumb-item"><a href="./consultar-inscripcion.xhtml">#{formdashboardadmin.txtConsultarInscripciones}</a></li>
-                    <li class="breadcrumb-item active">#{formdashboardadmin.Detalle}:#{formdashboardadmin.Inscripciónaevento}</li>
-                </ol>
+                            </style>
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formcrearusuario.bcInicio}</a></li>
+                        </c:if>
+                        <li class="breadcrumb-item"><a href="./consultar-inscripcion.xhtml">#{formdashboardadmin.txtConsultarInscripciones}</a></li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Detalle}:#{formdashboardadmin.Inscripciónaevento}</li>
+                    </ol>
+                </div>
+                <!-- main -->
+                <section class="container-fluid" id="principal">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>
+                                <i class="fas fa-stream"></i>
+                                Detalle inscripción: #{inscripcionControlador.inscripcion.idEvento.titulo}
+                            </h3>
+                        </div>
+                    </div>
+                    <hr/>
+                    <hr/>
+                    <h:form class="mt-3 mb-3">
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-6 mt-3" style="border-right: 1px solid rgba(0,0,0,.1)">
+                                <div class="carousel slide text-center" id="principal-carousel" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#principal-carousel" data-slid-to="0" class="active"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="img-thumbnail" src="#{inscripcionControlador.inscripcion.idEvento.img}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <h2 class="mt-3">Evento: #{inscripcionControlador.inscripcion.idEvento.titulo}</h2>
+                                <hr/>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4>Persona inscrita:</h4><p>#{inscripcionControlador.inscripcion.nombre} | #{formdashboardadmin.Fechadeinscripción}: #{horaControlador.convertirfh(inscripcionControlador.inscripcion.fechaInscripcion)}</p>
+                                        <h4>Inmueble:</h4><p>#{inscripcionControlador.inscripcion.idResidente.idInmueble.idTorre.idTorre} - #{inscripcionControlador.inscripcion.idResidente.idInmueble.idApartamento.idApartamento}</p>
+                                        <h4 class="mt-0">#{formdashboardadmin.Detalledelevento}</h4>
+                                        <p>#{inscripcionControlador.inscripcion.idEvento.detalle}</p>
+                                        <hr/>
+                                        <div class="media">
+                                            <i class="far fa-clock d-flex align-self-start mr-3"></i>
+                                            <div class="media-body">
+                                                <h4 class="mt-0">#{formdashboardadmin.Fechayhoradelevento}</h4>
+                                                <p>
+                                                    #{formdashboardadmin.Elevento} #{inscripcionControlador.inscripcion.idEvento.titulo} #{formdashboardadmin.serealizaraenlazona}
+                                                    <mark>#{inscripcionControlador.inscripcion.idEvento.idZonaComunal.nombre}</mark>. 
+                                                    <br/>
+                                                    #{formdashboardadmin.Fechainicio}:
+                                                    <mark>
+                                                        <h:outputText value="#{horaControlador.convertirf(inscripcionControlador.inscripcion.idEvento.fechaInicio)}"></h:outputText> -
+                                                        <h:outputText value="#{horaControlador.convertir(inscripcionControlador.inscripcion.idEvento.horaInicio.hora)}"></h:outputText>
+                                                    </mark> 
+                                                    <br/>
+                                                    #{formdashboardadmin.Fechafin}:
+                                                    <mark>
+                                                        <h:outputText value="#{horaControlador.convertirf(inscripcionControlador.inscripcion.idEvento.fechaFin)}"></h:outputText> -
+                                                        <h:outputText value="#{horaControlador.convertir(inscripcionControlador.inscripcion.idEvento.horaFin.hora)}"></h:outputText>
+                                                    </mark>
+                                                </p>
+                                                <p>#{formdashboardadmin.Estadodelevento}: <mark>#{inscripcionControlador.inscripcion.idEvento.estado}</mark></p>
+                                                <p>#{formdashboardadmin.Estadodelinscrito}: <mark>#{inscripcionControlador.inscripcion.estado}</mark></p>
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <strong><h4 class="mt-0 text-right">#{formdashboardadmin.Notas}</h4></strong>
+                                        <p class="text-right">
+                                            #{formdashboardadmin.Elorganizadordeleventoes} #{inscripcionControlador.inscripcion.idEvento.organizador}.
+                                        </p>
+                                    </div>
+                                    <img src="#{inscripcionControlador.inscripcion.idEvento.img}" width="64" height="64" alt="" class="ml-3"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <!-- Modal inscripcion a evento -->
+                    <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>#{formdashboardadmin.Inscripciónaevento}</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- Formulario comunicado -->
+                                <h:form class="row">
+                                    <div class="modal-body">
+                                        <div class="form-group row font">
+                                            <div class="col-12">
+                                                <b><label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label></b>
+                                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row font">
+                                            <div class="col-12 col-md-6">
+                                                <b><label>#{formdashboardadmin.Residenteresponsable}:</label></b>
+                                                <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <b><label>#{formdashboardadmin.Torre}:</label></b>
+                                                <h:selectOneMenu class="form-control">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <b><label>#{formdashboardadmin.Apartamento}:</label></b>
+                                                <h:selectOneMenu class="form-control">
+                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer col-12">
+                                        <h:commandButton value="#{formdashboardadmin.confirmar}" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
-            <!-- main -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>
-                            <i class="fas fa-stream"></i>
-                            Detalle inscripción: #{inscripcionControlador.inscripcion.idEvento.titulo}
-                        </h3>
-                    </div>
-                </div>
-                <hr/>
-                <hr/>
-                <h:form class="mt-3 mb-3">
-                    <div class="row mb-3">
-                        <div class="col-12 col-md-6 mt-3" style="border-right: 1px solid rgba(0,0,0,.1)">
-                            <div class="carousel slide text-center" id="principal-carousel" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#principal-carousel" data-slid-to="0" class="active"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="img-thumbnail" src="#{inscripcionControlador.inscripcion.idEvento.img}" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-3">
-                            <h2 class="mt-3">#{inscripcionControlador.inscripcion.idEvento.titulo}</h2>
-                            <hr/>
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>Inscrito:</h4><p>#{inscripcionControlador.inscripcion.nombre}</p>
-                                    <h4>Inmueble:</h4><p>#{inscripcionControlador.inscripcion.idResidente.idInmueble.idTorre.idTorre} - #{inscripcionControlador.inscripcion.idResidente.idInmueble.idApartamento.idApartamento}</p>
-                                    <h4 class="mt-0">#{formdashboardadmin.Detalledelevento}</h4>
-                                    <p>#{inscripcionControlador.inscripcion.idEvento.detalle}</p>
-                                    <hr/>
-                                    <div class="media">
-                                        <i class="far fa-clock d-flex align-self-start mr-3"></i>
-                                        <div class="media-body">
-                                            <h4 class="mt-0">#{formdashboardadmin.Detalledelevento}</h4>
-                                            <p>
-                                                #{formdashboardadmin.Elevento} #{inscripcionControlador.inscripcion.idEvento.titulo} #{formdashboardadmin.serealizaraenlazona}
-                                                <mark>#{inscripcionControlador.inscripcion.idEvento.idZonaComunal.nombre}</mark>, #{formdashboardadmin.empiezaalas}
-                                                <mark>
-                                                    <h:outputText value="#{inscripcionControlador.inscripcion.idEvento.fechaInicio}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText> -
-                                                    <h:outputText value="#{inscripcionControlador.inscripcion.idEvento.horaInicio}">
-                                                        <f:convertDateTime pattern="HH:mm a" />
-                                                    </h:outputText>
-                                                </mark> 
-                                                #{formdashboardadmin.hastalas}
-                                                <mark>
-                                                    <h:outputText value="#{inscripcionControlador.inscripcion.idEvento.fechaFin}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText> -
-                                                    <h:outputText value="#{inscripcionControlador.inscripcion.idEvento.horaFin}">
-                                                        <f:convertDateTime pattern="HH:mm a" />
-                                                    </h:outputText>
-                                                </mark>
-                                            </p>
-                                            <p>#{formdashboardadmin.Estadodelevento}: <mark>#{inscripcionControlador.inscripcion.idEvento.estado}</mark></p>
-                                            <p>#{formdashboardadmin.Estadodelinscrito}: <mark>#{inscripcionControlador.inscripcion.estado}</mark></p>
-                                            <hr/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="media">
-                                <div class="media-body">
-                                    <strong><h4 class="mt-0 text-right">#{formdashboardadmin.Notas}</h4></strong>
-                                    <p class="text-right">
-                                        #{formdashboardadmin.Elorganizadordeleventoes} #{inscripcionControlador.inscripcion.idEvento.organizador}.
-                                    </p>
-                                </div>
-                                <img src="#{inscripcionControlador.inscripcion.idEvento.img}" width="64" height="64" alt="" class="ml-3"/>
-                            </div>
-                        </div>
-                    </div>
-                </h:form>
-                <!-- Modal inscripcion a evento -->
-                <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>#{formdashboardadmin.Inscripciónaevento}</h5>
-                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <!-- Formulario comunicado -->
-                            <h:form class="row">
-                                <div class="modal-body">
-                                    <div class="form-group row font">
-                                        <div class="col-12">
-                                            <b><label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label></b>
-                                            <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row font">
-                                        <div class="col-12 col-md-6">
-                                            <b><label>#{formdashboardadmin.Residenteresponsable}:</label></b>
-                                            <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            <b><label>#{formdashboardadmin.Torre}:</label></b>
-                                            <h:selectOneMenu class="form-control">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            <b><label>#{formdashboardadmin.Apartamento}:</label></b>
-                                            <h:selectOneMenu class="form-control">
-                                                <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer col-12">
-                                    <h:commandButton value="#{formdashboardadmin.confirmar}" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
-                                </div>
-                            </h:form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+        </f:view>
         <!-- Bootstrap y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

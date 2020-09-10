@@ -161,17 +161,18 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="Ingreso"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{Npaq.fechaIngreso}">
-                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                                                    </h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(Npaq.fechaIngreso)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="Salida"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{Npaq.fechaSalida}">
-                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                                                    </h:outputText>
+                                                    <c:if test="#{Npaq.fechaSalida!=null}">
+                                                        <h:outputText value="#{horaControlador.convertirf(Npaq.fechaSalida)}"></h:outputText>
+                                                    </c:if>
+                                                    <c:if test="#{Npaq.fechaSalida==null}">
+                                                        <h:outputText value="No"></h:outputText>
+                                                    </c:if>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -254,17 +255,18 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="Ingreso"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{paq.fechaIngreso}">
-                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                                                    </h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(paq.fechaIngreso)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="Salida"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{paq.fechaSalida}">
-                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                                                    </h:outputText>
+                                                    <c:if test="#{paq.fechaSalida!=null}">
+                                                        <h:outputText value="#{horaControlador.convertirf(paq.fechaSalida)}"></h:outputText>
+                                                    </c:if>
+                                                    <c:if test="#{paq.fechaSalida==null}">
+                                                        <h:outputText value="No"></h:outputText>
+                                                    </c:if>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -350,7 +352,7 @@
             <script src="../../../js/scriptvigilante.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
             <!-- Menu responsive -->
-            <script src="../../navs/nav.js"></script>
+            <script src="../../nav/nav.js"></script>
         </f:view>
     </h:body>
 </html>

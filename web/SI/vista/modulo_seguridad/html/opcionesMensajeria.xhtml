@@ -4,7 +4,8 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
 
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="UTF-8" />
 
@@ -62,57 +63,51 @@
         </style>
     </h:head>
     <h:body>
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <!-- fin de header y poput -->
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <!-- fin de header y poput -->
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="pep col-sm-12 col-md-12 col-xl-12">
-                    <!--________________________ Inicio de capa principal ______________________- -->
-                    <!-- <div class="espacio"></div> -->
-                    <section class="opciones">
-                        <div
-                            class="agregar menos"
-                            onclick="location.href = 'agregarMensajeria.xhtml'"
-                            >
-                            <i class="fas fa-user-plus negro" aria-hidden="true" />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="pep col-sm-12 col-md-12 col-xl-12">
+                        <!--________________________ Inicio de capa principal ______________________- -->
+                        <!-- <div class="espacio"></div> -->
+                        <section class="opciones">
+                            <div
+                                class="agregar menos"
+                                onclick="location.href = 'agregarMensajeria.xhtml'"
+                                >
+                                <i class="fas fa-user-plus negro" aria-hidden="true" />
 
-                            <h3><b>Agregar Paquete</b></h3>
-                        </div>
+                                <h3><b>Agregar Paquete</b></h3>
+                            </div>
 
-                        <div
-                            class="agregar"
-                            onclick="location.href = 'buscarMensajeria.xhtml'"
-                            >
-                            <i class="fas fa-search negro" aria-hidden="true" />
+                            <div
+                                class="agregar"
+                                onclick="location.href = 'buscarMensajeria.xhtml'"
+                                >
+                                <i class="fas fa-search negro" aria-hidden="true" />
 
-                            <h3><b>Consultar Paquete</b></h3>
-                        </div>
-                    </section>
-                    <!--__________________________ fin de capa principal ________________________-->
+                                <h3><b>Consultar Paquete</b></h3>
+                            </div>
+                        </section>
+                        <!--__________________________ fin de capa principal ________________________-->
+                    </div>
+                    <!-- <div class="col-sm-12 col-md-4 col-xl-4 pepue"></div> -->
                 </div>
-                <!-- <div class="col-sm-12 col-md-4 col-xl-4 pepue"></div> -->
             </div>
-        </div>
-        <!--__________________________- inicio del footer __________________________- -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
-        <!--______________________________- fin del footer __________________________-->
-        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
-
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-        <script src="../../../js/scriptvigilante.js"></script>
+            <!--__________________________- inicio del footer __________________________- -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+            <!--______________________________- fin del footer __________________________-->
+            <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+        </f:view>
         <!-- bootstrap and jquery -->
-
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
-
         <script src="../../../../js/bootstrap.min.js"></script>
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-        <script src="../../../js/alert.js"></script>
-
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <script src="../../../js/scriptvigilante.js"></script>
         <!-- Menu responsive -->
         <script src="../../nav/nav.js"></script>
     </h:body>

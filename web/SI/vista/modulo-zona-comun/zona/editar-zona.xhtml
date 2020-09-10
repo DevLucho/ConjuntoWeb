@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
@@ -17,285 +18,169 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
-        <!-- Sweet alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.editarzonacomún}</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Editarzonacomún}</title>
     </h:head>
     <h:body>
-        <script>#{mensajeControlador.mensaje}</script>
-        <!-- Contenedor principal -->
-        <div class="contenedor">
-            <!-- header -->
-            <ui:include src="../../header/header.xhtml"></ui:include>
-            <!-- nav -->
-            <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <!-- miga de pan -->
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
-                    <li class="breadcrumb-item"><a href="./organizar-zona.xhtml">#{formdashboardadmin.Organizarzonacomún}</a></li>
-                    <li class="breadcrumb-item active">#{formdashboardadmin.editarzonacomún}</li>
-                </ol>
-            </div>
-            <!-- main -->
-            <section class="container-fluid" id="principal">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>
-                            <i class="far fa-edit"></i>
-                            #{formdashboardadmin.Editarzonacomún}: #{disponibilidadControlador.zonaComunal.nombre}
-                        </h3>
-                    </div>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <script>#{mensajeControlador.mensaje}</script>
+            <!-- Contenedor principal -->
+            <div class="contenedor">
+                <!-- header -->
+                <ui:include src="../../header/header.xhtml"></ui:include>
+                <!-- nav -->
+                <ui:include src="../../nav/nav.xhtml"></ui:include>
+                <!-- miga de pan -->
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="./organizar-zona.xhtml">#{formdashboardadmin.Organizarzonacomún}</a></li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Editarzonacomún}</li>
+                    </ol>
                 </div>
-                <hr/>
-                <!-- Formulario -->
-                <h:form>
+                <!-- main -->
+                <section class="container-fluid" id="principal">
                     <div class="row">
-                        <!-- Titulo -->
-                        <div class="col-12 ">
-                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">#{formdashboardadmin.Zonacomún}</a></p>
-                            <div class="collapse" id="titulo">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="#{formdashboardadmin.Nombrezonacomún}" a:placeholder="#{formdashboardadmin.Ingreseelnombredezonacomunal}" required="true"/>
+                        <div class="col-12">
+                            <h3>
+                                <i class="far fa-edit"></i>
+                                #{formdashboardadmin.Editarzonacomún}: #{disponibilidadControlador.zonaComunal.nombre}
+                            </h3>
+                        </div>
+                    </div>
+                    <hr/>
+                    <!-- Formulario -->
+                    <h:form enctype="multipart/form-data">
+                        <div class="row">
+                            <!-- Titulo -->
+                            <div class="col-12 ">
+                                <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">#{formdashboardadmin.Zonacomún}</a></p>
+                                <div class="collapse" id="titulo">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="#{formdashboardadmin.Nombrezonacomún}" pt:placeholder="#{formdashboardadmin.Ingreseelnombredelazonacomunal}" required="true"/>
+                                            <h:message for="nombre" style="color: red"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <!-- Disponibilidad -->
-                        <div class="col-12">
-                            <p>
-                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                                   data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>#{formdashboardadmin.Disponibilidad}</a>
-                            </p>
-                            <div class="collapse" id="date">
-                                <div class="from-group row">
-                                    <div class="col-6" style="border-right: 1px solid #efefef ;">
-                                        <b>
-                                            <p>#{formdashboardadmin.Disponibilidadendías}</p>
-                                        </b>
-                                        <hr/>
-                                        <div class="custom-control custom-checkbox" style="padding-left: 0;">
+                        <div class="row">
+                            <!-- Disponibilidad -->
+                            <div class="col-12">
+                                <p>
+                                    <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                                       data-toggle="collapse"><i class="far fa-clock" id="iseparador"></i>#{formdashboardadmin.Disponibilidad}</a>
+                                </p>
+                                <div class="collapse" id="date">
+                                    <div class="from-group row">
+                                        <div class="col-6" style="border-right: 1px solid #efefef ;">
+                                            <b>
+                                                <p>#{formdashboardadmin.Disponibilidadendías}</p>
+                                            </b>
+                                            <hr/>
+                                            <div class="custom-control custom-checkbox" style="padding-left: 0;">
+                                                <div class="form-group row">
+                                                    <div class="col-12 col-sm col-md col-lg col-xl">
+                                                        <!-- 
+                                                        <h:selectManyCheckbox>
+                                                            <f:selectItems value="#{disponibilidadControlador.consultarToodos()}" var="d" itemValue="#{d.idDia}" itemLabel="#{d.nombre}"></f:selectItems>
+                                                        </h:selectManyCheckbox>
+                                                        -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>#{formdashboardadmin.Domingo}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Lunes}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Martes}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}"></h:selectBooleanCheckbox>#{formdashboardadmin.Miércoles}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}"></h:selectBooleanCheckbox>#{formdashboardadmin.Jueves}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Viernes}
+                                                        <!-- . -->
+                                                        <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}"></h:selectBooleanCheckbox>#{formdashboardadmin.Sábado}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <b><p>#{formdashboardadmin.Disponibilidadenhoras}</p></b>
+                                            <hr/>
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm col-md col-lg col-xl">
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.domingo}"></h:selectBooleanCheckbox>#{formdashboardadmin.Domingo}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.lunes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Lunes}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.martes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Martes}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.miercoles}"></h:selectBooleanCheckbox>#{formdashboardadmin.Miércoles}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.jueves}"></h:selectBooleanCheckbox>#{formdashboardadmin.Jueves}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.viernes}"></h:selectBooleanCheckbox>#{formdashboardadmin.Viernes}
-                                                    <!-- . -->
-                                                    <h:selectBooleanCheckbox value="#{disponibilidadControlador.sabado}"></h:selectBooleanCheckbox>#{formdashboardadmin.Sábado}
+                                                <div class="col-12 col-md-6">
+                                                    <b><label>#{formdashboardadmin.Reservacionesdesdelas}:</label></b>
+                                                    <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.horaInicial.idHora}"  required="true">
+                                                        <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                        <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                                    </h:selectOneMenu>
+                                                    <h:message for="horaI" style="color: red"/>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
+                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal.idHora}"  required="true">
+                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                        <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                                    </h:selectOneMenu>
+                                                    <h:message for="horaF" style="color: red"/>
+                                                </div>
+                                                <div class="col-12 col-md-6 mt-3">
+                                                    <b><label>#{formdashboardadmin.Tiempomáximodereservaenhoras}:</label></b>
+                                                    <h:selectOneMenu id="tiempoM" value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
+                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                        <f:selectItems value="#{disponibilidadControlador.horaReserva()}"/>
+                                                    </h:selectOneMenu> 
+                                                    <h:message for="tiempoM" style="color: red"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <b><p>Disponiblidad en horas</p></b>
-                                        <hr/>
-                                        <div class="form-group row">
-                                            <div class="col-12 col-md-6">
-                                                <b><label>#{formdashboardadmin.Reservacionesdesdelas}:</label></b>
-                                                <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaInicialReserva}" class="form-control" required="true">
-                                                    <f:convertDateTime pattern="HH:mm" />
-                                                </h:inputText>
-                                                <!--
-                                                <h:selectOneMenu value="" class="form-control">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItem itemValue="00:00" itemLabel="00:00"></f:selectItem>
-                                                    <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
-                                                    <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
-                                                    <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
-                                                    <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
-                                                    <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
-                                                    <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
-                                                    <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
-                                                    <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
-                                                    <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
-                                                    <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
-                                                    <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
-                                                    <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
-                                                    <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
-                                                    <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
-                                                    <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
-                                                    <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
-                                                    <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
-                                                    <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
-                                                    <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
-                                                    <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
-                                                    <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
-                                                    <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
-                                                    <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
-                                                    <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
-                                                    <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
-                                                    <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
-                                                    <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
-                                                    <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
-                                                    <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
-                                                    <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
-                                                    <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
-                                                    <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
-                                                    <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
-                                                    <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
-                                                    <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
-                                                    <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
-                                                    <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
-                                                    <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
-                                                    <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
-                                                    <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
-                                                    <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
-                                                    <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
-                                                    <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
-                                                    <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
-                                                    <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
-                                                    <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
-                                                    <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
-                                                </h:selectOneMenu>-->
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
-                                                <h:inputText a:type="time" value="#{disponibilidadControlador.disponibilidad.horaFinalReserva}" class="form-control" required="true">
-                                                    <f:convertDateTime pattern="HH:mm" />
-                                                </h:inputText>
-                                                <!--
-                                                <h:selectOneMenu value="" class="form-control">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItem itemValue="00:30" itemLabel="00:30"></f:selectItem>
-                                                    <f:selectItem itemValue="01:00" itemLabel="01:00"></f:selectItem>
-                                                    <f:selectItem itemValue="01:30" itemLabel="01:30"></f:selectItem>
-                                                    <f:selectItem itemValue="02:00" itemLabel="02:00"></f:selectItem>
-                                                    <f:selectItem itemValue="02:30" itemLabel="02:30"></f:selectItem>
-                                                    <f:selectItem itemValue="03:00" itemLabel="03:00"></f:selectItem>
-                                                    <f:selectItem itemValue="03:30" itemLabel="03:30"></f:selectItem>
-                                                    <f:selectItem itemValue="04:00" itemLabel="04:00"></f:selectItem>
-                                                    <f:selectItem itemValue="04:30" itemLabel="04:30"></f:selectItem>
-                                                    <f:selectItem itemValue="05:00" itemLabel="05:00"></f:selectItem>
-                                                    <f:selectItem itemValue="05:30" itemLabel="05:30"></f:selectItem>
-                                                    <f:selectItem itemValue="06:00" itemLabel="06:00"></f:selectItem>
-                                                    <f:selectItem itemValue="06:30" itemLabel="06:30"></f:selectItem>
-                                                    <f:selectItem itemValue="07:00" itemLabel="07:00"></f:selectItem>
-                                                    <f:selectItem itemValue="07:30" itemLabel="07:30"></f:selectItem>
-                                                    <f:selectItem itemValue="08:00" itemLabel="08:00"></f:selectItem>
-                                                    <f:selectItem itemValue="08:30" itemLabel="08:30"></f:selectItem>
-                                                    <f:selectItem itemValue="09:00" itemLabel="09:00"></f:selectItem>
-                                                    <f:selectItem itemValue="09:30" itemLabel="09:30"></f:selectItem>
-                                                    <f:selectItem itemValue="10:00" itemLabel="10:00"></f:selectItem>
-                                                    <f:selectItem itemValue="10:30" itemLabel="10:30"></f:selectItem>
-                                                    <f:selectItem itemValue="11:00" itemLabel="11:00"></f:selectItem>
-                                                    <f:selectItem itemValue="11:30" itemLabel="11:30"></f:selectItem>
-                                                    <f:selectItem itemValue="12:00" itemLabel="12:00"></f:selectItem>
-                                                    <f:selectItem itemValue="12:30" itemLabel="12:30"></f:selectItem>
-                                                    <f:selectItem itemValue="13:00" itemLabel="13:00"></f:selectItem>
-                                                    <f:selectItem itemValue="13:30" itemLabel="13:30"></f:selectItem>
-                                                    <f:selectItem itemValue="14:00" itemLabel="14:00"></f:selectItem>
-                                                    <f:selectItem itemValue="14:30" itemLabel="14:30"></f:selectItem>
-                                                    <f:selectItem itemValue="15:00" itemLabel="15:00"></f:selectItem>
-                                                    <f:selectItem itemValue="15:30" itemLabel="15:30"></f:selectItem>
-                                                    <f:selectItem itemValue="16:00" itemLabel="16:00"></f:selectItem>
-                                                    <f:selectItem itemValue="16:30" itemLabel="16:30"></f:selectItem>
-                                                    <f:selectItem itemValue="17:00" itemLabel="17:00"></f:selectItem>
-                                                    <f:selectItem itemValue="17:30" itemLabel="17:30"></f:selectItem>
-                                                    <f:selectItem itemValue="18:00" itemLabel="18:00"></f:selectItem>
-                                                    <f:selectItem itemValue="18:30" itemLabel="18:30"></f:selectItem>
-                                                    <f:selectItem itemValue="19:00" itemLabel="19:00"></f:selectItem>
-                                                    <f:selectItem itemValue="19:30" itemLabel="19:30"></f:selectItem>
-                                                    <f:selectItem itemValue="20:00" itemLabel="20:00"></f:selectItem>
-                                                    <f:selectItem itemValue="20:30" itemLabel="20:30"></f:selectItem>
-                                                    <f:selectItem itemValue="21:00" itemLabel="21:00"></f:selectItem>
-                                                    <f:selectItem itemValue="21:30" itemLabel="21:30"></f:selectItem>
-                                                    <f:selectItem itemValue="22:00" itemLabel="22:00"></f:selectItem>
-                                                    <f:selectItem itemValue="22:30" itemLabel="22:30"></f:selectItem>
-                                                    <f:selectItem itemValue="23:00" itemLabel="23:00"></f:selectItem>
-                                                    <f:selectItem itemValue="23:30" itemLabel="23:30"></f:selectItem>
-                                                    <f:selectItem itemValue="23:30" itemLabel="23:59"></f:selectItem>
-                                                </h:selectOneMenu>-->
-                                            </div>
-                                            <div class="col-12 col-md-6 mt-3">
-                                                <b><label>#{formdashboardadmin.Tiempomáximodereservaenhoras}:</label></b>
-                                                <h:selectOneMenu value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
-                                                    <f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
-                                                    <f:selectItem itemValue="3" itemLabel="3"></f:selectItem>
-                                                    <f:selectItem itemValue="4" itemLabel="4"></f:selectItem>
-                                                    <f:selectItem itemValue="5" itemLabel="5"></f:selectItem>
-                                                    <f:selectItem itemValue="6" itemLabel="6"></f:selectItem>
-                                                    <f:selectItem itemValue="7" itemLabel="7"></f:selectItem>
-                                                    <f:selectItem itemValue="8" itemLabel="8"></f:selectItem>
-                                                    <f:selectItem itemValue="9" itemLabel="9"></f:selectItem>
-                                                    <f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
-                                                    <f:selectItem itemValue="11" itemLabel="11"></f:selectItem>
-                                                    <f:selectItem itemValue="12" itemLabel="12"></f:selectItem>
-                                                    <f:selectItem itemValue="13" itemLabel="13"></f:selectItem>
-                                                    <f:selectItem itemValue="14" itemLabel="14"></f:selectItem>
-                                                    <f:selectItem itemValue="15" itemLabel="15"></f:selectItem>
-                                                    <f:selectItem itemValue="16" itemLabel="16"></f:selectItem>
-                                                    <f:selectItem itemValue="17" itemLabel="17"></f:selectItem>
-                                                    <f:selectItem itemValue="18" itemLabel="18"></f:selectItem>
-                                                    <f:selectItem itemValue="19" itemLabel="19"></f:selectItem>
-                                                    <f:selectItem itemValue="20" itemLabel="20"></f:selectItem>
-                                                    <f:selectItem itemValue="21" itemLabel="21"></f:selectItem>
-                                                    <f:selectItem itemValue="22" itemLabel="22"></f:selectItem>
-                                                    <f:selectItem itemValue="23" itemLabel="23"></f:selectItem>
-                                                    <f:selectItem itemValue="24" itemLabel="24"></f:selectItem>
-                                                </h:selectOneMenu> 
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Descripción -->
+                        <hr/>
+                        <h4 class="col-12">#{formdashboardadmin.Descripción}</h4>
+                        <hr/>
+                        <div class="form-group row">
+                            <div class="col-12 col-md-9">
+                                <h:inputTextarea class="form col-12 form-control" pt:placeholder="#{formdashboardadmin.Detallezonacomún}" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <div class="row">
+                                    <!--Subir foto--> 
+                                    <div class="col-5" style="padding: 0;">
+                                        <h:outputLabel for="file" class="subir-foto">
+                                            <span>+</span> <br/> #{formdashboardadmin.Adjuntar} <br/> #{formdashboardadmin.imagen}
+                                        </h:outputLabel>
+                                        <h:inputFile id="file" value="#{disponibilidadControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
+                                        <h:message for="file" style="color: red"/>
+                                    </div>
+                                    <!--Pre-visualizar foto--> 
+                                    <div class="contenedor-imagen col-7" style="padding: 0;">
+                                        <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
+                                    </div>
+                                </div>
+                                <!--Mostrar foto en modal-->
+                                <div class="modal fade" id="modal-img">
+                                    <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                        <div class="modal-content"><img src="#" alt=""/></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Descripción -->
-                    <hr/>
-                    <h4 class="col-12">#{formdashboardadmin.Descripción}</h4>
-                    <hr/>
-                    <div class="form-group row">
-                        <div class="col-12 col-md-9">
-                            <h:inputTextarea class="form col-12 form-control" a:placeholder="#{formdashboardadmin.Detallezonacomún}" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" style="height:100px;"/>
-                        </div>
-
-                        <div class="col-12 col-md-3">
-                            <div class="row">
-                                <!--Subir foto--> 
-                                <div class="col-5" style="padding: 0;">
-                                    <label for="file" class="subir-foto"> <span>+</span> <br/> #{formdashboardadmin.Adjuntar} <br/> #{formdashboardadmin.imagen}</label>
-                                    <input id="file" accept="image/x-png,image/gif,image/jpeg" type="file" style="display: none;" name="file"/>
-                                </div>
-                                <!--Pre-visualizar foto--> 
-                                <div class="contenedor-imagen col-7" style="padding: 0;">
-                                    <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
-                                </div>
-                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Rutaimg}" id="ruta" value="#{disponibilidadControlador.zonaComunal.img}" required="true"/>
-                            </div>
-                            <!--Mostrar foto en modal-->
-                            <div class="modal fade" id="modal-img">
-                                <div class="modal-dialog d-flex justify-content-center align-items-center">
-                                    <div class="modal-content"><img src="#" alt=""/></div>
+                            <!-- Boton publicar -->
+                            <div class="row justify-content-center mt-3 mb-3">
+                                <div class="col-12 col-md-2">
+                                    <h:commandButton class="btn btn-outline-success btn-block" value="#{formdashboardadmin.Guardarcambios}" action="#{disponibilidadControlador.actualizar()}"></h:commandButton>
                                 </div>
                             </div>
                         </div>
-                        <!-- Boton actualizar -->
-                        <div class="row justify-content-center mt-3 mb-3">
-                            <div class="col-12 col-md-2">
-                                <h:commandButton class="btn btn-outline-success btn-block" value="#{formdashboardadmin.Guardarcambios}" action="#{disponibilidadControlador.actualizar()}"></h:commandButton>
-                            </div>
-                        </div>
-                    </div>
-                </h:form>
-            </section>
-            <!-- footer -->
-            <ui:include src="../../footer/footer.xhtml"></ui:include>
-        </div>
+                    </h:form>
+                </section>
+                <!-- footer -->
+                <ui:include src="../../footer/footer.xhtml"></ui:include>
+            </div>
+        </f:view>
         <!-- Previsulizar img -->
         <script>
             // Previsualizar imagen input type file
@@ -321,8 +206,12 @@
         <!-- bootstrap and jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

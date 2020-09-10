@@ -5,7 +5,8 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     lang="es"
 
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="UTF-8" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Visitantes</title>
@@ -58,37 +59,39 @@
         </style>
     </h:head>
     <h:body>
-        <script src="../../../js/opcionesSeguridad.js"></script>
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
 
-        <!-- fin de header y poput -->
-        <!--________________________ Inicio de capa principal ______________________- -->
+            <script src="../../../js/opcionesSeguridad.js"></script>
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
 
-        <div class="espacio" />
-        <section class="opciones">
-            <div
-                class="agregar menos"
-                onclick="location.href = 'agregarVisitante.xhtml'"
-                >
-                <i class="fas fa-user-plus negro" aria-hidden="true" />
+            <!-- fin de header y poput -->
+            <!--________________________ Inicio de capa principal ______________________- -->
 
-                <h3><b>Agregar Vistante</b></h3>
-            </div>
+            <div class="espacio" />
+            <section class="opciones">
+                <div
+                    class="agregar menos"
+                    onclick="location.href = 'agregarVisitante.xhtml'"
+                    >
+                    <i class="fas fa-user-plus negro" aria-hidden="true" />
 
-            <div class="agregar" onclick="location.href = 'buscarVisitante.xhtml'">
-                <i class="fas fa-search negro" aria-hidden="true" />
+                    <h3><b>Agregar Vistante</b></h3>
+                </div>
 
-                <h3><b>Buscar Visitante</b></h3>
-            </div>
-        </section>
-        <!--__________________________ fin de capa principal ________________________--><!--__________________________- inicio del footer __________________________- -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
-        <!--______________________________- fin del footer __________________________-->
-        <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+                <div class="agregar" onclick="location.href = 'buscarVisitante.xhtml'">
+                    <i class="fas fa-search negro" aria-hidden="true" />
 
+                    <h3><b>Buscar Visitante</b></h3>
+                </div>
+            </section>
+            <!--__________________________ fin de capa principal ________________________--><!--__________________________- inicio del footer __________________________- -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+            <!--______________________________- fin del footer __________________________-->
+            <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
+        </f:view>
+        
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
         <script src="../../../js/scriptvigilante.js"></script>
         <!-- Menu responsive -->
         <script src="../../nav/nav.js"></script>

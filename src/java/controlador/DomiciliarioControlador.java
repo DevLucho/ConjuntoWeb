@@ -41,15 +41,15 @@ import javax.inject.Inject;
 @SessionScoped
 public class DomiciliarioControlador implements Serializable {
 
-    private String horaEntrada = "";
-    private String horaSalida = "";
-
     /**
      * Creates a new instance of DomiciliarioControlador
      */
     public DomiciliarioControlador() {
     }
-
+    @Inject
+    private HoraControlador hora;
+    @Inject
+    private MensajeControlador mensaje;
     private Domiciliario domiciliario;
     private FichaIngreso fichaIngreso;
     private Paquete paquete;
@@ -74,9 +74,6 @@ public class DomiciliarioControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
-    
-    @Inject
-    private MensajeControlador mensaje;
 
     public Domiciliario getDomiciliario() {
         return domiciliario;
@@ -140,13 +137,8 @@ public class DomiciliarioControlador implements Serializable {
         fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
         fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
         fichaIngreso.setEstadoFicha("Activo");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        horaEntrada = dateFormat.format(date);
-        fichaIngreso.setHoraEntrada(date);
+        fichaIngreso.setHoraEntrada(hora.now());
         fichaIngresoFacade.create(fichaIngreso);
-        
         domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
         domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
         domiciliario.setIdFicha(fichaIngreso);
@@ -159,6 +151,7 @@ public class DomiciliarioControlador implements Serializable {
         domiciliario = new Domiciliario();
         mensaje.setMensaje("RegistrarVisitante('success','Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
+
     /*public static void delaySegundos(){
         try {
             Thread.sleep(1000);
@@ -176,34 +169,30 @@ public class DomiciliarioControlador implements Serializable {
             }
         }
     }*/
-    public void salida(FichaIngreso fichaIngresoSalida){
+    public void salida(FichaIngreso fichaIngresoSalida) {
         fichaIngreso = fichaIngresoSalida;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        horaSalida = dateFormat.format(date);
-        fichaIngreso.setHoraSalida(date);
+        fichaIngreso.setHoraSalida(hora.now());
         fichaIngreso.setEstadoFicha("Inactivo");
-        fichaIngresoFacade.edit(fichaIngresoSalida);   
+        fichaIngresoFacade.edit(fichaIngresoSalida);
         mensaje.setMensaje("ConfirmarSalida('info','Salida Registrada','El domiciliario ha abandonado, <br> el conjunto residencial <br><br>');");
     }
-    
+
     public List<Domiciliario> consultar() {
         return domiciliarioFacade.findAll();
     }
 
-    public List<Domiciliario> consultarEstadoD(String estadoFicha){
+    public List<Domiciliario> consultarEstadoD(String estadoFicha) {
         return domiciliarioFacade.fichaBloqueadaD(estadoFicha);
     }
-    
-    public List<Domiciliario> fichaDomiciliario(int idInmueble){
+
+    public List<Domiciliario> fichaDomiciliario(int idInmueble) {
         return domiciliarioFacade.fichaDomiciliario(idInmueble);
     }
-    
-    public int contarDomiciliarioR(int idInmueble){
+
+    public int contarDomiciliarioR(int idInmueble) {
         return domiciliarioFacade.contarDomiclioR(idInmueble);
     }
-    
+
     public String preActualizar(Domiciliario domiciliarioActualizar) {
         domiciliario = domiciliarioActualizar;
         fichaIngreso = domiciliarioActualizar.getIdFicha();
@@ -234,13 +223,14 @@ public class DomiciliarioControlador implements Serializable {
         domiciliario = domiciliarioFacade.find(id);
         return "buscarDomiciliario";
     }
-    public void validarLong(FacesContext context, UIComponent comp, Object value){
+
+    public void validarLong(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
-        String texto = (String)value;
-        
-        if(texto.length() < 4 || texto.length() > 10){
-            ((UIInput)comp).setValid(false);
-            context.addMessage(comp.getClientId(context),new FacesMessage("tamaño no valido"));
+        String texto = (String) value;
+
+        if (texto.length() < 4 || texto.length() > 10) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("tamaño no valido"));
         }
     }
 }

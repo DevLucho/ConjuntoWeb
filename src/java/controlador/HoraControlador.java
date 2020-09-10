@@ -14,6 +14,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -51,11 +52,36 @@ public class HoraControlador implements Serializable {
         return horaFinalFacade.findAll();
     }
 
-    // Dar formato
+    // Generar fecha actual
+    public Date now() {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        return date;
+    }
+
+    // Dar formato a horas
     public String convertir(Date hora) {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        String time = df.format(hora);
-        return time;
+        return df.format(hora);
+    }
+
+    // Dar formato a fechas
+    public String convertirf(Date fecha) {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(fecha);
+    }
+
+    public String convertirfh(Date hf) {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return df.format(hf);
+    }
+
+    // modificar dia +1 en fecha
+    public Date fecha(Date fecha) {
+        Calendar f = Calendar.getInstance();
+        f.setTime(fecha);
+        f.add(Calendar.DATE, 1);
+        return f.getTime();
     }
 
     // Metodos get y set

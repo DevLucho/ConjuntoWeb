@@ -15,10 +15,6 @@ import facade.TipoPqrsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.PostConstruct;
@@ -36,11 +32,13 @@ public class PqrsControlador implements Serializable {
     /**
      * Creates a new instance of PqrsControlador
      */
+    @Inject
+    private MensajeControlador mensaje;
+    @Inject
+    private HoraControlador hora;
     private Pqrs pqrs;
     private Residente residente;
     private TipoPqrs tipoPqrs;
-    private String horaI = "";
-    private String fechaI = "";
     // Generar numero radicado
     Random rnd = new Random();
     String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -55,9 +53,6 @@ public class PqrsControlador implements Serializable {
 
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
-
-    @Inject
-    private MensajeControlador mensaje;
 
     public PqrsControlador() {
     }
@@ -77,21 +72,10 @@ public class PqrsControlador implements Serializable {
             radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos + 2) + num + abecedario.charAt(pos - 1); //Estructura codigo
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             pqrs.setNroRadicado(radicado);
-            // generar fecha de solicitud
-            DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            Date date = cal.getTime();
-            fechaI = fecha.format(date);
-            pqrs.setFecha(date);
-            // generar hora de solicitud
-            DateFormat hora = new SimpleDateFormat("HH:mm:ss");
-            Calendar cale = Calendar.getInstance();
-            Date dates = cale.getTime();
-            horaI = hora.format(dates);
-            pqrs.setHora(dates);
-            // generar pqrs
-            pqrs.setIdResidente(residente);
-            pqrs.setIdTipoPqrs(tipoPqrs);
+            pqrs.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+            pqrs.setIdTipoPqrs(tipoPqrsFacade.find(tipoPqrs.getIdTipoPqrs()));
+            pqrs.setFecha(hora.now());
+            pqrs.setHora(hora.now());
             pqrs.setEstado("Pendiente");
             pqrsFacade.create(pqrs);
             residente = new Residente();
@@ -221,22 +205,6 @@ public class PqrsControlador implements Serializable {
 
     public void setMensaje(MensajeControlador mensaje) {
         this.mensaje = mensaje;
-    }
-
-    public String getHoraI() {
-        return horaI;
-    }
-
-    public void setHoraI(String horaI) {
-        this.horaI = horaI;
-    }
-
-    public String getFechaI() {
-        return fechaI;
-    }
-
-    public void setFechaI(String fechaI) {
-        this.fechaI = fechaI;
     }
 
 }

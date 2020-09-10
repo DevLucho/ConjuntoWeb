@@ -90,23 +90,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechainicio}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{evento.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{evento.horaInicio}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(evento.fechaInicio)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(evento.horaInicio.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechafin}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{evento.fechaFin}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{evento.horaFin}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(evento.fechaFin)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(evento.horaFin.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -156,23 +148,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechainicio}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoV.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoV.horaInicio}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoV.fechaInicio)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoV.horaInicio.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechafin}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoV.fechaFin}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoV.horaFin}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoV.fechaFin)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoV.horaFin.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -222,23 +206,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechainicio}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoF.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoF.horaInicio}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoF.fechaInicio)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoF.horaInicio.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechafin}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoF.fechaFin}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoF.horaFin}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoF.fechaFin)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoF.horaFin.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -284,23 +260,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechainicio}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoC.fechaInicio}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoC.horaInicio}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoC.fechaInicio)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoC.horaInicio.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Fechafin}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{eventoC.fechaFin}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText> -
-                                                <h:outputText value="#{eventoC.horaFin}">
-                                                    <f:convertDateTime pattern="HH:mm a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(eventoC.fechaFin)}"></h:outputText> -
+                                                <h:outputText value="#{horaControlador.convertir(eventoC.horaFin.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -358,7 +326,7 @@
         <script src="../../../js/dataTables/buttons.html5.min.js"></script>
         <script src="../../../js/dataTables/exportar_tablas.js"></script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

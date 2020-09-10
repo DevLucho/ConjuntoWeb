@@ -11,7 +11,6 @@
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
         <!-- Estilos -->
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
@@ -27,111 +26,113 @@
                 }
             }
         </style>
-        <!-- Sweet alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Generar PQRS</title>
     </h:head>
     <h:body>
-        <script>#{mensajeControlador.mensaje}</script>
-        <!-- header -->
-        <ui:include src="../../header/header.xhtml"></ui:include>
-        <!-- nav -->
-        <ui:include src="../../nav/nav.xhtml"></ui:include>
-        <div aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                <li class="breadcrumb-item active">Generar pqrs</li>
-            </ol>
-        </div>
-        <section class="container-fluid" id="principal">
-            <div class="row">
-                <div class="col-12">
-                    <h3>
-                        <i class="far fa-comment-alt"></i>
-                        Crear Pqrs
-                    </h3>
-                </div>
+        <f:view locale="#{lenguajeControlador.languageSelected}">
+            <!-- header -->
+            <ui:include src="../../header/header.xhtml"></ui:include>
+            <!-- nav -->
+            <ui:include src="../../nav/nav.xhtml"></ui:include>
+            <div aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                    <li class="breadcrumb-item active">Generar pqrs</li>
+                </ol>
             </div>
-            <hr/>                 
-            <!-- Formulario -->
-
-            <h:form>
+            <section class="container-fluid" id="principal">
                 <div class="row">
-                    <!-- Titulo -->
-                    <div class="col-12 ">
-                        <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Asunto</a></p>
-                        <div class="collapse" id="titulo">
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <h:inputText id="asunto" class="form-control" value="#{pqrsControlador.pqrs.asunto}" title="Asunto" pt:placeholder="Ingrese el asunto" required="true"/>
+                    <div class="col-12">
+                        <h3>
+                            <i class="far fa-comment-alt"></i>
+                            Crear Pqrs
+                        </h3>
+                    </div>
+                </div>
+                <hr/>                 
+                <!-- Formulario -->
+
+                <h:form>
+                    <div class="row">
+                        <!-- Titulo -->
+                        <div class="col-12 ">
+                            <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Asunto</a></p>
+                            <div class="collapse" id="titulo">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <h:inputText id="asunto" class="form-control" value="#{pqrsControlador.pqrs.asunto}" title="Asunto" pt:placeholder="Ingrese el asunto" required="true"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- Disponibilidad -->
-                    <div class="col-12">
-                        <p>
-                            <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
-                               data-toggle="collapse"><i></i>Tipo de PQRS</a>
-                        </p>
-                        <div class="collapse" id="date">
-                            <div class="from-group row">
-                                <div class="col-6" style="border-right: 1px solid #efefef ;">
-                                    <b>
-                                        <p>Seleccionar</p>
-                                    </b>
-                                    <hr/>
-                                    <div class="custom-control custom-checkbox" style="padding-left: 0;">
-                                        <div class="form-group row">
-                                            <div class="col">
-                                                <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}"  class="form-control" title="IdTipoPqrs" required="true">                 
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
-                                                </h:selectOneMenu>
+                    <div class="row">
+                        <!-- Disponibilidad -->
+                        <div class="col-12">
+                            <p>
+                                <a href="#date" class="btn btn-primary text-left" aria-expanded="false" aria-controls="date"
+                                   data-toggle="collapse"><i></i>Tipo de PQRS</a>
+                            </p>
+                            <div class="collapse" id="date">
+                                <div class="from-group row">
+                                    <div class="col-6" style="border-right: 1px solid #efefef;">
+                                        <b>
+                                            <p>Seleccionar</p>
+                                        </b>
+                                        <hr/>
+                                        <div class="custom-control custom-checkbox" style="padding-left: 0;">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}"  class="form-control" title="IdTipoPqrs" required="true">                 
+                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                        <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                                <div class="col-6">
-                                    <p>Residente:</p>
-                                    <hr/>
-                                    <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" class="form-control col-12 col-md-4" title="IdResidente" required="true">
-                                        <f:selectItems var="residente" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{residente.idResidente}" itemLabel="#{residente.idPerfil.nombre}"/>
-                                    </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-6" style="display: none;">
+                                        <p>Residente:</p>
+                                        <hr/>
+                                        <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" class="form-control col-12 col-md-4" title="IdResidente" required="true">
+                                            <f:selectItems var="residente" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{residente.idResidente}" itemLabel="#{residente.idPerfil.nombre}"/>
+                                        </h:selectOneMenu>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Descripción -->
-                <hr/>
-                <h4 class="col-12">Descripción</h4>
-                <hr/>
-                <div class="form-group row">
-                    <div class="col-12">
-                        <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;"/>
-                    </div>
-                    <!-- Boton publicar -->
-                    <div class="row justify-content-center mt-3 mb-3">
-                        <div class="col-12 col-md-2">
-                            <h:commandButton class="btn btn-outline-success btn-block" value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
+                    <!-- Descripción -->
+                    <hr/>
+                    <h4 class="col-12">Descripción</h4>
+                    <hr/>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;"/>
+                        </div>
+                        <!-- Boton publicar -->
+                        <div class="row justify-content-center mt-3 mb-3">
+                            <div class="col-12 col-md-2">
+                                <h:commandButton class="btn btn-outline-success btn-block" value="Registrar" action="#{pqrsControlador.registar()}"></h:commandButton>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </h:form>
-        </section>
-        <!-- footer -->
-        <ui:include src="../../footer/footer.xhtml"></ui:include>
+                </h:form>
+            </section>
+            <!-- footer -->
+            <ui:include src="../../footer/footer.xhtml"></ui:include>
+        </f:view>
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
+        <!-- Sweet alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <script>#{mensajeControlador.mensaje}</script>
         <!-- Menu responsive -->
-        <script src="../../navs/nav.js"></script>
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

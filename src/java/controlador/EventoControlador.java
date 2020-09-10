@@ -17,17 +17,10 @@ import facade.HoraInicialFacade;
 import facade.RolFacade;
 import facade.UsuarioFacade;
 import facade.ZonaComunalFacade;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.NoSuchProviderException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -48,6 +41,8 @@ public class EventoControlador implements Serializable {
      */
     @Inject
     private MensajeControlador mensaje;
+    @Inject
+    private HoraControlador hora;
     private CorreoControlador email;
     private ImagenControlador imagen;
     private Evento evento;
@@ -56,12 +51,6 @@ public class EventoControlador implements Serializable {
     private HoraInicial horaInicial;
     private HoraFinal horaFinal;
     private int notificar;
-    private String horaI = "";
-    private String fechaI = "";
-    private String horaF = "";
-    private String fechaF = "";
-    DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat hora = new SimpleDateFormat("HH:mm:ss");
 
     @EJB
     EventoFacade eventoFacade;
@@ -103,23 +92,16 @@ public class EventoControlador implements Serializable {
         evento.setHoraFin(horaFiFacade.find(horaFinal.getIdHora()));
         evento.setEstado("Vigente");
         eventoFacade.create(evento);
-        
-        Calendar f = Calendar.getInstance();
-        f.setTime(evento.getFechaInicio());
-        f.add(Calendar.DATE, 1);
-        evento.setFechaInicio(f.getTime());
-        
-        f.setTime(evento.getFechaFin());
-        f.add(Calendar.DATE, 1);
-        evento.setFechaFin(f.getTime());
-        
+        // Modifica el dia de la fecha +1
+        evento.setFechaInicio(hora.fecha(evento.getFechaInicio()));
+        evento.setFechaFin(hora.fecha(evento.getFechaFin()));
         eventoFacade.edit(evento);
         
         // mostrar fechas - horas con formato
-        fechaI = fecha.format(evento.getFechaInicio());
-        horaI = hora.format(evento.getHoraInicio().getHora());
-        fechaF = fecha.format(evento.getFechaFin());
-        horaF = hora.format(evento.getHoraFin().getHora());
+        String fechaI = hora.convertirf(evento.getFechaInicio());
+        String horaI = hora.convertir(evento.getHoraInicio().getHora());
+        String fechaF = hora.convertir(evento.getFechaFin());
+        String horaF = hora.convertir(evento.getHoraFin().getHora());
         if (notificar == 1000) { // 1000 notifica todos los usuarios
             allMails();
             // Correos masivos 
@@ -154,6 +136,8 @@ public class EventoControlador implements Serializable {
         } else {
             mensaje.setMensaje("Mensajes('Evento publicado!','Se ha publicado un nuevo evento.','success');");
         }
+        horaInicial = new HoraInicial();
+        horaFinal = new HoraFinal();
         email = new CorreoControlador();
         zonaComunal = new ZonaComunal();
         evento = new Evento();
