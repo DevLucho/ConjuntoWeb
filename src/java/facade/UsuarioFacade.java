@@ -49,8 +49,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public Usuario validarEmail(String correo) {
         Usuario usuario = new Usuario();
         try {
-            Query query;
-            query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo=:correo");
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo=:correo");
             query.setParameter("correo", correo);
             usuario = (Usuario) query.getResultList().get(0);
         } catch (Exception e) {

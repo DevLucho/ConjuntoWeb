@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="stylesheet" href="../../../css/dataTables.bootstrap4.min.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar reservas</title>
     </h:head>
     <h:body>

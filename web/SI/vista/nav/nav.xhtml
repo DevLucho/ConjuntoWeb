@@ -3,11 +3,13 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <!-- btn-menu-responsive -->
         <i class="fas fa-ellipsis-v btn-menu" id="btn-menu"></i>
-
         <!-- Menu admin-->
         <nav id="nav">
             <ul style="width: 100%;display:flex;flex-flow:row wrap;justify-content: flex-start;align-items: center;">

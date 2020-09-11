@@ -36,6 +36,8 @@
             } 
         </style>
         -->
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Evento}</title>
     </h:head>
     <h:body>

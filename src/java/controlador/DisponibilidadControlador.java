@@ -95,7 +95,7 @@ public class DisponibilidadControlador implements Serializable {
     }
 
     public void registrar() {
-        imagen.subirImagen();
+        imagen.subirImagen(1);
         zonaComunal.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
         zonaComunalFacade.create(zonaComunal);
         if (domingo) {

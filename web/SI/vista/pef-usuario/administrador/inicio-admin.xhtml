@@ -23,6 +23,7 @@
         <link href="../../../css/alertify.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../../css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <style>.icalendar{color:white;}</style>
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formconsultarusuario.bcInicio}</title>
     </h:head>
@@ -111,12 +112,10 @@
                                                 <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
                                             </li>
                                         </c:if>
-                                        <c:forEach items="#{eventoControlador.consultarVigentes()}" var="evento">
+                                        <c:forEach items="#{eventoControlador.eventos()}" var="evento">
                                             <li>
                                                 <label class="date">
-                                                    <h:outputText value="#{evento.fechaInicio}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(evento.fechaInicio)}"></h:outputText>
                                                 </label>
                                                 <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
                                             </li>

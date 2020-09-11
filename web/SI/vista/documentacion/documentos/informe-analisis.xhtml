@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Bootstrap 4 -->
@@ -15,6 +16,8 @@
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>Documentación | Informe de analisis</title>
     </h:head>
     <h:body>

@@ -134,11 +134,11 @@ public class UsuarioControlador implements Serializable {
             user = usuarioFacade.validarDocumento(nrodocumento = Integer.parseInt(nrodoc));
             useremail = usuarioFacade.validarEmail(correo);
             if (user.getDocumento() != 0 && useremail.getCorreo() != null) {
-                mensaje.setMensaje("Mensajes('Error','El número de documento: <b>" + nrodocumento + "</b> y el correo: <b>" + correo + "</b> ya se encuentran registrados en el sistema.','error');");
+                mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.nrodocumento + " y el correo: " + correo + " ya se encuentran registrados en el sistema.','error');");
             } else if (user.getDocumento() != 0) {
-                mensaje.setMensaje("Mensajes('Error','El número de documento: " + nrodocumento + " ya se encuentra registrado en el sistema.','error');");
-            } else if (useremail.getCorreo() != null) {
-                mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + correo + " ya se encuentra registrado en el sistema.','error');");
+                mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.nrodocumento + " ya se encuentra registrado en el sistema.','error');");
+            } else if (useremail != null) {
+                mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + this.correo + " ya se encuentra registrado en el sistema.','error');");
             } else {
                 usuario.setIdRol(rolFacade.find(rol.getIdRol()));
                 usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));

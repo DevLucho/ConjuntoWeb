@@ -95,6 +95,17 @@ public class SesionControlador implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
+    public void verifSesion(String ruta) {
+        try {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (us == null) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" + ruta + "not-found/mensaje.xhtml");
+            }
+        } catch (Exception e) {
+            System.out.println("Error verifS" + e.getMessage());
+        }
+    }
+
     public void cambiarContrasenia() {
         user = usuarioFacade.cambiarContrasenia(user.getContrasenia());
         if (contrasenia != null && !contrasenia.equals("")) {

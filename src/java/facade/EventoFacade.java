@@ -32,9 +32,17 @@ public class EventoFacade extends AbstractFacade<Evento> {
         super(Evento.class);
     }
 
+    public List<Evento> eventos(String estado) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Evento u WHERE u.estado=:estado ORDER BY u.idEvento DESC");
+        query.setParameter("estado", estado);
+        query.setMaxResults(3);
+        return query.getResultList();
+    }
+
     public List<Evento> estadoEvento(String estado) {
         Query query;
-        query = em.createQuery("SELECT u FROM Evento u WHERE u.estado=:estado");
+        query = em.createQuery("SELECT u FROM Evento u WHERE u.estado=:estado ORDER BY u.idEvento DESC");
         query.setParameter("estado", estado);
         return query.getResultList();
     }

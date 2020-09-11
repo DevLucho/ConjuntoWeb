@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Editarzonacomún}</title>
     </h:head>
     <h:body>

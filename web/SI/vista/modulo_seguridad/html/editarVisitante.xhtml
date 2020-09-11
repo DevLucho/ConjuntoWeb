@@ -11,7 +11,8 @@
     <h:head>
         <meta charset="UTF-8" />
         <link rel="shortcut icon" href="../../../img/logo2.png" />
-
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar Visitante</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"

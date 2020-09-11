@@ -7,6 +7,8 @@
              xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
     <header>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <div class="sub-contenedor">
             <div class="row">
                 <!-- Isologotipo -->

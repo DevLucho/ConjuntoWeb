@@ -43,6 +43,10 @@ public class ExportUControlador {
         this.excel = excel;
     }
     
+    public String redirect(){
+        return "importar";
+    }
+    
     public void migrar() throws SQLException{
         try {
             Driver dvr = new com.mysql.cj.jdbc.Driver();

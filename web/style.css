@@ -494,7 +494,7 @@ nav .start-contact, a:nth-child(6):hover~.animation{
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
-    z-index:2;
+    z-index:1000;
 }
 .overlay:target {
     visibility: visible;

@@ -13,7 +13,7 @@
         <!-- swiper css -->
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
         <!-- styles -->
-        <link href="index.css" rel="stylesheet" type="text/css"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
         <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>        
@@ -54,19 +54,21 @@
             <div class="contenedor1">
                 <!-- Encabezado -->
                 <header id="header" style="position: fixed; z-index: 1000; background: white">
-                    <div class="logoindex">
-                        <img width="350" src="img/logo.png" alt="" />
-                    </div>
-                    <!-- Navegacion -->
-                    <nav>
-                        <a href="#inicio">#{formlogin.inicio}</a>
-                        <a href="#noticias">#{formlogin.noti}</a>
-                        <a href="#galeria">#{formlogin.galeria}</a>
-                        <a href="#ventajas" class="men">#{formlogin.ventajas}</a>
-                        <a class="men masss" href="#contacto">#{formlogin.contacto}</a>
-                        <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
-                        <div class="animation start-home" />
-                    </nav>
+                    <h:form>
+                        <div class="logoindex">
+                            <img width="350" src="img/logo.png" alt="" />
+                        </div>
+                        <!-- Navegacion -->
+                        <nav>
+                            <a href="#inicio">#{formlogin.inicio}</a>
+                            <a href="#noticias">#{formlogin.noti}</a>
+                            <a href="#galeria">#{formlogin.galeria}</a>
+                            <a href="#ventajas" class="men">#{formlogin.ventajas}</a>
+                            <a class="men masss" href="#contacto">#{formlogin.contacto}</a>
+                            <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
+                            <div class="animation start-home" />
+                        </nav>
+                    </h:form>
                     <h:form class="col-10 p-1 text-right" style="width: 100%;"> 
                         <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
                             <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
@@ -157,7 +159,7 @@
                                     <h2 style="margin:2px">#{comunicado.titulo}</h2>
                                     <p>#{comunicado.descripcion}</p>
                                     <br/>
-                                    <small><b>#{formlogin.fechadepublicacion}: </b><h:outputText value="#{comunicado.fechaPublicacion}"><f:convertDateTime pattern="yyyy-MMM-dd"/></h:outputText></small>
+                                    <small><b>#{formlogin.fechadepublicacion}: </b><h:outputText value="#{horaControlador.convertirf(comunicado.fechaPublicacion)}"></h:outputText></small>
                                 </div>
                             </div>
                         </c:forEach>
@@ -240,7 +242,7 @@
                                     <div class="adelante card1" />
                                     <div class="atras">
                                         <p>
-                                           #{formlogin.Reservaresmasfácil} !!!
+                                            #{formlogin.Reservaresmasfácil} !!!
                                         </p>
                                     </div>
                                 </div>
@@ -287,61 +289,78 @@
                     </div>
                 </section>
                 <!-- form de contacto -->
-                <section class="conteForm" id="contacto">
+                <section class="conteForm" id="contacto" style="height: 750px">
                     <div class="datosss">
                         <h3>#{formlogin.contactoponte}</h3>
                         <p>
                             #{formlogin.contactomensaje}
                         </p>
+                        <br/><br/>
                         <table class="border">
                             <tbody>
                                 <tr class="border">
                                     <td class="border">
                                         <i class="fas fa-tty black" aria-hidden="true" />
                                     </td>
-                                    <td class="border">(+57) 2 87 33 09</td>
+                                    <td class="border">(+57) 310 476 1511</td>
                                 </tr>
                                 <tr class="border">
                                     <td class="border">
                                         <i class="fas fa-at black" aria-hidden="true" />
                                     </td>
-                                    <td class="border">Senita@misena.edu.co</td>
+                                    <td class="border">conjunto@gmail.com</td>
                                 </tr>
                                 <tr class="border">
                                     <td class="border">
                                         <i class="fas fa-map-marker-alt black" aria-hidden="true" />
                                     </td>
                                     <td class="border">
-                                        Torres De Lucena<br/>Cra 82g Bis #59-62,<br/>Bogota
+                                        Torres De Lucena<br/>Cra 82g Bis #59-62,<br/>Bogotá
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <h:form class="form">
-                        <h:inputText id="nombre" a:type="text" class="duos" a:placeholder="#{formlogin.Nombres}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
-                        <h:message for="nombre" style="color: red"/>
-                        <h:inputText id="apellido" a:type="text" class="duos" a:placeholder="#{formlogin.Apellidos}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
-                        <h:message for="apellido" style="color: red"/>
-                        <h:inputText id="email" a:type="email" class="duos com" a:placeholder="#{formlogin.CorreoElectrónico}" title="ejemplo@dominio.com" required="true" requiredMessage="#{formlogin.Especifiqueuncorreoelectrónico}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-                        <h:message for="email" style="color: red"/>
-                        <h:inputText id="celular" a:type="tel" class="duos com" a:placeholder="#{formlogin.Númerotelefónico}"  required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
-                        <h:message for="celular" style="color: red"/>
-                        <h:selectOneMenu id="torre" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunaTorre}">
-                            <f:selectItem itemLabel="#{formlogin.Torre}" itemValue=""></f:selectItem>
-                            <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
-                        </h:selectOneMenu>
-                        <h:message for="torre" style="color: red"/>
-                        <h:selectOneMenu id="apto" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunApto}">
-                            <f:selectItem itemLabel="#{formlogin.Apartamento}" itemValue=""></f:selectItem>
-                            <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
-                        </h:selectOneMenu>
-                        <h:message for="apto" style="color: red"/>
-                        <h:inputText id="asunto" a:type="text" class="duos com" a:placeholder="#{formlogin.Asunto}"/>
-                        <h:message for="asunto" style="color: red"/>
-                        <h:inputTextarea id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="#{formlogin.Mensaje}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                        <h:message for="msj" style="color: red"/>
-                        <h:inputText a:type="submit" class="duos enviar" value="#{formlogin.Enviar}" a:placeholder="#{formlogin.Enviar}"/>
+                    <h:form class="form" style="height: auto">
+                        <div style="width: 41%;float: left">
+                            <h:inputText style="width: 100%" id="nombre" a:type="text" class="duos" a:placeholder="#{formlogin.Nombres}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
+                            <h:message for="nombre" style="color: red"/>
+                        </div>
+                        <div style="width: 41%;float: left">
+                            <h:inputText style="width: 100%" id="apellido" a:type="text" class="duos" a:placeholder="#{formlogin.Apellidos}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
+                            <h:message for="apellido" style="color: red"/>
+                        </div>
+                        <div style="width: 82%">
+                            <h:inputText id="email" a:type="email" class="duos com" a:placeholder="#{formlogin.CorreoElectrónico}" title="ejemplo@dominio.com" required="true" requiredMessage="#{formlogin.Especifiqueuncorreoelectrónico}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                            <h:message for="email" style="color: red"/>
+                        </div>
+                        <div style="width: 82%">
+                            <h:inputText style="width: 100%" id="celular" a:type="tel" class="duos com" a:placeholder="#{formlogin.Númerotelefónico}"  required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
+                            <h:message for="celular" style="color: red"/>
+                        </div>
+                        <div style="width: 41%;float: left">
+                            <h:selectOneMenu style="width: 100%" id="torre" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunaTorre}">
+                                <f:selectItem itemLabel="#{formlogin.Torre}" itemValue=""></f:selectItem>
+                                <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
+                            </h:selectOneMenu>
+                            <h:message for="torre" style="color: red"/>
+                        </div>
+                        <div style="width: 41%;float: left">
+                            <h:selectOneMenu style="width: 100%" id="apto" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunApto}">
+                                <f:selectItem itemLabel="#{formlogin.Apartamento}" itemValue=""></f:selectItem>
+                                <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
+                            </h:selectOneMenu>
+                            <h:message for="apto" style="color: red"/>
+                        </div>
+                        <div style="width: 82%">
+                            <h:inputText style="width: 100%" id="asunto" a:type="text" class="duos com" a:placeholder="#{formlogin.Asunto}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
+                            <h:message for="asunto" style="color: red"/>
+                        </div>
+                        <div style="width: 82%">
+                            <h:inputTextarea style="width: 100%" id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="#{formlogin.Mensaje}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
+                            <h:message for="msj" style="color: red"/>
+                        </div>
+                        <h:commandButton class="duos" value="#{formlogin.Enviar}" a:placeholder="#{formlogin.Enviar}" style="cursor: pointer"/>
                     </h:form>
                 </section>
                 <!-- footer -->

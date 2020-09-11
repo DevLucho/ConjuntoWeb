@@ -114,17 +114,19 @@ public class CodigoControlador implements Serializable {
                 codr.setEstado("Invalido");
                 codigoFacade.edit(codr);
                 if (codr.getCodigo().length() >= 7) { // >=7 = recuperar clave
-                    return "nueva-clave?faces-redirect=true";
+                    return "nueva-clave";
                 } else {
+                    Codigo c = new Codigo();
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", c);
                     return "vista/registro/registro?faces-redirect=true";
                 }
             } else {
                 mensaje.setMensaje("MensajeAlertify('Lo sentimos el código ingresado ya no es válido.','error');");
-                return "";
+                return "validar-cod";
             }
         } else {
             mensaje.setMensaje("MensajeAlertify('El código ingresado no existe o es incorrecto.','error');");
-            return "";
+            return "validar-cod";
         }
     }
 
@@ -132,7 +134,7 @@ public class CodigoControlador implements Serializable {
     public String recuperarPass() throws NoSuchProviderException, MessagingException {
         user = codigoFacade.recuperarPass(recorreo);
         if (user.getCorreo() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userPass", user);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
             // generar codigo alfanumerico
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
@@ -151,7 +153,7 @@ public class CodigoControlador implements Serializable {
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Si no solicitaste restablecer la contraseña, por favor ignorar este mensaje. </p>",
                             "'#'")
             );
-            
+
             email = new CorreoControlador();
             codigo = new Codigo();
             mensaje.setMensaje("MensajeAlertify('Código generado','success');");
@@ -160,7 +162,7 @@ public class CodigoControlador implements Serializable {
             return "validar-cod";
         } else {
             mensaje.setMensaje("MensajeAlertify('El correo especificado no existe en el sistema.','error');");
-            return "";
+            return "restablecer-clave";
         }
     }
 

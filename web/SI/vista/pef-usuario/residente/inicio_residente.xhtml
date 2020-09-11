@@ -18,9 +18,8 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
-        <!-- Font Awesome -->
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <style>
             nav ul li{ width:25%;}
             @media screen and (max-width:903px){
@@ -97,12 +96,10 @@
                                                 <p class="text-left text-muted" style="margin:0px;">#{formdashboardadmin.txtEventos}</p>
                                             </li>
                                         </c:if>
-                                        <c:forEach items="#{eventoControlador.consultarVigentes()}" var="evento">
+                                        <c:forEach items="#{eventoControlador.eventos()}" var="evento">
                                             <li>
                                                 <label class="date">
-                                                    <h:outputText value="#{evento.fechaInicio}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                    </h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(evento.fechaInicio)}"></h:outputText>
                                                 </label>
                                                 <p style="margin:0px;"><strong>#{evento.titulo}</strong></p>
                                             </li>
@@ -190,6 +187,8 @@
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/sweetAlert.js"></script>   
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
     </h:body>
 </html>
 

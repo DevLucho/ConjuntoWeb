@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.Inmueble;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,10 @@ public class InmuebleFacade extends AbstractFacade<Inmueble> {
     public InmuebleFacade() {
         super(Inmueble.class);
     }
-    
+
+    public List<Inmueble> findInmueble() {
+        Query query = em.createQuery("SELECT u FROM Inmueble u ORDER BY u.idTorre.idTorre ASC");
+        return query.getResultList();
+    }
+
 }

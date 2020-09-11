@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
         <link rel="stylesheet" href="./registro.css"/>
         <link rel="shortcut icon" href="../../img/Logo ShortCut.png"/>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../')}" />
         <title>Conjunto lucerna | Registro</title>
     </h:head>
     <h:body>
@@ -26,7 +28,6 @@
                     <div class="titulo">
                         <strong><h1>Registro de residente</h1></strong>
                     </div>
-                    <!-- formulario NO SIRVE VALIDACION POR EL ATRIBUTO NAME-->
                     <h:form id="form">
                         <div class="form-group row">
 
@@ -60,7 +61,7 @@
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="correo">Email</label></strong>
-                                <h:inputText a:type="email" class="form-control" id="correo" value="#{residenteControlador.usuario.correo}" a:placeholder="ejemplo@dominio.com" title="ejemplo@dominio.com" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true" requiredMessage="#{formlogin.camporequerido}"/>
+                                <h:inputText a:type="email" class="form-control" id="correo" value="#{residenteControlador.correo}" a:placeholder="ejemplo@dominio.com" title="ejemplo@dominio.com" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true" requiredMessage="#{formlogin.camporequerido}"/>
                                 <h:message for="correo" style="color: red"/>
                             </div>
                             <div class="col-12 col-md-6 mb-3">

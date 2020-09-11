@@ -59,35 +59,39 @@ public class ComunicadoControlador implements Serializable {
     }
 
     public void registrar(String tipo) {
-        imagen.subirImagen();
-        comunicado.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
         switch (tipo) {
             case "Interno":
+                imagen.subirImagen(1);
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
                 comunicado.setFechaPublicacion(hora.now());
                 comunicado.setTipo("Interno");
+                comunicado.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
                 comunicado = new Comunicado();
                 mensaje.setMensaje("Mensaje('Exito','Se ha publicado el comunicado','success');");
                 break;
             case "Externo":
+                imagen.subirImagen(2);
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
-                comunicado.setTipo("Externo");       
+                comunicado.setTipo("Externo");
                 comunicado.setFechaPublicacion(hora.now());
+                comunicado.setImg("img/" + imagen.getImg().getSubmittedFileName());
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
                 comunicado = new Comunicado();
                 mensaje.setMensaje("Mensaje('Exito','Se ha publicado la noticia','success');");
                 break;
             case "Galeria":
+                imagen.subirImagen(2);
                 usuario.setIdPerfil(1);
                 comunicado.setIdPerfil(usuario);
                 comunicado.setTitulo(".");
                 comunicado.setDescripcion(".");
                 comunicado.setTipo("Galeria");
+                comunicado.setImg("img/" + imagen.getImg().getSubmittedFileName());
                 comunicadoFacade.create(comunicado);
                 usuario = new Usuario();
                 comunicado = new Comunicado();
@@ -122,8 +126,8 @@ public class ComunicadoControlador implements Serializable {
     public void eliminar(Comunicado comunicadoEliminar) {
         comunicadoFacade.remove(comunicadoEliminar);
     }
-    
-    public int contarComunicado(String tipo){
+
+    public int contarComunicado(String tipo) {
         return comunicadoFacade.contarComunicados(tipo);
     }
 
@@ -131,9 +135,8 @@ public class ComunicadoControlador implements Serializable {
     public void asignarImg(Comunicado comunicadoImg) {
         comunicado = comunicadoImg;
     }
-    
-    // Metodos get y set
 
+    // Metodos get y set
     public Comunicado getComunicado() {
         return comunicado;
     }

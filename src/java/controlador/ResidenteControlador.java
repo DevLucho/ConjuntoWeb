@@ -105,14 +105,15 @@ public class ResidenteControlador implements Serializable {
         user = usuarioFacade.validarDocumento(documento = Integer.parseInt(documentoc));
         useremail = usuarioFacade.validarEmail(correo);
         if (user.getDocumento() != 0) {
-            mensaje.setMensaje("Mensajes('Error','El número de documento: " + documento + " ya se encuentra registrado en el sistema.','error');");
-        } else if (useremail.getCorreo() != null) {
-            mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + correo + " ya se encuentra registrado en el sistema.','error');");
+            mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.documento + " ya se encuentra registrado en el sistema.','error');");
+        } else if (useremail != null) {
+            mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + this.correo + " ya se encuentra registrado en el sistema.','error');");
         } else {
             usuario.setIdRol(rolFacade.find(2));
             usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
             usuario.setCelular(nrocelular = Long.parseLong(nrocel));
             usuario.setDocumento(documento = Integer.parseInt(documentoc));
+            usuario.setCorreo(correo);
             usuario.setEstado("Activo");
             usuarioFacade.create(usuario);
             residente.setIdPerfil(usuario);

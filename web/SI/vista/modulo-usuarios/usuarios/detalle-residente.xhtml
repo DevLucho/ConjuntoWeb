@@ -23,6 +23,8 @@
         <!-- css bootstrap 4 datatable -->
         <link rel="stylesheet" href="../../../css/dataTables.bootstrap4.min.css"/>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Detalle residente: #{usuarioControlador.residente.idPerfil.nombre} #{usuarioControlador.residente.idPerfil.apellido}</title>
     </h:head>
     <h:body>
@@ -131,33 +133,35 @@
                                 </div>
                                 <div class="tab-pane" id="tab2" role="tabpanel">
                                     <h4 class="mt-3 text-center"><i class="fas fa-car mr-3 mt-3"></i>#{formconsultarusuario.Vehiculos}</h4>
-                                    <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                                 value="#{vehiculoControlador.vehiculoResidente(usuarioControlador.residente.idResidente)}" var="vc">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Placa}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{vc.placa}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Tipovehiculo}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{vc.tipoVehiculo}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.ubicación}"/>
-                                            </f:facet>
-                                            <h:outputText value="NRO-#{vc.idParqueadero.lugar}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Propietario}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{vc.idResidente.idPerfil.nombre}"/><h:outputText value=" #{vc.idResidente.idPerfil.apellido}"/>
-                                        </h:column>
-                                    </h:dataTable>
+                                    <h:form>
+                                        <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
+                                                     value="#{vehiculoControlador.vehiculoResidente(usuarioControlador.residente.idResidente)}" var="vc">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Placa}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{vc.placa}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Tipovehiculo}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{vc.tipoVehiculo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.ubicación}"/>
+                                                </f:facet>
+                                                <h:outputText value="NRO-#{vc.idParqueadero.lugar}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Propietario}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{vc.idResidente.idPerfil.nombre}"/><h:outputText value=" #{vc.idResidente.idPerfil.apellido}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
                                 </div>
                                 <div class="tab-pane" id="tab3" role="tabpanel">
                                     <h4 class="mt-3 text-center"><i class="fas fa-male mr-3 mt-3"></i>#{formconsultarusuario.Visitantes}</h4>
@@ -199,17 +203,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formconsultarusuario.Fechaentrada}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{visi.idFicha.horaEntrada}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirfh(visi.idFicha.horaEntrada)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formconsultarusuario.Fechasalida}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{visi.idFicha.horaSalida}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                                </h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirfh(visi.idFicha.horaSalida)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -222,119 +222,115 @@
                                 </div>
                                 <div class="tab-pane" id="tab4" role="tabpanel">
                                     <h4 class="mt-3 text-center"><i class="fas fa-shipping-fast mr-3 mt-3"></i>#{formconsultarusuario.Domicilios}</h4>
-                                    <h:dataTable class="table table-bordered table-hover tabla" value="#{domiciliarioControlador.fichaDomiciliario(usuarioControlador.residente.idInmueble.idInmueble)}" var="Act">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Ficha}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.idFicha}"/>
-                                        </h:column> 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Domiciliario}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.nombre}"/>
-                                            <h:outputText value=" #{Act.idFicha.apellido}"/>
-                                        </h:column>  
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Tipodomicilio}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idPaquete.tipo}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Empresa}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idEmpresa.nombre}"/>
-                                        </h:column> 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Inmueble}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.idInmueble.idTorre.idTorre}"/> -
-                                            <h:outputText value="#{Act.idFicha.idInmueble.idApartamento.idApartamento}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Fechaentrada}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.horaEntrada}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                            </h:outputText>
-                                        </h:column>  
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Fechasalida}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.horaSalida}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                            </h:outputText>
-                                        </h:column>  
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Estado}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{Act.idFicha.estadoFicha}"/>
-                                        </h:column>                                        
-                                    </h:dataTable>
+                                    <h:form>
+                                        <h:dataTable class="table table-bordered table-hover tabla" value="#{domiciliarioControlador.fichaDomiciliario(usuarioControlador.residente.idInmueble.idInmueble)}" var="Act">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Ficha}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idFicha.idFicha}"/>
+                                            </h:column> 
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Domiciliario}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idFicha.nombre}"/>
+                                                <h:outputText value=" #{Act.idFicha.apellido}"/>
+                                            </h:column>  
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Tipodomicilio}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idPaquete.tipo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Empresa}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idEmpresa.nombre}"/>
+                                            </h:column> 
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Inmueble}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idFicha.idInmueble.idTorre.idTorre}"/> -
+                                                <h:outputText value="#{Act.idFicha.idInmueble.idApartamento.idApartamento}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Fechaentrada}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{horaControlador.convertirfh(Act.idFicha.horaEntrada)}"></h:outputText>
+                                            </h:column>  
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Fechasalida}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{horaControlador.convertirfh(Act.idFicha.horaSalida)}"></h:outputText>
+                                            </h:column>  
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Estado}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{Act.idFicha.estadoFicha}"/>
+                                            </h:column>                                        
+                                        </h:dataTable>
+                                    </h:form>
                                 </div>
                                 <div class="tab-pane" id="tab5" role="tabpanel">
                                     <h4 class="mt-3 text-center"><i class="fas fa-box-open mr-3 mt-3"></i>#{formconsultarusuario.Correspondencia}</h4>
-                                    <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.correspondenciaResidente(usuarioControlador.residente.idInmueble.idInmueble)}" var="correspondencia">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Id"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.idCorrespondencia}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.TipoPaquete}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Descripcion}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.descripcion}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Empresa}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.idEmpresa.nombre}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Fechaentrada}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.fechaIngreso}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Fechasalida}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.fechaSalida}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss a" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Registradovigilante}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre} #{correspondencia.idVigilante.idPerfil.apellido}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{formconsultarusuario.Estado}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{correspondencia.estado}"/>
-                                        </h:column>
-                                    </h:dataTable>
+                                    <h:form>
+                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{correspondenciaControlador.correspondenciaResidente(usuarioControlador.residente.idInmueble.idInmueble)}" var="correspondencia">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Id"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.idCorrespondencia}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.TipoPaquete}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.idPaquete.tipo}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Descripcion}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.descripcion}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Empresa}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.idEmpresa.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Fechaentrada}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{horaControlador.convertirfh(correspondencia.fechaIngreso)}"></h:outputText>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Fechasalida}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{horaControlador.convertirfh(correspondencia.fechaSalida)}"></h:outputText>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Registradovigilante}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.idVigilante.idPerfil.nombre} #{correspondencia.idVigilante.idPerfil.apellido}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{formconsultarusuario.Estado}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{correspondencia.estado}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>

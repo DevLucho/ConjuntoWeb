@@ -8,6 +8,8 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+                <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <meta charset="UTF-8" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Visitantes</title>
         <link

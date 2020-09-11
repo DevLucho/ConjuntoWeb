@@ -31,6 +31,8 @@
                 }
             }
         </style>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar parqueaderos</title>
     </h:head>
     <h:body>

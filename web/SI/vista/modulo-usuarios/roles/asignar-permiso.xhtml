@@ -68,6 +68,8 @@
             .formulario .checkbox input[type="checkbox"]:checked + label:before { display: none; }
             .formulario .checkbox input[type="checkbox"]:checked + label { background: #001f3f; color: #fff; padding: 5px 15px;}
         </style>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Editar rol</title>
     </h:head>
     <h:body>

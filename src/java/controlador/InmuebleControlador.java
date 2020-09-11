@@ -63,6 +63,10 @@ public class InmuebleControlador implements Serializable {
     public List<Inmueble> consultarTodos(){
         return inmuebleFacade.findAll();
     }
+    // Consultar ordenadamente
+    public List<Inmueble> findInmueble(){
+        return inmuebleFacade.findInmueble();
+    }
 
     public Torre getTorre() {
         return torre;

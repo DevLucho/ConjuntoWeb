@@ -84,7 +84,7 @@ public class EventoControlador implements Serializable {
     public void registrar() throws NoSuchProviderException, MessagingException {
         boolean notifico = false; // validar si notifico o no
         // --- Subir img --- 
-        imagen.subirImagen();
+        imagen.subirImagen(1);
         // ------------------
         evento.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
         evento.setHoraInicio(horaInFacade.find(horaInicial.getIdHora()));
@@ -100,7 +100,7 @@ public class EventoControlador implements Serializable {
         // mostrar fechas - horas con formato
         String fechaI = hora.convertirf(evento.getFechaInicio());
         String horaI = hora.convertir(evento.getHoraInicio().getHora());
-        String fechaF = hora.convertir(evento.getFechaFin());
+        String fechaF = hora.convertirf(evento.getFechaFin());
         String horaF = hora.convertir(evento.getHoraFin().getHora());
         if (notificar == 1000) { // 1000 notifica todos los usuarios
             allMails();
@@ -177,6 +177,10 @@ public class EventoControlador implements Serializable {
 
     public List<Evento> consultarTodos() {
         return eventoFacade.findAll();
+    }
+    
+    public List<Evento> eventos(){
+        return eventoFacade.eventos("Vigente");
     }
 
     public List<HoraInicial> consultarHorasI() {

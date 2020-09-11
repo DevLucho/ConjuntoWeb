@@ -30,6 +30,8 @@
                 border: 1px solid #2A6378;
             }
         </style>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Responder PQRS</title>
     </h:head>
     <h:body>

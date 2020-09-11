@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       >
     <h:head>
-        <link rel="shortcut icon" href="#"/>
+        <link rel="shortcut icon" href="../../img/Logo ShortCut.png"/>
         <style>
             @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
             body {
@@ -189,14 +189,14 @@
                 transition: all 0.5s ease-out;
             }
         </style>
-        <title>Error 404</title>
+        <title>Conjunto Lucerna | Sesión expirada</title>
     </h:head>
     <h:body>
         <h:form>
             <div id='oopss'>
                 <div id='error-text'>
-                    <span>404</span>
-                    <p>No podemos encontrar lo que estas buscando</p>
+                    <span style="font-size: 150%">Sesión expirada</span>
+                    <p>El usuario ha perdido las <br/>credenciales de acceso a la aplicación.<br/><br/>Debe autenticarse nuevamente</p>
                     <p class='hmpg'><h:commandLink class="back" value="Regresar" action="#{sesionControlador.cerrarSesion()}"/></p>
                 </div>
             </div>

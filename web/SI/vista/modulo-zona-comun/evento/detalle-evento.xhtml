@@ -22,6 +22,8 @@
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <style>h3{color:#33406A;margin-bottom: 0;}</style>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{formconsultarusuario.txtAdministrador} | #{formdashboardadmin.Zonacomún}</title>
     </h:head>
     <h:body>

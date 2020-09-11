@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="../../../css/style-tablas.css"/>
         <link href="../../../css/validate.css" rel="stylesheet" type="text/css"/>
         <link href="../../../css/util.css" rel="stylesheet" type="text/css"/>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Roles</title>
     </h:head>
     <h:body>

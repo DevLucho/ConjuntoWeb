@@ -21,6 +21,8 @@
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <link href="../../../css/validate.css" rel="stylesheet" type="text/css"/>
         <link href="../../../css/util.css" rel="stylesheet" type="text/css"/>
+        <!-- Validar sesion activa -->
+        <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formcrearusuario.bcAgregarUsuario}</title>
     </h:head>
     <h:body>
@@ -179,7 +181,7 @@
                                 <div class="modal-body">
                                     <div class="form-group row">
                                         <div class="col-12 font">
-                                            <b><h:outputLabel value="#{formcrearusuario.notiViaEmail}:" /></b>
+                                            <b><h:outputLabel value="#{formcrearusuario.TxtCod}:" /></b>
                                             <div class="wrap-input100 validate-input m-b-36" data-validate = "#{formcrearusuario.correovalido}">
                                                 <h:inputText class="input100" a:type="email" value="#{codigoControlador.correo}" required="true" a:placeholder="ejemplo@dominio.com"/>
                                                 <span class="focus-input100"></span>
