@@ -25,7 +25,7 @@
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Editar usuario</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formconsultarusuario.hoverAccionEditar}</title>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -39,15 +39,15 @@
                 <!-- miga pan -->
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml">Consultar usuario</a></li>
-                        <li class="breadcrumb-item active">Editar usuario</li>
+                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
+                        <li class="breadcrumb-item"><a href="../../modulo-usuarios/usuarios/consultar-usuario.xhtml">#{formconsultarusuario.bcConsultar}</a></li>
+                        <li class="breadcrumb-item active">#{formconsultarusuario.hoverAccionEditar}</li>
                     </ol>
                 </div>
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><i class="far fa-edit"></i>Editar usuario: #{usuarioControlador.usuario.nombre} #{usuarioControlador.usuario.apellido}</h3>
+                            <h3><i class="far fa-edit"></i>#{formconsultarusuario.hoverAccionEditar}: #{usuarioControlador.usuario.nombre} #{usuarioControlador.usuario.apellido}</h3>
                             <hr/>	
                         </div>
                         <div class="col-12 col-md-8 form">
@@ -55,84 +55,84 @@
                                 <!--formulario-->
                                 <h:form class="recorrer-dato"><!--Falta atributo name=""-->
                                     <div class="col-12">
-                                        <div class="caja bg-faded border-bottom-0">Datos básicos</div>
+                                        <div class="caja bg-faded border-bottom-0">#{formconsultarusuario.datos}</div>
                                     </div>  
                                     <div class="form-group row sombra">
                                         <div class="col-12" style="margin-top: 1rem;"></div> 
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="nombre">Nombres</label></strong> 
+                                            <strong><label for="nombre">#{formconsultarusuario.lblNombres}</label></strong> 
                                             <h:inputText id="nombre" class="form-control-plaintext" value="#{usuarioControlador.usuario.nombre}"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="apellido">Apellidos</label></strong> 
+                                            <strong><label for="apellido">#{formconsultarusuario.lblApellidos}</label></strong> 
                                             <h:inputText id="apellido" class="form-control-plaintext" value="#{usuarioControlador.usuario.apellido}"/>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <strong><label for="tipoDocumento">Tipo documento</label></strong> 
+                                            <strong><label for="tipoDocumento">#{formconsultarusuario.lblTipo}</label></strong> 
                                             <h:selectOneMenu id="tipoDocumento" class="form-control-plaintext" value="#{usuarioControlador.tipoDocumento.id}">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems var="tipo" value="#{tipoDocumentoControlador.consultarTodos()}" itemValue="#{tipo.id}" itemLabel="#{tipo.tipo}"/>
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <strong><label for="identificacion">Numero de identificación</label></strong> 
+                                            <strong><label for="identificacion">#{formconsultarusuario.lblDocumento}</label></strong> 
                                             <h:inputText a:type="number" id="documento" class="form-control-plaintext" value="#{usuarioControlador.usuario.documento}"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="correo">Email</label></strong> 
+                                            <strong><label for="correo">#{formconsultarusuario.lblEmail}</label></strong> 
                                             <h:inputText a:type="email" id="correo" class="form-control-plaintext" value="#{usuarioControlador.usuario.correo}"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="phone">Número de celular</label></strong> 
+                                            <strong><label for="phone">#{formconsultarusuario.lblCelular}</label></strong> 
                                             <h:inputText a:type="number" id="celular" class="form-control-plaintext" value="#{usuarioControlador.usuario.celular}"/>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="direccion">Dirección</label></strong> 
-                                            <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="Direccion" />
+                                            <strong><label for="direccion">#{formconsultarusuario.txtDireccion}</label></strong> 
+                                            <h:inputText id="direccion" class="form-control-plaintext" value="#{usuarioControlador.usuario.direccion}" title="#{formconsultarusuario.txtDireccion}" />
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="Rol">Rol</label></strong>
+                                            <strong><label for="Rol">#{formconsultarusuario.lblRol}</label></strong>
                                             <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.rol.idRol}" onchange="submit();" disabled="true">
-                                                <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true"></f:selectItem>
                                                 <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                             </h:selectOneMenu>
                                         </div>
 
                                         <c:if test="#{usuarioControlador.rol.getIdRol() == 2}">
                                             <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="direccion">Automovil</label></strong>
+                                                <strong><label for="direccion">#{formconsultarusuario.lblAutomovil}</label></strong>
                                                 <h:selectOneMenu value="#{usuarioControlador.residente.automovil}" class="form-control-plaintext" id="automovil">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItem itemValue="Si" itemLabel="Si"></f:selectItem>
-                                                    <f:selectItem itemValue="No" itemLabel="No"></f:selectItem>
+                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemValue="Si" itemLabel="#{formcrearusuario.Si}"></f:selectItem>
+                                                    <f:selectItem itemValue="No" itemLabel="#{formcrearusuario.No}"></f:selectItem>
                                                 </h:selectOneMenu>
                                             </div>
 
                                             <div class="torre col-12 col-md mb-3">
-                                                <strong><label for="torre">Torre</label></strong>
+                                                <strong><label for="torre">#{formconsultarusuario.lblTorre}</label></strong>
                                                 <h:selectOneMenu  id="idTorre" value="#{usuarioControlador.torre.idTorre}"  class="form-control-plaintext">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemValue="#{torre.idTorre}" itemLabel="#{torre.idTorre}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col-12 col-md mb-3">
-                                                <strong><label for="apto">Apartamento</label></strong>
+                                                <strong><label for="apto">#{formconsultarusuario.lblApartamento}</label></strong>
                                                 <h:selectOneMenu  id="idApartamento" value="#{usuarioControlador.apartamento.idApartamento}" class="form-control-plaintext">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemValue="#{apto.idApartamento}" itemLabel="#{apto.idApartamento}"/>
                                                 </h:selectOneMenu>
                                             </div>  
                                         </c:if>
                                         <c:if test="#{usuarioControlador.rol.getIdRol() == 3}">
                                             <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="inicioTurno">Inicio turno</label></strong>
-                                                <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="InicioTurno">
+                                                <strong><label for="inicioTurno">#{formconsultarusuario.lblInicioTurno}</label></strong>
+                                                <h:inputText a:type="time" id="inicioTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.inicioTurno}" title="#{formconsultarusuario.lblInicioTurno}">
                                                     <f:convertDateTime pattern="HH:mm" />
                                                 </h:inputText>
                                             </div>
                                             <div class="col-12 col-md-6 mb-3">
-                                                <strong><label for="finTurno">Fin turno</label></strong>
-                                                <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="FinTurno" requiredMessage="The FinTurno field is required.">
+                                                <strong><label for="finTurno">#{formconsultarusuario.lblFinTurno}</label></strong>
+                                                <h:inputText a:type="time" id="finTurno" class="form-control-plaintext" value="#{usuarioControlador.turnoVigilante.finTurno}" title="#{formconsultarusuario.lblFinTurno}" requiredMessage="#{formlogin.camporequerido}">
                                                     <f:convertDateTime pattern="HH:mm" />
                                                 </h:inputText>
                                             </div>
@@ -141,9 +141,9 @@
                                             <div class="col-12 mb-3">
                                                 <strong><label for="Rol">Estado</label></strong>
                                                 <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}" disabled="true">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
-                                                    <f:selectItem itemLabel="Activo" itemValue="Activo"/>
-                                                    <f:selectItem itemLabel="Bloqueado" itemValue="Bloqueado"/>
+                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="#{formconsultarusuario.Activo}" itemValue="Activo"/>
+                                                    <f:selectItem itemLabel="#{formconsultarusuario.Bloqueado}" itemValue="Bloqueado"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </c:if>
@@ -152,22 +152,22 @@
                                                 <strong><label for="Rol">Estado</label></strong>
                                                 <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
-                                                    <f:selectItem itemLabel="Activo" itemValue="Activo"/>
-                                                    <f:selectItem itemLabel="Bloqueado" itemValue="Bloqueado"/>
+                                                    <f:selectItem itemLabel="#{formconsultarusuario.Activo}" itemValue="Activo"/>
+                                                    <f:selectItem itemLabel="#{formconsultarusuario.Bloqueado}" itemValue="Bloqueado"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </c:if>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
-                                            <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="Ingrese contrase&ntilde;a"/>
-                                            <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
+                                            <strong><label for="contrasenia">#{formconsultarusuario.contraseña}</label></strong>
+                                            <h:inputText a:type="password" class="form-control-plaintext" id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" pt:placeholder="#{formconsultarusuario.Ingresecontraseña}"/>
+                                            <small id="contrasenia" class="form-text text-muted">#{formconsultarusuario.Tucontraseñadebetenerunalongitud}</small>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
                                             <strong><label for="confirmar">Confirme contrase&ntilde;a</label></strong>
-                                            <input type="password" class="form-control-plaintext" placeholder="Repita la contrase&ntilde;a"/>
+                                            <input type="password" class="form-control-plaintext" placeholder="#{formconsultarusuario.Repitalacontraseña}"/>
                                         </div>
                                         <div class="col-12 mb-3">
-                                            <h:commandButton value="Guardar cambios" class="btn btn-outline-success btn-block" action="#{usuarioControlador.actualizar()}"></h:commandButton>
+                                            <h:commandButton value="#{formconsultarusuario.Guardarcambios}" class="btn btn-outline-success btn-block" action="#{usuarioControlador.actualizar()}"></h:commandButton>
                                         </div>
                                     </div>
                                 </h:form>
