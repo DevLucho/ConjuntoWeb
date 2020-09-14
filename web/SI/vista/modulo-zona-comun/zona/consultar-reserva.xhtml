@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
-        <title>#{sesionControlador.rolSeleccionado.nombre} | Consultar reservas</title>
+        <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.txtConsultarReservas}</title>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -30,7 +30,7 @@
                 <ol class="breadcrumb">
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
-                        <li class="breadcrumb-item active">Consultar reservas</li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.txtConsultarReservas}</li>
                     </c:if>
                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
@@ -53,7 +53,7 @@
                         <h3>
                             <i class="fas fa-thumbtack"></i> 
                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                Consultar reservas
+                                #{formdashboardadmin.txtConsultarReservas}
                             </c:if>
                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                 #{formdashboardadmin.Consultarmisreservas}

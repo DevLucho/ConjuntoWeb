@@ -88,8 +88,11 @@
                                                         <h:message for="tituloc" style="color: red"/>
                                                     </div>
                                                     <div class="col-12 col-md-6">
-                                                        <label for="fechafinal">Publicar hasta:</label>
-                                                        <input type="date" class="form-control" name="publicar" id="publicar"/>
+                                                        <label for="fechaPublicacion">Publicar hasta:</label>
+                                                        <h:inputText id="fechaPublicacion" a:type="date" class="form-control" value="#{comunicadoControlador.comunicado.publicarHasta}" a:min="#{horaControlador.nowFormat()}" required="true" requiredMessage="#{formlogin.camporequerido}">
+                                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                        </h:inputText>
+                                                        <h:message for="fechaPublicacion" style="color: red"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row font">
@@ -116,7 +119,7 @@
                                             </div>
 
                                             <div class="modal-footer col-12">
-                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Interno')}"></h:commandButton>
+                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Interno', sesionControlador.user.idPerfil)}"></h:commandButton>
                                             </div>
                                         </h:form>
                                     </div>
@@ -191,15 +194,17 @@
                                         <h:form class="row" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group row font">
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12">
                                                         <label for="titulon">Título de la noticia:</label>
                                                         <h:inputText class="form-control" a:placeholder="Título comunicado" id="titulon" value="#{comunicadoControlador.comunicado.titulo}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
                                                         <h:message for="titulon" style="color: red"/>
                                                     </div>
+                                                    <!--
                                                     <div class="col-12 col-md-6">
                                                         <label for="fechafinal">Publicar hasta:</label>
                                                         <input type="date" class="form-control" name="publicar2" id="publicar2"/>
                                                     </div>
+                                                    -->
                                                 </div>
                                                 <div class="form-group row font">
                                                     <div class="col-12">
@@ -211,7 +216,7 @@
                                                 <div class="form-group row">
                                                     <!-- Subir foto -->
                                                     <div class="col-5" style="padding-right:0 ;">
-                                                       <h:outputLabel for="file" class="subir-foto">
+                                                        <h:outputLabel for="file" class="subir-foto">
                                                             <span>+</span> <br/> Adjuntar <br/> imagen
                                                         </h:outputLabel>
                                                         <h:inputFile id="file" value="#{comunicadoControlador.imagen.img}" a:accept="image/x-png,image/gif,image/jpeg" required="true" requiredMessage="#{formcrearusuario.camporequerido}" style="display: none"/>
@@ -225,7 +230,7 @@
                                             </div>
 
                                             <div class="modal-footer col-12">
-                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Externo')}"></h:commandButton>
+                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Externo', sesionControlador.user.idPerfil)}"></h:commandButton>
                                             </div>
                                         </h:form>
                                     </div>
@@ -246,7 +251,7 @@
                                                         </div>
                                                     </h3>
                                                     <p class="card-subtitle text-muted mb-2">Fecha publicación: <h:outputText value="#{horaControlador.convertirf(noticia.fechaPublicacion)}"></h:outputText>, Por: #{noticia.idPerfil.idRol.nombre}</p>
-                                                    <img src="../../../../#{noticia.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
+                                                    <img src="#{noticia.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
                                                     <p class="card-text mt-3">#{noticia.descripcion}</p>
                                                 </div>
                                             </div>
@@ -300,7 +305,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer col-12">
-                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Galeria')}"></h:commandButton>
+                                                <h:commandButton class="btn btn-outline-success col-12" value="Publicar" action="#{comunicadoControlador.registrar('Galeria', sesionControlador.user.idPerfil)}"></h:commandButton>
                                             </div>
                                         </h:form>
                                     </div>
@@ -318,7 +323,7 @@
                                                         <h:commandButton value="" class="btn btn-outline-danger float-right fas fa-trash-alt btn-eliminar-comunicado" title="Eliminar foto" action="#{comunicadoControlador.eliminar(galeria)}"></h:commandButton>
                                                         <!-- . -->
                                                     </div>
-                                                    <img src="../../../../#{galeria.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
+                                                    <img src="#{galeria.img}" class="card-img-top img-fluid" alt="" style="border: 1px dashed #e7e7e7;"/>
                                                 </div>
                                             </div>
                                         </div>

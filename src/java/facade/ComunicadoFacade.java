@@ -5,12 +5,18 @@
  */
 package facade;
 
+import controlador.HoraControlador;
 import entidades.Comunicado;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,6 +25,9 @@ import javax.persistence.Query;
 @Stateless
 public class ComunicadoFacade extends AbstractFacade<Comunicado> {
 
+    @Inject
+    HoraControlador hora;
+    
     @PersistenceContext(unitName = "ProyectoConjuntoWebPU")
     private EntityManager em;
 
@@ -32,9 +41,14 @@ public class ComunicadoFacade extends AbstractFacade<Comunicado> {
     }
 
     public List<Comunicado> consultarTodos(String tipo) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Comunicado u WHERE u.tipo=:tipo");
+        Query query = em.createQuery("SELECT u FROM Comunicado u WHERE u.tipo=:tipo");
         query.setParameter("tipo", tipo);
+        return query.getResultList();
+    }
+
+    public List<Comunicado> procesoEliminar(Date fechaF) {
+        Query query = em.createQuery("SELECT u FROM Comunicado u WHERE u.publicarHasta BETWEEN '2020-01-01' AND :fechaF");
+        query.setParameter("fechaF", fechaF);
         return query.getResultList();
     }
 

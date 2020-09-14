@@ -17,9 +17,13 @@ import facade.HoraInicialFacade;
 import facade.RolFacade;
 import facade.UsuarioFacade;
 import facade.ZonaComunalFacade;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchProviderException;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -96,7 +100,7 @@ public class EventoControlador implements Serializable {
         evento.setFechaInicio(hora.fecha(evento.getFechaInicio()));
         evento.setFechaFin(hora.fecha(evento.getFechaFin()));
         eventoFacade.edit(evento);
-        
+
         // mostrar fechas - horas con formato
         String fechaI = hora.convertirf(evento.getFechaInicio());
         String horaI = hora.convertir(evento.getHoraInicio().getHora());
@@ -105,7 +109,7 @@ public class EventoControlador implements Serializable {
         if (notificar == 1000) { // 1000 notifica todos los usuarios
             allMails();
             // Correos masivos 
-            for (Usuario u:allMails()) {
+            for (Usuario u : allMails()) {
                 email.enviarEmail(u.getCorreo(), "Invitación a evento",
                         email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
                                 "<p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
@@ -118,7 +122,7 @@ public class EventoControlador implements Serializable {
             notifico = true;
         } else if (notificar != 1100) { // 1100 = ningun usuario, notifica segun rol
             correos();
-            for (Usuario u:correos()) {
+            for (Usuario u : correos()) {
                 email.enviarEmail(u.getCorreo(), "Invitación a evento",
                         email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
                                 " <p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
@@ -178,8 +182,8 @@ public class EventoControlador implements Serializable {
     public List<Evento> consultarTodos() {
         return eventoFacade.findAll();
     }
-    
-    public List<Evento> eventos(){
+
+    public List<Evento> eventos() {
         return eventoFacade.eventos("Vigente");
     }
 
@@ -219,7 +223,9 @@ public class EventoControlador implements Serializable {
         return eventoFacade.estadoEvento("Finalizado");
     }
 
-    public void eliminar(Evento eventoEliminar) {
+    public void eliminar(Evento eventoEliminar) throws IOException {
+        Path p = Paths.get(imagen.getRuta() + eventoEliminar.getImg());
+        Files.deleteIfExists(p);
         eventoFacade.remove(eventoEliminar);
     }
 
@@ -298,5 +304,5 @@ public class EventoControlador implements Serializable {
     public void setImagen(ImagenControlador imagen) {
         this.imagen = imagen;
     }
-    
+
 }

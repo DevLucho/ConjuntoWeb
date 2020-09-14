@@ -61,8 +61,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public Usuario iniciarSesion(int documento, String contrasenia) {
         Usuario usuario = new Usuario();
         try {
-            Query query;
-            query = em.createQuery("SELECT u FROM Usuario u WHERE u.documento=:documento and u.contrasenia=:contrasenia");
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.documento=:documento and u.contrasenia=:contrasenia");
             query.setParameter("documento", documento);
             query.setParameter("contrasenia", contrasenia);
             usuario = (Usuario) query.getResultList().get(0);
@@ -75,8 +74,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public Usuario cambiarContrasenia(String contrasenia) {
         Usuario usuario = new Usuario();
         try {
-            Query query;
-            query = em.createQuery("SELECT u FROM Usuario u WHERE u.contrasenia=:contrasenia");
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.contrasenia=:contrasenia");
             query.setParameter("contrasenia", contrasenia);
             usuario = (Usuario) query.getResultList().get(0);
         } catch (Exception e) {
@@ -86,51 +84,44 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public List<Usuario> sesionUsuario(int idPerfil) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.idPerfil=:idPerfil");
         query.setParameter("idPerfil", idPerfil);
         return query.getResultList();
     }
 
     public List<Residente> sesionUsuarioR(int idPerfil) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Residente u WHERE u.idPerfil.idPerfil=:idPerfil");
+        Query query = em.createQuery("SELECT u FROM Residente u WHERE u.idPerfil.idPerfil=:idPerfil");
         query.setParameter("idPerfil", idPerfil);
         return query.getResultList();
     }
 
     public List<Vigilante> sesionUsuarioV(int idPerfil) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Vigilante u WHERE u.idPerfil.idPerfil=:idPerfil");
+        Query query = em.createQuery("SELECT u FROM Vigilante u WHERE u.idPerfil.idPerfil=:idPerfil");
         query.setParameter("idPerfil", idPerfil);
         return query.getResultList();
     }
 
     public List<Usuario> usuarioBloquedo(String estado) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Usuario u WHERE u.estado=:estado");
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.estado=:estado");
         query.setParameter("estado", estado);
         return query.getResultList();
     }
 
     // count
     public int contarBloqueados(String estado) {
-        Query query;
-        query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.estado=:estado");
+        Query query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.estado=:estado");
         query.setParameter("estado", estado);
         return ((Long) query.getSingleResult()).intValue();
     }
 
     public int contarAdministradores(int idRol) {
-        Query query;
-        query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.idRol.idRol=:idRol");
+        Query query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.idRol.idRol=:idRol");
         query.setParameter("idRol", idRol);
         return ((Long) query.getSingleResult()).intValue();
     }
 
     public List<Usuario> usuarioAdmin(int idRol) {
-        Query query;
-        query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol");
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol");
         query.setParameter("idRol", idRol);
         return query.getResultList();
     }

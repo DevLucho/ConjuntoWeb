@@ -31,7 +31,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  */
 @ManagedBean
 public class ExportUControlador {
-     Part excel;
+
+    Part excel;
     @Inject
     private MensajeControlador mensaje;
 
@@ -42,12 +43,12 @@ public class ExportUControlador {
     public void setExcel(Part excel) {
         this.excel = excel;
     }
-    
-    public String redirect(){
+
+    public String redirect() {
         return "importar";
     }
-    
-    public void migrar() throws SQLException{
+
+    public void migrar() throws SQLException {
         try {
             Driver dvr = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(dvr);
@@ -55,33 +56,33 @@ public class ExportUControlador {
             Pongan sus conexiones locales:
             Avendaño: jdbc:mysql://localhost:3306/conjuntoweb?user=root&password=&useSSL=false
             Lucho: jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false
-            */
+             */
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false");
-            
+
             Workbook libro = WorkbookFactory.create(excel.getInputStream());
             XSSFSheet hoja = (XSSFSheet) libro.getSheetAt(0);
-           
-            Iterator <Row> itr = hoja.rowIterator();
+
+            Iterator<Row> itr = hoja.rowIterator();
             itr.next();
             boolean crear;
-            while(itr.hasNext()){
+            while (itr.hasNext()) {
                 crear = true;
                 Row fila = itr.next();
                 int ncamp = 1;
                 String query = "INSERT INTO usuario VALUES(";
                 Iterator<Cell> itrCelda = fila.cellIterator();
-                
-                while(itrCelda.hasNext()){
+
+                while (itrCelda.hasNext()) {
                     Cell celda = itrCelda.next();
-                    
-                    if(celda.getCellTypeEnum()== CellType.STRING){
-                        if(ncamp == 3 || ncamp == 4 || ncamp == 7 || ncamp == 9 || ncamp == 10 || ncamp == 11){
+
+                    if (celda.getCellTypeEnum() == CellType.STRING) {
+                        if (ncamp == 3 || ncamp == 4 || ncamp == 7 || ncamp == 9 || ncamp == 10 || ncamp == 11) {
                             query = query + ",'" + celda.getRichStringCellValue() + "'";
                         }
                         //System.out.println(" " + celda.getRichStringCellValue());
-                    }else{
-                        if(ncamp == 1){
-                            query = query + (int)celda.getNumericCellValue();
+                    } else {
+                        if (ncamp == 1) {
+                            query = query + (int) celda.getNumericCellValue();
                             if ((int) celda.getNumericCellValue() == 0) {
                                 crear = false;
                             }
@@ -109,18 +110,18 @@ public class ExportUControlador {
                     PreparedStatement ps;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
-                }          
+                }
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Aviso","Migracion Exitosa"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Migracion Exitosa"));
             mensaje.setMensaje("Mensaje('Importacion Exitosa','Datos registrados en la Bd','success');");
-        }catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Aviso","Error abriendo archivo"));  
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error abriendo archivo"));
             mensaje.setMensaje("Mensaje('Error en Importacion','El archivo no se puede abrir, revisar la extension requerida','warning');");
-        }catch (InvalidFormatException e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Aviso","Error en formato1"));  
+        } catch (InvalidFormatException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error en formato1"));
             mensaje.setMensaje("Mensaje('Error en Importacion','El formato en el archivo es erroneo, por favor verificar las instrucciones.','error');");
-        }catch (SQLException e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Aviso","Error en formato"));                
+        } catch (SQLException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error en formato"));
             mensaje.setMensaje("Mensaje('Error en Importacion','El formato en el archivo es erroneo, por favor verificar las instrucciones.','error');");
         }
     }

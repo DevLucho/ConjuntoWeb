@@ -7,6 +7,7 @@ package controlador;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -25,6 +26,13 @@ public class ImagenControlador implements Serializable {
      * Creates a new instance of ImagenControlador
      */
     private Part img;
+    private File f;
+    /*
+    *Pongan su ruta local:
+    *Lucho: C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\SI\\img\\
+     */
+    private String ruta = "C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\SI\\img\\"; // Ruta img interna
+    private String ruta2 = "C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\img\\"; // Ruta img externa
 
     public ImagenControlador() {
     }
@@ -32,18 +40,14 @@ public class ImagenControlador implements Serializable {
     public void subirImagen(int ruta) {
         try {
             InputStream in = img.getInputStream();
-            /*
-            Pongan su ruta local:
-            Lucho: C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\BackEnd-and-FrontEnd\\web\\SI\\img\\
-             */
-            File f;
+
             if (ruta == 1) { // Imagenes internas
-                f = new File("C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\BackEnd-and-FrontEnd\\web\\SI\\img\\" + img.getSubmittedFileName());
+                this.f = new File(this.ruta + img.getSubmittedFileName());
             } else { // Imagenes para index
-                f = new File("C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\BackEnd-and-FrontEnd\\web\\img\\" + img.getSubmittedFileName());
+                this.f = new File(this.ruta2 + img.getSubmittedFileName());
             }
-            f.createNewFile();
-            FileOutputStream nf = new FileOutputStream(f);
+            this.f.createNewFile();
+            FileOutputStream nf = new FileOutputStream(this.f);
 
             byte[] buffer = new byte[1024];
             int tamaño;
@@ -65,6 +69,30 @@ public class ImagenControlador implements Serializable {
 
     public void setImg(Part img) {
         this.img = img;
+    }
+
+    public File getF() {
+        return f;
+    }
+
+    public void setF(File f) {
+        this.f = f;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public String getRuta2() {
+        return ruta2;
+    }
+
+    public void setRuta2(String ruta2) {
+        this.ruta2 = ruta2;
     }
 
 }

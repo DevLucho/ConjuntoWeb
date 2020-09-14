@@ -7,9 +7,13 @@ package controlador;
 
 import entidades.ZonaComunal;
 import facade.ZonaComunalFacade;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -26,6 +30,7 @@ public class ZonaComunalControlador implements Serializable {
     /**
      * Creates a new instance of ZonaComunalControlador
      */
+    @Inject ImagenControlador imagen;
     @Inject
     private MensajeControlador mensaje;
     private ZonaComunal zonaComunal;
@@ -45,8 +50,10 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunalFacade.create(zonaComunal);
     }
 
-    public void eliminar(ZonaComunal zonaComunalEliminar) {
+    public void eliminar(ZonaComunal zonaComunalEliminar) throws IOException {
         mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar "+zonaComunalEliminar.getNombre()+"','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
+        Path p = Paths.get(imagen.getRuta() + zonaComunalEliminar.getImg());
+        Files.delete(p);
         zonaComunalFacade.remove(zonaComunalEliminar);
     }
 

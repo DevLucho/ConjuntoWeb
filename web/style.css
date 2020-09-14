@@ -392,12 +392,13 @@ nav .start-contact, a:nth-child(6):hover~.animation{
 .fonfo2{
     width: 100%;
     height: 645px;
+    background-image:url(img/coco.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
 .capanegra2{
     background-size: 100%;    
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.493);
     width: 100%;
     height: 645px;
 }

@@ -88,7 +88,7 @@
                             <div class="card-columns">
                                 <c:forEach items="#{zonaComunalControlador.consultarTodos()}" var="zona">
                                     <div class="card">
-                                        <img src="#{zona.img}" class="card-img-top img-fluid" alt=""/>
+                                        <img src="../../../img/#{zona.img}" class="card-img-top img-fluid" alt=""/>
                                         <div class="card-block">
                                             <h3 class="card-title">#{zona.nombre}</h3>
                                             <p class="card-text">#{zona.descripcion}<h:commandLink class="card-link" value="...#{formdashboardadmin.Leermas}" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandLink></p>

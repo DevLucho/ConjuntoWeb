@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comunicado.findAll", query = "SELECT c FROM Comunicado c")
     , @NamedQuery(name = "Comunicado.findByIdComunicado", query = "SELECT c FROM Comunicado c WHERE c.idComunicado = :idComunicado")
     , @NamedQuery(name = "Comunicado.findByFechaPublicacion", query = "SELECT c FROM Comunicado c WHERE c.fechaPublicacion = :fechaPublicacion")
+    , @NamedQuery(name = "Comunicado.findByPublicarHasta", query = "SELECT c FROM Comunicado c WHERE c.publicarHasta = :publicarHasta")
     , @NamedQuery(name = "Comunicado.findByTitulo", query = "SELECT c FROM Comunicado c WHERE c.titulo = :titulo")
     , @NamedQuery(name = "Comunicado.findByDescripcion", query = "SELECT c FROM Comunicado c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "Comunicado.findByImg", query = "SELECT c FROM Comunicado c WHERE c.img = :img")
@@ -51,6 +52,9 @@ public class Comunicado implements Serializable {
     @Column(name = "fechaPublicacion")
     @Temporal(TemporalType.DATE)
     private Date fechaPublicacion;
+    @Column(name = "publicarHasta")
+    @Temporal(TemporalType.DATE)
+    private Date publicarHasta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -61,7 +65,9 @@ public class Comunicado implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descripcion")
     private String descripcion;
-    @Size(max = 100)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "img")
     private String img;
     @Basic(optional = false)
@@ -80,10 +86,11 @@ public class Comunicado implements Serializable {
         this.idComunicado = idComunicado;
     }
 
-    public Comunicado(Integer idComunicado, String titulo, String descripcion, String tipo) {
+    public Comunicado(Integer idComunicado, String titulo, String descripcion, String img, String tipo) {
         this.idComunicado = idComunicado;
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.img = img;
         this.tipo = tipo;
     }
 
@@ -101,6 +108,14 @@ public class Comunicado implements Serializable {
 
     public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Date getPublicarHasta() {
+        return publicarHasta;
+    }
+
+    public void setPublicarHasta(Date publicarHasta) {
+        this.publicarHasta = publicarHasta;
     }
 
     public String getTitulo() {

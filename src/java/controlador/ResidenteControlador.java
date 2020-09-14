@@ -59,6 +59,10 @@ public class ResidenteControlador implements Serializable {
     private long nrocelular;
     private String correo;
     private String clave;
+    private String contra;
+    private String contraUsuario;
+    private String newpass;
+    boolean validate;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -135,14 +139,13 @@ public class ResidenteControlador implements Serializable {
     }
 
     // validaciones
-
     public void validarClave(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
         this.clave = (String) value;
 
         if (this.clave.length() < 8 || this.clave.length() > 20) {
             ((UIInput) comp).setValid(false);
-            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña invalida"));
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña invalida. Debe contener entre 8 - 20 caracteres"));
             mensaje.setMensaje("MensajeAlertify('Contraseña invalida','error');");
         }
     }
@@ -158,11 +161,39 @@ public class ResidenteControlador implements Serializable {
         }
     }
 
+    public void messagge(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String contra = (String) value;
+
+        if (this.contraUsuario.equals(contra)) {
+            validate = true;
+        } else {
+            validate = false;
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña no existe"));
+        }
+    }
+
+    public void contra(String contrasenia) {
+        this.contraUsuario = contrasenia;
+    }
+
+    public void cambiarContrasenia(String contrasenia, Usuario usuario) {
+        if (contrasenia.equals(contra)) {
+            mensaje.setMensaje("MensajeAlertify('Contraseña guardada','success');");
+            usuario.setContrasenia(newpass);
+            usuarioFacade.edit(usuario);
+        } else {
+            mensaje.setMensaje("MensajeAlertify('Contraseña no existe','error');");
+        }
+
+    }
+
     public void validarDoc(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
         String doc = (String) value;
 
-        if (doc.length() <8 || doc.length()>10) {
+        if (doc.length() < 8 || doc.length() > 10) {
             ((UIInput) comp).setValid(false);
             context.addMessage(comp.getClientId(context), new FacesMessage("Documento incorrecto"));
             mensaje.setMensaje("MensajeAlertify('Nº de documento incorrecto','error');");
@@ -176,9 +207,8 @@ public class ResidenteControlador implements Serializable {
     public int contarResidentes() {
         return residenteFacade.count();
     }
-    
-    // Get's y Set's ↓
 
+    // Get's y Set's ↓
     public Residente getResidente() {
         return residente;
     }
@@ -297,6 +327,30 @@ public class ResidenteControlador implements Serializable {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getNewpass() {
+        return newpass;
+    }
+
+    public void setNewpass(String newpass) {
+        this.newpass = newpass;
+    }
+
+    public String getContra() {
+        return contra;
+    }
+
+    public void setContra(String contra) {
+        this.contra = contra;
+    }
+
+    public String getContraUsuario() {
+        return contraUsuario;
+    }
+
+    public void setContraUsuario(String contraUsuario) {
+        this.contraUsuario = contraUsuario;
     }
 
 }

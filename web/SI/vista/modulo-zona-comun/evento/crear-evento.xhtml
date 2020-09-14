@@ -87,7 +87,7 @@
                                     <div class="form-group row">
                                         <div class="col-12 col-md-5">
                                             <strong><label for="fechai">#{formdashboardadmin.Fechainicio}</label></strong>
-                                            <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <h:inputText a:type="date" class="form-control"  id="fechaInicio" value="#{eventoControlador.evento.fechaInicio}" a:min="#{horaControlador.nowFormat()}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                                             </h:inputText>
                                             <h:message for="fechaInicio" style="color: red"/>
@@ -112,7 +112,7 @@
                                     <div class="form-group row">
                                         <div class="col-12 col-md-5">
                                             <strong><label for="fechaf">#{formdashboardadmin.Fechafin}</label></strong>
-                                            <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"> 
+                                            <h:inputText a:type="date" class="form-control" id="fechaFin" value="#{eventoControlador.evento.fechaFin}" a:min="#{horaControlador.nowFormat()}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"> 
                                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                                             </h:inputText>
                                             <h:message for="fechaFin" style="color: red"/>

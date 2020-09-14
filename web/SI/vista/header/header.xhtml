@@ -151,6 +151,7 @@
                             </div>
                         </div>
                     </h:form>
+
                     <h:form>
                         <!-- Modal cambiar contrase&ntilde;a -->
                         <div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true" >
@@ -167,20 +168,21 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
-                                                    <strong><label for="user-password">Contrase&ntilde;a actual</label></strong>
-                                                    <input type="password" class="form-control-plaintext" placeholder="" value="#{usuarioControlador.usuario.contrasenia}"/>
-
-                                                    <strong><label for="user-new-password">Nueva contrase&ntilde;a</label></strong>
-                                                    <input type="password" class="form-control-plaintext" placeholder="" value="#{usuarioControlador.usuario.contrasenia}"/>
-
-                                                    <strong><label for="user-confirm-pasword">Confirma contrase&ntilde;a</label></strong>
-                                                    <input type="password" class="form-control-plaintext" placeholder=""/>
+                                                    <strong><h:outputLabel for="pass" value="Contrase&ntilde;a actual"/></strong>
+                                                    <h:inputText id="pass" a:type="password" class="form-control-plaintext" a:placeholder="Ingrese su pass" value="#{residenteControlador.contra}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.messagge}"/>
+                                                    <h:message for="pass" style="color:red"/><br/>
+                                                    <strong><h:outputLabel for="npass" value="Nueva contrase&ntilde;a"/></strong>
+                                                    <h:inputText id="npass" a:type="password" class="form-control-plaintext" a:placeholder="Digite nueva pass" value="#{residenteControlador.newpass}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClave}"/>
+                                                    <h:message for="npass" style="color:red"/><br/>
+                                                    <strong><h:outputLabel for="cpass" value="Confirma contrase&ntilde;a"/></strong>
+                                                    <h:inputText id="cpass" a:type="password" class="form-control-plaintext" a:placeholder="Repita su nueva pass" validator="#{residenteControlador.confirmarClave}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
+                                                    <h:message for="cpass" style="color:red"/>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <p><strong>Recuerda:</strong><br/>
                                                         <ul style="padding-left: 40px;">
                                                             <li style="list-style:circle;">#{formcrearusuario.txtContraseña}</li><br/>
-                                                            <li style="list-style:circle;">No datos personales</li>
+                                                            <!--<li style="list-style:circle;">No datos personales</li>-->
                                                         </ul>
                                                     </p>
                                                 </div>
@@ -189,7 +191,25 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
-                                        <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{sesionControlador.cambiarContrasenia()}"></h:commandButton>
+                                        <!-- Si es admin -->
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
+                                            <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
+                                                #{sesion.contrasenia}
+                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesion.contrasenia, sesion)}"></h:commandButton>
+                                            </c:forEach>
+                                        </c:if>
+                                        <!-- Si es residente -->
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                                            <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesionR">
+                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionR.idPerfil.contrasenia)}"></h:commandButton>
+                                            </c:forEach>
+                                        </c:if>
+                                        <!-- Si es vigilante -->
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                                            <c:forEach items="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" var="sesionV">
+                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionV.idPerfil.contrasenia)}"></h:commandButton>
+                                            </c:forEach>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>

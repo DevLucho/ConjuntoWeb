@@ -59,6 +59,13 @@ public class HoraControlador implements Serializable {
         return date;
     }
 
+    public String nowFormat() {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();        
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(fecha(date));
+    }
+
     // Dar formato a horas
     public String convertir(Date hora) {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");

@@ -33,6 +33,10 @@ public class SesionControlador implements Serializable {
      * Creates a new instance of SesionControlador
      */
     @Inject
+    HoraControlador hora;
+    @Inject
+    ComunicadoControlador comunicado;
+    @Inject
     private MensajeControlador mensaje;
     private String documentoc;
     private int documento;
@@ -51,30 +55,38 @@ public class SesionControlador implements Serializable {
     PermisoFacade permisoFacade;
 
     public SesionControlador() {
-        FacesContext fc = FacesContext.getCurrentInstance();
         rolFacade = new RolFacade();
         usuarioFacade = new UsuarioFacade();
     }
 
     public String iniciarSesion() {
-        user = usuarioFacade.iniciarSesion(documento = Integer.parseInt(documentoc), contrasenia);
-        FacesContext fc = FacesContext.getCurrentInstance();
-        if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("")) {
-            rolSeleccionado = user.getIdRol();
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
-            if ("Activo".equals(user.getEstado())) {
-                if (rolSeleccionado.getIdRol() == 1) {
-                    return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+        try {
+            user = usuarioFacade.iniciarSesion(documento = Integer.parseInt(documentoc), contrasenia);
+        } catch (NumberFormatException e) {
+            System.out.println("Revisar login: " + e.getMessage());
+        }
+        if (user != null) {
+            if (user.getDocumento() != 0 && user.getDocumento() > 0 && contrasenia != null && !contrasenia.equals("")) {
+                rolSeleccionado = user.getIdRol();
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
+                if ("Activo".equals(user.getEstado())) {
+                    comunicado.eliminarExpirados(); // Elimina comunicados expirados
+                    if (rolSeleccionado.getIdRol() == 1) {
+                        return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+                    }
+                    if (rolSeleccionado.getIdRol() == 2) {
+                        return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
+                    }
+                    return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
+                } else {
+                    mensaje.setMensaje("MensajeAlertify('Usuario bloqueado. Contacte al administrador para solucionar el inconveniente.','error');");
+                    return "";
                 }
-                if (rolSeleccionado.getIdRol() == 2) {
-                    return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
-                }
-                return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
+
             } else {
-                mensaje.setMensaje("MensajeAlertify('Usuario bloqueado. Contacte al administrador para solucionar el inconveniente.','error');");
+                mensaje.setMensaje("MensajeAlertify('Documento y/o clave inválidos','error');");
                 return "";
             }
-
         } else {
             mensaje.setMensaje("MensajeAlertify('Documento y/o clave inválidos','error');");
             return "";
@@ -103,15 +115,6 @@ public class SesionControlador implements Serializable {
             }
         } catch (Exception e) {
             System.out.println("Error verifS" + e.getMessage());
-        }
-    }
-
-    public void cambiarContrasenia() {
-        user = usuarioFacade.cambiarContrasenia(user.getContrasenia());
-        if (contrasenia != null && !contrasenia.equals("")) {
-            usuarioFacade.edit(user);
-        } else {
-            mensaje.setMensaje("MensajeAlertify('Contraseña inválida','error');");
         }
     }
 
