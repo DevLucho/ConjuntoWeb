@@ -59,10 +59,11 @@ public class ResidenteControlador implements Serializable {
     private long nrocelular;
     private String correo;
     private String clave;
+    // ----------------- Cambio contraseña interna
+    private String confirmar;
     private String contra;
-    private String contraUsuario;
     private String newpass;
-    boolean validate;
+    private String contraActual;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -138,7 +139,21 @@ public class ResidenteControlador implements Serializable {
         }
     }
 
-    // validaciones
+    public List<Residente> consultarTodos() {
+        return residenteFacade.findAll();
+    }
+
+    public void actualizar(Usuario usuario) {
+        usuarioFacade.edit(usuario);
+        mensaje.setMensaje("Mensaje('Cambios guardados','Se a actualizado correctamente la información','success');");
+        usuario = new Usuario();
+    }
+
+    public int contarResidentes() {
+        return residenteFacade.count();
+    }
+
+    // -------------------------------- validaciones
     public void validarClave(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
         this.clave = (String) value;
@@ -161,34 +176,6 @@ public class ResidenteControlador implements Serializable {
         }
     }
 
-    public void messagge(FacesContext context, UIComponent comp, Object value) {
-        context = FacesContext.getCurrentInstance();
-        String contra = (String) value;
-
-        if (this.contraUsuario.equals(contra)) {
-            validate = true;
-        } else {
-            validate = false;
-            ((UIInput) comp).setValid(false);
-            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña no existe"));
-        }
-    }
-
-    public void contra(String contrasenia) {
-        this.contraUsuario = contrasenia;
-    }
-
-    public void cambiarContrasenia(String contrasenia, Usuario usuario) {
-        if (contrasenia.equals(contra)) {
-            mensaje.setMensaje("MensajeAlertify('Contraseña guardada','success');");
-            usuario.setContrasenia(newpass);
-            usuarioFacade.edit(usuario);
-        } else {
-            mensaje.setMensaje("MensajeAlertify('Contraseña no existe','error');");
-        }
-
-    }
-
     public void validarDoc(FacesContext context, UIComponent comp, Object value) {
         context = FacesContext.getCurrentInstance();
         String doc = (String) value;
@@ -200,12 +187,30 @@ public class ResidenteControlador implements Serializable {
         }
     }
 
-    public List<Residente> consultarTodos() {
-        return residenteFacade.findAll();
+    // Valida contraseña de usuario en sesion
+    public void validar(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String c = (String) value;
+
+        if (!contraActual.equals(c)) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña no existe"));
+            mensaje.setMensaje("Mensajes('Contraseña incorrecta','Verifica tu contraseña actual','error');");
+            this.contra = "";
+        }
     }
 
-    public int contarResidentes() {
-        return residenteFacade.count();
+    // Metodo -> Cambiar contrasenia desde dashboard
+    public void cambiarContrasenia(String contrasenia, Usuario usuario) {
+        if (contrasenia.equals(contra)) {
+            usuario.setContrasenia(newpass);
+            usuarioFacade.edit(usuario);
+            mensaje.setMensaje("Mensaje('Contraseña guardada','Se a cambiado la contraseña satisfactoriamente.','success');");
+            this.contra = "";
+            this.newpass = "";
+            this.confirmar = "";
+            this.contraActual = "";
+        }
     }
 
     // Get's y Set's ↓
@@ -345,12 +350,20 @@ public class ResidenteControlador implements Serializable {
         this.contra = contra;
     }
 
-    public String getContraUsuario() {
-        return contraUsuario;
+    public String getConfirmar() {
+        return confirmar;
     }
 
-    public void setContraUsuario(String contraUsuario) {
-        this.contraUsuario = contraUsuario;
+    public void setConfirmar(String confirmar) {
+        this.confirmar = confirmar;
+    }
+
+    public String getContraActual() {
+        return contraActual;
+    }
+
+    public void setContraActual(String contraActual) {
+        this.contraActual = contraActual;
     }
 
 }

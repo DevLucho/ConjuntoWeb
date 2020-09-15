@@ -167,15 +167,31 @@
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <div class="row">
+                                                <!-- Mientras no sea residente o vigilante -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
+                                                    ${residenteControlador.setContraActual(sesionControlador.user.contrasenia)}
+                                                </c:if>
+                                                <!-- Si es residente -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesionR">
+                                                        ${residenteControlador.setContraActual(sesionR.idPerfil.contrasenia)}
+                                                    </c:forEach>
+                                                </c:if>
+                                                <!-- Si es vigilante -->
+                                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
+                                                    <c:forEach items="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" var="sesionV">
+                                                        ${residenteControlador.setContraActual(sesionV.idPerfil.contrasenia)}
+                                                    </c:forEach>
+                                                </c:if>
                                                 <div class="col-12 col-sm-6">
                                                     <strong><h:outputLabel for="pass" value="Contrase&ntilde;a actual"/></strong>
-                                                    <h:inputText id="pass" a:type="password" class="form-control-plaintext" a:placeholder="Ingrese su pass" value="#{residenteControlador.contra}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.messagge}"/>
+                                                    <h:inputText id="pass" a:type="password" class="form-control-plaintext" a:placeholder="Ingrese su contraseña" value="#{residenteControlador.contra}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validar}"/>
                                                     <h:message for="pass" style="color:red"/><br/>
                                                     <strong><h:outputLabel for="npass" value="Nueva contrase&ntilde;a"/></strong>
-                                                    <h:inputText id="npass" a:type="password" class="form-control-plaintext" a:placeholder="Digite nueva pass" value="#{residenteControlador.newpass}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClave}"/>
+                                                    <h:inputText id="npass" a:type="password" class="form-control-plaintext" a:placeholder="Digite nueva contraseña" value="#{residenteControlador.newpass}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClave}"/>
                                                     <h:message for="npass" style="color:red"/><br/>
                                                     <strong><h:outputLabel for="cpass" value="Confirma contrase&ntilde;a"/></strong>
-                                                    <h:inputText id="cpass" a:type="password" class="form-control-plaintext" a:placeholder="Repita su nueva pass" validator="#{residenteControlador.confirmarClave}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
+                                                    <h:inputText id="cpass" a:type="password" class="form-control-plaintext" a:placeholder="Repita la nueva contraseña" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.confirmarClave}"/>
                                                     <h:message for="cpass" style="color:red"/>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -194,20 +210,19 @@
                                         <!-- Si es admin -->
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
                                             <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
-                                                #{sesion.contrasenia}
                                                 <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesion.contrasenia, sesion)}"></h:commandButton>
                                             </c:forEach>
                                         </c:if>
                                         <!-- Si es residente -->
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                             <c:forEach items="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="sesionR">
-                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionR.idPerfil.contrasenia)}"></h:commandButton>
+                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionR.idPerfil.contrasenia, sesionR.idPerfil)}"></h:commandButton>
                                             </c:forEach>
                                         </c:if>
                                         <!-- Si es vigilante -->
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 3}">
                                             <c:forEach items="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" var="sesionV">
-                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionV.idPerfil.contrasenia)}"></h:commandButton>
+                                                <h:commandButton class="btn btn-success" value="Guardar cambios" action="#{residenteControlador.cambiarContrasenia(sesionV.idPerfil.contrasenia, sesionV.idPerfil)}"></h:commandButton>
                                             </c:forEach>
                                         </c:if>
                                     </div>
@@ -231,31 +246,33 @@
                                         <div class="container-fluid">
                                             <div class="form-group row">
                                                 <c:if test="#{sesionControlador.rolSeleccionado.idRol != 2 and sesionControlador.rolSeleccionado.idRol != 3}" >
-                                                    <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
-
-                                                    </c:forEach>
+                                                    <div class="alert alert-info col-12">
+                                                        Si requiere actualizar sus datos porfavor dirigirse a la consulta de usuarios en la sección de #{sesionControlador.user.idRol.nombre}.
+                                                    </div>
                                                 </c:if>
                                                 <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2 or sesionControlador.rolSeleccionado.idRol == 3}">
-                                                    <c:forEach items="#{usuarioControlador.sesionUsuario(sesionControlador.user.idPerfil)}" var="sesion">
-                                                        <div class="alert alert-info col-12">
-                                                            Si requiere actualizar mas datos porfavor dirigirse al Administrador del sistema.
-                                                        </div>
-                                                        <div class="col-12 col-md-6 mb-3">
-                                                            <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesion.celular}"></h:inputText>
-                                                        </div>                                                    
-                                                        <div class="col-12 col-md-6 mb-3">
-                                                            <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
-                                                            <h:inputText class="form-control-plaintext" a:placeholder="Ingrese un email v&aacute;lido" value="#{sesion.correo}"></h:inputText>
-                                                        </div>
-                                                    </c:forEach>
+                                                    <div class="alert alert-info col-12">
+                                                        Si requiere actualizar mas datos porfavor dirigirse al Administrador del sistema.
+                                                    </div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <strong><label for="user-phone">#{formcrearusuario.lvlCelular}</label></strong>
+                                                        <h:inputText id="user-phone" a:type="tel" class="form-control-plaintext" a:placeholder="N&uacute;mero con 10 d&iacute;gitos" value="#{sesionControlador.user.celular}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="10 digitos"></h:inputText>
+                                                        <h:message for="user-phone" style="color: red"/>
+                                                    </div>                                                    
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <strong><label for="user-correo">#{formconsultarusuario.lblEmail}</label></strong>
+                                                        <h:inputText id="user-correo" a:type="email" class="form-control-plaintext" value="#{sesionControlador.user.correo}" a:placeholder="ejemplo@dominio.com" title="ejemplo@dominio.com" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></h:inputText>
+                                                        <h:message for="user-correo" style="color: red"/>
+                                                    </div>
                                                 </c:if>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#modal">Cancelar</button>
-                                        <h:commandButton class="btn btn-success" value="Actualizar"></h:commandButton>
+                                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2 or sesionControlador.rolSeleccionado.idRol == 3}">
+                                            <h:commandButton class="btn btn-success" value="Actualizar" action="#{residenteControlador.actualizar(sesionControlador.user)}"></h:commandButton>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
