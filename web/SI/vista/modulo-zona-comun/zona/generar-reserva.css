@@ -48,7 +48,7 @@ nav ul li{
   content:'\f073';
 } 
 .panel{
-  background: #0F1012;
+  background: rgb(28, 30, 32);
   color: white;
   border-radius: 5px 5px 0 0;
 }
@@ -62,56 +62,6 @@ nav ul li{
 .modal textarea{
   width: 100%;
   height: 150px;
-}
-/* Estilos calendario */
-.calendar{
-  padding: 20px 10px;
-  background: #292b2e;
-  width: 100%;
-  border-radius: 3px;
-}
-.calendar-header{
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-.calendar .control{
-  color: white;
-  font-weight: bold;
-  background-color: transparent;
-  border:none;
-  cursor: pointer;
-  outline: none;
-  padding: 0 5px;
-}
-.grid__header, .grid__body{
-  display:grid;
-  grid-template-columns: repeat(7,1fr);
-}
-.grid__header{
-  color:white;
-  margin-bottom: 20px;
-}
-.grid__body{
-  grid-auto-rows: 40px;
-  color:#fff;
-}
-.celdas{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.selected{
-  color:rgb(29, 212, 23);
-  cursor: pointer;
-}
-.selected:hover{
-  color:rgb(35, 153, 33);
-}
-.disabled{
-  color:#424649;
-  cursor: not-allowed;
 }
 /* Estilos hora de reserva */
 .contenedor-hora-reserva{

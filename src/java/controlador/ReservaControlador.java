@@ -33,10 +33,10 @@ public class ReservaControlador implements Serializable {
     /**
      * Creates a new instance of ReservaControlador
      */
-    private String fechaI = "";
     private Residente residente;
     private ZonaComunal zonaComunal;
     private Reserva reserva;
+    private Date fechaSeleccionada;
 
     @EJB
     ResidenteFacade residenteFacade;
@@ -65,7 +65,6 @@ public class ReservaControlador implements Serializable {
         DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         Date date = cal.getTime();
-        fechaI = fecha.format(date);
         
         reserva.setFechaInicioReserva(date);
         reserva.setFechaFinReserva(date);
@@ -104,6 +103,14 @@ public class ReservaControlador implements Serializable {
 
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
+    }
+
+    public Date getFechaSeleccionada() {
+        return fechaSeleccionada;
+    }
+
+    public void setFechaSeleccionada(Date fechaSeleccionada) {
+        this.fechaSeleccionada = fechaSeleccionada;
     }
 
 }
