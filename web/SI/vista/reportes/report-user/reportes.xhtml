@@ -42,10 +42,15 @@
                             <hr/>	
                         </div>
                     </div>
-                    <div id="report-users"></div>
-                    <hr style="background-color: #33406A;"/>
+                    <center>
+                        <button class="btn btn-outline-secondary" type="button" id="btnGrafico">Llenar Gráfico</button>
+                        <hr/>
+                        <div id="report-users"></div>
+                    </center>
+                    <!--
                     <div id="report-zona-comun"></div>
                     <hr style="background-color: #33406A;"/>
+                    -->
                 </section> 
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -59,79 +64,69 @@
         <!-- Reporte -->
         <script src="../../../js/highcharts.js"></script>
         <script src="../../../js/exporting.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#btnGrafico').click("click", function () {
+                    DibujaGrafico();
+                });
+            });
+            function DibujaGrafico() {
+                var nom =#{rolControlador.contarRol()};
+                Highcharts.chart('report-users', {
+                    chart: {
+                        plotBackgroundColor: '',
+                        // #33406A #2A6378
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Reporte de Usuarios'
+                    },
+                    subtitle: {
+                        text: 'Comparación cantidad de usuarios por rol'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}:{point.y} = (<b>{point.percentage:.1f}%</b>)'
+
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.y}'
+                            }
+                        }
+                    },
+                    series: [{
+                            name: 'Cantidad - Porcentaje ',
+                            colorByPoint: true,
+                            data: [{
+                                    name: 'Residentes',
+                                    y: nom,
+                                    sliced: true,
+                                    selected: true
+                                }, {
+                                    name: 'Administrador',
+                                    y: nom
+                                }, {
+                                    name: 'Vigilante',
+                                    y: nom
+                                }]
+                        }]
+                });
+            }
+        </script>
         <!--
         <script>
-          
-                var ctx = document.getElementById("grafica").getContext("2d");
-                var graf = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: role,
-                        datasets: [{
-                                label: "cosas",
-                                data: dataUs,
-                                backgroundColor: colores
-                            }]
-                    }
-
-                });
-        </script>
-        -->
-        <script>
-
-            var nom =#{rolControlador.contarRol()};
-            Highcharts.chart('report-users', {
-                chart: {
-                    plotBackgroundColor: '',
-                    // #33406A #2A6378
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
-                },
-                title: {
-                    text: 'Reporte de Usuarios'
-                },
-                subtitle: {
-                    text: 'Comparación cantidad de usuarios por rol'
-                },
-                tooltip: {
-                    pointFormat: '{series.name}:{point.y} = (<b>{point.percentage:.1f}%</b>)'
-
-                },
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
-                    }
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.y}'
-                        }
-                    }
-                },
-                series: [{
-                        name: 'Cantidad - Porcentaje ',
-                        colorByPoint: true,
-                        data: [{
-                                name: 'Residentes',
-                                y: nom,
-                                sliced: true,
-                                selected: true
-                            }, {
-                                name: 'Administrador',
-                                y: nom
-                            }, {
-                                name: 'Vigilante',
-                                y: nom
-                            }]
-                    }]
-            });
-
-
             Highcharts.chart('report-zona-comun', {
                 chart: {
                     type: 'spline',
@@ -194,7 +189,7 @@
                     }]
             });
         </script>
-
+        -->
     </h:body>
 </html>
 
