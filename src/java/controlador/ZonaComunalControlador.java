@@ -30,9 +30,10 @@ public class ZonaComunalControlador implements Serializable {
     /**
      * Creates a new instance of ZonaComunalControlador
      */
-    @Inject ImagenControlador imagen;
     @Inject
-    private MensajeControlador mensaje;
+    ImagenControlador imagen;
+    @Inject
+    MensajeControlador mensaje;
     private ZonaComunal zonaComunal;
 
     @EJB
@@ -51,7 +52,7 @@ public class ZonaComunalControlador implements Serializable {
     }
 
     public void eliminar(ZonaComunal zonaComunalEliminar) throws IOException {
-        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar "+zonaComunalEliminar.getNombre()+"','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
+        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar " + zonaComunalEliminar.getNombre() + "','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
         Path p = Paths.get(imagen.getRuta() + zonaComunalEliminar.getImg());
         Files.delete(p);
         zonaComunalFacade.remove(zonaComunalEliminar);
@@ -66,6 +67,11 @@ public class ZonaComunalControlador implements Serializable {
         return "detalle-zona";
     }
 
+    public String reservarZona(int id) {
+        zonaComunal = zonaComunalFacade.find(id);
+        return "generar-reserva";
+    }
+
     public int contarZonas() {
         return zonaComunalFacade.count();
     }
@@ -76,14 +82,6 @@ public class ZonaComunalControlador implements Serializable {
 
     public void setZonaComunal(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
-    }
-
-    public MensajeControlador getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(MensajeControlador mensaje) {
-        this.mensaje = mensaje;
     }
 
 }

@@ -16,6 +16,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
 
@@ -89,6 +90,13 @@ public class HoraControlador implements Serializable {
         f.setTime(fecha);
         f.add(Calendar.DATE, 1);
         return f.getTime();
+    }
+    
+    public Date hora(Date hora){
+        Calendar c = GregorianCalendar.getInstance();
+        c.setTime(hora);
+        c.add(Calendar.HOUR, 5);
+        return c.getTime();
     }
 
     // Metodos get y set

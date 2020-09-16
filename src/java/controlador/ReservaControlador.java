@@ -15,12 +15,15 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -33,10 +36,16 @@ public class ReservaControlador implements Serializable {
     /**
      * Creates a new instance of ReservaControlador
      */
+    @Inject
+    HoraControlador hora;
+    @Inject
+    MensajeControlador mensaje;
     private Residente residente;
     private ZonaComunal zonaComunal;
     private Reserva reserva;
-    private Date fechaSeleccionada;
+    private String fechaSeleccionada;
+    private Date horaInicio;
+    private Date horaFin;
 
     @EJB
     ResidenteFacade residenteFacade;
@@ -58,19 +67,51 @@ public class ReservaControlador implements Serializable {
     }
 
     public void registrar() {
-        reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
-        reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
-        reserva.setEstado("Pendiente");
+        try {
+            reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
+            reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+            reserva.setEstado("Pendiente");
 
-        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        
-        reserva.setFechaInicioReserva(date);
-        reserva.setFechaFinReserva(date);
-        
+            // Extraer fecha de string
+            int dia = Integer.parseInt(fechaSeleccionada.substring(0, 2));
+            int mes = Integer.parseInt(fechaSeleccionada.substring(3, 5));
+            int anio = Integer.parseInt(fechaSeleccionada.substring(6, 10));
 
-        reservaFacade.create(reserva);
+            // Extraer fecha inicio
+            Calendar time = GregorianCalendar.getInstance();
+            time.setTime(this.horaInicio);
+
+            int hour = time.get(Calendar.HOUR);
+            int minute = time.get(Calendar.MINUTE);
+            int second = time.get(Calendar.SECOND);
+
+            // Extraer fecha fin
+            Calendar time2 = GregorianCalendar.getInstance();
+            time2.setTime(this.horaFin);
+
+            int hour2 = time2.get(Calendar.HOUR);
+            int minute2 = time2.get(Calendar.MINUTE);
+            int second2 = time2.get(Calendar.SECOND);
+
+            // Construir fecha-hora inicio reserva
+            Calendar c = Calendar.getInstance();
+            c.set(anio, mes, dia, hour, minute, second);
+            c.add(Calendar.MONTH, -1);
+            reserva.setFechaInicioReserva(c.getTime());
+
+            // Construir fecha-hora fin de reserva
+            Calendar c2 = Calendar.getInstance();
+            c2.set(anio, mes, dia, hour2, minute2, second2);
+            c2.add(Calendar.MONTH, -1);
+            reserva.setFechaFinReserva(c2.getTime());
+
+            reservaFacade.create(reserva);
+            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.');");
+
+        } catch (Exception e) {
+            System.out.println("Error reserva" + e.getMessage());
+        }
+
     }
 
     public List<Reserva> consultar() {
@@ -105,11 +146,27 @@ public class ReservaControlador implements Serializable {
         this.reserva = reserva;
     }
 
-    public Date getFechaSeleccionada() {
+    public Date getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public String getFechaSeleccionada() {
         return fechaSeleccionada;
     }
 
-    public void setFechaSeleccionada(Date fechaSeleccionada) {
+    public void setFechaSeleccionada(String fechaSeleccionada) {
         this.fechaSeleccionada = fechaSeleccionada;
     }
 

@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <link href="../../../css/calendar.css" rel="stylesheet" type="text/css"/>
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Calendariodereserva}</title>
@@ -63,14 +62,13 @@
                                 <div class="col-12 col-md-5" style="padding: 0;">
                                     <div class="form-group row">
                                         <div class="col-12 mt-3" style="padding: 0;">
-                                            <strong><label for="zona-comun">#{formdashboardadmin.Zonacomún}</label></strong>
+                                            <strong><h:outputLabel for="zona" value="#{formdashboardadmin.Zonacomún}"/></strong>
                                             <div class="box">
-                                                <h:selectOneMenu id="idZonaComunal" value="#{zonaComunalControlador.zonaComunal.idZonaComunal}" required="true">
-                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItems var="zona" value="#{zonaComunalControlador.consultarTodos()}" itemValue="#{zona.idZonaComunal}" itemLabel="#{zona.nombre}" itemDisabled="true"/>
+                                                <h:selectOneMenu id="zona" value="#{zonaComunalControlador.zonaComunal.idZonaComunal}" required="true" requiredMessage="#{formlogin.camporequerido}">
+                                                    <f:selectItem itemValue="#{zonaComunalControlador.zonaComunal.idZonaComunal}" itemLabel="#{zonaComunalControlador.zonaComunal.nombre}" a:selected="true"/>
                                                 </h:selectOneMenu>
-                                                <h:message for="idZonaComunal" style="color:red"/>
                                             </div>
+                                            <h:message for="zona" style="color:red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -80,22 +78,18 @@
                                             <strong><h:outputLabel for="filtro-i" value="#{formdashboardadmin.Fechainicio}"/></strong>
                                             <div class="box date">
                                                 <h:inputText id="filtro-i" a:type="date" a:min="#{horaControlador.nowFormat()}" required="true" requiredMessage="#{formlogin.camporequerido}"></h:inputText>
-                                                <h:message for="filtro-1" style="color:red"/>
                                             </div>
+                                            <h:message for="filtro-i" style="color:red"/>
                                         </div>
                                         <div class="col-12 col-md-5 mb-3 sin-padding">
                                             <strong><h:outputLabel for="filtro-f" value="#{formdashboardadmin.Fechafin}"/></strong>
                                             <div class="box date">
                                                 <h:inputText id="filtro-f" a:type="date" a:min="#{horaControlador.nowFormat()}" required="true" requiredMessage="#{formlogin.camporequerido}"></h:inputText>
-                                                <h:message for="filtro-f" style="color:red"/>
                                             </div>
+                                            <h:message for="filtro-f" style="color:red"/>
                                         </div>
                                         <div class="col-12 col-md-2 mb-3" style="text-align: center; padding-top: 33px;">
-                                            <button type="submit" style="--content: 'BUSCAR';">
-                                                <div class="left"></div>
-                                                #{formdashboardadmin.Buscar}
-                                                <div class="right"></div>
-                                            </button>
+                                            <h:commandButton class="btn btn-primary" value="#{formdashboardadmin.Buscar}"></h:commandButton>
                                         </div>
                                     </div>
                                 </div>
@@ -103,62 +97,68 @@
                         </div>
                     </div>
                     <hr style="border-top:1px solid gray"/>
-                    <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
-                        <div class="col-12 panel">
-                            <div class="panel-heading">
-                                <span>#{formdashboardadmin.Disponibilidadlazonacomunal}</span>
+                    <h:form>
+                        <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
+                            <div class="col-12 panel">
+                                <div class="panel-heading">
+                                    <span>#{formdashboardadmin.Disponibilidadlazonacomunal}</span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 mt-3 mb-3">
+                                <center>
+                                    <div class="calendar" id="calendar"></div>
+                                    <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
+                                    <h:inputText a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                    <h:message for="fechaSeleccionada" style="color:red"/>
+                                </center>
+                            </div>
+                            <!-- Horas disponibles -->
+                            <div class="col-12 col-md-9 mt-3 mb-3">
+                                <div class="form-group col-12">
+                                    <strong><h:outputLabel value="Zona comunal:" for="idZonaComunal" /></strong>
+                                    <h:selectOneMenu class="form-control" id="idZonaComunal" value="#{reservaControlador.zonaComunal.idZonaComunal}" title="Zona comunal" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                        <f:selectItem itemValue="#{zonaComunalControlador.zonaComunal.idZonaComunal}" itemLabel="#{zonaComunalControlador.zonaComunal.nombre}"/>
+                                    </h:selectOneMenu>
+                                    <h:message for="idZonaComunal" style="color:red"/>
+                                </div>
+                                <div class="form-group col-12">
+                                    <strong><h:outputLabel value="Motivo de reserva:" for="motivoReserva" /></strong>
+                                    <h:inputTextarea class="form-control" id="motivoReserva" value="#{reservaControlador.reserva.motivoReserva}" title="Motivo de reserva" a:placeholder="Digite el motivo de reserva" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                    <h:message for="motivoReserva" style="color:red"/>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 col-md-3">
+                                        <strong><h:outputLabel for="horaI" value="Hora inicio"/></strong>
+                                        <h:selectOneMenu id="horaI" class="form-control" value="#{reservaControlador.horaInicio}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.hora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                            <f:convertDateTime pattern="HH:mm:ss"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="horaI" style="color:red"/>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <strong><h:outputLabel for="horaF" value="Hora final"/></strong>
+                                        <h:selectOneMenu id="horaF" class="form-control" value="#{reservaControlador.horaFin}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.hora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                            <f:convertDateTime pattern="HH:mm:ss"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="horaF" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <h:selectOneMenu style="display: none" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="The IdResidente field is required.">
+                                        <f:selectItems value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton class="btn btn-outline-success" value="Reservar" action="#{reservaControlador.registrar()}"/>
+                                </div>
+                                <div class="col-12">
+                                    <b><p>*Recuerda que el administrador aprobara tu solicitud de reserva</p></b>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 mt-3 mb-3">
-                            <!-- Calendario -->
-                            <h:form>
-                                <div class="calendar" id="calendar"></div>
-                                <center class="col-12">
-                                    <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
-                                    <h:inputText disabled="true" id="fechaSeleccionada" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-5 text-center"/>
-                                    <h:commandButton value="Filtrar" class="btn btn-primary col-12 col-md-5 btn-block"></h:commandButton>
-                                </center>
-                            </h:form>
-                        </div>
-                        <!-- Horas disponibles -->
-                        <div class="col-12 col-md-9 mt-3 mb-3">
-                            <h:form>
-                                <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%" value="#{disponibilidadControlador.consultarTodos()}" var="d">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Zona común"/>
-                                        </f:facet>
-                                        <h:outputText value="#{d.idZonaComunal.nombre}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Día"/>
-                                        </f:facet>
-                                        <h:outputText value="#{d.idDia.nombre}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Hora inicial reserva"/>
-                                        </f:facet>
-                                        <h:outputText value="#{horaControlador.convertir(d.horaInicialReserva.hora)}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Hora final reserva"/>
-                                        </f:facet>
-                                        <h:outputText value="#{horaControlador.convertir(d.horaFinalReserva.hora)}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Acción"/>
-                                        </f:facet>
-                                        <h:commandButton class="btn btn-outline-success" value="Reservar"/>
-                                    </h:column>
-                                </h:dataTable>
-                            </h:form>
+                    </h:form>
 
-                        </div>
-                    </div>
                 </section>
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -205,10 +205,11 @@
         <!-- calendar -->
         <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <script src="../../../js/calendar.js" type="text/javascript"></script>
         <script type="text/javascript">
                 let calendar = new Calendar('calendar');
-                var inputFecha = document.getElementById('j_idt128:fechaSeleccionada');
+                var inputFecha = document.getElementById('j_idt127:fechaSeleccionada');
                 calendar.getElement().addEventListener('change', e => {
                     var dateSelected = calendar.value().format('L');
                     inputFecha.value = dateSelected;
