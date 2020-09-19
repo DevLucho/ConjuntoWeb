@@ -38,8 +38,10 @@ public class RespuestaControlador implements Serializable {
     /**
      * Creates a new instance of RespuestaControlador
      */
-    private String horaI = "";
-    private String fechaI = "";
+    @Inject
+    HoraControlador hora;
+    @Inject
+    MensajeControlador mensaje;
     private Respuesta respuesta;
     private Usuario usuario;
     private Residente residente;
@@ -61,9 +63,6 @@ public class RespuestaControlador implements Serializable {
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
 
-    @Inject
-    private MensajeControlador mensaje;
-
     public RespuestaControlador() {
     }
 
@@ -74,36 +73,26 @@ public class RespuestaControlador implements Serializable {
         residente = new Residente();
         tipoPqrs = new TipoPqrs();
         pqrs = new Pqrs();
-
     }
 
     public void registrar(Pqrs pqrs) {
-        respuesta.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
-        respuesta.setIdPqrs(pqrsFacade.find(pqrs.getIdPqrs()));
-        this.pqrs = pqrs;
-        pqrs.setEstado("Resuelto");
-        pqrsFacade.edit(pqrs);
+        try {
+            this.pqrs = pqrs;
+            pqrs.setEstado("Resuelto");
+            pqrsFacade.edit(pqrs);
+            respuesta.setIdPerfil(usuarioFacade.find(usuario.getIdPerfil()));
+            respuesta.setIdPqrs(pqrsFacade.find(pqrs.getIdPqrs()));
+            respuesta.setFecha(hora.now());
+            respuesta.setHora(hora.now());
+            respuestaFacade.create(respuesta);
+            mensaje.setMensaje("MensajeRedirect('consultar-pqrs.xhtml','PQRS resuelta','El estado de la pqrs con el radicado: " + pqrs.getNroRadicado() + " ahora es resuelta!','success');");
+            this.usuario = new Usuario();
+            this.respuesta = new Respuesta();
+            this.pqrs = new Pqrs();
+        } catch (Exception e) {
+            System.out.println("Error respuesta: " + e.getMessage());
+        }
 
-        DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        fechaI = fecha.format(date);
-        respuesta.setFecha(date);
-
-        DateFormat hora = new SimpleDateFormat("HH:mm:ss");
-        Calendar cale = Calendar.getInstance();
-        Date dates = cale.getTime();
-        horaI = hora.format(dates);
-        respuesta.setHora(dates);
-
-        respuestaFacade.create(respuesta);
-        
-        mensaje.setMensaje("MensajeRedirect('consultar-pqrs.xhtml','PQRS resuelta','El estado de la pqrs con el radicado: "+pqrs.getNroRadicado()+" ahora es resuelta!','success');");
-        this.usuario = new Usuario();
-        this.respuesta = new Respuesta();
-        this.residente = new Residente();
-        this.tipoPqrs = new TipoPqrs();
-        this.pqrs = new Pqrs();
     }
 
     public List<Respuesta> consultar() {
