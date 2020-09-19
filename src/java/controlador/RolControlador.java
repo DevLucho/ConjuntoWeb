@@ -11,6 +11,7 @@ import entidades.RolPermiso;
 import facade.PermisoFacade;
 import facade.RolFacade;
 import facade.RolPermisoFacade;
+import facade.UsuarioFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -20,6 +21,8 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -29,6 +32,8 @@ import javax.inject.Inject;
 @SessionScoped
 public class RolControlador implements Serializable {
 
+    @PersistenceContext(unitName = "ProyectoConjuntoWebPU")
+    private EntityManager em;
     /**
      * Creates a new instance of RolControlador
      */
@@ -63,6 +68,8 @@ public class RolControlador implements Serializable {
     private List<RolPermiso> permisosAsignados;
     private List<RolPermiso> permisosNoAsinados;
     
+    @Inject
+    private CorreoControlador correo;
     
     @EJB
     RolFacade rolFacade;
@@ -73,6 +80,9 @@ public class RolControlador implements Serializable {
     @EJB
     PermisoFacade permisoFacade;
 
+    @EJB
+    UsuarioFacade usuarioFacade;
+    
     public RolControlador() {
     }
 
@@ -225,13 +235,27 @@ public class RolControlador implements Serializable {
         List<Rol> roleList = rolFacade.findAll();
         for (int i = 0; i < roleList.size(); i++) {
             String nameRol = roleList.get(i).getNombre();
-            nombres.add("'" + nameRol + "'");
+            nombres.add('"' + nameRol + '"');
         }
 
         return nombres;
     }
-
-
+    
+     public List<Integer> contadorUsuRol() {
+        List<Integer> data = new ArrayList<>();
+        List<Rol> roleList = rolFacade.findAll();
+        for (int i = 0; i < roleList.size(); i++) {
+            int dataUsu = usuarioFacade.contarUsuario(roleList.get(i).getIdRol());
+            data.add(dataUsu);
+        }
+        return data;
+    }
+    
+    public List<String> generarColores() {
+        int contt = rolFacade.contarRol();
+        return correo.colores(contt);
+    }
+     
     public List<Permiso> consultarPermisos(int idPermiso) {
         return permisoFacade.consultarHijos(idPermiso);
     }

@@ -10,6 +10,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.NoSuchProviderException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -162,5 +164,24 @@ public class CorreoControlador implements Serializable {
 
         return pagina;
     }
-
+    public List<String> colores(int cont) {
+        List<String> colores = new ArrayList<>();
+        for (int i = 0; i < cont; i++) {
+            String colorFinal = "'rgb(";
+            for (int j = 0; j < 3; j++) {
+                int num = (int) Math.floor(Math.random() * 256);
+                String digito = String.valueOf(num);
+                if (j != 2) {
+                    colorFinal = colorFinal + digito + ",";
+                } else {
+                    colorFinal = colorFinal + digito;
+                }
+            }
+            String cierre = ")'";
+            colorFinal = colorFinal + cierre;
+            colores.add(colorFinal);
+        }
+        
+        return colores;
+    }
 }

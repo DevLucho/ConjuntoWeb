@@ -125,4 +125,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         query.setParameter("idRol", idRol);
         return query.getResultList();
     }
+    public int contarUsuario(int id) {
+        Query q = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.estado='Activo' AND u.idRol.idRol=:id");
+        q.setParameter("id", id);
+        return ((Long) q.getSingleResult()).intValue();
+
+    }
+    public List<Usuario> buscarUltimo(int idRol){
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.idRol.idRol=:idRol AND u.estado='Activo' ORDER BY u.idPerfil DESC");
+        query.setParameter("idRol", idRol);
+        return query.getResultList();
+    }
 }

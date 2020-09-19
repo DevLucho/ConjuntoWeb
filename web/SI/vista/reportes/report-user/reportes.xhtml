@@ -42,15 +42,119 @@
                             <hr/>	
                         </div>
                     </div>
-                    <center>
+                    <!--<center>
                         <button class="btn btn-outline-secondary" type="button" id="btnGrafico">Llenar Gráfico</button>
                         <hr/>
-                        <div id="report-users"></div>
-                    </center>
-                    <!--
-                    <div id="report-zona-comun"></div>
-                    <hr style="background-color: #33406A;"/>
-                    -->
+                        
+                    </center>-->
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3><i class="fas fa-users" id="icono"></i>Reporte de Usuarios</h3>
+                            <hr/>
+                        </div>  
+                    </div>
+                    <!-- Inicio plantilla reporte-->
+                    <div class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem">
+                        <div class="col-6" style="width: 45%; padding: 5rem">
+                            <canvas id="grafica" width="350" height="350"></canvas>
+                        </div>
+                        <div class="col-6"  style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
+                            <h6>Usuarios registrados por Rol</h6>
+                            <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Final plantilla reporte-->
+                    <div class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem">
+                        <div class="col-6"  style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
+                            <h6>otro titulo</h6>
+                            <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Administrador</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                    <h6>Ultimo Residente</h6>
+                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="width: 45%; padding: 5rem">
+                            <canvas id="grafisa" width="350" height="350"></canvas>
+                        </div>
+                    </div>
                 </section> 
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -64,14 +168,31 @@
         <!-- Reporte -->
         <script src="../../../js/highcharts.js"></script>
         <script src="../../../js/exporting.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 
-        <script>
-            $(document).ready(function () {
-                $('#btnGrafico').click("click", function () {
-                    DibujaGrafico();
+        <!--<script>
+            function ListaPubli(){
+                $ajax({
+                   type: "POST",
+                   contentType: "aplication/json; charset=utf-8",
+                   url: "RolControlador.java/reporte",
+                   data:"{}",
+                   dataType: "json",
+                   success: function(Result){
+                       Result = Result.d;
+                       var data = [];
+                       for(var i in Result){
+                          var serie = new Array(Result[i].idRol,Result[i].nombre);
+                          data.push(serie);
+                       }
+                       DibujaGrafico(data);
+                   },
+                   error: function(Result){
+                       alett("Error");
+                   }
                 });
-            });
-            function DibujaGrafico() {
+            }
+            function DibujaGrafico(series) {
                 var nom =#{rolControlador.contarRol()};
                 Highcharts.chart('report-users', {
                     chart: {
@@ -109,21 +230,41 @@
                     series: [{
                             name: 'Cantidad - Porcentaje ',
                             colorByPoint: true,
-                            data: [{
-                                    name: 'Residentes',
-                                    y: nom,
-                                    sliced: true,
-                                    selected: true
-                                }, {
-                                    name: 'Administrador',
-                                    y: nom
-                                }, {
-                                    name: 'Vigilante',
-                                    y: nom
-                                }]
+                            data: series
                         }]
                 });
             }
+        </script>-->
+        <script>
+            var role = #{rolControlador.consultarRolNombre()};
+            var dataUs = #{rolControlador.contadorUsuRol()};
+            var colores = #{rolControlador.generarColores()};
+            var ctx = document.getElementById("grafica").getContext("2d");
+            var graf = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: role,
+                    datasets: [{
+                            label: "cosas",
+                            data: dataUs,
+                            backgroundColor: colores
+                        }]
+                }
+
+            });
+            var ctxx = document.getElementById("grafisa").getContext("2d");
+            var graf = new Chart(ctxx, {
+                type: 'pie',
+                data: {
+                    labels: role,
+                    datasets: [{
+                            label: "cosas",
+                            data: dataUs,
+                            backgroundColor: colores
+                        }]
+                }
+
+            });
         </script>
         <!--
         <script>

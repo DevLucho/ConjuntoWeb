@@ -313,7 +313,13 @@ public class UsuarioControlador implements Serializable {
         residente = residenteConsultar;
         return "agregar-vehiculo";
     }
-
+    
+    public String obtenerUltimoDe(int idRol){
+        List<Usuario> pepe = usuarioFacade.buscarUltimo(idRol);
+        String nombresito = pepe.get(0).getNombre()+" "+pepe.get(0).getApellido();
+        return nombresito;
+    }
+    
     public List<Usuario> sesionUsuario(int idPerfil) {
         return usuarioFacade.sesionUsuario(idPerfil);
     }
@@ -443,5 +449,5 @@ public class UsuarioControlador implements Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
+    
 }
