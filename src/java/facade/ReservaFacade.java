@@ -9,6 +9,7 @@ import entidades.Reserva;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,9 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
     public ReservaFacade() {
         super(Reserva.class);
     }
-    
+    public int ContarReserva(int id){
+        Query q = em.createQuery("SELECT COUNT(r) FROM Reserva r WHERE r.estado='Reservado' AND r.idZonaComunal.idZonaComunal=:id");
+        q.setParameter("id", id);
+        return ((Long) q.getSingleResult()).intValue();
+    }
 }

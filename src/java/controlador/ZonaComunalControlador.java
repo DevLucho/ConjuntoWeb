@@ -6,6 +6,7 @@
 package controlador;
 
 import entidades.ZonaComunal;
+import facade.ReservaFacade;
 import facade.ZonaComunalFacade;
 import java.io.IOException;
 import javax.inject.Named;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -38,6 +40,9 @@ public class ZonaComunalControlador implements Serializable {
 
     @EJB
     ZonaComunalFacade zonaComunalFacade;
+
+    @EJB
+    ReservaFacade reservaFacade;
 
     public ZonaComunalControlador() {
     }
@@ -71,7 +76,25 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunal = zonaComunalFacade.find(id);
         return "generar-reserva";
     }
-
+    
+    public List<String> consultarNombreZona(){
+        List<String> nombres = new ArrayList<>();
+        List<ZonaComunal> roleList = zonaComunalFacade.findAll();
+        for (int i = 0; i < roleList.size(); i++){
+            String nameRol = roleList.get(i).getNombre();
+            nombres.add('"' + nameRol + '"');
+        }
+        return nombres;
+    }
+    public List<Integer> contarResZon(){
+        List<Integer> data = new ArrayList<>();
+        List<ZonaComunal> roleList = zonaComunalFacade.findAll();
+        for (int i = 0; i < roleList.size(); i++) {
+            int dataZon = reservaFacade.ContarReserva(roleList.get(i).getIdZonaComunal());
+            data.add(dataZon);
+        }
+        return data;
+    }
     public int contarZonas() {
         return zonaComunalFacade.count();
     }

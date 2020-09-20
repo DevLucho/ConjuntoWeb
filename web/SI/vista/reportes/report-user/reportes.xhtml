@@ -19,6 +19,18 @@
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Reportes</title>
+        <style>
+            h5{
+                font-family: Righteous;
+                font-size: 35px;
+                color:#333333;
+            }
+            h6{
+                font-family: Righteous;
+                color: #2A6378;
+                font-size: 20px;
+            }
+        </style>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -42,11 +54,7 @@
                             <hr/>	
                         </div>
                     </div>
-                    <!--<center>
-                        <button class="btn btn-outline-secondary" type="button" id="btnGrafico">Llenar Gráfico</button>
-                        <hr/>
-                        
-                    </center>-->
+                    
                     <div class="row">
                         <div class="col-12 text-center">
                             <h3><i class="fas fa-users" id="icono"></i>Reporte de Usuarios</h3>
@@ -54,19 +62,19 @@
                         </div>  
                     </div>
                     <!-- Inicio plantilla reporte-->
-                    <div class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem">
+                    <div id="HTMLtoPDF" class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem">
                         <div class="col-6" style="width: 45%; padding: 5rem">
                             <canvas id="grafica" width="350" height="350"></canvas>
                         </div>
-                        <div class="col-6"  style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
-                            <h6>Usuarios registrados por Rol</h6>
-                            <div class="row">
+                        <div class="col-6"  style="background-color: #e9ecef;display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
+                            <h5>Usuarios registrados por Rol</h5>
+                            <div class="row" style="padding-left: 25px">
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
                                     <h6>Ultimo Administrador</h6>
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h6>Ultimo Vigilante</h6>
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
@@ -74,47 +82,36 @@
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
                                 </div>
                             </div>
-                             <div class="row">
+                             <div class="row" style="padding-left: 25px">
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Administrador</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                    <img src="../administracion.png" width="120px" style="border-bottom: solid 5px black;padding-bottom: 15px" alt=""/>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                    <img src="../policia (1).png" width="120px" alt="" style="border-bottom: solid 5px black;padding-bottom: 15px"/>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Residente</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                    <img src="../llaves.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
                                 </div>
                             </div>
                              <div class="row">
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Administrador</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
-                                </div>
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
-                                </div>
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Residente</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
-                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
                             </div>
                         </div>
                     </div>
                     <!--Final plantilla reporte-->
-                    <div class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem">
-                        <div class="col-6"  style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
-                            <h6>otro titulo</h6>
-                            <div class="row">
+                    <!--segunda plantilla reporte-->
+                    <div id="HTMLtoPDF" class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem;margin-bottom: 200px">
+                        <div class="col-6"  style="background-color: #e9ecef;display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
+                            <h5>Reservas actuales</h5>
+                            <div class="row" style="padding-left: 25px">
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
                                     <h6>Ultimo Administrador</h6>
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
+                                    <h6>Ultimo Vigilante</h6>
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
@@ -122,44 +119,49 @@
                                     <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
                                 </div>
                             </div>
-                             <div class="row">
+                             <div class="row" style="padding-left: 25px">
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Administrador</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                    <img src="../administracion.png" width="120px" style="border-bottom: solid 5px black;padding-bottom: 15px" alt=""/>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                    <img src="../policia (1).png" width="120px" alt="" style="border-bottom: solid 5px black;padding-bottom: 15px"/>
                                 </div>
                                 <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Residente</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                    <img src="../llaves.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
                                 </div>
                             </div>
                              <div class="row">
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Administrador</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
-                                </div>
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Costeño!!!!!</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
-                                </div>
-                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                    <h6>Ultimo Residente</h6>
-                                    <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
-                                </div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
                             </div>
                         </div>
                         <div class="col-6" style="width: 45%; padding: 5rem">
-                            <canvas id="grafisa" width="350" height="350"></canvas>
+                            <canvas id="bar-chart" width="400" height="450"></canvas>
                         </div>
                     </div>
+                  	<!--
+                    <div id="">
+	<h2>HTML to PDF</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
+                    <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+                    <h:form>
+                        <h:commandButton onclick="HTMLtoPDF()" value="descargar"></h:commandButton>
+                    </h:form>-->
                 </section> 
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
         </f:view>
+        <script src="html2pdf.bundle.min.js"></script>
+        <script src="../../../js/jquery-2.1.3.js" type="text/javascript"></script>
+        <script src="../../../js/jspdf.js" type="text/javascript"></script>
         <!-- bootstrap and jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/bootstrap.min.js"></script>
@@ -169,29 +171,8 @@
         <script src="../../../js/highcharts.js"></script>
         <script src="../../../js/exporting.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-
+        
         <!--<script>
-            function ListaPubli(){
-                $ajax({
-                   type: "POST",
-                   contentType: "aplication/json; charset=utf-8",
-                   url: "RolControlador.java/reporte",
-                   data:"{}",
-                   dataType: "json",
-                   success: function(Result){
-                       Result = Result.d;
-                       var data = [];
-                       for(var i in Result){
-                          var serie = new Array(Result[i].idRol,Result[i].nombre);
-                          data.push(serie);
-                       }
-                       DibujaGrafico(data);
-                   },
-                   error: function(Result){
-                       alett("Error");
-                   }
-                });
-            }
             function DibujaGrafico(series) {
                 var nom =#{rolControlador.contarRol()};
                 Highcharts.chart('report-users', {
@@ -264,6 +245,41 @@
                         }]
                 }
 
+            });
+        </script>
+        <script>
+            var role = #{zonaComunalControlador.consultarNombreZona()};
+            var dataUs = #{zonaComunalControlador.contarResZon()};
+            var colores = #{rolControlador.generarColores()};
+            
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                  labels: role,
+                  datasets: [
+                    {
+                      label: "Reservas Actuales:",
+                      backgroundColor: colores,
+                      data:dataUs,
+                      borderColor:'black',
+                      borderWidth:5
+                    }
+                  ]
+                },
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Zonas Comunales'
+                  },
+                  scales:{
+                    yAxes:[{
+                            ticks:{
+                                beginAtZero:true
+                            }
+                    }]
+                  }
+                }
             });
         </script>
         <!--
