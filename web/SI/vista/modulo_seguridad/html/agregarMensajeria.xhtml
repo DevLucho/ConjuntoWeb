@@ -65,7 +65,7 @@
                                         <ul class="form-style-1">
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
-                                                <h:selectOneMenu class="js-example-basic-single field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true" requiredMessage="Seleccionar Inmueble">
+                                                <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true" requiredMessage="Seleccionar Inmueble">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmue" value="#{inmuebleControlador.findInmueble()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idTorre.idTorre} - #{inmue.idApartamento.idApartamento}"></f:selectItems>
                                                 </h:selectOneMenu>
