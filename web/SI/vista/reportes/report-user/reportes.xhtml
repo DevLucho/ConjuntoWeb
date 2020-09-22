@@ -154,6 +154,7 @@
                     <h:form>
                         <h:commandButton onclick="HTMLtoPDF()" value="descargar"></h:commandButton>
                     </h:form>-->
+                         <canvas id="line-chart" width="800" height="450"></canvas>
                 </section> 
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -251,7 +252,6 @@
             var role = #{zonaComunalControlador.consultarNombreZona()};
             var dataUs = #{zonaComunalControlador.contarResZon()};
             var colores = #{rolControlador.generarColores()};
-            
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
@@ -282,7 +282,39 @@
                 }
             });
         </script>
-        <!--
+       <!-- <script>
+           var role = #{zonaComunalControlador.consultarNombreZona()};
+           var dataUs = #{zonaComunalControlador.contarResZon()};
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: meses,
+    datasets: [{ 
+        data: dateUs,
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: dateUs,
+        label: "Asia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: dateUs,
+        label: "Europe",
+        borderColor: "#3cba9f",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+});
+        </script>
         <script>
             Highcharts.chart('report-zona-comun', {
                 chart: {
