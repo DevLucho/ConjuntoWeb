@@ -17,6 +17,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+//import java.util.Map;
+//import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -95,6 +97,15 @@ public class ZonaComunalControlador implements Serializable {
         }
         return data;
     }
+    //public String[] consultaaa() {
+      //List<Object[]> meses = reservaFacade.ContarReservaMes();
+      //String[] ListaMeses=new String[meses.size()];
+      //for(int i=0;i<meses.size();i++){
+        //  ListaMeses[i]=(String)meses.get(i)[0];
+      //}       
+      //return ListaMeses;
+    //}
+    
     public int contarZonas() {
         return zonaComunalFacade.count();
     }

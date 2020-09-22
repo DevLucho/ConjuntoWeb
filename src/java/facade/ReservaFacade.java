@@ -6,6 +6,9 @@
 package facade;
 
 import entidades.Reserva;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,4 +37,9 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         q.setParameter("id", id);
         return ((Long) q.getSingleResult()).intValue();
     }
+    //public List<Object[]> ContarReservaMes(){
+        //Query q = em.createNativeQuery("SELECT Date_Format(fechaInicioReserva,\"%M %Y\") AS Fecha, COUNT(idReserva) AS Cuenta, idZonaComunal FROM Reserva GROUP BY Fecha , idZonaComunal");
+      //  return q.getResultList();
+    //}
+    
 }
