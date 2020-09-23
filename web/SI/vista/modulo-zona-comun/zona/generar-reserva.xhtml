@@ -147,9 +147,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-12">
-                                    <h:selectOneMenu style="display: none" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="The IdResidente field is required.">
-                                        <f:selectItems value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
-                                    </h:selectOneMenu>
+                                    <c:if test="#{sesionControlador.user.idRol.idRol==2}">
+                                        <h:selectOneMenu style="display: none" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <f:selectItems value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="idResidente" style="color:red"/>
+                                    </c:if>
+                                    <c:if test="#{sesionControlador.user.idRol.idRol==1}">
+                                        <strong><h:outputLabel for="idResidente" value="Residente que reserva:"/></strong>
+                                        <h:selectOneMenu class="form-control" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                            <f:selectItems value="#{residenteControlador.consultarTodos()}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="idResidente" style="color:red"/>
+                                    </c:if>
+                                </div>
+                                <div class="form-group col-12">
                                     <h:commandButton class="btn btn-outline-success" value="Reservar" action="#{reservaControlador.registrar()}"/>
                                 </div>
                                 <div class="col-12">

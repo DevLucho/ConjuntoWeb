@@ -14,6 +14,7 @@ import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.security.NoSuchProviderException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -36,6 +38,8 @@ public class ReservaControlador implements Serializable {
     /**
      * Creates a new instance of ReservaControlador
      */
+    @Inject
+    CorreoControlador correo;
     @Inject
     HoraControlador hora;
     @Inject
@@ -66,7 +70,7 @@ public class ReservaControlador implements Serializable {
         reserva = new Reserva();
     }
 
-    public void registrar() {
+    public void registrar() throws NoSuchProviderException, MessagingException {
         try {
             reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
             reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
@@ -108,7 +112,23 @@ public class ReservaControlador implements Serializable {
             reservaFacade.create(reserva);
             mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.');");
 
-        } catch (Exception e) {
+            correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
+                    correo.paginaCorreo("Reserva pendiente de la zona: "+reserva.getIdZonaComunal().getNombre()+"",
+                            " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: "+reserva.getIdZonaComunal().getNombre()+" ha sido realizada exitosamente con el siguiente horario:</p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) +"</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) +"</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
+                            "http://imgfz.com/i/1CrnTaz.jpeg")
+            );
+
+            residente = new Residente();
+            zonaComunal = new ZonaComunal();
+            reserva = new Reserva();
+            horaInicio = new Date();
+            horaFin = new Date();
+            fechaSeleccionada = "";
+
+        } catch (NumberFormatException e) {
             System.out.println("Error reserva" + e.getMessage());
         }
 

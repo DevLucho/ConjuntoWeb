@@ -111,15 +111,15 @@ public class CorreoControlador implements Serializable {
                 + "        background: #ffffff;\n"
                 + "        box-shadow: 2px 0px 3px 0px rgba(0,0,0, 0.3);\n"
                 + "        border-radius: 0 0 4px 4px ;'>\n"
-                + "            <img src='"+img+"' style='width: 100% ;background-attachment: fixed'>\n"
+                + "            <img src='" + img + "' style='width: 100% ;background-attachment: fixed'>\n"
                 + "        </div>\n"
                 + "            <!-- Titulo y texto informativo -->\n"
                 + "        <div>\n"
                 + "            <h2 style='font-family: Arial, Helvetica, sans-serif;color:#33406A;font-weight: bold;'>\n"
-                + "            "+asunto+"\n"
+                + "            " + asunto + "\n"
                 + "            </h2>\n"
                 + "            <hr>\n"
-                + "            "+cuerpo+"\n"
+                + "            " + cuerpo + "\n"
                 + "        </div>\n"
                 + "    </div>\n"
                 + "    <hr style='\n"
@@ -164,6 +164,8 @@ public class CorreoControlador implements Serializable {
 
         return pagina;
     }
+    
+    // Colores aleatorios
     public List<String> colores(int cont) {
         List<String> colores = new ArrayList<>();
         for (int i = 0; i < cont; i++) {
@@ -181,7 +183,7 @@ public class CorreoControlador implements Serializable {
             colorFinal = colorFinal + cierre;
             colores.add(colorFinal);
         }
-        
+
         return colores;
     }
 }
