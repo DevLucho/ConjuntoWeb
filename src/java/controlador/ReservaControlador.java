@@ -133,7 +133,7 @@ public class ReservaControlador implements Serializable {
         }
 
     }
-
+    
     public List<Reserva> consultar() {
         return reservaFacade.findAll();
     }
@@ -141,7 +141,12 @@ public class ReservaControlador implements Serializable {
     public int contarReservas() {
         return reservaFacade.count();
     }
-
+    public String obtenerUltimoR(int idReserva){
+        List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
+        String nombresaso = pepa.get(0).getMotivoReserva();
+        return nombresaso;
+    }
+    
     public Residente getResidente() {
         return residente;
     }

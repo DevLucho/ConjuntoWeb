@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Reserva;
+import java.util.List;
 //import java.util.HashMap;
 //import java.util.List;
 //import java.util.Map;
@@ -41,5 +42,9 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         //Query q = em.createNativeQuery("SELECT Date_Format(fechaInicioReserva,\"%M %Y\") AS Fecha, COUNT(idReserva) AS Cuenta, idZonaComunal FROM Reserva GROUP BY Fecha , idZonaComunal");
       //  return q.getResultList();
     //}
-    
+    public List<Reserva> buscarUltimaR(int idZonaComunal){
+        Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.idZonaComunal.idZonaComunal=:idZonaComunal AND r.estado='Reservado' ORDER BY r.idReserva DESC");
+        query.setParameter("idZonaComunal", idZonaComunal);
+        return query.getResultList();
+    }
 }
