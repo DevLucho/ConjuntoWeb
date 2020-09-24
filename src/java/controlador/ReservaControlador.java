@@ -141,6 +141,11 @@ public class ReservaControlador implements Serializable {
     public int contarReservas() {
         return reservaFacade.count();
     }
+    
+    public int contarReservas(int idZona){
+        return reservaFacade.ContarReserva(idZona);
+    }
+    
     public String obtenerUltimoR(int idReserva){
         List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
         String nombresaso = pepa.get(0).getMotivoReserva();

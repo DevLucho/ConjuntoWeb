@@ -316,9 +316,9 @@
                                                     //  });
                                                     doc.text(25, 200, 'Terraza BBQ---||---Salon comunal Norte---||---Salon Comunal Sur');
                                                     doc.setTextColor(0, 0, 0);
-                                                    doc.text(61, 210, '#{usuarioControlador.contarAdministradores()}');
-                                                    doc.text(110, 210, '#{residenteControlador.contarResidentes()}');
-                                                    doc.text(155, 210, '#{vigilanteControlador.contarVigilantes()}');
+                                                    doc.text(61, 210, '#{reservaControlador.contarReservas(3)}');
+                                                    doc.text(110, 210, '#{reservaControlador.contarReservas(1)}');
+                                                    doc.text(155, 210, '#{reservaControlador.contarReservas(2)}');
 
                                                     doc.save("zona.pdf");
                                                 }
