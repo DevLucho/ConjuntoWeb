@@ -57,7 +57,7 @@ public class ExportUControlador {
             Avendaño: jdbc:mysql://localhost:3306/conjuntoweb?user=root&password=&useSSL=false
             Lucho: jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false
              */
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/conjuntoweb?user=Huertas&password=1979&useSSL=false");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/conjuntoweb?user=root&password=&useSSL=false");
 
             Workbook libro = WorkbookFactory.create(excel.getInputStream());
             XSSFSheet hoja = (XSSFSheet) libro.getSheetAt(0);
