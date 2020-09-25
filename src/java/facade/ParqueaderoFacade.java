@@ -36,5 +36,13 @@ public class ParqueaderoFacade extends AbstractFacade<Parqueadero> {
         query.setParameter("estado", estado);
         return query.getResultList();
     }
-
+    
+    public int contarParqueaderoR(int id){
+      
+        int Carros = em.createNativeQuery("SELECT COUNT(r.automovil) FROM Residente r, Torre t,Inmueble i WHERE r.automovil='Si' AND r.idInmueble=:i AND i.idTorre=:id").getFirstResult();
+        //Query q = em.createQuery("SELECT COUNT(v.placa) FROM Vehiculo v JOIN Residente r on v.idResidente = r.idResidente JOIN Inmueble i on r.idInmueble = i.idInmueble WHERE r.idResidente IS NOT NULL AND i.idTorre=:id GROUP BY i.idTorre ORDER BY i.idTorre");
+        //q.setParameter("id", id);
+        //return ((Long) q.getSingleResult()).intValue();
+        return Carros;
+    }
 }

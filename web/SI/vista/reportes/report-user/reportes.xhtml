@@ -168,6 +168,52 @@
                                 </div>
                             </div>
                         </div>
+                        <!--pepe-->
+                        <!-- comunicados -->
+                        <div class="tab-pane" id="tab3" role="tabpanel">
+                            <!-- Inicio plantilla reporte-->
+                            <div class="row" style="display: flex;flex-direction: row;justify-content: space-around;align-items: center; width: 100%;height: 40rem;margin-bottom: 30px;margin-top: 30px">
+                                <div class="col-6" style="width: 45%; padding: 5rem">
+                                    <canvas id="bar-chart" width="350" height="350"></canvas>
+                                </div>
+                                <div class="col-6 pexs"  style="background-color: #e9ecef;display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
+                                    <h5>Usuarios registrados por Torre</h5>
+                                    <div class="row" style="padding-left: 25px">
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h6>Ultimo Administrador</h6>
+                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                        </div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h6>Ultimo Vigilante</h6>
+                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                        </div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h6>Ultimo Residente</h6>
+                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-left: 25px">
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <img src="../../../img/administracion.png" width="120px" style="border-bottom: solid 5px black;padding-bottom: 15px" alt=""/>
+                                        </div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <img src="../../../img/policia (1).png" width="120px" alt="" style="border-bottom: solid 5px black;padding-bottom: 15px"/>
+                                        </div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <img src="../../../img/llaves.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h:form><h:commandButton class="btn btn-outline-danger btn-lg far fa-file-pdf" onclick="pepe()" value=" DESCARGAR PDF"></h:commandButton></h:form>
+                                        </div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--sjsh-->
                     </div>
                     <!--<canvas id="line-chart" width="800" height="450"></canvas>
                     <table id="my-table"></table>-->
@@ -324,8 +370,9 @@
                                                 }
         </script>
         <script>
-            var role = #{zonaComunalControlador.consultarNombreZona()};
-            var dataUs = #{zonaComunalControlador.contarResZon()};
+            var role = #{parqueaderoControlador.consultarRolNombre()};
+            //var dataUs = #{zonaComunalControlador.contarResZon()};
+            var dataUs = #{parqueaderoControlador.contarResZon()};
             var colores = #{rolControlador.generarColores()};
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
