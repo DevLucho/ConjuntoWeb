@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
         <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display;=swap" rel="stylesheet"/>
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
         <!-- Estilos -->
@@ -177,30 +178,30 @@
                                     <canvas id="bar-chart" width="350" height="350"></canvas>
                                 </div>
                                 <div class="col-6 pexs"  style="background-color: #e9ecef;display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 100%;padding: 2rem 0.5rem;">
-                                    <h5>Usuarios registrados por Torre</h5>
+                                    <h5>Vehiculos por Torre y Tipo</h5>
                                     <div class="row" style="padding-left: 25px">
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <h6>Ultimo Administrador</h6>
-                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(1)}"></h:outputText>
+                                            <h6>Automovil</h6>
+                                            <h:outputText style="font-family: fantasy; font-size: 20px" value="#{parqueaderoControlador.contartipos('Automovil')}"></h:outputText>
                                         </div>
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <h6>Ultimo Vigilante</h6>
-                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(3)}"></h:outputText>
+                                            <h6>Bicicleta</h6>
+                                            <h:outputText style="font-family: fantasy;font-size: 20px" value="#{parqueaderoControlador.contartipos('Bicicleta')}"></h:outputText>
                                         </div>
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <h6>Ultimo Residente</h6>
-                                            <h:outputText value="#{usuarioControlador.obtenerUltimoDe(2)}"></h:outputText>
+                                            <h6>Moto</h6>
+                                            <h:outputText style="font-family: fantasy;font-size: 20px" value="#{parqueaderoControlador.contartipos('Motocicleta')}"></h:outputText>
                                         </div>
                                     </div>
                                     <div class="row" style="padding-left: 25px">
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <img src="../../../img/administracion.png" width="120px" style="border-bottom: solid 5px black;padding-bottom: 15px" alt=""/>
+                                            <img src="../../../img/volante-de-coche.png" width="120px" style="border-bottom: solid 5px black;padding-bottom: 15px" alt=""/>
                                         </div>
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <img src="../../../img/policia (1).png" width="120px" alt="" style="border-bottom: solid 5px black;padding-bottom: 15px"/>
+                                            <img src="../../../img/senal-de-zona-de-bicicletas.png" width="120px" alt="" style="border-bottom: solid 5px black;padding-bottom: 15px"/>
                                         </div>
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
-                                            <img src="../../../img/llaves.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
+                                            <img src="../../../img/moto.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -371,7 +372,6 @@
         </script>
         <script>
             var role = #{parqueaderoControlador.consultarRolNombre()};
-            //var dataUs = #{zonaComunalControlador.contarResZon()};
             var dataUs = #{parqueaderoControlador.contarResZon()};
             var colores = #{rolControlador.generarColores()};
             new Chart(document.getElementById("bar-chart"), {
@@ -381,8 +381,8 @@
                     datasets: [
                         {
                             label: "Vehiculos Actuales",
-                            backgroundColor: colores,
                             data: dataUs,
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
                             borderColor: 'black',
                             borderWidth: 5
                         }

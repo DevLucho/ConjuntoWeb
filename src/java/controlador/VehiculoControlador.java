@@ -82,6 +82,9 @@ public class VehiculoControlador implements Serializable {
         parqueadero = vehiculo.getIdParqueadero();
         parqueadero.setEstado("Ocupado");
         parqueaderoFacade.edit(parqueadero);
+        residente = vehiculo.getIdResidente();
+        residente.setAutomovil("Si");
+        residenteFacade.edit(residente);
         vehiculo = new Vehiculo();
         residente = new Residente();
         visitante = new Visitante();

@@ -86,7 +86,9 @@ public class ParqueaderoControlador implements Serializable {
         }
         return data;
     }
-    
+     public int contartipos(String tipoVehiculo){
+        return parqueaderoFacade.contarVehiculosAuto(tipoVehiculo);
+    }
     public List<Parqueadero> consultarP(String estado){
         return parqueaderoFacade.consultarP(estado);
     }

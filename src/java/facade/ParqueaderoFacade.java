@@ -51,5 +51,10 @@ public class ParqueaderoFacade extends AbstractFacade<Parqueadero> {
         q.setParameter("idTorre", idTorre);
         return ((Long) q.getSingleResult()).intValue();
     }
+    public int contarVehiculosAuto(String tipoVehiculo) {
+        Query q = em.createQuery("SELECT COUNT(v) FROM Vehiculo v WHERE v.tipoVehiculo=:tipoVehiculo");
+        q.setParameter("tipoVehiculo", tipoVehiculo);
+        return ((Long) q.getSingleResult()).intValue();
+    }
 
 }
