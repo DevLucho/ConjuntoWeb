@@ -81,8 +81,7 @@ public class ParqueaderoControlador implements Serializable {
         List<Integer> data = new ArrayList<>();
         List<Torre> listaTorreRe = torreFacade.findAll();
         for (int i = 0; i < listaTorreRe.size(); i++) {
-            System.out.println(listaTorreRe.get(i).getIdTorre());
-            int dataZon = parqueaderoFacade.contarParqueaderoR(listaTorreRe.get(i).getIdTorre());
+            int dataZon = parqueaderoFacade.contarVehiculos(listaTorreRe.get(i).getIdTorre());
             data.add(dataZon);
         }
         return data;
