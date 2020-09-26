@@ -42,7 +42,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarroles.bcInicio}</a></li>
                         <li class="breadcrumb-item"><a href="./roles-permisos.xhtml">#{formconsultarroles.ConsultarRoles}</a></li>
-                        <li class="breadcrumb-item active">Editar rol</li>
+                        <li class="breadcrumb-item active">#{formconsultarroles.editarrolesyfunciones}</li>
                     </ol>
                 </div>
                 <!-- Contenido principal -->
@@ -63,7 +63,7 @@
                                 <a href="#tab1" class="nav-link active" data-toggle="tab"><h4><i class="fas fa-edit"></i>Editar rol</h4></a>
                             </li>
                             <li class="nav-item">
-                                <a href="#tab2" class="nav-link" data-toggle="tab"><h4><i class="fas fa-edit"></i>Editar permisos</h4></a>
+                                <a href="#tab2" class="nav-link" data-toggle="tab"><h4><i class="fas fa-edit"></i>#{formconsultarroles.Editarpermisos}</h4></a>
                             </li>
                         </ul>
                     </div>
@@ -78,8 +78,8 @@
                                         <div class="modal-body">
                                             <div class="form-group row">
                                                 <div class="col-12 font">
-                                                    <h:outputLabel value="Nombre rol" for="nombre" />
-                                                    <h:inputText id="nombre" styleClass="form-control" value="#{rolControlador.rol.nombre}" title="Nombre" required="true" requiredMessage="#{formdashboardadmin.fieldrequeried}."/>
+                                                    <h:outputLabel value="#{formconsultarroles.nombrerol}" for="nombre" />
+                                                    <h:inputText id="nombre" styleClass="form-control" value="#{rolControlador.rol.nombre}" title="#{formconsultarroles.nombrerol}" required="true" requiredMessage="#{formdashboardadmin.fieldrequeried}."/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -94,14 +94,14 @@
                                             <div class="collapse row" id="mas">
                                                 <div class="col-12">
                                                     <h:selectOneMenu class="form-control" value="#{rolControlador.rol.idRol}">
-                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                        <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true"></f:selectItem>
                                                         <f:selectItems value="#{rolControlador.consultarTodos()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton value="Guardar cambios" title="#{formdashboardadmin.Guardarcambios}" styleClass="btn btn-outline-success form" action="#{rolControlador.actualizar()}"></h:commandButton>
+                                            <h:commandButton value="#{formdashboardadmin.Guardarcambios}" title="#{formdashboardadmin.Guardarcambios}" styleClass="btn btn-outline-success form" action="#{rolControlador.actualizar()}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </f:view>
