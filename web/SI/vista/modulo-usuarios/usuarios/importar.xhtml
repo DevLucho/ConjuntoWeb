@@ -191,41 +191,39 @@ and open the template in the editor.
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formcrearusuario.bcInicio}</a></li>
                         <li class="breadcrumb-item"><a href="./consultar-usuario.xhtml">#{formconsultarusuario.txtConsultar}</a></li>
-                        <li class="breadcrumb-item active">Importar residentes</li>
+                        <li class="breadcrumb-item active">#{formdashboardadmin.Importarresidentes}</li>
                     </ol>
                 </div>
 
                 <section class="container-fluid" id="principal">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><i class="fas fa-cloud-upload-alt" id="icono"></i>Importar Usuarios - Residentes</h3>
+                            <h3><i class="fas fa-cloud-upload-alt" id="icono"></i>#{formdashboardadmin.ImportarUsuarios-Residentes}</h3>
                             <hr/>
                         </div>  
                     </div>
-                    <h1 class="text-center ten">Tener en cuenta</h1>
+                    <h1 class="text-center ten">#{formdashboardadmin.Tenerencuenta}</h1>
                     <div class="row">
                         <div class="containercss">
                             <div class="card">
                                 <div class="front">
                                     <div><img width="200px" src="https://img.icons8.com/clouds/100/000000/download.png"/><span></span></div>    
-                                    <div class="infoD">Instrucciones para importar</div>
+                                    <div class="infoD">#{formdashboardadmin.Instruccionesparaimportar}</div>
                                 </div>
                                 <div class="back">
-                                    <h6>Diligenciar Excel<span>Siguientes <i></i> Instrucciones</span></h6>
+                                    <h6>#{formdashboardadmin.DiligenciarExcel}<span>#{formdashboardadmin.Siguientes} <i></i> #{formdashboardadmin.Instrucciones}</span></h6>
                                     <ul class="ulcard">
-                                        <li class="licard">- Rellener las 10 columnnas, no deje algun campo vacio, 
-                                            si se ve el caso el sistema arrojara error y no importara la informacion.</li>
+                                        <li class="licard">- #{formdashboardadmin.Rellenarlascolumnas}</li>
 
-                                        <li class="licard">- El archivo debe ser un excel con fortamo XSL y en esta misma vista oprimir "Seleccionar", 
-                                            busque el XSL y carguelo.</li>
+                                        <li class="licard">- #{formdashboardadmin.ElarchivodebeserunExcel}</li>
 
-                                        <li class="licard">- Si se genera un error en el formato, se recomienda revisar todos los datos en especial "documento y correo", guarde, recarge y reintente.</li>
+                                        <li class="licard">- #{formdashboardadmin.Sisegeneraunerrorenelformato}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div><br/>
                     </div>
-                    <h1 class="text-center ten">Plantilla a subir</h1>
+                    <h1 class="text-center ten">#{formdashboardadmin.Plantillaasubir}</h1>
                     <div class="row">
                         <div class="col-12 text-center">
                             <img src="../../../img/excel2.PNG"  alt="Ejm Excel"/>

@@ -139,7 +139,7 @@
                                         </c:if>
                                         <c:if test="#{usuarioControlador.rol.idRol == 1}">
                                             <div class="col-12 mb-3">
-                                                <strong><label for="Rol">Estado</label></strong>
+                                                <strong><label for="Rol">#{formdashboardadmin.Estado}</label></strong>
                                                 <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}" disabled="true">
                                                     <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true"></f:selectItem>
                                                     <f:selectItem itemLabel="#{formconsultarusuario.Activo}" itemValue="Activo"/>
@@ -149,9 +149,9 @@
                                         </c:if>
                                         <c:if test="#{usuarioControlador.rol.idRol != 1}">
                                             <div class="col-12 mb-3">
-                                                <strong><label for="Rol">Estado</label></strong>
+                                                <strong><label for="Rol">#{formdashboardadmin.Estado}</label></strong>
                                                 <h:selectOneMenu class="form-control-plaintext" value="#{usuarioControlador.usuario.estado}">
-                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true"></f:selectItem>
                                                     <f:selectItem itemLabel="#{formconsultarusuario.Activo}" itemValue="Activo"/>
                                                     <f:selectItem itemLabel="#{formconsultarusuario.Bloqueado}" itemValue="Bloqueado"/>
                                                 </h:selectOneMenu>
@@ -163,7 +163,7 @@
                                             <small id="contrasenia" class="form-text text-muted">#{formconsultarusuario.Tucontraseñadebetenerunalongitud}</small>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <strong><label for="confirmar">Confirme contrase&ntilde;a</label></strong>
+                                            <strong><label for="confirmar">#{formdashboardadmin.confirmar}</label></strong>
                                             <input type="password" class="form-control-plaintext" placeholder="#{formconsultarusuario.Repitalacontraseña}"/>
                                         </div>
                                         <div class="col-12 mb-3">
