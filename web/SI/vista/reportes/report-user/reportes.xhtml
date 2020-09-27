@@ -263,9 +263,9 @@
                 doc.setTextColor(72, 84, 96);
                 doc.text(45, 210, 'Administrador-----||-----Residente-----||-----Vigilante');
                 doc.setTextColor(0, 0, 0);
-                doc.text(61, 220, '#{usuarioControlador.contarAdministradores()}');
-                doc.text(110, 220, '#{residenteControlador.contarResidentes()}');
-                doc.text(155, 220, '#{vigilanteControlador.contarVigilantes()}');
+                doc.text(61, 220, '#{rolControlador.contartodito(1)}');
+                doc.text(110, 220, '#{rolControlador.contartodito(2)}');
+                doc.text(155, 220, '#{rolControlador.contartodito(3)}');
                 doc.save("usuarios.pdf");
             }
             var zon = #{zonaComunalControlador.consultarNombreZona()};

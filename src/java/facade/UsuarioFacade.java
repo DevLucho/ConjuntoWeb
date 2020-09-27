@@ -138,4 +138,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         query.setParameter("idRol", idRol);
         return query.getResultList();
     }
+    public int contarUsuarioUb(int id) {
+        Query q = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.idRol.idRol=:id");
+        q.setParameter("id", id);
+        return ((Long) q.getSingleResult()).intValue();
+    }
 }

@@ -255,7 +255,11 @@ public class RolControlador implements Serializable {
         int contt = rolFacade.contarRol();
         return correo.colores(contt);
     }
-     
+    
+    public int contartodito(int id){
+        return usuarioFacade.contarUsuarioUb(id);
+    } 
+    
     public List<Permiso> consultarPermisos(int idPermiso) {
         return permisoFacade.consultarHijos(idPermiso);
     }
