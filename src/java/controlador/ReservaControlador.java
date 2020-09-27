@@ -113,10 +113,10 @@ public class ReservaControlador implements Serializable {
             mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.');");
 
             correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
-                    correo.paginaCorreo("Reserva pendiente de la zona: "+reserva.getIdZonaComunal().getNombre()+"",
-                            " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: "+reserva.getIdZonaComunal().getNombre()+" ha sido realizada exitosamente con el siguiente horario:</p>\n"
-                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) +"</b></p>\n"
-                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) +"</b></p>\n"
+                    correo.paginaCorreo("Reserva pendiente de la zona: " + reserva.getIdZonaComunal().getNombre() + "",
+                            " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: " + reserva.getIdZonaComunal().getNombre() + " ha sido realizada exitosamente con el siguiente horario:</p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) + "</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) + "</b></p>\n"
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
                             "http://imgfz.com/i/1CrnTaz.jpeg")
             );
@@ -133,25 +133,85 @@ public class ReservaControlador implements Serializable {
         }
 
     }
-    
+
     public List<Reserva> consultar() {
         return reservaFacade.findAll();
+    }
+
+    public String findReserva(Reserva reserva) {
+        this.zonaComunal = reserva.getIdZonaComunal();
+        this.residente = reserva.getIdResidente();
+        this.reserva = reserva;
+        return "detalle-reserva";
+    }
+
+    public void cancelar(Reserva reserva) {
+        if ("Cancelado".equals(reserva.getEstado())) {
+            mensaje.setMensaje("Mensajes('Advertencia!','Esta reserva ya esta cancelada','warning');");
+        } else {
+            mensaje.setMensaje("Confirmar('Estas seguro que deseas cancelar la reserva?','No podras revertilo!','warning','Si, cancelar!','Cancelado!','Se ha cancelado la reserva.','success');");
+            this.reserva = reserva;
+            this.reserva.setEstado("Cancelado");
+            reservaFacade.edit(this.reserva);
+        }
+    }
+
+    public void aprobarReserva(Reserva reserva) throws NoSuchProviderException, MessagingException {
+        this.reserva = reserva;
+        this.reserva.setEstado("Reservado");
+        reservaFacade.edit(this.reserva);
+        // notificar aprobación
+        correo.enviarEmail(this.reserva.getIdResidente().getIdPerfil().getCorreo(), "Reserva aprobada",
+                correo.paginaCorreo("Reserva aprobada de: " + reserva.getIdZonaComunal().getNombre() + "",
+                        " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: " + reserva.getIdZonaComunal().getNombre() + " ha sido aprobada por el administrador del conjunto con el siguiente horario:</p>\n"
+                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) + "</b></p>\n"
+                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) + "</b></p>\n"
+                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, en llegado caso de cancelar tu reserva cuentas con 3h antes para no causar bloqueo</p>",
+                        "http://imgfz.com/i/1CrnTaz.jpeg")
+        );
+        mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva aprobada satisfactoriamente','<b>*</b>La reserva se a notificado <br> vía email.<br><b>*</b>El estado de la reserva ahora<br> se encuentra en estado Reservado.');");
+    }
+
+    public String obtenerUltimoR(int idReserva) {
+        List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
+        String nombresaso = pepa.get(0).getMotivoReserva();
+        return nombresaso;
     }
 
     public int contarReservas() {
         return reservaFacade.count();
     }
-    
-    public int contarReservas(int idZona){
+
+    public int contarReservas(int idZona) {
         return reservaFacade.ContarReserva(idZona);
     }
-    
-    public String obtenerUltimoR(int idReserva){
-        List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
-        String nombresaso = pepa.get(0).getMotivoReserva();
-        return nombresaso;
+
+    public List<Reserva> findState(String estado) {
+        return reservaFacade.findState(estado);
     }
-    
+
+    public List<Reserva> findStateR(String estado, int idResidente) {
+        return reservaFacade.findStateR(estado, idResidente);
+    }
+
+    public List<Reserva> findR(int idResidente) {
+        return reservaFacade.findR(idResidente);
+    }
+
+    // count
+    public int countEstadoR(String estado, int idResidente) {
+        return reservaFacade.countEstadoR(estado, idResidente);
+    }
+
+    public int countEstado(String estado) {
+        return reservaFacade.countEstado(estado);
+    }
+
+    public int countR(int idResidente) {
+        return reservaFacade.countR(idResidente);
+    }
+
+    // Metodo Get y Set
     public Residente getResidente() {
         return residente;
     }

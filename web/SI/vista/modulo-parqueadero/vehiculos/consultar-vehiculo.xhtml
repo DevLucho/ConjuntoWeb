@@ -175,36 +175,36 @@
 
                                     <h:form>
                                         <h:dataTable styleClass="table table-bordered table-hover tabla text-center" style="width:100%"
-                                                     value="#{vehiculoControlador.vehiculoResidente()}" var="vc">
+                                                     value="#{vehiculoControlador.vehiculoResidente()}" var="vcr">
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Placa"/>
                                                 </f:facet>
-                                                <h:outputText value="#{vc.placa}"/>
+                                                <h:outputText value="#{vcr.placa}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Lugar"/>
                                                 </f:facet>
-                                                <h:outputText value="NRO-#{vc.idParqueadero.lugar}"/>
+                                                <h:outputText value="NRO-#{vcr.idParqueadero.lugar}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Tipo vehiculo"/>
                                                 </f:facet>
-                                                <h:outputText value="#{vc.tipoVehiculo}"/>
+                                                <h:outputText value="#{vcr.tipoVehiculo}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Residente"/>
                                                 </f:facet>
-                                                <h:commandLink value="#{vc.idResidente.idPerfil.nombre}"/><h:commandLink value=" #{vc.idResidente.idPerfil.apellido}"/>
+                                                <h:commandLink value="#{vcr.idResidente.idPerfil.nombre}"/><h:commandLink value=" #{vcr.idResidente.idPerfil.apellido}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Documento"/>
                                                 </f:facet>
-                                                <h:outputText value="#{vc.idResidente.idPerfil.documento}"/> 
+                                                <h:outputText value="#{vcr.idResidente.idPerfil.documento}"/> 
                                             </h:column>                                     
 
                                             <h:column>
@@ -212,8 +212,8 @@
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                 <div class="btn-group-sm">
-                                                    <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar vehiculo" action="#{vehiculoControlador.eliminar(vc)}"></h:commandButton>
-                                                    <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar vehiculo" action="#{vehiculoControlador.preActulizar(vc)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-trash-alt btn btn-outline-danger" title="Eliminar vehiculo" action="#{vehiculoControlador.eliminar(vcr)}"></h:commandButton>
+                                                    <h:commandButton value="" class="fas fa-edit btn btn-outline-info" style="margin-left: 5px;" title="Editar vehiculo" action="#{vehiculoControlador.preActulizar(vcr)}"></h:commandButton>
                                                 </div>
                                             </h:column>
                                         </h:dataTable>

@@ -81,18 +81,16 @@ public class ZonaComunalControlador implements Serializable {
     
     public List<String> consultarNombreZona(){
         List<String> nombres = new ArrayList<>();
-        List<ZonaComunal> roleList = zonaComunalFacade.findAll();
-        for (int i = 0; i < roleList.size(); i++){
-            String nameRol = roleList.get(i).getNombre();
+        for (ZonaComunal zona:zonaComunalFacade.findAll()){
+            String nameRol = zona.getNombre();
             nombres.add('"' + nameRol + '"');
         }
         return nombres;
     }
     public List<Integer> contarResZon(){
         List<Integer> data = new ArrayList<>();
-        List<ZonaComunal> roleList = zonaComunalFacade.findAll();
-        for (int i = 0; i < roleList.size(); i++) {
-            int dataZon = reservaFacade.ContarReserva(roleList.get(i).getIdZonaComunal());
+        for (ZonaComunal zona:zonaComunalFacade.findAll()) {
+            int dataZon = reservaFacade.ContarReserva(zona.getIdZonaComunal());
             data.add(dataZon);
         }
         return data;

@@ -195,7 +195,7 @@ public class UsuarioControlador implements Serializable {
                     mensaje.setMensaje("MensajeAlertify('user created successfully','success');");
                 }
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException | NoSuchProviderException | MessagingException e) {
             System.out.println("Error registro de usuario: " + e.getMessage());
         }
     }

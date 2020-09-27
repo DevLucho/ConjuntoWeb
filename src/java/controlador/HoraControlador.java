@@ -62,26 +62,38 @@ public class HoraControlador implements Serializable {
 
     public String nowFormat() {
         Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();        
+        Date date = cal.getTime();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(fecha(date));
     }
 
     // Dar formato a horas
     public String convertir(Date hora) {
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        return df.format(hora);
+        if (hora != null) {
+            DateFormat df = new SimpleDateFormat("HH:mm:ss");
+            return df.format(hora);
+        } else {
+            return "";
+        }
     }
 
     // Dar formato a fechas
     public String convertirf(Date fecha) {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        return df.format(fecha);
+        if (fecha != null) {
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            return df.format(fecha);
+        } else {
+            return "";
+        }
     }
 
     public String convertirfh(Date hf) {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        return df.format(hf);
+        if (hf != null) {
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            return df.format(hf);
+        } else {
+            return "";
+        }
     }
 
     // modificar dia +1 en fecha
@@ -91,8 +103,8 @@ public class HoraControlador implements Serializable {
         f.add(Calendar.DATE, 1);
         return f.getTime();
     }
-    
-    public Date hora(Date hora){
+
+    public Date hora(Date hora) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(hora);
         c.add(Calendar.HOUR, 5);

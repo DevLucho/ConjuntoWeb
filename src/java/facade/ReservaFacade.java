@@ -38,13 +38,51 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         q.setParameter("id", id);
         return ((Long) q.getSingleResult()).intValue();
     }
-    //public List<Object[]> ContarReservaMes(){
-        //Query q = em.createNativeQuery("SELECT Date_Format(fechaInicioReserva,\"%M %Y\") AS Fecha, COUNT(idReserva) AS Cuenta, idZonaComunal FROM Reserva GROUP BY Fecha , idZonaComunal");
-      //  return q.getResultList();
-    //}
+    
     public List<Reserva> buscarUltimaR(int idZonaComunal){
         Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.idZonaComunal.idZonaComunal=:idZonaComunal AND r.estado='Reservado' ORDER BY r.idReserva DESC");
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
     }
+    
+    public List<Reserva> findState(String estado) {
+        Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.estado=:estado ORDER BY r.idReserva DESC");
+        query.setParameter("estado", estado);
+        return query.getResultList();
+    }
+
+    public List<Reserva> findStateR(String estado, int idResidente) {
+        Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.estado=:estado AND r.idResidente.idResidente=:idResidente ORDER BY r.idReserva DESC");
+        query.setParameter("estado", estado);
+        query.setParameter("idResidente", idResidente);
+        return query.getResultList();
+    }
+
+    public List<Reserva> findR(int idResidente) {
+        Query query;
+        query = em.createQuery("SELECT r FROM Reserva r WHERE r.idResidente.idResidente=:idResidente ORDER BY r.idReserva DESC");
+        query.setParameter("idResidente", idResidente);
+        return query.getResultList();
+    }
+
+    // count
+    public int countEstadoR(String estado, int idResidente) {
+        Query query = em.createQuery("SELECT COUNT(r) FROM Reserva r WHERE r.estado=:estado AND r.idResidente.idResidente=:idResidente");
+        query.setParameter("estado", estado);
+        query.setParameter("idResidente", idResidente);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
+    public int countEstado(String estado) {
+        Query query = em.createQuery("SELECT COUNT(r) FROM Reserva r WHERE r.estado=:estado");
+        query.setParameter("estado", estado);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
+    public int countR(int idResidente) {
+        Query query = em.createQuery("SELECT COUNT(r) FROM Reserva r WHERE r.idResidente.idResidente=:idResidente");
+        query.setParameter("idResidente", idResidente);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+
 }
