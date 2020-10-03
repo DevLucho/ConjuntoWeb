@@ -156,12 +156,16 @@
                                             <img src="../../../img/brujula-apuntando-hacia-el-sur.png" width="120px" alt="" style="border-bottom: solid 5px black; padding-bottom: 15px" />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                    <div id="kevin" class="row">
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h:outputText value="#{zonaComunalControlador.mayor}"></h:outputText>
+                                        </div>
                                         <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
                                             <h:form style="font-family: helvetica"><h:commandButton class="btn btn-outline-danger btn-lg far fa-file-pdf" onclick="zona()" value=" DESCARGAR PDF"></h:commandButton></h:form>
                                         </div>
-                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;"></div>
+                                        <div class="col-4" style="display: flex;flex-direction: column;justify-content: space-around;align-items: center; height: 3rem;">
+                                            <h:outputText value="#{zonaComunalControlador.menor}"></h:outputText>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-6" style="width: 45%; padding: 5rem">
@@ -362,39 +366,6 @@
                                                     
             }
         </script>
-        <!--<script>
-            var role = #{zonaComunalControlador.consultarNombreZona()};
-            var dataUs = #{zonaComunalControlador.contarResZon()};
-            new Chart(document.getElementById("line-chart"), {
-                type: 'line',
-                data: {
-                    labels: meses,
-                    datasets: [{
-                            data: dateUs,
-                            label: "Africa",
-                            borderColor: "#3e95cd",
-                            fill: false
-                        }, {
-                            data: dateUs,
-                            label: "Asia",
-                            borderColor: "#8e5ea2",
-                            fill: false
-                        }, {
-                            data: dateUs,
-                            label: "Europe",
-                            borderColor: "#3cba9f",
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    title: {vaya por sus tomates
-                                display: true,
-                        text: 'World population per region (in millions)'
-                    }
-                }
-            });
-        </script>-->
     </h:body>
 </html>
 

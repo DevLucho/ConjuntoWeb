@@ -39,7 +39,9 @@ public class ZonaComunalControlador implements Serializable {
     @Inject
     MensajeControlador mensaje;
     private ZonaComunal zonaComunal;
-
+    private String mayor;
+    private String menor;
+    
     @EJB
     ZonaComunalFacade zonaComunalFacade;
 
@@ -92,6 +94,19 @@ public class ZonaComunalControlador implements Serializable {
         for (ZonaComunal zona:zonaComunalFacade.findAll()) {
             int dataZon = reservaFacade.ContarReserva(zona.getIdZonaComunal());
             data.add(dataZon);
+            if(data.size()>1){
+                for(int i=1;i<data.size();i++){
+                    if(data.get(i)>data.get(i-1)){
+                        mayor=zona.getNombre();
+                    }
+                    if(data.get(i)<data.get(i-1)){
+                        menor=zona.getNombre();
+                    }
+                }
+            }else{
+                mayor=zona.getNombre();
+                menor=zona.getNombre();
+            }
         }
         return data;
     }
@@ -114,6 +129,22 @@ public class ZonaComunalControlador implements Serializable {
 
     public void setZonaComunal(ZonaComunal zonaComunal) {
         this.zonaComunal = zonaComunal;
+    }
+
+    public String getMayor() {
+        return mayor;
+    }
+
+    public void setMayor(String mayor) {
+        this.mayor = mayor;
+    }
+
+    public String getMenor() {
+        return menor;
+    }
+
+    public void setMenor(String menor) {
+        this.menor = menor;
     }
 
 }
