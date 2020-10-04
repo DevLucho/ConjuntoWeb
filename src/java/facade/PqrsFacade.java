@@ -75,5 +75,9 @@ public class PqrsFacade extends AbstractFacade<Pqrs> {
         query.setParameter("idResidente", idResidente);
         return ((Long) query.getSingleResult()).intValue();
     }
-
+    public int contarPqrsT(int id){
+        Query q = em.createQuery("SELECT COUNT(p) FROM Pqrs p WHERE p.estado='Pendiente' AND p.idTipoPqrs.idTipoPqrs=:id");
+        q.setParameter("id", id);
+        return ((Long) q.getSingleResult()).intValue();
+    }
 }

@@ -5,11 +5,14 @@
  */
 package controlador;
 
+import entidades.Pqrs;
 import entidades.TipoPqrs;
+import facade.PqrsFacade;
 import facade.TipoPqrsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +33,9 @@ public class TipoPqrsControlador implements Serializable {
     @EJB
     TipoPqrsFacade tipoPqrsFacade;
 
+    @EJB
+    PqrsFacade pqrsFacade;
+
     public TipoPqrsControlador() {
     }
 
@@ -41,7 +47,25 @@ public class TipoPqrsControlador implements Serializable {
     public List<TipoPqrs> consultarTodos() {
         return tipoPqrsFacade.findAll();
     }
-
+    
+    public List<String> consultarnombrePq(){
+        List<String> nombres = new ArrayList<>();
+        List<TipoPqrs> tipoList = tipoPqrsFacade.findAll();
+        for(int i = 0;i<tipoList.size();i++){
+            String nameTipo = tipoList.get(i).getTipo();
+            nombres.add('"'+nameTipo+'"');
+        }
+        return nombres;
+    }
+    public List<Integer> contarTipoPqrs(){
+        List<Integer> data = new ArrayList<>();
+        List<TipoPqrs> pqrsList = tipoPqrsFacade.findAll();
+        for(int i = 0;i < pqrsList.size();i++){
+            int dataUsu =  pqrsFacade.contarPqrsT(pqrsList.get(i).getIdTipoPqrs());
+            data.add(dataUsu);
+        }
+        return data;
+    }
     public TipoPqrs getTipoPqrs() {
         return tipoPqrs;
     }

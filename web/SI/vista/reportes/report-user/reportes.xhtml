@@ -220,6 +220,8 @@
                         </div>
                         <!--sjsh-->
                     </div>
+                    <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+
                 </section> 
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
@@ -365,6 +367,39 @@
                 doc.save("seguridad.pdf");
                                                     
             }
+        </script>
+        <script>
+            var role = #{tipoPqrsControlador.consultarnombrePq()};
+            var dataUs = #{tipoPqrsControlador.contarTipoPqrs()};
+            var colores = #{rolControlador.generarColores()};
+            
+        new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels:role,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: colores,
+          data: dataUs
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Tipo Pqrs pendientes'
+      },
+                    scales: {
+                        xAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    }
+    }
+});
         </script>
     </h:body>
 </html>

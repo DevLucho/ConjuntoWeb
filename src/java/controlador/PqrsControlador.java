@@ -174,7 +174,7 @@ public class PqrsControlador implements Serializable {
     public int contarR(int idResidente) {
         return pqrsFacade.countR(idResidente);
     }
-
+    
     public Pqrs getPqrs() {
         return pqrs;
     }
