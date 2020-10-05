@@ -120,7 +120,7 @@ public class ReservaControlador implements Serializable {
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
                             "http://imgfz.com/i/1CrnTaz.jpeg")
             );
-
+            
             residente = new Residente();
             zonaComunal = new ZonaComunal();
             reserva = new Reserva();
@@ -170,6 +170,11 @@ public class ReservaControlador implements Serializable {
                         "http://imgfz.com/i/1CrnTaz.jpeg")
         );
         mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva aprobada satisfactoriamente','<b>*</b>La reserva se a notificado <br> vía email.<br><b>*</b>El estado de la reserva ahora<br> se encuentra en estado Reservado.');");
+        
+        int cantidadreserva = reserva.getIdZonaComunal().getCantidadReservada();
+        zonaComunal = reserva.getIdZonaComunal();
+        zonaComunal.setCantidadReservada(cantidadreserva=+1);
+        zonaComunalFacade.edit(zonaComunal);
     }
 
     public String obtenerUltimoR(int idReserva) {

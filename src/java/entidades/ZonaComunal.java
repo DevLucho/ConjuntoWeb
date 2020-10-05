@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huertas
+ * @author User
  */
 @Entity
 @Table(name = "zona_comunal")
@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "ZonaComunal.findByNombre", query = "SELECT z FROM ZonaComunal z WHERE z.nombre = :nombre")
     , @NamedQuery(name = "ZonaComunal.findByDescripcion", query = "SELECT z FROM ZonaComunal z WHERE z.descripcion = :descripcion")
     , @NamedQuery(name = "ZonaComunal.findByImg", query = "SELECT z FROM ZonaComunal z WHERE z.img = :img")
-    , @NamedQuery(name = "ZonaComunal.findByTiempoMaximoReserva", query = "SELECT z FROM ZonaComunal z WHERE z.tiempoMaximoReserva = :tiempoMaximoReserva")})
+    , @NamedQuery(name = "ZonaComunal.findByTiempoMaximoReserva", query = "SELECT z FROM ZonaComunal z WHERE z.tiempoMaximoReserva = :tiempoMaximoReserva")
+    , @NamedQuery(name = "ZonaComunal.findByCantidadReservada", query = "SELECT z FROM ZonaComunal z WHERE z.cantidadReservada = :cantidadReservada")})
 public class ZonaComunal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,6 +64,8 @@ public class ZonaComunal implements Serializable {
     @NotNull
     @Column(name = "tiempoMaximoReserva")
     private int tiempoMaximoReserva;
+    @Column(name = "cantidadReservada")
+    private Integer cantidadReservada;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
     private List<Evento> eventoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idZonaComunal", fetch = FetchType.LAZY)
@@ -122,6 +125,14 @@ public class ZonaComunal implements Serializable {
 
     public void setTiempoMaximoReserva(int tiempoMaximoReserva) {
         this.tiempoMaximoReserva = tiempoMaximoReserva;
+    }
+
+    public Integer getCantidadReservada() {
+        return cantidadReservada;
+    }
+
+    public void setCantidadReservada(Integer cantidadReservada) {
+        this.cantidadReservada = cantidadReservada;
     }
 
     @XmlTransient

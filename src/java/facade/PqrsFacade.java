@@ -80,4 +80,14 @@ public class PqrsFacade extends AbstractFacade<Pqrs> {
         q.setParameter("id", id);
         return ((Long) q.getSingleResult()).intValue();
     }
+    public List<Pqrs> buscarUltimoP(int idTipoPqrs){
+        Query query = em.createQuery("SELECT p FROM Pqrs p WHERE p.idTipoPqrs.idTipoPqrs=:idTipoPqrs AND p.estado='Pendiente' ORDER BY p.idPqrs DESC");
+        query.setParameter("idTipoPqrs", idTipoPqrs);
+        return query.getResultList();
+    }
+    public int contarPqrsTipos(String tipoPqrs){
+        Query q = em.createQuery("SELECT COUNT(p) FROM Pqrs p WHERE p.idTipoPqrs.tipo=:tipoPqrs AND p.estado='Pendiente'");
+        q.setParameter("tipoPqrs", tipoPqrs);
+        return ((Long) q.getSingleResult()).intValue();
+    }
 }

@@ -110,15 +110,36 @@ public class ZonaComunalControlador implements Serializable {
         }
         return data;
     }
-    //public String[] consultaaa() {
-      //List<Object[]> meses = reservaFacade.ContarReservaMes();
-      //String[] ListaMeses=new String[meses.size()];
-      //for(int i=0;i<meses.size();i++){
-        //  ListaMeses[i]=(String)meses.get(i)[0];
-      //}       
-      //return ListaMeses;
-    //}
     
+    public String maxx(){
+        zonaComunal=zonaComunalFacade.find(1);
+        ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
+        ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
+        if(zonaComunal.getCantidadReservada()>zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada()>zonaComunal3.getCantidadReservada()){
+             mayor=zonaComunal.getNombre();
+        }else if(zonaComunal2.getCantidadReservada()>zonaComunal.getCantidadReservada()&&zonaComunal2.getCantidadReservada()>zonaComunal3.getCantidadReservada()){
+             mayor=zonaComunal2.getNombre();
+        }else if(zonaComunal3.getCantidadReservada()>zonaComunal.getCantidadReservada()&&zonaComunal3.getCantidadReservada()>zonaComunal2.getCantidadReservada()){
+            mayor=zonaComunal3.getNombre();
+        }
+        return mayor;
+    }
+    public String minn(){
+        zonaComunal=zonaComunalFacade.find(1);
+        ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
+        ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
+        if(zonaComunal.getCantidadReservada()<zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada()<zonaComunal3.getCantidadReservada()){
+             menor=zonaComunal.getNombre();
+        }else if(zonaComunal2.getCantidadReservada()<zonaComunal.getCantidadReservada()&&zonaComunal2.getCantidadReservada()<zonaComunal3.getCantidadReservada()){
+             menor=zonaComunal2.getNombre();
+        }else if(zonaComunal3.getCantidadReservada()<zonaComunal.getCantidadReservada()&&zonaComunal3.getCantidadReservada()<zonaComunal2.getCantidadReservada()){
+            menor=zonaComunal3.getNombre();
+        }
+        return menor;
+    }
+    public String pepe(){
+        return zonaComunalFacade.max();
+    }
     public int contarZonas() {
         return zonaComunalFacade.count();
     }
