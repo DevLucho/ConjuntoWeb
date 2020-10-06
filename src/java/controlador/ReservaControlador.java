@@ -24,6 +24,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 
@@ -120,7 +124,7 @@ public class ReservaControlador implements Serializable {
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
                             "http://imgfz.com/i/1CrnTaz.jpeg")
             );
-            
+
             residente = new Residente();
             zonaComunal = new ZonaComunal();
             reserva = new Reserva();
@@ -170,10 +174,10 @@ public class ReservaControlador implements Serializable {
                         "http://imgfz.com/i/1CrnTaz.jpeg")
         );
         mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva aprobada satisfactoriamente','<b>*</b>La reserva se a notificado <br> vía email.<br><b>*</b>El estado de la reserva ahora<br> se encuentra en estado Reservado.');");
-        
+
         int cantidadreserva = reserva.getIdZonaComunal().getCantidadReservada();
         zonaComunal = reserva.getIdZonaComunal();
-        zonaComunal.setCantidadReservada(cantidadreserva=+1);
+        zonaComunal.setCantidadReservada(cantidadreserva = +1);
         zonaComunalFacade.edit(zonaComunal);
     }
 
@@ -214,6 +218,36 @@ public class ReservaControlador implements Serializable {
 
     public int countR(int idResidente) {
         return reservaFacade.countR(idResidente);
+    }
+
+    //
+    public void validarFecha(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String fechaSeleccionadas = (String) value;
+
+        // Extraer fecha de string
+        int dia = Integer.parseInt(fechaSeleccionadas.substring(0, 2));
+        int mes = Integer.parseInt(fechaSeleccionadas.substring(3, 5));
+        int anio = Integer.parseInt(fechaSeleccionadas.substring(6, 10));
+
+        Calendar c = Calendar.getInstance();
+        c.set(anio, mes, dia);
+        c.add(Calendar.MONTH, -1);
+        
+        System.out.println("La seleccionada:"+hora.convertirf(c.getTime()));
+        System.out.println("La actual: "+hora.convertirf(hora.now()));
+
+        try {
+            if (hora.convertirf(c.getTime()).compareTo(hora.convertirf(hora.now())) < 0) {
+                ((UIInput) comp).setValid(false);
+                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas pasadas, a la actual"));
+                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas pasadas, selecciona otra','error');");
+            }
+        } catch (Exception e) {
+            System.out.println("Error validacion fecha r: "+e.getMessage());
+            mensaje.setMensaje("MensajeAlertify('Error, selecciona otra fecha','error');");
+        }
+
     }
 
     // Metodo Get y Set
