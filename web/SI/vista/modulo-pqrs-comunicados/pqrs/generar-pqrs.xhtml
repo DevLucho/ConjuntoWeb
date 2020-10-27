@@ -54,7 +54,7 @@
                 <hr/>                 
                 <!-- Formulario -->
 
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <div class="row">
                         <!-- Titulo -->
                         <div class="col-12 ">
@@ -113,6 +113,32 @@
                         <div class="col-12">
                             <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;"/>
                         </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-1" style="padding-left:15px;">
+                            <h:outputLabel for="file" class="subir-foto">
+                                <span>+</span> <br/> Adjuntar <br/> imagen
+                            </h:outputLabel>                                        
+                            <h:inputFile id="file" value="#{pqrsControlador.imagen.img}" a:accept=".pdf,image/x-png,image/gif,image/jpeg" required="false" style="display: none"/>
+                            <h:message for="file" style="color: red"/>
+                        </div>
+                        <!--Pre-visualizar foto-->
+                        <div class="contenedor-imagen col-1" style="padding: 0">
+                            <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
+                        </div>
+
+                        <!--Mostrar foto en modal-->
+                        <div class="modal fade" id="modal-img">
+                            <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                <div class="modal-content">
+                                    <img/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
                         <!-- Boton publicar -->
                         <div class="row justify-content-center mt-3 mb-3">
                             <div class="col-12 col-md-2">
@@ -125,6 +151,28 @@
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>
         </f:view>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("j_idt106:file").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar'),
+                            image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script>        
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>
