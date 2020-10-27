@@ -168,6 +168,15 @@ public class PqrsControlador implements Serializable {
     public List<Pqrs> pqrsResidente(int idResidente) {
         return pqrsFacade.pqrsResidente(idResidente);
     }
+    
+    public String obtenerUltimoP(int idPqrs){
+        List<Pqrs> pepaa = pqrsFacade.buscarUltimoP(idPqrs);
+        String nombresito = pepaa.get(0).getAsunto();
+        return nombresito;
+    }
+    public int contarporTipos(String tipoPqrs){
+        return pqrsFacade.contarPqrsTipos(tipoPqrs);
+    }
 
     public int countState(String estado) {
         return pqrsFacade.countEstado(estado);
