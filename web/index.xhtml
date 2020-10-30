@@ -1,415 +1,476 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet"/>
+        <meta charset="utf-8"/>
+        <title>#{formlogin.ConjuntoResidencial} Torres de Lucerna</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="keywords"/>
+        <meta content="" name="description"/>
+
+        <!-- Favicons -->
+        <link rel="shortcut icon" href="img/Logo ShortCut.png" />
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet"/>
+
+        <!-- Bootstrap CSS File -->
+        <link href="resources/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Libraries CSS Files -->
+        <link href="resources/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="resources/lib/animate/animate.min.css" rel="stylesheet"/>
+        <link href="resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+        <link href="resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet"/>
+
+        <link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
+        <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>  
+
+        <!-- Main Stylesheet File -->
+        <link href="resources/css/style.css" rel="stylesheet"/>
+
         <!-- swiper css -->
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-        <!-- styles -->
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-        <link href="SI/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="SI/css/validate.css" rel="stylesheet" type="text/css"/>
-        <link href="SI/css/util.css" rel="stylesheet" type="text/css"/>        
-        <link rel="shortcut icon" href="img/Logo ShortCut.png" />
-        <!-- Bootstrap 4
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-        -->
+
         <style>
-            html{
-                scroll-behavior: smooth;
+            html,
+            body {
+                position: relative;
+                height: 100%;
             }
-            .imgpoput{
-                width: 320px;
-                padding-bottom: 5%;
-                border-bottom: black 3px solid;
+
+            body {
+                background: #eee;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                color: #000;
+                margin: 0;
+                padding: 0;
             }
-            .card1{
-                background-image: url('http://imgfz.com/i/dskNMfY.png');
-                background-size: cover;
-                border-radius: 50%;
+
+            .swiper-container {
+                width: 100%;
+                height: 100%;
             }
-            .card5{
-                background-image: url('img/cod-register.png');
-                border-radius: 50%;
-                background-size: cover;
-            }
-            .card8{
-                background-image: url('http://imgfz.com/i/eKwyJ06.png');
-                border-radius: 50%;
-                background-size: cover;
+
+            .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
             }
         </style>
-        <title>#{formlogin.ConjuntoResidencial} Torres de Lucerna</title>
+
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
             <script src="js/swiper.min.js"></script>
-            <div class="contenedor1">
-                <!-- Encabezado -->
-                <header id="header" style="position: fixed; z-index: 1000; background: white">
-                    <h:form>
-                        <div class="logoindex">
-                            <img width="350" src="img/logo.png" alt="" />
+
+            <!--==========================
+            Header
+            ============================-->
+            <header id="header">
+
+                <div id="topbar">
+                    <div class="container">
+                        <div class="social-links">
+
+                            <!-- espacio para poner iconos-->
+
                         </div>
-                        <!-- Navegacion -->
-                        <nav>
-                            <a href="#inicio">#{formlogin.inicio}</a>
-                            <a href="#noticias">#{formlogin.noti}</a>
-                            <a href="#galeria">#{formlogin.galeria}</a>
-                            <a href="#ventajas" class="men">#{formlogin.ventajas}</a>
-                            <a class="men masss" href="#contacto">#{formlogin.contacto}</a>
-                            <a href="faces/vista/login/login.xhtml" target="_blank" class="mas">#{formlogin.iniciar}</a>
-                            <div class="animation start-home" />
-                        </nav>
-                    </h:form>
-                    <h:form class="col-10 p-1 text-right" style="width: 100%;"> 
-                        <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
-                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
-                                <img src="SI/img/country-es.png" width="32px"/>
-                            </h:commandLink>
-                        </c:if>
-                        <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.espaniol}">
-                            <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
-                                <img src="SI/img/country-us.png" width="32px"/>
-                            </h:commandLink>
-                        </c:if>
-                    </h:form> 
-                </header>
-                <!-- Capa presentacion pag. -->
-                <section class="fonfo" id="inicio">
-                    <div class="capanegra">
-                        <h2 class="textPrin" style="">
-                            #{formlogin.bienvenida}<br/>
-                            Torres de Lucerna
-                        </h2>
+                    </div>
+                </div>
 
-                        <button onclick="location.href = '#popup'" class="button type3">
-                            #{formlogin.registro}
-                        </button>
-                        <!-- modal validar cod registro -->
-                        <div id="popup" class="overlay">
-                            <div id="popupBody">
-                                <div style="width: 100%;text-align: center">
-                                    <img class="imgpoput" src="img/logo.png" alt="img de logo" style="margin:0;"/>
-                                </div>
+                <div class="container">
 
-                                <h2>#{formlogin.registrocodigo}</h2>
-                                <div style="text-align: center;width:100%;">
-                                    <em >#{formlogin.codigocontactaradmin}</em> 
+                    <div class="logo float-left">
+                        <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"/></a>
+                    </div>
+
+                    <nav class="main-nav float-right d-none d-lg-block">
+                        <ul>
+                            <li>
+                                <h:form> 
+                                    <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
+                                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
+                                            <img src="SI/img/country-es.png" width="32px"/>
+                                        </h:commandLink>
+                                    </c:if>
+                                    <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.espaniol}">
+                                        <h:commandLink action="#{lenguajeControlador.cambiarIdioma('en')}">
+                                            <img src="SI/img/country-us.png" width="32px"/>
+                                        </h:commandLink>
+                                    </c:if>
+                                </h:form> 
+                            </li>
+                            <li><a href="#intro">#{formlogin.inicio}</a></li>
+                            <li><a href="#noticias">#{formlogin.noti}</a></li>
+                            <li><a href="#services">#{formlogin.ventajas}</a></li>
+                            <li><a href="#galeria">#{formlogin.galeria}</a></li>
+                            <li><a href="#footer">#{formlogin.contacto}</a></li>
+                            <li><a href="faces/vista/login/login.xhtml" target="_blank">#{formlogin.iniciar}</a></li>
+                        </ul>
+                    </nav><!-- .main-nav -->
+
+                </div>
+            </header><!-- #header -->
+
+            <!--==========================
+              Intro Section
+            ============================-->
+            <section id="intro" class="clearfix">
+                <div class="container h-100">
+                    <div class="row justify-content-center align-self-center">
+                        <div class="col-md-12 intro-info order-md-first order-last text-center">
+                            <h2>
+                                #{formlogin.bienvenida}<br/>
+                                #{formlogin.txtBienvenida} Torres de Lucerna
+                            </h2>
+                            <div>
+                                <button type="button" class="button type3" data-toggle="modal" data-target="#modal">
+                                    #{formlogin.registro}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Modal -->
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img class="" src="img/logo.png" alt="img de logo" width="60%" style="margin-left: auto;margin-right: auto"/>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:0;padding: 0">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h5 style="padding: 0;margin: 0;font-weight: bold">#{formlogin.registrocodigo}</h5>
+                            <em >#{formlogin.codigocontactaradmin}</em> 
+
+                            <h:form class="login100-form validate-form flex-sb flex-w">
+                                <div style="margin-left: auto;margin-right: auto" class="mt-5 col-12 font wrap-input100 validate-input m-b-10 col-md-10 col-12" data-validate = "#{formlogin.digiteuncodigo}" >
+                                    <h:inputText class="input100" value="#{codigoControlador.cod}" required="true" a:placeholder="#{formlogin.digiteuncodigo}"/>
+                                    <span class="focus-input100"></span>
+                                </div>                       
+                                <div class="mb-5 mt-3 col-md-6 col-12" style="margin-left: auto;margin-right: auto">
+                                    <h:commandButton value="#{formdashboardadmin.confirmar}" class="p-3 btn btn-primary " action="#{codigoControlador.validarCodigo()}"></h:commandButton>
                                 </div>
-                                <a id="cerrar" href="#">×</a>
-                                <div class="popupContent">
-                                    <h:form class="login100-form validate-form flex-sb flex-w">
-                                        <div class="modal-body m-t-36" style="width: 100%;margin-left: 80px;margin-right: auto;">
-                                            <div style="width: 10%; float: left"> 
-                                                <i class="fas fa-qrcode code" aria-hidden="true" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main id="main">
+
+                <section id="noticias" class="wow fadeInUp">
+                    <div class="container">
+
+                        <header class="section-header">
+                            <h3>Noticias</h3>
+                        </header>
+
+
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+
+
+
+                                <c:forEach items="#{comunicadoControlador.consultar('Externo')}" var="comunicado">
+                                    <div class="swiper-slide" style="">
+                                        <div class="card" style="width: 18rem;border-color: transparent">
+                                            <img style="margin-right: auto;margin-left: auto" class="card-img-top" src="img/#{comunicadoControlador.subString(comunicado.img)}" alt="#{comunicado.titulo}" />
+                                            <div class="card-body">
+                                                <b><h5 class="card-title text-primary text-left">#{comunicado.titulo}</h5></b>
+                                                <p class="card-text text-left">#{comunicado.descripcion}</p>
                                             </div>
-                                            <div style="width: 70%; float: left; margin-left: 10px">
-                                                <div class="col-12 font wrap-input100 validate-input m-b-10" data-validate = "#{formlogin.digiteuncodigo}" >
-                                                    <h:inputText class="input100" value="#{codigoControlador.cod}" required="true" a:placeholder="#{formlogin.digiteuncodigo}"/>
-                                                    <span class="focus-input100"></span>
-                                                </div>                       
+                                            <div class="card-footer">
+                                                <small><b>#{formlogin.fechadepublicacion}: </b><h:outputText value="#{horaControlador.convertirf(comunicado.fechaPublicacion)}"></h:outputText></small>
                                             </div>
                                         </div>
-                                        <div class="modal-footer" style="width: 100%">
-                                            <h:commandButton value="#{formdashboardadmin.confirmar}" class="colorincolorado" action="#{codigoControlador.validarCodigo()}"></h:commandButton>
+                                    </div>
+                                </c:forEach>
+
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+
+
+
+
+                    </div>
+                </section>
+
+
+                <!--==========================
+                  Services Section
+                ============================-->
+                <section id="services" class="section-bg">
+                    <div class="container">
+
+                        <header class="section-header">
+                            <h3>#{formlogin.ventajas}</h3>
+                            <p>#{formlogin.Todalainformación}.</p>
+                        </header>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
+                                <div class="box">
+                                    <div class="icon" style="background: #fceef3;">
+                                        <i class="far fa-newspaper" style="color: #ff689b;"></i></div>
+                                    <h4 class="title">Mantente informado</h4>
+                                    <p class="description">#{formlogin.Consultanoticias}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
+                                <div class="box">
+                                    <div class="icon" style="background: #fff0da;">
+                                        <i class="fas fa-qrcode" style="color: #e98e06;"></i></div>
+                                    <h4 class="title">Codigo de registro al sistema</h4>
+                                    <p class="description">#{formlogin.Recuerdasolicitar}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                                <div class="box">
+                                    <div class="icon" style="background: #e6fdfc;">
+                                        <i class="fas fa-thumbtack" style="color: #3fcdc7;"></i></div>
+                                    <h4 class="title">Reservar zonas comunes</h4>
+                                    <p class="description">#{formlogin.Reservaresmasfácil} !!!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <!--==========================
+                  Portfolio Section
+                ============================-->
+                <section id="galeria">
+                    <div class="container">
+
+                        <header class="section-header">
+                            <h3 class="section-title">Galeria</h3>
+                        </header>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul id="portfolio-flters">
+                                    <li data-filter="*" class="filter-active"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h:form class="row portfolio-container">
+
+                            <c:forEach items="#{comunicadoControlador.consultar('Galeria')}" var="comunicado">
+                                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                                    <div class="portfolio-wrap">
+                                        <img src="img/#{comunicadoControlador.subString(comunicado.img)}" class="img-fluid" alt=""/>
+                                        <div class="portfolio-info">
+                                            <h4>#{comunicado.titulo}</h4>
+                                            <p>#{comunicado.descripcion}</p>
+                                            <div>
+                                                <a href="img/#{comunicadoControlador.subString(comunicado.img)}" data-lightbox="portfolio" data-title="App 1" class="link-preview"
+                                                   title="Preview"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                        </h:form>
+
+                    </div>
+                </section>
+
+            </main>
+
+            <!--==========================
+              Footer
+            ============================-->
+            <footer id="footer" class="section-bg">
+                <div class="footer-top">
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+
+                                        <div class="footer-info">
+                                            <h3>#{formlogin.contactoponte}</h3>
+                                            <!--<p>#{formlogin.contactomensaje}</p>-->
+                                        </div>
+
+                                        <div class="footer-links">
+                                            <h4>Contacto</h4>
+                                            <p> 
+                                                Cra. 82g Bis #59-62, Bogotá <br/>
+                                                <strong>#{formlogin.Númerotelefónico}</strong> +57 310 8521782<br/>
+                                                <strong>Email:</strong> conjunto@example.com<br/>
+                                            </p>
+                                        </div>
+
+                                        <div class="social-links">
+                                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="form">
+
+                                    <h4>Enviar mensaje</h4>
+                                    <p>#{formlogin.contactomensaje}</p>
+                                    <h:form class="contactForm">
+                                        <div class="form-group">
+                                            <h:inputText a:type="text" class="form-control" id="name" a:placeholder="#{formlogin.Nombres}"
+                                                         a:data-rule="minlen:4" a:data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:inputText a:type="email" class="form-control" id="email" a:placeholder="#{formlogin.CorreoElectrónico}"
+                                                         a:data-rule="email" a:data-msg="Please enter a valid email" />
+                                            <div class="validation"></div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-6 col-md-6">
+                                                <h:selectOneMenu id="torre" class="form-control" required="true">
+                                                    <f:selectItem itemLabel="#{formlogin.Torre}" itemValue=""></f:selectItem>
+                                                    <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
+                                                </h:selectOneMenu>
+                                                <h:message for="torre" style="color: red"/>
+
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <h:selectOneMenu id="apto" class="form-control" required="true">
+                                                    <f:selectItem itemLabel="#{formlogin.Apartamento}" itemValue=""></f:selectItem>
+                                                    <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
+                                                </h:selectOneMenu>
+                                                <h:message for="apto" style="color: red"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:inputText a:type="text" class="form-control" id="subject" a:placeholder="#{formlogin.Asunto}"
+                                                         a:data-rule="minlen:4" a:data-msg="Please enter at least 8 chars of subject" />
+                                            <div class="validation"></div>
+                                        </div>          
+
+                                        <div class="form-group">
+                                            <h:inputTextarea class="form-control" rows="5" a:data-rule="required"
+                                                             a:data-msg="Please write something for us" a:placeholder="#{formlogin.Mensaje}"></h:inputTextarea>
+                                            <div class="validation"></div>
+                                        </div>                                       
+
+                                        <h:commandButton value="#{formlogin.Enviar}" class="text-center btn btn-primary"/>
                                     </h:form>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="cont" id="noticias">
-                    <br/>
-                    <br/>
-                    <div class="notinoti">
-                        <div class="capi">
-                            <br />
-                            <div class="section1">
-                                <div class="lineassss float" />
-                            </div>
-                            <div class="section11">
-                                <div class="redondo">
-                                    <h1 class="hnoti">#{formlogin.noti}</h1>
-                                </div>
-                            </div>
-                            <div class="section111">
-                                <div class="lineassss" />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- slider noticias -->
-                <h:form class="swiper-container" style="margin-bottom: 0px;">
-                    <div class="swiper-wrapper">
-                        <c:forEach items="#{comunicadoControlador.consultar('Externo')}" var="comunicado">
-                            <div class="swiper-slide">
-                                <div class="imgsss">
-                                    <img src="img/#{comunicadoControlador.subString(comunicado.img)}" width="435px" height="360px"/>
-                                </div>
-                                <div class="textSlider">
-                                    <h2 style="margin:2px">#{comunicado.titulo}</h2>
-                                    <p>#{comunicado.descripcion}</p>
-                                    <br/>
-                                    <small><b>#{formlogin.fechadepublicacion}: </b><h:outputText value="#{horaControlador.convertirf(comunicado.fechaPublicacion)}"></h:outputText></small>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <div class="swiper-pagination" />
-                </h:form>
-                <br/>
-                <br/>
-                <!-- titulo galeria -->
-                <section class="cont" id="galeria" style="margin:0px">
-                    <div class="notinoti">
-                        <div class="capi">
-                            <div class="section1">
-                                <div class="lineassss float" />
-                            </div>
-                            <div class="section11">
-                                <div class="redondo">
-                                    <h1 class="hnoti">#{formlogin.galeria}</h1>
-                                </div>
-                            </div>
-                            <div class="section111">
-                                <div class="lineassss" />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- slider galeria -->
-                <h:form class="swiper-container"> 
 
-                    <div class="swiper-wrapper">
-                        <c:forEach items="#{comunicadoControlador.consultar('Galeria')}" var="comunicado">
-                            <div class="swiper-slide" style="background-color: transparent">
-                                <div>
-                                    <img src="img/#{comunicadoControlador.subString(comunicado.img)}" width="100% 100%" alt="" />
-                                </div>
-                            </div> 
-                        </c:forEach>
-                    </div>
+                            </div>
 
-                    <div class="swiper-pagination" />
-                </h:form>
+                        </div>
 
-                <!-- zona de  -->
-                <section class="fonfo2">
-                    <div class="capanegra2">
-                        <div class="not1">
-                            <h2 class="textPrin2">
-                                #{formlogin.Todalainformación}
-                            </h2>
-                        </div>
-                        <div class="not2">
-                            <div class="for2">
-                                <div class="tarjeta-contenedor">
-                                    <div class="tarjeta">
-                                        <div class="adelante card8" />
-                                        <div class="atras">
-                                            <p>
-                                                #{formlogin.Consultanoticias}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="for2">
-                                <div class="tarjeta-contenedor">
-                                    <div class="tarjeta">
-                                        <div class="adelante card5" />
-                                        <div class="atras">
-                                            <p>
-                                                #{formlogin.Recuerdasolicitar}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="not3">
-                            <div class="tarjeta-contenedor">
-                                <div class="tarjeta">
-                                    <div class="adelante card1" />
-                                    <div class="atras">
-                                        <p>
-                                            #{formlogin.Reservaresmasfácil} !!!
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </section>
-                <br/>
-                <br/>
-                <!-- segunda zona de publicidad -->
-                <section id="ventajas" class="fonfo2 fonfo3">
-                    <div class="capanegra2" style="background-color: rgba(0, 0, 0, 0.493);">
-                        <div class="not1 not11">
-                            <div class="for fosi">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <span>#{formlogin.espaciosrecreativos}</span>
-                                    </a>
-                                </div>
-                                <p>#{formlogin.zonasdeportivas}</p>
-                            </div>
-                        </div>
-                        <div class="not2 not11">
-                            <div class="for fosi fosi2">
-                                <p>#{formlogin.ubicacionbeneficios}</p>
+                </div>
 
-                                <div class="rarfo">
-                                    <a href="#">
-                                        <span>#{formlogin.zonascomerciales}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="not3 not11">
-                            <div class="for fosi fosi3">
-                                <div class="mordo">
-                                    <a href="#">
-                                        <span>#{formlogin.seguridad}</span>
-                                    </a>
-                                </div>
-                                <p>#{formlogin.seguridadyentreten}</p>
-                            </div>
-                        </div>
+                <div class="container">
+                    <div class="copyright">
+                        #{formlogin.derechosresevados}
                     </div>
-                </section>
-                <!-- form de contacto -->
-                <section class="conteForm" id="contacto" style="height: 750px">
-                    <div class="datosss">
-                        <h3>#{formlogin.contactoponte}</h3>
-                        <p>
-                            #{formlogin.contactomensaje}
-                        </p>
-                        <br/><br/>
-                        <table class="border">
-                            <tbody>
-                                <tr class="border">
-                                    <td class="border">
-                                        <i class="fas fa-tty black" aria-hidden="true" />
-                                    </td>
-                                    <td class="border">(+57) 310 476 1511</td>
-                                </tr>
-                                <tr class="border">
-                                    <td class="border">
-                                        <i class="fas fa-at black" aria-hidden="true" />
-                                    </td>
-                                    <td class="border">conjunto@gmail.com</td>
-                                </tr>
-                                <tr class="border">
-                                    <td class="border">
-                                        <i class="fas fa-map-marker-alt black" aria-hidden="true" />
-                                    </td>
-                                    <td class="border">
-                                        Torres De Lucena<br/>Cra 82g Bis #59-62,<br/>Bogotá
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="credits">
+                        Designed by <a href="#"><img src="SI/img/derechos.png"/></a>
                     </div>
-                    <h:form class="form" style="height: auto">
-                        <div style="width: 41%;float: left">
-                            <h:inputText style="width: 100%" id="nombre" a:type="text" class="duos" a:placeholder="#{formlogin.Nombres}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
-                            <h:message for="nombre" style="color: red"/>
-                        </div>
-                        <div style="width: 41%;float: left">
-                            <h:inputText style="width: 100%" id="apellido" a:type="text" class="duos" a:placeholder="#{formlogin.Apellidos}" required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;\s]*$" title="#{formlogin.Solotextononúmeros}."/>
-                            <h:message for="apellido" style="color: red"/>
-                        </div>
-                        <div style="width: 82%">
-                            <h:inputText id="email" a:type="email" class="duos com" a:placeholder="#{formlogin.CorreoElectrónico}" title="ejemplo@dominio.com" required="true" requiredMessage="#{formlogin.Especifiqueuncorreoelectrónico}" a:pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-                            <h:message for="email" style="color: red"/>
-                        </div>
-                        <div style="width: 82%">
-                            <h:inputText style="width: 100%" id="celular" a:type="tel" class="duos com" a:placeholder="#{formlogin.Númerotelefónico}"  required="true" requiredMessage="#{formlogin.camporequerido}" a:pattern="[0-9]{10}" title="#{formlogin.diezdígitos}"/>
-                            <h:message for="celular" style="color: red"/>
-                        </div>
-                        <div style="width: 41%;float: left">
-                            <h:selectOneMenu style="width: 100%" id="torre" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunaTorre}">
-                                <f:selectItem itemLabel="#{formlogin.Torre}" itemValue=""></f:selectItem>
-                                <f:selectItems value="#{torreControlador.cosultarTodos()}" var="torre" itemLabel="#{torre.idTorre}" itemValue=""></f:selectItems>
-                            </h:selectOneMenu>
-                            <h:message for="torre" style="color: red"/>
-                        </div>
-                        <div style="width: 41%;float: left">
-                            <h:selectOneMenu style="width: 100%" id="apto" class="duos mierda" required="true" requiredMessage="#{formlogin.SeleccioneunApto}">
-                                <f:selectItem itemLabel="#{formlogin.Apartamento}" itemValue=""></f:selectItem>
-                                <f:selectItems value="#{apartamentoControlador.consultarTodos()}" var="apto" itemLabel="#{apto.idApartamento}" itemValue=""></f:selectItems>
-                            </h:selectOneMenu>
-                            <h:message for="apto" style="color: red"/>
-                        </div>
-                        <div style="width: 82%">
-                            <h:inputText style="width: 100%" id="asunto" a:type="text" class="duos com" a:placeholder="#{formlogin.Asunto}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                            <h:message for="asunto" style="color: red"/>
-                        </div>
-                        <div style="width: 82%">
-                            <h:inputTextarea style="width: 100%" id="msj" class="duos com furor" cols="1" rows="1" a:placeholder="#{formlogin.Mensaje}" required="true" requiredMessage="#{formlogin.camporequerido}"/>
-                            <h:message for="msj" style="color: red"/>
-                        </div>
-                        <h:commandButton class="duos" value="#{formlogin.Enviar}" a:placeholder="#{formlogin.Enviar}" style="cursor: pointer"/>
-                    </h:form>
-                </section>
-                <!-- footer -->
-                <footer>
-                    <div class="parS">
-                        <div class="divi cono">
-                            <img src="img/Logo ShortCut.png" width="200px" alt="" />
-                        </div>
-                        <div class="divi diva">
-                            <h4>#{formlogin.SobreNosotros}</h4>
-                            <p class="pexs">
-                                #{formlogin.sobremensaje}
-                            </p>
-                            <a href="#inicio" ><i class="fas fa-arrow-alt-circle-up black2" aria-hidden="true"/></a>
-                        </div>
-                        <div class="divi divo">
-                            <img src="img/Redes.png" width="300px" alt="" />
-                        </div>
-                    </div>
-                    <div class="parI">
-                        <p>
-                            #{formlogin.derechosresevados}
-                            <a href="#"><img src="././SI/img/derechos.png" alt="" /></a>
-                        </p>
-                    </div>
-                </footer>
-            </div>
-        </f:view>   
-        <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-        <!--
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        -->
-        <script src="js/popper.min.js" type="text/javascript"></script>
-        <script>
-                            var swiper = new Swiper(".swiper-container", {
-                                slidesPerView: 3,
-                                spaceBetween: 30,
-                                pagination: {
-                                    el: ".swiper-pagination",
-                                    clickable: true
-                                }
-                            });
-        </script>
+                </div>
+            </footer><!-- #footer -->
+
+            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        </f:view>
+        <!-- Uncomment below i you want to use a preloader -->
+        <!-- <div id="preloader"></div> -->
+
+        <!-- JavaScript Libraries -->
+        <script src="resources/lib/jquery/jquery.min.js"></script>
+        <script src="resources/lib/jquery/jquery-migrate.min.js"></script>
+        <script src="resources/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="resources/lib/easing/easing.min.js"></script>
+        <script src="resources/lib/mobile-nav/mobile-nav.js"></script>
+        <script src="resources/lib/wow/wow.min.js"></script>
+        <script src="resources/lib/waypoints/waypoints.min.js"></script>
+        <script src="resources/lib/counterup/counterup.min.js"></script>
+        <script src="resources/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="resources/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="resources/lib/lightbox/js/lightbox.min.js"></script>
+        <!-- Contact Form JavaScript File -->
+        <script src="resources/js/contactform.js"></script>
+
+        <!-- Template Main Javascript File -->
+        <script src="resources/js/main.js"></script>
+
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+
         <!-- validaciones y mensaje -->
         <script src="js/main.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
-        <script src="SI/js/opcionesSeguridad.js" type="text/javascript"></script>
+
         <script src="SI/js/Mensajes.js" type="text/javascript"></script>
         <script>#{mensajeControlador.mensaje}</script>
+
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                slidesPerGroup: 3,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        </script>
     </h:body>
+
 </html>

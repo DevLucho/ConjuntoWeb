@@ -118,6 +118,17 @@ public class SesionControlador implements Serializable {
         }
     }
 
+    public void verifRolAdmin() {
+        try {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (us.getIdRol().getIdRol() != 1) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" +"../../../../vista/not-found/mensaje.xhtml");
+            }
+        } catch (Exception e) {
+            System.out.println("Error verifS" + e.getMessage());
+        }
+    }
+
     public Boolean validarPermiso() {
         FacesContext fc = FacesContext.getCurrentInstance();
         String urlRecurso = fc.getExternalContext().getRequestPathInfo();

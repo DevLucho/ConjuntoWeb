@@ -32,8 +32,8 @@ public class ImagenControlador implements Serializable {
     *Lucho: C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\SI\\img\\
     AVENDAÑO: C:\\Users\\User\\Documents\\NetBeansProjects\\ProyectoConjuntoWeb\\web\\SI\\img\\
     */
-    private String ruta = "C:\\Users\\User\\Documents\\NetBeansProjects\\ProyectoConjuntoWeb\\web\\SI\\img\\"; // Ruta img interna
-    private String ruta2 = "C:\\Users\\User\\Documents\\NetBeansProjects\\ProyectoConjuntoWeb\\web\\img\\"; // Ruta img externa
+    private String ruta = "C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\SI\\img\\"; // Ruta img interna
+    private String ruta2 = "C:\\Users\\CM1049LA\\Documents\\NetBeansProjects\\ConjuntoWeb\\web\\img\\"; // Ruta img externa
 
     public ImagenControlador() {
     }
