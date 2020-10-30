@@ -36,6 +36,7 @@ public class PqrsControlador implements Serializable {
     private MensajeControlador mensaje;
     @Inject
     private HoraControlador hora;
+    private ImagenControlador imagen;
     private Pqrs pqrs;
     private Residente residente;
     private TipoPqrs tipoPqrs;
@@ -61,6 +62,7 @@ public class PqrsControlador implements Serializable {
     public void init() {
         residente = new Residente();
         tipoPqrs = new TipoPqrs();
+        imagen = new ImagenControlador();
         pqrs = new Pqrs();
     }
 
@@ -71,15 +73,19 @@ public class PqrsControlador implements Serializable {
             num = (int) (rnd.nextDouble() * 9999 + 1000);
             radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos + 2) + num + abecedario.charAt(pos - 1); //Estructura codigo
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            // --- Subir img --- 
+            imagen.subirImagen(1);            
             pqrs.setNroRadicado(radicado);
             pqrs.setIdResidente(residenteFacade.find(residente.getIdResidente()));
             pqrs.setIdTipoPqrs(tipoPqrsFacade.find(tipoPqrs.getIdTipoPqrs()));
             pqrs.setFecha(hora.now());
             pqrs.setHora(hora.now());
             pqrs.setEstado("Pendiente");
+            pqrs.setAdjunto("../../../img/" + imagen.getImg().getSubmittedFileName());
             pqrsFacade.create(pqrs);
             residente = new Residente();
             tipoPqrs = new TipoPqrs();
+            imagen = new ImagenControlador();
             pqrs = new Pqrs();
             mensaje.setMensaje("Mensajes('Se ha generado la PQRS','Su número de radicado es: " + radicado + "','success');");
             radicado = "";
@@ -162,6 +168,7 @@ public class PqrsControlador implements Serializable {
     public List<Pqrs> pqrsResidente(int idResidente) {
         return pqrsFacade.pqrsResidente(idResidente);
     }
+    
     public String obtenerUltimoP(int idPqrs){
         List<Pqrs> pepaa = pqrsFacade.buscarUltimoP(idPqrs);
         String nombresito = pepaa.get(0).getAsunto();
@@ -170,6 +177,7 @@ public class PqrsControlador implements Serializable {
     public int contarporTipos(String tipoPqrs){
         return pqrsFacade.contarPqrsTipos(tipoPqrs);
     }
+
     public int countState(String estado) {
         return pqrsFacade.countEstado(estado);
     }
@@ -181,7 +189,7 @@ public class PqrsControlador implements Serializable {
     public int contarR(int idResidente) {
         return pqrsFacade.countR(idResidente);
     }
-    
+
     public Pqrs getPqrs() {
         return pqrs;
     }
@@ -214,4 +222,11 @@ public class PqrsControlador implements Serializable {
         this.mensaje = mensaje;
     }
 
+    public ImagenControlador getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenControlador imagen) {
+        this.imagen = imagen;
+    }
 }

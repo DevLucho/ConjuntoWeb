@@ -175,7 +175,7 @@
                                                         <h:outputText value="Acciones"/>
                                                     </f:facet>
                                                     <div class="btn-group-sm text-center">
-                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(p)}"></h:commandButton>
                                                         <!-- . -->
                                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                                             <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar pqrs" action="#{pqrsControlador.cancelar(p)}"></h:commandButton>
@@ -243,14 +243,14 @@
                                                             <h:outputText value="Acciones"/>
                                                         </f:facet>
                                                         <div class="btn-group-sm text-center">
-                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(pq)}"></h:commandButton>
                                                             <!-- . -->
                                                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                                                 <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar pqrs" action="#{pqrsControlador.cancelar(pq)}"></h:commandButton>
                                                             </c:if>
                                                             <!-- . -->
                                                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                                                <h:commandButton class="btn btn-outline-success" value="Responder" title="Editar PQRS" action="#{respuestaControlador.consultarRespuesta(p)}"></h:commandButton>
+                                                                <h:commandButton class="btn btn-outline-success" value="Responder" title="Editar PQRS" action="#{respuestaControlador.consultarRespuesta(pq)}"></h:commandButton>
                                                             </c:if>
                                                         </div>
                                                     </h:column>
@@ -315,7 +315,7 @@
                                                         <h:outputText value="Acciones"/>
                                                     </f:facet>
                                                     <div class="btn-group-sm text-center">
-                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(pp)}"></h:commandButton>
                                                         <!-- . -->
                                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                                             <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar pqrs" action="#{pqrsControlador.cancelar(pp)}"></h:commandButton>
@@ -383,7 +383,7 @@
                                                             <h:outputText value="Acciones"/>
                                                         </f:facet>
                                                         <div class="btn-group-sm text-center">
-                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(ppr)}"></h:commandButton>
 
                                                             <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                                                 <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" title="Cancelar pqrs" action="#{pqrsControlador.cancelar(ppr)}"></h:commandButton>
@@ -465,7 +465,7 @@
                                                         <h:outputText value="Acciones"/>
                                                     </f:facet>
                                                     <div class="btn-group-sm text-center">
-                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(pr)}"></h:commandButton>
                                                     </div>
                                                 </h:column>
                                             </h:dataTable>
@@ -525,7 +525,7 @@
                                                             <h:outputText value="Acciones"/>
                                                         </f:facet>
                                                         <div class="btn-group-sm text-center">
-                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(ppr)}"></h:commandButton>
                                                         </div>
                                                     </h:column>
                                                 </h:dataTable>
@@ -589,7 +589,7 @@
                                                         <h:outputText value="Acciones"/>
                                                     </f:facet>
                                                     <div class="btn-group-sm text-center">
-                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                        <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(pc)}"></h:commandButton>
                                                     </div>
                                                 </h:column>
                                             </h:dataTable>
@@ -648,7 +648,7 @@
                                                             <h:outputText value="Acciones"/>
                                                         </f:facet>
                                                         <div class="btn-group-sm text-center">
-                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" title="#{formconsultarusuario.hoverAccionVer}"></h:commandButton>
+                                                            <h:commandButton value="" class="fas fa-eye btn btn-outline-primary" action="#{pqrsControlador.consultarPqrs(pcr)}"></h:commandButton>
                                                         </div>
                                                     </h:column>
                                                 </h:dataTable>

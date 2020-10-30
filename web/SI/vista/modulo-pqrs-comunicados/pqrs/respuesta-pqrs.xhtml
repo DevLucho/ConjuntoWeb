@@ -74,7 +74,7 @@
                 <hr/>                 
                 <!-- Formulario -->
 
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <div class="row">
                         <!-- Titulo -->
                         <div class="col-12 ">
@@ -107,7 +107,11 @@
                                         <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.asunto}"></h:outputText>
                                         <hr/>
                                         <b><p>Descripción:</p></b>
-                                        <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{respuestaControlador.pqrs.descripcion}" required="required" style="height:100px;" disabled="true"/>
+                                        <h:outputText class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{respuestaControlador.pqrs.descripcion}" style="height:100px;" />
+                                        <b><p>Adjunto:</p></b>
+                                        <!--<a href="#{respuestaControlador.pqrs.adjunto}" download="Adjunto 1">Descargar adjunto</a>-->
+                                        <!--<iframe name="principal" src="#{respuestaControlador.pqrs.adjunto}"></iframe>-->
+                                        <a href="soporte.xhtml"><i class="fas fa-file"></i>Ver archivo adjunto</a>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
@@ -147,9 +151,10 @@
                     <hr/>
                     <h4 class="col-12">Respuesta</h4>
                     <hr/>
-                    <div class="form-group row">
+                    <div class="form-group row" >
                         <div class="col-12">
                             <h:inputTextarea class="form col-12 form-control" pt:placeholder="Digite su respuesta . . ." id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;border: 1px solid #2A6378;"/>
+                            <h:inputFile id="file" value="#{respuestaControlador.respuesta.adjunto}" a:accept=".pdf,image/x-png,image/gif,image/jpeg" required="false" style="display: none"/>
                         </div>
                         <!-- Boton registrar -->
                         <div class="row justify-content-center mt-3 mb-3">
