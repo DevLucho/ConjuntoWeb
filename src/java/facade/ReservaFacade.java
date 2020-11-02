@@ -10,6 +10,7 @@ import java.util.List;
 //import java.util.HashMap;
 //import java.util.List;
 //import java.util.Map;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,18 +34,30 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
     public ReservaFacade() {
         super(Reserva.class);
     }
-    public int ContarReserva(int id){
+
+    public List<Reserva> findDesc() {
+        Query query = em.createQuery("SELECT r FROM Reserva r ORDER BY r.idReserva DESC");
+        return query.getResultList();
+    }
+
+    public List<Reserva> fechasReservadas(Date fecha) {
+        Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.fechaReserva = :fecha");
+        query.setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+
+    public int ContarReserva(int id) {
         Query q = em.createQuery("SELECT COUNT(r) FROM Reserva r WHERE r.estado='Reservado' AND r.idZonaComunal.idZonaComunal=:id");
         q.setParameter("id", id);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
-    public List<Reserva> buscarUltimaR(int idZonaComunal){
+
+    public List<Reserva> buscarUltimaR(int idZonaComunal) {
         Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.idZonaComunal.idZonaComunal=:idZonaComunal AND r.estado='Reservado' ORDER BY r.idReserva DESC");
         query.setParameter("idZonaComunal", idZonaComunal);
         return query.getResultList();
     }
-    
+
     public List<Reserva> findState(String estado) {
         Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.estado=:estado ORDER BY r.idReserva DESC");
         query.setParameter("estado", estado);

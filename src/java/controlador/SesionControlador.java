@@ -107,6 +107,29 @@ public class SesionControlador implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
+    public String session() {
+        try {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (us != null) {
+                if ("Activo".equals(us.getEstado())) {
+                    comunicado.eliminarExpirados(); // Elimina comunicados expirados
+                    if (us.getIdRol().getIdRol() == 1) {
+                        return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
+                    }
+                    if (us.getIdRol().getIdRol() == 2) {
+                        return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
+                    }
+                    if (us.getIdRol().getIdRol() == 3) {
+                        return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error verifS" + e.getMessage());
+        }
+        return "";
+    }
+
     public void verifSesion(String ruta) {
         try {
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
@@ -122,7 +145,7 @@ public class SesionControlador implements Serializable {
         try {
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
             if (us.getIdRol().getIdRol() != 1) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("" +"../../../../vista/not-found/mensaje.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../../../vista/not-found/mensaje.xhtml");
             }
         } catch (Exception e) {
             System.out.println("Error verifS" + e.getMessage());

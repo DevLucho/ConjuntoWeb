@@ -192,15 +192,17 @@
         <title>Error 404</title>
     </h:head>
     <h:body>
-        <h:form>
-            <div id='oopss'>
-                <div id='error-text'>
-                    <span>404</span>
-                    <p>No podemos encontrar lo que estas buscando</p>
-                    <p class='hmpg'><h:commandLink class="back" value="Regresar" action="#{sesionControlador.cerrarSesion()}"/></p>
-                </div>
+        <div id='oopss'>
+            <div id='error-text'>
+                <span>404</span>
+                <p>No podemos encontrar lo que estas buscando</p>
+                <p class='hmpg'>        
+                    <h:form>
+                        <h:commandLink class="back" value="Regresar" action="#{sesionControlador.cerrarSesion()}"/> 
+                    </h:form>
+                </p>
             </div>
-        </h:form>
+        </div>
     </h:body>
 </html>
 

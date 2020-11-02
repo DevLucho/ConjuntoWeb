@@ -111,7 +111,7 @@ public class ResidenteControlador implements Serializable {
         useremail = usuarioFacade.validarEmail(correo);
         if (user.getDocumento() != 0) {
             mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.documento + " ya se encuentra registrado en el sistema.','error');");
-        } else if (useremail != null) {
+        } else if (useremail.getCorreo() != null) {
             mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + this.correo + " ya se encuentra registrado en el sistema.','error');");
         } else {
             usuario.setIdRol(rolFacade.find(2));

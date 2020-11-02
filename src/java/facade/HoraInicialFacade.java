@@ -6,9 +6,11 @@
 package facade;
 
 import entidades.HoraInicial;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,11 @@ public class HoraInicialFacade extends AbstractFacade<HoraInicial> {
     public HoraInicialFacade() {
         super(HoraInicial.class);
     }
-    
+
+    public List<HoraInicial> horasNoReservadas(int id) {
+        Query query = em.createQuery("SELECT h FROM HoraInicial h WHERE h.idHora <> :id");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
 }

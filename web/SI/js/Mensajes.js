@@ -73,21 +73,7 @@ function Confirmar(titulo, texto, icono, textob, tituloc, textoc, iconoc) {
         }
     });
 };
-/*
-function ConfirmacionResidenteR(linkURL) {
-    Swal.fire({
-        icon: 'warning',
-        title: "Esta pqrs ya esta resuelta",
-        confirmButtonText: 'Volver',
-        allowOutsideClick: false
-    }).then(function (result) {
-        console.log(result);
-        if (result.value) {
-            window.location.href = linkURL;
-        }
-    });
-}
-*/
+
 function RegistrarVisitante(icono, titulo, html) {
     Swal.fire({
         icon: icono,

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Huertas
  */
 @Entity
 @Table(name = "hora_inicial")
@@ -52,6 +52,8 @@ public class HoraInicial implements Serializable {
     private Date hora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "horaInicio", fetch = FetchType.LAZY)
     private List<Evento> eventoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horaInicioReserva", fetch = FetchType.LAZY)
+    private List<Reserva> reservaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "horaInicialReserva", fetch = FetchType.LAZY)
     private List<Disponibilidad> disponibilidadList;
 
@@ -90,6 +92,15 @@ public class HoraInicial implements Serializable {
 
     public void setEventoList(List<Evento> eventoList) {
         this.eventoList = eventoList;
+    }
+
+    @XmlTransient
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 
     @XmlTransient

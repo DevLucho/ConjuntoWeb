@@ -53,7 +53,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             query.setParameter("correo", correo);
             usuario = (Usuario) query.getResultList().get(0);
         } catch (Exception e) {
-            System.out.println("Error en documento revisar: " + e.getMessage());
+            System.out.println("Error en email revisar: " + e.getMessage());
         }
         return usuario;
     }

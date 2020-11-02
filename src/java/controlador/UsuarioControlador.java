@@ -137,7 +137,7 @@ public class UsuarioControlador implements Serializable {
                 mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.nrodocumento + " y el correo: " + correo + " ya se encuentran registrados en el sistema.','error');");
             } else if (user.getDocumento() != 0) {
                 mensaje.setMensaje("Mensajes('Error','El número de documento: " + this.nrodocumento + " ya se encuentra registrado en el sistema.','error');");
-            } else if (useremail != null) {
+            } else if (useremail.getCorreo() != null) {
                 mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + this.correo + " ya se encuentra registrado en el sistema.','error');");
             } else {
                 usuario.setIdRol(rolFacade.find(rol.getIdRol()));

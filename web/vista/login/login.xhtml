@@ -18,6 +18,8 @@
             .btn-labeled {padding-top: 0;padding-bottom: 0;}
             .btn { margin-bottom:10px; }
         </style>
+        <f:event type="preRenderView" listener="#{sesionControlador.session()}" />
+
         <title>Conjunto Lucerna | Iniciar Sesi&oacute;n</title>
     </h:head>
     <h:body>

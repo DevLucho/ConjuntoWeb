@@ -110,7 +110,7 @@
                                 <h4 class="mt-3 text-center">#{formdashboardadmin.Todaslasreservas}</h4>
                                 <h:form>
                                     <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{reservaControlador.consultar()}" var="reserva">
+                                        <h:dataTable class="table table-bordered table-hover tabla" style="width:100%" value="#{reservaControlador.consultarDesc()}" var="reserva">
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Residente}"/>
@@ -133,13 +133,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reserva.fechaInicioReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reserva.fechaReserva)} | #{horaControlador.convertir(reserva.horaInicioReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reserva.fechaFinReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reserva.fechaReserva) } | #{ horaControlador.convertir(reserva.horaFinReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -182,13 +182,13 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reserva.fechaInicioReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reserva.fechaReserva) }#{horaControlador.convertir(reserva.horaInicioReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reserva.fechaFinReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reserva.fechaReserva) }#{horaControlador.convertir(reserva.horaFinReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -240,13 +240,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaR.fechaInicioReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaR.fechaReserva) }#{horaControlador.convertir(reservaR.horaInicioReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaR.fechaFinReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaR.fechaReserva) }#{horaControlador.convertir(reservaR.horaFinReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -289,13 +289,13 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaR.fechaInicioReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaR.fechaReserva) }#{horaControlador.convertir(reservaR.horaInicioReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaR.fechaFinReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaR.fechaReserva) }#{horaControlador.convertir(reservaR.horaFinReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -309,8 +309,8 @@
                                                     </f:facet>
                                                     <div class="btn-group-sm text-center">
                                                         <h:commandButton value="" class="fas fa-ban btn btn-outline-danger" action="#{reservaControlador.cancelar(reservaR)}" title="#{formdashboardadmin.Cancelarreserva}"></h:commandButton>
-                                                       <!-- . -->
-                                                       <h:commandButton value="" class="btn btn-outline-info far fa-eye" action="#{reservaControlador.findReserva(reservaR)}" title="#{formdashboardadmin.Verreserva}"></h:commandButton>
+                                                        <!-- . -->
+                                                        <h:commandButton value="" class="btn btn-outline-info far fa-eye" action="#{reservaControlador.findReserva(reservaR)}" title="#{formdashboardadmin.Verreserva}"></h:commandButton>
                                                     </div>
                                                 </h:column>
                                             </h:dataTable>
@@ -346,13 +346,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaP.fechaInicioReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaP.fechaReserva) }#{horaControlador.convertir(reservaP.horaInicioReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaP.fechaFinReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaP.fechaReserva) }#{horaControlador.convertir(reservaP.horaFinReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -395,13 +395,13 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaP.fechaInicioReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaP.fechaReserva) }#{horaControlador.convertir(reservaP.horaInicioReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaP.fechaFinReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaP.fechaReserva) }#{horaControlador.convertir(reservaP.horaFinReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -453,13 +453,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaC.fechaInicioReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaC.fechaReserva) }#{horaControlador.convertir(reservaC.horaInicioReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{horaControlador.convertirfh(reservaC.fechaFinReserva)}"></h:outputText>
+                                                <h:outputText value="#{horaControlador.convertirf(reservaC.fechaReserva) }#{horaControlador.convertir(reservaC.horaFinReserva.hora)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -502,13 +502,13 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Inicioreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaC.fechaInicioReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaC.fechaReserva) }#{horaControlador.convertir(reservaC.horaInicioReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
                                                         <h:outputText value="#{formdashboardadmin.Finreserva}"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{horaControlador.convertirfh(reservaC.fechaFinReserva)}"></h:outputText>
+                                                    <h:outputText value="#{horaControlador.convertirf(reservaC.fechaReserva) }#{horaControlador.convertir(reservaC.horaFinReserva.hora)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">

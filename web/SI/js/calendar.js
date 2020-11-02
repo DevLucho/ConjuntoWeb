@@ -18,9 +18,9 @@ class Calendar {
     getTemplate() {
         let template = `
             <div class="calendar__header">
-                <button type="button" class="control control--prev">&lt;</button>
+                <button type="button" class="control control--prev" disabled="true">&lt;</button>
                 <span class="month-name">dic 2019</span>
-                <button type="button" class="control control--next">&gt;</button>
+                <button type="button" class="control control--next" disabled="true">&gt;</button>
             </div>
             <div class="calendar__body">
                 <div class="grid">

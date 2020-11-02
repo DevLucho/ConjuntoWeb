@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author User
+ * @author Huertas
  */
 @Entity
 @Table(name = "reserva")
@@ -36,8 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")
     , @NamedQuery(name = "Reserva.findByIdReserva", query = "SELECT r FROM Reserva r WHERE r.idReserva = :idReserva")
     , @NamedQuery(name = "Reserva.findByMotivoReserva", query = "SELECT r FROM Reserva r WHERE r.motivoReserva = :motivoReserva")
-    , @NamedQuery(name = "Reserva.findByFechaInicioReserva", query = "SELECT r FROM Reserva r WHERE r.fechaInicioReserva = :fechaInicioReserva")
-    , @NamedQuery(name = "Reserva.findByFechaFinReserva", query = "SELECT r FROM Reserva r WHERE r.fechaFinReserva = :fechaFinReserva")
+    , @NamedQuery(name = "Reserva.findByFechaReserva", query = "SELECT r FROM Reserva r WHERE r.fechaReserva = :fechaReserva")
     , @NamedQuery(name = "Reserva.findByEstado", query = "SELECT r FROM Reserva r WHERE r.estado = :estado")})
 public class Reserva implements Serializable {
 
@@ -54,14 +53,9 @@ public class Reserva implements Serializable {
     private String motivoReserva;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fechaInicioReserva")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicioReserva;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fechaFinReserva")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFinReserva;
+    @Column(name = "fechaReserva")
+    @Temporal(TemporalType.DATE)
+    private Date fechaReserva;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -73,6 +67,12 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "idZonaComunal", referencedColumnName = "idZonaComunal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ZonaComunal idZonaComunal;
+    @JoinColumn(name = "horaInicioReserva", referencedColumnName = "idHora")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private HoraInicial horaInicioReserva;
+    @JoinColumn(name = "horaFinReserva", referencedColumnName = "idHora")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private HoraFinal horaFinReserva;
 
     public Reserva() {
     }
@@ -81,11 +81,10 @@ public class Reserva implements Serializable {
         this.idReserva = idReserva;
     }
 
-    public Reserva(Integer idReserva, String motivoReserva, Date fechaInicioReserva, Date fechaFinReserva, String estado) {
+    public Reserva(Integer idReserva, String motivoReserva, Date fechaReserva, String estado) {
         this.idReserva = idReserva;
         this.motivoReserva = motivoReserva;
-        this.fechaInicioReserva = fechaInicioReserva;
-        this.fechaFinReserva = fechaFinReserva;
+        this.fechaReserva = fechaReserva;
         this.estado = estado;
     }
 
@@ -105,20 +104,12 @@ public class Reserva implements Serializable {
         this.motivoReserva = motivoReserva;
     }
 
-    public Date getFechaInicioReserva() {
-        return fechaInicioReserva;
+    public Date getFechaReserva() {
+        return fechaReserva;
     }
 
-    public void setFechaInicioReserva(Date fechaInicioReserva) {
-        this.fechaInicioReserva = fechaInicioReserva;
-    }
-
-    public Date getFechaFinReserva() {
-        return fechaFinReserva;
-    }
-
-    public void setFechaFinReserva(Date fechaFinReserva) {
-        this.fechaFinReserva = fechaFinReserva;
+    public void setFechaReserva(Date fechaReserva) {
+        this.fechaReserva = fechaReserva;
     }
 
     public String getEstado() {
@@ -143,6 +134,22 @@ public class Reserva implements Serializable {
 
     public void setIdZonaComunal(ZonaComunal idZonaComunal) {
         this.idZonaComunal = idZonaComunal;
+    }
+
+    public HoraInicial getHoraInicioReserva() {
+        return horaInicioReserva;
+    }
+
+    public void setHoraInicioReserva(HoraInicial horaInicioReserva) {
+        this.horaInicioReserva = horaInicioReserva;
+    }
+
+    public HoraFinal getHoraFinReserva() {
+        return horaFinReserva;
+    }
+
+    public void setHoraFinReserva(HoraFinal horaFinReserva) {
+        this.horaFinReserva = horaFinReserva;
     }
 
     @Override

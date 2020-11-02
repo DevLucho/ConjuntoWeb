@@ -5,9 +5,13 @@
  */
 package controlador;
 
+import entidades.HoraFinal;
+import entidades.HoraInicial;
 import entidades.Reserva;
 import entidades.Residente;
 import entidades.ZonaComunal;
+import facade.HoraFinalFacade;
+import facade.HoraInicialFacade;
 import facade.ReservaFacade;
 import facade.ResidenteFacade;
 import facade.ZonaComunalFacade;
@@ -18,6 +22,7 @@ import java.security.NoSuchProviderException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -48,12 +53,18 @@ public class ReservaControlador implements Serializable {
     HoraControlador hora;
     @Inject
     MensajeControlador mensaje;
+    @Inject
+    ZonaComunalControlador zona;
+
     private Residente residente;
     private ZonaComunal zonaComunal;
     private Reserva reserva;
     private String fechaSeleccionada;
     private Date horaInicio;
     private Date horaFin;
+    private HoraInicial horaInicial;
+    private HoraFinal horaFinal;
+    private int horaI;
 
     @EJB
     ResidenteFacade residenteFacade;
@@ -64,6 +75,12 @@ public class ReservaControlador implements Serializable {
     @EJB
     ReservaFacade reservaFacade;
 
+    @EJB
+    HoraInicialFacade horaInicialFacade;
+
+    @EJB
+    HoraFinalFacade horaFinalFacade;
+
     public ReservaControlador() {
     }
 
@@ -72,55 +89,47 @@ public class ReservaControlador implements Serializable {
         residente = new Residente();
         zonaComunal = new ZonaComunal();
         reserva = new Reserva();
+        horaInicial = new HoraInicial();
+        horaFinal = new HoraFinal();
+    }
+
+    public String filtrar() {
+        this.fechaSeleccionada = fechaSeleccionada;
+        return "generar-reserva";
+    }
+
+    public Date extraerFecha(String fecha) {
+        Calendar c = Calendar.getInstance();
+        try {
+            int dia = Integer.parseInt(fecha.substring(0, 2));
+            int mes = Integer.parseInt(fecha.substring(3, 5));
+            int anio = Integer.parseInt(fecha.substring(6, 10));
+            c.set(anio, mes, dia);
+            c.add(Calendar.MONTH, -1);
+        } catch (Exception e) {
+            System.out.println("Error en extraer fecha: " + e.getMessage());
+        }
+        return c.getTime();
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
         try {
+            reserva.setHoraInicioReserva(horaInicialFacade.find(horaI));
+            reserva.setHoraFinReserva(horaFinalFacade.find(horaFinal.getIdHora()));
             reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
             reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
             reserva.setEstado("Pendiente");
 
-            // Extraer fecha de string
-            int dia = Integer.parseInt(fechaSeleccionada.substring(0, 2));
-            int mes = Integer.parseInt(fechaSeleccionada.substring(3, 5));
-            int anio = Integer.parseInt(fechaSeleccionada.substring(6, 10));
-
-            // Extraer fecha inicio
-            Calendar time = GregorianCalendar.getInstance();
-            time.setTime(this.horaInicio);
-
-            int hour = time.get(Calendar.HOUR);
-            int minute = time.get(Calendar.MINUTE);
-            int second = time.get(Calendar.SECOND);
-
-            // Extraer fecha fin
-            Calendar time2 = GregorianCalendar.getInstance();
-            time2.setTime(this.horaFin);
-
-            int hour2 = time2.get(Calendar.HOUR);
-            int minute2 = time2.get(Calendar.MINUTE);
-            int second2 = time2.get(Calendar.SECOND);
-
-            // Construir fecha-hora inicio reserva
-            Calendar c = Calendar.getInstance();
-            c.set(anio, mes, dia, hour, minute, second);
-            c.add(Calendar.MONTH, -1);
-            reserva.setFechaInicioReserva(c.getTime());
-
-            // Construir fecha-hora fin de reserva
-            Calendar c2 = Calendar.getInstance();
-            c2.set(anio, mes, dia, hour2, minute2, second2);
-            c2.add(Calendar.MONTH, -1);
-            reserva.setFechaFinReserva(c2.getTime());
+            reserva.setFechaReserva(extraerFecha(this.fechaSeleccionada));
 
             reservaFacade.create(reserva);
-            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.');");
+            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><b>*</b>Se a notificado vía email su reserva.');");
 
             correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
                     correo.paginaCorreo("Reserva pendiente de la zona: " + reserva.getIdZonaComunal().getNombre() + "",
                             " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: " + reserva.getIdZonaComunal().getNombre() + " ha sido realizada exitosamente con el siguiente horario:</p>\n"
-                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) + "</b></p>\n"
-                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) + "</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirf(reserva.getFechaReserva()) + " " + hora.convertir(reserva.getHoraInicioReserva().getHora()) + "</b></p>\n"
+                            + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirf(reserva.getFechaReserva()) + " " + hora.convertir(reserva.getHoraFinReserva().getHora()) + "</b></p>\n"
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
                             "http://imgfz.com/i/1CrnTaz.jpeg")
             );
@@ -128,25 +137,14 @@ public class ReservaControlador implements Serializable {
             residente = new Residente();
             zonaComunal = new ZonaComunal();
             reserva = new Reserva();
-            horaInicio = new Date();
-            horaFin = new Date();
+            horaFinal = new HoraFinal();
+            horaInicial = new HoraInicial();
             fechaSeleccionada = "";
 
         } catch (NumberFormatException e) {
             System.out.println("Error reserva" + e.getMessage());
         }
 
-    }
-
-    public List<Reserva> consultar() {
-        return reservaFacade.findAll();
-    }
-
-    public String findReserva(Reserva reserva) {
-        this.zonaComunal = reserva.getIdZonaComunal();
-        this.residente = reserva.getIdResidente();
-        this.reserva = reserva;
-        return "detalle-reserva";
     }
 
     public void cancelar(Reserva reserva) {
@@ -168,31 +166,93 @@ public class ReservaControlador implements Serializable {
         correo.enviarEmail(this.reserva.getIdResidente().getIdPerfil().getCorreo(), "Reserva aprobada",
                 correo.paginaCorreo("Reserva aprobada de: " + reserva.getIdZonaComunal().getNombre() + "",
                         " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: " + reserva.getIdZonaComunal().getNombre() + " ha sido aprobada por el administrador del conjunto con el siguiente horario:</p>\n"
-                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirfh(reserva.getFechaInicioReserva()) + "</b></p>\n"
-                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirfh(reserva.getFechaFinReserva()) + "</b></p>\n"
+                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + hora.convertirf(reserva.getFechaReserva()) + " " + hora.convertir(reserva.getHoraInicioReserva().getHora()) + "</b></p>\n"
+                        + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + hora.convertirf(reserva.getFechaReserva()) + " " + hora.convertir(reserva.getHoraFinReserva().getHora()) + "</b></p>\n"
                         + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, en llegado caso de cancelar tu reserva cuentas con 3h antes para no causar bloqueo</p>",
                         "http://imgfz.com/i/1CrnTaz.jpeg")
         );
         mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva aprobada satisfactoriamente','<b>*</b>La reserva se a notificado <br> vía email.<br><b>*</b>El estado de la reserva ahora<br> se encuentra en estado Reservado.');");
 
-        int cantidadreserva = reserva.getIdZonaComunal().getCantidadReservada();
         zonaComunal = reserva.getIdZonaComunal();
-        zonaComunal.setCantidadReservada(cantidadreserva = +1);
+        zonaComunal.setCantidadReservada(reserva.getIdZonaComunal().getCantidadReservada() + 1);
         zonaComunalFacade.edit(zonaComunal);
     }
 
+    public void validarFecha(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String fechaValue = (String) value;
+
+        try {
+            if (hora.now().after(extraerFecha(fechaValue))) { // Si es una fecha posterior
+                ((UIInput) comp).setValid(false);
+                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas pasadas, a la actual"));
+                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas pasadas, selecciona otra','error');");
+            } else if (hora.now().equals(extraerFecha(fechaValue))) { // Si son iguales
+                ((UIInput) comp).setValid(false);
+                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas a la actual"));
+                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas a la actual, selecciona otra','error');");
+            }
+        } catch (Exception e) {
+            System.out.println("Error validacion fecha r: " + e.getMessage());
+            mensaje.setMensaje("MensajeAlertify('Error, selecciona otra fecha','error');");
+        }
+
+    }
+
+    public List<HoraInicial> horasIniSinReserva() {
+        List<HoraInicial> horasIni = horaInicialFacade.findAll();
+
+        List<Reserva> reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada)); // Busca reservas con la fecha seleccionada
+
+        try {
+            if (reservas != null) {
+                for (Reserva reservado : reservas) {
+                    for (int j = reservado.getHoraInicioReserva().getIdHora(); j <= reservado.getHoraFinReserva().getIdHora()-1; j++) {
+                        System.out.println("Indice #:"+j +"Desde: "+reservado.getHoraInicioReserva().getIdHora()+"Hasta:"+reservado.getHoraFinReserva().getIdHora());
+                        horasIni.remove(j); // Remueve las fechas reservadas
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error remove horas: " + e.getMessage());
+        }
+
+        return horasIni;
+    }
+
+    public List<HoraFinal> horasFinales() {
+        List<HoraFinal> horasFinales = horaFinalFacade.horasFinales(this.horaI); // Consulta horas mayores a la hora i. seleccionada
+        HoraInicial objHora = horaInicialFacade.find(this.horaI); // Obj hora inicio seleccionada
+        ZonaComunal zona2 = zona.getZonaComunal(); // Obj con la zona actual
+        List<HoraFinal> horasDisponibles = new ArrayList<>(); // Almacena horas dependiendo que cumplan con el t. max. de reserva
+        try {
+
+            Calendar time = GregorianCalendar.getInstance();
+            time.setTime(objHora.getHora());
+            int hourI = time.get(Calendar.HOUR); // Extraer hora
+            int diff;
+            if (horasFinales != null) {
+                for (HoraFinal horaF : horasFinales) {
+                    diff = hourI - horaF.getHora().getHours();
+                    // Agregar horas que cumplan con el t. max de reserva
+                    if (Math.abs(diff) <= zona2.getTiempoMaximoReserva()) {
+                        horasDisponibles.add(new HoraFinal(horaF.getIdHora(), horaF.getHora()));
+                    }
+                    System.out.println(Math.abs(diff));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error horas finales: " + e.getMessage());
+        }
+
+        return horasDisponibles;
+    }
+
+    // Metodos de consulta
     public String obtenerUltimoR(int idReserva) {
         List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
         String nombresaso = pepa.get(0).getMotivoReserva();
         return nombresaso;
-    }
-
-    public int contarReservas() {
-        return reservaFacade.count();
-    }
-
-    public int contarReservas(int idZona) {
-        return reservaFacade.ContarReserva(idZona);
     }
 
     public List<Reserva> findState(String estado) {
@@ -207,7 +267,30 @@ public class ReservaControlador implements Serializable {
         return reservaFacade.findR(idResidente);
     }
 
-    // count
+    public List<Reserva> consultar() {
+        return reservaFacade.findAll();
+    }
+
+    public List<Reserva> consultarDesc() {
+        return reservaFacade.findDesc();
+    }
+
+    public String findReserva(Reserva reserva) {
+        this.zonaComunal = reserva.getIdZonaComunal();
+        this.residente = reserva.getIdResidente();
+        this.reserva = reserva;
+        return "detalle-reserva";
+    }
+
+    // Metodos count
+    public int contarReservas() {
+        return reservaFacade.count();
+    }
+
+    public int contarReservas(int idZona) {
+        return reservaFacade.ContarReserva(idZona);
+    }
+
     public int countEstadoR(String estado, int idResidente) {
         return reservaFacade.countEstadoR(estado, idResidente);
     }
@@ -220,37 +303,7 @@ public class ReservaControlador implements Serializable {
         return reservaFacade.countR(idResidente);
     }
 
-    //
-    public void validarFecha(FacesContext context, UIComponent comp, Object value) {
-        context = FacesContext.getCurrentInstance();
-        String fechaSeleccionadas = (String) value;
-
-        // Extraer fecha de string
-        int dia = Integer.parseInt(fechaSeleccionadas.substring(0, 2));
-        int mes = Integer.parseInt(fechaSeleccionadas.substring(3, 5));
-        int anio = Integer.parseInt(fechaSeleccionadas.substring(6, 10));
-
-        Calendar c = Calendar.getInstance();
-        c.set(anio, mes, dia);
-        c.add(Calendar.MONTH, -1);
-        
-        System.out.println("La seleccionada:"+hora.convertirf(c.getTime()));
-        System.out.println("La actual: "+hora.convertirf(hora.now()));
-
-        try {
-            if (hora.convertirf(c.getTime()).compareTo(hora.convertirf(hora.now())) < 0) {
-                ((UIInput) comp).setValid(false);
-                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas pasadas, a la actual"));
-                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas pasadas, selecciona otra','error');");
-            }
-        } catch (Exception e) {
-            System.out.println("Error validacion fecha r: "+e.getMessage());
-            mensaje.setMensaje("MensajeAlertify('Error, selecciona otra fecha','error');");
-        }
-
-    }
-
-    // Metodo Get y Set
+    // Metodos Get y Set
     public Residente getResidente() {
         return residente;
     }
@@ -297,6 +350,30 @@ public class ReservaControlador implements Serializable {
 
     public void setFechaSeleccionada(String fechaSeleccionada) {
         this.fechaSeleccionada = fechaSeleccionada;
+    }
+
+    public HoraInicial getHoraInicial() {
+        return horaInicial;
+    }
+
+    public void setHoraInicial(HoraInicial horaInicial) {
+        this.horaInicial = horaInicial;
+    }
+
+    public HoraFinal getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(HoraFinal horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
+    public int getHoraI() {
+        return horaI;
+    }
+
+    public void setHoraI(int horaI) {
+        this.horaI = horaI;
     }
 
 }
