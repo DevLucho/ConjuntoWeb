@@ -19,9 +19,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.NoSuchProviderException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,6 +30,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 
@@ -66,6 +64,9 @@ public class ReservaControlador implements Serializable {
     private HoraFinal horaFinal;
     private int horaI;
 
+    // listas
+    private List<HoraFinal> horasDisponibles;
+
     @EJB
     ResidenteFacade residenteFacade;
 
@@ -94,8 +95,7 @@ public class ReservaControlador implements Serializable {
     }
 
     public String filtrar() {
-        this.fechaSeleccionada = fechaSeleccionada;
-        return "generar-reserva";
+        return null;
     }
 
     public Date extraerFecha(String fecha) {
@@ -200,15 +200,15 @@ public class ReservaControlador implements Serializable {
     }
 
     public List<HoraInicial> horasIniSinReserva() {
-        List<HoraInicial> horasIni = horaInicialFacade.findAll();
-
-        List<Reserva> reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada)); // Busca reservas con la fecha seleccionada
-
+        List<HoraInicial> horasIni = null;
+        List<Reserva> reservas = null;
+        reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada),this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
         try {
-            if (reservas != null) {
+            if (reservas != null && this.fechaSeleccionada!=null) {
+                horasIni = horaInicialFacade.findAll();
                 for (Reserva reservado : reservas) {
-                    for (int j = reservado.getHoraInicioReserva().getIdHora(); j <= reservado.getHoraFinReserva().getIdHora()-1; j++) {
-                        System.out.println("Indice #:"+j +"Desde: "+reservado.getHoraInicioReserva().getIdHora()+"Hasta:"+reservado.getHoraFinReserva().getIdHora());
+                    for (int j = reservado.getHoraInicioReserva().getIdHora(); j <= reservado.getHoraFinReserva().getIdHora() - 1; j++) {
+                        System.out.println("Indice #:" + j + "Desde: " + reservado.getHoraInicioReserva().getIdHora() + "Hasta:" + reservado.getHoraFinReserva().getIdHora());
                         horasIni.remove(j); // Remueve las fechas reservadas
                     }
                 }
@@ -220,11 +220,11 @@ public class ReservaControlador implements Serializable {
         return horasIni;
     }
 
-    public List<HoraFinal> horasFinales() {
+    public void horasFinales(AjaxBehaviorEvent event) {
         List<HoraFinal> horasFinales = horaFinalFacade.horasFinales(this.horaI); // Consulta horas mayores a la hora i. seleccionada
         HoraInicial objHora = horaInicialFacade.find(this.horaI); // Obj hora inicio seleccionada
         ZonaComunal zona2 = zona.getZonaComunal(); // Obj con la zona actual
-        List<HoraFinal> horasDisponibles = new ArrayList<>(); // Almacena horas dependiendo que cumplan con el t. max. de reserva
+        horasDisponibles = new ArrayList<>(); // Almacena horas dependiendo que cumplan con el t. max. de reserva
         try {
 
             Calendar time = GregorianCalendar.getInstance();
@@ -244,8 +244,6 @@ public class ReservaControlador implements Serializable {
         } catch (Exception e) {
             System.out.println("Error horas finales: " + e.getMessage());
         }
-
-        return horasDisponibles;
     }
 
     // Metodos de consulta
@@ -374,6 +372,14 @@ public class ReservaControlador implements Serializable {
 
     public void setHoraI(int horaI) {
         this.horaI = horaI;
+    }
+
+    public List<HoraFinal> getHorasDisponibles() {
+        return horasDisponibles;
+    }
+
+    public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
+        this.horasDisponibles = horasDisponibles;
     }
 
 }

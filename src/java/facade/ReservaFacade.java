@@ -40,9 +40,17 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         return query.getResultList();
     }
 
-    public List<Reserva> fechasReservadas(Date fecha) {
-        Query query = em.createQuery("SELECT r FROM Reserva r WHERE r.fechaReserva = :fecha");
-        query.setParameter("fecha", fecha);
+    public List<Reserva> fechasReservadas(Date fecha, int id) {
+        Query query = null;
+        try {
+            query = em.createQuery("SELECT r FROM Reserva r WHERE r.fechaReserva = :fecha AND r.idZonaComunal.idZonaComunal=:id");
+            query.setParameter("fecha", fecha);
+            query.setParameter("id", id);
+
+        } catch (Exception e) {
+            System.out.println("Error consulta fecha r. " + e.getMessage());
+        }
+
         return query.getResultList();
     }
 

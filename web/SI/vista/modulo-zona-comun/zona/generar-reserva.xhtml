@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -68,6 +69,7 @@
                         </div>
                     </div>
                     <hr style="color:black"/>
+                    <!--
                     <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
                         <div class="col-12 panel">
                             <div class="panel-heading">
@@ -112,7 +114,7 @@
                                 </div>
                             </h:form>
                         </div>
-                    </div>
+                    </div>-->
                     <hr style="border-top:1px solid gray"/>
                     <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
                         <div class="col-12 panel">
@@ -126,21 +128,20 @@
                                 <div class="calendar" id="calendar"></div>
                                 <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
                                 <h:form>
-                                    <h:inputText a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" validator="#{reservaControlador.validarFecha}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
-                                    <h:message for="fechaSeleccionada" style="color:red"/>
-                                    <hr/>
-                                    <h:inputText a:type="reset" class="btn btn-info" value="Limpiar"/>
+                                    <h:inputText style="display: none" a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" validator="#{reservaControlador.validarFecha}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                    <h:message for="fechaSeleccionada" style="color:red"/><br/>
                                     <!-- . -->
-                                    <h:commandButton value="Filtrar" class="btn btn-success" action="#{reservaControlador.filtrar()}"/>
+                                    <h:commandButton value="Filtrar" class="btn btn-secondary" action="#{reservaControlador.filtrar}"></h:commandButton>
                                 </h:form>
                             </center>
                         </div>
                         <!-- Horas disponibles -->
                         <div class="col-12 col-md-9 mt-3 mb-3">
+                            #{reservaControlador.setFechaSeleccionada(reservaControlador.fechaSeleccionada)}
                             <c:if test="#{reservaControlador.fechaSeleccionada!=null}">
-                                <h:form>
+                                <h:form id="reserva">
                                     <div class="form-group col-12">
-                                        <p><b>Nota: </b>El tiempo maximo de reserva de la zona: #{zonaComunalControlador.zonaComunal.nombre} es <mark>#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}h</mark></p>
+                                        <p><b>Nota: </b>El tiempo maximo de reserva de la zona: #{zonaComunalControlador.zonaComunal.nombre} es <span class="badge badge-success p-2">#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}h</span></p>
                                         <strong><h:outputLabel value="Zona comunal:" for="idZonaComunal" /></strong>
                                         <h:selectOneMenu class="form-control" id="idZonaComunal" value="#{reservaControlador.zonaComunal.idZonaComunal}" title="Zona comunal" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                             <f:selectItem itemValue="#{zonaComunalControlador.zonaComunal.idZonaComunal}" itemLabel="#{zonaComunalControlador.zonaComunal.nombre}"/>
@@ -152,25 +153,29 @@
                                         <h:inputTextarea class="form-control" id="motivoReserva" value="#{reservaControlador.reserva.motivoReserva}" title="Motivo de reserva" a:placeholder="Digite el motivo de reserva" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
                                         <h:message for="motivoReserva" style="color:red"/>
                                     </div>
+                                    <div class="form-group col-12">
+                                        <p style="margin:0" id="fechaSeleccionadaOut">Horario <span class="badge badge-success p-2 "> disponible </span> para la fecha seleccionada: #{reservaControlador.fechaSeleccionada}</p>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-12 col-md-3">
+                                            <!-- hora inicial -->
                                             <strong><h:outputLabel for="horaI" value="Hora inicio"/></strong>
-                                            <h:selectOneMenu id="horaI" class="form-control" value="#{reservaControlador.horaI}" required="true" requiredMessage="#{formcrearusuario.camporequerido}" onchange="submit();">
+                                            <h:selectOneMenu id="horaI" class="form-control" value="#{reservaControlador.horaI}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{reservaControlador.horasIniSinReserva()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                                <f:ajax event="change" listener="#{reservaControlador.horasFinales}" render="horaF" execute="@this"></f:ajax>
                                             </h:selectOneMenu>
                                             <h:message for="horaI" style="color:red"/>
                                         </div>
-                                        <c:if test="#{reservaControlador.horaI!=0}">
-                                            <div class="col-12 col-md-3">
-                                                <strong><h:outputLabel for="horaF" value="Hora final"/></strong>
-                                                <h:selectOneMenu id="horaF" class="form-control" value="#{reservaControlador.horaFinal.idHora}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
-                                                    <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                    <f:selectItems value="#{reservaControlador.horasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
-                                                </h:selectOneMenu>
-                                                <h:message for="horaF" style="color:red"/>
-                                            </div>
-                                        </c:if>
+                                        <!-- hora final -->
+                                        <div class="col-12 col-md-3">
+                                            <strong><h:outputLabel for="horaF" value="Hora final"/></strong>
+                                            <h:selectOneMenu id="horaF" class="form-control" value="#{reservaControlador.horaFinal.idHora}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                <f:selectItems value="#{reservaControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                            </h:selectOneMenu>
+                                            <h:message for="horaF" style="color:red"/>
+                                        </div>
                                     </div>
                                     <div class="form-group col-12">
                                         <c:if test="#{sesionControlador.user.idRol.idRol==2}">
@@ -217,14 +222,14 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
         <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
             <script>
-                                                $(document).ready(function () {
-                                                    // Ejecutar dataTable
-                                                    $(document).ready(function () {
-                                                        $('.tabla').DataTable({
-                                                            dom: 'lrtip'
-                                                        });
-                                                    });
-                                                });
+                $(document).ready(function () {
+                    // Ejecutar dataTable
+                    $(document).ready(function () {
+                        $('.tabla').DataTable({
+                            dom: 'lrtip'
+                        });
+                    });
+                });
             </script>
         </c:if>
         <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
@@ -251,7 +256,7 @@
         <script src="../../../js/calendar.js"></script>
         <script type="text/javascript">
                 let calendar = new Calendar('calendar');
-                var inputFecha = document.getElementById('j_idt136:fechaSeleccionada');
+                var inputFecha = document.getElementById('j_idt115:fechaSeleccionada');
                 calendar.getElement().addEventListener('change', e => {
                     var dateSelected = calendar.value().format('L');
                     inputFecha.value = dateSelected;

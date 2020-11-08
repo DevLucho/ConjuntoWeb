@@ -184,15 +184,25 @@
                                                     </c:forEach>
                                                 </c:if>
                                                 <div class="col-12 col-sm-6">
+
                                                     <strong><h:outputLabel for="pass" value="Contrase&ntilde;a actual"/></strong>
-                                                    <h:inputText id="pass" a:type="password" class="form-control-plaintext" a:placeholder="Ingrese su contraseña" value="#{residenteControlador.contra}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validar}"/>
-                                                    <h:message for="pass" style="color:red"/><br/>
+                                                    <h:inputText id="pass" a:type="password" class="form-control-plaintext" a:placeholder="Ingrese su contraseña" value="#{residenteControlador.contra}" required="true">
+                                                        <f:ajax event="keyup" render="mspass" listener="#{residenteControlador.validar}"/>
+                                                    </h:inputText>
+                                                    <h:message for="pass" style="display: none"/>
+                                                    <h:outputText id="mspass" style="color:red" value="#{residenteControlador.msgerror}"/><br/>
                                                     <strong><h:outputLabel for="npass" value="Nueva contrase&ntilde;a"/></strong>
-                                                    <h:inputText id="npass" a:type="password" class="form-control-plaintext" a:placeholder="Digite nueva contraseña" value="#{residenteControlador.newpass}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClave}"/>
-                                                    <h:message for="npass" style="color:red"/><br/>
+                                                    <h:inputText id="npass" a:type="password" class="form-control-plaintext" a:placeholder="Digite nueva contraseña" value="#{residenteControlador.newpass}" required="true">
+                                                        <f:ajax event="keyup" render="msnpass" listener="#{residenteControlador.validarClave}"/>
+                                                    </h:inputText>
+                                                    <h:message for="npass" style="display: none"/>
+                                                    <h:outputText id="msnpass" style="color:red" value="#{residenteControlador.msgerror2}"/><br/>
                                                     <strong><h:outputLabel for="cpass" value="Confirma contrase&ntilde;a"/></strong>
-                                                    <h:inputText id="cpass" a:type="password" class="form-control-plaintext" a:placeholder="Repita la nueva contraseña" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.confirmarClave}"/>
-                                                    <h:message for="cpass" style="color:red"/>
+                                                    <h:inputText id="cpass" a:type="password" class="form-control-plaintext" a:placeholder="Repita la nueva contraseña" value="#{residenteControlador.confirmar}" required="true">
+                                                        <f:ajax event="keyup" rendered="mscpass" listener="#{residenteControlador.confirmarClave}"/>
+                                                    </h:inputText>
+                                                    <h:message for="cpass" style="display: none"/>
+                                                    <h:outputText id="mscpass" style="color:red" value="#{residenteControlador.msgerror3}"/><br/>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <p><strong>Recuerda:</strong><br/>
