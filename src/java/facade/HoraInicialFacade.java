@@ -37,4 +37,11 @@ public class HoraInicialFacade extends AbstractFacade<HoraInicial> {
         return query.getResultList();
     }
 
+    public List<HoraInicial> horasSinReserva(int idHoraIni, int idHoraFin) {
+        Query q = em.createQuery("SELECT h FROM HoraInicial h WHERE h.idHora BETWEEN  :idHoraIni AND :idHoraFin");
+        q.setParameter("idHoraIni", idHoraIni);
+        q.setParameter("idHoraFin", idHoraFin);
+        return q.getResultList();
+    }
+
 }

@@ -130,7 +130,7 @@ nav ul li{
 .contenedor-body ul::-webkit-scrollbar {    
   display:none;
 }
-/* Efecto boton */
+/* Efecto boton 
 form button, .contenedor-footer button {
   position:relative;
   padding: 10px 20px;  
@@ -205,3 +205,4 @@ form button::before {
     transform: translate(0, -66.666%);
   }
 }
+*/

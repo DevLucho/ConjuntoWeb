@@ -43,7 +43,7 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
     public List<Reserva> fechasReservadas(Date fecha, int id) {
         Query query = null;
         try {
-            query = em.createQuery("SELECT r FROM Reserva r WHERE r.fechaReserva = :fecha AND r.idZonaComunal.idZonaComunal=:id");
+            query = em.createQuery("SELECT r FROM Reserva r WHERE r.fechaReserva = :fecha AND r.idZonaComunal.idZonaComunal=:id AND r.estado='Pendiente'");
             query.setParameter("fecha", fecha);
             query.setParameter("id", id);
 

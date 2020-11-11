@@ -97,6 +97,7 @@
                                             <h:selectOneMenu id="horaInicio" class="form-control" value="#{eventoControlador.horaInicial.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                                <f:ajax event="change" listener="#{eventoControlador.horasFinales}" render="horaFin" execute="@this"></f:ajax>
                                             </h:selectOneMenu>
                                             <h:message for="horaInicio" style="color: red"/>
                                         </div>
@@ -121,7 +122,7 @@
                                             <strong><label for="fechaf">#{formdashboardadmin.Terminaalas}</label></strong>
                                             <h:selectOneMenu id="horaFin" class="form-control" value="#{eventoControlador.horaFinal.idHora}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                                <f:selectItems value="#{eventoControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                             </h:selectOneMenu>
                                             <h:message for="horaFin" style="color: red"/> 
                                         </div>

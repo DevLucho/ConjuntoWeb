@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.HoraFinal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,10 +38,17 @@ public class HoraFinalFacade extends AbstractFacade<HoraFinal> {
         return query.getResultList();
     }
 
-    public List<HoraFinal> horasFinales(int id) {
-        Query query = em.createQuery("SELECT h FROM HoraFinal h WHERE h.idHora > :id");
-        query.setParameter("id", id);
+    public List<HoraFinal> horasFinales(int num) {
+        Query query = em.createQuery("SELECT h FROM HoraFinal h WHERE h.idHora >= :num");
+        query.setParameter("num", num);
         return query.getResultList();
+    }            
+
+    public List<HoraFinal> horasSinReserva(int idHoraIni, int idHoraFin) {
+        Query q = em.createQuery("SELECT h FROM HoraFinal h WHERE h.idHora BETWEEN  :idHoraIni AND :idHoraFin");
+        q.setParameter("idHoraIni", idHoraIni);
+        q.setParameter("idHoraFin", idHoraFin);
+        return q.getResultList();
     }
 
 }

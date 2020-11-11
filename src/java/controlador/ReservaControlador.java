@@ -22,8 +22,8 @@ import java.security.NoSuchProviderException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -63,9 +63,12 @@ public class ReservaControlador implements Serializable {
     private HoraInicial horaInicial;
     private HoraFinal horaFinal;
     private int horaI;
+    private boolean verifica = true;
 
     // listas
-    private List<HoraFinal> horasDisponibles;
+    private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
+    private List<HoraInicial> horasIni = null;
+    private List<Reserva> reservas = null;
 
     @EJB
     ResidenteFacade residenteFacade;
@@ -94,6 +97,11 @@ public class ReservaControlador implements Serializable {
         horaFinal = new HoraFinal();
     }
 
+    public String limpiar() {
+        fechaSeleccionada = null;
+        return null;
+    }
+
     public String filtrar() {
         return null;
     }
@@ -107,7 +115,9 @@ public class ReservaControlador implements Serializable {
             c.set(anio, mes, dia);
             c.add(Calendar.MONTH, -1);
         } catch (Exception e) {
+            mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
             System.out.println("Error en extraer fecha: " + e.getMessage());
+            verifica = false;
         }
         return c.getTime();
     }
@@ -123,7 +133,7 @@ public class ReservaControlador implements Serializable {
             reserva.setFechaReserva(extraerFecha(this.fechaSeleccionada));
 
             reservaFacade.create(reserva);
-            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><b>*</b>Se a notificado vía email su reserva.');");
+            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><br><b>*</b>Se a notificado vía email su reserva.');");
 
             correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
                     correo.paginaCorreo("Reserva pendiente de la zona: " + reserva.getIdZonaComunal().getNombre() + "",
@@ -135,17 +145,37 @@ public class ReservaControlador implements Serializable {
             );
 
             residente = new Residente();
-            zonaComunal = new ZonaComunal();
+            //zonaComunal = new ZonaComunal();
             reserva = new Reserva();
             horaFinal = new HoraFinal();
             horaInicial = new HoraInicial();
-            fechaSeleccionada = "";
+            fechaSeleccionada = null;
+            horaI = 0;
 
         } catch (NumberFormatException e) {
+            mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
             System.out.println("Error reserva" + e.getMessage());
         }
 
     }
+
+    /*
+       public void handleClose(CloseEvent event) {
+        addMessage(event.getComponent().getId() + " closed", "So you don't like nature?");
+    }
+     
+    public void handleMove(MoveEvent event) {
+        addMessage(event.getComponent().getId() + " moved", "Left: " + event.getLeft() + ", Top: " + event.getTop());
+    }
+     
+    public void destroyWorld() {
+        addMessage("System Error", "Please try again later.");
+    }
+     
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }*/
 
     public void cancelar(Reserva reserva) {
         if ("Cancelado".equals(reserva.getEstado())) {
@@ -200,21 +230,20 @@ public class ReservaControlador implements Serializable {
     }
 
     public List<HoraInicial> horasIniSinReserva() {
-        List<HoraInicial> horasIni = null;
-        List<Reserva> reservas = null;
-        reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada),this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
-        try {
-            if (reservas != null && this.fechaSeleccionada!=null) {
-                horasIni = horaInicialFacade.findAll();
-                for (Reserva reservado : reservas) {
-                    for (int j = reservado.getHoraInicioReserva().getIdHora(); j <= reservado.getHoraFinReserva().getIdHora() - 1; j++) {
-                        System.out.println("Indice #:" + j + "Desde: " + reservado.getHoraInicioReserva().getIdHora() + "Hasta:" + reservado.getHoraFinReserva().getIdHora());
-                        horasIni.remove(j); // Remueve las fechas reservadas
+        reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada), this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
+        if (verifica) {
+            try {
+                if (reservas != null && this.fechaSeleccionada != null) {
+                    horasIni = horaInicialFacade.findAll();
+                    for (Reserva reservado : reservas) {
+                        // Consulta las horas reservadas
+                        List<HoraInicial> horasIni2 = horaInicialFacade.horasSinReserva(reservado.getHoraInicioReserva().getIdHora(), reservado.getHoraFinReserva().getIdHora() + 1);
+                        horasIni.removeAll(horasIni2); // Remueve todas las horas reservadas de la lista
                     }
                 }
+            } catch (Exception e) {
+                System.out.println("Error remove horas: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println("Error remove horas: " + e.getMessage());
         }
 
         return horasIni;
@@ -227,20 +256,28 @@ public class ReservaControlador implements Serializable {
         horasDisponibles = new ArrayList<>(); // Almacena horas dependiendo que cumplan con el t. max. de reserva
         try {
 
-            Calendar time = GregorianCalendar.getInstance();
-            time.setTime(objHora.getHora());
-            int hourI = time.get(Calendar.HOUR); // Extraer hora
-            int diff;
             if (horasFinales != null) {
                 for (HoraFinal horaF : horasFinales) {
-                    diff = hourI - horaF.getHora().getHours();
-                    // Agregar horas que cumplan con el t. max de reserva
-                    if (Math.abs(diff) <= zona2.getTiempoMaximoReserva()) {
+                    long diferencia;
+                    // calcula diferencia en minutos
+                    if (objHora.getHora().getTime() > horaF.getHora().getTime()) {
+                        diferencia = objHora.getHora().getTime() - horaF.getHora().getTime();
+                    } else {
+                        diferencia = horaF.getHora().getTime() - objHora.getHora().getTime();
+                    }
+                    long horasDiff = (TimeUnit.MILLISECONDS.toMinutes(diferencia)) / 60; // Operacion para pasar de minutos a horas.
+
+                    if (horasDiff <= zona2.getTiempoMaximoReserva()) { // Agregar horas que cumplan con el t. max de reserva
                         horasDisponibles.add(new HoraFinal(horaF.getIdHora(), horaF.getHora()));
                     }
-                    System.out.println(Math.abs(diff));
+                }
+                // elimina horas reservadas
+                for (Reserva reservado : reservas) {
+                    List<HoraFinal> horasFin = horaFinalFacade.horasSinReserva(reservado.getHoraInicioReserva().getIdHora() - 1, reservado.getHoraFinReserva().getIdHora());
+                    horasDisponibles.removeAll(horasFin);
                 }
             }
+
         } catch (Exception e) {
             System.out.println("Error horas finales: " + e.getMessage());
         }
@@ -380,6 +417,14 @@ public class ReservaControlador implements Serializable {
 
     public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
         this.horasDisponibles = horasDisponibles;
+    }
+
+    public boolean isVerifica() {
+        return verifica;
+    }
+
+    public void setVerifica(boolean verifica) {
+        this.verifica = verifica;
     }
 
 }

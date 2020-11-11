@@ -119,7 +119,7 @@
                     <div class="row mt-3 mb-3" style="border: 1px solid #33406A; border-radius: 5px;">
                         <div class="col-12 panel">
                             <div class="panel-heading">
-                                <span>#{formdashboardadmin.Disponibilidadlazonacomunal}</span>
+                                <span>#{formdashboardadmin.Disponibilidadlazonacomunal}: #{zonaComunalControlador.zonaComunal.nombre}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-3 mt-3 mb-3">
@@ -128,16 +128,23 @@
                                 <div class="calendar" id="calendar"></div>
                                 <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
                                 <h:form>
-                                    <h:inputText style="display: none" a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" validator="#{reservaControlador.validarFecha}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
-                                    <h:message for="fechaSeleccionada" style="color:red"/><br/>
+                                    <h:inputText style="display: none" a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" validator="#{reservaControlador.validarFecha}" required="true" requiredMessage="Selecciona una fecha del calendario."/>
+                                    <h:message for="fechaSeleccionada" style="color:red"/>
+                                    <div class="mt-2">
+                                        <h:commandButton value="Limpiar" class="btn btn-dark" actionListener="#{reservaControlador.limpiar()}"/>
                                     <!-- . -->
-                                    <h:commandButton value="Filtrar" class="btn btn-secondary" action="#{reservaControlador.filtrar}"></h:commandButton>
+                                    <h:commandButton value="Filtrar" class="btn btn-primary" action="#{reservaControlador.filtrar()}"/>
+                                    </div>
+                                    
                                 </h:form>
                             </center>
                         </div>
                         <!-- Horas disponibles -->
                         <div class="col-12 col-md-9 mt-3 mb-3">
                             #{reservaControlador.setFechaSeleccionada(reservaControlador.fechaSeleccionada)}
+                            <c:if test="#{reservaControlador.fechaSeleccionada==null}">
+                                <h3 class="text-center mt-20">Selecciona una fecha<br/>Luego filtra</h3>
+                            </c:if>
                             <c:if test="#{reservaControlador.fechaSeleccionada!=null}">
                                 <h:form id="reserva">
                                     <div class="form-group col-12">
@@ -196,6 +203,7 @@
                                     <div class="form-group col-12">
                                         <h:commandButton class="btn btn-outline-success" value="Reservar" action="#{reservaControlador.registrar()}"/>
                                     </div>
+                                    
                                     <c:if test="#{sesionControlador.user.idRol.idRol==2}">
                                         <div class="col-12">
                                             <b><p>*Recuerda que el administrador aprobara tu solicitud de reserva</p></b>

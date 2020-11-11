@@ -28,6 +28,7 @@ import java.security.NoSuchProviderException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.servlet.http.Part;
@@ -55,6 +56,7 @@ public class EventoControlador implements Serializable {
     private HoraInicial horaInicial;
     private HoraFinal horaFinal;
     private int notificar;
+    private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
 
     @EJB
     EventoFacade eventoFacade;
@@ -240,6 +242,11 @@ public class EventoControlador implements Serializable {
         }
     }
 
+    public List<HoraFinal> horasFinales(AjaxBehaviorEvent event) {
+        this.horasDisponibles = horaFiFacade.horasFinales(horaInicial.getIdHora());
+        return horasDisponibles;
+    }
+
     // Metodos get y set
     public Evento getEvento() {
         return evento;
@@ -305,4 +312,11 @@ public class EventoControlador implements Serializable {
         this.imagen = imagen;
     }
 
+    public List<HoraFinal> getHorasDisponibles() {
+        return horasDisponibles;
+    }
+
+    public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
+        this.horasDisponibles = horasDisponibles;
+    }
 }
