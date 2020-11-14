@@ -66,30 +66,41 @@ public class ParqueaderoControlador implements Serializable {
     public List<Parqueadero> consultarTodos() {
         return parqueaderoFacade.findAll();
     }
+
     public List<String> consultarRolNombre() {
         List<String> nombres = new ArrayList<>();
         List<Torre> roleList = torreFacade.findAll();
-        for (int i = 0; i < roleList.size(); i++) {
-            String nameRol = roleList.get(i).getIdTorre().toString();
-            nombres.add('"' + nameRol + '"');
+        try {
+            for (int i = 0; i < roleList.size(); i++) {
+                String nameRol = roleList.get(i).getIdTorre().toString();
+                nombres.add('"' + nameRol + '"');
+            }
+        } catch (Exception e) {
+            System.out.println("Error consulta rol-name:" + e.getMessage());
         }
-
         return nombres;
     }
-    
-    public List<Integer> contarResZon(){
+
+    public List<Integer> contarResZon() {
         List<Integer> data = new ArrayList<>();
         List<Torre> listaTorreRe = torreFacade.findAll();
         for (int i = 0; i < listaTorreRe.size(); i++) {
             int dataZon = parqueaderoFacade.contarVehiculos(listaTorreRe.get(i).getIdTorre());
             data.add(dataZon);
         }
+        try {
+
+        } catch (Exception e) {
+            System.out.println("Error contar res - zona: " + e.getMessage());
+        }
         return data;
     }
-     public int contartipos(String tipoVehiculo){
+
+    public int contartipos(String tipoVehiculo) {
         return parqueaderoFacade.contarVehiculosAuto(tipoVehiculo);
     }
-    public List<Parqueadero> consultarP(String estado){
+
+    public List<Parqueadero> consultarP(String estado) {
         return parqueaderoFacade.consultarP(estado);
     }
 

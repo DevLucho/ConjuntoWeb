@@ -74,7 +74,7 @@ public class PqrsControlador implements Serializable {
             radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos + 2) + num + abecedario.charAt(pos - 1); //Estructura codigo
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             // --- Subir img --- 
-            imagen.subirImagen(1);            
+            imagen.subirImagen(1);
             pqrs.setNroRadicado(radicado);
             pqrs.setIdResidente(residenteFacade.find(residente.getIdResidente()));
             pqrs.setIdTipoPqrs(tipoPqrsFacade.find(tipoPqrs.getIdTipoPqrs()));
@@ -168,13 +168,19 @@ public class PqrsControlador implements Serializable {
     public List<Pqrs> pqrsResidente(int idResidente) {
         return pqrsFacade.pqrsResidente(idResidente);
     }
-    
-    public String obtenerUltimoP(int idPqrs){
-        List<Pqrs> pepaa = pqrsFacade.buscarUltimoP(idPqrs);
-        String nombresito = pepaa.get(0).getAsunto();
+
+    public String obtenerUltimoP(int idPqrs) {
+        String nombresito = "";
+        try {
+            List<Pqrs> pepaa = pqrsFacade.buscarUltimoP(idPqrs);
+            nombresito = pepaa.get(0).getAsunto();
+        } catch (Exception e) {
+            System.out.println("Error ultimo p: " + e.getMessage());
+        }
         return nombresito;
     }
-    public int contarporTipos(String tipoPqrs){
+
+    public int contarporTipos(String tipoPqrs) {
         return pqrsFacade.contarPqrsTipos(tipoPqrs);
     }
 

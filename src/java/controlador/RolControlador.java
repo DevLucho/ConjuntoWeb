@@ -67,10 +67,10 @@ public class RolControlador implements Serializable {
     private int[] permisoAgredados;
     private List<RolPermiso> permisosAsignados;
     private List<RolPermiso> permisosNoAsinados;
-    
+
     @Inject
     private CorreoControlador correo;
-    
+
     @EJB
     RolFacade rolFacade;
 
@@ -82,7 +82,7 @@ public class RolControlador implements Serializable {
 
     @EJB
     UsuarioFacade usuarioFacade;
-    
+
     public RolControlador() {
     }
 
@@ -174,18 +174,18 @@ public class RolControlador implements Serializable {
                     rolPermisoFacade.create(rolPermiso);
                 }
                 usuarios = null;
-                comunicados=null;
-                eventos=null;
-                zonasComunes=null;
-                servicioPqrs=null;
-                reportes=null;
-                documentacion=null;
-                domiciliario=null;
-                visitante=null;
-                correspondencia=null;
-                inicio=null;
-                parqueadero=null;
-                correspondenciaV=null;
+                comunicados = null;
+                eventos = null;
+                zonasComunes = null;
+                servicioPqrs = null;
+                reportes = null;
+                documentacion = null;
+                domiciliario = null;
+                visitante = null;
+                correspondencia = null;
+                inicio = null;
+                parqueadero = null;
+                correspondenciaV = null;
                 mensaje.setMensaje("MensajeRedirect('roles-permisos.xhtml','¡Permisos asignados!','Has asignado satisfactoriamente permisos al rol " + nombre + "','success');");
                 rol = new Rol();
                 nombre = "";
@@ -221,45 +221,52 @@ public class RolControlador implements Serializable {
         rolFacade.edit(rol);
         mensaje.setMensaje("Mensaje('Exito!','Rol " + rol.getNombre() + " modificado satisfactoriamente','success');");
     }
-    
-    public void actulizarPermisos(){
-        
+
+    public void actulizarPermisos() {
+
     }
-    
+
     public List<Rol> consultarTodos() {
         return rolFacade.findAll();
     }
-    
+
     public List<String> consultarRolNombre() {
         List<String> nombres = new ArrayList<>();
         List<Rol> roleList = rolFacade.findAll();
-        for (int i = 0; i < roleList.size(); i++) {
-            String nameRol = roleList.get(i).getNombre();
-            nombres.add('"' + nameRol + '"');
+        try {
+            for (int i = 0; i < roleList.size(); i++) {
+                String nameRol = roleList.get(i).getNombre();
+                nombres.add('"' + nameRol + '"');
+            }
+        } catch (Exception e) {
+            System.out.println("error consulta rol-nombre: " + e.getMessage());
         }
-
         return nombres;
     }
-    
-     public List<Integer> contadorUsuRol() {
+
+    public List<Integer> contadorUsuRol() {
         List<Integer> data = new ArrayList<>();
         List<Rol> roleList = rolFacade.findAll();
-        for (int i = 0; i < roleList.size(); i++) {
-            int dataUsu = usuarioFacade.contarUsuario(roleList.get(i).getIdRol());
-            data.add(dataUsu);
+        try {
+            for (int i = 0; i < roleList.size(); i++) {
+                int dataUsu = usuarioFacade.contarUsuario(roleList.get(i).getIdRol());
+                data.add(dataUsu);
+            }
+        } catch (Exception e) {
+            System.out.println("error count rol-user: " + e.getMessage());
         }
         return data;
     }
-    
+
     public List<String> generarColores() {
         int contt = rolFacade.contarRol();
         return correo.colores(contt);
     }
-    
-    public int contartodito(int id){
+
+    public int contartodito(int id) {
         return usuarioFacade.contarUsuarioUb(id);
-    } 
-    
+    }
+
     public List<Permiso> consultarPermisos(int idPermiso) {
         return permisoFacade.consultarHijos(idPermiso);
     }

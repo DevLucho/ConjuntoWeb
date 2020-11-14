@@ -41,7 +41,7 @@ public class ZonaComunalControlador implements Serializable {
     private ZonaComunal zonaComunal;
     private String mayor;
     private String menor;
-    
+
     @EJB
     ZonaComunalFacade zonaComunalFacade;
 
@@ -80,66 +80,86 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunal = zonaComunalFacade.find(id);
         return "generar-reserva";
     }
-    
-    public List<String> consultarNombreZona(){
+
+    public List<String> consultarNombreZona() {
         List<String> nombres = new ArrayList<>();
-        for (ZonaComunal zona:zonaComunalFacade.findAll()){
-            String nameRol = zona.getNombre();
-            nombres.add('"' + nameRol + '"');
+        try {
+            for (ZonaComunal zona : zonaComunalFacade.findAll()) {
+                String nameRol = zona.getNombre();
+                nombres.add('"' + nameRol + '"');
+            }
+        } catch (Exception e) {
+            System.out.println("Error consulta zona-name: " + e.getMessage());
         }
         return nombres;
     }
-    public List<Integer> contarResZon(){
+
+    public List<Integer> contarResZon() {
         List<Integer> data = new ArrayList<>();
-        for (ZonaComunal zona:zonaComunalFacade.findAll()) {
-            int dataZon = reservaFacade.ContarReserva(zona.getIdZonaComunal());
-            data.add(dataZon);
-            if(data.size()>1){
-                for(int i=1;i<data.size();i++){
-                    if(data.get(i)>data.get(i-1)){
-                        mayor=zona.getNombre();
+        try {
+            for (ZonaComunal zona : zonaComunalFacade.findAll()) {
+                int dataZon = reservaFacade.ContarReserva(zona.getIdZonaComunal());
+                data.add(dataZon);
+                if (data.size() > 1) {
+                    for (int i = 1; i < data.size(); i++) {
+                        if (data.get(i) > data.get(i - 1)) {
+                            mayor = zona.getNombre();
+                        }
+                        if (data.get(i) < data.get(i - 1)) {
+                            menor = zona.getNombre();
+                        }
                     }
-                    if(data.get(i)<data.get(i-1)){
-                        menor=zona.getNombre();
-                    }
+                } else {
+                    mayor = zona.getNombre();
+                    menor = zona.getNombre();
                 }
-            }else{
-                mayor=zona.getNombre();
-                menor=zona.getNombre();
             }
+        } catch (Exception e) {
+            System.out.println("Error contar res-zon: " + e.getMessage());
         }
         return data;
     }
-    
-    public String maxx(){
-        zonaComunal=zonaComunalFacade.find(1);
-        ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
-        ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
-        if(zonaComunal.getCantidadReservada()>zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada()>zonaComunal3.getCantidadReservada()){
-             mayor=zonaComunal.getNombre();
-        }else if(zonaComunal2.getCantidadReservada()>zonaComunal.getCantidadReservada()&&zonaComunal2.getCantidadReservada()>zonaComunal3.getCantidadReservada()){
-             mayor=zonaComunal2.getNombre();
-        }else if(zonaComunal3.getCantidadReservada()>zonaComunal.getCantidadReservada()&&zonaComunal3.getCantidadReservada()>zonaComunal2.getCantidadReservada()){
-            mayor=zonaComunal3.getNombre();
+
+    public String maxx() {
+        try {
+            zonaComunal = zonaComunalFacade.find(1);
+            ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
+            ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
+            if (zonaComunal.getCantidadReservada() > zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada() > zonaComunal3.getCantidadReservada()) {
+                mayor = zonaComunal.getNombre();
+            } else if (zonaComunal2.getCantidadReservada() > zonaComunal.getCantidadReservada() && zonaComunal2.getCantidadReservada() > zonaComunal3.getCantidadReservada()) {
+                mayor = zonaComunal2.getNombre();
+            } else if (zonaComunal3.getCantidadReservada() > zonaComunal.getCantidadReservada() && zonaComunal3.getCantidadReservada() > zonaComunal2.getCantidadReservada()) {
+                mayor = zonaComunal3.getNombre();
+            }
+        } catch (Exception e) {
+            System.out.println("Error MAX - Zona:" + e.getMessage());
         }
         return mayor;
     }
-    public String minn(){
-        zonaComunal=zonaComunalFacade.find(1);
-        ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
-        ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
-        if(zonaComunal.getCantidadReservada()<zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada()<zonaComunal3.getCantidadReservada()){
-             menor=zonaComunal.getNombre();
-        }else if(zonaComunal2.getCantidadReservada()<zonaComunal.getCantidadReservada()&&zonaComunal2.getCantidadReservada()<zonaComunal3.getCantidadReservada()){
-             menor=zonaComunal2.getNombre();
-        }else if(zonaComunal3.getCantidadReservada()<zonaComunal.getCantidadReservada()&&zonaComunal3.getCantidadReservada()<zonaComunal2.getCantidadReservada()){
-            menor=zonaComunal3.getNombre();
+
+    public String minn() {
+        try {
+            zonaComunal = zonaComunalFacade.find(1);
+            ZonaComunal zonaComunal2 = zonaComunalFacade.find(2);
+            ZonaComunal zonaComunal3 = zonaComunalFacade.find(3);
+            if (zonaComunal.getCantidadReservada() < zonaComunal2.getCantidadReservada() && zonaComunal.getCantidadReservada() < zonaComunal3.getCantidadReservada()) {
+                menor = zonaComunal.getNombre();
+            } else if (zonaComunal2.getCantidadReservada() < zonaComunal.getCantidadReservada() && zonaComunal2.getCantidadReservada() < zonaComunal3.getCantidadReservada()) {
+                menor = zonaComunal2.getNombre();
+            } else if (zonaComunal3.getCantidadReservada() < zonaComunal.getCantidadReservada() && zonaComunal3.getCantidadReservada() < zonaComunal2.getCantidadReservada()) {
+                menor = zonaComunal3.getNombre();
+            }
+        } catch (Exception e) {
+            System.out.println("Erro Min - Zona: " + e.getMessage());
         }
         return menor;
     }
-    public String pepe(){
+
+    public String pepe() {
         return zonaComunalFacade.max();
     }
+
     public int contarZonas() {
         return zonaComunalFacade.count();
     }

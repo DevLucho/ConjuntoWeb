@@ -47,25 +47,35 @@ public class TipoPqrsControlador implements Serializable {
     public List<TipoPqrs> consultarTodos() {
         return tipoPqrsFacade.findAll();
     }
-    
-    public List<String> consultarnombrePq(){
+
+    public List<String> consultarnombrePq() {
         List<String> nombres = new ArrayList<>();
         List<TipoPqrs> tipoList = tipoPqrsFacade.findAll();
-        for(int i = 0;i<tipoList.size();i++){
-            String nameTipo = tipoList.get(i).getTipo();
-            nombres.add('"'+nameTipo+'"');
+        try {
+            for (int i = 0; i < tipoList.size(); i++) {
+                String nameTipo = tipoList.get(i).getTipo();
+                nombres.add('"' + nameTipo + '"');
+            }
+        } catch (Exception e) {
+            System.out.println("Error consulta name-pqrs:" + e.getMessage());
         }
         return nombres;
     }
-    public List<Integer> contarTipoPqrs(){
+
+    public List<Integer> contarTipoPqrs() {
         List<Integer> data = new ArrayList<>();
         List<TipoPqrs> pqrsList = tipoPqrsFacade.findAll();
-        for(int i = 0;i < pqrsList.size();i++){
-            int dataUsu =  pqrsFacade.contarPqrsT(pqrsList.get(i).getIdTipoPqrs());
-            data.add(dataUsu);
+        try {
+            for (int i = 0; i < pqrsList.size(); i++) {
+                int dataUsu = pqrsFacade.contarPqrsT(pqrsList.get(i).getIdTipoPqrs());
+                data.add(dataUsu);
+            }
+        } catch (Exception e) {
+            System.out.println("Error contar tipo pqrs:" + e.getMessage());
         }
         return data;
     }
+
     public TipoPqrs getTipoPqrs() {
         return tipoPqrs;
     }

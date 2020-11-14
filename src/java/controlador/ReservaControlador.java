@@ -288,8 +288,13 @@ public class ReservaControlador implements Serializable {
 
     // Metodos de consulta
     public String obtenerUltimoR(int idReserva) {
-        List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
-        String nombresaso = pepa.get(0).getMotivoReserva();
+        String nombresaso = "";
+        try {
+            List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
+            nombresaso = pepa.get(0).getMotivoReserva();
+        } catch (Exception e) {
+            System.out.println("Error obtener ultimo r: "+e.getMessage());
+        }
         return nombresaso;
     }
 
