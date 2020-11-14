@@ -19,6 +19,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.NoSuchProviderException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -99,6 +101,11 @@ public class ReservaControlador implements Serializable {
 
     public String limpiar() {
         fechaSeleccionada = null;
+        residente = new Residente();
+        reserva = new Reserva();
+        horaFinal = new HoraFinal();
+        horaInicial = new HoraInicial();
+        horaI = 0;
         return null;
     }
 
@@ -107,19 +114,16 @@ public class ReservaControlador implements Serializable {
     }
 
     public Date extraerFecha(String fecha) {
-        Calendar c = Calendar.getInstance();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
         try {
-            int dia = Integer.parseInt(fecha.substring(0, 2));
-            int mes = Integer.parseInt(fecha.substring(3, 5));
-            int anio = Integer.parseInt(fecha.substring(6, 10));
-            c.set(anio, mes, dia);
-            c.add(Calendar.MONTH, -1);
-        } catch (Exception e) {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException e) {
             mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
             System.out.println("Error en extraer fecha: " + e.getMessage());
             verifica = false;
         }
-        return c.getTime();
+        return fechaDate;
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
@@ -133,7 +137,7 @@ public class ReservaControlador implements Serializable {
             reserva.setFechaReserva(extraerFecha(this.fechaSeleccionada));
 
             reservaFacade.create(reserva);
-            mensaje.setMensaje("EdicionVisitante('consultar-reserva.xhtml','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><br><b>*</b>Se a notificado vía email su reserva.');");
+            mensaje.setMensaje("EdicionVisitante('#','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><br><b>*</b>Se a notificado vía email su reserva.');");
 
             correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
                     correo.paginaCorreo("Reserva pendiente de la zona: " + reserva.getIdZonaComunal().getNombre() + "",
@@ -176,7 +180,6 @@ public class ReservaControlador implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }*/
-
     public void cancelar(Reserva reserva) {
         if ("Cancelado".equals(reserva.getEstado())) {
             mensaje.setMensaje("Mensajes('Advertencia!','Esta reserva ya esta cancelada','warning');");

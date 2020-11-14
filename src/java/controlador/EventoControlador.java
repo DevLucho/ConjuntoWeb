@@ -225,7 +225,7 @@ public class EventoControlador implements Serializable {
         return eventoFacade.estadoEvento("Finalizado");
     }
 
-    public void eliminar(Evento eventoEliminar) throws IOException {
+    public void eliminar(Evento eventoEliminar) throws IOException { // elimina img almacenadas
         Path p = Paths.get(imagen.getRuta() + eventoEliminar.getImg());
         Files.deleteIfExists(p);
         eventoFacade.remove(eventoEliminar);
@@ -239,6 +239,20 @@ public class EventoControlador implements Serializable {
             evento = eventoCancelar;
             evento.setEstado("Cancelado");
             eventoFacade.edit(evento);
+        }
+    }
+
+    public void eventoFinalizar() {
+        try {
+            List<Evento> efinalizados = eventoFacade.procesoFinalizar(hora.now());
+            if (efinalizados != null) {
+                for (Evento efinalizado : efinalizados) {
+                    efinalizado.setEstado("Finalizado");
+                    eventoFacade.edit(efinalizado);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error finalizar evento:" + e.getMessage());
         }
     }
 

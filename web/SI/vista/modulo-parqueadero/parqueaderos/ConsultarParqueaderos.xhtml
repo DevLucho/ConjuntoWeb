@@ -68,15 +68,9 @@
                                              value="#{parqueaderoControlador.consultarTodos()}" var="parqueadero">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Identificador Parqueadero"/>
-                                        </f:facet>
-                                        <h:outputText value="#{parqueadero.idParqueadero}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
                                             <h:outputText value="Lugar"/>
                                         </f:facet>
-                                        <h:outputText value="#{parqueadero.lugar}"/>
+                                        <h:outputText value="NRO #{parqueadero.lugar}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">

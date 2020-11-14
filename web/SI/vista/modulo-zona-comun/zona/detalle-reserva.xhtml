@@ -133,15 +133,15 @@
                                             <hr/>
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <b><p>Fecha inicial de reserva:</p></b>
+                                                    <b><p>Fecha reservada:</p></b>
                                                     <div class="form-plain">
-                                                        <h:outputText value="#{horaControlador.convertirfh(reservaControlador.reserva.fechaInicioReserva)}" a:disabled="true"></h:outputText>
+                                                        <h:outputText value="#{horaControlador.convertirf(reservaControlador.reserva.fechaReserva)}" a:disabled="true"></h:outputText>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <b><label>Fecha de final de reserva:</label><br/></b>
+                                                    <b><label>Horario reservado:</label><br/></b>
                                                     <div class="form-plain">
-                                                        <h:outputText value="#{horaControlador.convertirfh(reservaControlador.reserva.fechaFinReserva)}" a:disabled="true"></h:outputText>
+                                                        <h:outputText value="#{horaControlador.convertir(reservaControlador.reserva.horaInicioReserva.hora)} - #{horaControlador.convertir(reservaControlador.reserva.horaFinReserva.hora)}" a:disabled="true"></h:outputText>
                                                     </div>
                                                 </div>
                                             </div>

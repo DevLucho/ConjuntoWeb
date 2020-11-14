@@ -157,12 +157,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Salida"/>
                                                 </f:facet>
-                                                <c:if test="#{visi.idFicha.horaSalida!=null}">
-                                                    <h:outputText value="#{horaControlador.convertir(visi.idFicha.horaSalida)}"></h:outputText>
-                                                </c:if>
-                                                <c:if test="#{visi.idFicha.horaSalida==null}">
-                                                    <h:outputText value="No"></h:outputText>
-                                                </c:if>
+                                                <h:outputText value="#{horaControlador.convertir(visi.idFicha.horaSalida)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">
@@ -236,12 +231,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Salida"/>
                                                 </f:facet>
-                                                <c:if test="#{blo.idFicha.horaSalida!=null}">
-                                                    <h:outputText value="#{horaControlador.convertir(blo.idFicha.horaSalida)}"></h:outputText>
-                                                </c:if>
-                                                <c:if test="#{blo.idFicha.horaSalida==null}">
-                                                    <h:outputText value="No"></h:outputText>
-                                                </c:if>
+                                                <h:outputText value="#{horaControlador.convertir(blo.idFicha.horaSalida)}"></h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">

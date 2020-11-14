@@ -48,6 +48,8 @@
                 max-height: 78vh
             }
         </style>
+        <!-- select 2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -73,7 +75,7 @@
                                         <ul class="form-style-1">
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble</h:outputLabel>
-                                                <h:selectOneMenu class="field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true" requiredMessage="Seleccionar Inmueble">
+                                                <h:selectOneMenu class="js-example-basic-single field-long correcto" id="inmueble" value="#{correspondenciaControlador.inmueble.idInmueble}" title="Inmueble" required="true" requiredMessage="Seleccionar Inmueble">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmue" value="#{inmuebleControlador.findInmueble()}" itemValue="#{inmue.idInmueble}" itemLabel="#{inmue.idTorre.idTorre} - #{inmue.idApartamento.idApartamento}"></f:selectItems>
                                                 </h:selectOneMenu>
@@ -164,6 +166,16 @@
             <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
             <!-- bootstrap and jquery -->
             <script src="../../../../js/jquery-3.4.1.min.js"></script>
+            <!-- select2 js -->
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.js-example-basic-single').select2({
+                        placeholder: "- Seleccione -",
+                        language: "es"
+                    });
+                });
+            </script>
             <script src="../../../../js/bootstrap.min.js"></script>
             <script src="../../../js/scriptvigilante.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

@@ -49,6 +49,8 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="stylesheet" href="../../header/header.css"/>
         <link rel="stylesheet" href="../../nav/nav.css"/>
+        <!-- select 2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
         <style>
             nav ul li{ width:20%;}
             @media screen and (max-width:903px){
@@ -95,22 +97,22 @@
 
                                         <ul class="form-style-1">
                                             <div>
-                                            <li>
-                                                <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
-                                                
-                                                <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
-                                                <h:message for="nombre" style="color: white;margin-left:-235px;margin-top: 45px; position: absolute;"/>
-                                                <!--validator="#{v}"-->
-                                                <!--<f:validator validatorId="valnu" />-->
-                                                
-                                                <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true" requiredMessage=" campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
-                                                <h:message for="apellido" style="color: White;margin-left:170px;margin-top: 45px;"/>
-                                                
-                                            </li>   
+                                                <li>
+                                                    <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
+
+                                                    <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
+                                                    <h:message for="nombre" style="color: white;margin-left:-235px;margin-top: 45px; position: absolute;"/>
+                                                    <!--validator="#{v}"-->
+                                                    <!--<f:validator validatorId="valnu" />-->
+
+                                                    <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true" requiredMessage=" campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
+                                                    <h:message for="apellido" style="color: White;margin-left:170px;margin-top: 45px;"/>
+
+                                                </li>   
                                             </div>    
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
-                                                <h:selectOneMenu class="field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="Seleccionar un inmueble">
+                                                <h:selectOneMenu class="js-example-basic-single field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="Seleccionar un inmueble">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmueble" value="#{inmuebleControlador.findInmueble()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
                                                 </h:selectOneMenu>
@@ -197,6 +199,16 @@
             <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
             <!-- bootstrap and jquery -->
             <script src="../../../../js/jquery-3.4.1.min.js"></script>
+            <!-- select2 js -->
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+            <script>
+                                                        $(document).ready(function () {
+                                                            $('.js-example-basic-single').select2({
+                                                                placeholder: "- Seleccione -",
+                                                                language: "es"
+                                                            });
+                                                        });
+            </script>
             <script src="../../../../js/bootstrap.min.js"></script>
             <script src="../../../js/scriptvigilante.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

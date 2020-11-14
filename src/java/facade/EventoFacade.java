@@ -7,6 +7,7 @@ package facade;
 
 import entidades.Evento;
 import entidades.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +31,14 @@ public class EventoFacade extends AbstractFacade<Evento> {
 
     public EventoFacade() {
         super(Evento.class);
+    }
+
+    public List<Evento> procesoFinalizar(Date fechaF) {
+        //Query query = em.createQuery("SELECT e FROM Evento e WHERE e.fechaFin = :horaF AND e.horaFin.hora = :horaF ");
+        Query query = em.createQuery("SELECT e FROM Evento e WHERE e.fechaFin <= :fechaF");
+        query.setParameter("fechaF", fechaF);
+        //query.setParameter("horaF", horaF);
+        return query.getResultList();
     }
 
     public List<Evento> eventos(String estado) {

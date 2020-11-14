@@ -185,7 +185,7 @@ public class CodigoControlador implements Serializable {
             }
         }
     }
-
+    
     // Metodos set y get ↓↓
     public Codigo getCodigo() {
         return codigo;

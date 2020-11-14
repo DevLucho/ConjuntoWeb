@@ -168,12 +168,7 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="Salida"/>
                                                     </f:facet>
-                                                    <c:if test="#{Npaq.fechaSalida!=null}">
-                                                        <h:outputText value="#{horaControlador.convertirf(Npaq.fechaSalida)}"></h:outputText>
-                                                    </c:if>
-                                                    <c:if test="#{Npaq.fechaSalida==null}">
-                                                        <h:outputText value="No"></h:outputText>
-                                                    </c:if>
+                                                    <h:outputText value="#{horaControlador.convertirf(Npaq.fechaSalida)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">
@@ -262,12 +257,7 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="Salida"/>
                                                     </f:facet>
-                                                    <c:if test="#{paq.fechaSalida!=null}">
-                                                        <h:outputText value="#{horaControlador.convertirf(paq.fechaSalida)}"></h:outputText>
-                                                    </c:if>
-                                                    <c:if test="#{paq.fechaSalida==null}">
-                                                        <h:outputText value="No"></h:outputText>
-                                                    </c:if>
+                                                    <h:outputText value="#{horaControlador.convertirf(paq.fechaSalida)}"></h:outputText>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">

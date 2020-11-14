@@ -37,6 +37,8 @@ public class SesionControlador implements Serializable {
     @Inject
     ComunicadoControlador comunicado;
     @Inject
+    EventoControlador evento;
+    @Inject
     private MensajeControlador mensaje;
     private String documentoc;
     private int documento;
@@ -71,6 +73,7 @@ public class SesionControlador implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", user);
                 if ("Activo".equals(user.getEstado())) {
                     comunicado.eliminarExpirados(); // Elimina comunicados expirados
+                    evento.eventoFinalizar(); // finaliza eventos
                     if (rolSeleccionado.getIdRol() == 1) {
                         return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
                     }
