@@ -64,13 +64,18 @@ public class ReservaControlador implements Serializable {
     private Date horaFin;
     private HoraInicial horaInicial;
     private HoraFinal horaFinal;
-    private int horaI;
     private boolean verifica = true;
 
     // listas
     private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
     private List<HoraInicial> horasIni = null;
     private List<Reserva> reservas = null;
+
+    // atributos form
+    private int horaI;
+    private int horaF;
+    private String motivo;
+    private int idResidente;
 
     @EJB
     ResidenteFacade residenteFacade;
@@ -106,6 +111,7 @@ public class ReservaControlador implements Serializable {
         horaFinal = new HoraFinal();
         horaInicial = new HoraInicial();
         horaI = 0;
+        reservaFacade.findAll();
         return null;
     }
 
@@ -129,9 +135,10 @@ public class ReservaControlador implements Serializable {
     public void registrar() throws NoSuchProviderException, MessagingException {
         try {
             reserva.setHoraInicioReserva(horaInicialFacade.find(horaI));
-            reserva.setHoraFinReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+            reserva.setHoraFinReserva(horaFinalFacade.find(horaF));
             reserva.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
-            reserva.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+            reserva.setIdResidente(residenteFacade.find(idResidente));
+            reserva.setMotivoReserva(motivo);
             reserva.setEstado("Pendiente");
 
             reserva.setFechaReserva(extraerFecha(this.fechaSeleccionada));
@@ -155,7 +162,9 @@ public class ReservaControlador implements Serializable {
             horaInicial = new HoraInicial();
             fechaSeleccionada = null;
             horaI = 0;
-
+            horaF = 0;
+            motivo = "";
+            idResidente=0;
         } catch (NumberFormatException e) {
             mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
             System.out.println("Error reserva" + e.getMessage());
@@ -293,7 +302,7 @@ public class ReservaControlador implements Serializable {
             List<Reserva> pepa = reservaFacade.buscarUltimaR(idReserva);
             nombresaso = pepa.get(0).getMotivoReserva();
         } catch (Exception e) {
-            System.out.println("Error obtener ultimo r: "+e.getMessage());
+            System.out.println("Error obtener ultimo r: " + e.getMessage());
         }
         return nombresaso;
     }
@@ -433,6 +442,30 @@ public class ReservaControlador implements Serializable {
 
     public void setVerifica(boolean verifica) {
         this.verifica = verifica;
+    }
+
+    public int getHoraF() {
+        return horaF;
+    }
+
+    public void setHoraF(int horaF) {
+        this.horaF = horaF;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public int getIdResidente() {
+        return idResidente;
+    }
+
+    public void setIdResidente(int idResidente) {
+        this.idResidente = idResidente;
     }
 
 }

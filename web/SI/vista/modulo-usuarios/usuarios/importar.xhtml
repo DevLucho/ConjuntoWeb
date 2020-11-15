@@ -202,7 +202,9 @@ and open the template in the editor.
                             <hr/>
                         </div>  
                     </div>
-                    <h1 class="text-center ten">#{formdashboardadmin.Tenerencuenta}</h1>
+                    <p:messages id="msj" showSummary="true" showDetail="true"/>
+
+                    <h2 class="text-center ten">#{formdashboardadmin.Tenerencuenta}</h2>
                     <div class="row">
                         <div class="containercss">
                             <div class="card">
@@ -223,18 +225,24 @@ and open the template in the editor.
                             </div>
                         </div><br/>
                     </div>
-                    <h1 class="text-center ten">#{formdashboardadmin.Plantillaasubir}</h1>
+                    <h2 class="text-center ten">Ejemplo de #{formdashboardadmin.Plantillaasubir}</h2>
+
                     <div class="row">
                         <div class="col-12 text-center">
-                            <img src="../../../img/excel2.PNG"  alt="Ejm Excel"/>
+                            <img src="../../../img/img-excel.PNG"  alt="Ejm Excel"/>
+                            <hr/>
+                            <div class="text-center" >
+                                <h5><a href="https://drive.google.com/file/d/1ORZ2YLLyh8J_MiX5oAmsgZHbjpiBF4_8/view?usp=sharing" target="_blank" download="importar_residentes"><i class="fas fa-file-excel" style="color:green"></i>Descarga aquí la plantilla</a></h5>
+                            </div>
                             <h:form enctype="multipart/form-data">
-                                <p:messages id="msj" showSummary="true" showDetail="true"/>
-
+                                <br/>
+                                <h:inputFile id="import" class="btn btn-outline-secondary col-12 col-md-3" a:accept=".xlsx" value="#{exportUControlador.excel}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                <br/>
+                                <h:message for="import" style="color:red"/>
                                 <br/><br/>
-                                <h:inputFile class="btn btn-outline-secondary col-12 col-md-3" a:accept=".xlsx" value="#{exportUControlador.excel}"/>
-                                <br/><br/>
-                                <p:commandButton ajax="false" class="btn btn-outline-success col-12 col-md-3" value="Iniciar Migracias" actionListener="#{exportUControlador.migrar()}" update="msj"/>
-                            </h:form><br/><br/>
+                                <p:commandButton ajax="false" class="btn btn-success col-12 col-md-3" style="font-family: righteous !important" value="IMPORTAR" actionListener="#{exportUControlador.migrar()}" update="msj"/>
+                            </h:form><br/>
+                            <p><b>Notas:<br/></b> *El usuario y contraseña de los residentes importados exitosamente se les notificara vía email.<br/>*La contraseña se generara automaticamente.</p>
                         </div>
                     </div>
                 </section>

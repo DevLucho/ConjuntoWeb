@@ -160,7 +160,7 @@
                                     </div>
                                     <div class="form-group col-12">
                                         <strong><h:outputLabel value="Motivo de reserva:" for="motivoReserva" /></strong>
-                                        <h:inputTextarea class="form-control" id="motivoReserva" value="#{reservaControlador.reserva.motivoReserva}" title="Motivo de reserva" a:placeholder="Digite el motivo de reserva" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                        <h:inputTextarea class="form-control" id="motivoReserva" value="#{reservaControlador.motivo}" title="Motivo de reserva" a:placeholder="Digite el motivo de reserva" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
                                         <h:message for="motivoReserva" style="color:red"/>
                                     </div>
                                     <div class="form-group col-12">
@@ -180,7 +180,7 @@
                                         <!-- hora final -->
                                         <div class="col-12 col-md-3">
                                             <strong><h:outputLabel for="horaF" value="Hora final"/></strong>
-                                            <h:selectOneMenu id="horaF" class="form-control" value="#{reservaControlador.horaFinal.idHora}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <h:selectOneMenu id="horaF" class="form-control" value="#{reservaControlador.horaF}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{reservaControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                             </h:selectOneMenu>
@@ -189,14 +189,14 @@
                                     </div>
                                     <div class="form-group col-12 col-md-6">
                                         <c:if test="#{sesionControlador.user.idRol.idRol==2}">
-                                            <h:selectOneMenu style="display: none" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <h:selectOneMenu style="display: none" id="idResidente" value="#{reservaControlador.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItems value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
                                             </h:selectOneMenu>
                                             <h:message for="idResidente" style="color:red"/>
                                         </c:if>
                                         <c:if test="#{sesionControlador.user.idRol.idRol==1}">
                                             <strong><h:outputLabel for="idResidente" value="Residente que reserva:"/></strong>
-                                            <h:selectOneMenu class="js-example-basic-single form-control" id="idResidente" value="#{reservaControlador.residente.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                            <h:selectOneMenu class="js-example-basic-single form-control" id="idResidente" value="#{reservaControlador.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                 <f:selectItems value="#{residenteControlador.consultarTodos()}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.documento}"/>
                                             </h:selectOneMenu>
@@ -276,7 +276,7 @@
         <script src="../../../js/calendar.js"></script>
         <script type="text/javascript">
                 let calendar = new Calendar('calendar');
-                var inputFecha = document.getElementById('j_idt106:fechaSeleccionada');
+                var inputFecha = document.getElementById('j_idt113:fechaSeleccionada');
                 calendar.getElement().addEventListener('change', e => {
                     var dateSelected = calendar.value().format('L');
                     inputFecha.value = dateSelected;

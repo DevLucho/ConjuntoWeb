@@ -67,11 +67,6 @@ public class UsuarioControlador implements Serializable {
     private String nrocel;
     private long nrocelular;
     private String correo;
-    // Generar contraseña aleatoria
-    Random rnd = new Random();
-    String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String clavegenerada = "";
-    int pos = 0, num;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -117,6 +112,20 @@ public class UsuarioControlador implements Serializable {
         email = new CorreoControlador();
     }
 
+    public String generarContraseña() {
+        // Generar contraseña aleatoria
+        Random rnd = new Random();
+        String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String clavegenerada = "";
+        int pos = 0, num;
+        // generar contraseña
+        pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+        num = (int) (rnd.nextDouble() * 9999 + 1000);
+         //Estructura codigo 8 caracteres
+        clavegenerada = clavegenerada + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos - 1) + abecedario.charAt(pos);
+        return clavegenerada;
+    }
+
     public void registrar() throws NoSuchProviderException, MessagingException {
 
         try {
@@ -134,11 +143,7 @@ public class UsuarioControlador implements Serializable {
                 usuario.setCelular(nrocelular = Long.parseLong(nrocel));
                 usuario.setDocumento(nrodocumento = Integer.parseInt(nrodoc));
                 usuario.setEstado("Activo");
-                // generar contraseña
-                pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
-                num = (int) (rnd.nextDouble() * 9999 + 1000);
-                clavegenerada = clavegenerada + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos - 1) + abecedario.charAt(pos); //Estructura codigo 8 caracteres
-                usuario.setContrasenia(clavegenerada);
+                usuario.setContrasenia(generarContraseña());
                 usuario.setCorreo(correo);
                 usuarioFacade.create(usuario);
                 // if is residente
@@ -167,7 +172,7 @@ public class UsuarioControlador implements Serializable {
                         email.paginaCorreo("Bienvenido!",
                                 "<p style='font-family: Arial, Helvetica, sans-serif;'><b>¡Hola, " + usuario.getNombre() + "!</b></p>\n"
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'>Aquí tienes la información de tu <b>cuenta</b> para acceder al sistema de tu conjunto residencial:</p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: " + usuario.getDocumento() + "<br/>Contraseña: " + clavegenerada + "</p>",
+                                + "<p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: " + usuario.getDocumento() + "<br/>Contraseña: " + usuario.getContrasenia() + "</p>",
                                 "http://imgfz.com/i/7ocMf5s.jpeg")
                 );
 
@@ -175,7 +180,6 @@ public class UsuarioControlador implements Serializable {
                 rol = new Rol();
                 tipoDocumento = new TipoDocumento();
                 nrodoc = "";
-                clavegenerada = "";
                 nrocel = "";
                 correo = "";
                 if ("es".equals(lenguaje.getLenguaje())) {
@@ -302,13 +306,13 @@ public class UsuarioControlador implements Serializable {
         residente = residenteConsultar;
         return "agregar-vehiculo";
     }
-    
-    public String obtenerUltimoDe(int idRol){
+
+    public String obtenerUltimoDe(int idRol) {
         List<Usuario> pepe = usuarioFacade.buscarUltimo(idRol);
-        String nombresito = pepe.get(0).getNombre()+" "+pepe.get(0).getApellido();
+        String nombresito = pepe.get(0).getNombre() + " " + pepe.get(0).getApellido();
         return nombresito;
     }
-    
+
     public List<Usuario> sesionUsuario(int idPerfil) {
         return usuarioFacade.sesionUsuario(idPerfil);
     }
@@ -438,5 +442,5 @@ public class UsuarioControlador implements Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
+
 }

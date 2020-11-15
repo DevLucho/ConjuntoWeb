@@ -52,6 +52,9 @@
                                 #{formconsultarusuario.txtConsultar}
                             </h3>
                             <hr/>
+                            <h:form class="text-center">
+                                <h:commandLink class="btn btn-primary" style="font-family:righteous !important" value="Importar residentes" action="#{exportUControlador.redirect()}"/>
+                            </h:form>
                         </div>
                     </div>
                     <div class="row">
@@ -79,9 +82,7 @@
                                 <!-- Tabla todos los usuarios -->
                                 <div class="tab-pane active" id="tab1" role="tabpanel">
                                     <h4 class="mt-3 text-center"><i class="fas fa-users mr-3 mt-3"></i>#{formconsultarusuario.txtTodos}</h4>
-                                     <h:form class="text-center">
-                                        <h:commandLink class="btn btn-primary" value="Importar usuarios" action="#{exportUControlador.redirect()}"/>
-                                    </h:form>
+
                                     <h:form>
                                         <h:dataTable class="table table-bordered table-hover tabla mt-3" style="width:100%" value="#{usuarioControlador.consultarTodos()}" var="usuario">
                                             <h:column>
