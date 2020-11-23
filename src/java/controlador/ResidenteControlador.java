@@ -199,6 +199,40 @@ public class ResidenteControlador implements Serializable {
 
     }
 
+    // -------------------------------- validaciones registro residente
+    public void validarClaveR(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        this.clave = (String) value;
+
+        if (this.clave.length() < 8 || this.clave.length() > 20) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña invalida. Debe contener entre 8 - 20 caracteres"));
+            mensaje.setMensaje("MensajeAlertify('Contraseña invalida','error');");
+        }
+    }
+
+    public void confirmarClaveR(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String confirm = (String) value;
+
+        if (confirm == null ? this.clave != null : !confirm.equals(this.clave)) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Contraseña no coincide"));
+            mensaje.setMensaje("MensajeAlertify('Contraseñas no coinciden','error');");
+        }
+    }
+
+    public void validarDoc(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String doc = (String) value;
+
+        if (doc.length() < 8 || doc.length() > 10) {
+            ((UIInput) comp).setValid(false);
+            context.addMessage(comp.getClientId(context), new FacesMessage("Documento incorrecto"));
+            mensaje.setMensaje("MensajeAlertify('Nº de documento incorrecto','error');");
+        }
+    }
+
     // Metodo -> Cambiar contrasenia desde dashboard
     public void cambiarContrasenia(String contrasenia, Usuario usuario) {
         if (this.contra.isEmpty() || this.contra == null || this.newpass.isEmpty() || this.newpass == null || this.confirmar == null || this.confirmar.isEmpty()) {
@@ -225,17 +259,6 @@ public class ResidenteControlador implements Serializable {
             } else {
                 mensaje.setMensaje("Mensaje('Error','Verifica los datos...','error');");
             }
-        }
-    }
-
-    public void validarDoc(FacesContext context, UIComponent comp, Object value) {
-        context = FacesContext.getCurrentInstance();
-        String doc = (String) value;
-
-        if (doc.length() < 8 || doc.length() > 10) {
-            ((UIInput) comp).setValid(false);
-            context.addMessage(comp.getClientId(context), new FacesMessage("Documento incorrecto"));
-            mensaje.setMensaje("MensajeAlertify('Nº de documento incorrecto','error');");
         }
     }
 

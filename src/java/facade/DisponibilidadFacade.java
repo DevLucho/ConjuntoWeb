@@ -46,6 +46,13 @@ public class DisponibilidadFacade extends AbstractFacade<Disponibilidad> {
         return query.getResultList();
     }
 
+    public List<Disponibilidad> ctlaSingleDisponilidad(int idZonaComunal) {
+        Query query;
+        query = em.createQuery("SELECT u FROM Disponibilidad u WHERE u.idZonaComunal.idZonaComunal=:idZonaComunal");
+        query.setParameter("idZonaComunal", idZonaComunal);
+        return query.setMaxResults(1).getResultList();
+    }
+
     public void eliminarZona(ZonaComunal idZonaComunal) {
         Query query;
         query = em.createQuery("DELETE FROM Disponibilidad u WHERE u.idZonaComunal=:idZonaComunal");

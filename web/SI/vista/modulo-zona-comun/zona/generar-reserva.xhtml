@@ -26,6 +26,17 @@
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Calendariodereserva}</title>
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+            .ui-datepicker .ui-datepicker-calendar .ui-state-default {
+                color: #28a745;
+            }
+            .ui-datepicker .ui-datepicker-current-day .ui-state-highlight, .ui-datepicker .ui-datepicker-current-day .ui-state-default {
+                background: darkgreen;
+            }
+        </style>
     </h:head>
     <h:body>
         <f:view locale="#{lenguajeControlador.languageSelected}">
@@ -41,13 +52,13 @@
                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
                             <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">#{formconsultarusuario.bcInicio}</a></li>
                             <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">#{formdashboardadmin.Consultarzonacomún}</a></li>
-                            <li class="breadcrumb-item"><a href="./detalle-zona.xhtml">#{formdashboardadmin.Detallezonacomún}</a></li>
+                            <li class="breadcrumb-item active">#{formdashboardadmin.Detallezonacomún}</li>
                             <li class="breadcrumb-item active">#{formdashboardadmin.Calendariodereserva}</li>
                         </c:if>
                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                             <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">#{formconsultarusuario.bcInicio}</a></li>
                             <li class="breadcrumb-item"><a href="./consultar-zona.xhtml">#{formdashboardadmin.Consultarzonacomún}</a></li>
-                            <li class="breadcrumb-item"><a href="./detalle-zona.xhtml">#{formdashboardadmin.Detallezonacomún}</a></li>
+                            <li class="breadcrumb-item active">#{formdashboardadmin.Detallezonacomún}</li>
                             <li class="breadcrumb-item active">#{formdashboardadmin.Calendariodereserva}</li>
                             <style>
                                 nav ul li{ width:25%;}
@@ -128,27 +139,32 @@
                         <div class="col-12 col-md-3 mt-3 mb-3">
                             <!-- fecha seleccionada -->
                             <center>
+                                <!--
                                 <div class="calendar" id="calendar"></div>
-                                <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
-                                <h:form>
-                                    <h:inputText style="display: none" a:type="text" id="fechaSeleccionada" a:placeholder="Seleccione una fecha" value="#{reservaControlador.fechaSeleccionada}" class="form-control col-12 col-md-8 text-center" validator="#{reservaControlador.validarFecha}" required="true" requiredMessage="Selecciona una fecha del calendario."/>
-                                    <h:message for="fechaSeleccionada" style="color:red"/>
+                                -->
+                                <h:form id="form">
+                                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                                    <p:calendar id="inline" value="#{reservaControlador.fechaSelected}" mode="inline" locale="es" required="true" mindate="#{horaControlador.now()}" requiredMessage="Seleccione una fecha">
+                                        <p:ajax event="dateSelect" listener="#{reservaControlador.onDateSelect}" update=":form:fecha_seleccionada"/>
+                                        <f:ajax event="change" listener="#{reservaControlador.cargaHoras}" render="@form : reserva : horaI" execute="@this"></f:ajax>
+                                    </p:calendar>
+                                    <span class="badge badge-success mb-3 p-2 mt-3">#{formdashboardadmin.Díasconreservasdisponibles}</span>
+                                    <br/>
+                                    <h:outputText id="fecha_seleccionada" value="Fecha a filtrar: #{horaControlador.convertirf(reservaControlador.fechaSelected)}"/>
                                     <div class="mt-2">
-                                        <h:commandButton value="Limpiar" class="btn btn-dark" actionListener="#{reservaControlador.limpiar()}"/>
+                                        <h:commandButton value="Limpiar" class="btn btn-dark" action="#{reservaControlador.limpiar}"/>
                                         <!-- . -->
-                                        <h:commandButton value="Filtrar" class="btn btn-primary" action="#{reservaControlador.filtrar()}"/>
+                                        <h:commandButton value="Filtrar" class="btn btn-primary" action="#{reservaControlador.filtrar}"/>
                                     </div>
-
                                 </h:form>
                             </center>
                         </div>
                         <!-- Horas disponibles -->
                         <div class="col-12 col-md-9 mt-3 mb-3">
-                            #{reservaControlador.setFechaSeleccionada(reservaControlador.fechaSeleccionada)}
-                            <c:if test="#{reservaControlador.fechaSeleccionada==null}">
+                            <c:if test="#{reservaControlador.fechaSelected==null or reservaControlador.error}">
                                 <h3 class="text-center mt-20">Selecciona una fecha<br/>Luego filtra</h3>
                             </c:if>
-                            <c:if test="#{reservaControlador.fechaSeleccionada!=null}">
+                            <c:if test="#{reservaControlador.fechaSelected!=null and !reservaControlador.error}">
                                 <h:form id="reserva">
                                     <div class="form-group col-12">
                                         <p><b>Nota: </b>El tiempo maximo de reserva de la zona: #{zonaComunalControlador.zonaComunal.nombre} es <span class="badge badge-success p-2">#{zonaComunalControlador.zonaComunal.tiempoMaximoReserva}h</span></p>
@@ -164,7 +180,7 @@
                                         <h:message for="motivoReserva" style="color:red"/>
                                     </div>
                                     <div class="form-group col-12">
-                                        <p style="margin:0" id="fechaSeleccionadaOut">Horario <span class="badge badge-success p-2 "> disponible </span> para la fecha seleccionada: #{reservaControlador.fechaSeleccionada}</p>
+                                        <p style="margin:0" id="fechaSeleccionadaOut">Horario <span class="badge badge-success p-2 "> disponible </span> para la fecha seleccionada: <h:outputText id="txtFechaS" value="#{horaControlador.convertirf(reservaControlador.fechaSelected)}"/> </p>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-12 col-md-3">
@@ -172,7 +188,7 @@
                                             <strong><h:outputLabel for="horaI" value="Hora inicio"/></strong>
                                             <h:selectOneMenu id="horaI" class="form-control" value="#{reservaControlador.horaI}" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems value="#{reservaControlador.horasIniSinReserva()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                                <f:selectItems value="#{reservaControlador.horasIni}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
                                                 <f:ajax event="change" listener="#{reservaControlador.horasFinales}" render="horaF" execute="@this"></f:ajax>
                                             </h:selectOneMenu>
                                             <h:message for="horaI" style="color:red"/>
@@ -216,14 +232,14 @@
                             </c:if>
                         </div>
                     </div>
-
                 </section>
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
         </f:view>
-        <!-- Bootstrap y jquery -->
+        <!-- Bootstrap y jquery 
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
+        -->
         <!-- select2 js -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script>
@@ -269,10 +285,11 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../../../js/Mensajes.js" type="text/javascript"></script>
         <script>#{mensajeControlador.mensaje}</script>
-        <!-- calendar -->
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <script src="../../../js/pcalendar.js"></script>
+        <!-- calendar
         <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <script src="../../../js/calendar.js"></script>
         <script type="text/javascript">
                 let calendar = new Calendar('calendar');
@@ -283,6 +300,7 @@
                     console.log(dateSelected);
                 });
         </script>
+        -->
     </h:body>
 </html>
 

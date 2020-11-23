@@ -5,11 +5,13 @@
  */
 package controlador;
 
+import entidades.Disponibilidad;
 import entidades.HoraFinal;
 import entidades.HoraInicial;
 import entidades.Reserva;
 import entidades.Residente;
 import entidades.ZonaComunal;
+import facade.DisponibilidadFacade;
 import facade.HoraFinalFacade;
 import facade.HoraInicialFacade;
 import facade.ReservaFacade;
@@ -35,6 +37,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -59,13 +62,13 @@ public class ReservaControlador implements Serializable {
     private Residente residente;
     private ZonaComunal zonaComunal;
     private Reserva reserva;
-    private String fechaSeleccionada;
+    private Date fechaSelected;
     private Date horaInicio;
     private Date horaFin;
     private HoraInicial horaInicial;
     private HoraFinal horaFinal;
     private boolean verifica = true;
-
+    private boolean error = false;
     // listas
     private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
     private List<HoraInicial> horasIni = null;
@@ -92,6 +95,9 @@ public class ReservaControlador implements Serializable {
     @EJB
     HoraFinalFacade horaFinalFacade;
 
+    @EJB
+    DisponibilidadFacade disponibilidad;
+
     public ReservaControlador() {
     }
 
@@ -104,32 +110,21 @@ public class ReservaControlador implements Serializable {
         horaFinal = new HoraFinal();
     }
 
-    public String limpiar() {
-        fechaSeleccionada = null;
+    public void limpiar() {
+        fechaSelected = null;
         residente = new Residente();
         reserva = new Reserva();
         horaFinal = new HoraFinal();
         horaInicial = new HoraInicial();
         horaI = 0;
         reservaFacade.findAll();
-        return null;
     }
 
     public String filtrar() {
-        return null;
-    }
-
-    public Date extraerFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException e) {
-            mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
-            System.out.println("Error en extraer fecha: " + e.getMessage());
-            verifica = false;
+        if (error) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención!", "Debes reservar con un día de anticipa<<ción"));
         }
-        return fechaDate;
+        return null;
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
@@ -140,9 +135,7 @@ public class ReservaControlador implements Serializable {
             reserva.setIdResidente(residenteFacade.find(idResidente));
             reserva.setMotivoReserva(motivo);
             reserva.setEstado("Pendiente");
-
-            reserva.setFechaReserva(extraerFecha(this.fechaSeleccionada));
-
+            reserva.setFechaReserva(this.fechaSelected);
             reservaFacade.create(reserva);
             mensaje.setMensaje("EdicionVisitante('#','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><br><b>*</b>Se a notificado vía email su reserva.');");
 
@@ -160,11 +153,11 @@ public class ReservaControlador implements Serializable {
             reserva = new Reserva();
             horaFinal = new HoraFinal();
             horaInicial = new HoraInicial();
-            fechaSeleccionada = null;
+            fechaSelected = null;
             horaI = 0;
             horaF = 0;
             motivo = "";
-            idResidente=0;
+            idResidente = 0;
         } catch (NumberFormatException e) {
             mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
             System.out.println("Error reserva" + e.getMessage());
@@ -172,23 +165,6 @@ public class ReservaControlador implements Serializable {
 
     }
 
-    /*
-       public void handleClose(CloseEvent event) {
-        addMessage(event.getComponent().getId() + " closed", "So you don't like nature?");
-    }
-     
-    public void handleMove(MoveEvent event) {
-        addMessage(event.getComponent().getId() + " moved", "Left: " + event.getLeft() + ", Top: " + event.getTop());
-    }
-     
-    public void destroyWorld() {
-        addMessage("System Error", "Please try again later.");
-    }
-     
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }*/
     public void cancelar(Reserva reserva) {
         if ("Cancelado".equals(reserva.getEstado())) {
             mensaje.setMensaje("Mensajes('Advertencia!','Esta reserva ya esta cancelada','warning');");
@@ -220,32 +196,52 @@ public class ReservaControlador implements Serializable {
         zonaComunalFacade.edit(zonaComunal);
     }
 
-    public void validarFecha(FacesContext context, UIComponent comp, Object value) {
-        context = FacesContext.getCurrentInstance();
-        String fechaValue = (String) value;
-
+    public void onDateSelect(SelectEvent event) {
+        error = false;
         try {
-            if (hora.now().after(extraerFecha(fechaValue))) { // Si es una fecha posterior
-                ((UIInput) comp).setValid(false);
-                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas pasadas, a la actual"));
-                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas pasadas, selecciona otra','error');");
-            } else if (hora.now().equals(extraerFecha(fechaValue))) { // Si son iguales
-                ((UIInput) comp).setValid(false);
-                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas a la actual"));
-                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas a la actual, selecciona otra','error');");
+            if (hora.now().after(this.fechaSelected)) { // Si es una fecha posterior
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención!", "Debes reservar con un día de anticipación"));
+                this.error = true;
+            } else if (hora.now().equals(this.fechaSelected)) { // Si son iguales
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pueden reservar fechas a la actual"));
+                this.error = true;
+            } else {
+                horasIniSinReserva(this.fechaSelected);
             }
         } catch (Exception e) {
-            System.out.println("Error validacion fecha r: " + e.getMessage());
-            mensaje.setMensaje("MensajeAlertify('Error, selecciona otra fecha','error');");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! " + e.getMessage() + "", ""));
         }
-
     }
 
-    public List<HoraInicial> horasIniSinReserva() {
-        reservas = reservaFacade.fechasReservadas(extraerFecha(this.fechaSeleccionada), this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
+    public void cargaHoras(AjaxBehaviorEvent event) {
+        horasIniSinReserva(this.fechaSelected);
+    }
+
+    public Date extraerFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException e) {
+            mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
+            System.out.println("Error en extraer fecha: " + e.getMessage());
+            verifica = false;
+        }
+        return fechaDate;
+    }
+
+    public void horasIniSinReserva(Date fechaSelected) {
+        reservas = reservaFacade.fechasReservadas(fechaSelected, this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
         if (verifica) {
             try {
-                if (reservas != null && this.fechaSeleccionada != null) {
+                if (reservas != null && this.fechaSelected != null) {
+                    // Reservaciones desde - hasta
+                    /*
+                    List<Disponibilidad> zonaDisponibilidad = disponibilidad.ctlaSingleDisponilidad(this.zona.getZonaComunal().getIdZonaComunal());
+                    for (Disponibilidad objDisponi : zonaDisponibilidad) {
+                        horasIni = horaInicialFacade.horaReservaMaxMin(objDisponi.getHoraInicialReserva().getIdHora(), objDisponi.getHoraFinalReserva().getIdHora() + 1);
+                    }*/
+                    
                     horasIni = horaInicialFacade.findAll();
                     for (Reserva reservado : reservas) {
                         // Consulta las horas reservadas
@@ -254,11 +250,10 @@ public class ReservaControlador implements Serializable {
                     }
                 }
             } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! " + e.getMessage() + "", ""));
                 System.out.println("Error remove horas: " + e.getMessage());
             }
         }
-
-        return horasIni;
     }
 
     public void horasFinales(AjaxBehaviorEvent event) {
@@ -307,6 +302,30 @@ public class ReservaControlador implements Serializable {
         return nombresaso;
     }
 
+    /*
+    public void validarFecha(FacesContext context, UIComponent comp, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String fechaValue = (String) value;
+
+        try {
+            if (hora.now().after(extraerFecha(fechaValue))) { // Si es una fecha posterior
+                ((UIInput) comp).setValid(false);
+                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas pasadas, a la actual"));
+                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas pasadas, selecciona otra','error');");
+                this.error = true;
+            } else if (hora.now().equals(extraerFecha(fechaValue))) { // Si son iguales
+                ((UIInput) comp).setValid(false);
+                context.addMessage(comp.getClientId(context), new FacesMessage("No se pueden reservar fechas a la actual"));
+                mensaje.setMensaje("MensajeAlertify('No se pueden reservar fechas a la actual, selecciona otra','error');");
+                this.error = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error validacion fecha r: " + e.getMessage());
+            mensaje.setMensaje("MensajeAlertify('Error, selecciona otra fecha','error');");
+        }
+
+    }
+     */
     public List<Reserva> findState(String estado) {
         return reservaFacade.findState(estado);
     }
@@ -396,14 +415,6 @@ public class ReservaControlador implements Serializable {
         this.horaFin = horaFin;
     }
 
-    public String getFechaSeleccionada() {
-        return fechaSeleccionada;
-    }
-
-    public void setFechaSeleccionada(String fechaSeleccionada) {
-        this.fechaSeleccionada = fechaSeleccionada;
-    }
-
     public HoraInicial getHoraInicial() {
         return horaInicial;
     }
@@ -466,6 +477,30 @@ public class ReservaControlador implements Serializable {
 
     public void setIdResidente(int idResidente) {
         this.idResidente = idResidente;
+    }
+
+    public Date getFechaSelected() {
+        return fechaSelected;
+    }
+
+    public void setFechaSelected(Date fechaSelected) {
+        this.fechaSelected = fechaSelected;
+    }
+
+    public List<HoraInicial> getHorasIni() {
+        return horasIni;
+    }
+
+    public void setHorasIni(List<HoraInicial> horasIni) {
+        this.horasIni = horasIni;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 
 }

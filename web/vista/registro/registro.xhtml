@@ -106,13 +106,13 @@
 
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="contrasenia">Contrase&ntilde;a</label></strong>
-                                <h:inputText a:type="password" class="form-control" a:placeholder="Ingrese contrase&ntilde;a" id="contrasenia" value="#{residenteControlador.usuario.contrasenia}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClave}"/>
+                                <h:inputText a:type="password" class="form-control" a:placeholder="Ingrese contrase&ntilde;a" id="contrasenia" value="#{residenteControlador.usuario.contrasenia}" required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.validarClaveR}"/>
                                 <h:message for="contrasenia" style="color: red"/>
                                 <small id="contrasenia" class="form-text text-muted">Tu contrase&ntilde;a debe tener una longitud de 8-20 caracteres.</small>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <strong><label for="confirmar">Confirme contraseña</label></strong>
-                                <h:inputText id="confirmar" a:type="password" class="form-control" a:placeholder="Repita la contraseña"  required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.confirmarClave}"/>
+                                <h:inputText id="confirmar" a:type="password" class="form-control" a:placeholder="Repita la contraseña"  required="true" requiredMessage="#{formlogin.camporequerido}" validator="#{residenteControlador.confirmarClaveR}"/>
                                 <h:message for="confirmar" style="color: red"/>
                             </div>
 
