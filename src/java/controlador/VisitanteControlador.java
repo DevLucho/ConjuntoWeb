@@ -59,7 +59,17 @@ public class VisitanteControlador implements Serializable {
     private Vehiculo vehiculo;
     private Parqueadero parqueadero;
     private List<Visitante> consultaVisitante;
-
+    //variables del form
+    private String nombre;
+    private String apellido;
+    private String placa;
+    private int documento;
+    private int inmuebl;
+    private int vigilant;
+    private int parquea;
+    private String tipoVehicul;
+    private String seleccionAuto;
+    
     @PostConstruct
     public void init() {
         visitante = new Visitante();
@@ -122,22 +132,37 @@ public class VisitanteControlador implements Serializable {
     }
 
     public void registrar() {
-        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
-        fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmuebl));
+        fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilant));
+        fichaIngreso.setNombre(nombre);
+        fichaIngreso.setApellido(apellido);
         fichaIngreso.setEstadoFicha("Activo");
         fichaIngreso.setHoraEntrada(hora.now());
         fichaIngresoFacade.create(fichaIngreso);
         visitante.setIdFicha(fichaIngreso);
+        visitante.setDocumento(documento);
+        visitante.setVehiculo(seleccionAuto);
         visitanteFacade.create(visitante);
         if ("Si".equals(visitante.getVehiculo())) {
             vehiculo.setIdVisitante(visitante);
-            vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
+            vehiculo.setPlaca(placa);
+            vehiculo.setTipoVehiculo(tipoVehicul);
+            vehiculo.setIdParqueadero(parqueaderoFacade.find(parquea));
             vehiculoFacade.create(vehiculo);
         }
         fichaIngreso = new FichaIngreso();
         inmueble = new Inmueble();
         vigilante = new Vigilante();
         visitante = new Visitante();
+        nombre = null;
+        apellido= null;
+        placa= null;
+        documento=0;
+        inmuebl=0;
+        vigilant=0;
+        parquea=0;
+        tipoVehicul= null;
+        seleccionAuto= null;
         mensaje.setMensaje("RegistrarVisitante('success','Ficha de visitante creada','Para buscar datos, <br> modificar datos o agregar <br> datos, ingresar a visitantes <br><br>');");
     }
 
@@ -276,4 +301,78 @@ public class VisitanteControlador implements Serializable {
     public static boolean validarCa(String datos) {
         return datos.matches("[a-zA-Z]{1,10}*");
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public int getInmuebl() {
+        return inmuebl;
+    }
+
+    public void setInmuebl(int inmuebl) {
+        this.inmuebl = inmuebl;
+    }
+
+    public int getVigilant() {
+        return vigilant;
+    }
+
+    public void setVigilant(int vigilant) {
+        this.vigilant = vigilant;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
+    }
+
+    public int getParquea() {
+        return parquea;
+    }
+
+    public void setParquea(int parquea) {
+        this.parquea = parquea;
+    }
+
+    public String getTipoVehicul() {
+        return tipoVehicul;
+    }
+
+    public void setTipoVehicul(String tipoVehicul) {
+        this.tipoVehicul = tipoVehicul;
+    }
+
+    public String getSeleccionAuto() {
+        return seleccionAuto;
+    }
+
+    public void setSeleccionAuto(String seleccionAuto) {
+        this.seleccionAuto = seleccionAuto;
+    }
+
+    
 }

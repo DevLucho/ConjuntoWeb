@@ -74,7 +74,15 @@ public class DomiciliarioControlador implements Serializable {
 
     @EJB
     VigilanteFacade vigilanteFacade;
-
+    
+    //variables form
+    private String nombre;
+    private String apellido;
+    private int inmuebl;
+    private int vigilant;
+    private int paque;
+    private int empres;
+    
     public Domiciliario getDomiciliario() {
         return domiciliario;
     }
@@ -134,13 +142,15 @@ public class DomiciliarioControlador implements Serializable {
     }
 
     public void registrar() {
-        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
-        fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        fichaIngreso.setIdInmueble(inmuebleFacade.find(inmuebl));
+        fichaIngreso.setIdVigilante(vigilanteFacade.find(vigilant));
+        fichaIngreso.setNombre(nombre);
+        fichaIngreso.setApellido(apellido);
         fichaIngreso.setEstadoFicha("Activo");
         fichaIngreso.setHoraEntrada(hora.now());
         fichaIngresoFacade.create(fichaIngreso);
-        domiciliario.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
-        domiciliario.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
+        domiciliario.setIdEmpresa(empresaFacade.find(empres));
+        domiciliario.setIdPaquete(paqueteFacade.find(paque));
         domiciliario.setIdFicha(fichaIngreso);
         domiciliarioFacade.create(domiciliario);
         fichaIngreso = new FichaIngreso();
@@ -149,6 +159,12 @@ public class DomiciliarioControlador implements Serializable {
         empresa = new Empresa();
         paquete = new Paquete();
         domiciliario = new Domiciliario();
+        nombre = null;
+        apellido = null;
+        inmuebl=0;
+        vigilant=0;
+        paque=0;
+        empres=0;
         mensaje.setMensaje("RegistrarVisitante('success','Ficha de domiciliario creada','Tiempo disponible para entregar el, <br> domicilio maximo de 10 minutos,<br>para cualquier modificacion ingresar al menu<br> de Domiciliario.<br><br>');");
     }
 
@@ -232,5 +248,53 @@ public class DomiciliarioControlador implements Serializable {
             ((UIInput) comp).setValid(false);
             context.addMessage(comp.getClientId(context), new FacesMessage("tamaño no valido"));
         }
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getInmuebl() {
+        return inmuebl;
+    }
+
+    public void setInmuebl(int inmuebl) {
+        this.inmuebl = inmuebl;
+    }
+
+    public int getVigilant() {
+        return vigilant;
+    }
+
+    public void setVigilant(int vigilant) {
+        this.vigilant = vigilant;
+    }
+
+    public int getPaque() {
+        return paque;
+    }
+
+    public void setPaque(int paque) {
+        this.paque = paque;
+    }
+
+    public int getEmpres() {
+        return empres;
+    }
+
+    public void setEmpres(int empres) {
+        this.empres = empres;
     }
 }

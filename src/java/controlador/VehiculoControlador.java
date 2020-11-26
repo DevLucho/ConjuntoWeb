@@ -63,6 +63,12 @@ public class VehiculoControlador implements Serializable {
     @EJB
     ResidenteFacade residenteFacade;
 
+    //variables form
+    private String placaa;
+    private String tipoVehiculoo;
+    private int parqueaderoo;
+    private int documentoResidente;
+    
     public VehiculoControlador() {
     }
 
@@ -76,8 +82,10 @@ public class VehiculoControlador implements Serializable {
     }
 
     public void registrar() {
-        vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueadero.getIdParqueadero()));
-        vehiculo.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+        vehiculo.setIdParqueadero(parqueaderoFacade.find(parqueaderoo));
+        vehiculo.setIdResidente(residenteFacade.find(documentoResidente));
+        vehiculo.setPlaca(placaa);
+        vehiculo.setTipoVehiculo(tipoVehiculoo);
         vehiculoFacade.create(vehiculo);
         parqueadero = vehiculo.getIdParqueadero();
         parqueadero.setEstado("Ocupado");
@@ -90,6 +98,10 @@ public class VehiculoControlador implements Serializable {
         visitante = new Visitante();
         usuario = new Usuario();
         parqueadero = new Parqueadero();
+        placaa =null;
+        tipoVehiculoo=null;
+        parqueaderoo=0;
+        documentoResidente=0;
         mensaje.setMensaje("Mensajes('Exito!','Vehiculo agregado satisfactoriamente','success');");
     }
 
@@ -232,6 +244,38 @@ public class VehiculoControlador implements Serializable {
 
     public void setTorre(Torre torre) {
         this.torre = torre;
+    }
+
+    public String getPlacaa() {
+        return placaa;
+    }
+
+    public void setPlacaa(String placaa) {
+        this.placaa = placaa;
+    }
+
+    public String getTipoVehiculoo() {
+        return tipoVehiculoo;
+    }
+
+    public void setTipoVehiculoo(String tipoVehiculoo) {
+        this.tipoVehiculoo = tipoVehiculoo;
+    }
+
+    public int getParqueaderoo() {
+        return parqueaderoo;
+    }
+
+    public void setParqueaderoo(int parqueaderoo) {
+        this.parqueaderoo = parqueaderoo;
+    }
+
+    public int getDocumentoResidente() {
+        return documentoResidente;
+    }
+
+    public void setDocumentoResidente(int documentoResidente) {
+        this.documentoResidente = documentoResidente;
     }
 
 }

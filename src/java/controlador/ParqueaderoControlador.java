@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -33,10 +34,17 @@ public class ParqueaderoControlador implements Serializable {
 
     @EJB
     ParqueaderoFacade parqueaderoFacade;
-
+    
+    @Inject
+    private MensajeControlador mensaje;
+    
     @EJB
     TorreFacade torreFacade;
 
+    //variable form
+    private String lugarr;
+    private String estaddo;
+    
     public ParqueaderoControlador() {
     }
 
@@ -46,8 +54,13 @@ public class ParqueaderoControlador implements Serializable {
     }
 
     public void registrar() {
+        parqueadero.setLugar(lugarr);
+        parqueadero.setEstado(estaddo);
         parqueaderoFacade.create(parqueadero);
         parqueadero = new Parqueadero();
+        lugarr = null;
+        estaddo = null;
+        mensaje.setMensaje("Mensajes('Exito!','Parquedero agregado satisfactoriamente','success');");
     }
 
     public void eliminar(Parqueadero parqueaderoEliminar) {
@@ -61,6 +74,8 @@ public class ParqueaderoControlador implements Serializable {
 
     public void actualizar() {
         parqueaderoFacade.edit(parqueadero);
+        mensaje.setMensaje("Mensajes('Exito!','Parquedero Editado satisfactoriamente','success');");
+   
     }
 
     public List<Parqueadero> consultarTodos() {
@@ -112,4 +127,28 @@ public class ParqueaderoControlador implements Serializable {
         this.parqueadero = parqueadero;
     }
 
+    public String getLugarr() {
+        return lugarr;
+    }
+
+    public void setLugarr(String lugarr) {
+        this.lugarr = lugarr;
+    }
+
+   
+    public String getEstaddo() {
+        return estaddo;
+    }
+
+    public void setEstaddo(String estaddo) {
+        this.estaddo = estaddo;
+    }
+
+    public MensajeControlador getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(MensajeControlador mensaje) {
+        this.mensaje = mensaje;
+    }
 }

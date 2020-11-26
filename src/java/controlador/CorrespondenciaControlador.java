@@ -72,7 +72,14 @@ public class CorrespondenciaControlador implements Serializable {
     EmpresaFacade empresaFacade;
     @EJB
     VigilanteFacade vigilanteFacade;
-
+    
+    //variables form
+    private int inmuebl;
+    private String descripcio;
+    private int paque;
+    private int vigilant;
+    private int empre;
+    
     public Correspondencia getCorrespondencia() {
         return correspondencia;
     }
@@ -131,10 +138,11 @@ public class CorrespondenciaControlador implements Serializable {
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
-        correspondencia.setIdEmpresa(empresaFacade.find(empresa.getIdEmpresa()));
-        correspondencia.setIdInmueble(inmuebleFacade.find(inmueble.getIdInmueble()));
-        correspondencia.setIdPaquete(paqueteFacade.find(paquete.getIdPaquete()));
-        correspondencia.setIdVigilante(vigilanteFacade.find(vigilante.getIdVigilante()));
+        correspondencia.setIdEmpresa(empresaFacade.find(empre));
+        correspondencia.setIdInmueble(inmuebleFacade.find(inmuebl));
+        correspondencia.setIdPaquete(paqueteFacade.find(paque));
+        correspondencia.setIdVigilante(vigilanteFacade.find(vigilant));
+        correspondencia.setDescripcion(descripcio);
         correspondencia.setEstado("No reclamado");
         correspondencia.setFechaIngreso(hora.now());
         correspondenciaFacade.create(correspondencia);
@@ -152,6 +160,11 @@ public class CorrespondenciaControlador implements Serializable {
         paquete = new Paquete();
         vigilante = new Vigilante();
         correspondencia = new Correspondencia();
+        inmuebl =0;
+        descripcio = null;
+        paque=0;
+        vigilant=0;
+        empre=0;
         mensaje.setMensaje("RegistrarVisitante('success','Correspondencia Registrada','Para buscar datos, <br> modificar datos o agregar<br>datos, ingrese al menu de Correspondencia.<br><br>');");
     }
 
@@ -204,6 +217,46 @@ public class CorrespondenciaControlador implements Serializable {
     public String consultarID(int id) {
         correspondencia = correspondenciaFacade.find(id);
         return "ListaPaquete";
+    }
+
+    public int getInmuebl() {
+        return inmuebl;
+    }
+
+    public void setInmuebl(int inmuebl) {
+        this.inmuebl = inmuebl;
+    }
+
+    public String getDescripcio() {
+        return descripcio;
+    }
+
+    public void setDescripcio(String descripcio) {
+        this.descripcio = descripcio;
+    }
+
+    public int getPaque() {
+        return paque;
+    }
+
+    public void setPaque(int paque) {
+        this.paque = paque;
+    }
+
+    public int getVigilant() {
+        return vigilant;
+    }
+
+    public void setVigilant(int vigilant) {
+        this.vigilant = vigilant;
+    }
+
+    public int getEmpre() {
+        return empre;
+    }
+
+    public void setEmpre(int empre) {
+        this.empre = empre;
     }
     
 }

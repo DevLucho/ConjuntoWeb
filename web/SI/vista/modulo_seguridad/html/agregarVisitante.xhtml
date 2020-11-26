@@ -100,19 +100,19 @@
                                                 <li>
                                                     <h:outputLabel for="nombre" class="label">Nombre Completo<span class="required">*</span></h:outputLabel>
 
-                                                    <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.fichaIngreso.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
+                                                    <h:inputText a:type="text" id="nombre" value="#{visitanteControlador.nombre}" class="field-divided correcto corto2 kk" title="Nombre" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
                                                     <h:message for="nombre" style="color: white;margin-left:-235px;margin-top: 45px; position: absolute;"/>
                                                     <!--validator="#{v}"-->
                                                     <!--<f:validator validatorId="valnu" />-->
 
-                                                    <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.fichaIngreso.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true" requiredMessage=" campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
+                                                    <h:inputText a:type="text" id="apellido" value="#{visitanteControlador.apellido}" title="Apellido" class="field-divided correcto corto3 lll" required="true" requiredMessage=" campo vacio" validator="#{visitanteControlador.validarLong}"></h:inputText>
                                                     <h:message for="apellido" style="color: White;margin-left:170px;margin-top: 45px;"/>
 
                                                 </li>   
                                             </div>    
                                             <li>
                                                 <h:outputLabel class="label" for="inmueble">Inmueble<span class="required">*</span></h:outputLabel>
-                                                <h:selectOneMenu class="js-example-basic-single field-long correcto " id="inmueble" value="#{visitanteControlador.inmueble.idInmueble}" title="Torre" required="true" requiredMessage="Seleccionar un inmueble">
+                                                <h:selectOneMenu class="js-example-basic-single field-long correcto " id="inmueble" value="#{visitanteControlador.inmuebl}" title="Torre" required="true" requiredMessage="Seleccionar un inmueble">
                                                     <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                     <f:selectItems var="inmueble" value="#{inmuebleControlador.findInmueble()}" itemValue="#{inmueble.idInmueble}" itemLabel="#{inmueble.idTorre.idTorre} - #{inmueble.idApartamento.idApartamento}"/>
                                                 </h:selectOneMenu>
@@ -120,18 +120,18 @@
                                             </li>
                                             <li>
                                                 <h:outputLabel class="label" for="vigilante">Vigilante</h:outputLabel>
-                                                <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilante.idVigilante}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
+                                                <h:selectOneMenu class="field-select correcto " id="vigilante" value="#{visitanteControlador.vigilant}" title="Torre" required="true" requiredMessage="The IdTorre field is required.">
                                                     <f:selectItems var="vigi" value="#{usuarioControlador.sesionUsuarioV(sesionControlador.user.idPerfil)}" itemValue="#{vigi.idVigilante}" itemLabel="#{vigi.idPerfil.nombre}"/>
                                                 </h:selectOneMenu>
                                             </li>
                                             <li>
                                                 <h:outputLabel for="identificacion" class="label"> Num. de documento <span class="required">*</span></h:outputLabel>
-                                                <h:inputText a:type="number" id="identificicacion" value="#{visitanteControlador.visitante.documento}" class="field-long correcto" title="Identificacion" required="true" requiredMessage="Campo de identificacion vacio" />
+                                                <h:inputText a:type="number" id="identificicacion" value="#{visitanteControlador.documento}" class="field-long correcto" title="Identificacion" required="true" requiredMessage="Campo de identificacion vacio" />
                                                 <h:message for="identificacion" style="color: white;"/>                                               
                                             </li>
                                             <li>
                                                 <h:outputLabel for="vehiculo" class="label">¿Ingresara un Automovil?</h:outputLabel>
-                                                <h:selectOneMenu onchange="submit();" class="field-select correcto " id="vehiculo" value="#{visitanteControlador.visitante.vehiculo}" title="Vehiculo" required="true" requiredMessage="Seleccione una opcion">
+                                                <h:selectOneMenu onchange="submit();" class="field-select correcto " id="vehiculo" value="#{visitanteControlador.seleccionAuto}" title="Vehiculo" required="true" requiredMessage="Seleccione una opcion">
 
                                                     <f:selectItem itemValue="" itemLabel="- Seleccione -" itemDisabled="true" a:selected="true"/>
                                                     <f:selectItem itemValue="Si" itemLabel="Si"/>
@@ -139,20 +139,20 @@
                                                 </h:selectOneMenu> 
                                                 <h:message for="vehiculo" style="color: white;"/>                                               
                                             </li>
-                                            <c:if test="#{visitanteControlador.visitante.vehiculo== 'Si'}">
+                                            <c:if test="#{visitanteControlador.seleccionAuto== 'Si'}">
                                                 <li>
                                                     <h:outputLabel for="placa">Placa</h:outputLabel>
-                                                    <h:inputText class="field-long correcto" value="#{visitanteControlador.vehiculo.placa}" id="placa" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarplaca}"></h:inputText>
+                                                    <h:inputText class="field-long correcto" value="#{visitanteControlador.placa}" id="placa" required="true" requiredMessage="Campo vacio" validator="#{visitanteControlador.validarplaca}"></h:inputText>
                                                     <h:message for="placa" style="color: white;"/>
                                                     <h:outputLabel for="tipoveh">Tipo vehiculo</h:outputLabel>
-                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.vehiculo.tipoVehiculo}" id="Tipo" required="true" requiredMessage="Seleccionar un tipo de vehiculo">
+                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.tipoVehicul}" id="Tipo" required="true" requiredMessage="Seleccionar un tipo de vehiculo">
                                                         <f:selectItem itemLabel="Automovil" itemValue="Automovil"/>
                                                         <f:selectItem itemLabel="Bicicleta" itemValue="Bicicleta"/>
                                                         <f:selectItem itemLabel="Motocicleta" itemValue="Motocicleta"/>
                                                         <h:message for="Tipo" style="color: white;"/>
                                                     </h:selectOneMenu>
                                                     <h:outputLabel for="idpar">Parqueadero</h:outputLabel>
-                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.parqueadero.idParqueadero}" id="Parq" required="true" requiredMessage="Seleccionar Parqueadero">
+                                                    <h:selectOneMenu class="field-long correcto" value="#{visitanteControlador.parquea}" id="Parq" required="true" requiredMessage="Seleccionar Parqueadero">
                                                         <f:selectItems var="p" value="#{parqueaderoControlador.consultarTodos()}" itemValue="#{p.idParqueadero}" itemLabel="#{p.lugar}"/>
                                                     </h:selectOneMenu>
                                                     <h:message for="Parq" style="color: white;"/>
