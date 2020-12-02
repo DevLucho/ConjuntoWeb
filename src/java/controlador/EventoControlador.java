@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchProviderException;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -57,6 +58,11 @@ public class EventoControlador implements Serializable {
     private HoraFinal horaFinal;
     private int notificar;
     private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
+
+    // cmps formulario
+    private String titulo, organizador, detalle;
+    private Date fechaInicio, fechaFin;
+    private int idHora, idZonaC, idHoraF;
 
     @EJB
     EventoFacade eventoFacade;
@@ -92,15 +98,18 @@ public class EventoControlador implements Serializable {
         // --- Subir img --- 
         imagen.subirImagen(1);
         // ------------------
-        evento.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
-        evento.setHoraInicio(horaInFacade.find(horaInicial.getIdHora()));
+        evento.setTitulo(titulo);
+        evento.setIdZonaComunal(zonaComunalFacade.find(idZonaC));
+        evento.setHoraInicio(horaInFacade.find(idHora));
         evento.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
-        evento.setHoraFin(horaFiFacade.find(horaFinal.getIdHora()));
+        evento.setHoraFin(horaFiFacade.find(idHoraF));
+        evento.setOrganizador(organizador);
+        evento.setDetalle(detalle);
         evento.setEstado("Vigente");
         eventoFacade.create(evento);
         // Modifica el dia de la fecha +1
-        evento.setFechaInicio(hora.fecha(evento.getFechaInicio()));
-        evento.setFechaFin(hora.fecha(evento.getFechaFin()));
+        evento.setFechaInicio(hora.fecha(fechaInicio));
+        evento.setFechaFin(hora.fecha(fechaFin));
         eventoFacade.edit(evento);
 
         // mostrar fechas - horas con formato
@@ -149,6 +158,13 @@ public class EventoControlador implements Serializable {
         evento = new Evento();
         imagen = new ImagenControlador();
         notificar = 0;
+        titulo = null;
+        organizador = null;
+        fechaInicio = null;
+        fechaFin = null;
+        idHora = 0;
+        idHoraF = 0;
+        idZonaC = 0;
     }
 
     public List<Usuario> correos() {
@@ -332,5 +348,69 @@ public class EventoControlador implements Serializable {
 
     public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
         this.horasDisponibles = horasDisponibles;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public int getIdHora() {
+        return idHora;
+    }
+
+    public void setIdHora(int idHora) {
+        this.idHora = idHora;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public int getIdZonaC() {
+        return idZonaC;
+    }
+
+    public void setIdZonaC(int idZonaC) {
+        this.idZonaC = idZonaC;
+    }
+
+    public String getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(String organizador) {
+        this.organizador = organizador;
+    }
+
+    public int getIdHoraF() {
+        return idHoraF;
+    }
+
+    public void setIdHoraF(int idHoraF) {
+        this.idHoraF = idHoraF;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 }

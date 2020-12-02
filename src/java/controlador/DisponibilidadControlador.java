@@ -18,10 +18,7 @@ import facade.ZonaComunalFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,7 +55,11 @@ public class DisponibilidadControlador implements Serializable {
     private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
 
     private String msjerror;
-
+    
+    // cmps formulario
+    private String nombre, descripcion;
+    private int idHoraI, idHoraF, tmpMax;
+    
     @EJB
     ZonaComunalFacade zonaComunalFacade;
 
@@ -97,70 +98,75 @@ public class DisponibilidadControlador implements Serializable {
         zonaComunal = new ZonaComunal();
         imagen = new ImagenControlador();
         msjerror = "";
+        nombre = null;
+        descripcion = null;
     }
 
     public void registrar() {
-        if (lunes == false && martes == false && miercoles == false && jueves == false && viernes == false && sabado == false && domingo == false) {
+        if (!lunes && !martes && !miercoles && !jueves && !viernes && !sabado && !domingo) {
             msjerror = "Selecciona por lo menos un día";
             mensaje.setMensaje("MensajeAlertify('Checkea los días de disponibilidad','warning');");
         } else {
             imagen.subirImagen(1);
+            zonaComunal.setNombre(nombre);
+            zonaComunal.setDescripcion(descripcion);
+            zonaComunal.setTiempoMaximoReserva(tmpMax);
             zonaComunal.setImg(imagen.getImg().getSubmittedFileName());
             zonaComunalFacade.create(zonaComunal);
             if (domingo) {
                 disponibilidadDia.setIdDia(1);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (lunes) {
                 disponibilidadDia.setIdDia(2);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (martes) {
                 disponibilidadDia.setIdDia(3);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (miercoles) {
                 disponibilidadDia.setIdDia(4);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (jueves) {
                 disponibilidadDia.setIdDia(5);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (viernes) {
                 disponibilidadDia.setIdDia(6);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             if (sabado) {
                 disponibilidadDia.setIdDia(7);
                 disponibilidad.setIdDia(disponibilidadDia);
                 disponibilidad.setIdZonaComunal(zonaComunal);
-                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(horaInicial.getIdHora()));
-                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(horaFinal.getIdHora()));
+                disponibilidad.setHoraInicialReserva(horaInicialFacade.find(idHoraI));
+                disponibilidad.setHoraFinalReserva(horaFinalFacade.find(idHoraF));
                 disponibilidadFacade.create(disponibilidad);
             }
             this.domingo = false;
@@ -176,6 +182,11 @@ public class DisponibilidadControlador implements Serializable {
             this.zonaComunal = new ZonaComunal();
             this.imagen = new ImagenControlador();
             this.msjerror = "";
+            this.nombre = null;
+            this.descripcion = null;
+            this.tmpMax = 0;
+            this.idHoraI = 0;
+            this.idHoraF = 0;
             mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
         }
     }
@@ -421,6 +432,46 @@ public class DisponibilidadControlador implements Serializable {
 
     public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
         this.horasDisponibles = horasDisponibles;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getIdHoraI() {
+        return idHoraI;
+    }
+
+    public void setIdHoraI(int idHoraI) {
+        this.idHoraI = idHoraI;
+    }
+
+    public int getIdHoraF() {
+        return idHoraF;
+    }
+
+    public void setIdHoraF(int idHoraF) {
+        this.idHoraF = idHoraF;
+    }
+
+    public int getTmpMax() {
+        return tmpMax;
+    }
+
+    public void setTmpMax(int tmpMax) {
+        this.tmpMax = tmpMax;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

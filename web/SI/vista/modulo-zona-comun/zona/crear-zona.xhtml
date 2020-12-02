@@ -62,7 +62,7 @@
                                 <div class="collapse" id="titulo">
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.zonaComunal.nombre}" title="#{formdashboardadmin.Nombrezonacomún}" pt:placeholder="#{formdashboardadmin.Ingreseelnombredelazonacomunal}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
+                                            <h:inputText id="nombre" class="form-control" value="#{disponibilidadControlador.nombre}" title="#{formdashboardadmin.Nombrezonacomún}" pt:placeholder="#{formdashboardadmin.Ingreseelnombredelazonacomunal}" required="true" requiredMessage="#{formcrearusuario.camporequerido}"/>
                                             <h:message for="nombre" style="color: red"/>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                             <div class="form-group row">
                                                 <div class="col-12 col-md-6">
                                                     <b><label>#{formdashboardadmin.Reservacionesdesdelas}:</label></b>
-                                                    <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.horaInicial.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                    <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.idHoraI}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
                                                         <f:ajax event="change" listener="#{disponibilidadControlador.horasFinales}" render="horaF" execute="@this"></f:ajax>
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
-                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItems value="#{disponibilidadControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                                     </h:selectOneMenu>
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 mt-3">
                                                     <b><label>#{formdashboardadmin.Tiempomáximodereservaenhoras}:</label></b>
-                                                    <h:selectOneMenu id="tiempoM" value="#{disponibilidadControlador.zonaComunal.tiempoMaximoReserva}" class="form-control" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                    <h:selectOneMenu id="tiempoM" value="#{disponibilidadControlador.tmpMax}" class="form-control" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItems value="#{disponibilidadControlador.horaReserva()}"/>
                                                     </h:selectOneMenu> 
@@ -145,7 +145,7 @@
                         <hr/>
                         <div class="form-group row">
                             <div class="col-12 col-md-9">
-                                <h:inputTextarea class="form col-12 form-control" pt:placeholder="#{formdashboardadmin.Detallezonacomún}" id="descripcion" value="#{disponibilidadControlador.zonaComunal.descripcion}" required="required" requiredMessage="#{formcrearusuario.camporequerido}" style="height:100px;"/>
+                                <h:inputTextarea class="form col-12 form-control" pt:placeholder="#{formdashboardadmin.Detallezonacomún}" id="descripcion" value="#{disponibilidadControlador.descripcion}" required="required" requiredMessage="#{formcrearusuario.camporequerido}" style="height:100px;"/>
                                 <h:message for="descripcion" style="color: red"/>
                             </div>
 
