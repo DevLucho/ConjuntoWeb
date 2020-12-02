@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
@@ -54,6 +55,7 @@ public class DisponibilidadControlador implements Serializable {
     private HoraFinal horaFinal;
     private DisponibilidadDia disponibilidadDia;
     private List<Disponibilidad> disponibilidadZona;
+    private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
 
     private String msjerror;
 
@@ -173,7 +175,7 @@ public class DisponibilidadControlador implements Serializable {
             this.disponibilidad = new Disponibilidad();
             this.zonaComunal = new ZonaComunal();
             this.imagen = new ImagenControlador();
-            this.msjerror="";
+            this.msjerror = "";
             mensaje.setMensaje("Mensajes('Exito!','Zona común creada satisfactoriamente','success');");
         }
     }
@@ -277,6 +279,11 @@ public class DisponibilidadControlador implements Serializable {
             numeros.add(new SelectItem(i, "" + i + ""));
         }
         return numeros;
+    }
+
+    public List<HoraFinal> horasFinales(AjaxBehaviorEvent event) {
+        this.horasDisponibles = horaFinalFacade.horasFinales(horaInicial.getIdHora());
+        return horasDisponibles;
     }
 
     // Metodos get y set
@@ -406,6 +413,14 @@ public class DisponibilidadControlador implements Serializable {
 
     public void setMsjerror(String msjerror) {
         this.msjerror = msjerror;
+    }
+
+    public List<HoraFinal> getHorasDisponibles() {
+        return horasDisponibles;
+    }
+
+    public void setHorasDisponibles(List<HoraFinal> horasDisponibles) {
+        this.horasDisponibles = horasDisponibles;
     }
 
 }

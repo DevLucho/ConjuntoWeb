@@ -27,6 +27,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.NoSuchProviderException;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.PostConstruct;
@@ -61,12 +62,17 @@ public class UsuarioControlador implements Serializable {
     private Torre torre;
     private Apartamento apartamento;
     private Inmueble inmueble;
-    // campos form
-    private String nrodoc;
+
+    // campos formulario - validados
+    private String nrodoc, correo, nrocel;
     private int nrodocumento;
-    private String nrocel;
     private long nrocelular;
-    private String correo;
+    // campos formulario
+    private String nombre, apellido, direccion;
+    private int idTipoDoc, idRol;
+    // campos formulario r.
+    private String automovil;
+    private int idTorre, idApto;
 
     @EJB
     UsuarioFacade usuarioFacade;
@@ -121,7 +127,7 @@ public class UsuarioControlador implements Serializable {
         // generar contraseña
         pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
         num = (int) (rnd.nextDouble() * 9999 + 1000);
-         //Estructura codigo 8 caracteres
+        //Estructura codigo 8 caracteres
         clavegenerada = clavegenerada + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos - 1) + abecedario.charAt(pos);
         return clavegenerada;
     }
@@ -138,33 +144,32 @@ public class UsuarioControlador implements Serializable {
             } else if (useremail.getCorreo() != null) {
                 mensaje.setMensaje("Mensajes('Error','El correo electrónico: " + this.correo + " ya se encuentra registrado en el sistema.','error');");
             } else {
-                usuario.setIdRol(rolFacade.find(rol.getIdRol()));
-                usuario.setTipoDocumento(tipoDocumentoFacade.find(tipoDocumento.getId()));
+                usuario.setIdRol(rolFacade.find(idRol));
+                usuario.setTipoDocumento(tipoDocumentoFacade.find(idTipoDoc));
+                usuario.setNombre(nombre);
+                usuario.setApellido(apellido);
                 usuario.setCelular(nrocelular = Long.parseLong(nrocel));
                 usuario.setDocumento(nrodocumento = Integer.parseInt(nrodoc));
                 usuario.setEstado("Activo");
                 usuario.setContrasenia(generarContraseña());
                 usuario.setCorreo(correo);
+                usuario.setDireccion(direccion);
                 usuarioFacade.create(usuario);
                 // if is residente
                 if (rol.getIdRol() == 2) {
                     residente.setIdPerfil(usuario);
-                    inmueble.setIdTorre(torreFacade.find(torre.getIdTorre()));
-                    inmueble.setIdApartamento(apartamentoFacade.find(apartamento.getIdApartamento()));
+                    inmueble.setIdTorre(torreFacade.find(idTorre));
+                    inmueble.setIdApartamento(apartamentoFacade.find(idApto));
                     inmuebleFacade.create(inmueble);
                     residente.setIdInmueble(inmueble);
+                    residente.setAutomovil(automovil);
                     residenteFacade.create(residente);
-                    torre = new Torre();
-                    apartamento = new Apartamento();
-                    residente = new Residente();
                 } // if is vigilante
                 else if (rol.getIdRol() == 3) {
                     vigilante.setIdPerfil(usuario);
                     turnoVigilanteFacade.create(turnoVigilante);
                     vigilante.setIdTurno(turnoVigilante);
                     vigilanteFacade.create(vigilante);
-                    vigilante = new Vigilante();
-                    turnoVigilante = new TurnoVigilante();
                 }
 
                 // enviar email con usuario y contraseña          
@@ -175,21 +180,36 @@ public class UsuarioControlador implements Serializable {
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: " + usuario.getDocumento() + "<br/>Contraseña: " + usuario.getContrasenia() + "</p>",
                                 "http://imgfz.com/i/7ocMf5s.jpeg")
                 );
-
+                // cmp usu
                 usuario = new Usuario();
                 rol = new Rol();
                 tipoDocumento = new TipoDocumento();
-                nrodoc = "";
-                nrocel = "";
-                correo = "";
+                nrodoc = null;
+                nrocel = null;
+                correo = null;
+                nombre = null;
+                apellido = null;
+                direccion = null;
+                idRol = 0;
+                idTipoDoc = 0;
+                // cmp resi
+                torre = new Torre();
+                apartamento = new Apartamento();
+                residente = new Residente();
+                idTorre = 0;
+                idApto = 0;
+                automovil = null;
+                // cmp vigi
+                vigilante = new Vigilante();
+                turnoVigilante = new TurnoVigilante();
                 if ("es".equals(lenguaje.getLenguaje())) {
                     mensaje.setMensaje("MensajeAlertify('Usuario creado satisfactoriamente','success');");
                 } else {
-                    mensaje.setMensaje("MensajeAlertify('user created successfully','success');");
+                    mensaje.setMensaje("MensajeAlertify('User created successfully','success');");
                 }
             }
         } catch (NumberFormatException | NoSuchProviderException | MessagingException e) {
-            System.out.println("Error registro de usuario: " + e.getMessage());
+            mensaje.setMensaje("MensajeAlertify('Error: " + e.getMessage() + "','error');");
         }
     }
 
@@ -441,6 +461,70 @@ public class UsuarioControlador implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getIdTipoDoc() {
+        return idTipoDoc;
+    }
+
+    public void setIdTipoDoc(int idTipoDoc) {
+        this.idTipoDoc = idTipoDoc;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+
+    public String getAutomovil() {
+        return automovil;
+    }
+
+    public void setAutomovil(String automovil) {
+        this.automovil = automovil;
+    }
+
+    public int getIdTorre() {
+        return idTorre;
+    }
+
+    public void setIdTorre(int idTorre) {
+        this.idTorre = idTorre;
+    }
+
+    public int getIdApto() {
+        return idApto;
+    }
+
+    public void setIdApto(int idApto) {
+        this.idApto = idApto;
     }
 
 }

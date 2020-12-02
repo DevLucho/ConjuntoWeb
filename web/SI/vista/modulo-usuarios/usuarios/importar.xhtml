@@ -232,7 +232,13 @@ and open the template in the editor.
                             <img src="../../../img/img-excel.PNG"  alt="Ejm Excel"/>
                             <hr/>
                             <div class="text-center" >
-                                <h5><a href="https://drive.google.com/file/d/1ORZ2YLLyh8J_MiX5oAmsgZHbjpiBF4_8/view?usp=sharing" target="_blank" download="importar_residentes"><i class="fas fa-file-excel" style="color:green"></i>Descarga aquí la plantilla</a></h5>
+                                <h:form>
+                                    <i class="fas fa-file-excel" style="color:green"></i>
+                                    <h:commandLink action="#{exportUControlador.downloadFile()}" style="text-decoration: underline" id="downloadBtn" value="Descarga aquí la plantilla"/>
+                                </h:form>
+                                <!--
+                                <h5><a href="https://drive.google.com/file/d/1ORZ2YLLyh8J_MiX5oAmsgZHbjpiBF4_8/view?usp=sharing" target="_blank" download="importar_residentes">Descarga aquí la plantilla</a></h5>
+                                -->
                             </div>
                             <h:form enctype="multipart/form-data">
                                 <br/>

@@ -17,7 +17,11 @@ import facade.RolFacade;
 import facade.TipoDocumentoFacade;
 import facade.TorreFacade;
 import facade.UsuarioFacade;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.security.NoSuchProviderException;
 import java.util.Iterator;
 import javax.annotation.PostConstruct;
@@ -27,6 +31,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -42,6 +48,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  */
 @ManagedBean
 public class ExportUControlador {
+
+    private static File WORKING_DIRECTORY; // Ruta directorio
 
     // ========== dependencias
     @Inject
@@ -168,9 +176,9 @@ public class ExportUControlador {
                     ncamp++;
                 }
             }
-            if (cantDuplicados != 0 && cantVacios!=0) {
+            if (cantDuplicados != 0 && cantVacios != 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                        FacesMessage.SEVERITY_INFO, "Aviso", 
+                        FacesMessage.SEVERITY_INFO, "Aviso",
                         "Migracion Realizada, se interrupieron "
                         + cantDuplicados + " filas ya que el nro. documento o email ya se encuentran registrados. "
                         + cantVacios + " filas se interrumpieron por campos vacios. "
@@ -243,6 +251,72 @@ public class ExportUControlador {
             cantVacios++;
             System.out.println("Error migracion:" + e.getMessage());
         }
+    }
+
+    public void downloadFile() throws FileNotFoundException, IOException {
+
+        File ficheroXLS = new File("" + get() + "\\SI\\docs\\importar_usuarios.xlsx");
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        FileInputStream fis = new FileInputStream(ficheroXLS);
+        byte[] bytes = new byte[1000];
+        int read = 0;
+
+        if (!ctx.getResponseComplete()) {
+            String fileName = ficheroXLS.getName();
+            String contentType = "application/vnd.ms-excel";
+            //String contentType = "application/pdf";
+            HttpServletResponse response
+                    = (HttpServletResponse) ctx.getExternalContext().getResponse();
+
+            response.setContentType(contentType);
+
+            response.setHeader("Content-Disposition",
+                    "attachment;filename=\"" + fileName + "\"");
+
+            ServletOutputStream out = response.getOutputStream();
+
+            while ((read = fis.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+
+            out.flush();
+            out.close();
+            ctx.responseComplete();
+        }
+
+    }
+
+    // extraer directorio de la clase
+    public static File get() {
+        String Recurso = ExportUControlador.class.getSimpleName() + ".class";
+        if (WORKING_DIRECTORY == null) {
+            try {
+                URL url = ExportUControlador.class.getResource(Recurso);
+                if (url.getProtocol().equals("file")) {
+                    File f = new File(url.toURI());
+                    do {
+                        f = f.getParentFile();
+                    } while (!f.getName().equals("web"));
+                    WORKING_DIRECTORY = f;
+                }
+                /*
+                else if (url.getProtocol().equals("jar")) {
+                    String expected = "!/" + Recurso;
+                    String s = url.toString();
+                    s = s.substring(4);
+                    s = s.substring(0, s.length() - expected.length());
+                    File f = new File(new URL(s).toURI());
+                    do {
+                        f = f.getParentFile();
+                    } while (!f.isDirectory());
+                    WORKING_DIRECTORY = f;
+                }
+                 */
+            } catch (Exception e) {
+                WORKING_DIRECTORY = new File(".");
+            }
+        }
+        return WORKING_DIRECTORY;
     }
 
     public Part getExcel() {

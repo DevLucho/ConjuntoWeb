@@ -113,6 +113,7 @@
                                                     <h:selectOneMenu id="horaI" class="form-control" value="#{disponibilidadControlador.horaInicial.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItems value="#{horaControlador.consultarHorasIniciales()}" var="hi" itemValue="#{hi.idHora}" itemLabel="#{horaControlador.convertir(hi.hora)}"/>
+                                                        <f:ajax event="change" listener="#{disponibilidadControlador.horasFinales}" render="horaF" execute="@this"></f:ajax>
                                                     </h:selectOneMenu>
                                                     <h:message for="horaI" style="color: red"/>
                                                 </div>
@@ -120,7 +121,7 @@
                                                     <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
                                                     <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal.idHora}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItems value="#{horaControlador.consultarHorasFinales()}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
+                                                        <f:selectItems value="#{disponibilidadControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                                     </h:selectOneMenu>
                                                     <h:message for="horaF" style="color: red"/>
                                                 </div>
