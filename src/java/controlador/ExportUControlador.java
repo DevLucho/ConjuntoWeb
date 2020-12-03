@@ -176,7 +176,7 @@ public class ExportUControlador {
                     ncamp++;
                 }
             }
-            if (cantDuplicados != 0 && cantVacios != 0) {
+            if (cantDuplicados != 0 || cantVacios != 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                         FacesMessage.SEVERITY_INFO, "Aviso",
                         "Migracion Realizada, se interrupieron "
@@ -249,41 +249,46 @@ public class ExportUControlador {
             }
         } catch (NoSuchProviderException | MessagingException e) {
             cantVacios++;
+            mensaje.setMensaje("Mensaje('Error','"+e.getMessage()+"','error');");
             System.out.println("Error migracion:" + e.getMessage());
         }
     }
 
+    //Metodo descargar
     public void downloadFile() throws FileNotFoundException, IOException {
+        try {
+            //File ficheroXLS = new File("" + get() + "\\SI\\docs\\importar_usuarios.xlsx");
+            File ficheroXLS = new File("http://conjuntoweb.w1-us.cloudjiffy.net/SI/docs/importar_usuarios.xlsx");
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            FileInputStream fis = new FileInputStream(ficheroXLS);
+            byte[] bytes = new byte[1000];
+            int read = 0;
 
-        File ficheroXLS = new File("" + get() + "\\SI\\docs\\importar_usuarios.xlsx");
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        FileInputStream fis = new FileInputStream(ficheroXLS);
-        byte[] bytes = new byte[1000];
-        int read = 0;
+            if (!ctx.getResponseComplete()) {
+                String fileName = ficheroXLS.getName();
+                String contentType = "application/vnd.ms-excel";
+                //String contentType = "application/pdf";
+                HttpServletResponse response
+                        = (HttpServletResponse) ctx.getExternalContext().getResponse();
 
-        if (!ctx.getResponseComplete()) {
-            String fileName = ficheroXLS.getName();
-            String contentType = "application/vnd.ms-excel";
-            //String contentType = "application/pdf";
-            HttpServletResponse response
-                    = (HttpServletResponse) ctx.getExternalContext().getResponse();
+                response.setContentType(contentType);
 
-            response.setContentType(contentType);
+                response.setHeader("Content-Disposition",
+                        "attachment;filename=\"" + fileName + "\"");
 
-            response.setHeader("Content-Disposition",
-                    "attachment;filename=\"" + fileName + "\"");
+                ServletOutputStream out = response.getOutputStream();
 
-            ServletOutputStream out = response.getOutputStream();
+                while ((read = fis.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
 
-            while ((read = fis.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
+                out.flush();
+                out.close();
+                ctx.responseComplete();
             }
-
-            out.flush();
-            out.close();
-            ctx.responseComplete();
+        } catch (Exception e) {
+            //mensaje.setMensaje("Mensaje('Error','"+e.getMessage()+"','error');");
         }
-
     }
 
     // extraer directorio de la clase
@@ -298,9 +303,7 @@ public class ExportUControlador {
                         f = f.getParentFile();
                     } while (!f.getName().equals("web"));
                     WORKING_DIRECTORY = f;
-                }
-                /*
-                else if (url.getProtocol().equals("jar")) {
+                } else if (url.getProtocol().equals("jar")) {
                     String expected = "!/" + Recurso;
                     String s = url.toString();
                     s = s.substring(4);
@@ -308,10 +311,9 @@ public class ExportUControlador {
                     File f = new File(new URL(s).toURI());
                     do {
                         f = f.getParentFile();
-                    } while (!f.isDirectory());
+                    } while (!f.getName().equals("web"));
                     WORKING_DIRECTORY = f;
                 }
-                 */
             } catch (Exception e) {
                 WORKING_DIRECTORY = new File(".");
             }

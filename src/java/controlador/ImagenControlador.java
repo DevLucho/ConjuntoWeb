@@ -39,6 +39,10 @@ public class ImagenControlador implements Serializable {
 
     private String ruta = "" + ExportUControlador.get() + "\\SI\\img\\"; // Ruta img interna
     private String ruta2 = "" + ExportUControlador.get() + "\\img\\"; // Ruta img externa
+    /*
+    private String ruta = "http://conjuntoweb.w1-us.cloudjiffy.net/SI/img/"; // Ruta img interna servidor
+    private String ruta = "http://conjuntoweb.w1-us.cloudjiffy.net/img/"; // Ruta img externa servidor
+    */
 
     public ImagenControlador() {
     }

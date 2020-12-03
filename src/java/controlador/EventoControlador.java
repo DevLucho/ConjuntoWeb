@@ -15,7 +15,6 @@ import facade.EventoFacade;
 import facade.HoraFinalFacade;
 import facade.HoraInicialFacade;
 import facade.RolFacade;
-import facade.UsuarioFacade;
 import facade.ZonaComunalFacade;
 import java.io.IOException;
 import javax.inject.Named;
@@ -32,7 +31,6 @@ import javax.ejb.EJB;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
-import javax.servlet.http.Part;
 
 /**
  *
@@ -94,77 +92,83 @@ public class EventoControlador implements Serializable {
     }
 
     public void registrar() throws NoSuchProviderException, MessagingException {
-        boolean notifico = false; // validar si notifico o no
-        // --- Subir img --- 
-        imagen.subirImagen(1);
-        // ------------------
-        evento.setTitulo(titulo);
-        evento.setIdZonaComunal(zonaComunalFacade.find(idZonaC));
-        evento.setHoraInicio(horaInFacade.find(idHora));
-        evento.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
-        evento.setHoraFin(horaFiFacade.find(idHoraF));
-        evento.setOrganizador(organizador);
-        evento.setDetalle(detalle);
-        evento.setEstado("Vigente");
-        eventoFacade.create(evento);
-        // Modifica el dia de la fecha +1
-        evento.setFechaInicio(hora.fecha(fechaInicio));
-        evento.setFechaFin(hora.fecha(fechaFin));
-        eventoFacade.edit(evento);
+        try {
+            boolean notifico = false; // validar si notifico o no
+            // --- Subir img --- 
+            imagen.subirImagen(1);
+            // ------------------
+            evento.setTitulo(titulo);
+            evento.setIdZonaComunal(zonaComunalFacade.find(idZonaC));
+            evento.setHoraInicio(horaInFacade.find(idHora));
+            evento.setFechaInicio(hora.fecha(fechaInicio));
+            evento.setFechaFin(hora.fecha(fechaFin));
+            evento.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
+            evento.setHoraFin(horaFiFacade.find(idHoraF));
+            evento.setOrganizador(organizador);
+            evento.setDetalle(detalle);
+            evento.setEstado("Vigente");
+            eventoFacade.create(evento);
+            // Modifica el dia de la fecha +1
+            evento.setFechaInicio(hora.fecha(fechaInicio));
+            evento.setFechaFin(hora.fecha(fechaFin));
+            eventoFacade.edit(evento);
 
-        // mostrar fechas - horas con formato
-        String fechaI = hora.convertirf(evento.getFechaInicio());
-        String horaI = hora.convertir(evento.getHoraInicio().getHora());
-        String fechaF = hora.convertirf(evento.getFechaFin());
-        String horaF = hora.convertir(evento.getHoraFin().getHora());
-        if (notificar == 1000) { // 1000 notifica todos los usuarios
-            allMails();
-            // Correos masivos 
-            for (Usuario u : allMails()) {
-                email.enviarEmail(u.getCorreo(), "Invitación a evento",
-                        email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
-                                "<p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
-                                "http://imgfz.com/i/XqFi5Ir.png")
-                );
-            }
-            notifico = true;
-        } else if (notificar != 1100) { // 1100 = ningun usuario, notifica segun rol
-            correos();
-            for (Usuario u : correos()) {
-                email.enviarEmail(u.getCorreo(), "Invitación a evento",
-                        email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
-                                " <p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
-                                + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
-                                "http://imgfz.com/i/XqFi5Ir.png")
-                );
+            // mostrar fechas - horas con formato
+            String fechaI = hora.convertirf(evento.getFechaInicio());
+            String horaI = hora.convertir(evento.getHoraInicio().getHora());
+            String fechaF = hora.convertirf(evento.getFechaFin());
+            String horaF = hora.convertir(evento.getHoraFin().getHora());
+            if (notificar == 1000) { // 1000 notifica todos los usuarios
+                allMails();
+                // Correos masivos 
+                for (Usuario u : allMails()) {
+                    email.enviarEmail(u.getCorreo(), "Invitación a evento",
+                            email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
+                                    "<p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
+                                    "http://imgfz.com/i/XqFi5Ir.png")
+                    );
+                }
+                notifico = true;
+            } else if (notificar != 1100) { // 1100 = ningun usuario, notifica segun rol
+                correos();
+                for (Usuario u : correos()) {
+                    email.enviarEmail(u.getCorreo(), "Invitación a evento",
+                            email.paginaCorreo("Tienes una invitación para el evento " + evento.getTitulo() + "",
+                                    " <p style='font-family: Arial, Helvetica, sans-serif;'>Cordial saludo " + u.getNombre() + ", el administrador del conjunto te ha invitando al evento " + evento.getTitulo() + ", el cual ha sido programado con el siguiente horario:</p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora inicio: " + fechaI + " " + horaI + "</b></p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Fecha y hora fin: " + fechaF + " " + horaF + "</b></p>\n"
+                                    + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: </b>Recuerda que para participar deberas <b>inscribirte</b> previamente al evento, este proceso lo podras realizar desde la pagina de tu conjunto donde encontraras información detallada del evento.</p>",
+                                    "http://imgfz.com/i/XqFi5Ir.png")
+                    );
 
+                }
+                notifico = true;
             }
-            notifico = true;
+            if (notifico) {
+                mensaje.setMensaje("Mensajes('Evento publicado!','Se ha publicado un nuevo evento y ha sido notificado.','success');");
+            } else {
+                mensaje.setMensaje("Mensajes('Evento publicado!','Se ha publicado un nuevo evento.','success');");
+            }
+            horaInicial = new HoraInicial();
+            horaFinal = new HoraFinal();
+            email = new CorreoControlador();
+            zonaComunal = new ZonaComunal();
+            evento = new Evento();
+            imagen = new ImagenControlador();
+            notificar = 0;
+            titulo = null;
+            organizador = null;
+            fechaInicio = null;
+            fechaFin = null;
+            idHora = 0;
+            idHoraF = 0;
+            idZonaC = 0;
+        } catch (Exception e) {
+            mensaje.setMensaje("Mensajes('Error','Vuelve a intentarlo.','error');");
         }
-        if (notifico) {
-            mensaje.setMensaje("Mensajes('Evento publicado!','Se ha publicado un nuevo evento y ha sido notificado.','success');");
-        } else {
-            mensaje.setMensaje("Mensajes('Evento publicado!','Se ha publicado un nuevo evento.','success');");
-        }
-        horaInicial = new HoraInicial();
-        horaFinal = new HoraFinal();
-        email = new CorreoControlador();
-        zonaComunal = new ZonaComunal();
-        evento = new Evento();
-        imagen = new ImagenControlador();
-        notificar = 0;
-        titulo = null;
-        organizador = null;
-        fechaInicio = null;
-        fechaFin = null;
-        idHora = 0;
-        idHoraF = 0;
-        idZonaC = 0;
     }
 
     public List<Usuario> correos() {
@@ -180,6 +184,8 @@ public class EventoControlador implements Serializable {
             mensaje.setMensaje("Mensajes('Atención!','No puedes editar un evento que no este vigente.','warning');");
         } else {
             zonaComunal = eventoActualizar.getIdZonaComunal();
+            horaInicial = eventoActualizar.getHoraInicio();
+            horaFinal = eventoActualizar.getHoraFin();
             evento = eventoActualizar;
             return "editar-evento";
         }
@@ -188,6 +194,11 @@ public class EventoControlador implements Serializable {
 
     public void actualizar() {
         evento.setIdZonaComunal(zonaComunalFacade.find(zonaComunal.getIdZonaComunal()));
+        evento.setHoraInicio(horaInFacade.find(horaInicial.getIdHora()));
+        evento.setHoraFin(horaFiFacade.find(horaFinal.getIdHora()));
+        evento.setImg("../../../img/" + imagen.getImg().getSubmittedFileName());
+        evento.setFechaInicio(hora.fecha(evento.getFechaInicio()));
+        evento.setFechaFin(hora.fecha(evento.getFechaFin()));
         eventoFacade.edit(evento);
         mensaje.setMensaje("Mensajes('Evento modificado!','Se ha modificado satisfactoriamente el evento.','success');");
     }
@@ -273,6 +284,11 @@ public class EventoControlador implements Serializable {
     }
 
     public List<HoraFinal> horasFinales(AjaxBehaviorEvent event) {
+        this.horasDisponibles = horaFiFacade.horasFinales(this.idHora);
+        return horasDisponibles;
+    }
+
+    public List<HoraFinal> horasFinalesUpdate(AjaxBehaviorEvent event) {
         this.horasDisponibles = horaFiFacade.horasFinales(horaInicial.getIdHora());
         return horasDisponibles;
     }

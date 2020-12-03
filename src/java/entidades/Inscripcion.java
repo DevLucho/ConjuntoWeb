@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Inscripcion.findAll", query = "SELECT i FROM Inscripcion i")
     , @NamedQuery(name = "Inscripcion.findByCodInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.codInscripcion = :codInscripcion")
-    , @NamedQuery(name = "Inscripcion.findByNombre", query = "SELECT i FROM Inscripcion i WHERE i.nombre = :nombre")
     , @NamedQuery(name = "Inscripcion.findByFechaInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.fechaInscripcion = :fechaInscripcion")
     , @NamedQuery(name = "Inscripcion.findByEstado", query = "SELECT i FROM Inscripcion i WHERE i.estado = :estado")})
 public class Inscripcion implements Serializable {
@@ -46,9 +45,6 @@ public class Inscripcion implements Serializable {
     @Basic(optional = false)
     @Column(name = "CodInscripcion")
     private Integer codInscripcion;
-    @Size(max = 50)
-    @Column(name = "nombre")
-    private String nombre;
     @Column(name = "fechaInscripcion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInscripcion;
@@ -82,14 +78,6 @@ public class Inscripcion implements Serializable {
 
     public void setCodInscripcion(Integer codInscripcion) {
         this.codInscripcion = codInscripcion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public Date getFechaInscripcion() {

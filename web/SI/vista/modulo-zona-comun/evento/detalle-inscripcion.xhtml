@@ -121,7 +121,19 @@
                                 <hr/>
                                 <div class="media">
                                     <div class="media-body">
-                                        <h4>Persona inscrita:</h4><p>#{inscripcionControlador.inscripcion.nombre} | #{formdashboardadmin.Fechadeinscripción}: #{horaControlador.convertirfh(inscripcionControlador.inscripcion.fechaInscripcion)}</p>
+                                        <h4>Residente inscrito:</h4>
+                                        <p>
+                                            <div class="row">
+                                                <div class="col6"> 
+                                                    <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                                        <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre} #{r.idPerfil.apellido}"/>
+                                                    </h:selectOneMenu> 
+                                                </div>
+                                                <div class="col6"> 
+                                                    | #{formdashboardadmin.Fechadeinscripción}: #{horaControlador.convertirfh(inscripcionControlador.inscripcion.fechaInscripcion)}
+                                                </div> 
+                                            </div>
+                                        </p>
                                         <h4>Inmueble:</h4><p>#{inscripcionControlador.inscripcion.idResidente.idInmueble.idTorre.idTorre} - #{inscripcionControlador.inscripcion.idResidente.idInmueble.idApartamento.idApartamento}</p>
                                         <h4 class="mt-0">#{formdashboardadmin.Detalledelevento}</h4>
                                         <p>#{inscripcionControlador.inscripcion.idEvento.detalle}</p>
@@ -180,12 +192,6 @@
                                 <!-- Formulario comunicado -->
                                 <h:form class="row">
                                     <div class="modal-body">
-                                        <div class="form-group row font">
-                                            <div class="col-12">
-                                                <b><label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label></b>
-                                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
-                                            </div>
-                                        </div>
                                         <div class="form-group row font">
                                             <div class="col-12 col-md-6">
                                                 <b><label>#{formdashboardadmin.Residenteresponsable}:</label></b>

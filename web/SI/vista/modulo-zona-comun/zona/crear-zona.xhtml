@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <b><label>#{formdashboardadmin.Reservacioneshastalas}:</label></b>
-                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.horaFinal}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
+                                                    <h:selectOneMenu id="horaF" class="form-control" value="#{disponibilidadControlador.idHoraF}"  required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                         <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
                                                         <f:selectItems value="#{disponibilidadControlador.horasDisponibles}" var="hf" itemValue="#{hf.idHora}" itemLabel="#{horaControlador.convertir(hf.hora)}"/>
                                                     </h:selectOneMenu>
@@ -188,7 +188,7 @@
         <!-- Previsulizar img -->
         <script>
             // Previsualizar imagen input type file
-            document.getElementById("j_idt113:file").onchange = function (e) {
+            document.getElementById("j_idt111:file").onchange = function (e) {
                 // Creamos el objeto de la clase FileReader
                 let reader = new FileReader();
 

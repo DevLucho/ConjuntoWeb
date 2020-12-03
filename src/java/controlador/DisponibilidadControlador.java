@@ -293,7 +293,7 @@ public class DisponibilidadControlador implements Serializable {
     }
 
     public List<HoraFinal> horasFinales(AjaxBehaviorEvent event) {
-        this.horasDisponibles = horaFinalFacade.horasFinales(horaInicial.getIdHora());
+        this.horasDisponibles = horaFinalFacade.horasFinales(this.idHoraI);
         return horasDisponibles;
     }
 

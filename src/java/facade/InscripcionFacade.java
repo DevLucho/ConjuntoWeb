@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Inscripcion;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,6 +30,15 @@ public class InscripcionFacade extends AbstractFacade<Inscripcion> {
 
     public InscripcionFacade() {
         super(Inscripcion.class);
+    }
+
+    public List<Inscripcion> inscrito(int idEvento, int idResidente, String estado) {
+        System.out.println(idEvento + " " + idResidente + " " + estado);
+        Query query = em.createQuery("SELECT u FROM Inscripcion u WHERE u.idEvento.idEvento= :idEvento AND u.idResidente.idResidente= :idResidente AND u.estado=:estado");
+        query.setParameter("idEvento", idEvento);
+        query.setParameter("idResidente", idResidente);
+        query.setParameter("estado", estado);
+        return query.getResultList();
     }
 
     public List<Inscripcion> inscripcionVigente(String estado) {

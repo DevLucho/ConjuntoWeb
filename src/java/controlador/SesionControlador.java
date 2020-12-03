@@ -17,7 +17,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -110,27 +109,21 @@ public class SesionControlador implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public String session() {
+    public void session() {
         try {
-            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
-            if (us != null) {
-                if ("Activo".equals(us.getEstado())) {
-                    comunicado.eliminarExpirados(); // Elimina comunicados expirados
-                    if (us.getIdRol().getIdRol() == 1) {
-                        return "/SI/vista/pef-usuario/administrador/inicio-admin?faces-redirect=true";
-                    }
-                    if (us.getIdRol().getIdRol() == 2) {
-                        return "/SI/vista/pef-usuario/residente/inicio_residente?faces-redirect=true";
-                    }
-                    if (us.getIdRol().getIdRol() == 3) {
-                        return "/SI/vista/pef-usuario/vigilante/inicioSeguridad?faces-redirect=true";
-                    }
+            if (user != null) {
+                if (user.getIdRol().getIdRol() == 1) {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/administrador/inicio-admin.xhtml");
+                } else if (user.getIdRol().getIdRol() == 2) {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/residente/inicio_residente.xhtml");
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/vigilante/inicioSeguridad.xhtml");
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error verifS" + e.getMessage());
+            System.out.println("Error:" + e.getMessage());
         }
-        return "";
+
     }
 
     public void verifSesion(String ruta) {
@@ -175,7 +168,6 @@ public class SesionControlador implements Serializable {
     }
 
     public void setRolSeleccionado(Rol rolSeleccionado) {
-        System.out.println("Rol - " + rolSeleccionado.getNombre());
         this.rolSeleccionado = rolSeleccionado;
     }
 

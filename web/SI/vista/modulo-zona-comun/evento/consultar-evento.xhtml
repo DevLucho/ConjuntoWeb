@@ -104,55 +104,7 @@
                             </div>
                         </div>
                     </h:form>
-                    <!-- Modal inscripcion a evento -->
-                    <div class="modal fade" id="modal-comunicado" tabindex="-1" role="dialog" aria-labelledby="fm-modal"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id=""><i class="fas fa-plus-circle"></i>#{formdashboardadmin.Inscripciónaevento}</h5>
-                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <!-- Formulario comunicado -->
-                                <h:form class="row">
-                                    <div class="modal-body">
-                                        <div class="form-group row font">
-                                            <div class="col-12">
-                                                <label for="titulo">#{formdashboardadmin.Nombreyapellidos}</label>
-                                                <h:inputText class="form-control" a:placeholder="#{formdashboardadmin.Nombreyapellidodelparticipante}" value="#{inscripcionControlador.inscripcion.nombre}" required="true"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row font">
-                                            <div class="col-12 col-md-6">
-                                                <label>#{formdashboardadmin.Residente}</label>
-                                                <h:selectOneMenu class="form-control" value="#{inscripcionControlador.residente.idResidente}">
-                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <label>#{formdashboardadmin.Torre}</label>
-                                                <h:selectOneMenu class="form-control">
-                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idTorre.idTorre}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <label>#{formdashboardadmin.Apartamento}</label>
-                                                <h:selectOneMenu class="form-control">
-                                                    <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemLabel="#{r.idInmueble.idApartamento.idApartamento}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer col-12">
-                                        <h:commandButton value="#{formdashboardadmin.confirmar}" class="btn btn-outline-success col-12" action="#{inscripcionControlador.registrar(eventoControlador.evento.idEvento)}"></h:commandButton>
-                                    </div>
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </section>
                 <!-- footer -->
                 <ui:include src="../../footer/footer.xhtml"></ui:include>

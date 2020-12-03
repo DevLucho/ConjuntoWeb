@@ -17,6 +17,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -31,12 +34,16 @@ public class InscripcionControlador implements Serializable {
      * Creates a new instance of InscripcionControlador
      */
     @Inject
+    EventoControlador eventoSelected;
+
+    @Inject
     private MensajeControlador mensaje;
-    
+
     @Inject
     private HoraControlador hora;
 
     private Inscripcion inscripcion;
+    private List<Inscripcion> ins = null;
 
     private Residente residente;
 
@@ -61,13 +68,29 @@ public class InscripcionControlador implements Serializable {
         residente = new Residente();
     }
 
-    public void registrar(int evento) {
-        inscripcion.setIdEvento(eventoFacade.find(evento));
-        inscripcion.setIdResidente(residenteFacade.find(residente.getIdResidente()));
-        inscripcion.setFechaInscripcion(hora.now());
-        inscripcion.setEstado("Inscrito");
-        inscripcionFacade.create(inscripcion);
-        mensaje.setMensaje("Mensajes('Exito!','Se ha inscrito satisfactoriamente al evento','success');");
+    public void inscribir() {
+        ins = inscripcionFacade.inscrito(this.eventoSelected.getEvento().getIdEvento(), residente.getIdResidente(), "Inscrito");
+        try {
+            if (ins == null || ins.isEmpty()) {
+                inscripcion.setIdEvento(eventoFacade.find(this.eventoSelected.getEvento().getIdEvento()));
+                inscripcion.setIdResidente(residenteFacade.find(residente.getIdResidente()));
+                inscripcion.setFechaInscripcion(hora.now());
+                inscripcion.setEstado("Inscrito");
+                inscripcionFacade.create(inscripcion);
+                addMessage(FacesMessage.SEVERITY_INFO, "Inscripción exitosa", "");
+                inscripcion = new Inscripcion();
+            } else {
+                addMessage(FacesMessage.SEVERITY_WARN, "Ooops !", "Ya te encuetras inscrito en este evento.");
+            }
+        } catch (Exception e) {
+            addMessage(FacesMessage.SEVERITY_FATAL, "Error!", " " + e.getMessage() + "");
+        }
+
+    }
+
+    public void addMessage(Severity tipo, String titulo, String mensaje) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(tipo, titulo, mensaje));
     }
 
     public List<Inscripcion> consultarTodos() {

@@ -214,13 +214,17 @@
                                             <strong><h:outputLabel for="idResidente" value="Residente que reserva:"/></strong>
                                             <h:selectOneMenu class="js-example-basic-single form-control" id="idResidente" value="#{reservaControlador.idResidente}" title="IdResidente" required="true" requiredMessage="#{formcrearusuario.camporequerido}">
                                                 <f:selectItem itemLabel="#{formcrearusuario.seleccione}" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                <f:selectItems value="#{residenteControlador.consultarTodos()}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.documento}"/>
+                                                <f:selectItems value="#{residenteControlador.consultarTodos()}" var="r" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.documento} - #{r.idPerfil.nombre} #{r.idPerfil.apellido}"/>
                                             </h:selectOneMenu>
                                             <h:message for="idResidente" style="color:red"/>
                                         </c:if>
                                     </div>
                                     <div class="form-group col-12">
-                                        <h:commandButton class="btn btn-outline-success" value="Reservar" action="#{reservaControlador.registrar()}"/>
+                                        <!--
+                                                                                <h:commandButton class="btn btn-outline-success" value="Reservar" action="#{reservaControlador.registrar()}"/>
+
+                                        -->
+                                        <p:commandButton class="btn btn-success" style="background-color: darkgreen" value="¡ Reserva ahora !" actionListener="#{medicoControladorador.limpiarMedicos()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
                                     </div>
 
                                     <c:if test="#{sesionControlador.user.idRol.idRol==2}">
@@ -229,6 +233,25 @@
                                         </div>
                                     </c:if>
                                 </h:form>
+
+                                <h:form id="formAgregar">
+                                    <p:growl id="message" showDetail="true" />
+                                    <p:dialog id="dlgAgregar" header="Confirmar reservar" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+
+                                        <h:outputText value="¿Estas seguro que deseas reserva la zona común: #{zonaComunalControlador.zonaComunal.nombre}?"/>
+                                        <h:outputText id="fecha_seleccionada2" value="Fecha a filtrar: #{horaControlador.convertirf(reservaControlador.fechaSelected)}"/>
+
+                                        <p:separator/>
+
+                                        <h:selectOneMenu style="display: none" class="form-control" value="#{inscripcionControlador.residente.idResidente}">
+                                            <f:selectItems var="r" value="#{usuarioControlador.sesionUsuarioR(sesionControlador.user.idPerfil)}" itemValue="#{r.idResidente}" itemLabel="#{r.idPerfil.nombre}"/>
+                                        </h:selectOneMenu>
+
+                                        <p:commandButton  value="Si, confirmar" style="    background: seagreen;color: white" class="btn btn-secondary" actionListener="#{inscripcionControlador.inscribir()}" update="message" oncomplete="PF('dialogoAgregar').hide();"/>
+                                        <p:commandButton  value="Cancelar" class="btn btn-danger" onclick="PF('dialogoAgregar').hide();"/>
+                                    </p:dialog>
+                                </h:form>
+
                             </c:if>
                         </div>
                     </div>
@@ -243,12 +266,12 @@
         <!-- select2 js -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('.js-example-basic-single').select2({
-                    placeholder: "Nro. documento del residente que reserva",
-                    language: "es"
-                });
-            });
+                                            $(document).ready(function () {
+                                                $('.js-example-basic-single').select2({
+                                                    placeholder: "Filtra el residente que reserva",
+                                                    language: "es"
+                                                });
+                                            });
         </script>
         <script src="../../../../js/bootstrap.min.js"></script>
         <!-- Menu responsive-->
@@ -258,14 +281,14 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
         <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.ingles}">
             <script>
-            $(document).ready(function () {
-                // Ejecutar dataTable
-                $(document).ready(function () {
-                    $('.tabla').DataTable({
-                        dom: 'lrtip'
-                    });
-                });
-            });
+                                            $(document).ready(function () {
+                                                // Ejecutar dataTable
+                                                $(document).ready(function () {
+                                                    $('.tabla').DataTable({
+                                                        dom: 'lrtip'
+                                                    });
+                                                });
+                                            });
             </script>
         </c:if>
         <c:if test="#{lenguajeControlador.languageSelected == lenguajeControlador.espaniol}">
