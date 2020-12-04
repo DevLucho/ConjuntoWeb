@@ -116,6 +116,10 @@ public class ReservaControlador implements Serializable {
         horaI = 0;
         reservaFacade.findAll();
     }
+    
+    public String reload(){
+        return null;
+    }
 
     public String filtrar() {
         if (error) {
@@ -124,7 +128,12 @@ public class ReservaControlador implements Serializable {
         return null;
     }
 
-    public void registrar() throws NoSuchProviderException, MessagingException {
+    public void addMessage(FacesMessage.Severity tipo, String titulo, String mensaje) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(tipo, titulo, mensaje));
+    }
+
+    public void registrar() {
         try {
             reserva.setHoraInicioReserva(horaInicialFacade.find(horaI));
             reserva.setHoraFinReserva(horaFinalFacade.find(horaF));
@@ -135,7 +144,9 @@ public class ReservaControlador implements Serializable {
             reserva.setFechaReserva(this.fechaSelected);
             reservaFacade.create(reserva);
             mensaje.setMensaje("EdicionVisitante('#','Reserva generada satisfactoriamente','<b>*</b>Recuerde, tiene 3 horas antes para <br> cancelar sin causar bloqueo.<br><br><b>*</b>Su solicitud queda en estado pendiente<br> hasta que el administrador la apruebe.<br><br><b>*</b>Se a notificado vía email su reserva.');");
+            addMessage(FacesMessage.SEVERITY_INFO, "Reserva realizada", "Recuerda que el admin aprobara o no tu solicitud.");
 
+            /*
             correo.enviarEmail(reserva.getIdResidente().getIdPerfil().getCorreo(), "Confirmacion de reserva común",
                     correo.paginaCorreo("Reserva pendiente de la zona: " + reserva.getIdZonaComunal().getNombre() + "",
                             " <p style='font-family: Arial, Helvetica, sans-serif;'>Estimado residente " + reserva.getIdResidente().getIdPerfil().getNombre() + ", la reserva de: " + reserva.getIdZonaComunal().getNombre() + " ha sido realizada exitosamente con el siguiente horario:</p>\n"
@@ -144,7 +155,7 @@ public class ReservaControlador implements Serializable {
                             + "<p style='font-family: Arial, Helvetica, sans-serif;'><b>Nota: Recuerda, tu petición de reserva se encuentra <b> Pendiente </b>, por lo tanto, el Administrador aprobara o no dicha reserva.</p>",
                             "http://imgfz.com/i/1CrnTaz.jpeg")
             );
-
+             */
             residente = new Residente();
             //zonaComunal = new ZonaComunal();
             reserva = new Reserva();
@@ -155,9 +166,10 @@ public class ReservaControlador implements Serializable {
             horaF = 0;
             motivo = "";
             idResidente = 0;
-        } catch (NumberFormatException e) {
-            mensaje.setMensaje("Mensaje('Error','Vuelve a intentarlo...','error');");
-            System.out.println("Error reserva" + e.getMessage());
+            reload();
+        } catch (Exception e) {
+            mensaje.setMensaje("Mensaje('Atención','Completa los campos...','warning');");
+            System.out.println("Completa los campos..." + e.getMessage());
         }
 
     }
@@ -230,7 +242,7 @@ public class ReservaControlador implements Serializable {
     public void horasIniSinReserva(Date fechaSelected) {
         reservas = reservaFacade.fechasReservadas(fechaSelected, this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
         Disponibilidad zonaDisponibilidad = disponibilidad.ctlaSingleDisponilidad(this.zona.getZonaComunal().getIdZonaComunal());
-        System.out.println("H." + zonaDisponibilidad.getHoraInicialReserva().getIdHora() + " "+(zonaDisponibilidad.getHoraFinalReserva().getIdHora() + 1));
+        System.out.println("H." + zonaDisponibilidad.getHoraInicialReserva().getIdHora() + " " + (zonaDisponibilidad.getHoraFinalReserva().getIdHora() + 1));
 
         if (verifica) {
             try {
