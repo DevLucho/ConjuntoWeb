@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import entidades.Disponibilidad;
 import entidades.HoraFinal;
 import entidades.HoraInicial;
 import entidades.Reserva;
@@ -118,7 +119,7 @@ public class ReservaControlador implements Serializable {
 
     public String filtrar() {
         if (error) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención!", "Debes reservar con un día de anticipa<<ción"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención!", "Debes reservar con un día de anticipación"));
         }
         return null;
     }
@@ -228,16 +229,17 @@ public class ReservaControlador implements Serializable {
 
     public void horasIniSinReserva(Date fechaSelected) {
         reservas = reservaFacade.fechasReservadas(fechaSelected, this.zona.getZonaComunal().getIdZonaComunal()); // Busca reservas con la fecha seleccionada
+        Disponibilidad zonaDisponibilidad = disponibilidad.ctlaSingleDisponilidad(this.zona.getZonaComunal().getIdZonaComunal());
+        System.out.println("H." + zonaDisponibilidad.getHoraInicialReserva().getIdHora() + " "+(zonaDisponibilidad.getHoraFinalReserva().getIdHora() + 1));
+
         if (verifica) {
             try {
                 if (reservas != null && this.fechaSelected != null) {
                     // Reservaciones desde - hasta
-                    /*
-                    List<Disponibilidad> zonaDisponibilidad = disponibilidad.ctlaSingleDisponilidad(this.zona.getZonaComunal().getIdZonaComunal());
-                    for (Disponibilidad objDisponi : zonaDisponibilidad) {
-                        horasIni = horaInicialFacade.horaReservaMaxMin(objDisponi.getHoraInicialReserva().getIdHora(), objDisponi.getHoraFinalReserva().getIdHora() + 1);
-                    }*/
-                    
+                    //Disponibilidad zona = disponibilidad.ctlaSingleDisponilidad(this.zona.getZonaComunal().getIdZonaComunal());
+                    //List<HoraInicial> notBeetwen = new ArrayList<>();
+                    //horasIni = horaInicialFacade.horaReservaMaxMin(zonaDisponibilidad.getHoraInicialReserva().getIdHora(), zonaDisponibilidad.getHoraFinalReserva().getIdHora() + 1);
+                    //System.out.println("H." + zonaDisponibilidad.getHoraInicialReserva().getIdHora() + zonaDisponibilidad.getHoraFinalReserva().getIdHora() + 1);
                     horasIni = horaInicialFacade.findAll();
                     for (Reserva reservado : reservas) {
                         // Consulta las horas reservadas

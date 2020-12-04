@@ -24,6 +24,7 @@
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolAdmin()}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | #{formdashboardadmin.Organizarzonacomún}</title>
     </h:head>
     <h:body>
@@ -78,7 +79,13 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{formdashboardadmin.Tiempomáximodereservaenhoras}"/>
                                                 </f:facet>
-                                                <h:outputText value="#{zona.tiempoMaximoReserva}"></h:outputText>
+                                                <h:outputText value="#{zona.tiempoMaximoReserva} h"></h:outputText>
+                                            </h:column> 
+                                             <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Cantidad de veces reservada"/>
+                                                </f:facet>
+                                                 <h:outputText value="#{zona.cantidadReservada}"></h:outputText>
                                             </h:column> 
                                             <h:column>
                                                 <f:facet name="header">

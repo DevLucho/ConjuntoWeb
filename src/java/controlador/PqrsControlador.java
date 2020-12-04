@@ -71,17 +71,18 @@ public class PqrsControlador implements Serializable {
             // generar numero radicado
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos + 2) + num + abecedario.charAt(pos - 1); //Estructura codigo
-            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
-            // --- Subir img --- 
-            imagen.subirImagen(1);
+            radicado = radicado + abecedario.charAt(pos) + abecedario.charAt(pos) + num + abecedario.charAt(pos); //Estructura codigo
             pqrs.setNroRadicado(radicado);
             pqrs.setIdResidente(residenteFacade.find(residente.getIdResidente()));
             pqrs.setIdTipoPqrs(tipoPqrsFacade.find(tipoPqrs.getIdTipoPqrs()));
             pqrs.setFecha(hora.now());
             pqrs.setHora(hora.now());
             pqrs.setEstado("Pendiente");
-            pqrs.setAdjunto("../../../img/" + imagen.getImg().getSubmittedFileName());
+            if (imagen.getImg() != null) {
+                // --- Subir img --- 
+                imagen.subirImagen(1);
+                pqrs.setAdjunto("../../../img/" + imagen.getImg().getSubmittedFileName());
+            }
             pqrsFacade.create(pqrs);
             residente = new Residente();
             tipoPqrs = new TipoPqrs();

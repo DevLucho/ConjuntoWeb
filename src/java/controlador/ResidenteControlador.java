@@ -144,7 +144,7 @@ public class ResidenteControlador implements Serializable {
             residente = new Residente();
             documentoc = "";
             nrocel = "";
-            mensaje.setMensaje("ConfirmacionResidente('../login/login.xhtml','success','Registro exitoso','Iniciar sesi&oacute;n');");
+            mensaje.setMensaje("MensajeRedirect('../login/login.xhtml','Registro exitoso','Inicia sesión con tu nro. de documento y contraseña.','success');");
         }
     }
 

@@ -26,6 +26,7 @@
         <link href="../../../css/util.css" rel="stylesheet" type="text/css"/>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolAdmin()}" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Roles</title>
     </h:head>
     <h:body>

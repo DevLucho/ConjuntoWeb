@@ -59,15 +59,13 @@
                 </div>
 
                 <div class="container">
-
-                    <div class="logo float-left">
-                        <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"/></a>
-                    </div>
-
-                    <nav class="main-nav float-right d-none d-lg-block">
-                        <ul>
-                            <li>
-                                <h:form> 
+                    <h:form>
+                        <div class="logo float-left">
+                            <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"/></a>
+                        </div>
+                        <nav class="main-nav float-right d-none d-lg-block">
+                            <ul>
+                                <li>
                                     <c:if test="#{lenguajeControlador.languageSelected==lenguajeControlador.ingles}">
                                         <h:commandLink action="#{lenguajeControlador.cambiarIdioma('es')}" >
                                             <img src="SI/img/country-es.png" width="32px"/>
@@ -78,17 +76,18 @@
                                             <img src="SI/img/country-us.png" width="32px"/>
                                         </h:commandLink>
                                     </c:if>
-                                </h:form> 
-                            </li>
-                            <li><a href="#intro">#{formlogin.inicio}</a></li>
-                            <li><a href="#noticias">#{formlogin.noti}</a></li>
-                            <li><a href="#services">#{formlogin.ventajas}</a></li>
-                            <li><a href="#galeria">#{formlogin.galeria}</a></li>
-                            <li><a href="#footer">#{formlogin.contacto}</a></li>
-                            <li><a href="faces/vista/login/login.xhtml" target="_blank">#{formlogin.iniciar}</a></li>
-                        </ul>
-                    </nav><!-- .main-nav -->
-
+                                </li>
+                                <li><a href="#intro">#{formlogin.inicio}</a></li>
+                                <li><a href="#noticias">#{formlogin.noti}</a></li>
+                                <li><a href="#services">#{formlogin.ventajas}</a></li>
+                                <li><a href="#galeria">#{formlogin.galeria}</a></li>
+                                <li><a href="#footer">#{formlogin.contacto}</a></li>
+                                <li>
+                                    <h:commandLink action="#{sesionControlador.redirectDenegate()}" target="_blank" value="#{formlogin.iniciar}"/>
+                                </li>
+                            </ul>
+                        </nav><!-- .main-nav -->
+                    </h:form>
                 </div>
             </header><!-- #header -->
 

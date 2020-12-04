@@ -52,4 +52,12 @@ public class HoraInicialFacade extends AbstractFacade<HoraInicial> {
         return q.getResultList();
     }
 
+    // Metodo que muestra las horas disponibles de reserva desde-hasta definidas
+    public List<HoraInicial> horaReservasMaxMin(int desde, int hasta) {
+        Query q = em.createQuery("SELECT h FROM HoraInicial h WHERE h.idHora NOT BETWEEN  :idHoraIni AND :idHoraFin");
+        q.setParameter("desde", desde);
+        q.setParameter("hasta", hasta);
+        return q.getResultList();
+    }
+
 }

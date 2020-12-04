@@ -10,6 +10,8 @@
         <meta charset="UTF-8" />
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolVigilante()}" />
+
         <title>#{sesionControlador.rolSeleccionado.nombre} | Mensajeria</title>
         <link
             href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap"

@@ -119,16 +119,21 @@ public class UsuarioControlador implements Serializable {
     }
 
     public String generarContraseña() {
-        // Generar contraseña aleatoria
-        Random rnd = new Random();
-        String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String clavegenerada = "";
-        int pos = 0, num;
-        // generar contraseña
-        pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
-        num = (int) (rnd.nextDouble() * 9999 + 1000);
-        //Estructura codigo 8 caracteres
-        clavegenerada = clavegenerada + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos - 1) + abecedario.charAt(pos);
+        try {
+            // Generar contraseña aleatoria
+            Random rnd = new Random();
+            String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            int pos = 0, num;
+            // generar contraseña
+            pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
+            num = (int) (rnd.nextDouble() * 9999 + 1000);
+            //Estructura codigo 8 caracteres
+            clavegenerada = clavegenerada + abecedario.charAt(pos) + abecedario.charAt(pos) + num + abecedario.charAt(pos) + abecedario.charAt(pos);
+        } catch (Exception e) {
+            System.out.println("Error contra:" + e.getMessage());
+        }
         return clavegenerada;
     }
 

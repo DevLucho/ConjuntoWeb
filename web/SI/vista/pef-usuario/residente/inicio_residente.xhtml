@@ -20,6 +20,7 @@
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolResidente()}" />
         <style>
             nav ul li{ width:25%;}
             @media screen and (max-width:903px){

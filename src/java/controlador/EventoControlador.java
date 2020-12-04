@@ -31,6 +31,7 @@ import javax.ejb.EJB;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -58,7 +59,12 @@ public class EventoControlador implements Serializable {
     private List<HoraFinal> horasDisponibles; // Horas mayores a la hora inicial
 
     // cmps formulario
-    private String titulo, organizador, detalle;
+    @Size(min = 1, max = 200)
+    private String detalle;
+    @Size(min = 1, max = 50)
+    private String titulo;
+    @Size(min = 1, max = 100)
+    private String organizador;
     private Date fechaInicio, fechaFin;
     private int idHora, idZonaC, idHoraF;
 
@@ -161,6 +167,7 @@ public class EventoControlador implements Serializable {
             notificar = 0;
             titulo = null;
             organizador = null;
+            detalle = null;
             fechaInicio = null;
             fechaFin = null;
             idHora = 0;

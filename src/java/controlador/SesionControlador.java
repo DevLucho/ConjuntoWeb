@@ -109,6 +109,7 @@ public class SesionControlador implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
+    // Si hay credenciales redirecciona
     public void session() {
         try {
             if (user != null) {
@@ -116,7 +117,7 @@ public class SesionControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/administrador/inicio-admin.xhtml");
                 } else if (user.getIdRol().getIdRol() == 2) {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/residente/inicio_residente.xhtml");
-                } else {
+                } else if (user.getIdRol().getIdRol() == 3) {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../SI/vista/pef-usuario/vigilante/inicioSeguridad.xhtml");
                 }
             }
@@ -141,11 +142,37 @@ public class SesionControlador implements Serializable {
         try {
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
             if (us.getIdRol().getIdRol() != 1) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../../../vista/not-found/mensaje.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../../../vista/not-found/error.xhtml");
             }
         } catch (Exception e) {
             System.out.println("Error verifS" + e.getMessage());
         }
+    }
+
+    public void verifRolResidente() {
+        try {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (us.getIdRol().getIdRol() != 2) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../../../vista/not-found/error.xhtml");
+            }
+        } catch (Exception e) {
+            System.out.println("Error verifS" + e.getMessage());
+        }
+    }
+
+    public void verifRolVigilante() {
+        try {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (us.getIdRol().getIdRol() != 3) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("" + "../../../../vista/not-found/error.xhtml");
+            }
+        } catch (Exception e) {
+            System.out.println("Error verifS" + e.getMessage());
+        }
+    }
+
+    public String redirectDenegate() {
+        return "/vista/login/login.xhtml?faces-redirect=true";
     }
 
     public Boolean validarPermiso() {

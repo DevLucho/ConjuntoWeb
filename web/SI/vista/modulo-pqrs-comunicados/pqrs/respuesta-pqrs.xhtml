@@ -81,13 +81,21 @@
                             <p><a href="#titulo" class="btn btn-primary text-left" aria-expanded="false" aria-controls="titulo" data-toggle="collapse">Información del residente</a></p>
                             <div class="collapse" id="titulo">
                                 <div class="form-group row">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-3">
                                         <b><label>Residente:</label></b>
                                         <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idPerfil.nombre} #{respuestaControlador.pqrs.idResidente.idPerfil.apellido}" ></h:outputText>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-3">
                                         <b><label>Inmueble:</label></b>
                                         <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idInmueble.idTorre.idTorre}-#{respuestaControlador.pqrs.idResidente.idInmueble.idApartamento.idApartamento}" ></h:outputText>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <b><label>Email:</label></b>
+                                        <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idPerfil.correo}" ></h:outputText>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <b><label>Celular:</label></b>
+                                        <h:outputText class="form-control-plaintext form-plain col-12" a:disabled="true" value="#{respuestaControlador.pqrs.idResidente.idPerfil.celular}" ></h:outputText>
                                     </div>
                                 </div>
                             </div>
@@ -109,9 +117,10 @@
                                         <b><p>Descripción:</p></b>
                                         <h:outputText class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{respuestaControlador.pqrs.descripcion}" style="height:100px;" />
                                         <b><p>Adjunto:</p></b>
-                                        <!--<a href="#{respuestaControlador.pqrs.adjunto}" download="Adjunto 1">Descargar adjunto</a>-->
-                                        <!--<iframe name="principal" src="#{respuestaControlador.pqrs.adjunto}"></iframe>-->
-                                        <a href="soporte.xhtml"><i class="fas fa-file"></i>Ver archivo adjunto</a>
+                                        <a href="#{respuestaControlador.pqrs.adjunto}" download="Adjunto">
+                                            <i class="fas fa-file"></i>
+                                            Descargar adjunto
+                                        </a>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
@@ -147,22 +156,48 @@
                             </div>
                         </div>
                     </div>                
-                    <!-- Respuesta -->
-                    <hr/>
-                    <h4 class="col-12">Respuesta</h4>
-                    <hr/>
                     <div class="form-group row" >
-                        <div class="col-12">
-                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Digite su respuesta . . ." id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;border: 1px solid #2A6378;"/>
-                            <h:inputFile id="file" value="#{respuestaControlador.respuesta.adjunto}" a:accept=".pdf,image/x-png,image/gif,image/jpeg" required="false" style="display: none"/>
+                        <div class="col-8">
+                            <!-- Respuesta -->
+                            <hr/>
+                            <h4 class="col-12">Respuesta</h4>
+                            <hr/>
+                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Digite su respuesta . . ." id="respuestass" value="#{respuestaControlador.respuesta.respuesta}" required="required" requiredMessage="Este campo es requerido" style="height:100px;border: 1px solid #2A6378;"/>
+                            <h:message for="respuestass" style="color:red"/>
                         </div>
-                        <!-- Boton registrar -->
-                        <div class="row justify-content-center mt-3 mb-3">
-                            <div class="col-12 col-md-2">
-                                <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                    <h:commandButton class="btn btn-outline-success btn-block" value="Responder" action="#{respuestaControlador.registrar(respuestaControlador.pqrs)}"></h:commandButton>
-                                </c:if>
+                        <div class="col-4">
+                            <hr/>
+                            <h4 class="col-12">Adjuntar soporte</h4>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-4" style="padding-left:15px;">
+                                    <h:outputLabel for="file2" class="subir-foto">
+                                        <span>+</span> <br/> Adjuntar <br/> imagen o pdf
+                                    </h:outputLabel>                                        
+                                    <h:inputFile id="file2" value="#{respuestControlador.imagen.img}" a:accept=".pdf,image/x-png,image/gif,image/jpeg" required="false" style="display: none"/>
+                                    <h:message for="file2" style="color: red"/>a
+                                </div>
+                                <!--Pre-visualizar foto-->
+                                <div class="contenedor-imagen col-8" style="padding: 0">
+                                    <div id="pre-visualizar" data-toggle="modal" data-target="#modal-img"></div>
+                                </div>
                             </div>
+                            <!--Mostrar foto en modal-->
+                            <div class="modal fade" id="modal-img">
+                                <div class="modal-dialog d-flex justify-content-center align-items-center">
+                                    <div class="modal-content">
+                                        <img/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Boton registrar -->
+                    <div class="row justify-content-center mt-3 mb-3">
+                        <div class="col-12 col-md-2">
+                            <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                                <h:commandButton class="btn btn-outline-success btn-block" value="Responder" action="#{respuestaControlador.registrar(respuestaControlador.pqrs)}"></h:commandButton>
+                            </c:if>
                         </div>
                     </div>
                 </h:form>
@@ -170,6 +205,28 @@
             <!-- footer -->
             <ui:include src="../../footer/footer.xhtml"></ui:include>
         </f:view>
+        <!-- Previsulizar img -->
+        <script>
+            // Previsualizar imagen input type file
+            document.getElementById("j_idt113:file2").onchange = function (e) {
+                // Creamos el objeto de la clase FileReader
+                let reader = new FileReader();
+
+                // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+                reader.readAsDataURL(e.target.files[0]);
+
+                // Le decimos que cuando este listo ejecute el código interno
+                reader.onload = function () {
+                    let preview = document.getElementById('pre-visualizar'),
+                            image = document.createElement('img');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    preview.append(image);
+                };
+            }
+        </script> 
         <!-- bootstrap, popper y jquery -->
         <script src="../../../../js/jquery-3.4.1.min.js"></script>
         <script src="../../../../js/popper.min.js"></script>

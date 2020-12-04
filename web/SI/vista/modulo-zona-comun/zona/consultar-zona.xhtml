@@ -91,7 +91,7 @@
                                         <img src="../../../img/#{zona.img}" class="card-img-top img-fluid" alt=""/>
                                         <div class="card-block">
                                             <h3 class="card-title">#{zona.nombre}</h3>
-                                            <p class="card-text">#{zona.descripcion}<h:commandLink class="card-link" value="...#{formdashboardadmin.Leermas}" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandLink></p>
+                                            <p class="card-text">#{zona.descripcion.substring(1,210)}<h:commandLink class="card-link" value="...#{formdashboardadmin.Leermas}" action="#{disponibilidadControlador.consultarDisponibilidad(zona)}"></h:commandLink></p>
                                             <h:commandLink value="¡#{formdashboardadmin.Reservar}!" class="btn  btn-outline-success btn-block btn-lg" action="#{zonaComunalControlador.reservarZona(zona.idZonaComunal)}"/>
                                         </div>
                                     </div>

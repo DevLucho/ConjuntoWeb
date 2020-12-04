@@ -70,7 +70,7 @@ public class CodigoControlador implements Serializable {
             // generar codigo alfanumerico
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1); //Estructura codigo 6 caracteres
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos); //Estructura codigo 6 caracteres
             // set y crear codigo
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");
@@ -128,7 +128,7 @@ public class CodigoControlador implements Serializable {
             // generar codigo alfanumerico
             pos = (int) (rnd.nextDouble() * abecedario.length() - 1 + 0);
             num = (int) (rnd.nextDouble() * 9999 + 1000);
-            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos + 1) + abecedario.charAt(pos); //Estructura codigo 7 caracteres
+            codgenerado = codgenerado + abecedario.charAt(pos) + num + abecedario.charAt(pos) + abecedario.charAt(pos); //Estructura codigo 7 caracteres
             // set y crear codigo
             codigo.setCodigo(codgenerado);
             codigo.setEstado("Valido");

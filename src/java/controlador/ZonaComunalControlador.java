@@ -60,11 +60,19 @@ public class ZonaComunalControlador implements Serializable {
         zonaComunalFacade.create(zonaComunal);
     }
 
-    public void eliminar(ZonaComunal zonaComunalEliminar) throws IOException {
-        mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar " + zonaComunalEliminar.getNombre() + "','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
-        Path p = Paths.get(imagen.getRuta() + zonaComunalEliminar.getImg());
-        Files.delete(p);
-        zonaComunalFacade.remove(zonaComunalEliminar);
+    public void eliminar(ZonaComunal zonaComunalEliminar){
+        try {
+            if (zonaComunalEliminar.getCantidadReservada() != 0) {
+                mensaje.setMensaje("Mensajes('Atención','No puedes eliminar una zona que ya a sido reservada...','warning');");
+            } else {
+                mensaje.setMensaje("Confirmar('Estas seguro que deseas eliminar " + zonaComunalEliminar.getNombre() + "','No podras revertilo!','warning','Si, eliminar!','Eliminado!','Se ha eliminado exitosamente la zona común.','success');");
+                Path p = Paths.get(imagen.getRuta() + zonaComunalEliminar.getImg());
+                Files.delete(p);
+                zonaComunalFacade.remove(zonaComunalEliminar);
+            }
+        } catch (Exception e) {
+            System.out.println("Error"+e.getMessage());
+        }
     }
 
     public List<ZonaComunal> consultarTodos() {

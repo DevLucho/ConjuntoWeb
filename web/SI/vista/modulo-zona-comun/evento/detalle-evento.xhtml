@@ -4,9 +4,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
     <h:head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <!-- Font righteous -->
@@ -18,7 +19,6 @@
         <link rel="stylesheet" href="../../nav/nav.css"/>
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
-        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <!-- select 2 -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
         <style>h3{color:#33406A;margin-bottom: 0;}</style>
@@ -175,23 +175,19 @@
                 <ui:include src="../../footer/footer.xhtml"></ui:include>
             </div>
         </f:view>
-        <!-- Bootstrap y jquery 
-        <script src="../../../../js/jquery-3.4.1.min.js"></script>
-        <script src="../../../../js/bootstrap.min.js"></script>-->
-        <!-- Menu responsive-->
-        <script src="../../nav/nav.js"></script>
         <!-- select2 js -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script>
                                         $(document).ready(function () {
                                             $('.js-example-basic-single').select2({
-                                                placeholder: "Filtra el residente a inscribir",
+                                                placeholder: "Filtra ",
                                                 language: "es"
                                             });
                                         });
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="../../../js/Mensajes.js" type="text/javascript"></script>
+        <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
+        <!-- Menu responsive-->
+        <script src="../../nav/nav.js"></script>
     </h:body>
 </html>
 

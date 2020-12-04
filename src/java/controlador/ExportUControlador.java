@@ -198,7 +198,7 @@ public class ExportUControlador {
 
     public void importarResidente(String nombre, String apellido, String tipoDoc,
             int documento, String direccion, long celular, String correo, int torre,
-            int apto, String automovil) throws NoSuchProviderException, MessagingException {
+            int apto, String automovil) {
         try {
             // ========== validar campos repetidos
             user = usuarioFacade.validarDocumento(documento);
@@ -234,7 +234,8 @@ public class ExportUControlador {
                 residente.setIdInmueble(inmueble);
                 residente.setAutomovil(automovil);
                 residenteFacade.create(residente);
-                // ========== enviar email con usuario y contraseña          
+                // ========== enviar email con usuario y contraseña  
+                /*
                 email.enviarEmail(correo, "Registro exitoso",
                         email.paginaCorreo("Bienvenido!",
                                 "<p style='font-family: Arial, Helvetica, sans-serif;'><b>¡Hola, " + usuario.getNombre() + "!</b></p>\n"
@@ -242,14 +243,15 @@ public class ExportUControlador {
                                 + "<p style='font-family: Arial, Helvetica, sans-serif;'>Usuario: " + usuario.getDocumento() + "<br/>Contraseña: " + usuario.getContrasenia() + "</p>",
                                 "http://imgfz.com/i/7ocMf5s.jpeg")
                 );
+                 */
                 cantImportados++;
                 residente = new Residente();
                 inmueble = new Inmueble();
                 usuario = new Usuario();
             }
-        } catch (NoSuchProviderException | MessagingException e) {
+        } catch (Exception e) {
             cantVacios++;
-            mensaje.setMensaje("Mensaje('Error','"+e.getMessage()+"','error');");
+            mensaje.setMensaje("Mensaje('Error','" + e.getMessage() + "','error');");
             System.out.println("Error migracion:" + e.getMessage());
         }
     }
@@ -287,6 +289,7 @@ public class ExportUControlador {
                 ctx.responseComplete();
             }
         } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
             //mensaje.setMensaje("Mensaje('Error','"+e.getMessage()+"','error');");
         }
     }

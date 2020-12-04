@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="../../footer/footer.css"/>
         <link rel="shortcut icon" href="../../../img/logo2.png"/>
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolAdmin()}" />
+
         <script src="https://kit.fontawesome.com/7769f8ac48.js" crossorigin="anonymous"></script>
         <title>#{sesionControlador.rolSeleccionado.nombre} | Reportes</title>
         <style>
@@ -290,22 +292,22 @@
         <script>
                                                 try {
 
-                                                
 
-                                                var role = #{rolControlador.consultarRolNombre()};
-                                                var dataUs = #{rolControlador.contadorUsuRol()};
-                                                var colores = #{rolControlador.generarColores()};
-                                                var ctx = document.getElementById("grafica").getContext("2d");
-                                                var graf = new Chart(ctx, {
-                                                    type: 'doughnut',
-                                                    data: {
-                                                        labels: role,
-                                                        datasets: [{
-                                                                data: dataUs,
-                                                                backgroundColor: colores
-                                                            }]
-                                                    }
-                                                });
+
+                                                    var role = #{rolControlador.consultarRolNombre()};
+                                                    var dataUs = #{rolControlador.contadorUsuRol()};
+                                                    var colores = #{rolControlador.generarColores()};
+                                                    var ctx = document.getElementById("grafica").getContext("2d");
+                                                    var graf = new Chart(ctx, {
+                                                        type: 'doughnut',
+                                                        data: {
+                                                            labels: role,
+                                                            datasets: [{
+                                                                    data: dataUs,
+                                                                    backgroundColor: colores
+                                                                }]
+                                                        }
+                                                    });
                                                 } catch (e) {
                                                     console.error(e);
 

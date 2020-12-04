@@ -30,27 +30,32 @@
             <ui:include src="../../header/header.xhtml"></ui:include>
             <!-- nav -->
             <ui:include src="../../nav/nav.xhtml"></ui:include>
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultar pqrs</li>
-                    </c:if>
-                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
-                        <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultar pqrs</li>
-                        <style>
-                            nav ul li{ width:25%;}
-                            @media screen and (max-width:903px){
-                                nav ul li{
-                                    width: 100%;
-                                    text-align: left;
+            <h:form>
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/administrador/inicio-admin.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item">
+                                <h:commandLink action="consultar-pqrs" value="Consultar pqrs"/>
+                            </li>
+                            <li class="breadcrumb-item active">Detalle pqrs</li>
+                        </c:if>
+                        <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
+                            <li class="breadcrumb-item"><a href="../../pef-usuario/residente/inicio_residente.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item active">Consultar pqrs</li>
+                            <style>
+                                nav ul li{ width:25%;}
+                                @media screen and (max-width:903px){
+                                    nav ul li{
+                                        width: 100%;
+                                        text-align: left;
+                                    }
                                 }
-                            }
-                        </style>
-                    </c:if>
-                </ol>
-            </div>
+                            </style>
+                        </c:if>
+                    </ol>
+                </div>
+            </h:form>
             <section class="container-fluid" id="principal">
                 <div class="row">
                     <div class="col-12">
@@ -88,23 +93,21 @@
                                 <div class="from-group row">
                                     <div class="col-6" style="border-right: 1px solid #efefef ;">
                                         <b>
-                                            <p>Seleccionar</p>
+                                            <b><p>Tipo de pqrs</p></b>
                                         </b>
                                         <hr/>
                                         <div class="custom-control custom-checkbox" style="padding-left: 0;">
                                             <div class="form-group row">
-                                                <div class="col">
-                                                    <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}" class="form-control" title="IdTipoPqrs" required="true" disabled="true">                 
-                                                        <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
-                                                        <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
+                                                <h:selectOneMenu id="idTipoPqrs" value="#{pqrsControlador.tipoPqrs.idTipoPqrs}" class="form-control" title="IdTipoPqrs" required="true" disabled="true">                 
+                                                    <f:selectItem itemLabel="- Seleccione -" itemValue="" a:selected="true" itemDisabled="true"></f:selectItem>
+                                                    <f:selectItems var="tipoPqrs" value="#{tipoPqrsControlador.consultarTodos()}" itemValue="#{tipoPqrs.idTipoPqrs}" itemLabel="#{tipoPqrs.tipo}"/>
+                                                </h:selectOneMenu>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-6">
-                                        <p>Residente:</p>
+
+                                    <div class="col-3">
+                                        <b><p>Residente:</p></b>
                                         <hr/>
                                         <c:if test="#{sesionControlador.rolSeleccionado.idRol == 2}">
                                             <h:selectOneMenu id="idResidente" value="#{pqrsControlador.residente.idResidente}" class="form-control col-12 col-md-4" title="IdResidente" required="true" disabled="true" >
@@ -115,37 +118,62 @@
                                             <h:selectOneMenu id="idResidente" value="#{respuestaControlador.respuesta.idPerfil}" class="form-control col-12 col-md-4" title="IdResidente" required="true" disabled="true" >
                                                 <f:selectItems var="usuario" value="#{pqrsControlador.consultar()}" itemValue="#{usuario.idResidente.idPerfil.idPerfil}" itemLabel="#{usuario.idResidente.idPerfil.idPerfil}"/>
                                             </h:selectOneMenu>                                        
-                                        </c:if>                                    
+                                        </c:if>       
                                     </div>
-                                    <c:if test="#{sesionControlador.rolSeleccionado.idRol == 1}">
-                                        <div class="col-6">
-                                            <p>Nro radicado</p>
-                                            <hr/>
-                                            <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.respuesta.idPqrs.nroRadicado}" class="form-control col-12" title="IdResidente" required="true" disabled="true" >
-                                                <f:selectItems var="radicado" value="#{pqrsControlador.consultar()}" itemValue="#{radicado.nroRadicado}" itemLabel="#{radicado.nroRadicado}"/>
-                                            </h:selectOneMenu>                        
-                                        </div>
-                                    </c:if>                                
+                                    <div class="col-3">
+                                        <b><p>Adjunto:</p></b>
+                                        <hr/>
+                                        <a href="#{pqrsControlador.pqrs.adjunto}" download="Adjunto">
+                                            <i class="fas fa-file"></i>
+                                            Descargar adjunto
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <b><p>Nro radicado</p></b>
+                                        <hr/>
+                                        <h:selectOneMenu id="idRadicado" value="#{respuestaControlador.respuesta.idPqrs.nroRadicado}" class="form-control col-12" title="IdResidente" required="true" disabled="true" >
+                                            <f:selectItems var="radicado" value="#{pqrsControlador.consultar()}" itemValue="#{radicado.nroRadicado}" itemLabel="#{radicado.nroRadicado}"/>
+                                        </h:selectOneMenu>                        
+                                    </div>
+                                    <div class="col-6">
+                                        <b><p>Estado de la pqrs</p></b>
+                                        <hr/>
+                                        <mark>
+                                            <h:outputText value="#{pqrsControlador.pqrs.estado}"/>
+                                        </mark>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <hr/>
+
                     <!-- Descripción -->
-                    <hr/>
-                    <h4 class="col-12">Descripción</h4>
-                    <hr/>
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;" disabled="true"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="col-12">Descripción</h4>
+                            <hr/>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <h:inputTextarea class="form col-12 form-control" pt:placeholder="Detalle" id="descripcion" value="#{pqrsControlador.pqrs.descripcion}" required="required" style="height:100px;" disabled="true"/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Respuesta -->
-                    <hr/>
-                    <h4 class="col-12">Respuesta</h4>
-                    <hr/>
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <h:inputTextarea class="form col-12 form-control" pt:placeholder="Respuesta" id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;" disabled="true"/>
+                        <div class="col-6">
+                            <!-- Respuesta -->
+                            <h4 class="col-12">Respuesta</h4>
+                            <hr/>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <h:inputTextarea class="form col-12 form-control" pt:placeholder="Respuesta" id="respuesta" value="#{respuestaControlador.respuesta.respuesta}" required="required" style="height:100px;" disabled="true"/>
+                                </div>
+                            </div>
+                            <b><p>Adjunto:</p></b>
+                            <hr/>
+                            <a href="#{pqrsControlador.pqrs.adjunto}" download="Adjunto">
+                                <i class="fas fa-file"></i>
+                                Descargar adjunto
+                            </a>
                         </div>
                     </div>
                 </h:form>

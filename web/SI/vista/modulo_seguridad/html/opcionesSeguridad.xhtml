@@ -8,8 +8,10 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-                <!-- Validar sesion activa -->
+        <!-- Validar sesion activa -->
         <f:event type="preRenderView" listener="#{sesionControlador.verifSesion('../../../../vista/')}" />
+        <f:event type="preRenderView" listener="#{sesionControlador.verifRolVigilante()}" />
+
         <meta charset="UTF-8" />
         <title>#{sesionControlador.rolSeleccionado.nombre} | Visitantes</title>
         <link
@@ -92,7 +94,7 @@
             <!--______________________________- fin del footer __________________________-->
             <i class="fas fa-ellipsis-v btn-menu" aria-hidden="true" />
         </f:view>
-        
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="../../../js/scriptvigilante.js"></script>
         <!-- Menu responsive -->
